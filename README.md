@@ -41,19 +41,16 @@ http://127.0.0.1:8000/
 ```
 
 ### 4. Login
-- **Email**: `admin@carbon.com`
-- **Password**: `admin123`
 
-Or create a new account at the signup page.
+Create your account at the signup page:
+```
+http://127.0.0.1:8000/en/signup/
+```
 
----
-
-## Test Users
-
-| Email | Password | Role |
-|-------|----------|------|
-| admin@carbon.com | admin123 | Administrator |
-| test@example.com | test1234 | Test User |
+Or create a user via command line:
+```bash
+python manage.py create_email_user your@email.com yourpassword --first-name "Your" --last-name "Name"
+```
 
 ---
 
@@ -66,8 +63,10 @@ Or create a new account at the signup page.
 
 ### Via Command Line
 ```bash
-python manage.py create_email_user your@email.com password123 --first-name "John" --last-name "Doe"
+python manage.py create_email_user your@email.com SecurePassword123! --first-name "John" --last-name "Doe"
 ```
+
+> **Security Note**: Always use strong passwords with a mix of letters, numbers, and symbols. Never commit passwords to version control.
 
 ---
 

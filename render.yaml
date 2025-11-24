@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: academia-carbon
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn carbon_tracker.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: academia-carbon-db
+          property: connectionString
+
+databases:
+  - name: academia-carbon-db
+    databaseName: academia_carbon
+    user: academia_carbon_user
