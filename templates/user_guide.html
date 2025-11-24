@@ -1,0 +1,811 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block page_title %}User Guide{% endblock %}
+
+{% block extra_css %}
+<style>
+    .guide-container {
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .guide-hero {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 20px;
+        padding: 50px;
+        text-align: center;
+        color: white;
+        margin-bottom: 40px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .guide-hero::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 400px;
+        height: 400px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+    }
+
+    .guide-hero::after {
+        content: '';
+        position: absolute;
+        bottom: -30%;
+        left: -5%;
+        width: 300px;
+        height: 300px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+    }
+
+    .guide-hero h1 {
+        font-size: 42px;
+        font-weight: 800;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 1;
+    }
+
+    .guide-hero p {
+        font-size: 18px;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+    }
+
+    .quick-links-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .quick-link-card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: all 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+        border: 2px solid transparent;
+    }
+
+    .quick-link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-color: #10b981;
+    }
+
+    .quick-link-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .quick-link-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+    }
+
+    .quick-link-card p {
+        font-size: 14px;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .section-title::before {
+        content: '';
+        width: 5px;
+        height: 35px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 3px;
+    }
+
+    .content-section {
+        background: white;
+        border-radius: 16px;
+        padding: 35px;
+        margin-bottom: 30px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-top: 25px;
+    }
+
+    .feature-item {
+        padding: 25px;
+        background: #f9fafb;
+        border-radius: 12px;
+        border-left: 4px solid #10b981;
+    }
+
+    .feature-item h4 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .feature-item h4 i {
+        color: #10b981;
+    }
+
+    .feature-item p {
+        font-size: 14px;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .feature-item ul {
+        margin: 15px 0 0 0;
+        padding-left: 20px;
+    }
+
+    .feature-item li {
+        font-size: 14px;
+        color: #6b7280;
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+
+    .info-box {
+        padding: 20px 25px;
+        border-radius: 12px;
+        margin: 25px 0;
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .info-box.success {
+        background: #f0fdf4;
+        border-left: 4px solid #10b981;
+    }
+
+    .info-box.warning {
+        background: #fef3c7;
+        border-left: 4px solid #f59e0b;
+    }
+
+    .info-box.info {
+        background: #eff6ff;
+        border-left: 4px solid #3b82f6;
+    }
+
+    .info-box.danger {
+        background: #fef2f2;
+        border-left: 4px solid #ef4444;
+    }
+
+    .info-box-icon {
+        font-size: 24px;
+        flex-shrink: 0;
+    }
+
+    .info-box.success .info-box-icon { color: #10b981; }
+    .info-box.warning .info-box-icon { color: #f59e0b; }
+    .info-box.info .info-box-icon { color: #3b82f6; }
+    .info-box.danger .info-box-icon { color: #ef4444; }
+
+    .info-box-content h4 {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        color: #111827;
+    }
+
+    .info-box-content p {
+        font-size: 14px;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .steps-list {
+        counter-reset: step-counter;
+        list-style: none;
+        padding: 0;
+        margin: 25px 0;
+    }
+
+    .steps-list li {
+        counter-increment: step-counter;
+        padding: 20px 20px 20px 70px;
+        margin-bottom: 15px;
+        background: #f9fafb;
+        border-radius: 12px;
+        position: relative;
+        font-size: 15px;
+        color: #374151;
+        line-height: 1.6;
+    }
+
+    .steps-list li::before {
+        content: counter(step-counter);
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        margin: 25px 0;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .comparison-table thead {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+    }
+
+    .comparison-table th {
+        padding: 15px 20px;
+        text-align: left;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .comparison-table td {
+        padding: 15px 20px;
+        border-bottom: 1px solid #f3f4f6;
+        font-size: 14px;
+        color: #374151;
+    }
+
+    .comparison-table tbody tr {
+        background: white;
+    }
+
+    .comparison-table tbody tr:hover {
+        background: #f9fafb;
+    }
+
+    .code-block {
+        background: #1f2937;
+        color: #e5e7eb;
+        padding: 20px;
+        border-radius: 12px;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        margin: 20px 0;
+        overflow-x: auto;
+    }
+
+    .code-block .highlight {
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    .badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 8px;
+    }
+
+    .badge.green {
+        background: #d1fae5;
+        color: #065f46;
+    }
+
+    .badge.blue {
+        background: #dbeafe;
+        color: #1e40af;
+    }
+
+    .badge.purple {
+        background: #ede9fe;
+        color: #5b21b6;
+    }
+
+    .badge.red {
+        background: #fee2e2;
+        color: #991b1b;
+    }
+
+    .faq-item {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .faq-item:hover {
+        border-color: #10b981;
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+    }
+
+    .faq-question {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-answer {
+        font-size: 14px;
+        color: #6b7280;
+        margin-top: 15px;
+        line-height: 1.6;
+        display: none;
+    }
+
+    .faq-item.active .faq-answer {
+        display: block;
+    }
+
+    .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+        .guide-hero {
+            padding: 30px 20px;
+        }
+
+        .guide-hero h1 {
+            font-size: 28px;
+        }
+
+        .quick-links-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .feature-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="guide-container">
+    <!-- Hero Section -->
+    <div class="guide-hero">
+        <h1>📚 User Guide</h1>
+        <p>Complete guide to tracking and managing your greenhouse gas emissions</p>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links-grid">
+        <a href="#getting-started" class="quick-link-card">
+            <div class="quick-link-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Getting Started</h3>
+            <p>Learn the basics and start tracking emissions in 30 seconds</p>
+        </a>
+
+        <a href="#country-selection" class="quick-link-card">
+            <div class="quick-link-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <h3>Country Selection</h3>
+            <p>Why choosing Turkey gives you more accurate results</p>
+        </a>
+
+        <a href="#scopes" class="quick-link-card">
+            <div class="quick-link-icon">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <h3>Understanding Scopes</h3>
+            <p>Learn about Scope 1, 2, and 3 emissions</p>
+        </a>
+
+        <a href="#best-practices" class="quick-link-card">
+            <div class="quick-link-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <h3>Best Practices</h3>
+            <p>Tips and tricks for accurate emission tracking</p>
+        </a>
+    </div>
+
+    <!-- Getting Started -->
+    <div class="content-section" id="getting-started">
+        <h2 class="section-title">Getting Started</h2>
+        
+        <div class="info-box success">
+            <i class="fas fa-lightbulb info-box-icon"></i>
+            <div class="info-box-content">
+                <h4>Quick Start in 30 Seconds</h4>
+                <p>Follow these simple steps to calculate your first emission!</p>
+            </div>
+        </div>
+
+        <ol class="steps-list">
+            <li>Navigate to <strong>Emission Management</strong> from the sidebar</li>
+            <li>Select your <strong>Country</strong> (🇹🇷 Turkey recommended for Turkish organizations)</li>
+            <li>Choose a <strong>Scope</strong> tab (1, 2, or 3)</li>
+            <li>Click on an emission category that matches your activity</li>
+            <li>Fill in the form with your data and click <strong>Calculate</strong></li>
+            <li>View your results and history in the <strong>History</strong> page</li>
+        </ol>
+    </div>
+
+    <!-- Country Selection -->
+    <div class="content-section" id="country-selection">
+        <h2 class="section-title">Country Selection</h2>
+        
+        <p style="font-size: 15px; color: #6b7280; margin-bottom: 25px;">
+            Different countries have different emission factors based on their energy mix, fuel composition, and infrastructure. 
+            Selecting the correct country ensures accurate calculations.
+        </p>
+
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4><i class="fas fa-bolt"></i> Electricity Grid Mix</h4>
+                <p>Each country has a unique electricity generation mix affecting emission factors.</p>
+                <div class="code-block" style="margin-top: 15px;">
+Turkey Grid: <span class="highlight">0.486</span> kg CO2e/kWh
+Global Avg: <span class="highlight">0.475</span> kg CO2e/kWh
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <h4><i class="fas fa-gas-pump"></i> Fuel Composition</h4>
+                <p>Local fuel quality and types vary by region.</p>
+                <ul>
+                    <li>Turkish lignite coal: 2.45 kg CO2e/kg</li>
+                    <li>LPG vehicles (4M+ in Turkey)</li>
+                    <li>Natural gas composition</li>
+                </ul>
+            </div>
+
+            <div class="feature-item">
+                <h4><i class="fas fa-bus"></i> Transportation Systems</h4>
+                <p>Unique transport modes specific to each country.</p>
+                <ul>
+                    <li>🚐 Dolmuş (Turkey-specific)</li>
+                    <li>🚇 Metro systems</li>
+                    <li>🚂 TCDD trains</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3 style="font-size: 22px; font-weight: 700; margin: 30px 0 20px 0;">Turkey vs Global Comparison</h3>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Source</th>
+                    <th>Turkey</th>
+                    <th>Global Average</th>
+                    <th>Difference</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Electricity Grid</td>
+                    <td>0.486 kg/kWh</td>
+                    <td>0.475 kg/kWh</td>
+                    <td><span class="badge red">+2.3%</span></td>
+                </tr>
+                <tr>
+                    <td>Natural Gas</td>
+                    <td>2.03 kg/m³</td>
+                    <td>2.0 kg/m³</td>
+                    <td><span class="badge red">+1.5%</span></td>
+                </tr>
+                <tr>
+                    <td>Landfill Waste</td>
+                    <td>0.62 kg/kg</td>
+                    <td>0.57 kg/kg</td>
+                    <td><span class="badge red">+8.8%</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Understanding Scopes -->
+    <div class="content-section" id="scopes">
+        <h2 class="section-title">Understanding Scopes</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-item" style="border-left-color: #ef4444;">
+                <h4><i class="fas fa-fire"></i> Scope 1 - Direct Emissions</h4>
+                <p>Emissions from sources you own or control</p>
+                <ul>
+                    <li>Company vehicles</li>
+                    <li>Boilers and furnaces</li>
+                    <li>Refrigerant leaks</li>
+                </ul>
+            </div>
+
+            <div class="feature-item" style="border-left-color: #f59e0b;">
+                <h4><i class="fas fa-bolt"></i> Scope 2 - Energy Indirect</h4>
+                <p>Emissions from purchased energy</p>
+                <ul>
+                    <li>Electricity consumption</li>
+                    <li>District heating/cooling</li>
+                    <li>Purchased steam</li>
+                </ul>
+            </div>
+
+            <div class="feature-item" style="border-left-color: #3b82f6;">
+                <h4><i class="fas fa-network-wired"></i> Scope 3 - Other Indirect</h4>
+                <p>All other indirect emissions</p>
+                <ul>
+                    <li>Business travel</li>
+                    <li>Employee commuting</li>
+                    <li>Waste disposal</li>
+                    <li>Purchased goods</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Turkey Specific Features -->
+    <div class="content-section">
+        <h2 class="section-title">🇹🇷 Turkey-Specific Features</h2>
+        
+        <div class="info-box info">
+            <i class="fas fa-info-circle info-box-icon"></i>
+            <div class="info-box-content">
+                <h4>Why Turkey Matters</h4>
+                <p>Turkey has unique emission factors based on IEA 2023 data and Turkish Ministry of Environment guidelines.</p>
+            </div>
+        </div>
+
+        <h3 style="font-size: 20px; font-weight: 700; margin: 25px 0 15px 0;">Turkey's Electricity Mix (2023)</h3>
+        <div class="feature-grid">
+            <div class="feature-item">
+                <h4>🏭 Coal: 37%</h4>
+                <p>Primarily lignite coal from domestic sources</p>
+            </div>
+            <div class="feature-item">
+                <h4>⚡ Natural Gas: 26%</h4>
+                <p>Imported natural gas for power generation</p>
+            </div>
+            <div class="feature-item">
+                <h4>💧 Hydropower: 25%</h4>
+                <p>Renewable hydroelectric power</p>
+            </div>
+            <div class="feature-item">
+                <h4>🌞 Renewable: 12%</h4>
+                <p>Wind and solar energy</p>
+            </div>
+        </div>
+
+        <h3 style="font-size: 20px; font-weight: 700; margin: 25px 0 15px 0;">Unique Transportation Options</h3>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Mode</th>
+                    <th>Emission Factor</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>🚐 Dolmuş</td>
+                    <td>0.082 kg CO2e/km</td>
+                    <td>10 km trip = 0.82 kg CO2e</td>
+                </tr>
+                <tr>
+                    <td>🚇 Metro</td>
+                    <td>0.028 kg CO2e/km</td>
+                    <td>20 km commute = 0.56 kg CO2e</td>
+                </tr>
+                <tr>
+                    <td>🚂 TCDD Train</td>
+                    <td>0.035 kg CO2e/km</td>
+                    <td>450 km (IST-ANK) = 16 kg CO2e</td>
+                </tr>
+                <tr>
+                    <td>✈️ Domestic Flight</td>
+                    <td>0.245 kg CO2e/km</td>
+                    <td>450 km (IST-ANK) = 110 kg CO2e</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-box success">
+            <i class="fas fa-leaf info-box-icon"></i>
+            <div class="info-box-content">
+                <h4>Did You Know?</h4>
+                <p>Taking the train from Istanbul to Ankara produces <strong>85% less emissions</strong> than flying!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Best Practices -->
+    <div class="content-section" id="best-practices">
+        <h2 class="section-title">Best Practices</h2>
+        
+        <div class="feature-grid">
+            <div class="feature-item" style="border-left-color: #10b981;">
+                <h4><i class="fas fa-check-circle"></i> DO</h4>
+                <ul>
+                    <li>Select your country before calculating</li>
+                    <li>Use actual bills and invoices</li>
+                    <li>Calculate monthly for better tracking</li>
+                    <li>Add descriptions to records</li>
+                    <li>Include supplier information</li>
+                    <li>Review history regularly</li>
+                </ul>
+            </div>
+
+            <div class="feature-item" style="border-left-color: #ef4444;">
+                <h4><i class="fas fa-times-circle"></i> DON'T</h4>
+                <ul>
+                    <li>Use estimates when actual data available</li>
+                    <li>Mix different time periods</li>
+                    <li>Forget to check units (kWh vs MWh)</li>
+                    <li>Skip Scope 3 emissions</li>
+                    <li>Ignore data validation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="info-box warning">
+            <i class="fas fa-exclamation-triangle info-box-icon"></i>
+            <div class="info-box-content">
+                <h4>Monthly Checklist</h4>
+                <p>✓ Enter all electricity bills • ✓ Enter all gas bills • ✓ Log fuel purchases • ✓ Record business travel • ✓ Track waste disposal • ✓ Review history totals</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="content-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How accurate are the emission factors?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                All emission factors are based on international standards (IPCC, EPA, DEFRA) and country-specific data from official sources like IEA and Turkish Ministry of Environment. Turkey-specific factors are updated annually.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Can I change the country after calculating?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                No, once a calculation is saved, the country cannot be changed. Always select your country before calculating. You can delete the record and recalculate if needed.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>What if my country is not listed?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                Use "Global Average" which provides internationally recognized emission factors. We're continuously adding more countries based on user demand.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>How often should I track emissions?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                We recommend monthly tracking for Scope 1 and 2 (electricity, fuel), and quarterly for Scope 3 (travel, waste). This provides good balance between accuracy and effort.
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="content-section" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #10b981;">
+        <h2 class="section-title" style="margin-bottom: 20px;">Ready to Start?</h2>
+        <p style="font-size: 15px; color: #6b7280; margin-bottom: 25px;">
+            Choose an action below to begin tracking your emissions
+        </p>
+        <div class="quick-links-grid">
+            <a href="{% url 'ghg:data_entry' %}" class="quick-link-card" style="background: white;">
+                <div class="quick-link-icon">
+                    <i class="fas fa-plus-circle"></i>
+                </div>
+                <h3>Start Data Entry</h3>
+                <p>Begin calculating your emissions now</p>
+            </a>
+
+            <a href="{% url 'ghg:emission_history' %}" class="quick-link-card" style="background: white;">
+                <div class="quick-link-icon">
+                    <i class="fas fa-history"></i>
+                </div>
+                <h3>View History</h3>
+                <p>See all your emission records</p>
+            </a>
+
+            <a href="{% url 'ghg:index' %}" class="quick-link-card" style="background: white;">
+                <div class="quick-link-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Dashboard</h3>
+                <p>Overview and analytics</p>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// FAQ Toggle
+document.querySelectorAll('.faq-item').forEach(item => {
+    item.addEventListener('click', function() {
+        this.classList.toggle('active');
+    });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

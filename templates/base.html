@@ -1,0 +1,67 @@
+{% load i18n %}
+{% load static %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Academia Carbon - GHG Emissions Platform{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'ghg:index' %}">
+                <div style="width: 32px; height: 32px; position: relative; margin-right: 12px;">
+                    <div style="width: 12px; height: 12px; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);"></div>
+                    <div style="width: 24px; height: 24px; border: 2px solid rgba(34, 197, 94, 0.3); border-radius: 50%; position: absolute; top: 4px; left: 4px;"></div>
+                    <div style="width: 32px; height: 32px; border: 2px solid rgba(34, 197, 94, 0.2); border-radius: 50%; position: absolute; top: 0; left: 0;"></div>
+                </div>
+                <span style="font-weight: 700; color: #333; font-size: 18px;">Academia Carbon</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="ms-auto d-flex align-items-center gap-3">
+                    {% if user.is_authenticated %}
+                        <span class="text-muted small">Organization: <strong>{{ user.username|title }}</strong></span>
+                        <a href="{% url 'ghg:user_guide' %}" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-book"></i> User Guide
+                        </a>
+                        <a href="{% url 'ghg:user_guide' %}" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-question-circle"></i>
+                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary btn-sm rounded-circle" style="width: 40px; height: 40px;" data-bs-toggle="dropdown">
+                                {{ user.username|first|upper }}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="/admin/"><i class="fas fa-cog me-2"></i> Admin</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{% url 'ghg:logout' %}"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                            </ul>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white text-center py-3 mt-5" style="border-top: 1px solid #e0e0e0;">
+        <p class="text-muted mb-0" style="font-size: 13px;">&copy; 2025 Academia Carbon. {% trans "All rights reserved." %}</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

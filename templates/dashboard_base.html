@@ -1,0 +1,490 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Academia Carbon{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5f7f9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .dashboard-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 100%);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+            z-index: 100;
+        }
+
+        .sidebar-logo {
+            padding: 0 20px 25px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Triangle A */
+        .logo-triangle {
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 20px solid #4ade80;
+            position: absolute;
+            left: 5px;
+            top: 12px;
+        }
+
+        /* Semi-circle C */
+        .logo-semicircle {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #a78bfa;
+            border-right: none;
+            border-radius: 20px 0 0 20px;
+            position: absolute;
+            right: 8px;
+            top: 12px;
+        }
+
+        .logo-text h2 {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-text p {
+            font-size: 10px;
+            margin: 0;
+            opacity: 0.7;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .data-entry-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 0 20px 25px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .data-entry-btn:hover {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            color: white;
+        }
+
+        .menu-label {
+            padding: 0 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex: 1;
+        }
+
+        .sidebar-menu > li {
+            margin-bottom: 2px;
+            position: relative;
+        }
+
+        .sidebar-menu .menu-item {
+            position: relative;
+        }
+
+        .sidebar-menu li.has-badge::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: translateY(-50%) scale(1);
+            }
+            50% {
+                opacity: 0.7;
+                transform: translateY(-50%) scale(1.1);
+            }
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .sidebar-menu a.active {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.05) 100%);
+            color: #a78bfa;
+            font-weight: 600;
+            border-left: 4px solid #a78bfa;
+            padding-left: 16px;
+        }
+
+
+
+        .sidebar-menu i {
+            width: 24px;
+            margin-right: 12px;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .menu-arrow {
+            margin-left: auto;
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+
+        .menu-badge {
+            margin-left: auto;
+            background: linear-gradient(135deg, #a78bfa 0%, #c4b5fd 100%);
+            color: #1e293b;
+            padding: 3px 10px;
+            border-radius: 8px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin: 15px 20px;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            margin: 0 20px 20px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .sidebar-footer i {
+            font-size: 40px;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .sidebar-footer p {
+            font-size: 12px;
+            margin: 0;
+            opacity: 0.8;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            margin-left: 280px;
+        }
+
+        .top-navbar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            text-align: right;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #111827;
+            margin: 0;
+        }
+
+        .user-role {
+            font-size: 12px;
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        .btn-logout {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ef4444;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-right: 10px;
+        }
+        
+        .btn-logout:hover {
+            background: #ef4444;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: -280px;
+                top: 0;
+                bottom: 0;
+                z-index: 1000;
+                transition: left 0.3s;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .main-content {
+                width: 100%;
+            }
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Logo -->
+            <div class="sidebar-logo">
+                <div class="logo-icon">
+                    <div class="logo-triangle"></div>
+                    <div class="logo-semicircle"></div>
+                </div>
+                <div class="logo-text">
+                    <h2>Academia Carbon</h2>
+                    <p>GHG Tracking</p>
+                </div>
+            </div>
+
+            <!-- Data Entry Button -->
+            <a href="{% url 'ghg:data_entry' %}" class="data-entry-btn">
+                <i class="fas fa-plus"></i>
+                Data entry
+            </a>
+
+            <!-- Menu Label -->
+            <div class="menu-label">MENU</div>
+
+            <!-- Main Menu -->
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="{% url 'ghg:index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">
+                        <i class="fas fa-home"></i>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'ghg:data_entry' %}" class="{% if request.resolver_match.url_name == 'data_entry' %}active{% endif %}">
+                        <i class="fas fa-chart-bar"></i>
+                        Emission Management
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-chart-line"></i>
+                        Analysis
+                    </a>
+                </li>
+                <li class="menu-item has-badge">
+                    <a href="#">
+                        <i class="fas fa-file-alt"></i>
+                        Reporting
+                    </a>
+                </li>
+                <li class="menu-item has-badge">
+                    <a href="{% url 'ghg:emission_history' %}" class="{% if request.resolver_match.url_name == 'emission_history' %}active{% endif %}">
+                        <i class="fas fa-chart-pie"></i>
+                        Reduction Plans
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Divider -->
+            <div class="sidebar-divider"></div>
+
+            <!-- Bottom Menu -->
+            <ul class="sidebar-menu">
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'ghg:user_guide' %}" class="{% if request.resolver_match.url_name == 'user_guide' %}active{% endif %}">
+                        <i class="fas fa-robot"></i>
+                        Automations
+                        <span class="menu-badge">NEW</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#">
+                        <i class="fas fa-headset"></i>
+                        Support
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <i class="fas fa-headphones-alt"></i>
+                <p>24/7 Support Available</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="top-navbar">
+                <h1 class="page-title">{% block page_title %}Dashboard{% endblock %}</h1>
+                <div class="user-section">
+                    <div class="user-info">
+                        <p class="user-name">{{ user.first_name|default:user.email|title }}</p>
+                        <p class="user-role">{{ user.email }}</p>
+                    </div>
+                    <div class="user-avatar">
+                        {{ user.first_name|first|default:user.email|first|upper }}
+                    </div>
+                    <a href="{% url 'ghg:logout' %}" class="btn-logout" title="خروج / Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="content-area">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,269 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Carbon Tracker 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-22 04:08-0800\n"
+"PO-Revision-Date: 2025-11-22 03:25-0800\n"
+"Last-Translator: Carbon Tracker Team\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\ghg\admin_views.py:23
+msgid "Please enter the correct username and password."
+msgstr "Lütfen doğru kullanıcı adı ve şifre girin."
+
+#: .\templates\admin\login.html:8
+msgid "Login"
+msgstr "Giriş"
+
+#: .\templates\admin\login.html:318
+msgid "Forever Free GHG Accounting"
+msgstr ""
+
+#: .\templates\admin\login.html:319
+msgid ""
+"Track and analyze greenhouse gas emissions data from countries worldwide "
+"with our comprehensive monitoring platform."
+msgstr ""
+
+#: .\templates\admin\login.html:324
+msgid "GHG Emission Calculations"
+msgstr ""
+
+#: .\templates\admin\login.html:328
+msgid "Real-time Data Analysis"
+msgstr ""
+
+#: .\templates\admin\login.html:332
+msgid "Detailed Country Reports"
+msgstr ""
+
+#: .\templates\admin\login.html:336
+msgid "Interactive Visualizations"
+msgstr ""
+
+#: .\templates\admin\login.html:346
+msgid "Welcome Back"
+msgstr ""
+
+#: .\templates\admin\login.html:347
+msgid "Please log in to your account to continue"
+msgstr ""
+
+#: .\templates\admin\login.html:363
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\admin\login.html:376
+msgid "Password"
+msgstr "Şifre"
+
+#: .\templates\admin\login.html:382
+msgid "Enter your password"
+msgstr "Şifrenizi girin"
+
+#: .\templates\admin\login.html:390
+msgid "Log In"
+msgstr "Giriş Yap"
+
+#: .\templates\admin\login.html:395
+msgid "Secure Login"
+msgstr ""
+
+#: .\templates\admin\login.html:399
+msgid "Protected by enterprise-grade security"
+msgstr ""
+
+#: .\templates\base.html:9
+msgid "Carbon Tracker - GHG Emissions"
+msgstr "Karbon İzleyici - Sera Gazı Emisyonları"
+
+#: .\templates\base.html:19
+msgid "Carbon Tracker"
+msgstr "Karbon İzleyici"
+
+#: .\templates\base.html:64
+msgid "All rights reserved."
+msgstr "Tüm hakları saklıdır."
+
+#: .\templates\index.html:168
+#, fuzzy
+#| msgid "Total Global Emissions"
+msgid "Global GHG Emissions Dashboard"
+msgstr "Toplam Küresel Emisyonlar"
+
+#: .\templates\index.html:170
+#, fuzzy
+#| msgid ""
+#| "View and analyze CO2 and other greenhouse gas emissions data worldwide"
+msgid "Real-time tracking and analysis of greenhouse gas emissions worldwide"
+msgstr ""
+"Dünya çapında CO2 ve diğer sera gazı emisyon verilerini görüntüleyin ve "
+"analiz edin"
+
+#: .\templates\index.html:175
+#, fuzzy
+#| msgid "Total Global Emissions"
+msgid "Total Emissions"
+msgstr "Toplam Küresel Emisyonlar"
+
+#: .\templates\index.html:177
+#, fuzzy
+#| msgid "CO2 (Million tons)"
+msgid "Million tons CO2e"
+msgstr "CO2 (Milyon ton)"
+
+#: .\templates\index.html:180
+#, fuzzy
+#| msgid "Carbon Tracker"
+msgid "Countries Tracked"
+msgstr "Karbon İzleyici"
+
+#: .\templates\index.html:182
+msgid "Active monitoring"
+msgstr ""
+
+#: .\templates\index.html:185
+msgid "Data Points"
+msgstr ""
+
+#: .\templates\index.html:187
+msgid "Historical records"
+msgstr ""
+
+#: .\templates\index.html:190
+msgid "Last Update"
+msgstr ""
+
+#: .\templates\index.html:192 .\templates\index.html:245
+msgid "Year"
+msgstr ""
+
+#: .\templates\index.html:201
+#, fuzzy
+#| msgid "CO2 Emissions Trend"
+msgid "Global Emissions Trend"
+msgstr "CO2 Emisyon Trendi"
+
+#: .\templates\index.html:207
+#, fuzzy
+#| msgid "Country Data"
+msgid "Country Analysis"
+msgstr "Ülke Verileri"
+
+#: .\templates\index.html:209
+msgid "Select a country to view detailed data"
+msgstr ""
+
+#: .\templates\index.html:221
+#, fuzzy
+#| msgid "Total Emissions Over Time"
+msgid "Emissions Over Time"
+msgstr "Zaman İçinde Toplam Emisyonlar"
+
+#: .\templates\index.html:227
+msgid "Gas Composition"
+msgstr ""
+
+#: .\templates\index.html:234
+#, fuzzy
+#| msgid "CO2 Emissions Trend"
+msgid "CO2 Emissions by Year"
+msgstr "CO2 Emisyon Trendi"
+
+#: .\templates\index.html:240
+msgid "Detailed Emissions Data"
+msgstr ""
+
+#: .\templates\index.html:246 .\templates\index.html:277
+msgid "CO2"
+msgstr ""
+
+#: .\templates\index.html:247
+#, fuzzy
+#| msgid "Methane (CH4)"
+msgid "Methane"
+msgstr "Metan (CH4)"
+
+#: .\templates\index.html:248
+msgid "N2O"
+msgstr ""
+
+#: .\templates\index.html:249
+msgid "Total"
+msgstr ""
+
+#: .\templates\index.html:250
+msgid "Trend"
+msgstr ""
+
+#: .\templates\index.html:256
+#, fuzzy
+#| msgid "Select a country"
+msgid "Select a country to view data"
+msgstr "Bir ülke seçin"
+
+#: .\templates\index.html:267
+msgid "Top Emitters (2023)"
+msgstr ""
+
+#: .\templates\index.html:276
+msgid "Global Emissions (Million tons CO2)"
+msgstr "Küresel Emisyonlar (Milyon ton CO2)"
+
+#: .\templates\index.html:278
+msgid "Methane (CH4)"
+msgstr "Metan (CH4)"
+
+#: .\templates\index.html:279
+msgid "Nitrous Oxide (N2O)"
+msgstr "Azot Oksit (N2O)"
+
+#: .\templates\index.html:280
+#, fuzzy
+#| msgid "Total Emissions (CO2 equivalent)"
+msgid "Total Emissions (CO2e)"
+msgstr "Toplam Emisyonlar (CO2 eşdeğeri)"
+
+#: .\templates\index.html:281
+#, fuzzy
+#| msgid "CO2 (Million tons)"
+msgid "Million tons"
+msgstr "CO2 (Milyon ton)"
+
+#~ msgid "Admin Login"
+#~ msgstr "Yönetici Girişi"
+
+#~ msgid "Username"
+#~ msgstr "Kullanıcı Adı"
+
+#~ msgid "Enter your username"
+#~ msgstr "Kullanıcı adınızı girin"
+
+#~ msgid "or connect with"
+#~ msgstr "veya bağlan"
+
+#~ msgid "Back to"
+#~ msgstr "Geri dön"
+
+#~ msgid "Home Page"
+#~ msgstr "Ana Sayfa"
+
+#~ msgid "Greenhouse Gas Emissions Tracker"
+#~ msgstr "Sera Gazı Emisyon İzleyici"
+
+#, python-format
+#~ msgid "Million tons CO2 equivalent (%(year)s)"
+#~ msgstr "Milyon ton CO2 eşdeğeri (%(year)s)"
+
+#~ msgid "Greenhouse Gas Comparison"
+#~ msgstr "Sera Gazı Karşılaştırması"

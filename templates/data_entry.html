@@ -1,0 +1,1257 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}Data Entry{% endblock %}
+
+{% block extra_css %}
+<style>
+
+    .btn-data-entry {
+        background: #22c55e;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        margin: 0 20px 20px 20px;
+        width: calc(100% - 40px);
+    }
+
+    .btn-data-entry:hover {
+        background: #16a34a;
+    }
+
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar-menu li a {
+        display: block;
+        padding: 12px 25px;
+        color: #666;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 14px;
+    }
+
+    .sidebar-menu li a:hover,
+    .sidebar-menu li a.active {
+        background: #f0f9ff;
+        color: #0ea5e9;
+        border-left: 3px solid #0ea5e9;
+    }
+
+    .sidebar-menu i {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    .content-area {
+        flex: 1;
+        padding: 30px;
+        overflow-y: auto;
+    }
+
+    .page-header {
+        margin-bottom: 30px;
+    }
+
+    .page-header h1 {
+        font-size: 24px;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 5px;
+    }
+
+    .scope-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid #e0e0e0;
+        margin-bottom: 30px;
+    }
+
+    .scope-tab {
+        padding: 12px 24px;
+        background: transparent;
+        border: none;
+        color: #666;
+        font-weight: 600;
+        cursor: pointer;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+        font-size: 14px;
+    }
+
+    .scope-tab:hover {
+        color: #22c55e;
+    }
+
+    .scope-tab.active {
+        color: #22c55e;
+        border-bottom-color: #22c55e;
+    }
+
+    .scope-content {
+        display: none;
+    }
+
+    .scope-content.active {
+        display: block;
+    }
+
+    .form-card {
+        background: white;
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 20px;
+    }
+
+    .emission-category {
+        padding: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .emission-category:hover {
+        border-color: #22c55e;
+        background: #f0fdf4;
+    }
+
+    .emission-category h3 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .emission-category p {
+        font-size: 13px;
+        color: #666;
+        margin: 5px 0 0 0;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #22c55e;
+        box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+    }
+
+    .form-control::placeholder {
+        color: #999;
+    }
+
+    .btn-calculate {
+        background: #22c55e;
+        color: white;
+        border: none;
+        padding: 12px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        float: right;
+    }
+
+    .btn-calculate:hover {
+        background: #16a34a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+    }
+
+    .help-icon {
+        color: #999;
+        cursor: help;
+    }
+
+    .activity-input {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .activity-input input {
+        flex: 1;
+    }
+
+    .activity-input button {
+        background: #22c55e;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    .activity-input button:hover {
+        background: #16a34a;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="btn-data-entry">
+            <i class="fas fa-plus"></i> Data entry
+        </button>
+        
+        <ul class="sidebar-menu">
+            <li><a href="{% url 'ghg:index' %}"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="{% url 'ghg:data_entry' %}" class="active"><i class="fas fa-edit"></i> Emission Management</a></li>
+            <li><a href="{% url 'ghg:emission_history' %}"><i class="fas fa-history"></i> History</a></li>
+            <li><a href="#"><i class="fas fa-chart-line"></i> Analysis</a></li>
+            <li><a href="#"><i class="fas fa-file-alt"></i> Reporting</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-area">
+        <div class="page-header">
+            <h1>{% trans "Data Entry" %}</h1>
+            <p class="text-muted">Organization: <strong>{{ user.username|title }}</strong></p>
+            
+            <!-- Country Selector -->
+            <div style="margin-top: 15px;">
+                <label style="font-size: 14px; font-weight: 600; color: #333; margin-right: 10px;">
+                    <i class="fas fa-globe"></i> Country/Region:
+                </label>
+                <select id="country-selector" style="padding: 8px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-width: 200px;">
+                    <option value="global">🌍 Global Average</option>
+                    <option value="turkey" selected>🇹🇷 Turkey (Türkiye)</option>
+                </select>
+                <span id="country-info" style="margin-left: 10px; font-size: 12px; color: #666;">
+                    <i class="fas fa-info-circle"></i> Using Turkey-specific emission factors
+                </span>
+            </div>
+        </div>
+
+        <!-- Scope Tabs -->
+        <div class="scope-tabs">
+            <button class="scope-tab active" onclick="switchScope(1)">Scope 1</button>
+            <button class="scope-tab" onclick="switchScope(2)">Scope 2</button>
+            <button class="scope-tab" onclick="switchScope(3)">Scope 3</button>
+        </div>
+
+        <!-- Scope 1 Content -->
+        <div class="scope-content active" id="scope1">
+            <div class="form-card">
+                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Scope 1 - Direct Emissions</h2>
+                
+                <div class="emission-category" onclick="toggleCategory('stationary')">
+                    <h3>
+                        Stationary combustion
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <p>Emissions from fuel combustion in stationary equipment</p>
+                </div>
+
+                <div id="stationary-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="natural-gas">Natural Gas</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="coal">Coal</option>
+                            <option value="lpg">LPG</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="liters">Liters</option>
+                            <option value="kg">Kilograms</option>
+                            <option value="m3">Cubic Meters</option>
+                            <option value="kwh">kWh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <select class="form-control">
+                            <option value="">Select Supplier</option>
+                            <option value="supplier1">Supplier 1</option>
+                            <option value="supplier2">Supplier 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    </div>
+
+                    <p class="text-muted" style="font-size: 13px;">
+                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                    </p>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <div class="emission-category" onclick="toggleCategory('mobile')">
+                    <h3>
+                        Mobile combustion
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <p>Emissions from fuel combustion in mobile equipment</p>
+                </div>
+
+                <div id="mobile-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="gasoline">Gasoline</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="cng">CNG</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="liters">Liters</option>
+                            <option value="km">Kilometers</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <div class="emission-category" onclick="toggleCategory('fugitive')">
+                    <h3>
+                        Fugitive emissions
+                        <i class="fas fa-chevron-down"></i>
+                    </h3>
+                    <p>Emissions from refrigerants, air conditioning, and other sources</p>
+                </div>
+
+                <div id="fugitive-form" style="display: none;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="r134a">R-134a (Refrigerant)</option>
+                            <option value="r410a">R-410A (Refrigerant)</option>
+                            <option value="sf6">SF6</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data (kg)</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scope 2 Content -->
+        <div class="scope-content" id="scope2">
+            <div class="form-card">
+                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Scope 2 - Indirect Emissions (Energy)</h2>
+                
+                <div class="emission-category" onclick="toggleCategory('electricity')">
+                    <h3>
+                        Electricity
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from purchased electricity"></i>
+                    </h3>
+                    <p>Emissions from purchased electricity consumption</p>
+                </div>
+
+                <div id="electricity-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control" id="electricity-source">
+                            <option value="">Select Emission Source</option>
+                            <option value="grid-average">Grid Average</option>
+                            <option value="us-grid">US Grid</option>
+                            <option value="eu-grid">EU Grid</option>
+                            <option value="china-grid">China Grid</option>
+                            <option value="renewable">Renewable Energy</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="kwh">kWh</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <select class="form-control">
+                            <option value="">Select Supplier</option>
+                            <option value="supplier1">Electric Company 1</option>
+                            <option value="supplier2">Electric Company 2</option>
+                            <option value="supplier3">Electric Company 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    </div>
+
+                    <p class="text-muted" style="font-size: 13px;">
+                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                    </p>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <div class="emission-category" onclick="toggleCategory('steam-heat')">
+                    <h3>
+                        Steam, Heat and Cooling
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from purchased steam, heat, or cooling"></i>
+                    </h3>
+                    <p>Emissions from purchased steam, heating, or cooling energy</p>
+                </div>
+
+                <div id="steam-heat-form" style="display: none;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="district-heating">District Heating</option>
+                            <option value="district-cooling">District Cooling</option>
+                            <option value="steam">Steam</option>
+                            <option value="chilled-water">Chilled Water</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="kwh">kWh</option>
+                            <option value="mj">MJ (Megajoules)</option>
+                            <option value="mmbtu">MMBtu</option>
+                            <option value="tons">Tons</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <select class="form-control">
+                            <option value="">Select Supplier</option>
+                            <option value="supplier1">Energy Provider 1</option>
+                            <option value="supplier2">Energy Provider 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    </div>
+
+                    <p class="text-muted" style="font-size: 13px;">
+                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                    </p>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scope 3 Content -->
+        <div class="scope-content" id="scope3">
+            <div class="form-card">
+                <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Scope 3 - Other Indirect Emissions</h2>
+                
+                <!-- Purchased Goods and Services -->
+                <div class="emission-category" onclick="toggleCategory('purchased-goods')">
+                    <h3>
+                        Purchased Goods and Services
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from purchased goods and services"></i>
+                    </h3>
+                    <p>Emissions from production of purchased goods and services</p>
+                </div>
+
+                <div id="purchased-goods-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="paper">Paper Products</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="office-supplies">Office Supplies</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="kg">Kilograms</option>
+                            <option value="units">Units</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <select class="form-control">
+                            <option value="">Select Supplier</option>
+                            <option value="supplier1">Supplier 1</option>
+                            <option value="supplier2">Supplier 2</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    </div>
+
+                    <p class="text-muted" style="font-size: 13px;">
+                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                    </p>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Capital Goods -->
+                <div class="emission-category" onclick="toggleCategory('capital-goods')">
+                    <h3>
+                        Capital Goods
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from capital goods"></i>
+                    </h3>
+                    <p>Emissions from production of capital goods (machinery, vehicles, buildings)</p>
+                </div>
+
+                <div id="capital-goods-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="machinery">Machinery</option>
+                            <option value="vehicles">Vehicles</option>
+                            <option value="buildings">Buildings/Construction</option>
+                            <option value="it-equipment">IT Equipment</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="units">Units</option>
+                            <option value="m2">Square Meters (m²)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Fuel and Energy Related Activities -->
+                <div class="emission-category" onclick="toggleCategory('fuel-energy')">
+                    <h3>
+                        Fuel and Energy Related Activities
+                        <i class="fas fa-chevron-down help-icon" title="Upstream emissions from fuel and energy"></i>
+                    </h3>
+                    <p>Upstream emissions from fuel extraction, processing, and transmission losses</p>
+                </div>
+
+                <div id="fuel-energy-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="upstream-electricity">Upstream Electricity</option>
+                            <option value="transmission-losses">Transmission & Distribution Losses</option>
+                            <option value="fuel-extraction">Fuel Extraction & Processing</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="kwh">kWh</option>
+                            <option value="liters">Liters</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Upstream Transportation and Distribution -->
+                <div class="emission-category" onclick="toggleCategory('upstream-transport')">
+                    <h3>
+                        Upstream Transportation and Distribution
+                        <i class="fas fa-chevron-down help-icon" title="Transportation of purchased goods"></i>
+                    </h3>
+                    <p>Emissions from transportation and distribution of purchased goods</p>
+                </div>
+
+                <div id="upstream-transport-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="truck-freight">Truck Freight</option>
+                            <option value="rail-freight">Rail Freight</option>
+                            <option value="sea-freight">Sea Freight</option>
+                            <option value="air-freight">Air Freight</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="tonne-km">Tonne-km</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data (tonne-km)</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Waste Generated in Operations -->
+                <div class="emission-category" onclick="toggleCategory('waste')">
+                    <h3>
+                        Waste Generated in Operations
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from waste disposal"></i>
+                    </h3>
+                    <p>Emissions from disposal and treatment of waste generated in operations</p>
+                </div>
+
+                <div id="waste-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="general-landfill">General Waste (Landfill)</option>
+                            <option value="recyclable">Recyclable Waste</option>
+                            <option value="organic-compost">Organic Waste (Compost)</option>
+                            <option value="incineration">Waste Incineration</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="kg">Kilograms</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter weight" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Business Travel -->
+                <div class="emission-category" onclick="toggleCategory('business-travel')">
+                    <h3>
+                        Business Travel
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from employee business travel"></i>
+                    </h3>
+                    <p>Emissions from employee business travel in vehicles not owned by the company</p>
+                </div>
+
+                <div id="business-travel-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="flight-short">Short-haul Flight (< 500 km)</option>
+                            <option value="flight-medium">Medium-haul Flight (500-3700 km)</option>
+                            <option value="flight-long">Long-haul Flight (> 3700 km)</option>
+                            <option value="train">Train</option>
+                            <option value="taxi">Taxi</option>
+                            <option value="bus">Bus</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="km">Kilometers</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter distance" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Employee Commuting -->
+                <div class="emission-category" onclick="toggleCategory('commuting')">
+                    <h3>
+                        Employee Commuting
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from employee commuting"></i>
+                    </h3>
+                    <p>Emissions from employee commuting between home and work</p>
+                </div>
+
+                <div id="commuting-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="car">Car</option>
+                            <option value="bus">Bus</option>
+                            <option value="train">Train</option>
+                            <option value="motorcycle">Motorcycle</option>
+                            <option value="bicycle">Bicycle</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="km">Kilometers</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter distance" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Upstream Leased Assets -->
+                <div class="emission-category" onclick="toggleCategory('upstream-leased')">
+                    <h3>
+                        Upstream Leased Assets
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from leased assets"></i>
+                    </h3>
+                    <p>Emissions from operation of assets leased by the reporting company</p>
+                </div>
+
+                <div id="upstream-leased-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="office-space">Leased Office Space</option>
+                            <option value="warehouse">Leased Warehouse</option>
+                            <option value="vehicles">Leased Vehicles</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="m2">Square Meters (m²)</option>
+                            <option value="units">Units</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Downstream Transportation and Distribution -->
+                <div class="emission-category" onclick="toggleCategory('downstream-transport')">
+                    <h3>
+                        Downstream Transportation and Distribution
+                        <i class="fas fa-chevron-down help-icon" title="Transportation of sold products"></i>
+                    </h3>
+                    <p>Emissions from transportation and distribution of sold products</p>
+                </div>
+
+                <div id="downstream-transport-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="truck-delivery">Truck Delivery</option>
+                            <option value="courier">Courier Service</option>
+                            <option value="postal">Postal Service</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control">
+                            <option value="">Select Unit</option>
+                            <option value="tonne-km">Tonne-km</option>
+                            <option value="packages">Packages</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter activity data" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- End of Life Treatment of Sold Products -->
+                <div class="emission-category" onclick="toggleCategory('end-of-life')">
+                    <h3>
+                        End of Life Treatment of Sold Products
+                        <i class="fas fa-chevron-down help-icon" title="End of life treatment emissions"></i>
+                    </h3>
+                    <p>Emissions from waste disposal and treatment of sold products at end of life</p>
+                </div>
+
+                <div id="end-of-life-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="product-recycling">Product Recycling</option>
+                            <option value="product-landfill">Product to Landfill</option>
+                            <option value="product-incineration">Product Incineration</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="kg">Kilograms</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter weight" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Franchises -->
+                <div class="emission-category" onclick="toggleCategory('franchises')">
+                    <h3>
+                        Franchises
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from franchise operations"></i>
+                    </h3>
+                    <p>Emissions from operation of franchises not included in Scope 1 or 2</p>
+                </div>
+
+                <div id="franchises-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control" disabled>
+                            <option value="franchise-operations">Franchise Operations</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="franchises">Number of Franchises</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter number of franchises" value="0" step="1">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
+                <!-- Investments -->
+                <div class="emission-category" onclick="toggleCategory('investments')">
+                    <h3>
+                        Investments
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from investments"></i>
+                    </h3>
+                    <p>Emissions from investments (equity, debt, project finance, etc.)</p>
+                </div>
+
+                <div id="investments-form" style="display: none;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control">
+                            <option value="">Select Emission Source</option>
+                            <option value="equity-investments">Equity Investments</option>
+                            <option value="debt-investments">Debt Investments</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="usd">USD</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data (USD)</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter investment amount" value="0" step="100">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function switchScope(scopeNum) {
+    // Hide all scopes
+    document.querySelectorAll('.scope-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.scope-tab').forEach(el => el.classList.remove('active'));
+    
+    // Show selected scope
+    document.getElementById('scope' + scopeNum).classList.add('active');
+    document.querySelectorAll('.scope-tab')[scopeNum - 1].classList.add('active');
+}
+
+function toggleCategory(category) {
+    const form = document.getElementById(category + '-form');
+    const icon = event.currentTarget.querySelector('i');
+    
+    if (form.style.display === 'none') {
+        form.style.display = 'block';
+        icon.style.transform = 'rotate(180deg)';
+    } else {
+        form.style.display = 'none';
+        icon.style.transform = 'rotate(0deg)';
+    }
+}
+
+// Activity data increment/decrement
+document.querySelectorAll('.activity-input button').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('input');
+        const currentValue = parseFloat(input.value) || 0;
+        
+        if (this.textContent === '+') {
+            input.value = currentValue + 1;
+        } else if (this.textContent === '−' && currentValue > 0) {
+            input.value = currentValue - 1;
+        }
+    });
+});
+
+// Calculate emissions
+document.querySelectorAll('.btn-calculate').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const form = this.closest('div[id$="-form"]');
+        const category = form.id.replace('-form', '');
+        
+        // Get form data
+        const sourceSelect = form.querySelector('select[class*="form-control"]');
+        const activityInput = form.querySelector('input[type="number"]');
+        
+        if (!sourceSelect || !activityInput) return;
+        
+        const source = sourceSelect.value;
+        const activityData = parseFloat(activityInput.value) || 0;
+        
+        if (!source || activityData <= 0) {
+            alert('Please select an emission source and enter activity data');
+            return;
+        }
+        
+        // Determine category type
+        let categoryType = 'stationary';
+        if (category === 'mobile') categoryType = 'mobile';
+        else if (category === 'fugitive') categoryType = 'fugitive';
+        else if (category === 'electricity') categoryType = 'electricity';
+        else if (category === 'steam-heat') categoryType = 'steam-heat';
+        else if (category === 'business-travel') categoryType = 'travel';
+        else if (category === 'waste') categoryType = 'waste';
+        else if (category === 'purchased-goods') categoryType = 'purchased-goods';
+        else if (category === 'capital-goods') categoryType = 'capital-goods';
+        else if (category === 'fuel-energy') categoryType = 'fuel-energy';
+        else if (category === 'upstream-transport') categoryType = 'upstream-transport';
+        else if (category === 'commuting') categoryType = 'commuting';
+        else if (category === 'upstream-leased') categoryType = 'upstream-leased';
+        else if (category === 'downstream-transport') categoryType = 'downstream-transport';
+        else if (category === 'end-of-life') categoryType = 'end-of-life';
+        else if (category === 'franchises') categoryType = 'franchises';
+        else if (category === 'investments') categoryType = 'investments';
+        
+        // Get selected country
+        const country = document.getElementById('country-selector').value;
+        
+        // Show loading
+        this.textContent = 'Calculating...';
+        this.disabled = true;
+        
+        // Calculate
+        fetch(window.location.pathname.replace('data-entry/', 'api/calculate/'), {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({
+                category: categoryType,
+                source: source,
+                activity_data: activityData,
+                country: country
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert('Error: ' + data.error);
+            } else {
+                showResult(data, form);
+            }
+            this.textContent = 'Calculate';
+            this.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Calculation failed. Please try again.');
+            this.textContent = 'Calculate';
+            this.disabled = false;
+        });
+    });
+});
+
+function showResult(data, form) {
+    // Remove existing result
+    const existingResult = form.querySelector('.calculation-result');
+    if (existingResult) existingResult.remove();
+    
+    // Create result display
+    const resultDiv = document.createElement('div');
+    resultDiv.className = 'calculation-result';
+    resultDiv.style.cssText = 'background: #f0fdf4; border: 2px solid #22c55e; border-radius: 12px; padding: 20px; margin-top: 20px;';
+    
+    resultDiv.innerHTML = `
+        <h4 style="color: #22c55e; font-size: 16px; font-weight: 700; margin-bottom: 15px;">
+            <i class="fas fa-check-circle"></i> Calculation Result ${data.saved ? '<span style="font-size: 12px; color: #666; font-weight: normal;">(Saved to History)</span>' : ''}
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+            <div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Activity Data</p>
+                <p style="font-size: 18px; font-weight: 700; color: #333;">${data.activity_data} ${data.unit}</p>
+            </div>
+            <div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Emission Factor</p>
+                <p style="font-size: 18px; font-weight: 700; color: #333;">${data.factor} kg CO2e/${data.unit}</p>
+            </div>
+            <div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Total Emissions (kg)</p>
+                <p style="font-size: 20px; font-weight: 700; color: #22c55e;">${data.emissions_kg} kg CO2e</p>
+            </div>
+            <div>
+                <p style="font-size: 12px; color: #666; margin-bottom: 5px;">Total Emissions (tons)</p>
+                <p style="font-size: 20px; font-weight: 700; color: #22c55e;">${data.emissions_tons} t CO2e</p>
+            </div>
+        </div>
+        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #22c55e;">
+            <p style="font-size: 13px; color: #666;">
+                <i class="fas fa-info-circle"></i> 
+                Source: ${data.source_name} | Country: ${data.country === 'turkey' ? '🇹🇷 Turkey' : '🌍 Global'}
+            </p>
+            ${data.reference ? `<p style="font-size: 12px; color: #999; margin-top: 5px;"><i class="fas fa-book"></i> Reference: ${data.reference}</p>` : ''}
+        </div>
+    `;
+    
+    form.appendChild(resultDiv);
+    
+    // Scroll to result
+    resultDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Country selector change handler
+document.getElementById('country-selector').addEventListener('change', function() {
+    const countryInfo = document.getElementById('country-info');
+    if (this.value === 'turkey') {
+        countryInfo.innerHTML = '<i class="fas fa-info-circle"></i> Using Turkey-specific emission factors (IEA 2023, Turkish Ministry of Environment)';
+        countryInfo.style.color = '#22c55e';
+    } else {
+        countryInfo.innerHTML = '<i class="fas fa-info-circle"></i> Using global average emission factors (IPCC, EPA, DEFRA)';
+        countryInfo.style.color = '#666';
+    }
+});
+</script>
+{% endblock %}

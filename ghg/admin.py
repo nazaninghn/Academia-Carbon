@@ -1,0 +1,39 @@
+from django.contrib import admin
+from .models import Country, EmissionData, EmissionRecord
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code']
+    search_fields = ['name', 'code']
+
+@admin.register(EmissionData)
+class EmissionDataAdmin(admin.ModelAdmin):
+    list_display = ['country', 'year', 'co2_emissions', 'total_ghg']
+    list_filter = ['year', 'country']
+    search_fields = ['country__name']
+
+@admin.register(EmissionRecord)
+class EmissionRecordAdmin(admin.ModelAdmin):
+    list_display = ['user', 'scope', 'source_name', 'emissions_kg', 'country', 'created_at']
+    list_filter = ['scope', 'country', 'created_at', 'user']
+    search_fields = ['user__username', 'source_name', 'description']
+    readonly_fields = ['created_at', 'updated_at']
+    date_hierarchy = 'created_at'
+    
+    fieldsets = (
+        ('User Information', {
+            'fields': ('user', 'scope')
+        }),
+        ('Emission Details', {
+            'fields': ('category', 'source', 'source_name', 'activity_data', 'unit')
+        }),
+        ('Calculation Results', {
+            'fields': ('emission_factor', 'emissions_kg', 'emissions_tons', 'country', 'reference')
+        }),
+        ('Additional Information', {
+            'fields': ('description', 'supplier')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
