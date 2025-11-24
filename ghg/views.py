@@ -258,7 +258,7 @@ def email_signup_view(request):
         form = EmailSignupForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='ghg.backends.EmailBackend')
             messages.success(request, 'Account created successfully! Welcome to Academia Carbon.')
             return redirect('ghg:index')
     else:
