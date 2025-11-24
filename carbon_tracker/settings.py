@@ -145,15 +145,36 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'ghg.backends.EmailBackend',  # Custom email backend
+    'django.contrib.auth.backends.ModelBackend',  # Default backend (fallback)
+]
+
 # Login settings
 LOGIN_URL = '/en/login/'
 LOGIN_REDIRECT_URL = '/en/'
 LOGOUT_REDIRECT_URL = '/en/login/'
 
 # CSRF settings
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8000', 'http://localhost:8000']
-CSRF_COOKIE_SECURE = False
-CSRF_COOKIE_HTTPONLY = False
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:8000',
+    'http://localhost:8000',
+    'https://*.onrender.com',  # For Render.com deployment
+]
+
+# Security settings for production
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+else:
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_HTTPONLY = False
 
 
 # Static files (CSS, JavaScript, Images)

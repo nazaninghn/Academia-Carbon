@@ -11,24 +11,18 @@ class EmailLoginForm(AuthenticationForm):
         widget=forms.EmailInput(attrs={
             'class': 'form-control',
             'placeholder': 'your@email.com',
-            'autofocus': True
+            'autofocus': True,
+            'id': 'id_username'
         })
     )
     password = forms.CharField(
         label='Password',
         widget=forms.PasswordInput(attrs={
             'class': 'form-control',
-            'placeholder': '••••••••'
+            'placeholder': '••••••••',
+            'id': 'id_password'
         })
     )
-    
-    def clean_username(self):
-        email = self.cleaned_data.get('username')
-        try:
-            user = User.objects.get(email=email)
-            return user.username
-        except User.DoesNotExist:
-            raise ValidationError('No user found with this email')
 
 
 class EmailSignupForm(UserCreationForm):

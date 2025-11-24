@@ -230,17 +230,19 @@ def email_login_view(request):
         return redirect('ghg:index')
     
     if request.method == 'POST':
-        form = EmailLoginForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                messages.success(request, f'Welcome back, {user.first_name or user.email}!')
-                return redirect('ghg:index')
+        email = request.POST.get('username')  # Field name is 'username' but contains email
+        password = request.POST.get('password')
+        
+        # Authenticate using email
+        user = authenticate(request, username=email, password=password)
+        
+        if user is not None:
+            login(request, user)
+            messages.success(request, f'Welcome back, {user.first_name or user.email}!')
+            return redirect('ghg:index')
         else:
-            messages.error(request, 'Invalid email or password')
+            messages.error(request, 'Invalid email or password. Please try again.')
+            form = EmailLoginForm()
     else:
         form = EmailLoginForm()
     
