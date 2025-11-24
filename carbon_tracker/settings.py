@@ -36,6 +36,11 @@ ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
 if '.onrender.com' not in str(ALLOWED_HOSTS):
     ALLOWED_HOSTS.append('.onrender.com')
 
+# Always allow Render domain in production
+if not DEBUG:
+    ALLOWED_HOSTS.append('academia-carbon.onrender.com')
+    ALLOWED_HOSTS.append('.onrender.com')
+
 
 # Application definition
 
@@ -160,8 +165,14 @@ LOGOUT_REDIRECT_URL = '/en/login/'
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    'https://*.onrender.com',  # For Render.com deployment
+    'https://*.onrender.com',
+    'https://academia-carbon.onrender.com',
 ]
+
+# Get additional CSRF origins from environment
+csrf_origins_env = config('CSRF_TRUSTED_ORIGINS', default='')
+if csrf_origins_env:
+    CSRF_TRUSTED_ORIGINS.extend([origin.strip() for origin in csrf_origins_env.split(',')])
 
 # Security settings for production
 if not DEBUG:
@@ -185,9 +196,35 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # WhiteNoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+if DEBUG:
+    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+else:
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Logging configuration for production debugging
+if not DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+            },
+        },
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': False,
+            },
+        },
+    }
