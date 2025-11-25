@@ -284,13 +284,19 @@
                 <div id="stationary-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="stationary-source"></select>
                             <option value="">Select Emission Source</option>
-                            <option value="natural-gas">Natural Gas</option>
-                            <option value="diesel">Diesel</option>
-                            <option value="coal">Coal</option>
-                            <option value="lpg">LPG</option>
+                            <option value="coal-industrial">Coal (industrial) (Defra, 2024)</option>
+                            <option value="gas-diesel-oil">Gas/Diesel Oil (IPCC, 2006)</option>
+                            <option value="lpg">Liquefied Petroleum Gases (IPCC, 2006)</option>
+                            <option value="motor-gasoline">Motor Gasoline (IPCC, 2006)</option>
+                            <option value="natural-gas">Natural Gas (IPCC, 2006)</option>
+                            <option value="propane">Propane (Defra, 2024)</option>
                         </select>
+                        <p class="text-muted" style="font-size: 12px; margin-top: 8px;">
+                            <i class="fas fa-info-circle"></i> Calculate your emissions more precisely by accessing additional emission sources with the Booster Plan. 
+                            <a href="#" style="color: #22c55e;">Learn more</a>
+                        </p>
                     </div>
 
                     <div class="form-group">
