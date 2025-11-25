@@ -37,7 +37,7 @@ def calculate_emission(request):
     if request.method == 'POST':
         import json
         from .emission_factors import calculate_emissions
-        from .models import EmissionRecord
+        from .models import EmissionRecord, Supplier
         
         data = json.loads(request.body)
         category = data.get('category')
@@ -45,7 +45,7 @@ def calculate_emission(request):
         activity_data = float(data.get('activity_data', 0))
         country = data.get('country', 'global')
         description = data.get('description', '')
-        supplier = data.get('supplier', '')
+        supplier_id = data.get('supplier_id', None)
         save_record = data.get('save', True)  # Option to save or not
         
         result = calculate_emissions(category, source, activity_data, country)
@@ -59,6 +59,14 @@ def calculate_emission(request):
                              'fuel-energy', 'upstream-transport', 'commuting', 'upstream-leased',
                              'downstream-transport', 'end-of-life', 'franchises', 'investments']:
                 scope = '3'
+            
+            # Get supplier object if provided
+            supplier_obj = None
+            if supplier_id:
+                try:
+                    supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
+                except Supplier.DoesNotExist:
+                    pass
             
             # Save to database
             record = EmissionRecord.objects.create(
@@ -75,7 +83,7 @@ def calculate_emission(request):
                 country=country,
                 reference=result.get('reference', ''),
                 description=description,
-                supplier=supplier
+                supplier=supplier_obj
             )
             
             result['record_id'] = record.id
@@ -272,3 +280,53 @@ def logout_view(request):
     logout(request)
     messages.info(request, 'You have been logged out successfully')
     return redirect('ghg:email_login')
+
+
+@login_required
+def get_suppliers(request):
+    """API endpoint to get user's suppliers"""
+    from .models import Supplier
+    
+    suppliers = Supplier.objects.filter(user=request.user).values('id', 'name', 'supplier_type')
+    return JsonResponse({'suppliers': list(suppliers)})
+
+
+@login_required
+def add_supplier(request):
+    """API endpoint to add a new supplier"""
+    from .models import Supplier
+    import json
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data.get('name', '').strip()
+        supplier_type = data.get('supplier_type', '').strip()
+        
+        if not name:
+            return JsonResponse({'error': 'Supplier name is required'}, status=400)
+        
+        # Check if supplier already exists
+        if Supplier.objects.filter(user=request.user, name=name).exists():
+            return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
+        
+        supplier = Supplier.objects.create(
+            user=request.user,
+            name=name,
+            supplier_type=supplier_type or None,
+            contact_person=data.get('contact_person'),
+            email=data.get('email'),
+            phone=data.get('phone'),
+            address=data.get('address'),
+            notes=data.get('notes')
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'supplier': {
+                'id': supplier.id,
+                'name': supplier.name,
+                'supplier_type': supplier.supplier_type
+            }
+        })
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)

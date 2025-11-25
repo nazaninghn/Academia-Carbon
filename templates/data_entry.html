@@ -284,7 +284,7 @@
                 <div id="stationary-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="stationary-source">
+                        <select class="form-control" id="stationary-source" onchange="updateStationaryUnit()">
                             <option value="">Select Emission Source</option>
                             <option value="coal-industrial">Coal (industrial) (Defra, 2024)</option>
                             <option value="gas-diesel-oil">Gas/Diesel Oil (IPCC, 2006)</option>
@@ -301,11 +301,11 @@
 
                     <div class="form-group">
                         <label>Unit</label>
-                        <select class="form-control">
+                        <select class="form-control" id="stationary-unit">
                             <option value="">Select Unit</option>
                             <option value="liters">Liters</option>
                             <option value="kg">Kilograms</option>
-                            <option value="m3">Cubic Meters</option>
+                            <option value="m3">Cubic Meters (m³)</option>
                             <option value="kwh">kWh</option>
                         </select>
                     </div>
@@ -314,23 +314,26 @@
                         <label>Activity Data</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
+                            <input type="number" class="form-control" id="stationary-activity" placeholder="Enter activity data" value="0">
                             <button type="button">+</button>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Supplier (Optional)</label>
-                        <select class="form-control">
-                            <option value="">Select Supplier</option>
-                            <option value="supplier1">Supplier 1</option>
-                            <option value="supplier2">Supplier 2</option>
-                        </select>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-control supplier-select" id="stationary-supplier" style="flex: 1;">
+                                <option value="">Select Supplier</option>
+                            </select>
+                            <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Description (Optional) <span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                        <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="Add description"></textarea>
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
@@ -1067,7 +1070,91 @@
     </div>
 </div>
 
+<!-- Add Supplier Modal -->
+<div id="supplierModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 12px; padding: 30px; max-width: 500px; width: 90%;">
+        <h3 style="margin-bottom: 20px; font-size: 20px; font-weight: 700;">Add New Supplier</h3>
+        
+        <div class="form-group">
+            <label>Supplier Name *</label>
+            <input type="text" id="modal-supplier-name" class="form-control" placeholder="Enter supplier name" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Supplier Type</label>
+            <select id="modal-supplier-type" class="form-control">
+                <option value="">Select Type (Optional)</option>
+                <option value="Energy">Energy</option>
+                <option value="Fuel">Fuel</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Waste">Waste Management</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button onclick="hideAddSupplierModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                Cancel
+            </button>
+            <button onclick="saveSupplier()" style="flex: 1; background: #22c55e; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                Save Supplier
+            </button>
+        </div>
+    </div>
+</div>
+
 <script>
+// Unit mapping for stationary combustion sources
+const stationaryUnits = {
+    'coal-industrial': ['kg'],
+    'gas-diesel-oil': ['liters'],
+    'lpg': ['liters'],
+    'motor-gasoline': ['liters'],
+    'natural-gas': ['m3'],
+    'propane': ['liters']
+};
+
+function updateStationaryUnit() {
+    const sourceSelect = document.getElementById('stationary-source');
+    const unitSelect = document.getElementById('stationary-unit');
+    const selectedSource = sourceSelect.value;
+    
+    // Clear current options
+    unitSelect.innerHTML = '<option value="">Select Unit</option>';
+    
+    if (selectedSource && stationaryUnits[selectedSource]) {
+        const allowedUnits = stationaryUnits[selectedSource];
+        
+        // Add only allowed units
+        allowedUnits.forEach(unit => {
+            const option = document.createElement('option');
+            option.value = unit;
+            
+            // Set display text
+            if (unit === 'kg') option.textContent = 'Kilograms (kg)';
+            else if (unit === 'liters') option.textContent = 'Liters';
+            else if (unit === 'm3') option.textContent = 'Cubic Meters (m³)';
+            else if (unit === 'kwh') option.textContent = 'kWh';
+            
+            unitSelect.appendChild(option);
+        });
+        
+        // Auto-select if only one option
+        if (allowedUnits.length === 1) {
+            unitSelect.value = allowedUnits[0];
+        }
+    } else {
+        // Show all units if no source selected
+        unitSelect.innerHTML = `
+            <option value="">Select Unit</option>
+            <option value="liters">Liters</option>
+            <option value="kg">Kilograms (kg)</option>
+            <option value="m3">Cubic Meters (m³)</option>
+            <option value="kwh">kWh</option>
+        `;
+    }
+}
+
 function switchScope(scopeNum) {
     // Hide all scopes
     document.querySelectorAll('.scope-content').forEach(el => el.classList.remove('active'));
@@ -1116,11 +1203,15 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
         // Get form data
         const sourceSelect = form.querySelector('select[class*="form-control"]');
         const activityInput = form.querySelector('input[type="number"]');
+        const supplierSelect = form.querySelector('.supplier-select');
+        const descriptionTextarea = form.querySelector('textarea');
         
         if (!sourceSelect || !activityInput) return;
         
         const source = sourceSelect.value;
         const activityData = parseFloat(activityInput.value) || 0;
+        const supplierId = supplierSelect ? supplierSelect.value : null;
+        const description = descriptionTextarea ? descriptionTextarea.value : '';
         
         if (!source || activityData <= 0) {
             alert('Please select an emission source and enter activity data');
@@ -1164,7 +1255,9 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
                 category: categoryType,
                 source: source,
                 activity_data: activityData,
-                country: country
+                country: country,
+                supplier_id: supplierId || null,
+                description: description
             })
         })
         .then(response => response.json())
@@ -1258,6 +1351,86 @@ document.getElementById('country-selector').addEventListener('change', function(
         countryInfo.innerHTML = '<i class="fas fa-info-circle"></i> Using global average emission factors (IPCC, EPA, DEFRA)';
         countryInfo.style.color = '#666';
     }
+});
+
+// Supplier Management Functions
+function loadSuppliers() {
+    fetch('/api/suppliers/', {
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const supplierSelects = document.querySelectorAll('.supplier-select');
+        supplierSelects.forEach(select => {
+            // Keep the first option (Select Supplier)
+            const firstOption = select.options[0];
+            select.innerHTML = '';
+            select.appendChild(firstOption);
+            
+            // Add suppliers
+            data.suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.id;
+                option.textContent = supplier.name + (supplier.supplier_type ? ` (${supplier.supplier_type})` : '');
+                select.appendChild(option);
+            });
+        });
+    })
+    .catch(error => console.error('Error loading suppliers:', error));
+}
+
+function showAddSupplierModal() {
+    const modal = document.getElementById('supplierModal');
+    modal.style.display = 'flex';
+    document.getElementById('modal-supplier-name').value = '';
+    document.getElementById('modal-supplier-type').value = '';
+}
+
+function hideAddSupplierModal() {
+    document.getElementById('supplierModal').style.display = 'none';
+}
+
+function saveSupplier() {
+    const name = document.getElementById('modal-supplier-name').value.trim();
+    const supplierType = document.getElementById('modal-supplier-type').value;
+    
+    if (!name) {
+        alert('Please enter supplier name');
+        return;
+    }
+    
+    fetch('/api/suppliers/add/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            name: name,
+            supplier_type: supplierType
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert('Error: ' + data.error);
+        } else {
+            hideAddSupplierModal();
+            loadSuppliers(); // Reload supplier list
+            alert('Supplier added successfully!');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to add supplier');
+    });
+}
+
+// Load suppliers on page load
+document.addEventListener('DOMContentLoaded', function() {
+    loadSuppliers();
 });
 </script>
 {% endblock %}

@@ -21,6 +21,8 @@ urlpatterns = [
     path('api/country/<str:country_code>/', views.get_country_data, name='country_data'),
     path('api/global/', views.get_global_data, name='global_data'),
     path('api/top-emitters/', views.get_top_emitters, name='top_emitters'),
+    path('api/suppliers/', views.get_suppliers, name='get_suppliers'),
+    path('api/suppliers/add/', views.add_supplier, name='add_supplier'),
     
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),

@@ -28,6 +28,31 @@ class EmissionData(models.Model):
         return f"{self.country.name} - {self.year}"
 
 
+class Supplier(models.Model):
+    """Supplier/Vendor management for emission tracking"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suppliers')
+    name = models.CharField(max_length=200, help_text="Supplier/Vendor name")
+    contact_person = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    phone = models.CharField(max_length=50, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    supplier_type = models.CharField(max_length=100, blank=True, null=True, 
+                                     help_text="e.g., Energy, Fuel, Transportation")
+    notes = models.TextField(blank=True, null=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['name']
+        verbose_name = "Supplier"
+        verbose_name_plural = "Suppliers"
+        unique_together = ['user', 'name']
+    
+    def __str__(self):
+        return self.name
+
+
 class EmissionRecord(models.Model):
     """Store user emission calculations"""
     SCOPE_CHOICES = [
@@ -53,7 +78,9 @@ class EmissionRecord(models.Model):
     reference = models.TextField(blank=True, null=True, help_text="Reference source for emission factor")
     
     description = models.TextField(blank=True, null=True, help_text="Optional description")
-    supplier = models.CharField(max_length=200, blank=True, null=True, help_text="Supplier name")
+    supplier_old = models.CharField(max_length=200, blank=True, null=True, help_text="Supplier name (deprecated)")
+    supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True, 
+                                 related_name='emission_records', help_text="Supplier/Vendor")
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Country, EmissionData, EmissionRecord
+from .models import Country, EmissionData, EmissionRecord, Supplier
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
@@ -32,6 +32,28 @@ class EmissionRecordAdmin(admin.ModelAdmin):
         }),
         ('Additional Information', {
             'fields': ('description', 'supplier')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at')
+        }),
+    )
+
+@admin.register(Supplier)
+class SupplierAdmin(admin.ModelAdmin):
+    list_display = ['name', 'user', 'supplier_type', 'email', 'phone', 'created_at']
+    list_filter = ['supplier_type', 'created_at', 'user']
+    search_fields = ['name', 'email', 'contact_person']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Basic Information', {
+            'fields': ('user', 'name', 'supplier_type')
+        }),
+        ('Contact Details', {
+            'fields': ('contact_person', 'email', 'phone', 'address')
+        }),
+        ('Additional Information', {
+            'fields': ('notes',)
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at')

@@ -44,11 +44,35 @@ TURKEY_STATIONARY = {
         'name': 'Coal/Lignite (Turkey)',
         'source': 'Turkish lignite has slightly higher emissions'
     },
+    'coal-industrial': {
+        'factor': 2.40739,  # kg CO2e per kg (2,407.39 kg CO2e per tonne)
+        'unit': 'kg',
+        'name': 'Coal (industrial) (Turkey)',
+        'source': 'Defra 2024 - UK Government GHG Conversion Factors (2,407.39 kg CO2e/tonne or 94.759 kg CO2e/GJ)'
+    },
+    'gas-diesel-oil': {
+        'factor': 2.68,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Gas/Diesel Oil (Turkey)',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+    },
     'lpg': {
         'factor': 1.51,  # kg CO2e per liter
         'unit': 'liters',
         'name': 'LPG (Turkey)',
         'source': 'IPCC 2006'
+    },
+    'motor-gasoline': {
+        'factor': 2.31,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Motor Gasoline (Turkey)',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+    },
+    'propane': {
+        'factor': 1.54,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Propane (Turkey)',
+        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
     },
     'fuel-oil': {
         'factor': 3.18,  # kg CO2e per liter
@@ -183,10 +207,10 @@ TURKEY_DISTRICT_ENERGY = {
 # Based on IPCC 2006 Guidelines and Defra 2024
 STATIONARY_COMBUSTION = {
     'coal-industrial': {
-        'factor': 2.42,  # kg CO2e per kg
+        'factor': 2.40739,  # kg CO2e per kg (2,407.39 kg CO2e per tonne)
         'unit': 'kg',
         'name': 'Coal (industrial)',
-        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
+        'source': 'Defra 2024 - UK Government GHG Conversion Factors (2,407.39 kg CO2e/tonne or 94.759 kg CO2e/GJ)'
     },
     'gas-diesel-oil': {
         'factor': 2.68,  # kg CO2e per liter
