@@ -179,32 +179,63 @@ TURKEY_DISTRICT_ENERGY = {
 # GLOBAL/DEFAULT EMISSION FACTORS
 # ============================================
 
-# Scope 1 - Stationary Combustion (kg CO2e per liter or kg)
+# Scope 1 - Stationary Combustion (kg CO2e per unit)
+# Based on IPCC 2006 Guidelines and Defra 2024
 STATIONARY_COMBUSTION = {
-    'natural-gas': {
-        'factor': 2.0,  # kg CO2e per m3
-        'unit': 'm3',
-        'name': 'Natural Gas'
-    },
-    'diesel': {
-        'factor': 2.68,  # kg CO2e per liter
-        'unit': 'liters',
-        'name': 'Diesel'
-    },
-    'coal': {
+    'coal-industrial': {
         'factor': 2.42,  # kg CO2e per kg
         'unit': 'kg',
-        'name': 'Coal'
+        'name': 'Coal (industrial)',
+        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
+    },
+    'gas-diesel-oil': {
+        'factor': 2.68,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Gas/Diesel Oil',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
     },
     'lpg': {
         'factor': 1.51,  # kg CO2e per liter
         'unit': 'liters',
-        'name': 'LPG'
+        'name': 'Liquefied Petroleum Gases',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+    },
+    'motor-gasoline': {
+        'factor': 2.31,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Motor Gasoline',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+    },
+    'natural-gas': {
+        'factor': 2.0,  # kg CO2e per m3
+        'unit': 'm3',
+        'name': 'Natural Gas',
+        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+    },
+    'propane': {
+        'factor': 1.54,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Propane',
+        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
+    },
+    # Legacy options (kept for backward compatibility)
+    'diesel': {
+        'factor': 2.68,  # kg CO2e per liter
+        'unit': 'liters',
+        'name': 'Diesel',
+        'source': 'IPCC 2006'
+    },
+    'coal': {
+        'factor': 2.42,  # kg CO2e per kg
+        'unit': 'kg',
+        'name': 'Coal',
+        'source': 'IPCC 2006'
     },
     'fuel-oil': {
         'factor': 3.18,  # kg CO2e per liter
         'unit': 'liters',
-        'name': 'Fuel Oil'
+        'name': 'Fuel Oil',
+        'source': 'IPCC 2006'
     }
 }
 
