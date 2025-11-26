@@ -1,0 +1,454 @@
+/* ========================================
+   MOBILE OPTIMIZATION CSS
+   Academia Carbon - Responsive Design
+   ======================================== */
+
+/* Prevent horizontal scroll */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Better text rendering on mobile */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Prevent text size adjustment on orientation change */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+/* Better tap highlighting */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Tablets (768px - 991px) */
+@media (max-width: 991px) {
+    /* Container adjustments */
+    .container {
+        max-width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    /* Dashboard layout */
+    .dashboard-wrapper {
+        flex-direction: column;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    /* Tables */
+    .table-responsive {
+        border: 0;
+    }
+    
+    table {
+        border: 0;
+    }
+    
+    table thead {
+        display: none;
+    }
+    
+    table tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: white;
+    }
+    
+    table td {
+        display: block;
+        text-align: right;
+        padding: 8px !important;
+        border: 0;
+    }
+    
+    table td:before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #666;
+    }
+}
+
+/* Mobile Devices (max-width: 767px) */
+@media (max-width: 767px) {
+    /* Typography */
+    h1 {
+        font-size: 1.75rem !important;
+        line-height: 1.3;
+    }
+    
+    h2 {
+        font-size: 1.5rem !important;
+        line-height: 1.3;
+    }
+    
+    h3 {
+        font-size: 1.25rem !important;
+        line-height: 1.3;
+    }
+    
+    p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+    
+    /* Spacing */
+    .mb-4, .my-4 {
+        margin-bottom: 1.5rem !important;
+    }
+    
+    .mt-4, .my-4 {
+        margin-top: 1.5rem !important;
+    }
+    
+    .p-4 {
+        padding: 1rem !important;
+    }
+    
+    /* Cards */
+    .card {
+        margin-bottom: 15px;
+        border-radius: 10px;
+    }
+    
+    .card-body {
+        padding: 15px;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+    
+    .btn-group {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    /* Forms */
+    .form-control {
+        font-size: 16px !important; /* Prevent zoom on iOS */
+        padding: 12px;
+        border-radius: 6px;
+    }
+    
+    .form-select {
+        font-size: 16px !important;
+        padding: 12px;
+    }
+    
+    .form-label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+    
+    /* Input groups */
+    .input-group {
+        flex-wrap: wrap;
+    }
+    
+    .input-group > * {
+        flex: 1 1 100%;
+    }
+    
+    /* Grid system */
+    .row {
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+    
+    .row > * {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    
+    /* Navigation */
+    .navbar {
+        padding: 10px 15px;
+    }
+    
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    
+    .navbar-nav {
+        margin-top: 10px;
+    }
+    
+    .nav-link {
+        padding: 8px 0;
+    }
+    
+    /* Modals */
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-content {
+        border-radius: 12px;
+    }
+    
+    .modal-header {
+        padding: 15px;
+    }
+    
+    .modal-body {
+        padding: 15px;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+    
+    .modal-footer {
+        padding: 15px;
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    /* Alerts */
+    .alert {
+        font-size: 14px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+    
+    /* Badges */
+    .badge {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+    
+    /* Charts */
+    canvas {
+        max-height: 250px !important;
+        width: 100% !important;
+    }
+    
+    /* Dropdown menus */
+    .dropdown-menu {
+        font-size: 14px;
+        min-width: 200px;
+    }
+    
+    .dropdown-item {
+        padding: 10px 15px;
+    }
+}
+
+/* Small Mobile (max-width: 575px) */
+@media (max-width: 575px) {
+    /* Container */
+    .container,
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Typography */
+    body {
+        font-size: 14px;
+    }
+    
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    h2 {
+        font-size: 1.3rem !important;
+    }
+    
+    h3 {
+        font-size: 1.15rem !important;
+    }
+    
+    /* Spacing */
+    .mb-3, .my-3 {
+        margin-bottom: 1rem !important;
+    }
+    
+    .mt-3, .my-3 {
+        margin-top: 1rem !important;
+    }
+    
+    .p-3 {
+        padding: 0.75rem !important;
+    }
+    
+    /* Cards */
+    .card-body {
+        padding: 12px;
+    }
+    
+    /* Buttons */
+    .btn {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+    
+    .btn-sm {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    
+    /* Forms */
+    .form-control,
+    .form-select {
+        font-size: 16px !important;
+        padding: 10px;
+    }
+    
+    .form-label {
+        font-size: 13px;
+    }
+    
+    /* Grid - Stack columns */
+    .col-md-6,
+    .col-lg-4,
+    .col-lg-6,
+    .col-lg-8 {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+    
+    /* Navigation */
+    .navbar-brand {
+        font-size: 1rem;
+    }
+    
+    /* Charts */
+    canvas {
+        max-height: 200px !important;
+    }
+    
+    /* Tables - Card view */
+    table {
+        font-size: 13px;
+    }
+    
+    table td {
+        padding: 6px !important;
+    }
+    
+    table td:before {
+        font-size: 12px;
+    }
+}
+
+/* Extra Small Devices (max-width: 400px) */
+@media (max-width: 400px) {
+    body {
+        font-size: 13px;
+    }
+    
+    h1 {
+        font-size: 1.3rem !important;
+    }
+    
+    h2 {
+        font-size: 1.15rem !important;
+    }
+    
+    h3 {
+        font-size: 1rem !important;
+    }
+    
+    .btn {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+    
+    .form-control,
+    .form-select {
+        padding: 8px;
+    }
+    
+    .navbar-brand {
+        font-size: 0.9rem;
+    }
+}
+
+/* Landscape Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+    .modal-body {
+        max-height: 60vh;
+    }
+    
+    .sidebar {
+        overflow-y: auto;
+    }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Sharper borders */
+    .card,
+    .btn,
+    .form-control {
+        border-width: 0.5px;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    /* Optional: Add dark mode styles if needed */
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .mobile-menu-toggle,
+    .btn,
+    .navbar {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        width: 100% !important;
+    }
+    
+    body {
+        background: white !important;
+    }
+}

@@ -27,10 +27,10 @@ TURKEY_ELECTRICITY = {
 # Source: Turkish Ministry of Environment, IPCC 2006
 TURKEY_STATIONARY = {
     'natural-gas': {
-        'factor': 1.99,  # kg CO2e per m3 (Turkey natural gas composition - 2025 with improved efficiency)
-        'unit': 'm3',
+        'factor': 56.211,  # kg CO2e per GJ (CO2: 56.1 + CH4: 0.0837 + N2O: 0.0273)
+        'unit': 'gj',
         'name': 'Natural Gas (Turkey)',
-        'source': 'Turkish Ministry of Environment 2025 - Updated with efficiency standards'
+        'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 56.1, CH4: 3.0g×27.9, N2O: 0.1g×273)'
     },
     'diesel': {
         'factor': 2.68,  # kg CO2e per liter (standard)
@@ -68,12 +68,6 @@ TURKEY_STATIONARY = {
         'name': 'Motor Gasoline (Turkey)',
         'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 69.3, CH4: 3.3g×27.9, N2O: 0.6g×273)'
     },
-    'propane': {
-        'factor': 1.54,  # kg CO2e per liter
-        'unit': 'liters',
-        'name': 'Propane (Turkey)',
-        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
-    },
     'fuel-oil': {
         'factor': 3.18,  # kg CO2e per liter
         'unit': 'liters',
@@ -85,6 +79,102 @@ TURKEY_STATIONARY = {
 # Turkey Scope 3 - Transportation
 # Source: Turkish Statistical Institute (TÜİK), DEFRA adapted
 TURKEY_TRANSPORTATION = {
+    'off-road-ipcc': {
+        'factor': 74.39892,  # kg CO2e per GJ (CO2: 74.1 + CH4: 0.18972 + N2O: 0.1092)
+        'unit': 'gj',
+        'name': 'Off-Road (IPCC 2019) (Turkey)',
+        'source': 'IPCC 2019 - Off-road equipment with AR6 GWP (CO2: 74.1, CH4: 6.8g×27.9, N2O: 0.4g×273)'
+    },
+    'off-road-diesel': {
+        'factor': 3.17939,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'Off-Road Diesel (Turkey)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'off-road-gasoline': {
+        'factor': 2.30233,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'Off-Road Gasoline (Turkey)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-petrol-desnz': {
+        'factor': 2.30233,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'On-Road Petrol (DESNZ 2024) (Turkey)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-diesel-desnz': {
+        'factor': 3.17939,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'On-Road Diesel (DESNZ 2024) (Turkey)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-lpg-desnz': {
+        'factor': 63.1,  # kg CO2e per GJ (using IPCC factor)
+        'unit': 'gj',
+        'name': 'On-Road LPG (DESNZ 2024) (Turkey)',
+        'source': 'IPCC 2019 - On-road vehicles (LPG)'
+    },
+    'on-road-gasoline-low-mileage-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Low Mileage (DESNZ 2024) (Turkey)',
+        'source': 'IPCC 2019 - Light Duty Vehicle Vintage 1995+ with AR6 GWP'
+    },
+    'on-road-gasoline-uncontrolled-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Uncontrolled (DESNZ 2024) (Turkey)',
+        'source': 'IPCC 2019 - Uncontrolled vehicles with AR6 GWP'
+    },
+    'on-road-gasoline-oxidation-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Oxidation Catalyst (DESNZ 2024) (Turkey)',
+        'source': 'IPCC 2019 - Vehicles with oxidation catalyst and AR6 GWP'
+    },
+    'on-road-natural-gas-desnz': {
+        'factor': 56.211,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Natural Gas (DESNZ 2024) (Turkey)',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP'
+    },
+    'on-road-lpg': {
+        'factor': 63.1,  # kg CO2e per GJ (IPCC default for LPG on-road)
+        'unit': 'gj',
+        'name': 'On-Road LPG (Turkey)',
+        'source': 'IPCC 2019 - On-road vehicles (LPG)'
+    },
+    'on-road-gasoline-low-mileage': {
+        'factor': 69.55587,  # kg CO2e per GJ (CO2: 69.3 + CH4: 0.09207 + N2O: 0.1638)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Low Mileage) (Turkey)',
+        'source': 'IPCC 2019 - Light Duty Vehicle Vintage 1995+ with AR6 GWP'
+    },
+    'on-road-gasoline-uncontrolled': {
+        'factor': 69.55587,  # kg CO2e per GJ (same base factor)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Uncontrolled) (Turkey)',
+        'source': 'IPCC 2019 - Uncontrolled vehicles with AR6 GWP'
+    },
+    'on-road-gasoline-oxidation': {
+        'factor': 69.55587,  # kg CO2e per GJ (same base factor)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Oxidation Catalyst) (Turkey)',
+        'source': 'IPCC 2019 - Vehicles with oxidation catalyst and AR6 GWP'
+    },
+    'on-road-diesel': {
+        'factor': 74.39892,  # kg CO2e per GJ (CO2: 74.1 + CH4: 0.18972 + N2O: 0.1092)
+        'unit': 'gj',
+        'name': 'On-Road Diesel (Turkey)',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP (CO2: 74.1, CH4: 6.8g×27.9, N2O: 0.4g×273)'
+    },
+    'on-road-natural-gas': {
+        'factor': 56.211,  # kg CO2e per GJ (CO2: 56.1 + CH4: 0.0837 + N2O: 0.0273)
+        'unit': 'gj',
+        'name': 'On-Road Natural Gas (Turkey)',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP (CO2: 56.1, CH4: 3.0g×27.9, N2O: 0.1g×273)'
+    },
     'flight-domestic': {
         'factor': 0.232,  # kg CO2e per km (Turkish domestic flights - 2025 with Boeing 737 MAX & A320neo)
         'unit': 'km',
@@ -231,16 +321,10 @@ STATIONARY_COMBUSTION = {
         'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 69.3, CH4: 3.3g×27.9, N2O: 0.6g×273)'
     },
     'natural-gas': {
-        'factor': 2.0,  # kg CO2e per m3
-        'unit': 'm3',
+        'factor': 56.211,  # kg CO2e per GJ (CO2: 56.1 + CH4: 0.0837 + N2O: 0.0273)
+        'unit': 'gj',
         'name': 'Natural Gas',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
-    },
-    'propane': {
-        'factor': 1.54,  # kg CO2e per liter
-        'unit': 'liters',
-        'name': 'Propane',
-        'source': 'Defra 2024 - UK Government GHG Conversion Factors'
+        'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 56.1, CH4: 3.0g×27.9, N2O: 0.1g×273)'
     },
     # Legacy options (kept for backward compatibility)
     'diesel': {
@@ -265,6 +349,102 @@ STATIONARY_COMBUSTION = {
 
 # Scope 1 - Mobile Combustion (kg CO2e per liter or km)
 MOBILE_COMBUSTION = {
+    'off-road-ipcc': {
+        'factor': 74.39892,  # kg CO2e per GJ (CO2: 74.1 + CH4: 0.18972 + N2O: 0.1092)
+        'unit': 'gj',
+        'name': 'Off-Road (IPCC 2019)',
+        'source': 'IPCC 2019 - Off-road equipment with AR6 GWP (CO2: 74.1, CH4: 6.8g×27.9, N2O: 0.4g×273)'
+    },
+    'off-road-diesel': {
+        'factor': 3.17939,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'Off-Road Diesel',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'off-road-gasoline': {
+        'factor': 2.30233,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'Off-Road Gasoline',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-petrol-desnz': {
+        'factor': 2.30233,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'On-Road Petrol (DESNZ 2024)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-diesel-desnz': {
+        'factor': 3.17939,  # kg CO2e per litre
+        'unit': 'liters',
+        'name': 'On-Road Diesel (DESNZ 2024)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'on-road-lpg-desnz': {
+        'factor': 63.1,  # kg CO2e per GJ (using IPCC factor)
+        'unit': 'gj',
+        'name': 'On-Road LPG (DESNZ 2024)',
+        'source': 'IPCC 2019 - On-road vehicles (LPG)'
+    },
+    'on-road-gasoline-low-mileage-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Low Mileage (DESNZ 2024)',
+        'source': 'IPCC 2019 - Light Duty Vehicle Vintage 1995+ with AR6 GWP'
+    },
+    'on-road-gasoline-uncontrolled-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Uncontrolled (DESNZ 2024)',
+        'source': 'IPCC 2019 - Uncontrolled vehicles with AR6 GWP'
+    },
+    'on-road-gasoline-oxidation-desnz': {
+        'factor': 69.55587,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Gasoline Oxidation Catalyst (DESNZ 2024)',
+        'source': 'IPCC 2019 - Vehicles with oxidation catalyst and AR6 GWP'
+    },
+    'on-road-natural-gas-desnz': {
+        'factor': 56.211,  # kg CO2e per GJ
+        'unit': 'gj',
+        'name': 'On-Road Natural Gas (DESNZ 2024)',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP'
+    },
+    'on-road-lpg': {
+        'factor': 63.1,  # kg CO2e per GJ (IPCC default for LPG on-road)
+        'unit': 'gj',
+        'name': 'On-Road LPG',
+        'source': 'IPCC 2019 - On-road vehicles (LPG)'
+    },
+    'on-road-gasoline-low-mileage': {
+        'factor': 69.55587,  # kg CO2e per GJ (CO2: 69.3 + CH4: 0.09207 + N2O: 0.1638)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Low Mileage)',
+        'source': 'IPCC 2019 - Light Duty Vehicle Vintage 1995+ with AR6 GWP'
+    },
+    'on-road-gasoline-uncontrolled': {
+        'factor': 69.55587,  # kg CO2e per GJ (same base factor)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Uncontrolled)',
+        'source': 'IPCC 2019 - Uncontrolled vehicles with AR6 GWP'
+    },
+    'on-road-gasoline-oxidation': {
+        'factor': 69.55587,  # kg CO2e per GJ (same base factor)
+        'unit': 'gj',
+        'name': 'On-Road Gasoline (Oxidation Catalyst)',
+        'source': 'IPCC 2019 - Vehicles with oxidation catalyst and AR6 GWP'
+    },
+    'on-road-diesel': {
+        'factor': 74.39892,  # kg CO2e per GJ (CO2: 74.1 + CH4: 0.18972 + N2O: 0.1092)
+        'unit': 'gj',
+        'name': 'On-Road Diesel',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP (CO2: 74.1, CH4: 6.8g×27.9, N2O: 0.4g×273)'
+    },
+    'on-road-natural-gas': {
+        'factor': 56.211,  # kg CO2e per GJ (CO2: 56.1 + CH4: 0.0837 + N2O: 0.0273)
+        'unit': 'gj',
+        'name': 'On-Road Natural Gas',
+        'source': 'IPCC 2019 - On-road vehicles with AR6 GWP (CO2: 56.1, CH4: 3.0g×27.9, N2O: 0.1g×273)'
+    },
     'gasoline': {
         'factor': 2.31,  # kg CO2e per liter
         'unit': 'liters',
@@ -289,30 +469,35 @@ MOBILE_COMBUSTION = {
 
 # Scope 1 - Fugitive Emissions (kg CO2e per kg)
 FUGITIVE_EMISSIONS = {
-    'r134a': {
-        'factor': 1430,  # GWP of R-134a
-        'unit': 'kg',
-        'name': 'R-134a (Refrigerant)'
-    },
     'r410a': {
-        'factor': 2088,  # GWP of R-410A
+        'factor': 2088,  # GWP of R-410A (highest among common refrigerants)
         'unit': 'kg',
-        'name': 'R-410A (Refrigerant)'
+        'name': 'R-410A (Refrigerant)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
+    },
+    'r432a': {
+        'factor': 1940,  # GWP of R-432A
+        'unit': 'kg',
+        'name': 'R-432A (Refrigerant)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
     },
     'r22': {
-        'factor': 1810,  # GWP of R-22
+        'factor': 1810,  # GWP of R-22 (HCFC-22 / Chlorodifluoromethane)
         'unit': 'kg',
-        'name': 'R-22 (HCFC)'
+        'name': 'R-22 (HCFC-22 / Chlorodifluoromethane)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
     },
-    'sf6': {
-        'factor': 22800,  # GWP of SF6
+    'r600a': {
+        'factor': 3.0,  # GWP of R-600A (Isobutane)
         'unit': 'kg',
-        'name': 'SF6'
+        'name': 'R-600A (Isobutane)',
+        'source': 'DESNZ 2024 - UK Government GHG Conversion Factors'
     },
     'methane': {
-        'factor': 25,  # GWP of CH4
+        'factor': 27.9,  # GWP of Methane (CH4) - IPCC AR6
         'unit': 'kg',
-        'name': 'Methane'
+        'name': 'Methane (CH4)',
+        'source': 'DESNZ 2024 / IPCC AR6 GWP'
     }
 }
 

@@ -10,16 +10,22 @@ A Django web application for tracking and calculating greenhouse gas (GHG) emiss
 
 ## Features ✨
 
-- 📊 Calculate emissions across Scope 1, 2, and 3
+### Core Functionality
+- 📊 Calculate emissions across **Scope 1, 2, and 3**
 - 🌍 Country-specific emission factors (Turkey 2025 + Global)
-- 📈 Interactive charts and visualizations
+- � MInteractive charts and visualizations
 - 📱 Modern, responsive design
 - 🎓 Academic-focused interface
-- 🔐 Email-based authentication
-- 📝 Emission history tracking
-- 🔬 Research-grade accuracy
-- 📝 Emission history tracking
-- 🔬 Research-grade accuracy
+- � Emiail-based authentication
+- � Emiession history tracking
+- � Researcnh-grade accuracy
+
+### DESNZ 2024 Standards (NEW!)
+- 🚗 **On-Road Emissions** - Volume-based factors for vehicles (Petrol, Diesel, LPG, Natural Gas)
+- ❄️ **Fugitive Emissions** - Complete refrigerant tracking (R-410A, R-432A, R-22, Methane, R-600A)
+- 🚜 **Off-Road Emissions** - Equipment and machinery (Diesel, Gasoline)
+- 📊 **Supplier Management** - Track emission sources by supplier
+- 🎯 **IPCC AR6 GWP** - Latest global warming potentials
 
 ---
 

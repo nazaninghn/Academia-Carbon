@@ -31,7 +31,7 @@ class EmissionRecordAdmin(admin.ModelAdmin):
             'fields': ('emission_factor', 'emissions_kg', 'emissions_tons', 'country', 'reference')
         }),
         ('Additional Information', {
-            'fields': ('description', 'industry_type', 'supplier')
+            'fields': ('description', 'industry_type', 'fuel_name', 'supplier')
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at')

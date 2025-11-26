@@ -2,6 +2,41 @@
 
 All notable changes to Academia Carbon will be documented in this file.
 
+## [2.1.0] - 2025-11-26
+
+### Added - DESNZ 2024 Emission Factors
+- 🚗 **On-Road (DESNZ 2024)** - Volume-based emission factors for road vehicles
+  - Petrol: 2.30233 kg CO2e/litre
+  - Diesel: 3.17939 kg CO2e/litre
+  - LPG, Motor Gasoline variants, Natural Gas (GJ-based)
+- ❄️ **Fugitive Emissions (DESNZ 2024)** - Complete refrigerant leakage tracking
+  - R-410A: GWP 2,088 (highest impact)
+  - R-432A: GWP 1,940
+  - R-22 (HCFC-22): GWP 1,810 (being phased out)
+  - Methane (CH4): GWP 27.9 (IPCC AR6)
+  - R-600A (Isobutane): GWP 3.0 (natural refrigerant)
+- 🚜 **Off-Road (DESNZ 2024)** - Equipment and machinery emissions
+  - Diesel: 3.17939 kg CO2e/litre
+  - Gasoline: 2.30233 kg CO2e/litre
+
+### Improved
+- 📝 Enhanced data entry forms with supplier tracking
+- 🔧 Fixed JavaScript source selection for fugitive emissions
+- 📊 Better form validation and user feedback
+- 🎨 Consistent UI across all emission categories
+- 📱 **Complete Mobile Optimization** - Fully responsive design for all devices
+  - Touch-optimized buttons (min 44px)
+  - Mobile-first navigation with hamburger menu
+  - Responsive tables with card view on mobile
+  - Optimized forms to prevent iOS zoom
+  - Better spacing and typography for small screens
+
+### Technical
+- Updated emission_factors.py with DESNZ 2024 standards
+- Improved category-specific source detection in JavaScript
+- Added character counter for description fields
+- Enhanced supplier management integration
+
 ## [2.0.0] - 2025-11-24
 
 ### Added

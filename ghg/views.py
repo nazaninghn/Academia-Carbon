@@ -46,6 +46,7 @@ def calculate_emission(request):
         country = data.get('country', 'global')
         description = data.get('description', '')
         industry_type = data.get('industry_type', '')
+        fuel_name = data.get('fuel_name', '')
         supplier_id = data.get('supplier_id', None)
         save_record = data.get('save', True)  # Option to save or not
         
@@ -85,6 +86,7 @@ def calculate_emission(request):
                 reference=result.get('reference', ''),
                 description=description,
                 industry_type=industry_type or None,
+                fuel_name=fuel_name or None,
                 supplier=supplier_obj
             )
             

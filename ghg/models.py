@@ -83,6 +83,7 @@ class EmissionRecord(models.Model):
     
     description = models.TextField(blank=True, null=True, help_text="Optional description")
     industry_type = models.CharField(max_length=100, blank=True, null=True, help_text="Industry type (for specific sources)")
+    fuel_name = models.CharField(max_length=100, blank=True, null=True, help_text="Fuel name (for Off-Road)")
     supplier_old = models.CharField(max_length=200, blank=True, null=True, help_text="Supplier name (deprecated)")
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True, 
                                  related_name='emission_records', help_text="Supplier/Vendor")

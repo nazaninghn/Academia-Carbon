@@ -290,8 +290,8 @@
                             <option value="gas-diesel-oil-energy">Gas/Diesel Oil (IPCC, 2019)</option>
                             <option value="lpg">Liquefied Petroleum Gases (Defra, 2024)</option>
                             <option value="motor-gasoline">Motor Gasoline (IPCC, 2019)</option>
-                            <option value="natural-gas">Natural Gas (IPCC, 2006)</option>
-                            <option value="propane">Propane (Defra, 2024)</option>
+                            <option value="natural-gas">Natural Gas (IPCC, 2019)</option>
+
                         </select>
                         <p class="text-muted" style="font-size: 12px; margin-top: 8px;">
                             <i class="fas fa-info-circle"></i> Calculate your emissions more precisely by accessing additional emission sources with the Booster Plan. 
@@ -367,19 +367,88 @@
                 <div id="mobile-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="mobile-source" onchange="updateMobileFields()">
                             <option value="">Select Emission Source</option>
-                            <option value="gasoline">Gasoline</option>
-                            <option value="diesel">Diesel</option>
-                            <option value="cng">CNG</option>
+                            <option value="off-road-ipcc">Off-Road (IPCC, 2019)</option>
+                            <option value="off-road-desnz">Off-Road (DESNZ, 2024)</option>
+                            <option value="on-road-ipcc">On-Road (IPCC, 2019)</option>
+                            <option value="on-road-desnz">On-Road (DESNZ, 2024)</option>
+                        </select>
+                    </div>
+
+                    <!-- Fuel Name (only for Off-Road IPCC) -->
+                    <div class="form-group" id="fuel-name-group" style="display: none;">
+                        <label>Fuel Name</label>
+                        <select class="form-control" id="mobile-fuel-name">
+                            <option value="">Select Fuel Name</option>
+                            <option value="motor-gasoline-2stroke-household">Motor Gasoline 2-Stroke - Household</option>
+                            <option value="motor-gasoline-2stroke-agriculture">Motor Gasoline 2-Stroke - Agriculture</option>
+                            <option value="motor-gasoline-2stroke-forestry">Motor Gasoline 2-Stroke - Forestry</option>
+                            <option value="motor-gasoline-2stroke-industry">Motor Gasoline 2-Stroke - Industry</option>
+                            <option value="motor-gasoline-4stroke-household">Motor Gasoline 4-stroke - Household</option>
+                            <option value="motor-gasoline-4stroke-agriculture">Motor Gasoline 4-stroke - Agriculture</option>
+                            <option value="motor-gasoline-4stroke-industry">Motor Gasoline 4-stroke - Industry</option>
+                            <option value="diesel-household">Diesel - Household</option>
+                            <option value="diesel-agriculture">Diesel - Agriculture</option>
+                            <option value="diesel-forestry">Diesel - Forestry</option>
+                            <option value="diesel-industry">Diesel - Industry</option>
+                        </select>
+                    </div>
+
+                    <!-- Fuel Type (only for Off-Road DESNZ) -->
+                    <div class="form-group" id="fuel-type-group" style="display: none;">
+                        <label>Fuel Type</label>
+                        <select class="form-control" id="mobile-fuel-type" onchange="updateOffRoadDesnzFactor()">
+                            <option value="">Select Fuel Type</option>
+                            <option value="motor-gasoline-2stroke-household">Motor Gasoline 2-Stroke - Household</option>
+                            <option value="motor-gasoline-2stroke-agriculture">Motor Gasoline 2-Stroke - Agriculture</option>
+                            <option value="motor-gasoline-2stroke-forestry">Motor Gasoline 2-Stroke - Forestry</option>
+                            <option value="motor-gasoline-2stroke-industry">Motor Gasoline 2-Stroke - Industry</option>
+                            <option value="motor-gasoline-4stroke-household">Motor Gasoline 4-stroke - Household</option>
+                            <option value="motor-gasoline-4stroke-agriculture">Motor Gasoline 4-stroke - Agriculture</option>
+                            <option value="motor-gasoline-4stroke-industry">Motor Gasoline 4-stroke - Industry</option>
+                            <option value="diesel-household">Diesel - Household</option>
+                            <option value="diesel-agriculture">Diesel - Agriculture</option>
+                            <option value="diesel-forestry">Diesel - Forestry</option>
+                            <option value="diesel-industry">Diesel - Industry</option>
+                        </select>
+                    </div>
+
+                    <!-- Fuel Type (only for On-Road IPCC) -->
+                    <div class="form-group" id="onroad-fuel-type-group" style="display: none;">
+                        <label>Fuel Type</label>
+                        <select class="form-control" id="onroad-fuel-type">
+                            <option value="">Select Fuel Type</option>
+                            <option value="lpg">Liquefied Petroleum Gases</option>
+                            <option value="gasoline-low-mileage">Motor Gasoline - Low Mileage Light Duty Vehicle Vintage 1995 or Later</option>
+                            <option value="gasoline-uncontrolled">Motor Gasoline - Uncontrolled</option>
+                            <option value="gasoline-oxidation">Motor Gasoline - Oxidation Catalyst</option>
+                            <option value="diesel">Gas / Diesel Oil</option>
+                            <option value="natural-gas">Natural Gas</option>
+                        </select>
+                    </div>
+
+                    <!-- Fuel Type (only for On-Road DESNZ) -->
+                    <div class="form-group" id="onroad-desnz-fuel-type-group" style="display: none;">
+                        <label>Fuel Type</label>
+                        <select class="form-control" id="onroad-desnz-fuel-type">
+                            <option value="">Select Fuel Type</option>
+                            <option value="lpg">Liquefied Petroleum Gases</option>
+                            <option value="gasoline-low-mileage">Motor Gasoline - Low Mileage Light Duty Vehicle Vintage 1995 or Later</option>
+                            <option value="gasoline-uncontrolled">Motor Gasoline - Uncontrolled</option>
+                            <option value="gasoline-oxidation">Motor Gasoline - Oxidation Catalyst</option>
+                            <option value="diesel">Gas / Diesel Oil</option>
+                            <option value="natural-gas">Natural Gas</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Unit</label>
-                        <select class="form-control">
+                        <select class="form-control" id="mobile-unit">
                             <option value="">Select Unit</option>
                             <option value="liters">Liters</option>
+                            <option value="kg">Kilograms</option>
+                            <option value="gj">Gigajoules (GJ)</option>
                             <option value="km">Kilometers</option>
                         </select>
                     </div>
@@ -408,22 +477,55 @@
                 <div id="fugitive-form" style="display: none;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="fugitive-source">
                             <option value="">Select Emission Source</option>
-                            <option value="r134a">R-134a (Refrigerant)</option>
-                            <option value="r410a">R-410A (Refrigerant)</option>
-                            <option value="sf6">SF6</option>
+                            <option value="r410a">R-410A (Refrigerant) - DESNZ 2024</option>
+                            <option value="r432a">R-432A (Refrigerant) - DESNZ 2024</option>
+                            <option value="r22">R-22 (HCFC-22 / Chlorodifluoromethane) - DESNZ 2024</option>
+                            <option value="r600a">R-600A (Isobutane) - DESNZ 2024</option>
+                            <option value="methane">Methane (CH4) - DESNZ 2024</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Activity Data (kg)</label>
+                        <label>Unit</label>
+                        <select class="form-control" id="fugitive-unit" disabled>
+                            <option value="kg">Kilograms (kg)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data</label>
                         <div class="activity-input">
-                            <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
-                            <button type="button">+</button>
+                            <button type="button" onclick="adjustValue(this, -1)">−</button>
+                            <input type="number" class="form-control" id="fugitive-activity" placeholder="Enter activity data" value="0" min="0" step="0.1">
+                            <button type="button" onclick="adjustValue(this, 1)">+</button>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-control supplier-select" id="fugitive-supplier" style="flex: 1;">
+                                <option value="">Select Supplier</option>
+                            </select>
+                            <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description <span style="color: #999; font-weight: normal;">(Optional)</span></label>
+                        <textarea class="form-control" id="fugitive-description" placeholder="Add description" rows="3" maxlength="500"></textarea>
+                        <small class="form-text text-muted" style="text-align: right; display: block;">
+                            <span id="fugitive-char-count">0</span>/500
+                        </small>
+                    </div>
+
+                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                        You can <strong>add your proof document</strong> here (i.e. gas bills).
+                    </p>
 
                     <button class="btn-calculate">Calculate</button>
                     <div style="clear: both;"></div>
@@ -1200,9 +1302,106 @@ const stationaryUnits = {
     'gas-diesel-oil-energy': ['gj'],
     'lpg': ['liters'],
     'motor-gasoline': ['gj'],
-    'natural-gas': ['m3'],
-    'propane': ['liters']
+    'natural-gas': ['gj']
 };
+
+// Unit mapping for mobile combustion sources
+const mobileUnits = {
+    'off-road-ipcc': ['gj'],
+    'off-road-desnz': ['liters'],
+    'on-road-ipcc': ['gj'],
+    'on-road-desnz': ['gj', 'liters']  // Support both GJ and Liters for different fuel types
+};
+
+// Off-Road DESNZ: determine source based on fuel type selection
+function getOffRoadDesnzSource(fuelType) {
+    // Check if it's a diesel or gasoline variant
+    if (fuelType.includes('diesel')) {
+        return 'off-road-diesel';
+    } else if (fuelType.includes('gasoline')) {
+        return 'off-road-gasoline';
+    }
+    return null;
+}
+
+function updateOffRoadDesnzFactor() {
+    // This function is called when fuel type changes for DESNZ
+    // The actual source will be determined during calculation
+}
+
+function updateMobileFields() {
+    const sourceSelect = document.getElementById('mobile-source');
+    const unitSelect = document.getElementById('mobile-unit');
+    const fuelNameGroup = document.getElementById('fuel-name-group');
+    const fuelTypeGroup = document.getElementById('fuel-type-group');
+    const onroadFuelTypeGroup = document.getElementById('onroad-fuel-type-group');
+    const onroadDesnzFuelTypeGroup = document.getElementById('onroad-desnz-fuel-type-group');
+    const selectedSource = sourceSelect.value;
+    
+    // Show/hide appropriate fields based on source
+    if (selectedSource === 'off-road-ipcc') {
+        fuelNameGroup.style.display = 'block';
+        fuelTypeGroup.style.display = 'none';
+        onroadFuelTypeGroup.style.display = 'none';
+        onroadDesnzFuelTypeGroup.style.display = 'none';
+    } else if (selectedSource === 'off-road-desnz') {
+        fuelNameGroup.style.display = 'none';
+        fuelTypeGroup.style.display = 'block';
+        onroadFuelTypeGroup.style.display = 'none';
+        onroadDesnzFuelTypeGroup.style.display = 'none';
+    } else if (selectedSource === 'on-road-ipcc') {
+        fuelNameGroup.style.display = 'none';
+        fuelTypeGroup.style.display = 'none';
+        onroadFuelTypeGroup.style.display = 'block';
+        onroadDesnzFuelTypeGroup.style.display = 'none';
+    } else if (selectedSource === 'on-road-desnz') {
+        fuelNameGroup.style.display = 'none';
+        fuelTypeGroup.style.display = 'none';
+        onroadFuelTypeGroup.style.display = 'none';
+        onroadDesnzFuelTypeGroup.style.display = 'block';
+    } else {
+        fuelNameGroup.style.display = 'none';
+        fuelTypeGroup.style.display = 'none';
+        onroadFuelTypeGroup.style.display = 'none';
+        onroadDesnzFuelTypeGroup.style.display = 'none';
+    }
+    
+    // Clear current options
+    unitSelect.innerHTML = '<option value="">Select Unit</option>';
+    
+    if (selectedSource && mobileUnits[selectedSource]) {
+        const allowedUnits = mobileUnits[selectedSource];
+        
+        // Add only allowed units
+        allowedUnits.forEach(unit => {
+            const option = document.createElement('option');
+            option.value = unit;
+            
+            // Set display text
+            if (unit === 'kg') option.textContent = 'Kilograms (kg)';
+            else if (unit === 'liters') option.textContent = 'Liters';
+            else if (unit === 'gj') option.textContent = 'Gigajoules (GJ)';
+            else if (unit === 'km') option.textContent = 'Kilometers';
+            else option.textContent = unit;
+            
+            unitSelect.appendChild(option);
+        });
+        
+        // Auto-select if only one option
+        if (allowedUnits.length === 1) {
+            unitSelect.value = allowedUnits[0];
+        }
+    } else {
+        // Show all units if no source selected
+        unitSelect.innerHTML = `
+            <option value="">Select Unit</option>
+            <option value="liters">Liters</option>
+            <option value="kg">Kilograms (kg)</option>
+            <option value="gj">Gigajoules (GJ)</option>
+            <option value="km">Kilometers</option>
+        `;
+    }
+}
 
 function updateStationaryFields() {
     const sourceSelect = document.getElementById('stationary-source');
@@ -1210,8 +1409,8 @@ function updateStationaryFields() {
     const industryTypeGroup = document.getElementById('industry-type-group');
     const selectedSource = sourceSelect.value;
     
-    // Show/hide Industry Type field for Gas/Diesel Oil, LPG, and Motor Gasoline
-    if (selectedSource === 'gas-diesel-oil-energy' || selectedSource === 'lpg' || selectedSource === 'motor-gasoline') {
+    // Show/hide Industry Type field for Gas/Diesel Oil, LPG, Motor Gasoline, and Natural Gas
+    if (selectedSource === 'gas-diesel-oil-energy' || selectedSource === 'lpg' || selectedSource === 'motor-gasoline' || selectedSource === 'natural-gas') {
         industryTypeGroup.style.display = 'block';
     } else {
         industryTypeGroup.style.display = 'none';
@@ -1301,20 +1500,72 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
         const form = this.closest('div[id$="-form"]');
         const category = form.id.replace('-form', '');
         
-        // Get form data
-        const sourceSelect = form.querySelector('select[class*="form-control"]');
+        // Get form data - find the source select by category-specific ID
+        let sourceSelect;
+        if (category === 'stationary') {
+            sourceSelect = document.getElementById('stationary-source');
+        } else if (category === 'mobile') {
+            sourceSelect = document.getElementById('mobile-source');
+        } else if (category === 'fugitive') {
+            sourceSelect = document.getElementById('fugitive-source');
+        } else if (category === 'electricity') {
+            sourceSelect = document.getElementById('electricity-source');
+        } else {
+            // Fallback to first select
+            sourceSelect = form.querySelector('select[class*="form-control"]');
+        }
+        
         const activityInput = form.querySelector('input[type="number"]');
         const supplierSelect = form.querySelector('.supplier-select');
         const descriptionTextarea = form.querySelector('textarea');
         const industryTypeSelect = document.getElementById('stationary-industry-type');
+        const fuelNameSelect = document.getElementById('mobile-fuel-name');
         
         if (!sourceSelect || !activityInput) return;
         
-        const source = sourceSelect.value;
+        let source = sourceSelect.value;
         const activityData = parseFloat(activityInput.value) || 0;
         const supplierId = supplierSelect ? supplierSelect.value : null;
         const description = descriptionTextarea ? descriptionTextarea.value : '';
         const industryType = industryTypeSelect ? industryTypeSelect.value : '';
+        const fuelName = fuelNameSelect ? fuelNameSelect.value : '';
+        const fuelTypeSelect = document.getElementById('mobile-fuel-type');
+        const fuelType = fuelTypeSelect ? fuelTypeSelect.value : '';
+        
+        // Handle Off-Road DESNZ: convert to specific source based on fuel type
+        if (source === 'off-road-desnz') {
+            if (!fuelType) {
+                alert('Please select a fuel type for Off-Road DESNZ');
+                return;
+            }
+            source = getOffRoadDesnzSource(fuelType);
+            if (!source) {
+                alert('Invalid fuel type selected');
+                return;
+            }
+        }
+        
+        // Handle On-Road IPCC: convert to specific source based on fuel type
+        if (source === 'on-road-ipcc') {
+            const onroadFuelTypeSelect = document.getElementById('onroad-fuel-type');
+            const onroadFuelType = onroadFuelTypeSelect ? onroadFuelTypeSelect.value : '';
+            if (!onroadFuelType) {
+                alert('Please select a fuel type for On-Road IPCC');
+                return;
+            }
+            source = 'on-road-' + onroadFuelType;
+        }
+        
+        // Handle On-Road DESNZ: convert to specific source based on fuel type
+        if (source === 'on-road-desnz') {
+            const onroadDesnzFuelTypeSelect = document.getElementById('onroad-desnz-fuel-type');
+            const onroadDesnzFuelType = onroadDesnzFuelTypeSelect ? onroadDesnzFuelTypeSelect.value : '';
+            if (!onroadDesnzFuelType) {
+                alert('Please select a fuel type for On-Road DESNZ');
+                return;
+            }
+            source = 'on-road-' + onroadDesnzFuelType + '-desnz';
+        }
         
         if (!source || activityData <= 0) {
             alert('Please select an emission source and enter activity data');
@@ -1361,7 +1612,8 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
                 country: country,
                 supplier_id: supplierId || null,
                 description: description,
-                industry_type: industryType || null
+                industry_type: industryType || null,
+                fuel_name: fuelName || null
             })
         })
         .then(response => response.json())
@@ -1565,6 +1817,16 @@ function saveSupplier() {
 // Load suppliers on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadSuppliers();
+    
+    // Character counter for fugitive description
+    const fugitiveDescription = document.getElementById('fugitive-description');
+    const fugitiveCharCount = document.getElementById('fugitive-char-count');
+    
+    if (fugitiveDescription && fugitiveCharCount) {
+        fugitiveDescription.addEventListener('input', function() {
+            fugitiveCharCount.textContent = this.value.length;
+        });
+    }
 });
 </script>
 {% endblock %}
