@@ -50,23 +50,23 @@ TURKEY_STATIONARY = {
         'name': 'Coal (industrial) (Turkey)',
         'source': 'Defra 2024 - UK Government GHG Conversion Factors (2,407.39 kg CO2e/tonne or 94.759 kg CO2e/GJ)'
     },
-    'gas-diesel-oil': {
-        'factor': 2.68,  # kg CO2e per liter
-        'unit': 'liters',
+    'gas-diesel-oil-energy': {
+        'factor': 74.1,  # kg CO2 per GJ (IPCC Tier 1)
+        'unit': 'gj',
         'name': 'Gas/Diesel Oil (Turkey)',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+        'source': 'IPCC 2019 - Default CO2 Emission Factor (74.1 kg CO2/GJ)'
     },
     'lpg': {
-        'factor': 1.51,  # kg CO2e per liter
+        'factor': 1.51468,  # kg CO2e per liter
         'unit': 'liters',
         'name': 'LPG (Turkey)',
-        'source': 'IPCC 2006'
+        'source': 'DESNZ/Defra 2024 - UK Government GHG Conversion Factors'
     },
     'motor-gasoline': {
-        'factor': 2.31,  # kg CO2e per liter
-        'unit': 'liters',
+        'factor': 69.55587,  # kg CO2e per GJ (CO2: 69.3 + CH4: 0.09207 + N2O: 0.1638)
+        'unit': 'gj',
         'name': 'Motor Gasoline (Turkey)',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+        'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 69.3, CH4: 3.3g×27.9, N2O: 0.6g×273)'
     },
     'propane': {
         'factor': 1.54,  # kg CO2e per liter
@@ -212,23 +212,23 @@ STATIONARY_COMBUSTION = {
         'name': 'Coal (industrial)',
         'source': 'Defra 2024 - UK Government GHG Conversion Factors (2,407.39 kg CO2e/tonne or 94.759 kg CO2e/GJ)'
     },
-    'gas-diesel-oil': {
-        'factor': 2.68,  # kg CO2e per liter
-        'unit': 'liters',
+    'gas-diesel-oil-energy': {
+        'factor': 74.1,  # kg CO2 per GJ (IPCC Tier 1)
+        'unit': 'gj',
         'name': 'Gas/Diesel Oil',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+        'source': 'IPCC 2019 - Default CO2 Emission Factor (74.1 kg CO2/GJ)'
     },
     'lpg': {
-        'factor': 1.51,  # kg CO2e per liter
+        'factor': 1.51468,  # kg CO2e per liter
         'unit': 'liters',
         'name': 'Liquefied Petroleum Gases',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+        'source': 'DESNZ/Defra 2024 - UK Government GHG Conversion Factors'
     },
     'motor-gasoline': {
-        'factor': 2.31,  # kg CO2e per liter
-        'unit': 'liters',
+        'factor': 69.55587,  # kg CO2e per GJ (CO2: 69.3 + CH4: 0.09207 + N2O: 0.1638)
+        'unit': 'gj',
         'name': 'Motor Gasoline',
-        'source': 'IPCC 2006 Guidelines for National Greenhouse Gas Inventories'
+        'source': 'IPCC 2019 - Tier 1 factors with AR6 GWP values (CO2: 69.3, CH4: 3.3g×27.9, N2O: 0.6g×273)'
     },
     'natural-gas': {
         'factor': 2.0,  # kg CO2e per m3

@@ -32,13 +32,17 @@ class Supplier(models.Model):
     """Supplier/Vendor management for emission tracking"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='suppliers')
     name = models.CharField(max_length=200, help_text="Supplier/Vendor name")
-    contact_person = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    phone = models.CharField(max_length=50, blank=True, null=True)
-    address = models.TextField(blank=True, null=True)
+    contact_person = models.CharField(max_length=100, blank=True, null=True, help_text="Primary contact name")
+    email = models.EmailField(blank=True, null=True, help_text="Primary contact email")
+    phone = models.CharField(max_length=50, blank=True, null=True, help_text="Phone number with country code")
     supplier_type = models.CharField(max_length=100, blank=True, null=True, 
-                                     help_text="e.g., Energy, Fuel, Transportation")
-    notes = models.TextField(blank=True, null=True)
+                                     help_text="Activity/Type: Energy, Fuel, Transportation, etc.")
+    country = models.CharField(max_length=100, blank=True, null=True, help_text="Country")
+    city = models.CharField(max_length=100, blank=True, null=True, help_text="City")
+    tax_number = models.CharField(max_length=100, blank=True, null=True, help_text="Tax/VAT number")
+    website = models.URLField(blank=True, null=True, help_text="Company website")
+    address = models.TextField(blank=True, null=True, help_text="Full address")
+    notes = models.TextField(blank=True, null=True, help_text="Additional notes")
     
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -78,6 +82,7 @@ class EmissionRecord(models.Model):
     reference = models.TextField(blank=True, null=True, help_text="Reference source for emission factor")
     
     description = models.TextField(blank=True, null=True, help_text="Optional description")
+    industry_type = models.CharField(max_length=100, blank=True, null=True, help_text="Industry type (for specific sources)")
     supplier_old = models.CharField(max_length=200, blank=True, null=True, help_text="Supplier name (deprecated)")
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True, 
                                  related_name='emission_records', help_text="Supplier/Vendor")

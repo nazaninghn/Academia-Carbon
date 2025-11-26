@@ -45,6 +45,7 @@ def calculate_emission(request):
         activity_data = float(data.get('activity_data', 0))
         country = data.get('country', 'global')
         description = data.get('description', '')
+        industry_type = data.get('industry_type', '')
         supplier_id = data.get('supplier_id', None)
         save_record = data.get('save', True)  # Option to save or not
         
@@ -83,6 +84,7 @@ def calculate_emission(request):
                 country=country,
                 reference=result.get('reference', ''),
                 description=description,
+                industry_type=industry_type or None,
                 supplier=supplier_obj
             )
             
@@ -300,7 +302,6 @@ def add_supplier(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         name = data.get('name', '').strip()
-        supplier_type = data.get('supplier_type', '').strip()
         
         if not name:
             return JsonResponse({'error': 'Supplier name is required'}, status=400)
@@ -309,15 +310,24 @@ def add_supplier(request):
         if Supplier.objects.filter(user=request.user, name=name).exists():
             return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
         
+        # Combine phone code and number
+        phone_code = data.get('phone_code', '')
+        phone_number = data.get('phone', '')
+        full_phone = f"{phone_code} {phone_number}".strip() if phone_code and phone_number else phone_number
+        
         supplier = Supplier.objects.create(
             user=request.user,
             name=name,
-            supplier_type=supplier_type or None,
-            contact_person=data.get('contact_person'),
-            email=data.get('email'),
-            phone=data.get('phone'),
-            address=data.get('address'),
-            notes=data.get('notes')
+            supplier_type=data.get('supplier_type') or None,
+            contact_person=data.get('contact_person') or None,
+            email=data.get('email') or None,
+            phone=full_phone or None,
+            country=data.get('country') or None,
+            city=data.get('city') or None,
+            tax_number=data.get('tax_number') or None,
+            website=data.get('website') or None,
+            address=data.get('address') or None,
+            notes=data.get('notes') or None
         )
         
         return JsonResponse({

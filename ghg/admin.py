@@ -31,7 +31,7 @@ class EmissionRecordAdmin(admin.ModelAdmin):
             'fields': ('emission_factor', 'emissions_kg', 'emissions_tons', 'country', 'reference')
         }),
         ('Additional Information', {
-            'fields': ('description', 'supplier')
+            'fields': ('description', 'industry_type', 'supplier')
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at')
@@ -40,9 +40,9 @@ class EmissionRecordAdmin(admin.ModelAdmin):
 
 @admin.register(Supplier)
 class SupplierAdmin(admin.ModelAdmin):
-    list_display = ['name', 'user', 'supplier_type', 'email', 'phone', 'created_at']
-    list_filter = ['supplier_type', 'created_at', 'user']
-    search_fields = ['name', 'email', 'contact_person']
+    list_display = ['name', 'user', 'supplier_type', 'country', 'city', 'email', 'phone', 'created_at']
+    list_filter = ['supplier_type', 'country', 'created_at', 'user']
+    search_fields = ['name', 'email', 'contact_person', 'city', 'tax_number']
     readonly_fields = ['created_at', 'updated_at']
     
     fieldsets = (
@@ -50,10 +50,13 @@ class SupplierAdmin(admin.ModelAdmin):
             'fields': ('user', 'name', 'supplier_type')
         }),
         ('Contact Details', {
-            'fields': ('contact_person', 'email', 'phone', 'address')
+            'fields': ('contact_person', 'email', 'phone', 'website')
         }),
-        ('Additional Information', {
-            'fields': ('notes',)
+        ('Location', {
+            'fields': ('country', 'city', 'address')
+        }),
+        ('Business Information', {
+            'fields': ('tax_number', 'notes')
         }),
         ('Timestamps', {
             'fields': ('created_at', 'updated_at')
