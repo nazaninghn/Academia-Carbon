@@ -286,12 +286,15 @@
                         <label>Emission Source</label>
                         <select class="form-control" id="stationary-source" onchange="updateStationaryFields()">
                             <option value="">Select Emission Source</option>
-                            <option value="coal-industrial">Coal (industrial) (Defra, 2024)</option>
-                            <option value="gas-diesel-oil-energy">Gas/Diesel Oil (IPCC, 2019)</option>
-                            <option value="lpg">Liquefied Petroleum Gases (Defra, 2024)</option>
-                            <option value="motor-gasoline">Motor Gasoline (IPCC, 2019)</option>
-                            <option value="natural-gas">Natural Gas (IPCC, 2019)</option>
-
+                            <option value="coal-industrial">Coal (industrial) - Defra 2024</option>
+                            <option value="coal">Coal (generic) - IPCC 2006</option>
+                            <option value="gas-diesel-oil-energy">Gas/Diesel Oil (energy basis) - IPCC 2019</option>
+                            <option value="lpg">Liquefied Petroleum Gas (LPG) - Defra 2024</option>
+                            <option value="propane">Propane - Defra 2024</option>
+                            <option value="motor-gasoline">Motor Gasoline - IPCC 2019</option>
+                            <option value="natural-gas">Natural Gas - IPCC 2019</option>
+                            <option value="diesel">Diesel (volume) - IPCC 2006</option>
+                            <option value="fuel-oil">Fuel Oil - IPCC 2006</option>
                         </select>
                         <p class="text-muted" style="font-size: 12px; margin-top: 8px;">
                             <i class="fas fa-info-circle"></i> Calculate your emissions more precisely by accessing additional emission sources with the Booster Plan. 
@@ -369,76 +372,21 @@
                         <label>Emission Source</label>
                         <select class="form-control" id="mobile-source" onchange="updateMobileFields()">
                             <option value="">Select Emission Source</option>
-                            <option value="off-road-ipcc">Off-Road (IPCC, 2019)</option>
-                            <option value="off-road-desnz">Off-Road (DESNZ, 2024)</option>
-                            <option value="on-road-ipcc">On-Road (IPCC, 2019)</option>
-                            <option value="on-road-desnz">On-Road (DESNZ, 2024)</option>
-                        </select>
-                    </div>
-
-                    <!-- Fuel Name (only for Off-Road IPCC) -->
-                    <div class="form-group" id="fuel-name-group" style="display: none;">
-                        <label>Fuel Name</label>
-                        <select class="form-control" id="mobile-fuel-name">
-                            <option value="">Select Fuel Name</option>
-                            <option value="motor-gasoline-2stroke-household">Motor Gasoline 2-Stroke - Household</option>
-                            <option value="motor-gasoline-2stroke-agriculture">Motor Gasoline 2-Stroke - Agriculture</option>
-                            <option value="motor-gasoline-2stroke-forestry">Motor Gasoline 2-Stroke - Forestry</option>
-                            <option value="motor-gasoline-2stroke-industry">Motor Gasoline 2-Stroke - Industry</option>
-                            <option value="motor-gasoline-4stroke-household">Motor Gasoline 4-stroke - Household</option>
-                            <option value="motor-gasoline-4stroke-agriculture">Motor Gasoline 4-stroke - Agriculture</option>
-                            <option value="motor-gasoline-4stroke-industry">Motor Gasoline 4-stroke - Industry</option>
-                            <option value="diesel-household">Diesel - Household</option>
-                            <option value="diesel-agriculture">Diesel - Agriculture</option>
-                            <option value="diesel-forestry">Diesel - Forestry</option>
-                            <option value="diesel-industry">Diesel - Industry</option>
-                        </select>
-                    </div>
-
-                    <!-- Fuel Type (only for Off-Road DESNZ) -->
-                    <div class="form-group" id="fuel-type-group" style="display: none;">
-                        <label>Fuel Type</label>
-                        <select class="form-control" id="mobile-fuel-type" onchange="updateOffRoadDesnzFactor()">
-                            <option value="">Select Fuel Type</option>
-                            <option value="motor-gasoline-2stroke-household">Motor Gasoline 2-Stroke - Household</option>
-                            <option value="motor-gasoline-2stroke-agriculture">Motor Gasoline 2-Stroke - Agriculture</option>
-                            <option value="motor-gasoline-2stroke-forestry">Motor Gasoline 2-Stroke - Forestry</option>
-                            <option value="motor-gasoline-2stroke-industry">Motor Gasoline 2-Stroke - Industry</option>
-                            <option value="motor-gasoline-4stroke-household">Motor Gasoline 4-stroke - Household</option>
-                            <option value="motor-gasoline-4stroke-agriculture">Motor Gasoline 4-stroke - Agriculture</option>
-                            <option value="motor-gasoline-4stroke-industry">Motor Gasoline 4-stroke - Industry</option>
-                            <option value="diesel-household">Diesel - Household</option>
-                            <option value="diesel-agriculture">Diesel - Agriculture</option>
-                            <option value="diesel-forestry">Diesel - Forestry</option>
-                            <option value="diesel-industry">Diesel - Industry</option>
-                        </select>
-                    </div>
-
-                    <!-- Fuel Type (only for On-Road IPCC) -->
-                    <div class="form-group" id="onroad-fuel-type-group" style="display: none;">
-                        <label>Fuel Type</label>
-                        <select class="form-control" id="onroad-fuel-type">
-                            <option value="">Select Fuel Type</option>
-                            <option value="lpg">Liquefied Petroleum Gases</option>
-                            <option value="gasoline-low-mileage">Motor Gasoline - Low Mileage Light Duty Vehicle Vintage 1995 or Later</option>
-                            <option value="gasoline-uncontrolled">Motor Gasoline - Uncontrolled</option>
-                            <option value="gasoline-oxidation">Motor Gasoline - Oxidation Catalyst</option>
-                            <option value="diesel">Gas / Diesel Oil</option>
-                            <option value="natural-gas">Natural Gas</option>
-                        </select>
-                    </div>
-
-                    <!-- Fuel Type (only for On-Road DESNZ) -->
-                    <div class="form-group" id="onroad-desnz-fuel-type-group" style="display: none;">
-                        <label>Fuel Type</label>
-                        <select class="form-control" id="onroad-desnz-fuel-type">
-                            <option value="">Select Fuel Type</option>
-                            <option value="lpg">Liquefied Petroleum Gases</option>
-                            <option value="gasoline-low-mileage">Motor Gasoline - Low Mileage Light Duty Vehicle Vintage 1995 or Later</option>
-                            <option value="gasoline-uncontrolled">Motor Gasoline - Uncontrolled</option>
-                            <option value="gasoline-oxidation">Motor Gasoline - Oxidation Catalyst</option>
-                            <option value="diesel">Gas / Diesel Oil</option>
-                            <option value="natural-gas">Natural Gas</option>
+                            <option value="off-road-ipcc">Off-Road Equipment - IPCC 2019</option>
+                            <option value="off-road-diesel">Off-Road Diesel - DESNZ 2024</option>
+                            <option value="off-road-gasoline">Off-Road Gasoline - DESNZ 2024</option>
+                            <option value="on-road-diesel">On-Road Diesel - IPCC 2019</option>
+                            <option value="on-road-gasoline-low-mileage">On-Road Gasoline (Low Mileage) - IPCC 2019</option>
+                            <option value="on-road-gasoline-uncontrolled">On-Road Gasoline (Uncontrolled) - IPCC 2019</option>
+                            <option value="on-road-gasoline-oxidation">On-Road Gasoline (Oxidation Catalyst) - IPCC 2019</option>
+                            <option value="on-road-natural-gas">On-Road Natural Gas - IPCC 2019</option>
+                            <option value="on-road-lpg">On-Road LPG - IPCC 2019</option>
+                            <option value="on-road-petrol-desnz">On-Road Petrol - DESNZ 2024</option>
+                            <option value="on-road-diesel-desnz">On-Road Diesel - DESNZ 2024</option>
+                            <option value="gasoline">Gasoline (generic)</option>
+                            <option value="diesel">Diesel (generic)</option>
+                            <option value="cng">CNG</option>
+                            <option value="vehicle-km">Vehicle distance (avg car)</option>
                         </select>
                     </div>
 
@@ -457,9 +405,26 @@
                         <label>Activity Data</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="Enter activity data" value="0">
+                            <input type="number" class="form-control" id="mobile-activity" placeholder="Enter activity data" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-control supplier-select" id="mobile-supplier" style="flex: 1;">
+                                <option value="">Select Supplier</option>
+                            </select>
+                            <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" id="mobile-description" rows="3" maxlength="100" placeholder="Add description"></textarea>
                     </div>
 
                     <button class="btn-calculate">Calculate</button>
@@ -479,11 +444,12 @@
                         <label>Emission Source</label>
                         <select class="form-control" id="fugitive-source">
                             <option value="">Select Emission Source</option>
-                            <option value="r410a">R-410A (Refrigerant) - DESNZ 2024</option>
-                            <option value="r432a">R-432A (Refrigerant) - DESNZ 2024</option>
-                            <option value="r22">R-22 (HCFC-22 / Chlorodifluoromethane) - DESNZ 2024</option>
-                            <option value="r600a">R-600A (Isobutane) - DESNZ 2024</option>
-                            <option value="methane">Methane (CH4) - DESNZ 2024</option>
+                            <option value="r410a">R-410A (Refrigerant) - Defra 2024</option>
+                            <option value="r432a">R-432A (Refrigerant) - Defra 2024</option>
+                            <option value="r22">R-22 (HCFC-22) - Defra 2024</option>
+                            <option value="hfc-227ea">HFC-227ea - Defra 2024</option>
+                            <option value="r600a">R-600a (Isobutane) - Defra 2024</option>
+                            <option value="methane">Methane (CH4) - IPCC AR6</option>
                         </select>
                     </div>
 
@@ -551,11 +517,12 @@
                         <label>Emission Source</label>
                         <select class="form-control" id="electricity-source">
                             <option value="">Select Emission Source</option>
-                            <option value="grid-average">Grid Average</option>
-                            <option value="us-grid">US Grid</option>
-                            <option value="eu-grid">EU Grid</option>
-                            <option value="china-grid">China Grid</option>
-                            <option value="renewable">Renewable Energy</option>
+                            <option value="turkey-grid">🇹🇷 Turkey National Grid</option>
+                            <option value="grid-average">🌍 Grid Average (Global)</option>
+                            <option value="us-grid">🇺🇸 US Grid</option>
+                            <option value="eu-grid">🇪🇺 EU Grid</option>
+                            <option value="china-grid">🇨🇳 China Grid</option>
+                            <option value="renewable">♻️ 100% Renewable Energy</option>
                         </select>
                     </div>
 
@@ -609,7 +576,7 @@
                 <div id="steam-heat-form" style="display: none;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="steam-heat-source">
                             <option value="">Select Emission Source</option>
                             <option value="district-heating">District Heating</option>
                             <option value="district-cooling">District Cooling</option>
@@ -679,12 +646,32 @@
                 <div id="purchased-goods-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="purchased-goods-source">
                             <option value="">Select Emission Source</option>
-                            <option value="paper">Paper Products</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="furniture">Furniture</option>
-                            <option value="office-supplies">Office Supplies</option>
+                            <optgroup label="Turkey-Specific (ATOM KABLO ISO 14064-1)">
+                                <option value="chemical">Chemical</option>
+                                <option value="chemical-oil">Chemical Oil</option>
+                                <option value="plastic">Plastic</option>
+                                <option value="carton">Carton</option>
+                                <option value="metal-primary">Metal (Primary)</option>
+                                <option value="metal-recycled">Metal (Recycled)</option>
+                                <option value="wood">Wood</option>
+                                <option value="foam-tape">Foam Tape</option>
+                            </optgroup>
+                            <optgroup label="Global (Defra 2024)">
+                                <option value="electrical-large">Electrical Items - Large</option>
+                                <option value="electrical-small">Electrical Items - Small</option>
+                                <option value="electrical-fridges-freezers">Electrical Items - Fridges & Freezers</option>
+                                <option value="electrical-it">Electrical Items - IT</option>
+                                <option value="glass">Glass</option>
+                                <option value="metal-aluminium-cans-foil">Metal: Aluminium Cans & Foil</option>
+                                <option value="metal-mixed-cans">Metal: Mixed Cans</option>
+                                <option value="metal-steel-cans">Metal: Steel Cans</option>
+                                <option value="mineral-oil">Mineral Oil</option>
+                                <option value="paper-mixed">Paper & Board: Mixed</option>
+                                <option value="plastic-average">Plastics: Average</option>
+                                <option value="plastic-hdpe">Plastics: HDPE</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -854,6 +841,62 @@
                     <div style="clear: both;"></div>
                 </div>
 
+                <!-- Water Supply and Treatment -->
+                <div class="emission-category" onclick="toggleCategory('water')">
+                    <h3>
+                        Water Supply and Treatment
+                        <i class="fas fa-chevron-down help-icon" title="Emissions from water supply and wastewater treatment"></i>
+                    </h3>
+                    <p>Emissions from water supply and wastewater treatment (Defra 2024)</p>
+                </div>
+
+                <div id="water-form" style="display: none; margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label>Emission Source</label>
+                        <select class="form-control" id="water-source">
+                            <option value="">Select Emission Source</option>
+                            <option value="supply">Water Supply - Defra 2024</option>
+                            <option value="treatment">Wastewater Treatment - Defra 2024</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Unit</label>
+                        <select class="form-control" disabled>
+                            <option value="m3">Cubic Meters (m³)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Activity Data (m³)</label>
+                        <div class="activity-input">
+                            <button type="button">−</button>
+                            <input type="number" class="form-control" placeholder="Enter volume" value="0" step="0.01">
+                            <button type="button">+</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Supplier (Optional)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <select class="form-control supplier-select" id="water-supplier" style="flex: 1;">
+                                <option value="">Select Supplier</option>
+                            </select>
+                            <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description (Optional) <span class="text-muted">0/100</span></label>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    </div>
+
+                    <button class="btn-calculate">Calculate</button>
+                    <div style="clear: both;"></div>
+                </div>
+
                 <!-- Waste Generated in Operations -->
                 <div class="emission-category" onclick="toggleCategory('waste')">
                     <h3>
@@ -866,12 +909,20 @@
                 <div id="waste-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="waste-source">
                             <option value="">Select Emission Source</option>
-                            <option value="general-landfill">General Waste (Landfill)</option>
-                            <option value="recyclable">Recyclable Waste</option>
-                            <option value="organic-compost">Organic Waste (Compost)</option>
-                            <option value="incineration">Waste Incineration</option>
+                            <optgroup label="Turkey">
+                                <option value="landfill">Landfill (Turkey)</option>
+                                <option value="recyclable">Recyclable (Turkey)</option>
+                                <option value="organic-compost">Organic Compost (Turkey)</option>
+                                <option value="incineration">Incineration (Turkey)</option>
+                            </optgroup>
+                            <optgroup label="Global">
+                                <option value="general-landfill">General Waste (Landfill)</option>
+                                <option value="recyclable">Recyclable Waste</option>
+                                <option value="organic-compost">Organic Waste (Compost)</option>
+                                <option value="incineration">Waste Incineration</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -907,14 +958,29 @@
                 <div id="business-travel-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="business-travel-source">
                             <option value="">Select Emission Source</option>
-                            <option value="flight-short">Short-haul Flight (< 500 km)</option>
-                            <option value="flight-medium">Medium-haul Flight (500-3700 km)</option>
-                            <option value="flight-long">Long-haul Flight (> 3700 km)</option>
-                            <option value="train">Train</option>
-                            <option value="taxi">Taxi</option>
-                            <option value="bus">Bus</option>
+                            <optgroup label="Turkey Transportation">
+                                <option value="flight-domestic">🇹🇷 Domestic Flight (Turkey)</option>
+                                <option value="flight-international">✈️ International Flight</option>
+                                <option value="train">🚆 Train (Turkey)</option>
+                                <option value="metro">🚇 Metro (Turkey)</option>
+                                <option value="bus">🚌 Bus (Turkey)</option>
+                                <option value="dolmus">🚐 Dolmuş (Turkey)</option>
+                                <option value="car-gasoline">🚗 Car - Gasoline (Turkey)</option>
+                                <option value="car-diesel">🚗 Car - Diesel (Turkey)</option>
+                                <option value="car-lpg">🚗 Car - LPG (Turkey)</option>
+                                <option value="car-electric">⚡ Car - Electric (Turkey)</option>
+                                <option value="car-hybrid">🔋 Car - Hybrid (Turkey)</option>
+                            </optgroup>
+                            <optgroup label="Global">
+                                <option value="flight-short">Short-haul Flight (< 500 km)</option>
+                                <option value="flight-medium">Medium-haul Flight (500-3700 km)</option>
+                                <option value="flight-long">Long-haul Flight (> 3700 km)</option>
+                                <option value="train">Train</option>
+                                <option value="taxi">Taxi</option>
+                                <option value="bus">Bus</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -950,13 +1016,26 @@
                 <div id="commuting-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control">
+                        <select class="form-control" id="commuting-source">
                             <option value="">Select Emission Source</option>
-                            <option value="car">Car</option>
-                            <option value="bus">Bus</option>
-                            <option value="train">Train</option>
-                            <option value="motorcycle">Motorcycle</option>
-                            <option value="bicycle">Bicycle</option>
+                            <optgroup label="Turkey">
+                                <option value="car-gasoline">🚗 Car - Gasoline (Turkey)</option>
+                                <option value="car-diesel">🚗 Car - Diesel (Turkey)</option>
+                                <option value="car-lpg">🚗 Car - LPG (Turkey)</option>
+                                <option value="car-electric">⚡ Car - Electric (Turkey)</option>
+                                <option value="car-hybrid">🔋 Car - Hybrid (Turkey)</option>
+                                <option value="bus">🚌 Bus (Turkey)</option>
+                                <option value="metro">🚇 Metro (Turkey)</option>
+                                <option value="train">🚆 Train (Turkey)</option>
+                                <option value="dolmus">🚐 Dolmuş (Turkey)</option>
+                            </optgroup>
+                            <optgroup label="Global">
+                                <option value="car">Car</option>
+                                <option value="bus">Bus</option>
+                                <option value="train">Train</option>
+                                <option value="motorcycle">Motorcycle</option>
+                                <option value="bicycle">Bicycle (Zero Emissions)</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -1299,72 +1378,42 @@
 // Unit mapping for stationary combustion sources
 const stationaryUnits = {
     'coal-industrial': ['kg'],
+    'coal': ['kg'],
     'gas-diesel-oil-energy': ['gj'],
     'lpg': ['liters'],
+    'propane': ['kg'],
     'motor-gasoline': ['gj'],
-    'natural-gas': ['gj']
+    'natural-gas': ['gj'],
+    'diesel': ['liters'],
+    'fuel-oil': ['liters']
 };
 
 // Unit mapping for mobile combustion sources
 const mobileUnits = {
     'off-road-ipcc': ['gj'],
-    'off-road-desnz': ['liters'],
-    'on-road-ipcc': ['gj'],
-    'on-road-desnz': ['gj', 'liters']  // Support both GJ and Liters for different fuel types
+    'off-road-diesel': ['liters'],
+    'off-road-gasoline': ['liters'],
+    'on-road-diesel': ['gj'],
+    'on-road-gasoline-low-mileage': ['gj'],
+    'on-road-gasoline-uncontrolled': ['gj'],
+    'on-road-gasoline-oxidation': ['gj'],
+    'on-road-natural-gas': ['gj'],
+    'on-road-lpg': ['gj'],
+    'on-road-petrol-desnz': ['liters'],
+    'on-road-diesel-desnz': ['liters'],
+    'on-road-lpg-desnz': ['gj'],
+    'gasoline': ['liters'],
+    'diesel': ['liters'],
+    'cng': ['kg'],
+    'vehicle-km': ['km']
 };
 
-// Off-Road DESNZ: determine source based on fuel type selection
-function getOffRoadDesnzSource(fuelType) {
-    // Check if it's a diesel or gasoline variant
-    if (fuelType.includes('diesel')) {
-        return 'off-road-diesel';
-    } else if (fuelType.includes('gasoline')) {
-        return 'off-road-gasoline';
-    }
-    return null;
-}
-
-function updateOffRoadDesnzFactor() {
-    // This function is called when fuel type changes for DESNZ
-    // The actual source will be determined during calculation
-}
+// Removed complex fuel type handling - sources are now directly selectable
 
 function updateMobileFields() {
     const sourceSelect = document.getElementById('mobile-source');
     const unitSelect = document.getElementById('mobile-unit');
-    const fuelNameGroup = document.getElementById('fuel-name-group');
-    const fuelTypeGroup = document.getElementById('fuel-type-group');
-    const onroadFuelTypeGroup = document.getElementById('onroad-fuel-type-group');
-    const onroadDesnzFuelTypeGroup = document.getElementById('onroad-desnz-fuel-type-group');
     const selectedSource = sourceSelect.value;
-    
-    // Show/hide appropriate fields based on source
-    if (selectedSource === 'off-road-ipcc') {
-        fuelNameGroup.style.display = 'block';
-        fuelTypeGroup.style.display = 'none';
-        onroadFuelTypeGroup.style.display = 'none';
-        onroadDesnzFuelTypeGroup.style.display = 'none';
-    } else if (selectedSource === 'off-road-desnz') {
-        fuelNameGroup.style.display = 'none';
-        fuelTypeGroup.style.display = 'block';
-        onroadFuelTypeGroup.style.display = 'none';
-        onroadDesnzFuelTypeGroup.style.display = 'none';
-    } else if (selectedSource === 'on-road-ipcc') {
-        fuelNameGroup.style.display = 'none';
-        fuelTypeGroup.style.display = 'none';
-        onroadFuelTypeGroup.style.display = 'block';
-        onroadDesnzFuelTypeGroup.style.display = 'none';
-    } else if (selectedSource === 'on-road-desnz') {
-        fuelNameGroup.style.display = 'none';
-        fuelTypeGroup.style.display = 'none';
-        onroadFuelTypeGroup.style.display = 'none';
-        onroadDesnzFuelTypeGroup.style.display = 'block';
-    } else {
-        fuelNameGroup.style.display = 'none';
-        fuelTypeGroup.style.display = 'none';
-        onroadFuelTypeGroup.style.display = 'none';
-        onroadDesnzFuelTypeGroup.style.display = 'none';
-    }
     
     // Clear current options
     unitSelect.innerHTML = '<option value="">Select Unit</option>';
@@ -1510,6 +1559,18 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
             sourceSelect = document.getElementById('fugitive-source');
         } else if (category === 'electricity') {
             sourceSelect = document.getElementById('electricity-source');
+        } else if (category === 'steam-heat') {
+            sourceSelect = document.getElementById('steam-heat-source');
+        } else if (category === 'water') {
+            sourceSelect = document.getElementById('water-source');
+        } else if (category === 'purchased-goods') {
+            sourceSelect = document.getElementById('purchased-goods-source');
+        } else if (category === 'business-travel') {
+            sourceSelect = document.getElementById('business-travel-source');
+        } else if (category === 'commuting') {
+            sourceSelect = document.getElementById('commuting-source');
+        } else if (category === 'waste') {
+            sourceSelect = document.getElementById('waste-source');
         } else {
             // Fallback to first select
             sourceSelect = form.querySelector('select[class*="form-control"]');
@@ -1532,40 +1593,7 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
         const fuelTypeSelect = document.getElementById('mobile-fuel-type');
         const fuelType = fuelTypeSelect ? fuelTypeSelect.value : '';
         
-        // Handle Off-Road DESNZ: convert to specific source based on fuel type
-        if (source === 'off-road-desnz') {
-            if (!fuelType) {
-                alert('Please select a fuel type for Off-Road DESNZ');
-                return;
-            }
-            source = getOffRoadDesnzSource(fuelType);
-            if (!source) {
-                alert('Invalid fuel type selected');
-                return;
-            }
-        }
-        
-        // Handle On-Road IPCC: convert to specific source based on fuel type
-        if (source === 'on-road-ipcc') {
-            const onroadFuelTypeSelect = document.getElementById('onroad-fuel-type');
-            const onroadFuelType = onroadFuelTypeSelect ? onroadFuelTypeSelect.value : '';
-            if (!onroadFuelType) {
-                alert('Please select a fuel type for On-Road IPCC');
-                return;
-            }
-            source = 'on-road-' + onroadFuelType;
-        }
-        
-        // Handle On-Road DESNZ: convert to specific source based on fuel type
-        if (source === 'on-road-desnz') {
-            const onroadDesnzFuelTypeSelect = document.getElementById('onroad-desnz-fuel-type');
-            const onroadDesnzFuelType = onroadDesnzFuelTypeSelect ? onroadDesnzFuelTypeSelect.value : '';
-            if (!onroadDesnzFuelType) {
-                alert('Please select a fuel type for On-Road DESNZ');
-                return;
-            }
-            source = 'on-road-' + onroadDesnzFuelType + '-desnz';
-        }
+        // No need for complex fuel type handling anymore - sources are directly selectable
         
         if (!source || activityData <= 0) {
             alert('Please select an emission source and enter activity data');
@@ -1579,6 +1607,7 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
         else if (category === 'electricity') categoryType = 'electricity';
         else if (category === 'steam-heat') categoryType = 'steam-heat';
         else if (category === 'business-travel') categoryType = 'travel';
+        else if (category.includes('water')) categoryType = 'water';
         else if (category === 'waste') categoryType = 'waste';
         else if (category === 'purchased-goods') categoryType = 'purchased-goods';
         else if (category === 'capital-goods') categoryType = 'capital-goods';
