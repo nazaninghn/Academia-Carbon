@@ -435,7 +435,11 @@ def add_custom_factor(request):
 def request_new_material(request):
     """API endpoint to request a new material/source"""
     from .models import MaterialRequest
+    from .notifications import send_material_request_notification
     import json
+    import logging
+    
+    logger = logging.getLogger(__name__)
     
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -458,7 +462,16 @@ def request_new_material(request):
             suggested_source=data.get('suggested_source', '')
         )
         
-        # TODO: Send notification to admin (email, etc.)
+        # Send notification to admin
+        try:
+            notification_sent = send_material_request_notification(material_request)
+            if notification_sent:
+                logger.info(f"Notification sent for material request: {material_name}")
+            else:
+                logger.warning(f"Notification not sent for material request: {material_name}")
+        except Exception as e:
+            logger.error(f"Error sending notification: {str(e)}")
+            # Don't fail the request if notification fails
         
         return JsonResponse({
             'success': True,

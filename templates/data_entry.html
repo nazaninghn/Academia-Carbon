@@ -284,7 +284,7 @@
                 <div id="stationary-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="stationary-source" onchange="updateStationaryFields()">
+                        <select class="form-control" id="stationary-source" onchange="updateStationaryFields(); handleOtherSelection(this, 'stationary')">
                             <option value="">Select Emission Source</option>
                             <option value="coal-industrial">Coal (industrial) - Defra 2024</option>
                             <option value="coal">Coal (generic) - IPCC 2006</option>
@@ -295,6 +295,7 @@
                             <option value="natural-gas">Natural Gas - IPCC 2019</option>
                             <option value="diesel">Diesel (volume) - IPCC 2006</option>
                             <option value="fuel-oil">Fuel Oil - IPCC 2006</option>
+                            <option value="other">📝 Other / Not Listed</option>
                         </select>
                         <p class="text-muted" style="font-size: 12px; margin-top: 8px;">
                             <i class="fas fa-info-circle"></i> Calculate your emissions more precisely by accessing additional emission sources with the Booster Plan. 
@@ -656,7 +657,7 @@
                     
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="purchased-goods-source">
+                        <select class="form-control" id="purchased-goods-source" onchange="handlePurchasedGoodsSourceChange(this)">
                             <option value="">Select Emission Source</option>
                             <optgroup label="Turkey-Specific (ATOM KABLO ISO 14064-1)">
                                 <option value="chemical">Chemical</option>
@@ -685,9 +686,12 @@
                             <optgroup label="Custom Factors" id="custom-factors-optgroup" style="display: none;">
                                 <!-- Custom factors will be loaded here dynamically -->
                             </optgroup>
+                            <optgroup label="Other">
+                                <option value="other">📝 Other / Not Listed</option>
+                            </optgroup>
                         </select>
                         <p style="font-size: 12px; color: #666; margin-top: 8px;">
-                            <i class="fas fa-info-circle"></i> Can't find your material? Use "Custom Factor" or "Request New Material" buttons above.
+                            <i class="fas fa-info-circle"></i> Can't find your material? Select "Other" or use buttons above.
                         </p>
                     </div>
 
@@ -1276,6 +1280,49 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- Choice Modal for "Other" Selection -->
+<div id="otherChoiceModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 12px; padding: 40px; max-width: 500px; width: 90%; margin: auto;">
+        <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 15px; text-align: center;">
+            <i class="fas fa-question-circle" style="color: #3b82f6;"></i> Material Not Listed
+        </h3>
+        <p style="color: #666; font-size: 14px; text-align: center; margin-bottom: 30px;">
+            What would you like to do?
+        </p>
+        
+        <!-- Option 1: Custom Factor -->
+        <div onclick="selectOtherOption('custom')" style="border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 15px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#22c55e'; this.style.background='#f0fdf4'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white'">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #22c55e; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 5px 0; color: #333;">I Have the Emission Factor</h4>
+                    <p style="font-size: 13px; color: #666; margin: 0;">Add a custom emission factor from your supplier or calculations</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Option 2: Request Material -->
+        <div onclick="selectOtherOption('request')" style="border: 2px solid #e0e0e0; border-radius: 12px; padding: 20px; margin-bottom: 25px; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.borderColor='#3b82f6'; this.style.background='#f0f9ff'" onmouseout="this.style.borderColor='#e0e0e0'; this.style.background='white'">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div style="background: #3b82f6; color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px;">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h4 style="font-size: 16px; font-weight: 600; margin: 0 0 5px 0; color: #333;">I Need Help Finding It</h4>
+                    <p style="font-size: 13px; color: #666; margin: 0;">Request our team to research and add the emission factor</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Cancel Button -->
+        <button onclick="hideOtherChoiceModal()" style="width: 100%; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            Cancel
+        </button>
     </div>
 </div>
 
@@ -2017,19 +2064,75 @@ function saveSupplier() {
     });
 }
 
+// Handle "Other" selection in any dropdown
+function handleOtherSelection(selectElement, category) {
+    if (selectElement.value === 'other') {
+        // Show choice modal
+        showOtherChoiceModal(category);
+        // Reset dropdown to empty
+        selectElement.value = '';
+    }
+}
+
+// Handle "Other" selection in Purchased Goods dropdown (backward compatibility)
+function handlePurchasedGoodsSourceChange(selectElement) {
+    handleOtherSelection(selectElement, 'purchased-goods');
+}
+
+// Other Choice Modal Functions
+let currentCategory = 'purchased-goods'; // Store current category
+
+function showOtherChoiceModal(category) {
+    currentCategory = category || 'purchased-goods';
+    const modal = document.getElementById('otherChoiceModal');
+    modal.style.display = 'flex';
+}
+
+function hideOtherChoiceModal() {
+    const modal = document.getElementById('otherChoiceModal');
+    modal.style.display = 'none';
+}
+
+function selectOtherOption(option) {
+    hideOtherChoiceModal();
+    
+    if (option === 'custom') {
+        // Open Custom Factor Modal with pre-filled category
+        showCustomFactorModal(currentCategory);
+    } else if (option === 'request') {
+        // Open Request Material Modal with pre-filled category
+        showRequestMaterialModal(currentCategory);
+    }
+}
+
 // Custom Emission Factor Functions
-function showCustomFactorModal() {
+function showCustomFactorModal(prefilledCategory) {
     const modal = document.getElementById('customFactorModal');
     modal.style.display = 'flex';
     
     // Clear all fields
     document.getElementById('custom-material-name').value = '';
-    document.getElementById('custom-category').value = '';
     document.getElementById('custom-emission-factor').value = '';
     document.getElementById('custom-unit').value = '';
     document.getElementById('custom-supplier').value = '';
     document.getElementById('custom-source-reference').value = '';
     document.getElementById('custom-description').value = '';
+    
+    // Pre-fill category if provided
+    const categorySelect = document.getElementById('custom-category');
+    if (prefilledCategory) {
+        // Map frontend categories to form categories
+        const categoryMap = {
+            'stationary': 'stationary',
+            'mobile': 'mobile',
+            'purchased-goods': 'purchased-goods',
+            'capital-goods': 'capital-goods',
+            'waste': 'waste'
+        };
+        categorySelect.value = categoryMap[prefilledCategory] || '';
+    } else {
+        categorySelect.value = '';
+    }
 }
 
 function hideCustomFactorModal() {
@@ -2093,17 +2196,31 @@ function saveCustomFactor() {
 }
 
 // Request New Material Functions
-function showRequestMaterialModal() {
+function showRequestMaterialModal(prefilledCategory) {
     const modal = document.getElementById('requestMaterialModal');
     modal.style.display = 'flex';
     
     // Clear all fields
     document.getElementById('request-material-name').value = '';
-    document.getElementById('request-category').value = '';
     document.getElementById('request-description').value = '';
     document.getElementById('request-suggested-factor').value = '';
     document.getElementById('request-suggested-unit').value = '';
     document.getElementById('request-suggested-source').value = '';
+    
+    // Pre-fill category if provided
+    const categorySelect = document.getElementById('request-category');
+    if (prefilledCategory) {
+        const categoryMap = {
+            'stationary': 'stationary',
+            'mobile': 'mobile',
+            'purchased-goods': 'purchased-goods',
+            'capital-goods': 'capital-goods',
+            'waste': 'waste'
+        };
+        categorySelect.value = categoryMap[prefilledCategory] || '';
+    } else {
+        categorySelect.value = '';
+    }
 }
 
 function hideRequestMaterialModal() {

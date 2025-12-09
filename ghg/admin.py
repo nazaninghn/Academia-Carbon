@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django.utils.html import format_html
 from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest
+import logging
+
+logger = logging.getLogger(__name__)
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
@@ -140,14 +143,26 @@ class MaterialRequestAdmin(admin.ModelAdmin):
     status_badge.short_description = 'Status'
     
     def approve_requests(self, request, queryset):
+        from .notifications import send_material_request_status_notification
         for req in queryset:
             req.approve(request.user, 'Approved via admin action')
+            # Send notification to user
+            try:
+                send_material_request_status_notification(req)
+            except Exception as e:
+                logger.error(f"Failed to send notification: {str(e)}")
         self.message_user(request, f"{queryset.count()} requests approved.")
     approve_requests.short_description = "Approve selected requests"
     
     def reject_requests(self, request, queryset):
+        from .notifications import send_material_request_status_notification
         for req in queryset:
             req.reject(request.user, 'Rejected via admin action')
+            # Send notification to user
+            try:
+                send_material_request_status_notification(req)
+            except Exception as e:
+                logger.error(f"Failed to send notification: {str(e)}")
         self.message_user(request, f"{queryset.count()} requests rejected.")
     reject_requests.short_description = "Reject selected requests"
     
