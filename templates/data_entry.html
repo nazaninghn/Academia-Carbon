@@ -371,7 +371,7 @@
                 <div id="mobile-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="mobile-source" onchange="updateMobileFields()">
+                        <select class="form-control" id="mobile-source" onchange="updateMobileFields(); handleOtherSelection(this, 'mobile')">
                             <option value="">Select Emission Source</option>
                             <option value="off-road-ipcc">Off-Road Equipment - IPCC 2019</option>
                             <option value="off-road-diesel">Off-Road Diesel - DESNZ 2024</option>
@@ -388,6 +388,7 @@
                             <option value="diesel">Diesel (generic)</option>
                             <option value="cng">CNG</option>
                             <option value="vehicle-km">Vehicle distance (avg car)</option>
+                            <option value="other">📝 Other / Not Listed</option>
                         </select>
                     </div>
 
@@ -443,7 +444,7 @@
                 <div id="fugitive-form" style="display: none;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="fugitive-source">
+                        <select class="form-control" id="fugitive-source" onchange="handleOtherSelection(this, 'fugitive')">
                             <option value="">Select Emission Source</option>
                             <option value="r410a">R-410A (Refrigerant) - Defra 2024</option>
                             <option value="r432a">R-432A (Refrigerant) - Defra 2024</option>
@@ -451,6 +452,7 @@
                             <option value="hfc-227ea">HFC-227ea - Defra 2024</option>
                             <option value="r600a">R-600a (Isobutane) - Defra 2024</option>
                             <option value="methane">Methane (CH4) - IPCC AR6</option>
+                            <option value="other">📝 Other / Not Listed</option>
                         </select>
                     </div>
 
@@ -929,7 +931,7 @@
                 <div id="waste-form" style="display: none; margin-bottom: 30px;">
                     <div class="form-group">
                         <label>Emission Source</label>
-                        <select class="form-control" id="waste-source">
+                        <select class="form-control" id="waste-source" onchange="handleOtherSelection(this, 'waste')">
                             <option value="">Select Emission Source</option>
                             <optgroup label="Turkey">
                                 <option value="landfill">Landfill (Turkey)</option>
@@ -942,6 +944,9 @@
                                 <option value="recyclable">Recyclable Waste</option>
                                 <option value="organic-compost">Organic Waste (Compost)</option>
                                 <option value="incineration">Waste Incineration</option>
+                            </optgroup>
+                            <optgroup label="Other">
+                                <option value="other">📝 Other / Not Listed</option>
                             </optgroup>
                         </select>
                     </div>
