@@ -378,7 +378,11 @@ def get_custom_factors(request):
 def add_custom_factor(request):
     """API endpoint to add a custom emission factor"""
     from .models import CustomEmissionFactor, Supplier
+    from .notifications import send_custom_factor_notification
     import json
+    import logging
+    
+    logger = logging.getLogger(__name__)
     
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -416,6 +420,17 @@ def add_custom_factor(request):
             unit=unit,
             source_reference=data.get('source_reference', '')
         )
+        
+        # Optional: notify admins about the new custom factor
+        try:
+            notification_sent = send_custom_factor_notification(custom_factor)
+            if notification_sent:
+                logger.info(f"Notification sent for custom factor: {material_name}")
+            else:
+                logger.warning(f"Notification not sent for custom factor: {material_name}")
+        except Exception as e:
+            logger.error(f"Error sending notification: {str(e)}")
+            # Don't fail the request if notification fails
         
         return JsonResponse({
             'success': True,
