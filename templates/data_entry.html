@@ -1374,11 +1374,13 @@
                 <option value="kg">Kilograms (kg)</option>
                 <option value="liters">Liters</option>
                 <option value="m3">Cubic Meters (m³)</option>
-                <option value="kwh">kWh</option>
+                <option value="m2">Square Meters (m²)</option>
+                <option value="kwh">Kilowatt-hours (kWh)</option>
                 <option value="gj">Gigajoules (GJ)</option>
-                <option value="units">Units</option>
-                <option value="km">Kilometers</option>
-                <option value="tonne-km">Tonne-km</option>
+                <option value="km">Kilometers (km)</option>
+                <option value="tonne-km">Tonne-kilometers (tonne-km)</option>
+                <option value="units">Units (for equipment/machinery)</option>
+                <option value="packages">Packages (for delivery)</option>
             </select>
         </div>
         
@@ -1464,7 +1466,19 @@
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
                 <label>Unit (Optional)</label>
-                <input type="text" id="request-suggested-unit" class="form-control" placeholder="e.g., kg, liters">
+                <select id="request-suggested-unit" class="form-control">
+                    <option value="">Select Unit</option>
+                    <option value="kg">Kilograms (kg)</option>
+                    <option value="liters">Liters</option>
+                    <option value="m3">Cubic Meters (m³)</option>
+                    <option value="m2">Square Meters (m²)</option>
+                    <option value="kwh">Kilowatt-hours (kWh)</option>
+                    <option value="gj">Gigajoules (GJ)</option>
+                    <option value="km">Kilometers (km)</option>
+                    <option value="tonne-km">Tonne-kilometers (tonne-km)</option>
+                    <option value="units">Units (for equipment/machinery)</option>
+                    <option value="packages">Packages (for delivery)</option>
+                </select>
             </div>
             <div class="form-group" style="margin-bottom: 0;">
                 <label>Source (Optional)</label>
@@ -1821,6 +1835,47 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
             return;
         }
         
+        // Check if this is a custom factor
+        if (source.startsWith('custom-')) {
+            const customFactorId = source.replace('custom-', '');
+            
+            // Show loading
+            this.textContent = 'Calculating...';
+            this.disabled = true;
+            
+            // Calculate with custom factor
+            fetch('/api/custom-factors/calculate/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    custom_factor_id: customFactorId,
+                    activity_data: activityData,
+                    description: description
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Error: ' + data.error);
+                } else {
+                    showResult(data, form);
+                }
+                this.textContent = 'Calculate';
+                this.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Calculation failed. Please try again.');
+                this.textContent = 'Calculate';
+                this.disabled = false;
+            });
+            
+            return; // Exit early for custom factors
+        }
+        
         // Determine category type
         let categoryType = 'stationary';
         if (category === 'mobile') categoryType = 'mobile';
@@ -1920,7 +1975,10 @@ function showResult(data, form) {
         <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #22c55e;">
             <p style="font-size: 13px; color: #666;">
                 <i class="fas fa-info-circle"></i> 
-                Source: ${data.source_name} | Country: ${data.country === 'turkey' ? '🇹🇷 Turkey' : '🌍 Global'}
+                Source: ${data.source_name} 
+                ${data.is_custom ? '<span style="background: #3b82f6; color: white; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-left: 5px;">CUSTOM</span>' : ''}
+                ${data.is_verified ? '<span style="color: #22c55e; margin-left: 5px;" title="Verified by admin">✓</span>' : ''}
+                | Country: ${data.country === 'turkey' ? '🇹🇷 Turkey' : data.country === 'custom' ? '🔧 Custom' : '🌍 Global'}
             </p>
             ${data.reference ? `<p style="font-size: 12px; color: #999; margin-top: 5px;"><i class="fas fa-book"></i> Reference: ${data.reference}</p>` : ''}
         </div>
@@ -2042,7 +2100,15 @@ function saveSupplier() {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            alert('Error: ' + data.error);
+            // Show error message as toast
+            const errorMsg = document.createElement('div');
+            errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error: ' + data.error;
+            document.body.appendChild(errorMsg);
+            
+            setTimeout(() => {
+                errorMsg.remove();
+            }, 4000);
         } else {
             hideAddSupplierModal();
             loadSuppliers(); // Reload supplier list
@@ -2060,7 +2126,15 @@ function saveSupplier() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to add supplier');
+        // Show error message as toast
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to add supplier. Please try again.';
+        document.body.appendChild(errorMsg);
+        
+        setTimeout(() => {
+            errorMsg.remove();
+        }, 4000);
     });
 }
 
@@ -2171,7 +2245,15 @@ function saveCustomFactor() {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            alert('Error: ' + data.error);
+            // Show error message as toast
+            const errorMsg = document.createElement('div');
+            errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error: ' + data.error;
+            document.body.appendChild(errorMsg);
+            
+            setTimeout(() => {
+                errorMsg.remove();
+            }, 4000);
         } else {
             hideCustomFactorModal();
             
@@ -2191,7 +2273,15 @@ function saveCustomFactor() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to add custom factor');
+        // Show error message as toast
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to add custom factor. Please try again.';
+        document.body.appendChild(errorMsg);
+        
+        setTimeout(() => {
+            errorMsg.remove();
+        }, 4000);
     });
 }
 
@@ -2242,7 +2332,7 @@ function submitMaterialRequest() {
         category: category,
         description: description,
         suggested_factor: document.getElementById('request-suggested-factor').value || null,
-        suggested_unit: document.getElementById('request-suggested-unit').value.trim() || null,
+        suggested_unit: document.getElementById('request-suggested-unit').value || null,
         suggested_source: document.getElementById('request-suggested-source').value.trim() || null
     };
     
@@ -2257,7 +2347,15 @@ function submitMaterialRequest() {
     .then(response => response.json())
     .then(data => {
         if (data.error) {
-            alert('Error: ' + data.error);
+            // Show error message as toast
+            const errorMsg = document.createElement('div');
+            errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error: ' + data.error;
+            document.body.appendChild(errorMsg);
+            
+            setTimeout(() => {
+                errorMsg.remove();
+            }, 4000);
         } else {
             hideRequestMaterialModal();
             
@@ -2274,19 +2372,107 @@ function submitMaterialRequest() {
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to submit request');
+        // Show error message as toast
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to submit request. Please try again.';
+        document.body.appendChild(errorMsg);
+        
+        setTimeout(() => {
+            errorMsg.remove();
+        }, 4000);
     });
 }
 
-function loadCustomFactors() {
-    // Load custom factors for the current category if needed
-    // This can be called when switching categories
-    console.log('Custom factors loaded');
+function loadCustomFactors(category) {
+    // Load custom factors for the specified category
+    const url = category ? `/api/custom-factors/?category=${category}` : '/api/custom-factors/';
+    
+    fetch(url, {
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken')
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.factors && data.factors.length > 0) {
+            // Update purchased-goods dropdown with custom factors
+            updateCustomFactorsInDropdown('purchased-goods-source', data.factors);
+            
+            console.log(`Loaded ${data.factors.length} custom factors`);
+        }
+    })
+    .catch(error => {
+        console.error('Error loading custom factors:', error);
+    });
 }
 
-// Load suppliers on page load
+function updateCustomFactorsInDropdown(selectId, factors) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
+    
+    // Find or create custom factors optgroup
+    let optgroup = document.getElementById('custom-factors-optgroup');
+    
+    if (factors.length > 0) {
+        // Clear existing custom factors
+        optgroup.innerHTML = '';
+        
+        // Add custom factors
+        factors.forEach(factor => {
+            const option = document.createElement('option');
+            option.value = 'custom-' + factor.id;
+            option.textContent = `${factor.material_name} (${factor.emission_factor} kg CO2e/${factor.unit})`;
+            if (factor.is_verified) {
+                option.textContent += ' ✓';
+            }
+            optgroup.appendChild(option);
+        });
+        
+        // Show optgroup
+        optgroup.style.display = 'block';
+    } else {
+        // Hide optgroup if no custom factors
+        if (optgroup) {
+            optgroup.style.display = 'none';
+        }
+    }
+}
+
+function calculateWithCustomFactor(customFactorId, activityData, description) {
+    // Calculate emissions using a custom emission factor
+    fetch('/api/custom-factors/calculate/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            custom_factor_id: customFactorId,
+            activity_data: activityData,
+            description: description || ''
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert('Error: ' + data.error);
+        } else {
+            // Show result (same as standard calculation)
+            const form = document.getElementById('purchased-goods-form');
+            showResult(data, form);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Calculation failed. Please try again.');
+    });
+}
+
+// Load suppliers and custom factors on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadSuppliers();
+    loadCustomFactors('purchased-goods'); // Load custom factors for purchased goods
     
     // Character counter for fugitive description
     const fugitiveDescription = document.getElementById('fugitive-description');
