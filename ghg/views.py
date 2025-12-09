@@ -342,3 +342,200 @@ def add_supplier(request):
         })
     
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+
+@login_required
+def get_custom_factors(request):
+    """API endpoint to get user's custom emission factors"""
+    from .models import CustomEmissionFactor
+    
+    category = request.GET.get('category', None)
+    
+    factors = CustomEmissionFactor.objects.filter(user=request.user)
+    if category:
+        factors = factors.filter(category=category)
+    
+    data = {
+        'factors': [
+            {
+                'id': f.id,
+                'material_name': f.material_name,
+                'emission_factor': f.emission_factor,
+                'unit': f.unit,
+                'category': f.category,
+                'is_verified': f.is_verified,
+                'supplier_name': f.supplier.name if f.supplier else None,
+            }
+            for f in factors
+        ]
+    }
+    
+    return JsonResponse(data)
+
+
+@login_required
+def add_custom_factor(request):
+    """API endpoint to add a custom emission factor"""
+    from .models import CustomEmissionFactor, Supplier
+    import json
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        material_name = data.get('material_name', '').strip()
+        emission_factor = data.get('emission_factor')
+        unit = data.get('unit', '').strip()
+        category = data.get('category', '').strip()
+        
+        if not all([material_name, emission_factor, unit, category]):
+            return JsonResponse({'error': 'Missing required fields'}, status=400)
+        
+        try:
+            emission_factor = float(emission_factor)
+        except ValueError:
+            return JsonResponse({'error': 'Invalid emission factor value'}, status=400)
+        
+        # Get supplier if provided
+        supplier_id = data.get('supplier_id')
+        supplier_obj = None
+        if supplier_id:
+            try:
+                supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
+            except Supplier.DoesNotExist:
+                pass
+        
+        # Create custom factor
+        custom_factor = CustomEmissionFactor.objects.create(
+            user=request.user,
+            supplier=supplier_obj,
+            material_name=material_name,
+            category=category,
+            description=data.get('description', ''),
+            emission_factor=emission_factor,
+            unit=unit,
+            source_reference=data.get('source_reference', '')
+        )
+        
+        return JsonResponse({
+            'success': True,
+            'factor': {
+                'id': custom_factor.id,
+                'material_name': custom_factor.material_name,
+                'emission_factor': custom_factor.emission_factor,
+                'unit': custom_factor.unit,
+                'category': custom_factor.category,
+            }
+        })
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@login_required
+def request_new_material(request):
+    """API endpoint to request a new material/source"""
+    from .models import MaterialRequest
+    import json
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        material_name = data.get('material_name', '').strip()
+        category = data.get('category', '').strip()
+        description = data.get('description', '').strip()
+        
+        if not all([material_name, category, description]):
+            return JsonResponse({'error': 'Missing required fields'}, status=400)
+        
+        # Create material request
+        material_request = MaterialRequest.objects.create(
+            user=request.user,
+            material_name=material_name,
+            category=category,
+            description=description,
+            suggested_factor=data.get('suggested_factor'),
+            suggested_unit=data.get('suggested_unit'),
+            suggested_source=data.get('suggested_source', '')
+        )
+        
+        # TODO: Send notification to admin (email, etc.)
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Your request has been submitted. Admin will review it soon.',
+            'request_id': material_request.id
+        })
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@login_required
+def calculate_with_custom_factor(request):
+    """Calculate emissions using a custom emission factor"""
+    import json
+    from .models import EmissionRecord, CustomEmissionFactor
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        custom_factor_id = data.get('custom_factor_id')
+        activity_data = float(data.get('activity_data', 0))
+        description = data.get('description', '')
+        
+        if not custom_factor_id or activity_data <= 0:
+            return JsonResponse({'error': 'Invalid data'}, status=400)
+        
+        try:
+            custom_factor = CustomEmissionFactor.objects.get(id=custom_factor_id, user=request.user)
+        except CustomEmissionFactor.DoesNotExist:
+            return JsonResponse({'error': 'Custom factor not found'}, status=404)
+        
+        # Calculate emissions
+        emissions_kg = activity_data * custom_factor.emission_factor
+        emissions_tons = emissions_kg / 1000.0
+        
+        # Determine scope based on category
+        scope = '3'  # Default to Scope 3
+        if custom_factor.category in ['stationary', 'mobile', 'fugitive']:
+            scope = '1'
+        elif custom_factor.category in ['electricity', 'steam-heat']:
+            scope = '2'
+        
+        # Save to database
+        record = EmissionRecord.objects.create(
+            user=request.user,
+            scope=scope,
+            category=custom_factor.category,
+            source='custom-' + str(custom_factor.id),
+            source_name=custom_factor.material_name,
+            activity_data=activity_data,
+            unit=custom_factor.unit,
+            emission_factor=custom_factor.emission_factor,
+            emissions_kg=emissions_kg,
+            emissions_tons=emissions_tons,
+            country='custom',
+            reference=f'Custom factor: {custom_factor.source_reference}' if custom_factor.source_reference else 'Custom emission factor',
+            description=description,
+            supplier=custom_factor.supplier
+        )
+        
+        result = {
+            'emissions_kg': round(emissions_kg, 4),
+            'emissions_tons': round(emissions_tons, 6),
+            'factor': custom_factor.emission_factor,
+            'unit': custom_factor.unit,
+            'source_name': custom_factor.material_name,
+            'activity_data': activity_data,
+            'country': 'custom',
+            'category': custom_factor.category,
+            'source_key': 'custom-' + str(custom_factor.id),
+            'reference': custom_factor.source_reference or 'Custom emission factor',
+            'record_id': record.id,
+            'saved': True,
+            'is_custom': True,
+            'is_verified': custom_factor.is_verified
+        }
+        
+        return JsonResponse(result)
+    
+    return JsonResponse({'error': 'Invalid request'}, status=400)

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Country, EmissionData, EmissionRecord, Supplier
+from django.utils.html import format_html
+from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest
 
 @admin.register(Country)
 class CountryAdmin(admin.ModelAdmin):
@@ -62,3 +63,95 @@ class SupplierAdmin(admin.ModelAdmin):
             'fields': ('created_at', 'updated_at')
         }),
     )
+
+
+@admin.register(CustomEmissionFactor)
+class CustomEmissionFactorAdmin(admin.ModelAdmin):
+    list_display = ['material_name', 'user', 'emission_factor', 'unit', 'category', 'is_verified', 'created_at']
+    list_filter = ['is_verified', 'category', 'created_at']
+    search_fields = ['material_name', 'user__username', 'description']
+    readonly_fields = ['created_at', 'updated_at', 'verified_at', 'verified_by']
+    
+    fieldsets = (
+        ('Material Information', {
+            'fields': ('user', 'supplier', 'material_name', 'category', 'description')
+        }),
+        ('Emission Factor', {
+            'fields': ('emission_factor', 'unit', 'source_reference', 'certificate_file')
+        }),
+        ('Verification', {
+            'fields': ('is_verified', 'verified_by', 'verified_at')
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    actions = ['verify_factors']
+    
+    def verify_factors(self, request, queryset):
+        for factor in queryset:
+            factor.verify(request.user)
+        self.message_user(request, f"{queryset.count()} custom factors verified successfully.")
+    verify_factors.short_description = "Verify selected custom factors"
+
+
+@admin.register(MaterialRequest)
+class MaterialRequestAdmin(admin.ModelAdmin):
+    list_display = ['material_name', 'user', 'category', 'status_badge', 'created_at', 'reviewed_by']
+    list_filter = ['status', 'category', 'created_at']
+    search_fields = ['material_name', 'user__username', 'description']
+    readonly_fields = ['created_at', 'updated_at', 'reviewed_at']
+    
+    fieldsets = (
+        ('Request Information', {
+            'fields': ('user', 'material_name', 'category', 'description')
+        }),
+        ('User Suggestions', {
+            'fields': ('suggested_factor', 'suggested_unit', 'suggested_source')
+        }),
+        ('Admin Review', {
+            'fields': ('status', 'admin_notes', 'reviewed_by', 'reviewed_at')
+        }),
+        ('System Integration', {
+            'fields': ('added_to_system', 'system_source_key')
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    actions = ['approve_requests', 'reject_requests', 'mark_in_progress']
+    
+    def status_badge(self, obj):
+        colors = {
+            'pending': '#fbbf24',
+            'approved': '#22c55e',
+            'rejected': '#ef4444',
+            'in_progress': '#3b82f6',
+        }
+        color = colors.get(obj.status, '#6b7280')
+        return format_html(
+            '<span style="background-color: {}; color: white; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600;">{}</span>',
+            color, obj.get_status_display()
+        )
+    status_badge.short_description = 'Status'
+    
+    def approve_requests(self, request, queryset):
+        for req in queryset:
+            req.approve(request.user, 'Approved via admin action')
+        self.message_user(request, f"{queryset.count()} requests approved.")
+    approve_requests.short_description = "Approve selected requests"
+    
+    def reject_requests(self, request, queryset):
+        for req in queryset:
+            req.reject(request.user, 'Rejected via admin action')
+        self.message_user(request, f"{queryset.count()} requests rejected.")
+    reject_requests.short_description = "Reject selected requests"
+    
+    def mark_in_progress(self, request, queryset):
+        queryset.update(status='in_progress')
+        self.message_user(request, f"{queryset.count()} requests marked as in progress.")
+    mark_in_progress.short_description = "Mark as in progress"

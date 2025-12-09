@@ -1,0 +1,47 @@
+feat: Add custom emission factors and material request system
+
+Major Features:
+- Custom emission factors: Users can add supplier-provided or calculated factors
+- Material request system: Request new materials not in the system
+- Admin review workflow: Approve, reject, or mark requests as in progress
+- Verification system: Admins can verify custom factors for quality assurance
+
+Backend Changes:
+- Added CustomEmissionFactor model with verification workflow
+- Added MaterialRequest model with status tracking
+- New API endpoints for custom factors and material requests
+- Admin panel integration with bulk actions and status badges
+- File upload support for certificates/documentation
+
+Frontend Changes:
+- Custom Factor Modal: Clean UI for adding custom emission factors
+- Request Material Modal: Simple form for requesting new materials
+- Integration in Purchased Goods form with prominent action buttons
+- Dynamic loading of custom factors in dropdowns
+- Success notifications and user feedback
+
+Database:
+- Migration 0007: Create CustomEmissionFactor and MaterialRequest tables
+- Foreign keys to User and Supplier models
+- Verification and approval tracking fields
+
+Benefits:
+- Users can use supplier-specific factors immediately
+- No waiting for admin to add every material
+- More accurate calculations with company-specific data
+- Scalable system that doesn't require code updates
+- Quality control through admin verification
+
+Files Changed:
+- ghg/models.py: Added CustomEmissionFactor and MaterialRequest models
+- ghg/views.py: Added API endpoints for custom factors and requests
+- ghg/admin.py: Added admin interfaces with bulk actions
+- ghg/urls.py: Added new URL patterns
+- templates/data_entry.html: Added modals and integration
+- ghg/migrations/0007_*.py: Database migration
+
+Documentation:
+- CUSTOM_FACTORS_FEATURE.md: Complete feature documentation
+- User workflows and admin guides included
+
+Status: Tested and Production Ready ✅

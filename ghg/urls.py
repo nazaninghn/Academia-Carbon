@@ -24,6 +24,12 @@ urlpatterns = [
     path('api/suppliers/', views.get_suppliers, name='get_suppliers'),
     path('api/suppliers/add/', views.add_supplier, name='add_supplier'),
     
+    # Custom emission factors
+    path('api/custom-factors/', views.get_custom_factors, name='get_custom_factors'),
+    path('api/custom-factors/add/', views.add_custom_factor, name='add_custom_factor'),
+    path('api/custom-factors/calculate/', views.calculate_with_custom_factor, name='calculate_custom_factor'),
+    path('api/materials/request/', views.request_new_material, name='request_material'),
+    
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),
 ]
