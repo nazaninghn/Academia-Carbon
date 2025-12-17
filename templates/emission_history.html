@@ -697,13 +697,30 @@
                     return;
                 }
                 
+                // Check if modal elements exist
+                const activityInput = document.getElementById('edit-activity-data');
+                const unitInput = document.getElementById('edit-unit');
+                const descriptionInput = document.getElementById('edit-description');
+                const modal = document.getElementById('editRecordModal');
+                
+                if (!activityInput || !unitInput || !descriptionInput || !modal) {
+                    console.error('Modal elements not found:', {
+                        activityInput: !!activityInput,
+                        unitInput: !!unitInput,
+                        descriptionInput: !!descriptionInput,
+                        modal: !!modal
+                    });
+                    alert('Modal elements not found. Please refresh the page.');
+                    return;
+                }
+                
                 // Populate form
-                document.getElementById('edit-activity-data').value = data.activity_data;
-                document.getElementById('edit-unit').value = data.unit;
-                document.getElementById('edit-description').value = data.description || '';
+                activityInput.value = data.activity_data;
+                unitInput.value = data.unit;
+                descriptionInput.value = data.description || '';
                 
                 // Show modal
-                document.getElementById('editRecordModal').style.display = 'flex';
+                modal.style.display = 'flex';
             })
             .catch(error => {
                 console.error('Fetch error:', error);
