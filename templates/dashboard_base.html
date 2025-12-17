@@ -32,7 +32,7 @@
         /* Sidebar */
         .sidebar {
             width: 280px;
-            background: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 100%);
+            background: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 80%, #164e3a 100%);
             padding: 20px 0;
             display: flex;
             flex-direction: column;
@@ -43,6 +43,7 @@
             bottom: 0;
             overflow-y: auto;
             z-index: 100;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .sidebar-logo {
@@ -184,7 +185,7 @@
             display: flex;
             align-items: center;
             padding: 14px 20px;
-            color: rgba(255,255,255,0.8);
+            color: rgba(255,255,255,0.95);
             text-decoration: none;
             transition: all 0.3s;
             font-size: 15px;
@@ -193,16 +194,21 @@
         }
 
         .sidebar-menu a:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.12);
             color: white;
         }
 
         .sidebar-menu a.active {
-            background: linear-gradient(90deg, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.05) 100%);
-            color: #a78bfa;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.05) 100%);
+            color: #ffffff;
             font-weight: 600;
-            border-left: 4px solid #a78bfa;
+            border-left: 4px solid #ffffff;
             padding-left: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .sidebar-menu a.active i {
+            color: #ffffff;
         }
 
 
@@ -212,6 +218,18 @@
             margin-right: 12px;
             font-size: 18px;
             text-align: center;
+            opacity: 0.9;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover i {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .sidebar-menu a.active i {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
         .menu-arrow {
