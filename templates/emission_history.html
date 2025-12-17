@@ -678,7 +678,7 @@
         currentEditId = recordId;
         
         // Fetch record data
-        fetch(`/api/emission-records/${recordId}/`)
+        fetch(`/ghg/api/emission-records/${recordId}/`)
             .then(response => response.json())
             .then(data => {
                 if (data.error) {
@@ -710,7 +710,7 @@
             return;
         }
         
-        fetch(`/api/emission-records/${recordId}/delete/`, {
+        fetch(`/ghg/api/emission-records/${recordId}/delete/`, {
             method: 'DELETE',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken')
@@ -750,7 +750,7 @@
             description: document.getElementById('edit-description').value.trim()
         };
         
-        fetch(`/api/emission-records/${currentEditId}/update/`, {
+        fetch(`/ghg/api/emission-records/${currentEditId}/update/`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
