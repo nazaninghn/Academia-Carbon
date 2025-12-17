@@ -677,10 +677,21 @@
     function editRecord(recordId) {
         currentEditId = recordId;
         
+        console.log('Fetching record:', recordId);
+        console.log('URL:', `/en/api/emission-records/${recordId}/`);
+        
         // Fetch record data
         fetch(`/en/api/emission-records/${recordId}/`)
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Response data:', data);
                 if (data.error) {
                     alert('Error: ' + data.error);
                     return;
@@ -695,8 +706,8 @@
                 document.getElementById('editRecordModal').style.display = 'flex';
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('Failed to load record data');
+                console.error('Fetch error:', error);
+                alert(`Failed to load record data: ${error.message}`);
             });
     }
 
