@@ -30,6 +30,11 @@ urlpatterns = [
     path('api/custom-factors/calculate/', views.calculate_with_custom_factor, name='calculate_custom_factor'),
     path('api/materials/request/', views.request_new_material, name='request_material'),
     
+    # Emission records management
+    path('api/emission-records/<int:record_id>/', views.get_emission_record, name='get_emission_record'),
+    path('api/emission-records/<int:record_id>/update/', views.update_emission_record, name='update_emission_record'),
+    path('api/emission-records/<int:record_id>/delete/', views.delete_emission_record, name='delete_emission_record'),
+    
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),
 ]

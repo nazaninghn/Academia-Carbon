@@ -567,3 +567,94 @@ def calculate_with_custom_factor(request):
         return JsonResponse(result)
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+@login_required
+def get_emission_record(request, record_id):
+    """API endpoint to get a single emission record"""
+    from .models import EmissionRecord
+    
+    try:
+        record = EmissionRecord.objects.get(id=record_id, user=request.user)
+        
+        return JsonResponse({
+            'id': record.id,
+            'activity_data': record.activity_data,
+            'unit': record.unit,
+            'description': record.description or '',
+            'source_name': record.source_name,
+            'emissions_kg': record.emissions_kg,
+            'emissions_tons': record.emissions_tons,
+            'created_at': record.created_at.isoformat()
+        })
+        
+    except EmissionRecord.DoesNotExist:
+        return JsonResponse({'error': 'Record not found'}, status=404)
+
+
+@login_required
+def update_emission_record(request, record_id):
+    """API endpoint to update an emission record"""
+    from .models import EmissionRecord
+    import json
+    
+    if request.method == 'PUT':
+        try:
+            record = EmissionRecord.objects.get(id=record_id, user=request.user)
+            data = json.loads(request.body)
+            
+            # Get new activity data
+            new_activity_data = float(data.get('activity_data', record.activity_data))
+            new_description = data.get('description', record.description or '')
+            
+            if new_activity_data <= 0:
+                return JsonResponse({'error': 'Activity data must be greater than 0'}, status=400)
+            
+            # Recalculate emissions if activity data changed
+            if new_activity_data != record.activity_data:
+                record.activity_data = new_activity_data
+                record.emissions_kg = new_activity_data * record.emission_factor
+                record.emissions_tons = record.emissions_kg / 1000.0
+            
+            # Update description
+            record.description = new_description
+            record.save()
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Record updated successfully',
+                'record': {
+                    'id': record.id,
+                    'activity_data': record.activity_data,
+                    'emissions_kg': record.emissions_kg,
+                    'emissions_tons': record.emissions_tons,
+                    'description': record.description
+                }
+            })
+            
+        except EmissionRecord.DoesNotExist:
+            return JsonResponse({'error': 'Record not found'}, status=404)
+        except ValueError:
+            return JsonResponse({'error': 'Invalid activity data'}, status=400)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@login_required
+def delete_emission_record(request, record_id):
+    """API endpoint to delete an emission record"""
+    from .models import EmissionRecord
+    
+    if request.method == 'DELETE':
+        try:
+            record = EmissionRecord.objects.get(id=record_id, user=request.user)
+            record.delete()
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Record deleted successfully'
+            })
+            
+        except EmissionRecord.DoesNotExist:
+            return JsonResponse({'error': 'Record not found'}, status=404)
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=400)
