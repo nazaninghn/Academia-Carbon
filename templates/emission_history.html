@@ -298,6 +298,21 @@
         color: white;
     }
     
+    .export-btn:hover {
+        background: #2563eb !important;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+    }
+    
+    .export-option:hover {
+        background: #f9fafb !important;
+        color: #111827 !important;
+    }
+    
+    .export-option:hover i {
+        transform: scale(1.1);
+    }
+    
     /* Responsive Design */
     @media (max-width: 1200px) {
         .stats-grid {
@@ -495,6 +510,49 @@
             padding: 10px 20px;
             font-size: 14px;
         }
+        
+        .export-group {
+            display: flex !important;
+            gap: 8px !important;
+        }
+        
+        .export-btn {
+            padding: 6px 12px !important;
+            font-size: 12px !important;
+        }
+        
+        .export-menu {
+            min-width: 160px !important;
+        }
+        
+        .export-option {
+            padding: 10px 12px !important;
+            font-size: 13px !important;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .card-header {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .card-header > div {
+            width: 100%;
+        }
+        
+        .filter-group {
+            justify-content: center;
+        }
+        
+        .export-group {
+            justify-content: center;
+        }
+        
+        .export-btn {
+            width: 100%;
+            justify-content: center;
+        }
     }
 </style>
 {% endblock %}
@@ -551,11 +609,41 @@
 <div class="history-card">
     <div class="card-header">
         <h3 class="card-title">📊 Emission Records</h3>
-        <div class="filter-group">
-            <button class="filter-btn active">All</button>
-            <button class="filter-btn">Scope 1</button>
-            <button class="filter-btn">Scope 2</button>
-            <button class="filter-btn">Scope 3</button>
+        <div style="display: flex; gap: 15px; align-items: center;">
+            <div class="filter-group">
+                <button class="filter-btn active" onclick="filterRecords('all')">All</button>
+                <button class="filter-btn" onclick="filterRecords('scope1')">Scope 1</button>
+                <button class="filter-btn" onclick="filterRecords('scope2')">Scope 2</button>
+                <button class="filter-btn" onclick="filterRecords('scope3')">Scope 3</button>
+            </div>
+            
+            <div class="export-group" style="display: flex; gap: 8px;">
+                <div class="dropdown" style="position: relative;">
+                    <button class="export-btn" onclick="toggleExportMenu()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-size: 13px; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-download"></i>
+                        Export Report
+                        <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                    </button>
+                    <div id="exportMenu" class="export-menu" style="display: none; position: absolute; top: 100%; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); z-index: 1000; min-width: 180px; margin-top: 5px;">
+                        <div class="export-option" onclick="exportReport('all')" style="padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #374151;">
+                            <i class="fas fa-file-excel" style="color: #10b981;"></i>
+                            All Scopes Report
+                        </div>
+                        <div class="export-option" onclick="exportReport('scope1')" style="padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #374151;">
+                            <i class="fas fa-fire" style="color: #ef4444;"></i>
+                            Scope 1 Report
+                        </div>
+                        <div class="export-option" onclick="exportReport('scope2')" style="padding: 12px 16px; cursor: pointer; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #374151;">
+                            <i class="fas fa-bolt" style="color: #f59e0b;"></i>
+                            Scope 2 Report
+                        </div>
+                        <div class="export-option" onclick="exportReport('scope3')" style="padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #374151;">
+                            <i class="fas fa-network-wired" style="color: #3b82f6;"></i>
+                            Scope 3 Report
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -838,6 +926,97 @@
         setTimeout(() => {
             toast.remove();
         }, type === 'error' ? 4000 : 2500);
+    }
+
+    // Filter Records Function
+    function filterRecords(scope) {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const tableRows = document.querySelectorAll('.history-table tbody tr');
+        
+        // Update active button
+        filterBtns.forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Filter table rows
+        tableRows.forEach(row => {
+            if (scope === 'all') {
+                row.style.display = '';
+            } else {
+                const scopeBadge = row.querySelector('.scope-badge');
+                if (scopeBadge && scopeBadge.textContent.toLowerCase().includes(scope.replace('scope', ''))) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // Toggle Export Menu
+    function toggleExportMenu() {
+        const menu = document.getElementById('exportMenu');
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Close export menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const exportBtn = document.querySelector('.export-btn');
+        const exportMenu = document.getElementById('exportMenu');
+        
+        if (!exportBtn.contains(event.target) && !exportMenu.contains(event.target)) {
+            exportMenu.style.display = 'none';
+        }
+    });
+
+    // Export Report Function
+    function exportReport(scope) {
+        const exportMenu = document.getElementById('exportMenu');
+        exportMenu.style.display = 'none';
+        
+        showToast('Generating report...', 'success');
+        
+        // Call API to generate report
+        fetch(`/en/api/export-report/${scope}/`, {
+            method: 'GET',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to generate report');
+            }
+            return response.blob();
+        })
+        .then(blob => {
+            // Create download link
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            
+            // Set filename based on scope
+            const scopeNames = {
+                'all': 'All_Scopes',
+                'scope1': 'Scope_1_Direct_Emissions',
+                'scope2': 'Scope_2_Electricity',
+                'scope3': 'Scope_3_Indirect_Emissions'
+            };
+            
+            const today = new Date().toISOString().split('T')[0];
+            a.download = `${scopeNames[scope]}_Report_${today}.xlsx`;
+            
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showToast('Report downloaded successfully!', 'success');
+        })
+        .catch(error => {
+            console.error('Export error:', error);
+            showToast('Failed to generate report', 'error');
+        });
     }
 </script>
 {% endblock %}

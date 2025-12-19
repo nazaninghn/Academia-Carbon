@@ -35,6 +35,9 @@ urlpatterns = [
     path('api/emission-records/<int:record_id>/update/', views.update_emission_record, name='update_emission_record'),
     path('api/emission-records/<int:record_id>/delete/', views.delete_emission_record, name='delete_emission_record'),
     
+    # Export reports
+    path('api/export-report/<str:scope>/', views.export_emission_report, name='export_report'),
+    
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),
 ]

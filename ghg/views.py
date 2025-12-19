@@ -658,3 +658,154 @@ def delete_emission_record(request, record_id):
             return JsonResponse({'error': 'Record not found'}, status=404)
     
     return JsonResponse({'error': 'Invalid request method'}, status=400)
+
+
+@login_required
+def export_emission_report(request, scope):
+    """API endpoint to export emission records as Excel report"""
+    from .models import EmissionRecord
+    from django.http import HttpResponse
+    import io
+    from datetime import datetime
+    
+    try:
+        # Try to import openpyxl for Excel export
+        from openpyxl import Workbook
+        from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+        from openpyxl.utils import get_column_letter
+    except ImportError:
+        return JsonResponse({'error': 'Excel export not available. Please install openpyxl.'}, status=500)
+    
+    # Filter records based on scope
+    records = EmissionRecord.objects.filter(user=request.user).order_by('-created_at')
+    
+    if scope != 'all':
+        scope_number = scope.replace('scope', '')
+        records = records.filter(scope=int(scope_number))
+    
+    # Create workbook and worksheet
+    wb = Workbook()
+    ws = wb.active
+    
+    # Set worksheet title based on scope (max 31 chars for Excel)
+    scope_titles = {
+        'all': 'All Scopes Report',
+        'scope1': 'Scope 1 Direct',
+        'scope2': 'Scope 2 Electricity', 
+        'scope3': 'Scope 3 Indirect'
+    }
+    ws.title = scope_titles.get(scope, 'Emission Report')
+    
+    # Define styles
+    header_font = Font(bold=True, color="FFFFFF")
+    header_fill = PatternFill(start_color="2D7A5F", end_color="2D7A5F", fill_type="solid")
+    header_alignment = Alignment(horizontal="center", vertical="center")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    # Add title
+    ws.merge_cells('A1:H1')
+    title_cell = ws['A1']
+    title_cell.value = f"Academia Carbon - {scope_titles.get(scope, 'Emission Report')}"
+    title_cell.font = Font(bold=True, size=16, color="2D7A5F")
+    title_cell.alignment = Alignment(horizontal="center", vertical="center")
+    
+    # Add generation info
+    ws.merge_cells('A2:H2')
+    info_cell = ws['A2']
+    info_cell.value = f"Generated on: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | User: {request.user.email}"
+    info_cell.font = Font(size=10, color="666666")
+    info_cell.alignment = Alignment(horizontal="center")
+    
+    # Add summary statistics
+    total_records = records.count()
+    total_emissions_kg = sum(record.emissions_kg for record in records)
+    total_emissions_tons = total_emissions_kg / 1000.0
+    
+    ws.merge_cells('A4:H4')
+    summary_cell = ws['A4']
+    summary_cell.value = f"Summary: {total_records} records | Total Emissions: {total_emissions_kg:.2f} kg CO2e ({total_emissions_tons:.3f} tons CO2e)"
+    summary_cell.font = Font(bold=True, size=12, color="2D7A5F")
+    summary_cell.alignment = Alignment(horizontal="center")
+    
+    # Headers
+    headers = ['Date', 'Time', 'Scope', 'Source', 'Activity Data', 'Unit', 'Emissions (kg CO2e)', 'Emissions (tons CO2e)', 'Country', 'Description']
+    
+    for col, header in enumerate(headers, 1):
+        cell = ws.cell(row=6, column=col)
+        cell.value = header
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.alignment = header_alignment
+        cell.border = border
+    
+    # Data rows
+    for row, record in enumerate(records, 7):
+        data = [
+            record.created_at.strftime('%Y-%m-%d'),
+            record.created_at.strftime('%H:%M:%S'),
+            f"Scope {record.scope}",
+            record.source_name,
+            record.activity_data,
+            record.unit,
+            round(record.emissions_kg, 3),
+            round(record.emissions_tons, 6),
+            'Turkey' if record.country == 'turkey' else 'Global',
+            record.description or ''
+        ]
+        
+        for col, value in enumerate(data, 1):
+            cell = ws.cell(row=row, column=col)
+            cell.value = value
+            cell.border = border
+            
+            # Color code by scope
+            if col == 3:  # Scope column
+                if record.scope == 1:
+                    cell.fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
+                elif record.scope == 2:
+                    cell.fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
+                elif record.scope == 3:
+                    cell.fill = PatternFill(start_color="DBEAFE", end_color="DBEAFE", fill_type="solid")
+    
+    # Auto-adjust column widths
+    for col in range(1, len(headers) + 1):
+        column_letter = get_column_letter(col)
+        max_length = 0
+        for row in ws[column_letter]:
+            try:
+                if len(str(row.value)) > max_length:
+                    max_length = len(str(row.value))
+            except:
+                pass
+        adjusted_width = min(max_length + 2, 50)
+        ws.column_dimensions[column_letter].width = adjusted_width
+    
+    # Save to memory
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    
+    # Create response
+    response = HttpResponse(
+        output.getvalue(),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    
+    # Set filename
+    scope_names = {
+        'all': 'All_Scopes',
+        'scope1': 'Scope_1_Direct_Emissions',
+        'scope2': 'Scope_2_Electricity',
+        'scope3': 'Scope_3_Indirect_Emissions'
+    }
+    
+    today = datetime.now().strftime('%Y-%m-%d')
+    filename = f"{scope_names.get(scope, 'Emission')}_Report_{today}.xlsx"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    
+    return response
