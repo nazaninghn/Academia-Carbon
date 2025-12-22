@@ -1,1 +1,1 @@
-# Reporting module for Carbon Tracker
+# Reporting module for Academia Carbon

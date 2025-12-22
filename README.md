@@ -3,81 +3,50 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![Django](https://img.shields.io/badge/Django-5.2.8-green.svg)](https://www.djangoproject.com/)
+[![GitHub](https://img.shields.io/badge/GitHub-nazaninghn/Academia--Carbon-blue.svg)](https://github.com/nazaninghn/Academia-Carbon)
 
-A Django web application for tracking and calculating greenhouse gas (GHG) emissions. Designed for academic institutions and research organizations.
+A comprehensive Django web application for tracking, calculating, and reporting greenhouse gas (GHG) emissions. Designed for academic institutions, research organizations, and businesses seeking ISO 14064-1 compliant emissions management.
 
-![Academia Carbon Screenshot](https://via.placeholder.com/800x400/7ea05a/ffffff?text=Academia+Carbon+Dashboard)
+![Academia Carbon Screenshot](https://via.placeholder.com/800x400/2d7a5f/ffffff?text=Academia+Carbon+Dashboard)
 
-## Features ✨
+## 🚀 Features
 
-### Core Functionality
-- 📊 Calculate emissions across **Scope 1, 2, and 3**
-- 🌍 Country-specific emission factors (Turkey 2025 + Global)
-- � MInteractive charts and visualizations
-- 📱 Modern, responsive design
-- 🎓 Academic-focused interface
-- � Emiail-based authentication
-- � Emiession history tracking
-- � Researcnh-grade accuracy
+### 📊 Emissions Management
+- **Multi-Scope Tracking**: Complete Scope 1, 2, and 3 emissions calculation
+- **Country-Specific Factors**: Turkey 2025 + Global emission factors database
+- **Custom Factors**: Support for supplier-provided emission factors
+- **Real-time Calculations**: Instant emission calculations with activity data input
 
-### DESNZ 2024 Standards (NEW!)
-- 🚗 **On-Road Emissions** - Volume-based factors for vehicles (Petrol, Diesel, LPG, Natural Gas)
-- ❄️ **Fugitive Emissions** - Complete refrigerant tracking (R-410A, R-432A, R-22, Methane, R-600A)
-- 🚜 **Off-Road Emissions** - Equipment and machinery (Diesel, Gasoline)
-- 📊 **Supplier Management** - Track emission sources by supplier
-- 🎯 **IPCC AR6 GWP** - Latest global warming potentials
+### 📈 Analysis & Reporting
+- **Analysis Dashboard**: Interactive charts and KPI cards with dynamic data loading
+- **ISO 14064-1 Reports**: Professional PDF inventory reports with filtering
+- **Scope Distribution**: Visual breakdown by emission scopes
+- **Top Sources Analysis**: Identify highest emission contributors
+- **Monthly Trends**: Track emissions over time
 
----
+### 🎨 User Experience
+- **Modern Interface**: Clean, responsive design with mobile optimization
+- **Multi-language**: English and Turkish language support
+- **Dashboard**: Comprehensive overview with key metrics
+- **Email Notifications**: Automated alerts and updates
 
-## Quick Start 🚀
-
-### 1. Activate Virtual Environment
-```bash
-.\venv\Scripts\activate
-```
-
-### 2. Run the Server
-```bash
-python manage.py runserver
-```
-
-### 3. Access the Application
-```
-http://127.0.0.1:8000/
-```
-
-### 4. Login
-
-Create your account at the signup page:
-```
-http://127.0.0.1:8000/en/signup/
-```
-
-Or create a user via command line:
-```bash
-python manage.py create_email_user your@email.com yourpassword --first-name "Your" --last-name "Name"
-```
+### 🔧 Technical Features
+- **PDF Generation**: Professional reports using ReportLab
+- **RESTful APIs**: JSON endpoints for data integration
+- **Responsive Design**: Mobile-first approach with Bootstrap 5
+- **Security**: Django authentication with CSRF protection
 
 ---
 
-## Creating New Users
+## 🏗️ Architecture
 
-### Via Web Interface
-1. Go to: `http://127.0.0.1:8000/en/signup/`
-2. Fill in the registration form
-3. Start tracking emissions
+### New Modules (v2.1)
+- **`ghg/reporting/`**: Complete reporting system with services layer
+- **Analysis Landing Cards**: Dynamic KPI cards with API integration
+- **PDF Generation**: ISO 14064-1 compliant inventory reports
+- **Enhanced Navigation**: Improved user experience with consistent styling
 
-### Via Command Line
-```bash
-python manage.py create_email_user your@email.com SecurePassword123! --first-name "John" --last-name "Doe"
-```
-
-> **Security Note**: Always use strong passwords with a mix of letters, numbers, and symbols. Never commit passwords to version control.
-
----
-
-## Project Structure 📁
-
+### Project Structure
 ```
 academia-carbon/
 ├── ghg/                          # Main application
@@ -86,21 +55,36 @@ academia-carbon/
 │   ├── urls.py                   # URL routing
 │   ├── forms.py                  # Authentication forms
 │   ├── emission_factors.py       # Emission calculations
+│   ├── reporting/                # NEW: Reporting module
+│   │   ├── services.py           # Business logic layer
+│   │   ├── views.py              # Report views
+│   │   └── urls.py               # Report URLs
 │   └── management/
 │       └── commands/
 │           ├── load_sample_data.py
 │           └── create_email_user.py
 ├── templates/                    # HTML templates
 │   ├── auth/                     # Login/Signup pages
+│   ├── analysis/                 # NEW: Analysis templates
+│   │   ├── index.html            # Analysis landing page
+│   │   └── emissions.html        # Emissions analysis
+│   ├── reporting/                # NEW: Reporting templates
+│   │   ├── inventory.html        # HTML report view
+│   │   └── inventory_pdf.html    # PDF template
 │   ├── dashboard_base.html       # Dashboard layout
 │   ├── data_entry.html           # Emission calculator
-│   ├── emission_history.html     # History view
-│   └── user_guide.html           # User guide
+│   └── emissions.html            # Emissions overview
 ├── static/                       # Static files
-│   ├── css/style.css
-│   └── js/
-│       ├── charts.js
-│       └── dashboard.js
+│   ├── css/
+│   │   ├── style.css
+│   │   ├── analysis-cards.css    # NEW: Analysis styling
+│   │   └── analysis-emissions.css
+│   ├── js/
+│   │   ├── charts.js
+│   │   ├── analysis-cards.js     # NEW: Dynamic cards
+│   │   └── analysis-emissions.js
+│   └── reporting/                # NEW: Report assets
+│       └── pdf.css
 └── carbon_tracker/               # Project settings
     ├── settings.py
     └── urls.py
@@ -108,220 +92,259 @@ academia-carbon/
 
 ---
 
-## Key Features
+## 🚀 Quick Start
 
-### 1. Emission Calculation
+### 1. Clone Repository
+```bash
+git clone https://github.com/nazaninghn/Academia-Carbon.git
+cd Academia-Carbon
+```
+
+### 2. Setup Virtual Environment
+```bash
+python -m venv venv
+# Windows
+.\venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Setup Database
+```bash
+python manage.py migrate
+python manage.py load_sample_data
+```
+
+### 5. Create User
+```bash
+python manage.py create_email_user your@email.com SecurePassword123! --first-name "Your" --last-name "Name"
+```
+
+### 6. Run Server
+```bash
+python manage.py runserver
+```
+
+### 7. Access Application
+```
+http://127.0.0.1:8000/
+```
+
+---
+
+## 📊 Key Features
+
+### 1. Analysis Dashboard
+- **Landing Cards**: Dynamic KPI display with real-time data
+- **Interactive Charts**: Scope distribution, monthly trends, top sources
+- **API Integration**: RESTful endpoints for data fetching
+- **Responsive Design**: Mobile-optimized interface
+
+### 2. Reporting System
+- **ISO 14064-1 Compliance**: Professional inventory reports
+- **PDF Generation**: High-quality reports with ReportLab
+- **Filtering Options**: Date range, scope, country filters
+- **Executive Summary**: Key metrics and totals
+- **Methodology Notes**: Transparent calculation methods
+
+### 3. Emission Calculation
 - **Scope 1**: Direct emissions (fuel combustion, vehicles, refrigerants)
 - **Scope 2**: Indirect emissions (electricity, heating, cooling)
 - **Scope 3**: Other indirect emissions (travel, waste, commuting)
+- **Custom Factors**: Supplier-provided emission factors
+- **Real-time Updates**: Instant calculation results
 
-### 2. Country-Specific Factors
-- **Turkey 2025**: Updated emission factors based on Turkey Energy Strategy
-- **Global Average**: International standards (IPCC, EPA, DEFRA)
-
-### 3. Emission History
-- Track all calculations
-- Filter by scope
-- View trends over time
-- Export data
-
-### 4. User Management
-- Email-based authentication
-- Secure password hashing
-- User-specific emission records
+### 4. Data Management
+- **Country-Specific Factors**: Turkey 2025 + Global standards
+- **DESNZ 2024 Standards**: Latest UK government factors
+- **IPCC AR6 GWP**: Updated global warming potentials
+- **Supplier Tracking**: Emission source management
 
 ---
 
-## Emission Factors
+## 🔌 API Endpoints
+
+### Analysis APIs
+- `GET /api/analysis/emissions/summary/` - Emissions summary for cards
+- `GET /api/analysis/scope-distribution/` - Scope breakdown data
+- `GET /api/analysis/monthly-trends/` - Monthly emissions trends
+- `GET /api/analysis/top-sources/` - Top emission sources
+
+### Reporting APIs
+- `GET /en/reporting/inventory` - HTML inventory report
+- `GET /en/reporting/inventory?format=pdf` - PDF inventory report
+- `GET /en/reporting/inventory?from=2025-01-01&to=2025-12-31` - Filtered report
+
+### Core APIs
+- `POST /api/calculate/` - Calculate emissions
+- `GET /api/user-summary/` - User emission summary
+- `GET /api/country/<country_code>/` - Country-specific data
+
+---
+
+## 🎨 UI Components
+
+### Analysis Landing Cards
+```javascript
+// Dynamic KPI cards with API integration
+fetch('/api/analysis/emissions/summary/')
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('kpiTotal').textContent = data.total_tco2e;
+    document.getElementById('kpiRecords').textContent = data.records;
+  });
+```
+
+### Reporting Interface
+- **Modern Cards**: Clean, professional design
+- **Gradient Buttons**: Consistent styling across the application
+- **Responsive Tables**: Mobile-optimized data display
+- **Filter Examples**: User-friendly filtering options
+
+---
+
+## 📋 Emission Factors
 
 ### Turkey 2025 (Updated)
-
 | Source | Factor | Unit |
 |--------|--------|------|
 | Electricity Grid | 0.452 kg CO2e | per kWh |
-| Natural Gas | 1.99 kg CO2e | per m³ |
-| Gasoline Car | 0.172 kg CO2e | per km |
-| Electric Car | 0.045 kg CO2e | per km |
-| Domestic Flight | 0.232 kg CO2e | per km |
-| Landfill Waste | 0.54 kg CO2e | per kg |
+| Natural Gas | 2.03 kg CO2e | per m³ |
+| Motor Gasoline | 69.56 kg CO2e | per GJ |
+| Gas/Diesel Oil | 74.1 kg CO2e | per GJ |
 
-### Global Average
-
+### DESNZ 2024 Standards
 | Source | Factor | Unit |
 |--------|--------|------|
-| Electricity Grid | 0.475 kg CO2e | per kWh |
-| Natural Gas | 2.0 kg CO2e | per m³ |
-| Gasoline | 2.31 kg CO2e | per liter |
-| Diesel | 2.68 kg CO2e | per liter |
-
-For complete emission factors, see `EMISSION_FACTORS_2025.md`
+| On-Road Diesel | 2.51 kg CO2e | per liter |
+| On-Road Petrol | 2.16 kg CO2e | per liter |
+| R-410A Refrigerant | 2088 kg CO2e | per kg |
+| Off-Road Diesel | 74.4 kg CO2e | per GJ |
 
 ---
 
-## Documentation 📚
+## 🛠️ Technology Stack
 
-- **QUICKSTART.md** - Quick setup guide
-- **USER_GUIDE.md** - Complete user manual
-- **QUICK_REFERENCE.md** - Quick reference card
-- **TURKEY_EMISSION_FACTORS.md** - Turkey-specific factors
-- **EMISSION_FACTORS_2025.md** - 2025 updates and projections
-
----
-
-## Technology Stack 💻
-
-- **Backend**: Django 5.2.8
-- **Database**: SQLite3
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Charts**: Chart.js
-- **Icons**: Font Awesome
-- **Styling**: Bootstrap 5.3
+- **Backend**: Django 5.2.8, Python 3.8+
+- **Database**: SQLite3 (development), PostgreSQL (production)
+- **Frontend**: HTML5, CSS3, JavaScript ES6+
+- **Charts**: Chart.js 4.4.0
+- **PDF Generation**: ReportLab
+- **Styling**: Bootstrap 5.3, Custom CSS
+- **Icons**: Font Awesome 6.4
 
 ---
 
-## API Endpoints 🔌
+## 🚀 Deployment
 
-### Public Endpoints
-- `GET /` - Redirect to login
-- `GET /en/login/` - Login page
-- `GET /en/signup/` - Signup page
+### Using Deploy Script
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
 
-### Authenticated Endpoints
-- `GET /en/` - Dashboard
-- `GET /en/data-entry/` - Emission calculator
-- `GET /en/history/` - Emission history
-- `GET /en/user-guide/` - User guide
-- `POST /en/api/calculate/` - Calculate emissions
-- `GET /en/api/user-summary/` - User emission summary
+### Manual Deployment
+```bash
+# Collect static files
+python manage.py collectstatic --noinput
 
----
+# Run checks
+python manage.py check
 
-## Database Models
+# Migrate database
+python manage.py migrate
+```
 
-### Country
-- `name`: Country name
-- `code`: ISO country code
-
-### EmissionData
-- `country`: Foreign key to Country
-- `year`: Data year
-- `co2_emissions`: CO2 emissions
-- `total_ghg`: Total GHG emissions
-
-### EmissionRecord
-- `user`: Foreign key to User
-- `scope`: Emission scope (1, 2, or 3)
-- `category`: Emission category
-- `source`: Emission source
-- `activity_data`: Amount of activity
-- `emissions_kg`: Calculated emissions
-- `country`: Country used for calculation
-- `created_at`: Timestamp
+### Environment Variables
+```bash
+# .env file
+SECRET_KEY=your-secret-key
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com,127.0.0.1
+DATABASE_URL=postgres://user:pass@host:port/db
+EMAIL_HOST_USER=your-email@gmail.com
+EMAIL_HOST_PASSWORD=your-app-password
+```
 
 ---
 
-## Development
+## 🧪 Testing
 
-### Running Tests
+### Run Tests
 ```bash
 python manage.py test
 ```
 
-### Creating Migrations
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### Loading Sample Data
-```bash
-python manage.py load_sample_data
-```
-
-### Creating Superuser
-```bash
-python manage.py createsuperuser
-```
+### Test Coverage
+- Model tests for emission calculations
+- View tests for all endpoints
+- Template rendering tests
+- API response validation
 
 ---
 
-## Contributing 🤝
+## 📚 Documentation
+
+- **INSTALLATION.md** - Detailed setup guide
+- **QUICKSTART.md** - Quick setup guide
+- **SECURITY.md** - Security guidelines
+- **CONTRIBUTING.md** - Contribution guidelines
+- **CHANGELOG.md** - Version history
+- **TROUBLESHOOTING.md** - Common issues and solutions
+
+---
+
+## 🤝 Contributing
 
 We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
-### Quick Contribution Guide
-
+### Development Setup
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Make your changes
+4. Add tests for new functionality
+5. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+6. Push to the branch (`git push origin feature/AmazingFeature`)
+7. Open a Pull Request
 
 ---
 
-## License 📄
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## Changelog 📋
-
-See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
-
----
-
-## Support 💬
-
-For questions or issues:
-- 📖 Check the [documentation files](.)
-- 📚 Review the [User Guide](USER_GUIDE.md)
-- 🐛 [Open an issue](https://github.com/yourusername/academia-carbon/issues)
-- 💡 [Start a discussion](https://github.com/yourusername/academia-carbon/discussions)
-
----
-
-## Acknowledgments 🙏
+## 🙏 Acknowledgments
 
 ### Data Sources
-- **IEA**: International Energy Agency
 - **IPCC**: Intergovernmental Panel on Climate Change
-- **EPA**: US Environmental Protection Agency
-- **DEFRA**: UK Department for Environment
+- **DESNZ**: UK Department for Energy Security and Net Zero
 - **Turkish Ministry of Environment**: Official GHG guidelines
+- **EPA**: US Environmental Protection Agency
 
-### Built With
-- [Django](https://www.djangoproject.com/) - Web framework
-- [Chart.js](https://www.chartjs.org/) - Data visualization
-- [Bootstrap](https://getbootstrap.com/) - UI framework
-- [Font Awesome](https://fontawesome.com/) - Icons
+### Standards Compliance
+- ISO 14064-1: Greenhouse gas inventories
+- GHG Protocol: Corporate accounting standards
+- IPCC 2006 Guidelines: National inventories
+- AR6 GWP Values: Latest warming potentials
 
 ---
 
-## Credits
+## 📊 Version Information
 
-### Data Sources
-- **IEA**: International Energy Agency
-- **IPCC**: Intergovernmental Panel on Climate Change
-- **EPA**: US Environmental Protection Agency
-- **DEFRA**: UK Department for Environment
-- **Turkish Ministry of Environment**: Official GHG guidelines
-
-### Emission Factor Standards
-- IPCC 2006 Guidelines
-- GHG Protocol
-- ISO 14064
-- Turkey Energy Strategy 2025
-
----
-
-## Version
-
-- **Version**: 2.0
-- **Last Updated**: November 2025
-- **Data Year**: 2025 (Projected)
+- **Version**: 2.1.0
+- **Last Updated**: December 2025
+- **Data Year**: 2025 (Current)
 - **Status**: Production Ready ✅
 
 ---
 
-**Academia Carbon** - Environmental Solutions for Academic Excellence 🎓🌍
+**Academia Carbon** - Professional GHG Management for Academic Excellence 🎓🌍
+
+*Built with ❤️ for environmental sustainability and academic research*
