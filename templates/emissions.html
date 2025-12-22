@@ -1,0 +1,1276 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block page_title %}Emissions{% endblock %}
+
+{% block extra_css %}
+<style>
+    .emissions-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: calc(100vh - 120px);
+    }
+
+    /* Header Controls */
+    .emissions-header {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .calculation-methods {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .method-btn {
+        padding: 8px 16px;
+        border: 1px solid #e5e7eb;
+        background: white;
+        border-radius: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: #6b7280;
+    }
+
+    .method-btn.active {
+        background: #10b981;
+        color: white;
+        border-color: #10b981;
+    }
+
+    .method-btn:hover:not(.active) {
+        border-color: #10b981;
+        color: #10b981;
+    }
+
+    .date-range-picker {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .date-input {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+
+    /* Main Content Layout */
+    .emissions-main {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 20px;
+        flex: 1;
+        min-height: 0;
+    }
+
+    /* Left Sidebar - Filters */
+    .filters-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        overflow-y: auto;
+    }
+
+    .filter-section {
+        margin-bottom: 25px;
+    }
+
+    .filter-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: between;
+        align-items: center;
+    }
+
+    .filter-actions {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .filter-action-btn {
+        padding: 4px 8px;
+        font-size: 11px;
+        border: 1px solid #e5e7eb;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        color: #6b7280;
+    }
+
+    .filter-action-btn:hover {
+        background: #f9fafb;
+    }
+
+    .scope-tree {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .scope-item {
+        margin-bottom: 8px;
+    }
+
+    .scope-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px;
+        border-radius: 8px;
+        background: #d1fae5;
+        margin-bottom: 12px;
+    }
+
+    .scope1-header {
+        background: #d1fae5;
+    }
+
+    .scope2-header {
+        background: #fef3c7;
+    }
+
+    .scope3-header {
+        background: #dbeafe;
+    }
+
+    .scope-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .scope-control-btn {
+        padding: 4px 12px;
+        border: none;
+        background: transparent;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        color: #374151;
+        font-weight: 500;
+    }
+
+    .scope-control-btn.active {
+        background: white;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+
+    .scope-control-btn:hover {
+        background: rgba(255,255,255,0.7);
+    }
+
+    .scope-dropdown-btn {
+        padding: 4px 12px;
+        border: none;
+        background: transparent;
+        border-radius: 4px;
+        font-size: 13px;
+        cursor: pointer;
+        color: #374151;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .scope-dropdown-btn:hover {
+        background: rgba(255,255,255,0.7);
+    }
+
+    .scope-dropdown {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        margin-top: 8px;
+        padding: 4px 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .dropdown-item {
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #374151;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .dropdown-item:hover {
+        background: #f9fafb;
+    }
+
+    .dropdown-divider {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 4px 0;
+    }
+
+    .category-list {
+        margin-left: 0;
+        margin-top: 0;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .category-list.expanded {
+        display: block;
+    }
+
+    .category-group {
+        margin-bottom: 12px;
+    }
+
+    .category-group.disabled {
+        opacity: 0.4;
+        pointer-events: none;
+    }
+
+    .category-header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .category-header:hover {
+        background: #f9fafb;
+    }
+
+    .category-toggle {
+        font-size: 10px;
+        color: #6b7280;
+        width: 12px;
+    }
+
+    .category-name {
+        flex: 1;
+        font-size: 14px;
+        color: #374151;
+        font-weight: 500;
+    }
+
+    .category-status {
+        font-size: 14px;
+        color: #10b981;
+    }
+
+    .category-status.active {
+        display: block;
+    }
+
+    .source-list {
+        list-style: none;
+        padding-left: 32px;
+        margin: 4px 0;
+    }
+
+    .source-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px;
+        font-size: 13px;
+        color: #10b981;
+        cursor: pointer;
+    }
+
+    .source-item:hover {
+        background: #f9fafb;
+        border-radius: 4px;
+    }
+
+    .source-dot {
+        font-size: 6px;
+        color: #10b981;
+    }
+
+    .source-dot.active {
+        color: #10b981;
+    }
+
+    .source-name {
+        color: #10b981;
+        font-weight: 500;
+    }
+
+    /* Right Content Area */
+    .emissions-content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        overflow-y: auto;
+    }
+
+    /* Chart Section */
+    .chart-section {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .chart-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 30px;
+        align-items: center;
+    }
+
+    .chart-wrapper {
+        position: relative;
+        height: 350px;
+    }
+
+    .total-emissions {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .total-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .total-label {
+        font-size: 14px;
+        color: #6b7280;
+        margin-top: 5px;
+    }
+
+    /* Scope Summary Table */
+    .scope-summary {
+        background: #f9fafb;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+    .summary-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #111827;
+        margin-bottom: 15px;
+    }
+
+    .summary-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .summary-table th {
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        color: #6b7280;
+        padding: 8px 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .summary-table td {
+        padding: 10px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .summary-table .source-name {
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .summary-table .percentage {
+        color: #6b7280;
+    }
+
+    .summary-table .value {
+        color: #10b981;
+        font-weight: 600;
+    }
+
+    /* Sources Table */
+    .sources-section {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .sources-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .sources-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .sources-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .sources-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .sources-table th {
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        color: #6b7280;
+        padding: 12px;
+        border-bottom: 2px solid #e5e7eb;
+        background: #f9fafb;
+    }
+
+    .sources-table td {
+        padding: 12px;
+        font-size: 14px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    .sources-table .source-name {
+        color: #111827;
+        font-weight: 500;
+    }
+
+    .sources-table .scope-badge {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+    }
+
+    .scope-badge.scope1 {
+        background: #fee2e2;
+        color: #dc2626;
+    }
+
+    .scope-badge.scope2 {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    .scope-badge.scope3 {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .distribution-bar {
+        width: 100px;
+        height: 8px;
+        background: #f3f4f6;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .distribution-fill {
+        height: 100%;
+        background: #10b981;
+        border-radius: 4px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+        .emissions-main {
+            grid-template-columns: 280px 1fr;
+        }
+        
+        .chart-container {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .emissions-main {
+            grid-template-columns: 1fr;
+        }
+        
+        .filters-sidebar {
+            order: 2;
+        }
+        
+        .emissions-content {
+            order: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .emissions-header {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        .calculation-methods {
+            justify-content: center;
+        }
+        
+        .date-range-picker {
+            justify-content: center;
+        }
+        
+        .chart-wrapper {
+            height: 250px;
+        }
+        
+        .sources-table {
+            font-size: 12px;
+        }
+        
+        .sources-table th,
+        .sources-table td {
+            padding: 8px;
+        }
+        
+        .scope-header {
+            padding: 10px;
+        }
+        
+        .scope-control-btn,
+        .scope-dropdown-btn {
+            padding: 3px 8px;
+            font-size: 12px;
+        }
+        
+        .category-header {
+            padding: 6px 8px;
+        }
+        
+        .category-name {
+            font-size: 13px;
+        }
+        
+        .source-item {
+            padding: 4px 6px;
+            font-size: 12px;
+        }
+        
+        .source-list {
+            padding-left: 24px;
+        }
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="emissions-container">
+    <!-- Header Controls -->
+    <div class="emissions-header">
+        <div class="calculation-methods">
+            <span style="font-size: 13px; color: #6b7280; margin-right: 10px;">Calculation Standard:</span>
+            <button class="method-btn active" data-method="ghg">GHG-Based</button>
+            <button class="method-btn" data-method="iso">ISO 14064-1</button>
+            <button class="method-btn" disabled style="opacity: 0.5;">Market-Based</button>
+            <button class="method-btn" disabled style="opacity: 0.5;">Location-Based</button>
+        </div>
+        
+        <div class="date-range-picker">
+            <span style="font-size: 13px; color: #6b7280;">Date Range:</span>
+            <input type="date" class="date-input" id="dateFrom" value="{{ date_from }}">
+            <span style="color: #9ca3af;">—</span>
+            <input type="date" class="date-input" id="dateTo" value="{{ date_to }}">
+            <button onclick="applyDateFilter()" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;">
+                <i class="fas fa-filter"></i> Apply
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="emissions-main">
+        <!-- Left Sidebar - Filters -->
+        <div class="filters-sidebar">
+            <div class="filter-section">
+                <div class="filter-title">
+                    Scope & Source Filter
+                </div>
+                <div class="filter-actions">
+                    <button class="filter-action-btn" onclick="selectAllFilters()">
+                        <i class="fas fa-check-square"></i> Select All
+                    </button>
+                    <button class="filter-action-btn" onclick="clearAllFilters()">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                </div>
+                
+                <ul class="scope-tree">
+                    <!-- Scope 1 -->
+                    <li class="scope-item">
+                        <div class="scope-header scope1-header">
+                            <span style="font-weight: 600; color: #111827;">Scope 1</span>
+                            <div class="scope-controls">
+                                <button class="scope-control-btn active" onclick="selectAllScope1()">All</button>
+                                <button class="scope-control-btn" onclick="clearScope1()">Clear</button>
+                                <i class="fas fa-chevron-up" style="margin-left: 8px; color: #9ca3af;"></i>
+                            </div>
+                        </div>
+                        <ul class="category-list expanded" id="categories1">
+                            <!-- Stationary Combustion -->
+                            <li class="category-group">
+                                <div class="category-header">
+                                    <i class="fas fa-minus category-toggle"></i>
+                                    <span class="category-name">Stationary Combustion</span>
+                                    <i class="fas fa-check category-status active"></i>
+                                </div>
+                                <ul class="source-list">
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Coal (industrial)</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Natural Gas</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Gas/Diesel Oil (energy basis)</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">LPG</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Propane</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Motor Gasoline</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Mobile Combustion -->
+                            <li class="category-group">
+                                <div class="category-header">
+                                    <i class="fas fa-minus category-toggle"></i>
+                                    <span class="category-name">Mobile Combustion</span>
+                                    <i class="fas fa-check category-status active"></i>
+                                </div>
+                                <ul class="source-list">
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Off-Road Motor Gasoline</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Off-Road Diesel</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">On-Road Diesel</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">On-Road Gasoline</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Car - Gasoline (Turkey)</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">Car - Diesel (Turkey)</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Process Emissions (Disabled) -->
+                            <li class="category-group disabled">
+                                <div class="category-header">
+                                    <i class="fas fa-plus category-toggle"></i>
+                                    <span class="category-name">Process Emissions</span>
+                                </div>
+                            </li>
+                            
+                            <!-- Fugitive Emissions -->
+                            <li class="category-group">
+                                <div class="category-header">
+                                    <i class="fas fa-minus category-toggle"></i>
+                                    <span class="category-name">Fugitive Emissions</span>
+                                    <i class="fas fa-check category-status active"></i>
+                                </div>
+                                <ul class="source-list">
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">R432A</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">R410A</span>
+                                    </li>
+                                    <li class="source-item">
+                                        <i class="fas fa-circle source-dot active"></i>
+                                        <span class="source-name">R134a</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Scope 2 -->
+                    <li class="scope-item">
+                        <div class="scope-header scope2-header">
+                            <span style="font-weight: 600; color: #111827;">Scope 2</span>
+                            <div class="scope-controls">
+                                <button class="scope-dropdown-btn" onclick="toggleScope2Dropdown()">
+                                    Select All <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="scope-dropdown" id="scope2Dropdown" style="display: none;">
+                            <div class="dropdown-item" onclick="selectAllScope2()">
+                                <i class="fas fa-check-square"></i> Select All
+                            </div>
+                            <div class="dropdown-item" onclick="clearScope2()">
+                                <i class="fas fa-times"></i> Clear All
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item" onclick="toggleScope2Category('electricity')">
+                                <i class="fas fa-square-check"></i> Electricity
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope2Category('heat-steam')">
+                                <i class="fas fa-square-check"></i> Heat and Steam
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope2Category('cooling')">
+                                <i class="fas fa-square-check"></i> Cooling
+                            </div>
+                        </div>
+                    </li>
+                    
+                    <!-- Scope 3 -->
+                    <li class="scope-item">
+                        <div class="scope-header scope3-header">
+                            <span style="font-weight: 600; color: #111827;">Scope 3</span>
+                            <div class="scope-controls">
+                                <button class="scope-dropdown-btn" onclick="toggleScope3Dropdown()">
+                                    Select All <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="scope-dropdown" id="scope3Dropdown" style="display: none;">
+                            <div class="dropdown-item" onclick="selectAllScope3()">
+                                <i class="fas fa-check-square"></i> Select All
+                            </div>
+                            <div class="dropdown-item" onclick="clearScope3()">
+                                <i class="fas fa-times"></i> Clear All
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('purchased-goods')">
+                                <i class="fas fa-square-check"></i> Purchased Goods and Services
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('capital-goods')">
+                                <i class="fas fa-square-check"></i> Capital Goods
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('fuel-energy')">
+                                <i class="fas fa-square-check"></i> Fuel and Energy Related Activities
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('business-travel')">
+                                <i class="fas fa-square-check"></i> Business Travel
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('employee-commuting')">
+                                <i class="fas fa-square-check"></i> Employee Commuting
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('waste')">
+                                <i class="fas fa-square-check"></i> Waste Generated in Operations
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('upstream-transport')">
+                                <i class="fas fa-square-check"></i> Upstream Transportation
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('downstream-transport')">
+                                <i class="fas fa-square-check"></i> Downstream Transportation
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('end-of-life')">
+                                <i class="fas fa-square-check"></i> End of Life
+                            </div>
+                            <div class="dropdown-item" onclick="toggleScope3Category('investments')">
+                                <i class="fas fa-square-check"></i> Investments
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Right Content Area -->
+        <div class="emissions-content">
+            <!-- Chart Section -->
+            <div class="chart-section">
+                <div class="chart-container">
+                    <div>
+                        <h3 style="font-size: 18px; font-weight: 600; color: #111827; margin-bottom: 20px;">
+                            <i class="fas fa-chart-pie" style="color: #10b981; margin-right: 10px;"></i>
+                            Emissions Breakdown by Scope
+                        </h3>
+                        <div class="chart-wrapper">
+                            <canvas id="emissionsChart"></canvas>
+                        </div>
+                        <div class="total-emissions">
+                            <div class="total-value" id="totalEmissions">0.00</div>
+                            <div class="total-label">TOTAL tCO₂e</div>
+                        </div>
+                    </div>
+                    
+                    <div class="scope-summary">
+                        <div class="summary-title">Scope Summary</div>
+                        <table class="summary-table" id="scopeSummaryTable">
+                            <thead>
+                                <tr>
+                                    <th>Source</th>
+                                    <th style="text-align: right;">%</th>
+                                    <th style="text-align: right;">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="scopeSummaryBody">
+                                <!-- Dynamic content -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sources Table -->
+            <div class="sources-section">
+                <div class="sources-header">
+                    <h3 class="sources-title">
+                        <i class="fas fa-table" style="color: #10b981; margin-right: 10px;"></i>
+                        View by Source
+                    </h3>
+                    <div class="sources-controls">
+                        <button onclick="exportSourcesTable()" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="overflow-x: auto;">
+                    <table class="sources-table" id="sourcesTable">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Scope</th>
+                                <th style="text-align: right;">Value (tCO₂e)</th>
+                                <th style="text-align: right;">Percentage (%)</th>
+                                <th>Distribution</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sourcesTableBody">
+                            <!-- Dynamic content -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let emissionsChart = null;
+    let currentData = null;
+    let activeFilters = {
+        scopes: [1, 2, 3],
+        categories: [],
+        dateFrom: null,
+        dateTo: null,
+        method: 'ghg'
+    };
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeFilters();
+        loadEmissionsData();
+        
+        // Method buttons
+        document.querySelectorAll('.method-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.disabled) {
+                    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    activeFilters.method = this.dataset.method;
+                    loadEmissionsData();
+                }
+            });
+        });
+        
+        // Category checkboxes
+        document.querySelectorAll('.category-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateFilters();
+                loadEmissionsData();
+            });
+        });
+    });
+
+    function initializeFilters() {
+        // Set default date range (last 12 months)
+        const today = new Date();
+        const lastYear = new Date(today.getFullYear() - 1, today.getMonth(), today.getDate());
+        
+        document.getElementById('dateFrom').value = lastYear.toISOString().split('T')[0];
+        document.getElementById('dateTo').value = today.toISOString().split('T')[0];
+        
+        activeFilters.dateFrom = lastYear.toISOString().split('T')[0];
+        activeFilters.dateTo = today.toISOString().split('T')[0];
+        
+        // Initialize category filters
+        updateFilters();
+    }
+
+    function updateFilters() {
+        activeFilters.categories = [];
+        activeFilters.scopes = [];
+        
+        // Check Scope 1 active sources
+        const scope1Active = document.querySelectorAll('#categories1 .source-dot.active').length > 0;
+        if (scope1Active) {
+            activeFilters.scopes.push(1);
+            activeFilters.categories.push({scope: 1, category: 'stationary'});
+            activeFilters.categories.push({scope: 1, category: 'mobile'});
+            activeFilters.categories.push({scope: 1, category: 'fugitive'});
+        }
+        
+        // Check Scope 2 (always include for now)
+        activeFilters.scopes.push(2);
+        activeFilters.categories.push({scope: 2, category: 'electricity'});
+        activeFilters.categories.push({scope: 2, category: 'heating'});
+        
+        // Check Scope 3 (always include for now)
+        activeFilters.scopes.push(3);
+        activeFilters.categories.push({scope: 3, category: 'business-travel'});
+        activeFilters.categories.push({scope: 3, category: 'purchased-goods'});
+        activeFilters.categories.push({scope: 3, category: 'waste'});
+        activeFilters.categories.push({scope: 3, category: 'water'});
+    }
+
+    // Scope 1 Controls
+    function selectAllScope1() {
+        document.querySelectorAll('.scope-control-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Activate all Scope 1 sources
+        document.querySelectorAll('#categories1 .source-dot').forEach(dot => {
+            dot.classList.add('active');
+        });
+        document.querySelectorAll('#categories1 .category-status').forEach(status => {
+            status.classList.add('active');
+        });
+        
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    function clearScope1() {
+        document.querySelectorAll('.scope-control-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Deactivate all Scope 1 sources
+        document.querySelectorAll('#categories1 .source-dot').forEach(dot => {
+            dot.classList.remove('active');
+        });
+        document.querySelectorAll('#categories1 .category-status').forEach(status => {
+            status.classList.remove('active');
+        });
+        
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    // Scope 2 Controls
+    function toggleScope2Dropdown() {
+        const dropdown = document.getElementById('scope2Dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        
+        // Close other dropdowns
+        document.getElementById('scope3Dropdown').style.display = 'none';
+    }
+
+    function selectAllScope2() {
+        // Implementation for Scope 2 select all
+        updateFilters();
+        loadEmissionsData();
+        document.getElementById('scope2Dropdown').style.display = 'none';
+    }
+
+    function clearScope2() {
+        // Implementation for Scope 2 clear
+        updateFilters();
+        loadEmissionsData();
+        document.getElementById('scope2Dropdown').style.display = 'none';
+    }
+
+    function toggleScope2Category(category) {
+        // Implementation for individual Scope 2 category toggle
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    // Scope 3 Controls
+    function toggleScope3Dropdown() {
+        const dropdown = document.getElementById('scope3Dropdown');
+        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+        
+        // Close other dropdowns
+        document.getElementById('scope2Dropdown').style.display = 'none';
+    }
+
+    function selectAllScope3() {
+        // Implementation for Scope 3 select all
+        updateFilters();
+        loadEmissionsData();
+        document.getElementById('scope3Dropdown').style.display = 'none';
+    }
+
+    function clearScope3() {
+        // Implementation for Scope 3 clear
+        updateFilters();
+        loadEmissionsData();
+        document.getElementById('scope3Dropdown').style.display = 'none';
+    }
+
+    function toggleScope3Category(category) {
+        // Implementation for individual Scope 3 category toggle
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.scope-dropdown-btn') && !event.target.closest('.scope-dropdown')) {
+            document.getElementById('scope2Dropdown').style.display = 'none';
+            document.getElementById('scope3Dropdown').style.display = 'none';
+        }
+    });
+
+    function selectAllFilters() {
+        document.querySelectorAll('.scope-checkbox, .category-checkbox').forEach(cb => {
+            cb.checked = true;
+        });
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    function clearAllFilters() {
+        document.querySelectorAll('.scope-checkbox, .category-checkbox').forEach(cb => {
+            cb.checked = false;
+        });
+        updateFilters();
+        loadEmissionsData();
+    }
+
+    function applyDateFilter() {
+        activeFilters.dateFrom = document.getElementById('dateFrom').value;
+        activeFilters.dateTo = document.getElementById('dateTo').value;
+        loadEmissionsData();
+    }
+
+    function loadEmissionsData() {
+        const params = new URLSearchParams({
+            method: activeFilters.method,
+            date_from: activeFilters.dateFrom,
+            date_to: activeFilters.dateTo,
+            scopes: activeFilters.scopes.join(','),
+            categories: JSON.stringify(activeFilters.categories)
+        });
+
+        fetch(`/en/api/emissions/data/?${params}`)
+            .then(response => response.json())
+            .then(data => {
+                currentData = data;
+                updateChart(data);
+                updateScopeSummary(data);
+                updateSourcesTable(data);
+            })
+            .catch(error => {
+                console.error('Error loading emissions data:', error);
+                showToast('Failed to load emissions data', 'error');
+            });
+    }
+
+    function updateChart(data) {
+        const ctx = document.getElementById('emissionsChart').getContext('2d');
+        
+        if (emissionsChart) {
+            emissionsChart.destroy();
+        }
+
+        const scopeData = [
+            data.scope1 || 0,
+            data.scope2 || 0,
+            data.scope3 || 0
+        ];
+
+        const total = scopeData.reduce((sum, val) => sum + val, 0);
+        document.getElementById('totalEmissions').textContent = (total / 1000).toFixed(2);
+
+        emissionsChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Scope 1', 'Scope 2', 'Scope 3'],
+                datasets: [{
+                    data: scopeData,
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6'],
+                    borderWidth: 0,
+                    cutout: '60%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const value = (context.parsed / 1000).toFixed(3);
+                                const percentage = ((context.parsed / total) * 100).toFixed(1);
+                                return `${context.label}: ${value} tCO₂e (${percentage}%)`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function updateScopeSummary(data) {
+        const tbody = document.getElementById('scopeSummaryBody');
+        const total = (data.scope1 || 0) + (data.scope2 || 0) + (data.scope3 || 0);
+        
+        const summaryData = [];
+        if (data.categories) {
+            data.categories.forEach(cat => {
+                const percentage = total > 0 ? ((cat.emissions / total) * 100).toFixed(2) : 0;
+                summaryData.push({
+                    name: cat.name,
+                    percentage: percentage,
+                    value: (cat.emissions / 1000).toFixed(3)
+                });
+            });
+        }
+
+        // Sort by emissions descending
+        summaryData.sort((a, b) => parseFloat(b.value) - parseFloat(a.value));
+
+        tbody.innerHTML = summaryData.map(item => `
+            <tr>
+                <td class="source-name">${item.name}</td>
+                <td class="percentage" style="text-align: right;">${item.percentage}%</td>
+                <td class="value" style="text-align: right;">${item.value}</td>
+            </tr>
+        `).join('');
+    }
+
+    function updateSourcesTable(data) {
+        const tbody = document.getElementById('sourcesTableBody');
+        const total = (data.scope1 || 0) + (data.scope2 || 0) + (data.scope3 || 0);
+        
+        if (!data.sources || data.sources.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #6b7280; padding: 40px;">No emission sources found for the selected filters.</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = data.sources.map(source => {
+            const percentage = total > 0 ? ((source.emissions / total) * 100).toFixed(2) : 0;
+            const value = (source.emissions / 1000).toFixed(3);
+            
+            return `
+                <tr>
+                    <td class="source-name">${source.name}</td>
+                    <td><span class="scope-badge scope${source.scope}">Scope ${source.scope}</span></td>
+                    <td style="text-align: right; color: #10b981; font-weight: 600;">${value}</td>
+                    <td style="text-align: right; color: #6b7280;">${percentage}%</td>
+                    <td>
+                        <div class="distribution-bar">
+                            <div class="distribution-fill" style="width: ${Math.min(percentage, 100)}%"></div>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function exportSourcesTable() {
+        if (!currentData || !currentData.sources) {
+            showToast('No data to export', 'error');
+            return;
+        }
+
+        const params = new URLSearchParams({
+            method: activeFilters.method,
+            date_from: activeFilters.dateFrom,
+            date_to: activeFilters.dateTo,
+            scopes: activeFilters.scopes.join(','),
+            categories: JSON.stringify(activeFilters.categories)
+        });
+
+        window.open(`/en/api/emissions/export/?${params}`, '_blank');
+        showToast('Export started...', 'success');
+    }
+
+    function showToast(message, type = 'success') {
+        const colors = {
+            'success': '#22c55e',
+            'error': '#ef4444',
+            'info': '#3b82f6'
+        };
+        
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: ${colors[type]}; 
+            color: white; 
+            padding: 15px 25px; 
+            border-radius: 8px; 
+            z-index: 10000; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: 500;
+        `;
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+</script>
+{% endblock %}

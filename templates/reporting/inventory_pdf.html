@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ report_title }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 2cm 1.5cm;
+            @top-center {
+                content: "{{ report_title }}";
+                font-size: 10px;
+                color: #666;
+            }
+            @bottom-center {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 10px;
+                color: #666;
+            }
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 11px;
+            line-height: 1.4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #2c5530;
+            padding-bottom: 15px;
+        }
+        
+        .header h1 {
+            font-size: 18px;
+            margin: 0 0 5px 0;
+            color: #2c5530;
+        }
+        
+        .header .subtitle {
+            font-size: 12px;
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .meta-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+            page-break-inside: avoid;
+        }
+        
+        .section h2 {
+            font-size: 14px;
+            color: #2c5530;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #2c5530;
+        }
+        
+        .summary-card h3 {
+            font-size: 12px;
+            margin: 0 0 10px 0;
+            color: #2c5530;
+        }
+        
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-weight: bold;
+        }
+        
+        .metric-value {
+            color: #2c5530;
+            font-weight: bold;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            font-size: 9px;
+        }
+        
+        table th {
+            background: #2c5530;
+            color: white;
+            padding: 8px 4px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        table td {
+            padding: 6px 4px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .records-table th {
+            font-size: 8px;
+        }
+        
+        .records-table td {
+            font-size: 8px;
+            padding: 4px 2px;
+        }
+        
+        .methodology {
+            background: #f0f8f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        
+        .methodology h3 {
+            font-size: 12px;
+            color: #2c5530;
+            margin: 0 0 10px 0;
+        }
+        
+        .methodology ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .methodology li {
+            margin-bottom: 5px;
+        }
+        
+        .filters {
+            background: #e8f4e8;
+            padding: 10px;
+            border-radius: 3px;
+            margin-bottom: 20px;
+            font-size: 10px;
+        }
+        
+        .filters strong {
+            color: #2c5530;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        .text-right {
+            text-align: right;
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .small {
+            font-size: 9px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_title }}</h1>
+        <div class="subtitle">{{ standard }} Compliant Emissions Inventory</div>
+        <div class="subtitle">Generated on {{ generated_at|date:"F d, Y \a\t H:i T" }}</div>
+    </div>
+
+    <!-- Filters Applied -->
+    {% if summary.filters.date_from or summary.filters.date_to or summary.filters.scope or summary.filters.country %}
+    <div class="filters">
+        <strong>Filters Applied:</strong>
+        {% if summary.filters.date_from %} From: {{ summary.filters.date_from }}{% endif %}
+        {% if summary.filters.date_to %} To: {{ summary.filters.date_to }}{% endif %}
+        {% if summary.filters.scope %} Scope: {{ summary.filters.scope }}{% endif %}
+        {% if summary.filters.country %} Country: {{ summary.filters.country }}{% endif %}
+    </div>
+    {% endif %}
+
+    <!-- Executive Summary -->
+    <div class="section">
+        <h2>Executive Summary</h2>
+        <div class="summary-grid">
+            <div class="summary-card">
+                <h3>Total Emissions</h3>
+                <div class="metric">
+                    <span class="metric-label">Total (tCO₂e):</span>
+                    <span class="metric-value">{{ summary.totals.total_t|floatformat:3 }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Total (kgCO₂e):</span>
+                    <span class="metric-value">{{ summary.totals.total_kg|floatformat:0 }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Records:</span>
+                    <span class="metric-value">{{ summary.totals.records }}</span>
+                </div>
+            </div>
+            
+            <div class="summary-card">
+                <h3>Data Quality</h3>
+                <div class="metric">
+                    <span class="metric-label">Custom Factors:</span>
+                    <span class="metric-value">{{ summary.flags.custom_factor_records }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Pending Items:</span>
+                    <span class="metric-value">{{ summary.flags.pending_other_items }}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Standard:</span>
+                    <span class="metric-value">{{ standard }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emissions by Scope -->
+    {% if summary.by_scope %}
+    <div class="section">
+        <h2>Emissions by Scope</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scope</th>
+                    <th class="text-right">Emissions (tCO₂e)</th>
+                    <th class="text-right">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in summary.by_scope %}
+                <tr>
+                    <td>{{ item.scope }}</td>
+                    <td class="text-right">{{ item.value_t|floatformat:3 }}</td>
+                    <td class="text-right">{{ item.percentage|floatformat:1 }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Emissions by Category -->
+    {% if summary.by_category %}
+    <div class="section">
+        <h2>Emissions by Category</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scope</th>
+                    <th>Category</th>
+                    <th class="text-right">Emissions (tCO₂e)</th>
+                    <th class="text-right">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in summary.by_category %}
+                <tr>
+                    <td>{{ item.scope }}</td>
+                    <td>{{ item.category }}</td>
+                    <td class="text-right">{{ item.value_t|floatformat:3 }}</td>
+                    <td class="text-right">{{ item.percentage|floatformat:1 }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Top Sources -->
+    {% if summary.top_sources %}
+    <div class="section">
+        <h2>Top Emission Sources</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Scope</th>
+                    <th>Category</th>
+                    <th>Source</th>
+                    <th class="text-right">Emissions (tCO₂e)</th>
+                    <th class="text-right">Percentage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in summary.top_sources %}
+                <tr>
+                    <td>{{ item.scope }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.source_name }}</td>
+                    <td class="text-right">{{ item.value_t|floatformat:3 }}</td>
+                    <td class="text-right">{{ item.percentage|floatformat:1 }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Detailed Records -->
+    {% if records %}
+    <div class="section page-break">
+        <h2>Detailed Emission Records</h2>
+        <table class="records-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Scope</th>
+                    <th>Category</th>
+                    <th>Source</th>
+                    <th>Supplier</th>
+                    <th>Activity</th>
+                    <th>Unit</th>
+                    <th>Factor</th>
+                    <th>Country</th>
+                    <th>kgCO₂e</th>
+                    <th>tCO₂e</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                <tr>
+                    <td>{{ record.created_date }}</td>
+                    <td>{{ record.scope }}</td>
+                    <td>{{ record.category }}</td>
+                    <td>{{ record.source_name }}</td>
+                    <td>{{ record.supplier|default:"-" }}</td>
+                    <td class="text-right">{{ record.activity_data|floatformat:2 }}</td>
+                    <td>{{ record.unit }}</td>
+                    <td class="text-right">{{ record.emission_factor|floatformat:4 }}</td>
+                    <td>{{ record.country }}</td>
+                    <td class="text-right">{{ record.emissions_kg|floatformat:2 }}</td>
+                    <td class="text-right">{{ record.emissions_t|floatformat:4 }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Methodology -->
+    <div class="methodology">
+        <h3>Methodology & Notes</h3>
+        <p><strong>Calculation Formula:</strong> {{ methodology.formula }}</p>
+        <ul>
+            {% for note in methodology.unit_notes %}
+            <li>{{ note }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

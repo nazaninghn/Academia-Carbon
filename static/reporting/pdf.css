@@ -1,0 +1,181 @@
+@page {
+    size: A4;
+    margin: 2cm 1.5cm;
+    @top-center {
+        content: "ISO 14064-1 Emissions Inventory Report";
+        font-size: 10px;
+        color: #666;
+    }
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+        font-size: 10px;
+        color: #666;
+    }
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #2c5530;
+    padding-bottom: 15px;
+}
+
+.header h1 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    color: #2c5530;
+}
+
+.header .subtitle {
+    font-size: 12px;
+    color: #666;
+    margin: 5px 0;
+}
+
+.meta-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    font-size: 10px;
+    color: #666;
+}
+
+.section {
+    margin-bottom: 25px;
+    page-break-inside: avoid;
+}
+
+.section h2 {
+    font-size: 14px;
+    color: #2c5530;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.summary-card {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    border-left: 4px solid #2c5530;
+}
+
+.summary-card h3 {
+    font-size: 12px;
+    margin: 0 0 10px 0;
+    color: #2c5530;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-weight: bold;
+}
+
+.metric-value {
+    color: #2c5530;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 9px;
+}
+
+table th {
+    background: #2c5530;
+    color: white;
+    padding: 8px 4px;
+    text-align: left;
+    font-weight: bold;
+}
+
+table td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #eee;
+}
+
+table tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.records-table th {
+    font-size: 8px;
+}
+
+.records-table td {
+    font-size: 8px;
+    padding: 4px 2px;
+}
+
+.methodology {
+    background: #f0f8f0;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.methodology h3 {
+    font-size: 12px;
+    color: #2c5530;
+    margin: 0 0 10px 0;
+}
+
+.methodology ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.methodology li {
+    margin-bottom: 5px;
+}
+
+.filters {
+    background: #e8f4e8;
+    padding: 10px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    font-size: 10px;
+}
+
+.filters strong {
+    color: #2c5530;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.small {
+    font-size: 9px;
+}

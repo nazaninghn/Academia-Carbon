@@ -18,6 +18,7 @@ urlpatterns = [
     # API endpoints
     path('api/calculate/', views.calculate_emission, name='calculate_emission'),
     path('api/user-summary/', views.get_user_emissions_summary, name='user_summary'),
+    path('api/analysis/emissions/summary/', views.emissions_summary_api, name='emissions_summary_api'),
     path('api/country/<str:country_code>/', views.get_country_data, name='country_data'),
     path('api/global/', views.get_global_data, name='global_data'),
     path('api/top-emitters/', views.get_top_emitters, name='top_emitters'),
@@ -37,6 +38,18 @@ urlpatterns = [
     
     # Export reports
     path('api/export-report/<str:scope>/', views.export_emission_report, name='export_report'),
+    
+    # Analysis pages
+    path('analysis/', views.analysis_index, name='analysis_index'),
+    path('analysis/emissions/', views.analysis, name='analysis'),
+    path('api/analysis/scope-distribution/', views.analysis_scope_distribution, name='analysis_scope_distribution'),
+    path('api/analysis/monthly-trends/', views.analysis_monthly_trends, name='analysis_monthly_trends'),
+    path('api/analysis/top-sources/', views.analysis_top_sources, name='analysis_top_sources'),
+    
+    # Emissions analysis (Carbondeck-style)
+    path('emissions/', views.emissions, name='emissions'),
+    path('api/emissions/data/', views.emissions_data_api, name='emissions_data_api'),
+    path('api/emissions/export/', views.emissions_export_api, name='emissions_export_api'),
     
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),

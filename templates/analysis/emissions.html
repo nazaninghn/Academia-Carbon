@@ -1,0 +1,159 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block page_title %}Emissions Analysis{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/analysis-emissions.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <h1 class="title">Emissions Analysis</h1>
+            <div class="tabs">
+                <button class="tab tab-active" data-standard="ghg">GHG-Based</button>
+                <button class="tab" data-standard="iso">ISO 14064-1</button>
+            </div>
+        </div>
+        
+        <div class="header-right">
+            <div class="control">
+                <label for="dateFrom">From</label>
+                <input id="dateFrom" type="date" value="{{ date_from }}" />
+            </div>
+            <div class="control">
+                <label for="dateTo">To</label>
+                <input id="dateTo" type="date" value="{{ date_to }}" />
+            </div>
+            
+            <div class="control">
+                <label for="facility">Facility</label>
+                <select id="facility">
+                    <option value="all">All Facilities</option>
+                </select>
+            </div>
+            
+            <button id="applyFilters" class="btn">Apply</button>
+        </div>
+    </header>
+    
+    <!-- Layout -->
+    <main class="layout">
+        <!-- Left panel: Scope tree -->
+        <aside class="panel">
+            <div class="panel-header">
+                <div class="search-wrap">
+                    <input id="treeSearch" type="text" placeholder="Search sources..." />
+                    <button id="clearSearch" class="link">Clear</button>
+                </div>
+                <button id="clearAll" class="link">Clear All</button>
+            </div>
+            
+            <div id="scopeTree" class="tree">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </aside>
+        
+        <!-- Center panel: Chart + summary -->
+        <section class="content">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">
+                            <i class="fas fa-chart-pie"></i>
+                            Emissions Breakdown
+                        </span>
+                    </div>
+                    
+                    <div class="card-body chart-grid">
+                        <div class="chart-wrap">
+                            <canvas id="scopeDonut"></canvas>
+                            <div class="total">
+                                <div class="total-label">TOTAL</div>
+                                <div id="totalValue" class="total-value">0.00 tCO₂e</div>
+                            </div>
+                        </div>
+                        
+                        <div class="summary">
+                            <div class="summary-title">Scope Breakdown</div>
+                            <div id="breakdownList" class="summary-list">
+                                <!-- Dynamic content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header row-between">
+                        <span class="card-title">
+                            <i class="fas fa-table"></i>
+                            View by Source
+                        </span>
+                        
+                        <div class="row">
+                            <label for="sortBy" class="muted">Sort by</label>
+                            <select id="sortBy">
+                                <option value="value_desc">Value (desc)</option>
+                                <option value="value_asc">Value (asc)</option>
+                                <option value="pct_desc">Percentage (desc)</option>
+                                <option value="pct_asc">Percentage (asc)</option>
+                                <option value="name_asc">Name (A-Z)</option>
+                            </select>
+                            
+                            <button id="exportTable" class="btn btn-secondary">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-wrap">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Source</th>
+                                        <th>Scope</th>
+                                        <th class="num">Value (tCO₂e)</th>
+                                        <th class="num">Percentage (%)</th>
+                                        <th>Distribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sourcesTableBody">
+                                    <!-- Dynamic content -->
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="table-footer">
+                            <div id="tableMeta" class="muted">0 rows</div>
+                            
+                            <div class="row">
+                                <label for="rowsPerPage" class="muted">Rows per page</label>
+                                <select id="rowsPerPage">
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                </select>
+                                
+                                <button id="prevPage" class="btn btn-secondary">
+                                    <i class="fas fa-chevron-left"></i> Prev
+                                </button>
+                                <button id="nextPage" class="btn btn-secondary">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/analysis-emissions.js' %}"></script>
+{% endblock %}

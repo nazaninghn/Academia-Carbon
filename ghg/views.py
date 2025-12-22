@@ -147,6 +147,30 @@ def get_top_emitters(request):
     return JsonResponse(data)
 
 @login_required
+def emissions_summary_api(request):
+    """API endpoint for emissions analysis summary data"""
+    from django.db.models import Sum, Count
+    
+    # Get user's emission records
+    user_records = EmissionRecord.objects.filter(user=request.user)
+    
+    # Calculate total emissions in tCO2e
+    total_kg = user_records.aggregate(total=Sum('emissions_kg'))['total'] or 0
+    total_tco2e = total_kg / 1000  # Convert kg to tonnes
+    
+    # Count total records
+    records_count = user_records.count()
+    
+    # Standard (always ISO for this system)
+    standard = "ISO"
+    
+    return JsonResponse({
+        'total_tco2e': round(total_tco2e, 3),
+        'records': records_count,
+        'standard': standard
+    })
+
+@login_required
 def emission_history(request):
     """View to display user's emission calculation history"""
     from .models import EmissionRecord
@@ -806,6 +830,454 @@ def export_emission_report(request, scope):
     
     today = datetime.now().strftime('%Y-%m-%d')
     filename = f"{scope_names.get(scope, 'Emission')}_Report_{today}.xlsx"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    
+    return response
+
+
+
+@login_required
+def analysis_index(request):
+    """Analysis landing page with cards"""
+    return render(request, 'analysis/index.html')
+
+@login_required
+def analysis(request):
+    """Analysis page view"""
+    from .models import EmissionRecord
+    from django.db.models import Sum
+    
+    # Get user's emission statistics
+    records = EmissionRecord.objects.filter(user=request.user)
+    total_records = records.count()
+    total_emissions_kg = records.aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    total_emissions = total_emissions_kg / 1000.0  # Convert to tons
+    
+    context = {
+        'total_records': total_records,
+        'total_emissions': total_emissions,
+    }
+    
+    return render(request, 'analysis.html', context)
+
+
+@login_required
+def analysis_scope_distribution(request):
+    """API endpoint for scope distribution data"""
+    from .models import EmissionRecord
+    from django.db.models import Sum
+    
+    records = EmissionRecord.objects.filter(user=request.user)
+    
+    scope1 = records.filter(scope=1).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope2 = records.filter(scope=2).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope3 = records.filter(scope=3).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    
+    return JsonResponse({
+        'scope1': round(scope1, 2),
+        'scope2': round(scope2, 2),
+        'scope3': round(scope3, 2)
+    })
+
+
+@login_required
+def analysis_monthly_trends(request):
+    """API endpoint for monthly emission trends"""
+    from .models import EmissionRecord
+    from django.db.models import Sum
+    from django.db.models.functions import TruncMonth
+    from datetime import datetime, timedelta
+    
+    # Get last 12 months of data
+    end_date = datetime.now()
+    start_date = end_date - timedelta(days=365)
+    
+    records = EmissionRecord.objects.filter(
+        user=request.user,
+        created_at__gte=start_date
+    ).annotate(
+        month=TruncMonth('created_at')
+    ).values('month').annotate(
+        total=Sum('emissions_kg')
+    ).order_by('month')
+    
+    months = []
+    emissions = []
+    
+    for record in records:
+        months.append(record['month'].strftime('%b %Y'))
+        emissions.append(round(record['total'], 2))
+    
+    return JsonResponse({
+        'months': months,
+        'emissions': emissions
+    })
+
+
+@login_required
+def analysis_top_sources(request):
+    """API endpoint for top emission sources"""
+    from .models import EmissionRecord
+    from django.db.models import Sum
+    
+    # Get top 10 emission sources
+    sources = EmissionRecord.objects.filter(
+        user=request.user
+    ).values('source_name').annotate(
+        total=Sum('emissions_kg')
+    ).order_by('-total')[:10]
+    
+    # Calculate total for percentage
+    total_emissions = sum(s['total'] for s in sources)
+    
+    sources_data = []
+    for source in sources:
+        percentage = (source['total'] / total_emissions * 100) if total_emissions > 0 else 0
+        sources_data.append({
+            'name': source['source_name'],
+            'emissions': round(source['total'], 2),
+            'percentage': round(percentage, 1)
+        })
+    
+    return JsonResponse({
+        'sources': sources_data
+    })
+
+
+@login_required
+def emissions(request):
+    """Professional emissions analysis page"""
+    from datetime import datetime, timedelta
+    
+    # Set default date range (last 12 months)
+    today = datetime.now()
+    last_year = today - timedelta(days=365)
+    
+    context = {
+        'date_from': last_year.strftime('%Y-%m-%d'),
+        'date_to': today.strftime('%Y-%m-%d'),
+    }
+    
+    return render(request, 'analysis/emissions.html', context)
+
+
+@login_required
+def emissions_data_api(request):
+    """API endpoint for emissions data with filters"""
+    from .models import EmissionRecord
+    from django.db.models import Sum, Q
+    from datetime import datetime
+    import json
+    
+    # Get filter parameters
+    method = request.GET.get('standard', 'ghg')
+    date_from = request.GET.get('from')
+    date_to = request.GET.get('to')
+    scopes = request.GET.get('scopes', '').split(',') if request.GET.get('scopes') else []
+    categories = request.GET.get('categories', '').split(',') if request.GET.get('categories') else []
+    sources = request.GET.get('sources', '').split(',') if request.GET.get('sources') else []
+    
+    # Base queryset
+    records = EmissionRecord.objects.filter(user=request.user)
+    
+    # Apply date filter
+    if date_from:
+        try:
+            records = records.filter(created_at__gte=datetime.strptime(date_from, '%Y-%m-%d'))
+        except ValueError:
+            pass
+    if date_to:
+        try:
+            records = records.filter(created_at__lte=datetime.strptime(date_to, '%Y-%m-%d'))
+        except ValueError:
+            pass
+    
+    # Apply scope filter
+    if scopes and scopes != ['']:
+        try:
+            scope_numbers = [int(s) for s in scopes if s.isdigit()]
+            if scope_numbers:
+                records = records.filter(scope__in=scope_numbers)
+        except ValueError:
+            pass
+    
+    # Calculate scope totals
+    scope1_total = records.filter(scope=1).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope2_total = records.filter(scope=2).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope3_total = records.filter(scope=3).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    
+    # Get sources data
+    sources_data = records.values('source_name', 'scope').annotate(
+        total=Sum('emissions_kg')
+    ).order_by('-total')
+    
+    sources_list = []
+    total_emissions = scope1_total + scope2_total + scope3_total
+    
+    for source in sources_data:
+        emissions = source['total']
+        percentage = (emissions / total_emissions * 100) if total_emissions > 0 else 0
+        
+        sources_list.append({
+            'name': source['source_name'],
+            'scope': source['scope'],
+            'emissions': emissions,
+            'percentage': percentage
+        })
+    
+    # Prepare chart data
+    chart_labels = []
+    chart_values = []
+    
+    if scope1_total > 0:
+        chart_labels.append('Scope 1')
+        chart_values.append(scope1_total)
+    if scope2_total > 0:
+        chart_labels.append('Scope 2') 
+        chart_values.append(scope2_total)
+    if scope3_total > 0:
+        chart_labels.append('Scope 3')
+        chart_values.append(scope3_total)
+    
+    return JsonResponse({
+        'scope1': scope1_total,
+        'scope2': scope2_total,
+        'scope3': scope3_total,
+        'sources': sources_list,
+        'scope_chart': {
+            'labels': chart_labels,
+            'values': chart_values
+        },
+        'method': method,
+        'total_records': records.count(),
+        'tree': {
+            'scopes': [
+                {
+                    'id': '1',
+                    'name': 'Scope 1',
+                    '_collapsed': False,
+                    'categories': [
+                        {
+                            'key': 'stationary',
+                            'name': 'Stationary Combustion',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'coal-industrial', 'name': 'Coal (industrial)'},
+                                {'key': 'natural-gas', 'name': 'Natural Gas'},
+                                {'key': 'diesel-oil', 'name': 'Gas/Diesel Oil'},
+                                {'key': 'lpg', 'name': 'LPG'},
+                                {'key': 'propane', 'name': 'Propane'},
+                                {'key': 'motor-gasoline', 'name': 'Motor Gasoline'}
+                            ]
+                        },
+                        {
+                            'key': 'mobile',
+                            'name': 'Mobile Combustion',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'off-road-gasoline', 'name': 'Off-Road Gasoline'},
+                                {'key': 'off-road-diesel', 'name': 'Off-Road Diesel'},
+                                {'key': 'on-road-diesel', 'name': 'On-Road Diesel'},
+                                {'key': 'car-gasoline', 'name': 'Car - Gasoline'},
+                                {'key': 'car-diesel', 'name': 'Car - Diesel'}
+                            ]
+                        },
+                        {
+                            'key': 'fugitive',
+                            'name': 'Fugitive Emissions',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'r432a', 'name': 'R432A'},
+                                {'key': 'r410a', 'name': 'R410A'},
+                                {'key': 'r134a', 'name': 'R134a'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'id': '2',
+                    'name': 'Scope 2',
+                    '_collapsed': False,
+                    'categories': [
+                        {
+                            'key': 'electricity',
+                            'name': 'Electricity',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'grid-electricity', 'name': 'Grid Electricity'},
+                                {'key': 'renewable-energy', 'name': 'Renewable Energy'}
+                            ]
+                        },
+                        {
+                            'key': 'heat-steam',
+                            'name': 'Heat and Steam',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'district-heating', 'name': 'District Heating'},
+                                {'key': 'steam', 'name': 'Steam'}
+                            ]
+                        }
+                    ]
+                },
+                {
+                    'id': '3',
+                    'name': 'Scope 3',
+                    '_collapsed': False,
+                    'categories': [
+                        {
+                            'key': 'purchased-goods',
+                            'name': 'Purchased Goods',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'paper', 'name': 'Paper'},
+                                {'key': 'plastic', 'name': 'Plastic'},
+                                {'key': 'metal', 'name': 'Metal'},
+                                {'key': 'chemical', 'name': 'Chemical'},
+                                {'key': 'wood', 'name': 'Wood'}
+                            ]
+                        },
+                        {
+                            'key': 'business-travel',
+                            'name': 'Business Travel',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'flight', 'name': 'Flight'},
+                                {'key': 'hotel', 'name': 'Hotel'},
+                                {'key': 'car-rental', 'name': 'Car Rental'},
+                                {'key': 'train', 'name': 'Train'}
+                            ]
+                        },
+                        {
+                            'key': 'waste',
+                            'name': 'Waste',
+                            '_collapsed': False,
+                            'sources': [
+                                {'key': 'waste', 'name': 'Waste'},
+                                {'key': 'recycling', 'name': 'Recycling'},
+                                {'key': 'landfill', 'name': 'Landfill'}
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    })
+
+
+@login_required
+def emissions_export_api(request):
+    """Export emissions data as Excel"""
+    from .models import EmissionRecord
+    from django.http import HttpResponse
+    from datetime import datetime
+    import json
+    import io
+    
+    try:
+        from openpyxl import Workbook
+        from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    except ImportError:
+        return JsonResponse({'error': 'Excel export not available'}, status=500)
+    
+    # Get same filters as data API
+    method = request.GET.get('method', 'ghg')
+    date_from = request.GET.get('date_from')
+    date_to = request.GET.get('date_to')
+    scopes = request.GET.get('scopes', '1,2,3').split(',')
+    
+    # Base queryset
+    records = EmissionRecord.objects.filter(user=request.user)
+    
+    # Apply filters
+    if date_from:
+        records = records.filter(created_at__gte=datetime.strptime(date_from, '%Y-%m-%d'))
+    if date_to:
+        records = records.filter(created_at__lte=datetime.strptime(date_to, '%Y-%m-%d'))
+    if scopes:
+        scope_numbers = [int(s) for s in scopes if s.isdigit()]
+        records = records.filter(scope__in=scope_numbers)
+    
+    # Create workbook
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Emissions Analysis"
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF")
+    header_fill = PatternFill(start_color="10B981", end_color="10B981", fill_type="solid")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    # Title
+    ws.merge_cells('A1:F1')
+    title_cell = ws['A1']
+    title_cell.value = f"Emissions Analysis Report - {method.upper()} Method"
+    title_cell.font = Font(bold=True, size=16, color="10B981")
+    title_cell.alignment = Alignment(horizontal="center")
+    
+    # Date range
+    ws.merge_cells('A2:F2')
+    date_cell = ws['A2']
+    date_cell.value = f"Period: {date_from} to {date_to}"
+    date_cell.font = Font(size=12)
+    date_cell.alignment = Alignment(horizontal="center")
+    
+    # Headers
+    headers = ['Source', 'Scope', 'Activity Data', 'Unit', 'Emissions (kg CO2e)', 'Emissions (tCO2e)']
+    for col, header in enumerate(headers, 1):
+        cell = ws.cell(row=4, column=col)
+        cell.value = header
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.border = border
+        cell.alignment = Alignment(horizontal="center")
+    
+    # Data
+    for row, record in enumerate(records.order_by('-emissions_kg'), 5):
+        data = [
+            record.source_name,
+            f"Scope {record.scope}",
+            record.activity_data,
+            record.unit,
+            round(record.emissions_kg, 3),
+            round(record.emissions_tons, 6)
+        ]
+        
+        for col, value in enumerate(data, 1):
+            cell = ws.cell(row=row, column=col)
+            cell.value = value
+            cell.border = border
+            
+            # Color code by scope
+            if col == 2:  # Scope column
+                if record.scope == 1:
+                    cell.fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
+                elif record.scope == 2:
+                    cell.fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
+                elif record.scope == 3:
+                    cell.fill = PatternFill(start_color="DBEAFE", end_color="DBEAFE", fill_type="solid")
+    
+    # Auto-adjust column widths
+    for col in range(1, len(headers) + 1):
+        ws.column_dimensions[chr(64 + col)].width = 20
+    
+    # Save to memory
+    output = io.BytesIO()
+    wb.save(output)
+    output.seek(0)
+    
+    # Create response
+    response = HttpResponse(
+        output.getvalue(),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    
+    today = datetime.now().strftime('%Y-%m-%d')
+    filename = f"Emissions_Analysis_{method.upper()}_{today}.xlsx"
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     
     return response

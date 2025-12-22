@@ -27,4 +27,5 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('ghg.urls')),
+    path('reporting/', include('ghg.reporting.urls')),
 )

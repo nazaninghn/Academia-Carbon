@@ -604,13 +604,19 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="#">
+                    <a href="{% url 'ghg:emissions' %}" class="{% if request.resolver_match.url_name == 'emissions' %}active{% endif %}">
+                        <i class="fas fa-chart-pie"></i>
+                        Emissions
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{% url 'ghg:analysis' %}" class="{% if request.resolver_match.url_name == 'analysis' %}active{% endif %}">
                         <i class="fas fa-chart-line"></i>
                         Analysis
                     </a>
                 </li>
                 <li class="menu-item has-badge">
-                    <a href="#">
+                    <a href="/en/reporting/inventory">
                         <i class="fas fa-file-alt"></i>
                         Reporting
                     </a>

@@ -1,0 +1,597 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+
+{% block page_title %}Analysis{% endblock %}
+
+{% block extra_css %}
+<style>
+    .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .analysis-card {
+        background: white;
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+    }
+
+    .analysis-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-color: #10b981;
+    }
+
+    .analysis-card.locked {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .analysis-card.locked:hover {
+        transform: none;
+        border-color: transparent;
+    }
+
+    .analysis-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        transform: translate(30%, -30%);
+        opacity: 0.1;
+    }
+
+    .analysis-card.emissions::before {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .analysis-card.comparative::before {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .analysis-card.performance::before {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .analysis-card.supplier::before {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .card-icon.emissions {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+
+    .card-icon.comparative {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    }
+
+    .card-icon.performance {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+
+    .card-icon.supplier {
+        background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    }
+
+    .card-title {
+        font-size: 22px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 8px;
+    }
+
+    .card-description {
+        font-size: 14px;
+        color: #6b7280;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .card-features {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .card-features li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+        font-size: 14px;
+        color: #374151;
+    }
+
+    .card-features li i {
+        color: #10b981;
+        font-size: 16px;
+        width: 20px;
+    }
+
+    .new-badge {
+        background: linear-gradient(135deg, #8b5cf6 0%, #c4b5fd 100%);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+    }
+
+    .lock-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: #9ca3af;
+        font-size: 20px;
+    }
+
+    .coming-soon {
+        background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        color: #6b7280;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+
+    .stats-preview {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #f3f4f6;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 20px;
+        font-weight: 700;
+        color: #111827;
+    }
+
+    .stat-label {
+        font-size: 11px;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 4px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .analysis-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        
+        .analysis-card {
+            padding: 25px;
+        }
+        
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+        }
+        
+        .card-title {
+            font-size: 20px;
+        }
+        
+        .stats-preview {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .stat-value {
+            font-size: 18px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .analysis-card {
+            padding: 20px;
+        }
+        
+        .card-icon {
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+        }
+        
+        .card-title {
+            font-size: 18px;
+        }
+        
+        .card-description {
+            font-size: 13px;
+        }
+        
+        .card-features li {
+            font-size: 13px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="analysis-grid">
+    <!-- Emissions Analysis -->
+    <div class="analysis-card emissions" onclick="openAnalysis('emissions')">
+        <div class="card-icon emissions">
+            <i class="fas fa-chart-pie"></i>
+        </div>
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Emissions Analysis</h3>
+                <p class="card-description">Professional ISO 14064-1 compliant emissions reporting and analysis dashboard.</p>
+            </div>
+        </div>
+        
+        <ul class="card-features">
+            <li><i class="fas fa-check"></i> Scope-wise emission breakdown</li>
+            <li><i class="fas fa-check"></i> Date range filtering</li>
+            <li><i class="fas fa-check"></i> Source contribution analysis</li>
+            <li><i class="fas fa-check"></i> Audit-ready reporting</li>
+        </ul>
+        
+        <div class="stats-preview">
+            <div class="stat-item">
+                <div class="stat-value">{{ total_emissions|floatformat:3 }}</div>
+                <div class="stat-label">Total tCO₂e</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">{{ total_records }}</div>
+                <div class="stat-label">Records</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">ISO</div>
+                <div class="stat-label">Standard</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparative Analysis -->
+    <div class="analysis-card comparative locked" onclick="showComingSoon('comparative')">
+        <i class="fas fa-lock lock-icon"></i>
+        <div class="card-icon comparative">
+            <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Comparative Analysis</h3>
+                <p class="card-description">Compare your emissions with industry benchmarks and similar organizations.</p>
+            </div>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+        
+        <ul class="card-features">
+            <li><i class="fas fa-clock"></i> Industry benchmarking</li>
+            <li><i class="fas fa-clock"></i> Peer comparison</li>
+            <li><i class="fas fa-clock"></i> Best practice insights</li>
+            <li><i class="fas fa-clock"></i> Improvement recommendations</li>
+        </ul>
+    </div>
+
+    <!-- Performance Analysis -->
+    <div class="analysis-card performance locked" onclick="showComingSoon('performance')">
+        <i class="fas fa-lock lock-icon"></i>
+        <div class="card-icon performance">
+            <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Performance Analysis</h3>
+                <p class="card-description">Track your carbon reduction performance and goal achievement over time.</p>
+            </div>
+            <span class="coming-soon">Coming Soon</span>
+        </div>
+        
+        <ul class="card-features">
+            <li><i class="fas fa-clock"></i> Goal tracking & progress</li>
+            <li><i class="fas fa-clock"></i> Reduction trend analysis</li>
+            <li><i class="fas fa-clock"></i> Performance scoring</li>
+            <li><i class="fas fa-clock"></i> Achievement milestones</li>
+        </ul>
+    </div>
+
+    <!-- Supplier Analysis -->
+    <div class="analysis-card supplier locked" onclick="showComingSoon('supplier')">
+        <i class="fas fa-lock lock-icon"></i>
+        <div class="card-icon supplier">
+            <i class="fas fa-users"></i>
+        </div>
+        <div class="card-header">
+            <div>
+                <h3 class="card-title">Supplier Analysis</h3>
+                <p class="card-description">Analyze emissions from your supply chain and supplier carbon footprint.</p>
+            </div>
+            <div class="new-badge">
+                <i class="fas fa-sparkles"></i>
+                NEW
+            </div>
+        </div>
+        
+        <ul class="card-features">
+            <li><i class="fas fa-clock"></i> Supplier carbon footprint</li>
+            <li><i class="fas fa-clock"></i> Supply chain emissions</li>
+            <li><i class="fas fa-clock"></i> Vendor sustainability scoring</li>
+            <li><i class="fas fa-clock"></i> Procurement recommendations</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Emissions Analysis Modal -->
+<div id="emissionsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; overflow-y: auto; padding: 20px;">
+    <div style="background: white; border-radius: 16px; padding: 40px; max-width: 1200px; width: 95%; max-height: 90vh; overflow-y: auto; margin: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+            <h2 style="font-size: 28px; font-weight: 700; margin: 0; color: #111827;">
+                <i class="fas fa-chart-pie" style="color: #10b981; margin-right: 15px;"></i>
+                Emissions Analysis
+            </h2>
+            <button onclick="closeModal('emissionsModal')" style="background: none; border: none; font-size: 28px; color: #9ca3af; cursor: pointer;">×</button>
+        </div>
+
+        <!-- Charts Container -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; margin-bottom: 30px;">
+            <!-- Scope Distribution Chart -->
+            <div style="background: #f9fafb; border-radius: 12px; padding: 25px;">
+                <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #374151;">
+                    <i class="fas fa-pie-chart" style="color: #10b981; margin-right: 10px;"></i>
+                    Emissions by Scope
+                </h3>
+                <canvas id="scopeChart" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Monthly Trend Chart -->
+            <div style="background: #f9fafb; border-radius: 12px; padding: 25px;">
+                <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #374151;">
+                    <i class="fas fa-chart-line" style="color: #3b82f6; margin-right: 10px;"></i>
+                    Monthly Trends
+                </h3>
+                <canvas id="trendChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Top Sources Table -->
+        <div style="background: #f9fafb; border-radius: 12px; padding: 25px;">
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 20px; color: #374151;">
+                <i class="fas fa-list" style="color: #f59e0b; margin-right: 10px;"></i>
+                Top Emission Sources
+            </h3>
+            <div id="topSourcesTable"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function openAnalysis(type) {
+        if (type === 'emissions') {
+            // Redirect to dedicated emissions page
+            window.location.href = '/en/emissions/';
+        }
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    function showComingSoon(type) {
+        const messages = {
+            'comparative': 'Comparative Analysis will be available in the next update. Stay tuned!',
+            'performance': 'Performance Analysis is coming soon with goal tracking features.',
+            'supplier': 'Supplier Analysis is our newest feature in development!'
+        };
+        
+        showToast(messages[type] || 'This feature is coming soon!', 'info');
+    }
+
+    function loadEmissionsAnalysis() {
+        // Load scope distribution chart
+        fetch('/en/api/analysis/scope-distribution/')
+            .then(response => response.json())
+            .then(data => {
+                createScopeChart(data);
+            })
+            .catch(error => {
+                console.error('Error loading scope data:', error);
+            });
+
+        // Load monthly trends
+        fetch('/en/api/analysis/monthly-trends/')
+            .then(response => response.json())
+            .then(data => {
+                createTrendChart(data);
+            })
+            .catch(error => {
+                console.error('Error loading trend data:', error);
+            });
+
+        // Load top sources
+        fetch('/en/api/analysis/top-sources/')
+            .then(response => response.json())
+            .then(data => {
+                createTopSourcesTable(data);
+            })
+            .catch(error => {
+                console.error('Error loading sources data:', error);
+            });
+    }
+
+    function createScopeChart(data) {
+        const ctx = document.getElementById('scopeChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Scope 1', 'Scope 2', 'Scope 3'],
+                datasets: [{
+                    data: [data.scope1 || 0, data.scope2 || 0, data.scope3 || 0],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function createTrendChart(data) {
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: data.months || [],
+                datasets: [{
+                    label: 'Total Emissions (kg CO2e)',
+                    data: data.emissions || [],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+    function createTopSourcesTable(data) {
+        const container = document.getElementById('topSourcesTable');
+        if (!data.sources || data.sources.length === 0) {
+            container.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 20px;">No emission sources found.</p>';
+            return;
+        }
+
+        let html = `
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background: white;">
+                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb;">Source</th>
+                        <th style="padding: 12px; text-align: right; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb;">Emissions (kg CO2e)</th>
+                        <th style="padding: 12px; text-align: right; font-weight: 600; color: #374151; border-bottom: 2px solid #e5e7eb;">Percentage</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        data.sources.forEach((source, index) => {
+            html += `
+                <tr style="border-bottom: 1px solid #f3f4f6;">
+                    <td style="padding: 12px; color: #111827;">${source.name}</td>
+                    <td style="padding: 12px; text-align: right; font-weight: 600; color: #10b981;">${source.emissions.toFixed(2)}</td>
+                    <td style="padding: 12px; text-align: right; color: #6b7280;">${source.percentage.toFixed(1)}%</td>
+                </tr>
+            `;
+        });
+
+        html += '</tbody></table>';
+        container.innerHTML = html;
+    }
+
+    function showToast(message, type = 'info') {
+        const colors = {
+            'info': '#3b82f6',
+            'success': '#22c55e',
+            'error': '#ef4444'
+        };
+        
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            background: ${colors[type]}; 
+            color: white; 
+            padding: 15px 25px; 
+            border-radius: 8px; 
+            z-index: 10000; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            font-weight: 500;
+        `;
+        toast.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    // Close modal when clicking outside
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('emissionsModal');
+        if (event.target === modal) {
+            closeModal('emissionsModal');
+        }
+    });
+</script>
+{% endblock %}

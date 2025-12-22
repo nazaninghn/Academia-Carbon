@@ -1,0 +1,77 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Analysis - Carbon Tracker</title>
+  <link rel="stylesheet" href="{% static 'css/analysis-cards.css' %}" />
+</head>
+<body>
+  <main class="page">
+    <h1 class="page-title">Analysis</h1>
+    
+    <section class="cards-grid">
+      <!-- Emissions Analysis Card -->
+      <a class="card" href="{% url 'ghg:analysis' %}" aria-label="Open Emissions Analysis">
+        <div class="card-top">
+          <div class="icon-wrap" aria-hidden="true">
+            <!-- Simple pie chart icon (inline SVG) -->
+            <svg viewBox="0 0 24 24" class="icon">
+              <path d="M11 2a10 10 0 1 0 10 10h-9V2z"></path>
+              <path d="M13 2.2V11h8.8A10 10 0 0 0 13 2.2z" opacity="0.35"></path>
+            </svg>
+          </div>
+          
+          <div class="decor" aria-hidden="true"></div>
+        </div>
+        
+        <div class="card-body">
+          <h2 class="card-title">Emissions Analysis</h2>
+          <p class="card-subtitle">
+            Professional ISO 14064-1 compliant emissions reporting and analysis dashboard.
+          </p>
+          
+          <ul class="feature-list">
+            <li class="feature">
+              <span class="check" aria-hidden="true">✓</span>
+              <span>Scope-wise emission breakdown</span>
+            </li>
+            <li class="feature">
+              <span class="check" aria-hidden="true">✓</span>
+              <span>Date range filtering</span>
+            </li>
+            <li class="feature">
+              <span class="check" aria-hidden="true">✓</span>
+              <span>Source contribution analysis</span>
+            </li>
+            <li class="feature">
+              <span class="check" aria-hidden="true">✓</span>
+              <span>Audit-ready reporting</span>
+            </li>
+          </ul>
+          
+          <div class="divider"></div>
+          
+          <div class="kpis">
+            <div class="kpi">
+              <div id="kpiTotal" class="kpi-value">--</div>
+              <div class="kpi-label">TOTAL tCO₂e</div>
+            </div>
+            <div class="kpi">
+              <div id="kpiRecords" class="kpi-value">--</div>
+              <div class="kpi-label">RECORDS</div>
+            </div>
+            <div class="kpi">
+              <div id="kpiStandard" class="kpi-value">ISO</div>
+              <div class="kpi-label">STANDARD</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </section>
+  </main>
+  
+  <script src="{% static 'js/analysis-cards.js' %}"></script>
+</body>
+</html>

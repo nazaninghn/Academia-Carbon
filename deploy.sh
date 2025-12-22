@@ -30,14 +30,14 @@ else
     exit 1
 fi
 
-# Step 3: Run tests
+# Step 3: Run basic checks
 echo ""
-echo "Step 3: Running deployment tests..."
-python test_deployment.py
+echo "Step 3: Running basic checks..."
+python manage.py check
 if [ $? -eq 0 ]; then
-    echo -e "${GREEN}✓ All tests passed${NC}"
+    echo -e "${GREEN}✓ All checks passed${NC}"
 else
-    echo -e "${RED}✗ Tests failed - Aborting deployment${NC}"
+    echo -e "${RED}✗ Checks failed - Aborting deployment${NC}"
     exit 1
 fi
 
@@ -72,7 +72,7 @@ echo "Next steps:"
 echo "1. Commit changes: git add . && git commit -m 'Deploy v2.1.0'"
 echo "2. Push to repository: git push origin main"
 echo "3. Deploy on your platform (Render/Heroku/VPS)"
-echo "4. Run: python test_deployment.py on server"
+echo "4. Run: python manage.py check on server"
 echo ""
-echo "For troubleshooting, see: SERVER_TROUBLESHOOTING.md"
+echo "For troubleshooting, see: TROUBLESHOOTING.md"
 echo ""

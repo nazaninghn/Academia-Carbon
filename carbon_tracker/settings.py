@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-hb@0-4*53iza=(08tohqr
 DEBUG = config('DEBUG', default='True') == 'True'
 
 # ALLOWED_HOSTS configuration
-allowed_hosts_str = config('ALLOWED_HOSTS', default='127.0.0.1,localhost')
+allowed_hosts_str = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,testserver')
 ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
 
 # Add Render domain if not in list
