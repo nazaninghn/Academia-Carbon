@@ -1325,7 +1325,7 @@
         </div>
         
         <!-- Cancel Button -->
-        <button onclick="hideOtherChoiceModal()" style="width: 100%; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+        <button type="button" onclick="hideOtherChoiceModal()" style="width: 100%; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
             Cancel
         </button>
     </div>
@@ -1411,10 +1411,10 @@
         
         <!-- Buttons -->
         <div style="display: flex; gap: 10px; margin-top: 25px;">
-            <button onclick="hideCustomFactorModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            <button type="button" onclick="hideCustomFactorModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                 Cancel
             </button>
-            <button onclick="saveCustomFactor()" style="flex: 1; background: #22c55e; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            <button type="button" id="save-custom-factor-btn-new" style="flex: 1; background: #22c55e; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                 Save Custom Factor
             </button>
         </div>
@@ -1493,10 +1493,10 @@
         
         <!-- Buttons -->
         <div style="display: flex; gap: 10px; margin-top: 25px;">
-            <button onclick="hideRequestMaterialModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            <button type="button" onclick="hideRequestMaterialModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                 Cancel
             </button>
-            <button onclick="submitMaterialRequest()" style="flex: 1; background: #3b82f6; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+            <button type="button" onclick="event.preventDefault(); event.stopPropagation(); submitMaterialRequest(event);" style="flex: 1; background: #3b82f6; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
                 Submit Request
             </button>
         </div>
@@ -1615,6 +1615,14 @@
 </div>
 
 <script>
+// API URLs - using Django URL reverse to avoid hardcoding
+const MATERIAL_REQUEST_URL = "{% url 'ghg:request_material' %}";
+const CUSTOM_FACTOR_ADD_URL = "{% url 'ghg:add_custom_factor' %}";
+
+// Debug: Log URLs
+console.log('MATERIAL_REQUEST_URL:', MATERIAL_REQUEST_URL);
+console.log('CUSTOM_FACTOR_ADD_URL:', CUSTOM_FACTOR_ADD_URL);
+
 // Unit mapping for stationary combustion sources
 const stationaryUnits = {
     'coal-industrial': ['kg'],
@@ -2173,20 +2181,30 @@ function hideOtherChoiceModal() {
 }
 
 function selectOtherOption(option) {
+    console.log('selectOtherOption called with:', option);
     hideOtherChoiceModal();
     
     if (option === 'custom') {
         // Open Custom Factor Modal with pre-filled category
-        showCustomFactorModal(currentCategory);
+        console.log('Opening custom factor modal');
+        showCustomFactorModal(window.currentCategory || '');
     } else if (option === 'request') {
         // Open Request Material Modal with pre-filled category
-        showRequestMaterialModal(currentCategory);
+        console.log('Opening request material modal');
+        showRequestMaterialModal(window.currentCategory || '');
     }
 }
 
 // Custom Emission Factor Functions
 function showCustomFactorModal(prefilledCategory) {
     const modal = document.getElementById('customFactorModal');
+    
+    // Move modal to body to prevent form nesting issues
+    if (modal && modal.parentNode !== document.body) {
+        console.log('Moving modal to body');
+        document.body.appendChild(modal);
+    }
+    
     modal.style.display = 'flex';
     
     // Clear all fields
@@ -2212,17 +2230,45 @@ function showCustomFactorModal(prefilledCategory) {
     } else {
         categorySelect.value = '';
     }
+    
+    // Load suppliers if function exists
+    if (typeof loadSuppliers === 'function') {
+        loadSuppliers('custom-supplier');
+    }
+    
+    // Setup event listener for new button
+    setTimeout(function() {
+        const saveBtn = document.getElementById('save-custom-factor-btn-new');
+        if (saveBtn && !saveBtn.hasAttribute('data-listener-added')) {
+            console.log('Adding event listener to save button in modal');
+            saveBtn.addEventListener('click', function(e) {
+                console.log('Save button clicked in modal');
+                e.preventDefault();
+                e.stopPropagation();
+                saveCustomFactorNew();
+                return false;
+            });
+            saveBtn.setAttribute('data-listener-added', 'true');
+        }
+    }, 100);
 }
 
 function hideCustomFactorModal() {
     document.getElementById('customFactorModal').style.display = 'none';
 }
 
-function saveCustomFactor() {
+function saveCustomFactor(e) {
+    if (e) e.preventDefault();   // جلوگیری از submit فرم
+    if (e) e.stopPropagation();  // جلوگیری از bubble up
+    
+    console.log('saveCustomFactor called');
+    
     const materialName = document.getElementById('custom-material-name').value.trim();
     const category = document.getElementById('custom-category').value;
     const emissionFactor = document.getElementById('custom-emission-factor').value;
     const unit = document.getElementById('custom-unit').value;
+    
+    console.log('Form data:', { materialName, category, emissionFactor, unit });
     
     if (!materialName || !category || !emissionFactor || !unit) {
         alert('Please fill in all required fields');
@@ -2239,16 +2285,28 @@ function saveCustomFactor() {
         description: document.getElementById('custom-description').value.trim()
     };
     
-    fetch('/api/custom-factors/add/', {
+    console.log('Sending data:', factorData);
+    console.log('URL:', CUSTOM_FACTOR_ADD_URL);
+    
+    fetch(CUSTOM_FACTOR_ADD_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
         },
+        credentials: 'same-origin',
         body: JSON.stringify(factorData)
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Response data:', data);
         if (data.error) {
             // Show error message as toast
             const errorMsg = document.createElement('div');
@@ -2262,6 +2320,15 @@ function saveCustomFactor() {
         } else {
             hideCustomFactorModal();
             
+            // Clear form
+            document.getElementById('custom-material-name').value = '';
+            document.getElementById('custom-category').value = '';
+            document.getElementById('custom-emission-factor').value = '';
+            document.getElementById('custom-unit').value = '';
+            document.getElementById('custom-supplier').value = '';
+            document.getElementById('custom-source-reference').value = '';
+            document.getElementById('custom-description').value = '';
+            
             // Show success message
             const successMsg = document.createElement('div');
             successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #22c55e; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
@@ -2273,7 +2340,9 @@ function saveCustomFactor() {
             }, 3000);
             
             // Reload custom factors if needed
-            loadCustomFactors();
+            if (typeof loadCustomFactors === 'function') {
+                loadCustomFactors();
+            }
         }
     })
     .catch(error => {
@@ -2281,12 +2350,191 @@ function saveCustomFactor() {
         // Show error message as toast
         const errorMsg = document.createElement('div');
         errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
-        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Failed to add custom factor. Please try again.';
+        errorMsg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Network error: ' + error.message;
         document.body.appendChild(errorMsg);
         
         setTimeout(() => {
             errorMsg.remove();
         }, 4000);
+    });
+}
+
+// Add event listener as backup
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, setting up event listeners');
+    
+    // Prevent all form submissions on this page
+    document.addEventListener('submit', function(e) {
+        console.log('Form submission detected, preventing...');
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+    });
+    
+    // Prevent Enter key from submitting forms
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA')) {
+            console.log('Enter key pressed in form element, preventing submission');
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    });
+    
+    // New approach: Use addEventListener instead of onclick
+    setTimeout(function() {
+        const saveBtn = document.getElementById('save-custom-factor-btn-new');
+        if (saveBtn) {
+            console.log('Found new save button, adding event listener');
+            
+            // Remove any existing onclick handlers
+            saveBtn.onclick = null;
+            
+            // Add new event listener
+            saveBtn.addEventListener('click', function(e) {
+                console.log('New save button clicked');
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Call save function
+                saveCustomFactorNew();
+                
+                return false;
+            });
+        } else {
+            console.log('New save button not found');
+        }
+    }, 1000); // Wait 1 second for DOM to be fully ready
+});
+
+// New save function with better error handling
+function saveCustomFactorNew() {
+    console.log('saveCustomFactorNew called');
+    
+    try {
+        const materialName = document.getElementById('custom-material-name').value.trim();
+        const category = document.getElementById('custom-category').value;
+        const emissionFactor = document.getElementById('custom-emission-factor').value;
+        const unit = document.getElementById('custom-unit').value;
+        
+        console.log('Form data:', { materialName, category, emissionFactor, unit });
+        
+        if (!materialName || !category || !emissionFactor || !unit) {
+            alert('Please fill in all required fields');
+            return;
+        }
+        
+        const factorData = {
+            material_name: materialName,
+            category: category,
+            emission_factor: parseFloat(emissionFactor),
+            unit: unit,
+            supplier_id: document.getElementById('custom-supplier').value || null,
+            source_reference: document.getElementById('custom-source-reference').value.trim(),
+            description: document.getElementById('custom-description').value.trim()
+        };
+        
+        console.log('Sending data to URL:', CUSTOM_FACTOR_ADD_URL);
+        console.log('Data:', factorData);
+        
+        const csrfToken = getCookie('csrftoken');
+        console.log('CSRF Token:', csrfToken);
+        
+        if (!csrfToken) {
+            alert('CSRF token not found. Please refresh the page.');
+            return;
+        }
+        
+        fetch(CUSTOM_FACTOR_ADD_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken,
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin',
+            body: JSON.stringify(factorData)
+        })
+        .then(response => {
+            console.log('Response received:', response);
+            console.log('Response status:', response.status);
+            console.log('Response ok:', response.ok);
+            
+            if (!response.ok) {
+                return response.text().then(text => {
+                    console.log('Error response text:', text);
+                    throw new Error(`HTTP ${response.status}: ${text}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Success response data:', data);
+            hideCustomFactorModal();
+            
+            // Clear form
+            document.getElementById('custom-material-name').value = '';
+            document.getElementById('custom-category').value = '';
+            document.getElementById('custom-emission-factor').value = '';
+            document.getElementById('custom-unit').value = '';
+            document.getElementById('custom-supplier').value = '';
+            document.getElementById('custom-source-reference').value = '';
+            document.getElementById('custom-description').value = '';
+            
+            alert('Custom emission factor added successfully!');
+        })
+        .catch(error => {
+            console.error('Fetch error:', error);
+            alert('Error: ' + error.message);
+        });
+        
+    } catch (error) {
+        console.error('Function error:', error);
+        alert('Unexpected error: ' + error.message);
+    }
+}
+
+// Test function to directly call API
+function testDirectAPI() {
+    console.log('Testing API directly...');
+    
+    const testData = {
+        material_name: 'Test Material Direct',
+        category: 'stationary',
+        emission_factor: 2.5,
+        unit: 'kg',
+        source_reference: 'Direct test',
+        description: 'Test from direct API call'
+    };
+    
+    console.log('Test data:', testData);
+    console.log('URL:', CUSTOM_FACTOR_ADD_URL);
+    
+    fetch(CUSTOM_FACTOR_ADD_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(testData)
+    })
+    .then(response => {
+        console.log('Test API Response status:', response.status);
+        console.log('Test API Response headers:', response.headers);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Test API Response data:', data);
+        alert('Direct API test successful!');
+    })
+    .catch(error => {
+        console.error('Test API Error:', error);
+        alert('Direct API test failed: ' + error.message);
     });
 }
 
@@ -2322,7 +2570,10 @@ function hideRequestMaterialModal() {
     document.getElementById('requestMaterialModal').style.display = 'none';
 }
 
-function submitMaterialRequest() {
+function submitMaterialRequest(e) {
+    if (e) e.preventDefault();   // جلوگیری از submit فرم
+    if (e) e.stopPropagation();  // جلوگیری از bubble up
+    
     const materialName = document.getElementById('request-material-name').value.trim();
     const category = document.getElementById('request-category').value;
     const description = document.getElementById('request-description').value.trim();
@@ -2341,15 +2592,22 @@ function submitMaterialRequest() {
         suggested_source: document.getElementById('request-suggested-source').value.trim() || null
     };
     
-    fetch('/api/materials/request/', {
+    fetch(MATERIAL_REQUEST_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
+            'X-CSRFToken': getCookie('csrftoken'),
+            'X-Requested-With': 'XMLHttpRequest'
         },
+        credentials: 'same-origin',
         body: JSON.stringify(requestData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.error) {
             // Show error message as toast
@@ -2364,9 +2622,17 @@ function submitMaterialRequest() {
         } else {
             hideRequestMaterialModal();
             
+            // Clear form
+            document.getElementById('request-material-name').value = '';
+            document.getElementById('request-category').value = '';
+            document.getElementById('request-description').value = '';
+            document.getElementById('request-suggested-factor').value = '';
+            document.getElementById('request-suggested-unit').value = '';
+            document.getElementById('request-suggested-source').value = '';
+            
             // Show success message
             const successMsg = document.createElement('div');
-            successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #3b82f6; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
+            successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #22c55e; color: white; padding: 15px 25px; border-radius: 8px; z-index: 10000; box-shadow: 0 4px 12px rgba(0,0,0,0.15);';
             successMsg.innerHTML = '<i class="fas fa-check-circle"></i> Request submitted! Admin will review it soon.';
             document.body.appendChild(successMsg);
             

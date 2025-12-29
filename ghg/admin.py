@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest
+from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest, ReportExtraInfo
 import logging
 
 logger = logging.getLogger(__name__)
@@ -170,3 +170,44 @@ class MaterialRequestAdmin(admin.ModelAdmin):
         queryset.update(status='in_progress')
         self.message_user(request, f"{queryset.count()} requests marked as in progress.")
     mark_in_progress.short_description = "Mark as in progress"
+
+
+@admin.register(ReportExtraInfo)
+class ReportExtraInfoAdmin(admin.ModelAdmin):
+    list_display = ['user', 'legal_name', 'industry', 'boundary_approach', 'has_consent', 'created_at']
+    list_filter = ['boundary_approach', 'share_org_profile', 'share_boundary', 'created_at']
+    search_fields = ['user__username', 'legal_name', 'industry']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('User', {
+            'fields': ('user',)
+        }),
+        ('Organization Details', {
+            'fields': ('legal_name', 'industry')
+        }),
+        ('Reporting Information', {
+            'fields': ('reporting_period', 'boundary_approach', 'notes')
+        }),
+        ('Consent Settings', {
+            'fields': ('share_org_profile', 'share_boundary', 'share_data_sources', 'share_projects')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def has_consent(self, obj):
+        consent_count = sum([
+            obj.share_org_profile,
+            obj.share_boundary,
+            obj.share_data_sources,
+            obj.share_projects
+        ])
+        return format_html(
+            '<span style="color: {};">{}/4 consents</span>',
+            '#22c55e' if consent_count >= 2 else '#f59e0b',
+            consent_count
+        )
+    has_consent.short_description = 'Consent Status'

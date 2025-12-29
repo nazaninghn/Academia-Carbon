@@ -212,3 +212,49 @@ class MaterialRequest(models.Model):
         self.reviewed_at = timezone.now()
         self.admin_notes = notes
         self.save()
+
+
+class ReportExtraInfo(models.Model):
+    """Store additional organizational details for more complete ISO 14064-1 reports"""
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='report_extra_info')
+    
+    # Organization details
+    legal_name = models.CharField(max_length=200, blank=True, null=True, 
+                                 help_text="Legal name of organization")
+    industry = models.CharField(max_length=100, blank=True, null=True,
+                               help_text="Industry type or NAICS code")
+    
+    # Reporting boundary
+    reporting_period = models.CharField(max_length=100, blank=True, null=True,
+                                       help_text="Reporting period (e.g., 2025-01-01 to 2025-12-31)")
+    boundary_approach = models.CharField(max_length=50, blank=True, null=True,
+                                        choices=[
+                                            ('operational_control', 'Operational Control'),
+                                            ('financial_control', 'Financial Control'),
+                                            ('equity_share', 'Equity Share'),
+                                        ],
+                                        help_text="Consolidation approach")
+    
+    # Additional context
+    notes = models.TextField(blank=True, null=True, 
+                            help_text="Additional context for the report")
+    
+    # Consent tracking
+    share_org_profile = models.BooleanField(default=True, 
+                                           help_text="User consented to share organization profile")
+    share_boundary = models.BooleanField(default=True,
+                                        help_text="User consented to share reporting boundary")
+    share_data_sources = models.BooleanField(default=False,
+                                            help_text="User consented to share data sources info")
+    share_projects = models.BooleanField(default=False,
+                                        help_text="User consented to share projects/initiatives")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Report Extra Information"
+        verbose_name_plural = "Report Extra Information"
+    
+    def __str__(self):
+        return f"{self.user.username} - Report Extra Info"

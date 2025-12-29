@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Country, EmissionData
-from django.db.models import Sum, Avg, Count
+from .models import Country, EmissionData, EmissionRecord, Supplier, MaterialRequest
+from django.db.models import Sum, Avg, Count, FloatField
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -170,6 +170,40 @@ def emissions_summary_api(request):
         'standard': standard
     })
 
+
+@login_required
+def dashboard_api(request):
+    """API endpoint for dashboard data"""
+    from datetime import datetime
+    from .dashboard_services import get_dashboard_metrics
+    
+    # Parse optional filters
+    date_from = None
+    date_to = None
+    country = request.GET.get('country')
+    
+    if request.GET.get('from'):
+        try:
+            date_from = datetime.strptime(request.GET.get('from'), '%Y-%m-%d').date()
+        except ValueError:
+            pass
+    
+    if request.GET.get('to'):
+        try:
+            date_to = datetime.strptime(request.GET.get('to'), '%Y-%m-%d').date()
+        except ValueError:
+            pass
+    
+    # Get dashboard data
+    data = get_dashboard_metrics(
+        user=request.user,
+        date_from=date_from,
+        date_to=date_to,
+        country=country,
+    )
+    
+    return JsonResponse(data)
+
 @login_required
 def emission_history(request):
     """View to display user's emission calculation history"""
@@ -258,6 +292,102 @@ def get_user_emissions_summary(request):
 def user_guide(request):
     """Display user guide page"""
     return render(request, 'user_guide.html')
+
+
+@login_required
+def test_report_feature(request):
+    """Test page for report feature"""
+    from django.http import HttpResponse
+    with open('test_report_feature.html', 'r') as f:
+        content = f.read()
+    return HttpResponse(content)
+
+
+@login_required
+def test_custom_factor_feature(request):
+    """Test page for custom factor feature"""
+    from django.shortcuts import render
+    return render(request, 'test_custom_factor_simple.html')
+
+
+@login_required
+def report_extra_info_api(request):
+    """API endpoint for saving/retrieving report extra information"""
+    from .models import ReportExtraInfo
+    import json
+    
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            # Get or create the report extra info for this user
+            report_info, created = ReportExtraInfo.objects.get_or_create(
+                user=request.user,
+                defaults={
+                    'legal_name': data.get('legal_name', ''),
+                    'industry': data.get('industry', ''),
+                    'reporting_period': data.get('period', ''),
+                    'boundary_approach': data.get('boundary', ''),
+                    'notes': data.get('notes', ''),
+                    'share_org_profile': data.get('share_org_profile', True),
+                    'share_boundary': data.get('share_boundary', True),
+                    'share_data_sources': data.get('share_data_sources', False),
+                    'share_projects': data.get('share_projects', False),
+                }
+            )
+            
+            # If not created, update existing record
+            if not created:
+                report_info.legal_name = data.get('legal_name', report_info.legal_name)
+                report_info.industry = data.get('industry', report_info.industry)
+                report_info.reporting_period = data.get('period', report_info.reporting_period)
+                report_info.boundary_approach = data.get('boundary', report_info.boundary_approach)
+                report_info.notes = data.get('notes', report_info.notes)
+                report_info.share_org_profile = data.get('share_org_profile', report_info.share_org_profile)
+                report_info.share_boundary = data.get('share_boundary', report_info.share_boundary)
+                report_info.share_data_sources = data.get('share_data_sources', report_info.share_data_sources)
+                report_info.share_projects = data.get('share_projects', report_info.share_projects)
+                report_info.save()
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Report details saved successfully',
+                'created': created
+            })
+            
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+    
+    elif request.method == 'GET':
+        try:
+            report_info = ReportExtraInfo.objects.get(user=request.user)
+            return JsonResponse({
+                'legal_name': report_info.legal_name or '',
+                'industry': report_info.industry or '',
+                'period': report_info.reporting_period or '',
+                'boundary': report_info.boundary_approach or '',
+                'notes': report_info.notes or '',
+                'share_org_profile': report_info.share_org_profile,
+                'share_boundary': report_info.share_boundary,
+                'share_data_sources': report_info.share_data_sources,
+                'share_projects': report_info.share_projects,
+            })
+        except ReportExtraInfo.DoesNotExist:
+            return JsonResponse({
+                'legal_name': '',
+                'industry': '',
+                'period': '',
+                'boundary': '',
+                'notes': '',
+                'share_org_profile': True,
+                'share_boundary': True,
+                'share_data_sources': False,
+                'share_projects': False,
+            })
+    
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
 def email_login_view(request):
@@ -869,9 +999,9 @@ def analysis_scope_distribution(request):
     
     records = EmissionRecord.objects.filter(user=request.user)
     
-    scope1 = records.filter(scope=1).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
-    scope2 = records.filter(scope=2).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
-    scope3 = records.filter(scope=3).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope1 = records.filter(scope='1').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope2 = records.filter(scope='2').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope3 = records.filter(scope='3').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
     
     return JsonResponse({
         'scope1': round(scope1, 2),
@@ -1002,9 +1132,9 @@ def emissions_data_api(request):
             pass
     
     # Calculate scope totals
-    scope1_total = records.filter(scope=1).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
-    scope2_total = records.filter(scope=2).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
-    scope3_total = records.filter(scope=3).aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope1_total = records.filter(scope='1').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope2_total = records.filter(scope='2').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
+    scope3_total = records.filter(scope='3').aggregate(Sum('emissions_kg'))['emissions_kg__sum'] or 0
     
     # Get sources data
     sources_data = records.values('source_name', 'scope').annotate(

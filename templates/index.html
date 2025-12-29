@@ -483,56 +483,58 @@
     </div>
 </div>
 
-<!-- Activity Card -->
+<!-- Recent Activity Card -->
 <div class="content-card">
     <div class="card-header">
-        <h3 class="card-title">Activity</h3>
+        <h3 class="card-title">Recent Emissions</h3>
         <a href="{% url 'ghg:emission_history' %}" class="view-all-btn">View All</a>
     </div>
     <ul class="activity-list">
-        <li class="activity-item">
-            <div class="activity-dot green"></div>
-            <div class="activity-content">
-                <p class="activity-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            </div>
-        </li>
-        <li class="activity-item">
-            <div class="activity-dot red"></div>
-            <div class="activity-content">
-                <p class="activity-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            </div>
-        </li>
-        <li class="activity-item">
-            <div class="activity-dot blue"></div>
-            <div class="activity-content">
-                <p class="activity-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            </div>
-        </li>
-        <li class="activity-item">
-            <div class="activity-dot yellow"></div>
-            <div class="activity-content">
-                <p class="activity-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-            </div>
-        </li>
+        {% for r in latest_records %}
+            <li class="activity-item">
+                <div class="activity-dot {% if r.scope == '1' %}red{% elif r.scope == '2' %}yellow{% elif r.scope == '3' %}blue{% else %}green{% endif %}"></div>
+                <div class="activity-content">
+                    <p class="activity-text">
+                        {{ r.created_at|date:"Y-m-d" }} | Scope {{ r.scope }} | {{ r.source_name }} | {{ r.emissions_tons|floatformat:4 }} tCO2e
+                        {% if r.description %}<br><small style="color: #9ca3af;">{{ r.description }}</small>{% endif %}
+                    </p>
+                </div>
+            </li>
+        {% empty %}
+            <li class="activity-item">
+                <div class="activity-dot yellow"></div>
+                <div class="activity-content">
+                    <p class="activity-text">No emission records yet. <a href="{% url 'ghg:data_entry' %}" style="color: #10b981;">Add your first entry from Emission Management</a>.</p>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
 
 {% block extra_js %}
 <script>
-// Doughnut Chart
+// Doughnut Chart with real scope data
 const ctx = document.getElementById('doughnutChart');
 if (ctx) {
+    const scope1 = Number("{{ scope_values.1|default:0 }}");
+    const scope2 = Number("{{ scope_values.2|default:0 }}");
+    const scope3 = Number("{{ scope_values.3|default:0 }}");
+    
+    // If no data, show placeholder
+    const hasData = scope1 > 0 || scope2 > 0 || scope3 > 0;
+    
     new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Complete', 'Remaining'],
+            labels: hasData ? ['Scope 1', 'Scope 2', 'Scope 3'] : ['No Data'],
             datasets: [{
-                data: [70, 30],
-                backgroundColor: [
-                    '#10b981',
-                    '#e5e7eb'
-                ],
+                data: hasData ? [scope1, scope2, scope3] : [1],
+                backgroundColor: hasData ? [
+                    '#ef4444',  // Red for Scope 1
+                    '#f59e0b',  // Yellow for Scope 2
+                    '#3b82f6'   // Blue for Scope 3
+                ] : ['#e5e7eb'], // Gray for no data
                 borderWidth: 0
             }]
         },
@@ -541,11 +543,25 @@ if (ctx) {
             maintainAspectRatio: false,
             cutout: '75%',
             plugins: {
-                legend: {
-                    display: false
+                legend: { 
+                    display: hasData, 
+                    position: 'bottom',
+                    labels: {
+                        padding: 20,
+                        usePointStyle: true
+                    }
                 },
                 tooltip: {
-                    enabled: false
+                    callbacks: {
+                        label: function(context) {
+                            if (!hasData) return 'No emission data available';
+                            const label = context.label || '';
+                            const value = context.parsed;
+                            const total = scope1 + scope2 + scope3;
+                            const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : '0';
+                            return `${label}: ${value.toFixed(3)} tCO2e (${percentage}%)`;
+                        }
+                    }
                 }
             }
         }

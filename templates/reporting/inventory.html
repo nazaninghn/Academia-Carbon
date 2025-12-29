@@ -4,6 +4,7 @@
 {% block title %}Reporting - Academia Carbon{% endblock %}
 
 {% block extra_css %}
+<meta name="csrf-token" content="{{ csrf_token }}">
 <style>
     .reporting-header {
         background: linear-gradient(135deg, #2d7a5f 0%, #1e5a45 100%);
@@ -69,6 +70,236 @@
     .btn-report.secondary:hover {
         background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%);
         box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+    }
+    
+    .complete-report-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 18px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .complete-report-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .complete-report-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #ecfdf5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #10b981;
+        font-size: 18px;
+        flex-shrink: 0;
+    }
+    
+    .complete-report-text {
+        flex: 1;
+    }
+    
+    .complete-report-text h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        color: #111827;
+    }
+    
+    .complete-report-text p {
+        margin: 6px 0 12px;
+        color: #6b7280;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .consent-checkboxes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 13px;
+    }
+    
+    .consent-checkboxes label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        color: #374151;
+    }
+    
+    .consent-checkboxes input[type="checkbox"] {
+        margin: 0;
+    }
+    
+    .complete-report-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .btn-complete-report {
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.3s;
+    }
+    
+    .btn-complete-report:hover {
+        background: #059669;
+    }
+    
+    .privacy-link {
+        font-size: 13px;
+        color: #3b82f6;
+        text-decoration: none;
+    }
+    
+    .privacy-link:hover {
+        color: #2563eb;
+        text-decoration: underline;
+    }
+    
+    /* Modal Styles */
+    .report-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+    
+    .report-modal-content {
+        background: #fff;
+        border-radius: 14px;
+        width: 100%;
+        max-width: 720px;
+        padding: 22px;
+        max-height: 85vh;
+        overflow: auto;
+    }
+    
+    .report-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .report-modal-header h3 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 800;
+        color: #111827;
+    }
+    
+    .modal-close-btn {
+        border: none;
+        background: transparent;
+        font-size: 22px;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .modal-close-btn:hover {
+        color: #374151;
+    }
+    
+    .modal-subtitle {
+        margin: 8px 0 16px;
+        color: #6b7280;
+        font-size: 13px;
+    }
+    
+    .modal-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+    
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 4px;
+    }
+    
+    .form-control {
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: #10b981;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    
+    .modal-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 18px;
+    }
+    
+    .btn-modal-cancel {
+        background: #e5e7eb;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        color: #374151;
+        font-size: 13px;
+    }
+    
+    .btn-modal-cancel:hover {
+        background: #d1d5db;
+    }
+    
+    .btn-modal-save {
+        background: #10b981;
+        color: white;
+        border: none;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+        font-size: 13px;
+    }
+    
+    .btn-modal-save:hover {
+        background: #059669;
     }
     
     .filters-card {
@@ -279,6 +510,28 @@
         .filter-examples ul {
             grid-template-columns: 1fr;
         }
+        
+        .complete-report-content {
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .complete-report-icon {
+            align-self: flex-start;
+        }
+        
+        .consent-checkboxes {
+            grid-template-columns: 1fr;
+        }
+        
+        .modal-form-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .report-modal-content {
+            margin: 10px;
+            padding: 18px;
+        }
     }
 </style>
 {% endblock %}
@@ -304,6 +557,33 @@
             <i class="fas fa-download"></i>
             Direct PDF Download
         </a>
+    </div>
+
+    <!-- Complete Report Card -->
+    <div class="complete-report-card">
+        <div class="complete-report-content">
+            <div class="complete-report-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="complete-report-text">
+                <h3>Improve report accuracy</h3>
+                <p>Want a more complete ISO 14064-1 report? You can optionally share extra details (organization info, boundaries, data sources).</p>
+                
+                <div class="consent-checkboxes">
+                    <label><input type="checkbox" id="share-org" checked> Organization profile</label>
+                    <label><input type="checkbox" id="share-boundary" checked> Reporting boundary</label>
+                    <label><input type="checkbox" id="share-sources"> Data sources (bills/receipts)</label>
+                    <label><input type="checkbox" id="share-projects"> Projects / initiatives</label>
+                </div>
+                
+                <div class="complete-report-actions">
+                    <button type="button" onclick="openReportDetailsModal()" class="btn-complete-report">
+                        Share info (optional)
+                    </button>
+                    <a href="#" class="privacy-link">Privacy & data use</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Filters Applied -->
@@ -438,4 +718,224 @@
         </ul>
     </div>
 </div>
+
+<!-- Report Details Modal -->
+<div id="reportDetailsModal" class="report-modal">
+    <div class="report-modal-content">
+        {% csrf_token %}
+        <div class="report-modal-header">
+            <h3>Complete report details</h3>
+            <button type="button" onclick="closeReportDetailsModal()" class="modal-close-btn">×</button>
+        </div>
+        
+        <p class="modal-subtitle">Optional — used only for report generation. You can remove this anytime.</p>
+        
+        <div class="modal-form-grid">
+            <div class="form-group">
+                <label>Legal name</label>
+                <input id="rep_legal_name" type="text" class="form-control" placeholder="Company/Organization name">
+            </div>
+            <div class="form-group">
+                <label>Industry (optional)</label>
+                <input id="rep_industry" type="text" class="form-control" placeholder="e.g., Manufacturing">
+            </div>
+            <div class="form-group">
+                <label>Reporting period</label>
+                <input id="rep_period" type="text" class="form-control" placeholder="e.g., 2025-01-01 to 2025-12-31">
+            </div>
+            <div class="form-group">
+                <label>Boundary approach</label>
+                <select id="rep_boundary" class="form-control">
+                    <option value="">Select</option>
+                    <option value="operational_control">Operational control</option>
+                    <option value="financial_control">Financial control</option>
+                    <option value="equity_share">Equity share</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label>Notes (optional)</label>
+            <textarea id="rep_notes" class="form-control" rows="3" placeholder="Any extra context for the report..."></textarea>
+        </div>
+        
+        <div class="modal-actions">
+            <button type="button" onclick="closeReportDetailsModal()" class="btn-modal-cancel">
+                Cancel
+            </button>
+            <button type="button" onclick="saveReportDetails()" class="btn-modal-save">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+// API URLs - using Django URL reverse to avoid hardcoding
+const REPORT_EXTRA_URL = "{% url 'ghg:report_extra_info_api' %}";
+
+// Debug: Log the URL
+console.log('REPORT_EXTRA_URL:', REPORT_EXTRA_URL);
+
+function openReportDetailsModal() {
+    console.log('openReportDetailsModal called');
+    const modal = document.getElementById('reportDetailsModal');
+    if (!modal) {
+        console.error('reportDetailsModal not found in DOM');
+        return;
+    }
+    
+    console.log('Opening modal, loading existing data...');
+    
+    // Load existing data
+    loadExistingReportData();
+    
+    modal.style.display = 'flex';
+    console.log('Modal opened');
+}
+
+function loadExistingReportData() {
+    fetch(REPORT_EXTRA_URL, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Loaded existing data:', data);
+        // Populate form fields
+        document.getElementById('rep_legal_name').value = data.legal_name || '';
+        document.getElementById('rep_industry').value = data.industry || '';
+        document.getElementById('rep_period').value = data.period || '';
+        document.getElementById('rep_boundary').value = data.boundary || '';
+        document.getElementById('rep_notes').value = data.notes || '';
+        
+        // Update checkboxes
+        document.getElementById('share-org').checked = data.share_org_profile !== false;
+        document.getElementById('share-boundary').checked = data.share_boundary !== false;
+        document.getElementById('share-sources').checked = data.share_data_sources === true;
+        document.getElementById('share-projects').checked = data.share_projects === true;
+    })
+    .catch(error => {
+        console.error('Error loading existing data:', error);
+        // Continue with empty form if loading fails
+    });
+}
+
+function closeReportDetailsModal() {
+    const modal = document.getElementById('reportDetailsModal');
+    if (modal) modal.style.display = 'none';
+}
+
+// Close modal when clicking on backdrop
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('reportDetailsModal');
+    if (!modal) return;
+    if (modal.style.display === 'flex' && e.target === modal) {
+        closeReportDetailsModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeReportDetailsModal();
+    }
+});
+
+function saveReportDetails() {
+    console.log('saveReportDetails called');
+    
+    // Collect form data
+    const payload = {
+        legal_name: document.getElementById('rep_legal_name').value,
+        industry: document.getElementById('rep_industry').value,
+        period: document.getElementById('rep_period').value,
+        boundary: document.getElementById('rep_boundary').value,
+        notes: document.getElementById('rep_notes').value,
+        share_org_profile: document.getElementById('share-org').checked,
+        share_boundary: document.getElementById('share-boundary').checked,
+        share_data_sources: document.getElementById('share-sources').checked,
+        share_projects: document.getElementById('share-projects').checked,
+    };
+    
+    console.log('Report details payload:', payload);
+    console.log('REPORT_EXTRA_URL:', REPORT_EXTRA_URL);
+    
+    // Get CSRF token - try multiple methods
+    let csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+    if (!csrfToken) {
+        csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+    }
+    if (!csrfToken) {
+        // Try to get from cookie
+        csrfToken = getCookie('csrftoken');
+    }
+    
+    if (!csrfToken) {
+        alert('CSRF token not found. Please refresh the page and try again.');
+        return;
+    }
+    
+    // Send to backend API
+    fetch(REPORT_EXTRA_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken,
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        console.log('Response status:', response.status);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response data:', data);
+        if (data.success) {
+            console.log('Success:', data);
+            alert('Report details saved successfully!');
+            closeReportDetailsModal();
+        } else {
+            console.error('Error:', data.error);
+            alert('Error saving report details: ' + (data.error || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Network error:', error);
+        alert('Network error: ' + error.message + '. Please try again.');
+    });
+}
+
+// Helper function to get cookie value
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+{% endblock %}
 {% endblock %}

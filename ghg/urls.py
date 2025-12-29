@@ -14,11 +14,15 @@ urlpatterns = [
     path('data-entry/', views.data_entry, name='data_entry'),
     path('history/', views.emission_history, name='emission_history'),
     path('user-guide/', views.user_guide, name='user_guide'),
+    path('test-report/', views.test_report_feature, name='test_report_feature'),
+    path('test-custom-factor/', views.test_custom_factor_feature, name='test_custom_factor_feature'),
     
     # API endpoints
     path('api/calculate/', views.calculate_emission, name='calculate_emission'),
     path('api/user-summary/', views.get_user_emissions_summary, name='user_summary'),
+    path('api/dashboard/', views.dashboard_api, name='dashboard_api'),
     path('api/analysis/emissions/summary/', views.emissions_summary_api, name='emissions_summary_api'),
+    path('api/report-extra/', views.report_extra_info_api, name='report_extra_info_api'),
     path('api/country/<str:country_code>/', views.get_country_data, name='country_data'),
     path('api/global/', views.get_global_data, name='global_data'),
     path('api/top-emitters/', views.get_top_emitters, name='top_emitters'),
