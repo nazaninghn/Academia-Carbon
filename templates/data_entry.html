@@ -6,68 +6,6 @@
 
 {% block extra_css %}
 <style>
-
-    .btn-data-entry {
-        background: #22c55e;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        margin: 0 20px 20px 20px;
-        width: calc(100% - 40px);
-    }
-
-    .btn-data-entry:hover {
-        background: #16a34a;
-    }
-
-    .sidebar-menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .sidebar-menu li a {
-        display: block;
-        padding: 12px 25px;
-        color: #666;
-        text-decoration: none;
-        transition: all 0.3s;
-        font-size: 14px;
-    }
-
-    .sidebar-menu li a:hover,
-    .sidebar-menu li a.active {
-        background: #f0f9ff;
-        color: #0ea5e9;
-        border-left: 3px solid #0ea5e9;
-    }
-
-    .sidebar-menu i {
-        width: 20px;
-        margin-right: 10px;
-    }
-
-    .content-area {
-        flex: 1;
-        padding: 30px;
-        overflow-y: auto;
-    }
-
-    .page-header {
-        margin-bottom: 30px;
-    }
-
-    .page-header h1 {
-        font-size: 24px;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 5px;
-    }
-
     .scope-tabs {
         display: flex;
         gap: 0;
@@ -191,11 +129,6 @@
         box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
     }
 
-    .help-icon {
-        color: #999;
-        cursor: help;
-    }
-
     .activity-input {
         display: flex;
         gap: 10px;
@@ -224,42 +157,25 @@
 {% endblock %}
 
 {% block content %}
-<div class="main-container">
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <button class="btn-data-entry">
-            <i class="fas fa-plus"></i> Data entry
-        </button>
-        
-        <ul class="sidebar-menu">
-            <li><a href="{% url 'ghg:index' %}"><i class="fas fa-home"></i> Dashboard</a></li>
-            <li><a href="{% url 'ghg:data_entry' %}" class="active"><i class="fas fa-edit"></i> Emission Management</a></li>
-            <li><a href="{% url 'ghg:emission_history' %}"><i class="fas fa-history"></i> History</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Analysis</a></li>
-            <li><a href="/en/reporting/inventory"><i class="fas fa-file-alt"></i> Reporting</a></li>
-        </ul>
+<!-- Page Header -->
+<div class="page-header">
+    <h1>{% trans "Data Entry" %}</h1>
+    <p class="text-muted">Organization: <strong>{{ user.username|title }}</strong></p>
+    
+    <!-- Country Selector -->
+    <div style="margin-top: 15px;">
+        <label style="font-size: 14px; font-weight: 600; color: #333; margin-right: 10px;">
+            <i class="fas fa-globe"></i> Country/Region:
+        </label>
+        <select id="country-selector" style="padding: 8px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-width: 200px;">
+            <option value="global">🌍 Global Average</option>
+            <option value="turkey" selected>🇹🇷 Turkey (Türkiye)</option>
+        </select>
+        <span id="country-info" style="margin-left: 10px; font-size: 12px; color: #666;">
+            <i class="fas fa-info-circle"></i> Using Turkey-specific emission factors
+        </span>
     </div>
-
-    <!-- Main Content -->
-    <div class="content-area">
-        <div class="page-header">
-            <h1>{% trans "Data Entry" %}</h1>
-            <p class="text-muted">Organization: <strong>{{ user.username|title }}</strong></p>
-            
-            <!-- Country Selector -->
-            <div style="margin-top: 15px;">
-                <label style="font-size: 14px; font-weight: 600; color: #333; margin-right: 10px;">
-                    <i class="fas fa-globe"></i> Country/Region:
-                </label>
-                <select id="country-selector" style="padding: 8px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-width: 200px;">
-                    <option value="global">🌍 Global Average</option>
-                    <option value="turkey" selected>🇹🇷 Turkey (Türkiye)</option>
-                </select>
-                <span id="country-info" style="margin-left: 10px; font-size: 12px; color: #666;">
-                    <i class="fas fa-info-circle"></i> Using Turkey-specific emission factors
-                </span>
-            </div>
-        </div>
+</div>
 
         <!-- Scope Tabs -->
         <div class="scope-tabs">

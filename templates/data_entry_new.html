@@ -1,0 +1,252 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}Data Entry{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<div class="mb-8">
+    <h1 class="text-3xl font-bold text-gray-900 mb-2">{% trans "Emission Management" %}</h1>
+    <p class="text-gray-600">Organization: <strong>{{ user.username|title }}</strong></p>
+    
+    <!-- Country Selector -->
+    <div class="flex items-center gap-4 mt-4">
+        <label class="text-sm font-semibold text-gray-700 flex items-center gap-2">
+            <i class="fas fa-globe text-primary-500"></i>
+            Country/Region:
+        </label>
+        <select id="country-selector" class="form-control max-w-xs">
+            <option value="global">🌍 Global Average</option>
+            <option value="turkey" selected>🇹🇷 Turkey (Türkiye)</option>
+        </select>
+        <span id="country-info" class="text-xs text-gray-500">
+            <i class="fas fa-info-circle"></i> Using Turkey-specific emission factors
+        </span>
+    </div>
+</div>
+
+<!-- Scope Tabs -->
+<div class="tabs mb-8">
+    <ul class="tab-list">
+        <li><button class="tab-button active" onclick="switchScope(1)">Scope 1</button></li>
+        <li><button class="tab-button" onclick="switchScope(2)">Scope 2</button></li>
+        <li><button class="tab-button" onclick="switchScope(3)">Scope 3</button></li>
+    </ul>
+</div>
+
+<!-- Scope 1 Content -->
+<div class="tab-content active" id="scope1">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-xl font-semibold text-gray-900">Scope 1 - Direct Emissions</h2>
+            <p class="text-sm text-gray-600">Emissions from sources owned or controlled by your organization</p>
+        </div>
+        <div class="card-body space-y-6">
+            
+            <!-- Stationary Combustion -->
+            <div class="emission-category" onclick="toggleCategory('stationary')">
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 hover:bg-primary-50 transition-all">
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Stationary combustion</h3>
+                        <p class="text-sm text-gray-600">Emissions from fuel combustion in stationary equipment</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+            </div>
+
+            <div id="stationary-form" class="hidden space-y-4 p-6 bg-gray-50 rounded-lg">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Emission Source</label>
+                        <select class="form-control" id="stationary-source" onchange="updateStationaryFields(); handleOtherSelection(this, 'stationary')">
+                            <option value="">Select Emission Source</option>
+                            <option value="coal-industrial">Coal (industrial) - Defra 2024</option>
+                            <option value="natural-gas">Natural Gas - IPCC 2019</option>
+                            <option value="diesel">Diesel (volume) - IPCC 2006</option>
+                            <option value="other">📝 Other / Not Listed</option>
+                        </select>
+                        <p class="form-help">
+                            <i class="fas fa-info-circle"></i> Calculate your emissions more precisely by accessing additional emission sources with the Booster Plan.
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Unit</label>
+                        <select class="form-control" id="stationary-unit">
+                            <option value="">Select Unit</option>
+                            <option value="liters">Liters</option>
+                            <option value="kg">Kilograms</option>
+                            <option value="m3">Cubic Meters (m³)</option>
+                            <option value="kwh">kWh</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Activity Data</label>
+                    <div class="flex items-center gap-2">
+                        <button type="button" class="btn btn-outline btn-sm">−</button>
+                        <input type="number" class="form-control" id="stationary-activity" placeholder="Enter activity data" value="0">
+                        <button type="button" class="btn btn-outline btn-sm">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Supplier (Optional)</label>
+                    <div class="flex gap-2">
+                        <select class="form-control flex-1" id="stationary-supplier">
+                            <option value="">Select Supplier</option>
+                        </select>
+                        <button type="button" class="btn btn-secondary" onclick="showAddSupplierModal()">
+                            <i class="fas fa-plus"></i> Add
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description (Optional)</label>
+                    <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="Add description"></textarea>
+                    <p class="form-help text-right">0/100</p>
+                </div>
+
+                <div class="flex justify-between items-center">
+                    <p class="text-sm text-gray-600">
+                        You can <a href="#" class="text-primary-600 hover:text-primary-700">add your proof document</a> here (i.e. gas bills).
+                    </p>
+                    <button class="btn btn-primary">
+                        <i class="fas fa-calculator"></i>
+                        Calculate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Combustion -->
+            <div class="emission-category" onclick="toggleCategory('mobile')">
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 hover:bg-primary-50 transition-all">
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Mobile combustion</h3>
+                        <p class="text-sm text-gray-600">Emissions from fuel combustion in mobile equipment</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+            </div>
+
+            <div id="mobile-form" class="hidden space-y-4 p-6 bg-gray-50 rounded-lg">
+                <!-- Similar structure as stationary form -->
+                <p class="text-center text-gray-500 py-8">Mobile combustion form will be similar to stationary...</p>
+            </div>
+
+            <!-- Fugitive Emissions -->
+            <div class="emission-category" onclick="toggleCategory('fugitive')">
+                <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary-300 hover:bg-primary-50 transition-all">
+                    <div>
+                        <h3 class="font-semibold text-gray-900">Fugitive emissions</h3>
+                        <p class="text-sm text-gray-600">Emissions from refrigerants, air conditioning, and other sources</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-gray-400"></i>
+                </div>
+            </div>
+
+            <div id="fugitive-form" class="hidden space-y-4 p-6 bg-gray-50 rounded-lg">
+                <!-- Similar structure as stationary form -->
+                <p class="text-center text-gray-500 py-8">Fugitive emissions form will be similar to stationary...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scope 2 Content -->
+<div class="tab-content" id="scope2">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-xl font-semibold text-gray-900">Scope 2 - Indirect Emissions (Energy)</h2>
+            <p class="text-sm text-gray-600">Emissions from purchased electricity, steam, heat, and cooling</p>
+        </div>
+        <div class="card-body">
+            <p class="text-center text-gray-500 py-12">Scope 2 content will be implemented here...</p>
+        </div>
+    </div>
+</div>
+
+<!-- Scope 3 Content -->
+<div class="tab-content" id="scope3">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-xl font-semibold text-gray-900">Scope 3 - Other Indirect Emissions</h2>
+            <p class="text-sm text-gray-600">Emissions from value chain activities</p>
+        </div>
+        <div class="card-body">
+            <!-- Custom Factor & Request Material Buttons -->
+            <div class="flex gap-4 mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                <button type="button" onclick="showCustomFactorModal()" class="btn btn-primary flex-1">
+                    <i class="fas fa-calculator"></i> Use Custom Factor
+                </button>
+                <button type="button" onclick="showRequestMaterialModal()" class="btn btn-secondary flex-1">
+                    <i class="fas fa-plus"></i> Request Material
+                </button>
+            </div>
+            
+            <p class="text-center text-gray-500 py-12">Scope 3 content will be implemented here...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Tab switching functionality
+function switchScope(scope) {
+    // Hide all tab contents
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remove active class from all tab buttons
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.classList.remove('active');
+    });
+    
+    // Show selected tab content
+    document.getElementById('scope' + scope).classList.add('active');
+    
+    // Add active class to clicked button
+    event.target.classList.add('active');
+}
+
+// Category toggle functionality
+function toggleCategory(category) {
+    const form = document.getElementById(category + '-form');
+    const icon = event.currentTarget.querySelector('i');
+    
+    if (form.classList.contains('hidden')) {
+        form.classList.remove('hidden');
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+    } else {
+        form.classList.add('hidden');
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+    }
+}
+
+// Placeholder functions
+function updateStationaryFields() {
+    console.log('Update stationary fields');
+}
+
+function handleOtherSelection(select, category) {
+    console.log('Handle other selection', category);
+}
+
+function showAddSupplierModal() {
+    console.log('Show add supplier modal');
+}
+
+function showCustomFactorModal() {
+    console.log('Show custom factor modal');
+}
+
+function showRequestMaterialModal() {
+    console.log('Show request material modal');
+}
+</script>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% load static %}
+
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+    <!-- Logo -->
+    <div class="sidebar-logo">
+        <div class="logo-icon">
+            <div class="logo-triangle"></div>
+            <div class="logo-semicircle"></div>
+        </div>
+        <div class="logo-text">
+            <h2>Academia Carbon</h2>
+            <p>GHG Tracking</p>
+        </div>
+    </div>
+
+    <!-- Data Entry Button -->
+    <a href="{% url 'ghg:data_entry' %}" class="data-entry-btn">
+        <i class="fas fa-plus"></i>
+        Data Entry
+    </a>
+
+    <!-- Menu Label -->
+    <div class="menu-label">MENU</div>
+
+    <!-- Main Menu -->
+    <ul class="sidebar-menu">
+        <li class="menu-item">
+            <a href="{% url 'ghg:index' %}" class="{% if active_menu == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-home"></i>
+                Dashboard
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{% url 'ghg:data_entry' %}" class="{% if active_menu == 'emission_management' %}active{% endif %}">
+                <i class="fas fa-chart-bar"></i>
+                Emission Management
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{% url 'ghg:emissions' %}" class="{% if active_menu == 'emissions' %}active{% endif %}">
+                <i class="fas fa-chart-pie"></i>
+                Emissions
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{% url 'ghg:analysis' %}" class="{% if active_menu == 'analysis' %}active{% endif %}">
+                <i class="fas fa-chart-line"></i>
+                Analysis
+            </a>
+        </li>
+        <li class="menu-item has-badge">
+            <a href="/en/reporting/inventory" class="{% if active_menu == 'reporting' %}active{% endif %}">
+                <i class="fas fa-file-alt"></i>
+                Reporting
+            </a>
+        </li>
+        <li class="menu-item has-badge">
+            <a href="{% url 'ghg:emission_history' %}" class="{% if active_menu == 'emission_history' %}active{% endif %}">
+                <i class="fas fa-chart-pie"></i>
+                Emission Records
+            </a>
+        </li>
+    </ul>
+
+    <!-- Divider -->
+    <div class="sidebar-divider"></div>
+
+    <!-- Bottom Menu -->
+    <ul class="sidebar-menu">
+        <li class="menu-item">
+            <a href="#" class="{% if active_menu == 'settings' %}active{% endif %}">
+                <i class="fas fa-cog"></i>
+                Settings
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{% url 'ghg:user_guide' %}" class="{% if active_menu == 'user_guide' %}active{% endif %}">
+                <i class="fas fa-robot"></i>
+                Automations
+                <span class="menu-badge">NEW</span>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="{% if active_menu == 'support' %}active{% endif %}">
+                <i class="fas fa-headset"></i>
+                Support
+            </a>
+        </li>
+    </ul>
+
+    <!-- Footer -->
+    <div class="sidebar-footer">
+        <i class="fas fa-headphones-alt"></i>
+        <p>24/7 Support Available</p>
+    </div>
+</div>

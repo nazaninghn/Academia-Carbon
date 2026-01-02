@@ -25,12 +25,16 @@ def index(request):
         'total_emissions': round(total_emissions, 2),
         'latest_year': latest_year.year if latest_year else 2023,
         'data_points': data_points,
+        'active_menu': 'dashboard',  # Set active menu
     }
     return render(request, 'index.html', context)
 
 @login_required
 def data_entry(request):
-    return render(request, 'data_entry.html')
+    context = {
+        'active_menu': 'emission_management',  # Set active menu
+    }
+    return render(request, 'data_entry.html', context)
 
 @login_required
 def calculate_emission(request):
@@ -227,7 +231,8 @@ def emission_history(request):
         'scope2_total': round(scope2_total / 1000, 2),
         'scope3_total': round(scope3_total / 1000, 2),
         'total_emissions': round(total_emissions / 1000, 2),
-        'record_count': records.count()
+        'record_count': records.count(),
+        'active_menu': 'emission_history',  # Set active menu
     }
     
     return render(request, 'emission_history.html', context)
@@ -291,7 +296,10 @@ def get_user_emissions_summary(request):
 @login_required
 def user_guide(request):
     """Display user guide page"""
-    return render(request, 'user_guide.html')
+    context = {
+        'active_menu': 'user_guide',  # Set active menu
+    }
+    return render(request, 'user_guide.html', context)
 
 
 @login_required
@@ -986,6 +994,7 @@ def analysis(request):
     context = {
         'total_records': total_records,
         'total_emissions': total_emissions,
+        'active_menu': 'analysis',  # Set active menu
     }
     
     return render(request, 'analysis.html', context)
@@ -1086,6 +1095,7 @@ def emissions(request):
     context = {
         'date_from': last_year.strftime('%Y-%m-%d'),
         'date_to': today.strftime('%Y-%m-%d'),
+        'active_menu': 'emissions',  # Set active menu
     }
     
     return render(request, 'analysis/emissions.html', context)

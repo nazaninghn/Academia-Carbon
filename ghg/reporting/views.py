@@ -53,6 +53,7 @@ def inventory_preview(request: HttpRequest) -> HttpResponse:
         "standard": "ISO 14064-1",
         "summary": summary,
         "records": records,
+        "active_menu": "reporting",  # Set active menu
         "methodology": {
             "formula": "Emissions (kgCO2e) = Activity Data × Emission Factor",
             "unit_notes": [
