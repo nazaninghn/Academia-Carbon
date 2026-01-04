@@ -1632,3 +1632,92 @@ def support(request):
         'active_menu': 'support',
     }
     return render(request, 'support.html', context)
+
+
+def fix_users_temp(request):
+    """Temporary endpoint to fix duplicate users - REMOVE AFTER USE"""
+    from django.contrib.auth.models import User
+    from django.db import transaction
+    from django.http import JsonResponse
+    
+    try:
+        with transaction.atomic():
+            # Fix duplicate users
+            duplicate_email = "nazaninghafouriann@gmail.com"
+            users = User.objects.filter(email=duplicate_email)
+            
+            result = {
+                'status': 'success',
+                'message': f'Found {users.count()} users with email: {duplicate_email}',
+                'users': []
+            }
+            
+            for user in users:
+                result['users'].append({
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email,
+                    'is_staff': user.is_staff,
+                    'is_superuser': user.is_superuser,
+                    'last_login': str(user.last_login) if user.last_login else None,
+                    'date_joined': str(user.date_joined)
+                })
+            
+            if users.count() > 1:
+                # Keep the user that's a superuser/staff, or the most recent one
+                primary_user = None
+                users_to_delete = []
+                
+                for user in users:
+                    if user.is_superuser or user.is_staff:
+                        if primary_user is None:
+                            primary_user = user
+                        else:
+                            users_to_delete.append(user)
+                    else:
+                        users_to_delete.append(user)
+                
+                if primary_user is None:
+                    primary_user = users.order_by('-date_joined').first()
+                    users_to_delete = [u for u in users if u.id != primary_user.id]
+                
+                result['kept_user'] = {
+                    'id': primary_user.id,
+                    'username': primary_user.username,
+                    'email': primary_user.email
+                }
+                
+                result['deleted_users'] = []
+                for user in users_to_delete:
+                    result['deleted_users'].append({
+                        'id': user.id,
+                        'username': user.username
+                    })
+                    user.delete()
+                
+                result['message'] += f' - Fixed duplicates, kept user ID {primary_user.id}'
+            
+            # Ensure superuser exists
+            superusers = User.objects.filter(is_superuser=True)
+            if superusers.count() == 0:
+                admin_user = User.objects.create_user(
+                    username='admin@academiacarbon.com',
+                    email='admin@academiacarbon.com',
+                    password='AdminPass123!',
+                    first_name='Admin',
+                    last_name='User',
+                    is_staff=True,
+                    is_superuser=True
+                )
+                result['created_admin'] = {
+                    'email': admin_user.email,
+                    'password': 'AdminPass123!'
+                }
+            
+            return JsonResponse(result)
+            
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
