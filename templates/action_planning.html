@@ -1,0 +1,254 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}Action Planning{% endblock %}
+
+{% block extra_css %}
+<style>
+    .planning-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .planning-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 12px;
+    }
+    
+    .planning-card p {
+        color: #64748b;
+        margin-bottom: 16px;
+        line-height: 1.6;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .feature-content h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 8px 0;
+    }
+    
+    .feature-content p {
+        font-size: 14px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.5;
+    }
+    
+    .coming-soon-badge {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        color: white;
+    }
+    
+    .btn-secondary {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+        background: #e2e8f0;
+        color: #334155;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Professional Page Header -->
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">Action Planning</h1>
+            <p style="color: #64748b; margin: 0; font-size: 14px;">
+                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
+                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
+                <span><strong>Standard:</strong> ISO 14064-1</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <!-- Overview Card -->
+    <div class="planning-card">
+        <h3>
+            <i class="fas fa-tasks" style="color: #10b981; margin-right: 10px;"></i>
+            Carbon Reduction Action Planning
+            <span class="coming-soon-badge">Coming Soon</span>
+        </h3>
+        <p>
+            Develop and track your organization's carbon reduction initiatives. Set targets, create action plans, 
+            and monitor progress towards your sustainability goals with our comprehensive action planning tools.
+        </p>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <a href="{% url 'ghg:data_entry' %}" class="btn-primary">
+                <i class="fas fa-plus"></i>
+                Start with Data Collection
+            </a>
+            <a href="/en/reporting/inventory" class="btn-secondary">
+                <i class="fas fa-chart-line"></i>
+                View Current Emissions
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Set Reduction Targets</h4>
+                <p>Define science-based targets aligned with your organization's sustainability commitments and industry benchmarks.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Create Action Plans</h4>
+                <p>Develop detailed roadmaps with specific initiatives, timelines, and responsible parties for emission reductions.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Track Progress</h4>
+                <p>Monitor the effectiveness of your initiatives with real-time progress tracking and performance analytics.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Smart Recommendations</h4>
+                <p>Get AI-powered suggestions for reduction opportunities based on your emission profile and industry best practices.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Team Collaboration</h4>
+                <p>Assign tasks, share progress updates, and collaborate with team members across different departments.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Progress Reports</h4>
+                <p>Generate comprehensive reports showing your reduction achievements and progress towards targets.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Status -->
+    <div class="planning-card">
+        <h3>
+            <i class="fas fa-info-circle" style="color: #3b82f6; margin-right: 10px;"></i>
+            Development Status
+        </h3>
+        <p>
+            The Action Planning module is currently under development. In the meantime, you can:
+        </p>
+        <ul style="color: #64748b; margin-left: 20px; line-height: 1.8;">
+            <li>Continue collecting emission data to establish your baseline</li>
+            <li>Generate reports to understand your current emission profile</li>
+            <li>Analyze your data to identify reduction opportunities</li>
+            <li>Contact our support team for guidance on reduction strategies</li>
+        </ul>
+        
+        <div style="margin-top: 20px; padding: 16px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
+            <p style="margin: 0; color: #0369a1; font-size: 14px;">
+                <i class="fas fa-bell" style="margin-right: 8px;"></i>
+                <strong>Stay Updated:</strong> We'll notify you when Action Planning features become available. 
+                Expected release: Q2 2024.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

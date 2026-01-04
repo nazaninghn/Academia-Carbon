@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block page_title %}Data Entry{% endblock %}
+{% block page_title %}Data Collection{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -157,25 +157,33 @@
 {% endblock %}
 
 {% block content %}
-<!-- Page Header -->
-<div class="page-header">
-    <h1>{% trans "Data Entry" %}</h1>
-    <p class="text-muted">Organization: <strong>{{ user.username|title }}</strong></p>
-    
-    <!-- Country Selector -->
-    <div style="margin-top: 15px;">
-        <label style="font-size: 14px; font-weight: 600; color: #333; margin-right: 10px;">
-            <i class="fas fa-globe"></i> Country/Region:
-        </label>
-        <select id="country-selector" style="padding: 8px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 14px; min-width: 200px;">
-            <option value="global">🌍 Global Average</option>
-            <option value="turkey" selected>🇹🇷 Turkey (Türkiye)</option>
-        </select>
-        <span id="country-info" style="margin-left: 10px; font-size: 12px; color: #666;">
-            <i class="fas fa-info-circle"></i> Using Turkey-specific emission factors
-        </span>
+<!-- Professional Page Header -->
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">{% trans "Data Collection" %}</h1>
+            <p style="color: #64748b; margin: 0; font-size: 14px;">
+                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
+                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
+                <span><strong>Standard:</strong> ISO 14064-1</span>
+            </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <!-- Country Selector -->
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <label style="font-size: 13px; font-weight: 600; color: #475569;">
+                    <i class="fas fa-globe" style="color: #22c55e;"></i> Country:
+                </label>
+                <select id="country-selector" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; min-width: 160px; background: white;">
+                    <option value="global">🌍 Global Average</option>
+                    <option value="turkey" selected>🇹🇷 Turkey</option>
+                </select>
+            </div>
+        </div>
     </div>
 </div>
+
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
 
         <!-- Scope Tabs -->
         <div class="scope-tabs">
@@ -219,16 +227,23 @@
                         </p>
                     </div>
 
-                    <!-- Industry Type (only for Gas/Diesel Oil) -->
+                    <!-- Industry Type (for all emission sources) -->
                     <div class="form-group" id="industry-type-group" style="display: none;">
                         <label>Industry Type</label>
-                        <select class="form-control" id="stationary-industry-type">
-                            <option value="">Select Industry Type</option>
-                            <option value="commercial-institutional">Commercial/Institutional</option>
-                            <option value="residential-agriculture">Residential and Agriculture/Forestery/Fishing/Fishing Farms</option>
-                            <option value="manufacturing-construction">Manufacturing And Construction</option>
-                            <option value="energy-industries">Energy Industries</option>
-                        </select>
+                        <div style="display: flex; gap: 10px;">
+                            <div style="flex: 1; position: relative;">
+                                <select class="form-control" id="stationary-industry-type" style="flex: 1;">
+                                    <option value="">Loading industry types...</option>
+                                </select>
+                                <input type="text" id="industry-search" class="form-control" placeholder="🔍 Search industries..." style="display: none; margin-top: 5px; font-size: 13px;">
+                            </div>
+                            <button type="button" class="btn-add-industry" onclick="showAddIndustryModal()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
+                                <i class="fas fa-plus"></i> Add Industry
+                            </button>
+                        </div>
+                        <p class="text-muted" style="font-size: 12px; margin-top: 8px;">
+                            <i class="fas fa-info-circle"></i> Don't see your industry? Click "Add Industry" to request a new one.
+                        </p>
                     </div>
 
                     <div class="form-group">
@@ -1530,14 +1545,83 @@
     </div>
 </div>
 
+<!-- Add Industry Modal -->
+<div id="addIndustryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; align-items: center; justify-content: center; overflow-y: auto; padding: 20px;">
+    <div style="background: white; border-radius: 12px; padding: 30px; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; margin: auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <h3 style="font-size: 20px; font-weight: 700; color: #333; margin: 0;">
+                REQUEST NEW INDUSTRY TYPE
+            </h3>
+            <button onclick="hideAddIndustryModal()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #999;">×</button>
+        </div>
+        <p style="color: #666; font-size: 13px; margin-bottom: 25px;">Don't see your industry type in the list? Request it and our team will add it to the system for better emission factor categorization.</p>
+        
+        <!-- Industry Name -->
+        <div class="form-group">
+            <label>Industry Name <span style="color: red;">*</span></label>
+            <input type="text" id="modal-industry-name" class="form-control" placeholder="e.g., Textile Manufacturing, Food Processing" required maxlength="200" oninput="updateCharCount('modal-industry-name', 'name-char-count', 200)">
+            <small style="color: #666; font-size: 11px; float: right;">
+                <span id="name-char-count">0</span>/200 characters
+            </small>
+            <div style="clear: both;"></div>
+        </div>
+        
+        <!-- Industry Code (Optional) -->
+        <div class="form-group">
+            <label>Industry Code (Optional)</label>
+            <input type="text" id="modal-industry-code" class="form-control" placeholder="e.g., NAICS 313, SIC 22" maxlength="20" oninput="updateCharCount('modal-industry-code', 'code-char-count', 20)">
+            <small style="color: #666; font-size: 11px;">
+                If you know the NAICS, SIC, or other industry classification code
+                <span style="float: right;"><span id="code-char-count">0</span>/20 characters</span>
+            </small>
+            <div style="clear: both;"></div>
+        </div>
+        
+        <!-- Description -->
+        <div class="form-group">
+            <label>Industry Description <span style="color: red;">*</span></label>
+            <textarea id="modal-industry-description" class="form-control" rows="3" placeholder="Describe what this industry does and its main activities..." required maxlength="1000" oninput="updateCharCount('modal-industry-description', 'desc-char-count', 1000)"></textarea>
+            <small style="color: #666; font-size: 11px; float: right;">
+                <span id="desc-char-count">0</span>/1000 characters
+            </small>
+            <div style="clear: both;"></div>
+        </div>
+        
+        <!-- Business Context -->
+        <div class="form-group">
+            <label>How does this relate to your business? (Optional)</label>
+            <textarea id="modal-business-context" class="form-control" rows="2" placeholder="Explain how this industry type relates to your organization's activities..." maxlength="1000" oninput="updateCharCount('modal-business-context', 'context-char-count', 1000)"></textarea>
+            <small style="color: #666; font-size: 11px; float: right;">
+                <span id="context-char-count">0</span>/1000 characters
+            </small>
+            <div style="clear: both;"></div>
+        </div>
+        
+        <!-- Buttons -->
+        <div style="display: flex; gap: 10px; margin-top: 25px;">
+            <button type="button" onclick="hideAddIndustryModal()" style="flex: 1; background: #e0e0e0; color: #333; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                Cancel
+            </button>
+            <button type="button" id="save-industry-btn" onclick="saveIndustryRequest()" style="flex: 1; background: #3b82f6; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: 600;">
+                <i class="fas fa-paper-plane"></i> Submit Request
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+
 <script>
 // API URLs - using Django URL reverse to avoid hardcoding
 const MATERIAL_REQUEST_URL = "{% url 'ghg:request_material' %}";
 const CUSTOM_FACTOR_ADD_URL = "{% url 'ghg:add_custom_factor' %}";
+const INDUSTRY_REQUEST_URL = "{% url 'ghg:request_industry' %}";
+const GET_INDUSTRIES_URL = "{% url 'ghg:get_industry_types' %}";
 
 // Debug: Log URLs
 console.log('MATERIAL_REQUEST_URL:', MATERIAL_REQUEST_URL);
 console.log('CUSTOM_FACTOR_ADD_URL:', CUSTOM_FACTOR_ADD_URL);
+console.log('INDUSTRY_REQUEST_URL:', INDUSTRY_REQUEST_URL);
+console.log('GET_INDUSTRIES_URL:', GET_INDUSTRIES_URL);
 
 // Unit mapping for stationary combustion sources
 const stationaryUnits = {
@@ -1622,8 +1706,8 @@ function updateStationaryFields() {
     const industryTypeGroup = document.getElementById('industry-type-group');
     const selectedSource = sourceSelect.value;
     
-    // Show/hide Industry Type field for Gas/Diesel Oil, LPG, Motor Gasoline, and Natural Gas
-    if (selectedSource === 'gas-diesel-oil-energy' || selectedSource === 'lpg' || selectedSource === 'motor-gasoline' || selectedSource === 'natural-gas') {
+    // Show Industry Type field for all emission sources (not just specific ones)
+    if (selectedSource && selectedSource !== '') {
         industryTypeGroup.style.display = 'block';
     } else {
         industryTypeGroup.style.display = 'none';
@@ -2660,6 +2744,7 @@ function calculateWithCustomFactor(customFactorId, activityData, description) {
 document.addEventListener('DOMContentLoaded', function() {
     loadSuppliers();
     loadCustomFactors('purchased-goods'); // Load custom factors for purchased goods
+    loadIndustryTypes(); // Load industry types
     
     // Character counter for fugitive description
     const fugitiveDescription = document.getElementById('fugitive-description');
@@ -2671,5 +2756,303 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Load industry types from API
+function loadIndustryTypes() {
+    const industrySelect = document.getElementById('stationary-industry-type');
+    if (!industrySelect) return;
+    
+    // Show loading state
+    industrySelect.innerHTML = '<option value="">🔄 Loading industries...</option>';
+    industrySelect.disabled = true;
+    
+    fetch(GET_INDUSTRIES_URL)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.industries && data.industries.length > 0) {
+                // Store industries globally for search
+                window.allIndustries = data.industries;
+                
+                // Clear loading state
+                industrySelect.innerHTML = '<option value="">Select Industry Type</option>';
+                
+                // Add industries from API
+                data.industries.forEach(industry => {
+                    const option = document.createElement('option');
+                    option.value = industry.id;
+                    option.textContent = industry.code ? `${industry.name} (${industry.code})` : industry.name;
+                    option.title = industry.description || '';
+                    option.dataset.name = industry.name.toLowerCase();
+                    option.dataset.code = (industry.code || '').toLowerCase();
+                    option.dataset.description = (industry.description || '').toLowerCase();
+                    industrySelect.appendChild(option);
+                });
+                
+                // Show search box if there are many industries
+                if (data.industries.length > 10) {
+                    const searchInput = document.getElementById('industry-search');
+                    if (searchInput) {
+                        searchInput.style.display = 'block';
+                        searchInput.addEventListener('input', filterIndustries);
+                    }
+                }
+                
+                console.log(`✓ Loaded ${data.industries.length} industry types`);
+            } else {
+                industrySelect.innerHTML = '<option value="">No industries available</option>';
+            }
+        })
+        .catch(error => {
+            console.error('Error loading industry types:', error);
+            industrySelect.innerHTML = '<option value="">❌ Failed to load industries</option>';
+            
+            // Show user-friendly error
+            const errorMsg = document.createElement('p');
+            errorMsg.style.cssText = 'color: #ef4444; font-size: 12px; margin-top: 5px;';
+            errorMsg.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Failed to load industry types. Please refresh the page.';
+            
+            const industryGroup = document.getElementById('industry-type-group');
+            if (industryGroup && !industryGroup.querySelector('.error-message')) {
+                errorMsg.className = 'error-message';
+                industryGroup.appendChild(errorMsg);
+            }
+        })
+        .finally(() => {
+            industrySelect.disabled = false;
+        });
+}
+
+// Filter industries based on search input
+function filterIndustries() {
+    const searchInput = document.getElementById('industry-search');
+    const industrySelect = document.getElementById('stationary-industry-type');
+    
+    if (!searchInput || !industrySelect || !window.allIndustries) return;
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    
+    // Clear current options except the first one
+    industrySelect.innerHTML = '<option value="">Select Industry Type</option>';
+    
+    // Filter and add matching industries
+    const filteredIndustries = window.allIndustries.filter(industry => {
+        return industry.name.toLowerCase().includes(searchTerm) ||
+               (industry.code && industry.code.toLowerCase().includes(searchTerm)) ||
+               (industry.description && industry.description.toLowerCase().includes(searchTerm));
+    });
+    
+    filteredIndustries.forEach(industry => {
+        const option = document.createElement('option');
+        option.value = industry.id;
+        option.textContent = industry.code ? `${industry.name} (${industry.code})` : industry.name;
+        option.title = industry.description || '';
+        industrySelect.appendChild(option);
+    });
+    
+    // Show "no results" if nothing found
+    if (filteredIndustries.length === 0 && searchTerm) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = `No industries found for "${searchTerm}"`;
+        option.disabled = true;
+        industrySelect.appendChild(option);
+    }
+}
+
+// Show add industry modal
+function showAddIndustryModal() {
+    const modal = document.getElementById('addIndustryModal');
+    modal.style.display = 'flex';
+}
+
+// Hide add industry modal
+function hideAddIndustryModal() {
+    const modal = document.getElementById('addIndustryModal');
+    modal.style.display = 'none';
+    
+    // Clear form
+    document.getElementById('modal-industry-name').value = '';
+    document.getElementById('modal-industry-code').value = '';
+    document.getElementById('modal-industry-description').value = '';
+    document.getElementById('modal-business-context').value = '';
+    
+    // Clear any error/success messages
+    clearErrorMessages();
+}
+
+// Save industry request
+function saveIndustryRequest() {
+    const industryName = document.getElementById('modal-industry-name').value.trim();
+    const industryCode = document.getElementById('modal-industry-code').value.trim();
+    const description = document.getElementById('modal-industry-description').value.trim();
+    const businessContext = document.getElementById('modal-business-context').value.trim();
+    
+    // Clear previous error messages
+    clearErrorMessages();
+    
+    // Client-side validation
+    const errors = [];
+    
+    if (!industryName) {
+        errors.push('Industry name is required');
+    } else if (industryName.length < 3) {
+        errors.push('Industry name must be at least 3 characters long');
+    } else if (industryName.length > 200) {
+        errors.push('Industry name cannot exceed 200 characters');
+    }
+    
+    if (!description) {
+        errors.push('Industry description is required');
+    } else if (description.length < 10) {
+        errors.push('Description must be at least 10 characters long');
+    } else if (description.length > 1000) {
+        errors.push('Description cannot exceed 1000 characters');
+    }
+    
+    if (industryCode && industryCode.length > 20) {
+        errors.push('Industry code cannot exceed 20 characters');
+    }
+    
+    if (businessContext && businessContext.length > 1000) {
+        errors.push('Business context cannot exceed 1000 characters');
+    }
+    
+    // Show validation errors
+    if (errors.length > 0) {
+        showErrorMessage(errors.join('<br>'));
+        return;
+    }
+    
+    const saveBtn = document.getElementById('save-industry-btn');
+    const originalText = saveBtn.innerHTML;
+    
+    // Show loading state
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    saveBtn.disabled = true;
+    
+    const data = {
+        industry_name: industryName,
+        industry_code: industryCode || null,
+        description: description,
+        business_context: businessContext || null
+    };
+    
+    fetch(INDUSTRY_REQUEST_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(err => Promise.reject(err));
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            if (data.auto_approved) {
+                showSuccessMessage(`🎉 ${data.message}`);
+                setTimeout(() => {
+                    hideAddIndustryModal();
+                    // Reload industry types to show the newly approved industry
+                    loadIndustryTypes();
+                }, 3000);
+            } else {
+                showSuccessMessage(data.message || 'Industry request submitted successfully!');
+                setTimeout(() => {
+                    hideAddIndustryModal();
+                    // Reload industry types to show any newly approved ones
+                    loadIndustryTypes();
+                }, 2000);
+            }
+        } else {
+            showErrorMessage(data.error || 'Unknown error occurred');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        if (error.error) {
+            showErrorMessage(error.error);
+        } else {
+            showErrorMessage('Network error. Please check your connection and try again.');
+        }
+    })
+    .finally(() => {
+        saveBtn.innerHTML = originalText;
+        saveBtn.disabled = false;
+    });
+}
+
+// Helper functions for error/success messages
+function showErrorMessage(message) {
+    const modal = document.getElementById('addIndustryModal');
+    let errorDiv = modal.querySelector('.error-message');
+    
+    if (!errorDiv) {
+        errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.style.cssText = 'background: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 13px;';
+        
+        const formContainer = modal.querySelector('.form-group').parentNode;
+        formContainer.insertBefore(errorDiv, formContainer.querySelector('.form-group'));
+    }
+    
+    errorDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+    errorDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function showSuccessMessage(message) {
+    const modal = document.getElementById('addIndustryModal');
+    let successDiv = modal.querySelector('.success-message');
+    
+    if (!successDiv) {
+        successDiv = document.createElement('div');
+        successDiv.className = 'success-message';
+        successDiv.style.cssText = 'background: #f0fdf4; border: 1px solid #bbf7d0; color: #16a34a; padding: 12px; border-radius: 8px; margin: 15px 0; font-size: 13px;';
+        
+        const formContainer = modal.querySelector('.form-group').parentNode;
+        formContainer.insertBefore(successDiv, formContainer.querySelector('.form-group'));
+    }
+    
+    successDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+    successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function clearErrorMessages() {
+    const modal = document.getElementById('addIndustryModal');
+    const errorMsg = modal.querySelector('.error-message');
+    const successMsg = modal.querySelector('.success-message');
+    
+    if (errorMsg) errorMsg.remove();
+    if (successMsg) successMsg.remove();
+}
+
+// Character counter function
+function updateCharCount(inputId, counterId, maxLength) {
+    const input = document.getElementById(inputId);
+    const counter = document.getElementById(counterId);
+    
+    if (input && counter) {
+        const currentLength = input.value.length;
+        counter.textContent = currentLength;
+        
+        // Change color based on usage
+        if (currentLength > maxLength * 0.9) {
+            counter.style.color = '#dc2626'; // Red when near limit
+        } else if (currentLength > maxLength * 0.7) {
+            counter.style.color = '#f59e0b'; // Orange when getting close
+        } else {
+            counter.style.color = '#666'; // Default gray
+        }
+    }
+}
 </script>
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest, ReportExtraInfo
+from django.utils import timezone
+from .models import Country, EmissionData, EmissionRecord, Supplier, CustomEmissionFactor, MaterialRequest, ReportExtraInfo, IndustryType, IndustryRequest
 import logging
 
 logger = logging.getLogger(__name__)
@@ -198,6 +199,108 @@ class ReportExtraInfoAdmin(admin.ModelAdmin):
         }),
     )
     
+    def has_consent(self, obj):
+        """Show if user has given any consent"""
+        return obj.share_org_profile or obj.share_boundary or obj.share_data_sources or obj.share_projects
+    has_consent.boolean = True
+    has_consent.short_description = 'Has Consent'
+
+
+@admin.register(IndustryType)
+class IndustryTypeAdmin(admin.ModelAdmin):
+    list_display = ['name', 'code', 'is_active', 'requested_by', 'created_at']
+    list_filter = ['is_active', 'created_at', 'requested_by']
+    search_fields = ['name', 'code', 'description']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Industry Information', {
+            'fields': ('name', 'code', 'description', 'is_active')
+        }),
+        ('Request Information', {
+            'fields': ('requested_by',)
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(IndustryRequest)
+class IndustryRequestAdmin(admin.ModelAdmin):
+    list_display = ['industry_name', 'user', 'status', 'created_at']
+    list_filter = ['status', 'created_at']
+    search_fields = ['industry_name', 'user__email', 'description']
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Request Details', {
+            'fields': ('user', 'industry_name', 'industry_code', 'description', 'business_context')
+        }),
+        ('Admin Review', {
+            'fields': ('status', 'admin_notes', 'approved_industry')
+        }),
+        ('Timestamps', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    actions = ['approve_requests', 'reject_requests']
+    
+    def approve_requests(self, request, queryset):
+        """Approve selected industry requests"""
+        approved_count = 0
+        for industry_request in queryset.filter(status='pending'):
+            # Create the industry type
+            industry_type, created = IndustryType.objects.get_or_create(
+                name=industry_request.industry_name,
+                defaults={
+                    'code': industry_request.industry_code,
+                    'description': industry_request.description,
+                    'requested_by': industry_request.user,
+                    'is_active': True,
+                }
+            )
+            
+            # Update the request
+            industry_request.status = 'approved'
+            industry_request.approved_industry = industry_type
+            industry_request.admin_notes = f'Approved via bulk action on {timezone.now().strftime("%Y-%m-%d")}'
+            industry_request.save()
+            
+            # Send notification to user
+            try:
+                from .notifications import send_industry_status_notification
+                send_industry_status_notification(industry_request)
+            except Exception as e:
+                logger.error(f"Failed to send approval notification: {str(e)}")
+            
+            approved_count += 1
+        
+        self.message_user(request, f"Successfully approved {approved_count} industry requests.")
+    approve_requests.short_description = "✅ Approve selected industry requests"
+    
+    def reject_requests(self, request, queryset):
+        """Reject selected industry requests"""
+        rejected_count = 0
+        for industry_request in queryset.filter(status='pending'):
+            industry_request.status = 'rejected'
+            industry_request.admin_notes = f'Rejected via bulk action on {timezone.now().strftime("%Y-%m-%d")} - Please review and resubmit with more details.'
+            industry_request.save()
+            
+            # Send notification to user
+            try:
+                from .notifications import send_industry_status_notification
+                send_industry_status_notification(industry_request)
+            except Exception as e:
+                logger.error(f"Failed to send rejection notification: {str(e)}")
+            
+            rejected_count += 1
+        
+        self.message_user(request, f"Successfully rejected {rejected_count} industry requests.")
+    reject_requests.short_description = "❌ Reject selected industry requests"
     def has_consent(self, obj):
         consent_count = sum([
             obj.share_org_profile,

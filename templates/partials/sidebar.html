@@ -17,7 +17,7 @@
     <!-- Data Entry Button -->
     <a href="{% url 'ghg:data_entry' %}" class="data-entry-btn">
         <i class="fas fa-plus"></i>
-        Data Entry
+        Add Data
     </a>
 
     <!-- Menu Label -->
@@ -33,8 +33,8 @@
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:data_entry' %}" class="{% if active_menu == 'emission_management' %}active{% endif %}">
-                <i class="fas fa-chart-bar"></i>
-                Emission Management
+                <i class="fas fa-database"></i>
+                Data Collection
             </a>
         </li>
         <li class="menu-item">
@@ -49,16 +49,22 @@
                 Analysis
             </a>
         </li>
-        <li class="menu-item has-badge">
+        <li class="menu-item">
             <a href="/en/reporting/inventory" class="{% if active_menu == 'reporting' %}active{% endif %}">
                 <i class="fas fa-file-alt"></i>
                 Reporting
             </a>
         </li>
-        <li class="menu-item has-badge">
-            <a href="{% url 'ghg:emission_history' %}" class="{% if active_menu == 'emission_history' %}active{% endif %}">
-                <i class="fas fa-chart-pie"></i>
-                Emission Records
+        <li class="menu-item">
+            <a href="{% url 'ghg:action_planning' %}" class="{% if active_menu == 'action_planning' %}active{% endif %}">
+                <i class="fas fa-tasks"></i>
+                Action Planning
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{% url 'ghg:suppliers' %}" class="{% if active_menu == 'suppliers' %}active{% endif %}">
+                <i class="fas fa-truck"></i>
+                Suppliers
             </a>
         </li>
     </ul>
@@ -69,20 +75,19 @@
     <!-- Bottom Menu -->
     <ul class="sidebar-menu">
         <li class="menu-item">
-            <a href="#" class="{% if active_menu == 'settings' %}active{% endif %}">
+            <a href="{% url 'ghg:settings' %}" class="{% if active_menu == 'settings' %}active{% endif %}">
                 <i class="fas fa-cog"></i>
                 Settings
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:user_guide' %}" class="{% if active_menu == 'user_guide' %}active{% endif %}">
-                <i class="fas fa-robot"></i>
-                Automations
-                <span class="menu-badge">NEW</span>
+                <i class="fas fa-question-circle"></i>
+                Help & Guide
             </a>
         </li>
         <li class="menu-item">
-            <a href="#" class="{% if active_menu == 'support' %}active{% endif %}">
+            <a href="{% url 'ghg:support' %}" class="{% if active_menu == 'support' %}active{% endif %}">
                 <i class="fas fa-headset"></i>
                 Support
             </a>

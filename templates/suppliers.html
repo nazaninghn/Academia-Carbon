@@ -1,0 +1,325 @@
+{% extends 'dashboard_base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block page_title %}Supplier Management{% endblock %}
+
+{% block extra_css %}
+<style>
+    .supplier-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .supplier-card h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 12px;
+    }
+    
+    .supplier-card p {
+        color: #64748b;
+        margin-bottom: 16px;
+        line-height: 1.6;
+    }
+    
+    .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+    
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+    
+    .feature-content h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 8px 0;
+    }
+    
+    .feature-content p {
+        font-size: 14px;
+        color: #64748b;
+        margin: 0;
+        line-height: 1.5;
+    }
+    
+    .coming-soon-badge {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-left: 10px;
+    }
+    
+    .btn-primary {
+        background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    .btn-primary:hover {
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+        color: white;
+    }
+    
+    .btn-secondary {
+        background: #f1f5f9;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+    }
+    
+    .btn-secondary:hover {
+        background: #e2e8f0;
+        color: #334155;
+    }
+    
+    .supplier-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .stat-item {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        text-align: center;
+    }
+    
+    .stat-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #0ea5e9;
+        margin-bottom: 8px;
+    }
+    
+    .stat-label {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Professional Page Header -->
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">Supplier Management</h1>
+            <p style="color: #64748b; margin: 0; font-size: 14px;">
+                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
+                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
+                <span><strong>Standard:</strong> ISO 14064-1</span>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+    <!-- Current Supplier Stats -->
+    <div class="supplier-stats">
+        <div class="stat-item">
+            <div class="stat-value">{{ supplier_count|default:"0" }}</div>
+            <div class="stat-label">Total Suppliers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ active_suppliers|default:"0" }}</div>
+            <div class="stat-label">Active Suppliers</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ supplier_categories|default:"0" }}</div>
+            <div class="stat-label">Categories</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-value">{{ countries_count|default:"0" }}</div>
+            <div class="stat-label">Countries</div>
+        </div>
+    </div>
+
+    <!-- Overview Card -->
+    <div class="supplier-card">
+        <h3>
+            <i class="fas fa-truck" style="color: #0ea5e9; margin-right: 10px;"></i>
+            Supplier Carbon Management
+            <span class="coming-soon-badge">Enhanced Features Coming Soon</span>
+        </h3>
+        <p>
+            Manage your supplier relationships and track their carbon impact. Currently, you can add suppliers 
+            when entering emission data. Enhanced supplier management features are being developed to help you 
+            engage with suppliers on sustainability initiatives.
+        </p>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <a href="{% url 'ghg:data_entry' %}" class="btn-primary">
+                <i class="fas fa-plus"></i>
+                Add Supplier (via Data Entry)
+            </a>
+            <a href="/en/reporting/inventory" class="btn-secondary">
+                <i class="fas fa-chart-line"></i>
+                View Supplier Emissions
+            </a>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="feature-grid">
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-address-book"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Supplier Database</h4>
+                <p>Maintain a comprehensive database of all your suppliers with contact information, categories, and sustainability profiles.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Carbon Footprint Tracking</h4>
+                <p>Track and analyze the carbon footprint of your suppliers to identify high-impact relationships and reduction opportunities.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Sustainability Assessments</h4>
+                <p>Conduct supplier sustainability assessments and track their environmental performance over time.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Engagement Programs</h4>
+                <p>Launch supplier engagement programs to encourage sustainability improvements and collaboration on reduction initiatives.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-certificate"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Certification Tracking</h4>
+                <p>Monitor supplier certifications, compliance status, and sustainability credentials in one centralized location.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="feature-icon">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="feature-content">
+                <h4>Impact Analytics</h4>
+                <p>Analyze supplier-related emissions and identify the most impactful relationships for targeted engagement efforts.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Functionality -->
+    <div class="supplier-card">
+        <h3>
+            <i class="fas fa-tools" style="color: #10b981; margin-right: 10px;"></i>
+            Current Supplier Features
+        </h3>
+        <p>
+            While we develop comprehensive supplier management tools, you can currently:
+        </p>
+        <ul style="color: #64748b; margin-left: 20px; line-height: 1.8;">
+            <li><strong>Add Suppliers:</strong> When entering emission data, you can add new suppliers with detailed information</li>
+            <li><strong>Categorize Suppliers:</strong> Organize suppliers by activity type (Energy, Fuel, Transportation, etc.)</li>
+            <li><strong>Track Supplier Emissions:</strong> Associate emission data with specific suppliers for better tracking</li>
+            <li><strong>Contact Management:</strong> Store supplier contact information and business details</li>
+        </ul>
+        
+        <div style="margin-top: 20px; padding: 16px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px;">
+            <p style="margin: 0; color: #0369a1; font-size: 14px;">
+                <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+                <strong>Pro Tip:</strong> Start adding suppliers now through the Data Collection page. 
+                This data will be automatically available when enhanced supplier management features launch.
+            </p>
+        </div>
+    </div>
+
+    <!-- Development Roadmap -->
+    <div class="supplier-card">
+        <h3>
+            <i class="fas fa-road" style="color: #8b5cf6; margin-right: 10px;"></i>
+            Development Roadmap
+        </h3>
+        <p>
+            Enhanced supplier management features coming in 2024:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+            <div style="padding: 12px; background: #fef3c7; border-radius: 8px; border-left: 4px solid #f59e0b;">
+                <strong style="color: #92400e;">Q2 2024:</strong> Supplier dashboard and bulk import
+            </div>
+            <div style="padding: 12px; background: #dbeafe; border-radius: 8px; border-left: 4px solid #3b82f6;">
+                <strong style="color: #1e40af;">Q3 2024:</strong> Sustainability assessments and scoring
+            </div>
+            <div style="padding: 12px; background: #dcfce7; border-radius: 8px; border-left: 4px solid #10b981;">
+                <strong style="color: #047857;">Q4 2024:</strong> Engagement programs and collaboration tools
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

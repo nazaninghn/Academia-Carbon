@@ -17,6 +17,12 @@ urlpatterns = [
     path('test-report/', views.test_report_feature, name='test_report_feature'),
     path('test-custom-factor/', views.test_custom_factor_feature, name='test_custom_factor_feature'),
     
+    # New professional pages
+    path('action-planning/', views.action_planning, name='action_planning'),
+    path('suppliers/', views.suppliers, name='suppliers'),
+    path('settings/', views.settings, name='settings'),
+    path('support/', views.support, name='support'),
+    
     # API endpoints
     path('api/calculate/', views.calculate_emission, name='calculate_emission'),
     path('api/user-summary/', views.get_user_emissions_summary, name='user_summary'),
@@ -34,6 +40,10 @@ urlpatterns = [
     path('api/custom-factors/add/', views.add_custom_factor, name='add_custom_factor'),
     path('api/custom-factors/calculate/', views.calculate_with_custom_factor, name='calculate_custom_factor'),
     path('api/materials/request/', views.request_new_material, name='request_material'),
+    
+    # Industry types
+    path('api/industries/', views.get_industry_types, name='get_industry_types'),
+    path('api/industries/request/', views.request_new_industry, name='request_industry'),
     
     # Emission records management
     path('api/emission-records/<int:record_id>/', views.get_emission_record, name='get_emission_record'),

@@ -258,3 +258,60 @@ class ReportExtraInfo(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - Report Extra Info"
+
+
+class IndustryType(models.Model):
+    """Industry types for better emission factor categorization"""
+    name = models.CharField(max_length=200, unique=True, help_text="Industry name")
+    code = models.CharField(max_length=20, blank=True, null=True, help_text="Industry code (e.g., NAICS)")
+    description = models.TextField(blank=True, null=True, help_text="Industry description")
+    is_active = models.BooleanField(default=True, help_text="Is this industry type active?")
+    
+    # User who requested this industry (if it was user-requested)
+    requested_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                   help_text="User who requested this industry type")
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Industry Type"
+        verbose_name_plural = "Industry Types"
+        ordering = ['name']
+    
+    def __str__(self):
+        return f"{self.name} ({self.code})" if self.code else self.name
+
+
+class IndustryRequest(models.Model):
+    """User requests for new industry types"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    industry_name = models.CharField(max_length=200, help_text="Requested industry name")
+    industry_code = models.CharField(max_length=20, blank=True, null=True, help_text="Industry code if known")
+    description = models.TextField(help_text="Description of the industry")
+    business_context = models.TextField(blank=True, null=True, help_text="How this industry relates to their business")
+    
+    # Status
+    STATUS_CHOICES = [
+        ('pending', 'Pending Review'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    admin_notes = models.TextField(blank=True, null=True, help_text="Admin notes about this request")
+    
+    # If approved, link to the created industry
+    approved_industry = models.ForeignKey(IndustryType, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    # Timestamps
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Industry Request"
+        verbose_name_plural = "Industry Requests"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.industry_name} - {self.get_status_display()}"

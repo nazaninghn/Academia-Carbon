@@ -660,6 +660,170 @@ def request_new_material(request):
 
 
 @login_required
+def get_industry_types(request):
+    """API endpoint to get available industry types"""
+    from .models import IndustryType
+    
+    industries = IndustryType.objects.filter(is_active=True).order_by('name')
+    
+    data = {
+        'industries': [
+            {
+                'id': industry.id,
+                'name': industry.name,
+                'code': industry.code,
+                'description': industry.description,
+            }
+            for industry in industries
+        ]
+    }
+    
+    return JsonResponse(data)
+
+
+@login_required
+def request_new_industry(request):
+    """API endpoint to request a new industry type"""
+    from .models import IndustryRequest
+    import json
+    import logging
+    
+    logger = logging.getLogger(__name__)
+    
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data provided'}, status=400)
+        
+        industry_name = data.get('industry_name', '').strip()
+        description = data.get('description', '').strip()
+        
+        # Enhanced validation
+        if not industry_name:
+            return JsonResponse({'error': 'Industry name is required'}, status=400)
+        
+        if len(industry_name) < 3:
+            return JsonResponse({'error': 'Industry name must be at least 3 characters long'}, status=400)
+        
+        if len(industry_name) > 200:
+            return JsonResponse({'error': 'Industry name cannot exceed 200 characters'}, status=400)
+        
+        if not description:
+            return JsonResponse({'error': 'Industry description is required'}, status=400)
+        
+        if len(description) < 10:
+            return JsonResponse({'error': 'Description must be at least 10 characters long'}, status=400)
+        
+        if len(description) > 1000:
+            return JsonResponse({'error': 'Description cannot exceed 1000 characters'}, status=400)
+        
+        # Check if industry already exists
+        from .models import IndustryType
+        if IndustryType.objects.filter(name__iexact=industry_name).exists():
+            return JsonResponse({
+                'error': f'Industry type "{industry_name}" already exists in our system. Please select it from the dropdown.'
+            }, status=400)
+        
+        # Check if user already requested this industry
+        existing_request = IndustryRequest.objects.filter(
+            user=request.user, 
+            industry_name__iexact=industry_name,
+            status='pending'
+        ).first()
+        
+        if existing_request:
+            return JsonResponse({
+                'error': f'You have already requested "{industry_name}" on {existing_request.created_at.strftime("%Y-%m-%d")}. Please wait for admin review.'
+            }, status=400)
+        
+        # Check industry code if provided
+        industry_code = data.get('industry_code', '').strip() or None
+        if industry_code and len(industry_code) > 20:
+            return JsonResponse({'error': 'Industry code cannot exceed 20 characters'}, status=400)
+        
+        # Check business context if provided
+        business_context = data.get('business_context', '').strip() or None
+        if business_context and len(business_context) > 1000:
+            return JsonResponse({'error': 'Business context cannot exceed 1000 characters'}, status=400)
+        
+        # Check for auto-approval patterns
+        auto_approve_patterns = [
+            'manufacturing', 'retail', 'healthcare', 'education', 'finance', 
+            'technology', 'construction', 'transportation', 'energy', 'agriculture'
+        ]
+        
+        should_auto_approve = any(pattern in industry_name.lower() for pattern in auto_approve_patterns)
+        
+        try:
+            # Create industry request
+            industry_request = IndustryRequest.objects.create(
+                user=request.user,
+                industry_name=industry_name,
+                industry_code=industry_code,
+                description=description,
+                business_context=business_context
+            )
+            
+            # Auto-approve if it matches common patterns
+            if should_auto_approve:
+                # Create the industry type immediately
+                industry_type, created = IndustryType.objects.get_or_create(
+                    name=industry_name,
+                    defaults={
+                        'code': industry_code,
+                        'description': description,
+                        'requested_by': request.user,
+                        'is_active': True,
+                    }
+                )
+                
+                # Update request status
+                industry_request.status = 'approved'
+                industry_request.approved_industry = industry_type
+                industry_request.admin_notes = 'Auto-approved based on common industry pattern'
+                industry_request.save()
+                
+                logger.info(f"Auto-approved industry request: {industry_name} by {request.user.email}")
+                
+                return JsonResponse({
+                    'success': True,
+                    'message': f'Great! "{industry_name}" has been automatically approved and is now available in the dropdown.',
+                    'request_id': industry_request.id,
+                    'auto_approved': True
+                })
+            
+            logger.info(f"New industry request: {industry_name} by {request.user.email}")
+            
+            # Send email notification to admin for manual review
+            try:
+                from .notifications import send_industry_request_notification
+                notification_sent = send_industry_request_notification(industry_request)
+                if notification_sent:
+                    logger.info(f"Admin notification sent for industry request: {industry_name}")
+                else:
+                    logger.warning(f"Failed to send admin notification for industry request: {industry_name}")
+            except Exception as e:
+                logger.error(f"Error sending admin notification: {str(e)}")
+                # Don't fail the request if notification fails
+            
+            return JsonResponse({
+                'success': True,
+                'message': f'Your request for "{industry_name}" has been submitted successfully! Our admin team will review it within 24-48 hours.',
+                'request_id': industry_request.id,
+                'auto_approved': False
+            })
+            
+        except Exception as e:
+            logger.error(f"Error creating industry request: {str(e)}")
+            return JsonResponse({
+                'error': 'An unexpected error occurred while processing your request. Please try again.'
+            }, status=500)
+    
+    return JsonResponse({'error': 'Only POST method is allowed'}, status=405)
+
+
+@login_required
 def calculate_with_custom_factor(request):
     """Calculate emissions using a custom emission factor"""
     import json
@@ -1421,3 +1585,50 @@ def emissions_export_api(request):
     response['Content-Disposition'] = f'attachment; filename="{filename}"'
     
     return response
+
+# New professional pages
+@login_required
+def action_planning(request):
+    """Action Planning page view"""
+    context = {
+        'active_menu': 'action_planning',
+    }
+    return render(request, 'action_planning.html', context)
+
+@login_required
+def suppliers(request):
+    """Supplier Management page view"""
+    from .models import Supplier
+    
+    # Get supplier statistics
+    user_suppliers = Supplier.objects.filter(user=request.user)
+    supplier_count = user_suppliers.count()
+    # Since there's no is_active field, we'll count all suppliers as active
+    active_suppliers = supplier_count
+    supplier_categories = user_suppliers.values('supplier_type').distinct().count()
+    countries_count = user_suppliers.values('country').distinct().count()
+    
+    context = {
+        'active_menu': 'suppliers',
+        'supplier_count': supplier_count,
+        'active_suppliers': active_suppliers,
+        'supplier_categories': supplier_categories,
+        'countries_count': countries_count,
+    }
+    return render(request, 'suppliers.html', context)
+
+@login_required
+def settings(request):
+    """Settings page view"""
+    context = {
+        'active_menu': 'settings',
+    }
+    return render(request, 'settings.html', context)
+
+@login_required
+def support(request):
+    """Support page view"""
+    context = {
+        'active_menu': 'support',
+    }
+    return render(request, 'support.html', context)

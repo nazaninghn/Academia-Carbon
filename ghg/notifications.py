@@ -1,230 +1,202 @@
-# -*- coding: utf-8 -*-
 """
-Notification system for Academia Carbon
-Handles email notifications to admins and users
+Email notification system for industry requests and other admin notifications
 """
-
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 import logging
 
 logger = logging.getLogger(__name__)
 
-
-def send_material_request_notification(material_request):
-    """
-    Send email notification to admins when a new material is requested
-    
-    Args:
-        material_request: MaterialRequest instance
-    """
+def send_industry_request_notification(industry_request):
+    """Send email notification to admin when new industry is requested"""
     try:
-        # Get admin emails
-        admin_emails = settings.ADMIN_NOTIFICATION_EMAILS
+        # Admin email addresses (you can configure this in settings)
+        admin_emails = getattr(settings, 'ADMIN_NOTIFICATION_EMAILS', ['admin@academiacarbon.com'])
         
-        # Also get superuser emails
-        superuser_emails = list(User.objects.filter(is_superuser=True).values_list('email', flat=True))
-        all_admin_emails = list(set(admin_emails + superuser_emails))
-        
-        # Remove empty emails
-        all_admin_emails = [email for email in all_admin_emails if email]
-        
-        if not all_admin_emails:
-            logger.warning("No admin emails configured for material request notifications")
+        if not admin_emails:
+            logger.warning("No admin emails configured for industry request notifications")
             return False
         
-        # Email subject
-        subject = f'[{settings.SITE_NAME}] New Material Request: {material_request.material_name}'
+        subject = f'New Industry Request: {industry_request.industry_name}'
         
-        # Plain text message
-        message = f"""
-New Material Request Submitted
-
-Material Name: {material_request.material_name}
-Category: {material_request.category}
-Requested by: {material_request.user.username} ({material_request.user.email})
-Description: {material_request.description}
-
-"""
+        # Create email content
+        context = {
+            'industry_request': industry_request,
+            'user': industry_request.user,
+            'admin_url': f'{settings.SITE_URL}/admin/ghg/industryrequest/{industry_request.id}/change/' if hasattr(settings, 'SITE_URL') else '#'
+        }
         
-        if material_request.suggested_factor:
-            message += f"""
-Suggested Emission Factor: {material_request.suggested_factor} {material_request.suggested_unit or 'kg CO2e/unit'}
-Source: {material_request.suggested_source or 'Not provided'}
-
-"""
+        # HTML email content
+        html_message = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: #22c55e; border-bottom: 2px solid #22c55e; padding-bottom: 10px;">
+                    🏭 New Industry Type Request
+                </h2>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="margin-top: 0; color: #333;">Industry Details:</h3>
+                    <p><strong>Name:</strong> {industry_request.industry_name}</p>
+                    {f'<p><strong>Code:</strong> {industry_request.industry_code}</p>' if industry_request.industry_code else ''}
+                    <p><strong>Description:</strong> {industry_request.description}</p>
+                    {f'<p><strong>Business Context:</strong> {industry_request.business_context}</p>' if industry_request.business_context else ''}
+                </div>
+                
+                <div style="background: #e0f2fe; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="margin-top: 0; color: #333;">Requested By:</h3>
+                    <p><strong>User:</strong> {industry_request.user.get_full_name() or industry_request.user.username}</p>
+                    <p><strong>Email:</strong> {industry_request.user.email}</p>
+                    <p><strong>Date:</strong> {industry_request.created_at.strftime('%Y-%m-%d %H:%M')}</p>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <a href="{context['admin_url']}" 
+                       style="background: #22c55e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">
+                        Review in Admin Panel
+                    </a>
+                </div>
+                
+                <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
+                <p style="font-size: 12px; color: #666; text-align: center;">
+                    This is an automated notification from Academia Carbon Tracker
+                </p>
+            </div>
+        </body>
+        </html>
+        """
         
-        message += f"""
-Please review this request in the admin panel:
-{settings.SITE_URL}/admin/ghg/materialrequest/{material_request.id}/change/
+        # Plain text version
+        plain_message = f"""
+New Industry Type Request
 
----
-Academia Carbon - Automated Notification
-"""
+Industry Details:
+- Name: {industry_request.industry_name}
+{f'- Code: {industry_request.industry_code}' if industry_request.industry_code else ''}
+- Description: {industry_request.description}
+{f'- Business Context: {industry_request.business_context}' if industry_request.business_context else ''}
+
+Requested By:
+- User: {industry_request.user.get_full_name() or industry_request.user.username}
+- Email: {industry_request.user.email}
+- Date: {industry_request.created_at.strftime('%Y-%m-%d %H:%M')}
+
+Please review this request in the admin panel: {context['admin_url']}
+        """
         
         # Send email
         send_mail(
             subject=subject,
-            message=message,
+            message=plain_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=all_admin_emails,
+            recipient_list=admin_emails,
+            html_message=html_message,
             fail_silently=False,
         )
         
-        logger.info(f"Material request notification sent for: {material_request.material_name}")
+        logger.info(f"Industry request notification sent for: {industry_request.industry_name}")
         return True
         
     except Exception as e:
-        logger.error(f"Failed to send material request notification: {str(e)}")
+        logger.error(f"Failed to send industry request notification: {str(e)}")
         return False
 
 
-def send_custom_factor_notification(custom_factor):
-    """
-    Send email notification to admins when a new custom factor is added
-    (Optional - for high-value factors that need verification)
-    
-    Args:
-        custom_factor: CustomEmissionFactor instance
-    """
+def send_industry_status_notification(industry_request):
+    """Send email to user when their industry request status changes"""
     try:
-        # Get admin emails
-        admin_emails = settings.ADMIN_NOTIFICATION_EMAILS
-        superuser_emails = list(User.objects.filter(is_superuser=True).values_list('email', flat=True))
-        all_admin_emails = list(set(admin_emails + superuser_emails))
-        all_admin_emails = [email for email in all_admin_emails if email]
-        
-        if not all_admin_emails:
-            return False
-        
-        subject = f'[{settings.SITE_NAME}] New Custom Emission Factor: {custom_factor.material_name}'
-        
-        message = f"""
-New Custom Emission Factor Added
-
-Material Name: {custom_factor.material_name}
-Category: {custom_factor.category}
-Emission Factor: {custom_factor.emission_factor} kg CO2e/{custom_factor.unit}
-Added by: {custom_factor.user.username} ({custom_factor.user.email})
-
-"""
-        
-        if custom_factor.supplier:
-            message += f"Supplier: {custom_factor.supplier.name}\n"
-        
-        if custom_factor.source_reference:
-            message += f"Source/Reference: {custom_factor.source_reference}\n"
-        
-        message += f"""
-
-Please verify this custom factor in the admin panel:
-{settings.SITE_URL}/admin/ghg/customemissionfactor/{custom_factor.id}/change/
-
----
-Academia Carbon - Automated Notification
-"""
-        
-        send_mail(
-            subject=subject,
-            message=message,
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=all_admin_emails,
-            fail_silently=False,
-        )
-        
-        logger.info(f"Custom factor notification sent for: {custom_factor.material_name}")
-        return True
-        
-    except Exception as e:
-        logger.error(f"Failed to send custom factor notification: {str(e)}")
-        return False
-
-
-def send_material_request_status_notification(material_request):
-    """
-    Send email to user when their material request status changes
-    
-    Args:
-        material_request: MaterialRequest instance
-    """
-    try:
-        user_email = material_request.user.email
-        
-        if not user_email:
-            logger.warning(f"User {material_request.user.username} has no email address")
+        if not industry_request.user.email:
+            logger.warning(f"No email address for user {industry_request.user.username}")
             return False
         
         status_messages = {
-            'approved': 'has been approved! The emission factor has been added to the system.',
-            'rejected': 'has been reviewed and unfortunately cannot be added at this time.',
-            'in_progress': 'is currently being researched by our team.',
+            'approved': {
+                'subject': f'✅ Your industry request "{industry_request.industry_name}" has been approved!',
+                'color': '#22c55e',
+                'icon': '✅',
+                'message': 'Great news! Your industry type request has been approved and added to our system.'
+            },
+            'rejected': {
+                'subject': f'❌ Your industry request "{industry_request.industry_name}" needs revision',
+                'color': '#ef4444',
+                'icon': '❌',
+                'message': 'Your industry type request needs some adjustments before we can approve it.'
+            }
         }
         
-        status_msg = status_messages.get(material_request.status, 'status has been updated.')
+        status_info = status_messages.get(industry_request.status)
+        if not status_info:
+            return False
         
-        subject = f'[{settings.SITE_NAME}] Material Request Update: {material_request.material_name}'
+        # HTML email content
+        html_message = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <h2 style="color: {status_info['color']}; border-bottom: 2px solid {status_info['color']}; padding-bottom: 10px;">
+                    {status_info['icon']} Industry Request Update
+                </h2>
+                
+                <p>Hello {industry_request.user.get_full_name() or industry_request.user.username},</p>
+                
+                <p>{status_info['message']}</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h3 style="margin-top: 0;">Your Request:</h3>
+                    <p><strong>Industry Name:</strong> {industry_request.industry_name}</p>
+                    <p><strong>Status:</strong> <span style="color: {status_info['color']}; font-weight: bold;">{industry_request.get_status_display()}</span></p>
+                    <p><strong>Submitted:</strong> {industry_request.created_at.strftime('%Y-%m-%d')}</p>
+                </div>
+                
+                {f'''
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ffc107;">
+                    <h4 style="margin-top: 0; color: #856404;">Admin Notes:</h4>
+                    <p style="margin-bottom: 0;">{industry_request.admin_notes}</p>
+                </div>
+                ''' if industry_request.admin_notes else ''}
+                
+                <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 30px 0;">
+                <p style="font-size: 12px; color: #666; text-align: center;">
+                    Thank you for using Academia Carbon Tracker
+                </p>
+            </div>
+        </body>
+        </html>
+        """
         
-        message = f"""
-Hello {material_request.user.first_name or material_request.user.username},
+        # Plain text version
+        plain_message = f"""
+Industry Request Update
 
-Your material request for "{material_request.material_name}" {status_msg}
+Hello {industry_request.user.get_full_name() or industry_request.user.username},
 
-Status: {material_request.get_status_display()}
-"""
-        
-        if material_request.admin_notes:
-            message += f"\nAdmin Notes:\n{material_request.admin_notes}\n"
-        
-        if material_request.status == 'approved' and material_request.system_source_key:
-            message += f"""
-You can now use this material in your calculations. Look for it in the emission source dropdown.
-"""
-        
-        message += f"""
+{status_info['message']}
 
-View your request:
-{settings.SITE_URL}/history/
+Your Request:
+- Industry Name: {industry_request.industry_name}
+- Status: {industry_request.get_status_display()}
+- Submitted: {industry_request.created_at.strftime('%Y-%m-%d')}
 
-Thank you for using Academia Carbon!
+{f'Admin Notes: {industry_request.admin_notes}' if industry_request.admin_notes else ''}
 
----
-Academia Carbon Team
-"""
+Thank you for using Academia Carbon Tracker
+        """
         
+        # Send email
         send_mail(
-            subject=subject,
-            message=message,
+            subject=status_info['subject'],
+            message=plain_message,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user_email],
+            recipient_list=[industry_request.user.email],
+            html_message=html_message,
             fail_silently=False,
         )
         
-        logger.info(f"Status notification sent to user for: {material_request.material_name}")
+        logger.info(f"Status notification sent to {industry_request.user.email} for industry: {industry_request.industry_name}")
         return True
         
     except Exception as e:
         logger.error(f"Failed to send status notification: {str(e)}")
-        return False
-
-
-def send_test_notification():
-    """
-    Send a test notification to verify email configuration
-    """
-    try:
-        admin_emails = settings.ADMIN_NOTIFICATION_EMAILS
-        
-        send_mail(
-            subject=f'[{settings.SITE_NAME}] Test Notification',
-            message='This is a test notification from Academia Carbon. Email system is working correctly!',
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=admin_emails,
-            fail_silently=False,
-        )
-        
-        return True
-    except Exception as e:
-        logger.error(f"Test notification failed: {str(e)}")
         return False

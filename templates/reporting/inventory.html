@@ -537,12 +537,22 @@
 {% endblock %}
 
 {% block content %}
-<div class="reporting-header">
-    <div class="container">
-        <div class="text-center">
-            <h1>{{ report_title }}</h1>
-            <div class="subtitle">{{ standard }} Compliant Emissions Inventory</div>
-            <div class="generated-time">Generated on {{ generated_at|date:"F d, Y \a\t H:i T" }}</div>
+<!-- Professional Page Header -->
+<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">ISO 14064-1 Reporting</h1>
+            <p style="color: #64748b; margin: 0; font-size: 14px;">
+                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
+                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
+                <span><strong>Standard:</strong> ISO 14064-1</span>
+            </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <div style="text-align: right; font-size: 12px; color: #64748b;">
+                <div><strong>Report Generated:</strong></div>
+                <div>{{ generated_at|date:"F d, Y \a\t H:i T" }}</div>
+            </div>
         </div>
     </div>
 </div>
