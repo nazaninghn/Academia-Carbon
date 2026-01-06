@@ -321,6 +321,25 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+/* Responsive grid fixes */
+@media (max-width: 1200px) {
+    .grid-auto-fit {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-auto-fit {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid-auto-fit {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ===== STAT CARDS ===== */
 .stat-card {
     background: white;

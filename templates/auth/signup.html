@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/auth-responsive.css' %}">
     
     <style>
         :root {
@@ -80,7 +81,7 @@
         
         /* Signup Container */
         .signup-container {
-            max-width: 95%;
+            max-width: 600px;
             width: 100%;
             background: var(--surface);
             border-radius: 24px;
@@ -387,13 +388,13 @@
         /* Responsive Design */
         @media (max-width: 1024px) {
             .signup-container {
-                max-width: 90%;
+                max-width: 550px;
             }
         }
         
         @media (max-width: 768px) {
             .signup-container {
-                max-width: 95%;
+                max-width: 500px;
                 border-radius: 20px;
             }
             
@@ -422,7 +423,7 @@
         @media (max-width: 480px) {
             .signup-container {
                 border-radius: 16px;
-                max-width: 100%;
+                max-width: 400px;
             }
             
             .signup-header {

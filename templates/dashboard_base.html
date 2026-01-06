@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/design-system.css' %}">
     <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive-fixes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/table-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/form-responsive.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chart-responsive.css' %}">
     
     <style>
         * {
@@ -402,6 +406,104 @@
         }
 
         /* Responsive */
+        @media (min-width: 1920px) {
+            .sidebar {
+                width: 300px;
+            }
+            
+            .main-content {
+                margin-left: 300px;
+            }
+            
+            .top-navbar {
+                padding: 20px 40px;
+            }
+            
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .content-area {
+                padding: 40px;
+            }
+            
+            .sidebar-menu a {
+                padding: 16px 24px;
+                font-size: 16px;
+            }
+            
+            .data-entry-btn {
+                padding: 18px 28px;
+                font-size: 17px;
+            }
+        }
+        
+        @media (min-width: 1600px) and (max-width: 1919px) {
+            .sidebar {
+                width: 290px;
+            }
+            
+            .main-content {
+                margin-left: 290px;
+            }
+            
+            .top-navbar {
+                padding: 18px 35px;
+            }
+            
+            .page-title {
+                font-size: 26px;
+            }
+            
+            .content-area {
+                padding: 35px;
+            }
+        }
+        
+        @media (min-width: 1366px) and (max-width: 1599px) {
+            .sidebar {
+                width: 280px;
+            }
+            
+            .main-content {
+                margin-left: 280px;
+            }
+            
+            .top-navbar {
+                padding: 16px 30px;
+            }
+            
+            .page-title {
+                font-size: 24px;
+            }
+            
+            .content-area {
+                padding: 30px;
+            }
+        }
+        
+        @media (min-width: 1280px) and (max-width: 1365px) {
+            .sidebar {
+                width: 270px;
+            }
+            
+            .main-content {
+                margin-left: 270px;
+            }
+            
+            .top-navbar {
+                padding: 15px 25px;
+            }
+            
+            .page-title {
+                font-size: 22px;
+            }
+            
+            .content-area {
+                padding: 25px;
+            }
+        }
+        
         @media (max-width: 1200px) {
             .sidebar {
                 width: 260px;
@@ -424,7 +526,7 @@
             }
         }
         
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
             .sidebar {
                 width: 240px;
             }
@@ -465,6 +567,54 @@
             }
         }
         
+        @media (max-width: 992px) {
+            .sidebar {
+                position: fixed;
+                left: -240px;
+                top: 0;
+                bottom: 0;
+                width: 240px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+                transform: translateX(0);
+            }
+
+            .sidebar.active {
+                left: 0;
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .mobile-menu-btn {
+                display: block !important;
+            }
+            
+            .top-navbar {
+                padding: 12px 20px;
+                position: relative;
+                z-index: 10;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-left: 40px;
+            }
+            
+            .content-area {
+                padding: 20px;
+            }
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 position: fixed;
@@ -473,11 +623,13 @@
                 bottom: 0;
                 width: 280px;
                 z-index: 1000;
-                transition: left 0.3s;
+                transition: left 0.3s ease;
+                transform: translateX(0);
             }
 
             .sidebar.active {
                 left: 0;
+                transform: translateX(0);
             }
 
             .main-content {
@@ -493,6 +645,8 @@
             
             .top-navbar {
                 padding: 10px 15px;
+                position: relative;
+                z-index: 10;
             }
             
             .page-title {
@@ -518,6 +672,22 @@
             .content-area {
                 padding: 15px;
             }
+            
+            /* Mobile menu button */
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                color: #111827;
+                font-size: 20px;
+                cursor: pointer;
+                padding: 5px;
+                z-index: 11;
+            }
         }
         
         @media (max-width: 576px) {
@@ -527,6 +697,7 @@
             
             .page-title {
                 font-size: 16px;
+                margin-left: 40px;
             }
             
             .user-avatar {
@@ -552,6 +723,47 @@
                 bottom: 15px;
                 right: 15px;
             }
+            
+            .mobile-menu-btn {
+                left: 10px;
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 14px;
+                margin-left: 35px;
+            }
+            
+            .user-section {
+                gap: 8px;
+            }
+            
+            .user-avatar {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+            
+            .btn-logout {
+                width: 28px;
+                height: 28px;
+                font-size: 11px;
+            }
+            
+            .content-area {
+                padding: 8px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+            
+            .sidebar.active {
+                left: 0;
+            }
         }
     </style>
     
@@ -573,6 +785,9 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="top-navbar">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" style="display: none;">
+                    <i class="fas fa-bars"></i>
+                </button>
                 <h1 class="page-title">{% block page_title %}{% trans "Dashboard" %}{% endblock %}</h1>
                 <div class="user-section">
                     <div class="user-info">
@@ -602,29 +817,111 @@
             const sidebar = document.getElementById('sidebar');
             const overlay = document.querySelector('.sidebar-overlay');
             const menuBtn = document.querySelector('.mobile-menu-toggle');
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
             
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
             
-            // Change icon
-            const icon = menuBtn.querySelector('i');
-            if (sidebar.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
+            // Add body class to prevent scrolling
+            document.body.classList.toggle('sidebar-open');
+            
+            // Change icon for floating button
+            if (menuBtn) {
+                const icon = menuBtn.querySelector('i');
+                if (sidebar.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+            
+            // Change icon for navbar button
+            if (mobileBtn) {
+                const icon = mobileBtn.querySelector('i');
+                if (sidebar.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                } else {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        }
+        
+        // Show/hide mobile menu button based on screen size
+        function updateMobileButton() {
+            const mobileBtn = document.querySelector('.mobile-menu-btn');
+            if (window.innerWidth <= 992) {
+                mobileBtn.style.display = 'block';
             } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
+                mobileBtn.style.display = 'none';
+                // Close sidebar if open
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
             }
         }
         
         // Close menu when clicking on a link
         document.querySelectorAll('.sidebar-menu a').forEach(link => {
             link.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 992) {
                     toggleMobileMenu();
                 }
             });
         });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (window.innerWidth <= 992 && 
+                sidebar.classList.contains('active') &&
+                !sidebar.contains(event.target) &&
+                !menuBtn.contains(event.target) &&
+                !menuToggle.contains(event.target)) {
+                toggleMobileMenu();
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            updateMobileButton();
+            
+            // Close mobile menu if screen becomes large
+            if (window.innerWidth > 992) {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.querySelector('.sidebar-overlay');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.classList.remove('sidebar-open');
+            }
+        });
+        
+        // Update on load
+        window.addEventListener('load', updateMobileButton);
+        
+        // Prevent body scroll when sidebar is open
+        const style = document.createElement('style');
+        style.textContent = `
+            body.sidebar-open {
+                overflow: hidden;
+            }
+            
+            @media (max-width: 992px) {
+                body.sidebar-open .main-content {
+                    filter: blur(2px);
+                    pointer-events: none;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
     
     {% block extra_js %}{% endblock %}

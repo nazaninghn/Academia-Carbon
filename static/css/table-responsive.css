@@ -1,0 +1,227 @@
+/* 
+===========================================
+TABLE RESPONSIVE - ACADEMIA CARBON
+===========================================
+Responsive table fixes for all devices
+*/
+
+/* Base table wrapper */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.table-responsive {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.table-responsive th,
+.table-responsive td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.table-responsive th {
+    background: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table-responsive tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* Mobile table cards */
+.table-cards {
+    display: none;
+}
+
+.table-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.table-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.table-card-title {
+    font-weight: 600;
+    color: #111827;
+}
+
+.table-card-status {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.table-card-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.table-card-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.table-card-label {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 2px;
+}
+
+.table-card-value {
+    font-size: 14px;
+    color: #111827;
+    font-weight: 500;
+}
+
+/* Status colors */
+.status-verified {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+    .table-wrapper {
+        overflow-x: visible;
+    }
+    
+    .table-responsive {
+        min-width: auto;
+    }
+    
+    .table-responsive th,
+    .table-responsive td {
+        padding: 16px;
+        font-size: 15px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .table-responsive {
+        min-width: 700px;
+    }
+    
+    .table-responsive th,
+    .table-responsive td {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+    .table-wrapper {
+        display: none;
+    }
+    
+    .table-cards {
+        display: block;
+    }
+    
+    .table-card-body {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .table-card {
+        padding: 12px;
+        margin-bottom: 8px;
+    }
+    
+    .table-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .table-card-body {
+        gap: 6px;
+    }
+    
+    .table-card-field {
+        padding: 6px 0;
+        border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .table-card-field:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .table-responsive th,
+    .table-responsive td {
+        padding: 14px;
+    }
+    
+    .table-card {
+        padding: 18px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .table-wrapper {
+        overflow: visible;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .table-responsive {
+        min-width: auto;
+        font-size: 12px;
+    }
+    
+    .table-responsive th,
+    .table-responsive td {
+        padding: 8px;
+    }
+    
+    .table-cards {
+        display: none;
+    }
+}

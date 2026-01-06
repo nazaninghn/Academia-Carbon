@@ -1,0 +1,394 @@
+/* 
+===========================================
+CHART RESPONSIVE - ACADEMIA CARBON
+===========================================
+Responsive chart fixes for all devices
+*/
+
+/* Base chart container */
+.chart-container {
+    width: 100%;
+    height: auto;
+    min-height: 300px;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+    position: relative;
+}
+
+.chart-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.chart-canvas {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 400px;
+}
+
+/* Chart header */
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.chart-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 4px 0 0 0;
+}
+
+.chart-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.chart-btn {
+    padding: 6px 12px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.chart-btn:hover {
+    background: #f9fafb;
+    border-color: #10b981;
+}
+
+.chart-btn.active {
+    background: #10b981;
+    color: white;
+    border-color: #10b981;
+}
+
+/* Chart legend */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+/* Chart loading */
+.chart-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.chart-loading i {
+    margin-right: 8px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Chart error */
+.chart-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #ef4444;
+    text-align: center;
+}
+
+.chart-error i {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+/* Desktop Large (1920px+) */
+@media (min-width: 1920px) {
+    .chart-container {
+        min-height: 400px;
+        padding: 32px;
+    }
+    
+    .chart-title {
+        font-size: 20px;
+    }
+    
+    .chart-canvas {
+        max-height: 500px;
+    }
+}
+
+/* Desktop (1366px - 1919px) */
+@media (min-width: 1366px) and (max-width: 1919px) {
+    .chart-container {
+        min-height: 350px;
+        padding: 24px;
+    }
+    
+    .chart-title {
+        font-size: 19px;
+    }
+    
+    .chart-canvas {
+        max-height: 450px;
+    }
+}
+
+/* Laptop (1024px - 1365px) */
+@media (min-width: 1024px) and (max-width: 1365px) {
+    .chart-container {
+        min-height: 320px;
+        padding: 20px;
+    }
+    
+    .chart-title {
+        font-size: 18px;
+    }
+    
+    .chart-canvas {
+        max-height: 400px;
+    }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .chart-container {
+        min-height: 280px;
+        padding: 16px;
+    }
+    
+    .chart-title {
+        font-size: 16px;
+    }
+    
+    .chart-subtitle {
+        font-size: 13px;
+    }
+    
+    .chart-canvas {
+        max-height: 320px;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .chart-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .chart-legend {
+        gap: 12px;
+    }
+    
+    .legend-item {
+        font-size: 13px;
+    }
+}
+
+/* Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+    .chart-container {
+        min-height: 250px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+    
+    .chart-title {
+        font-size: 15px;
+    }
+    
+    .chart-subtitle {
+        font-size: 12px;
+    }
+    
+    .chart-canvas {
+        max-height: 280px;
+    }
+    
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .chart-actions {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .chart-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+        flex: 1;
+        min-width: 60px;
+        text-align: center;
+    }
+    
+    .chart-legend {
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+    
+    .legend-item {
+        font-size: 12px;
+        justify-content: flex-start;
+    }
+    
+    .legend-color {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .chart-container {
+        min-height: 220px;
+        padding: 10px;
+    }
+    
+    .chart-title {
+        font-size: 14px;
+    }
+    
+    .chart-subtitle {
+        font-size: 11px;
+    }
+    
+    .chart-canvas {
+        max-height: 240px;
+    }
+    
+    .chart-header {
+        margin-bottom: 12px;
+    }
+    
+    .chart-btn {
+        padding: 6px 8px;
+        font-size: 10px;
+        min-width: 50px;
+    }
+    
+    .chart-legend {
+        margin-top: 8px;
+        padding-top: 8px;
+    }
+    
+    .legend-item {
+        font-size: 11px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .chart-container {
+        min-height: 180px;
+    }
+    
+    .chart-canvas {
+        max-height: 200px;
+    }
+    
+    .chart-header {
+        margin-bottom: 8px;
+    }
+    
+    .chart-legend {
+        display: none;
+    }
+}
+
+/* Touch optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .chart-btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 8px 12px;
+    }
+    
+    .chart-container {
+        padding: 16px;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .chart-canvas {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Print styles */
+@media print {
+    .chart-container {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .chart-actions {
+        display: none;
+    }
+    
+    .chart-canvas {
+        max-height: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .chart-loading i {
+        animation: none;
+    }
+    
+    .chart-btn {
+        transition: none;
+    }
+}

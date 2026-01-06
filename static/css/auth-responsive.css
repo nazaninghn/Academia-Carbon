@@ -1,0 +1,266 @@
+/* 
+===========================================
+AUTH PAGES RESPONSIVE - ACADEMIA CARBON
+===========================================
+Responsive fixes for login and signup pages
+*/
+
+/* Base auth container styles */
+.auth-container-base {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* Login specific */
+.login-container-responsive {
+    max-width: 1200px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+/* Signup specific */
+.signup-container-responsive {
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Form responsive */
+.auth-form-responsive {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.auth-form-responsive .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.auth-form-responsive .btn {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Desktop Large (1920px+) */
+@media (min-width: 1920px) {
+    .login-container-responsive {
+        max-width: 1400px;
+    }
+    
+    .signup-container-responsive {
+        max-width: 700px;
+    }
+}
+
+/* Desktop (1366px - 1919px) */
+@media (min-width: 1366px) and (max-width: 1919px) {
+    .login-container-responsive {
+        max-width: 1200px;
+    }
+    
+    .signup-container-responsive {
+        max-width: 600px;
+    }
+}
+
+/* Laptop Large (1200px - 1365px) */
+@media (min-width: 1200px) and (max-width: 1365px) {
+    .login-container-responsive {
+        max-width: 1100px;
+    }
+    
+    .signup-container-responsive {
+        max-width: 580px;
+    }
+}
+
+/* Laptop (1024px - 1199px) */
+@media (min-width: 1024px) and (max-width: 1199px) {
+    .login-container-responsive {
+        max-width: 1000px;
+    }
+    
+    .signup-container-responsive {
+        max-width: 550px;
+    }
+}
+
+/* Tablet Large (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .login-container-responsive {
+        max-width: 700px;
+        grid-template-columns: 1fr;
+    }
+    
+    .signup-container-responsive {
+        max-width: 500px;
+    }
+    
+    .auth-form-responsive {
+        max-width: 350px;
+    }
+}
+
+/* Mobile Large (576px - 767px) */
+@media (min-width: 576px) and (max-width: 767px) {
+    .login-container-responsive {
+        max-width: 500px;
+        grid-template-columns: 1fr;
+    }
+    
+    .signup-container-responsive {
+        max-width: 450px;
+    }
+    
+    .auth-form-responsive {
+        max-width: 320px;
+    }
+}
+
+/* Mobile (480px - 575px) */
+@media (min-width: 480px) and (max-width: 575px) {
+    .login-container-responsive {
+        max-width: 450px;
+        grid-template-columns: 1fr;
+    }
+    
+    .signup-container-responsive {
+        max-width: 400px;
+    }
+    
+    .auth-form-responsive {
+        max-width: 300px;
+    }
+}
+
+/* Mobile Small (320px - 479px) */
+@media (min-width: 320px) and (max-width: 479px) {
+    .login-container-responsive {
+        max-width: 350px;
+        grid-template-columns: 1fr;
+    }
+    
+    .signup-container-responsive {
+        max-width: 350px;
+    }
+    
+    .auth-form-responsive {
+        max-width: 280px;
+    }
+    
+    .auth-form-responsive .form-control {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+    
+    .auth-form-responsive .btn {
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+}
+
+/* Extra Small (< 320px) */
+@media (max-width: 319px) {
+    .login-container-responsive {
+        max-width: 300px;
+        grid-template-columns: 1fr;
+    }
+    
+    .signup-container-responsive {
+        max-width: 300px;
+    }
+    
+    .auth-form-responsive {
+        max-width: 250px;
+    }
+}
+
+/* Height-based responsive (for short screens) */
+@media (max-height: 600px) {
+    .login-container-responsive,
+    .signup-container-responsive {
+        margin: 10px auto;
+    }
+    
+    .auth-form-responsive {
+        padding: 20px;
+    }
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .login-container-responsive,
+    .signup-container-responsive {
+        margin: 5px auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .auth-form-responsive .form-control {
+        min-height: 48px;
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .auth-form-responsive .btn {
+        min-height: 48px;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .login-container-responsive,
+    .signup-container-responsive {
+        border-width: 0.5px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .login-container-responsive,
+    .signup-container-responsive {
+        max-width: 100%;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .login-container-responsive,
+    .signup-container-responsive,
+    .auth-form-responsive * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .login-container-responsive,
+    .signup-container-responsive {
+        background: #1f2937;
+        color: #f9fafb;
+    }
+    
+    .auth-form-responsive .form-control {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+}

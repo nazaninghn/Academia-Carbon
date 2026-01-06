@@ -11,6 +11,7 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/auth-responsive.css' %}">
     
     <style>
         :root {
@@ -80,7 +81,7 @@
         
         /* Login Container */
         .login-container {
-            max-width: 95%;
+            max-width: 1200px;
             width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -472,13 +473,13 @@
         /* Responsive Design */
         @media (max-width: 1200px) {
             .login-container {
-                max-width: 90%;
+                max-width: 1000px;
             }
         }
         
         @media (max-width: 1024px) {
             .login-container {
-                max-width: 95%;
+                max-width: 900px;
             }
             
             .hero-title {
@@ -497,7 +498,7 @@
         @media (max-width: 768px) {
             .login-container {
                 grid-template-columns: 1fr;
-                max-width: 95%;
+                max-width: 500px;
             }
             
             .login-hero {
@@ -516,7 +517,7 @@
         @media (max-width: 480px) {
             .login-container {
                 border-radius: 16px;
-                max-width: 100%;
+                max-width: 400px;
             }
             
             .login-form-section {

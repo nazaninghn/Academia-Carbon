@@ -905,6 +905,11 @@
             
             .hero-content h1 {
                 font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
             }
             
             .section-title {
@@ -917,6 +922,7 @@
             
             .features-grid {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
             
             .hero-stats {
@@ -932,6 +938,7 @@
             
             .btn {
                 width: 100%;
+                max-width: 300px;
                 justify-content: center;
                 padding: 16px 24px;
             }
@@ -944,6 +951,19 @@
             .footer-bottom {
                 flex-direction: column;
                 text-align: center;
+            }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .language-switcher {
+                gap: 5px;
+            }
+            
+            .lang-btn {
+                padding: 6px 10px;
+                font-size: 13px;
             }
         }
         
@@ -970,7 +990,7 @@
             }
             
             .hero-content p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
             .btn-large {
@@ -984,6 +1004,59 @@
             
             .stat-item {
                 padding: 20px 15px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .header {
+                padding: 15px 0;
+            }
+            
+            .dashboard-preview {
+                padding: 20px;
+            }
+            
+            .preview-content {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .cta h2 {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                padding: 14px 20px;
+                font-size: 14px;
+            }
+            
+            .feature-card {
+                padding: 25px 15px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 35px;
+                height: 35px;
             }
         }
         

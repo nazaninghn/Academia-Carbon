@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Windows Size Test" %} - Academia Carbon</title>
+    {% csrf_token %}
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="{% static 'css/design-system.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mobile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive-fixes.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f7f9;
+        }
+        
+        .windows-test-container {
+            max-width: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .test-header {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .size-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--color-primary-500);
+        }
+        
+        .info-card h4 {
+            margin: 0 0 10px 0;
+            color: var(--color-primary-600);
+        }
+        
+        .info-card p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        
+        .windows-sizes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .size-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .size-card.active {
+            border-color: var(--color-primary-500);
+            transform: translateY(-2px);
+        }
+        
+        .size-card h3 {
+            margin: 0 0 15px 0;
+            color: var(--color-gray-800);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .size-card .resolution {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--color-primary-600);
+            margin-bottom: 10px;
+        }
+        
+        .size-card .description {
+            color: var(--color-gray-600);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-test {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: var(--color-primary-500);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-primary-600);
+        }
+        
+        .btn-secondary {
+            background: var(--color-gray-200);
+            color: var(--color-gray-700);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-gray-300);
+        }
+        
+        .layout-test {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .layout-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .layout-item {
+            background: var(--color-primary-50);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--color-primary-200);
+        }
+        
+        .current-size-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: var(--color-primary-500);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .browser-info {
+            background: var(--color-secondary-50);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--color-secondary-500);
+        }
+        
+        /* Windows specific breakpoints */
+        @media (min-width: 1920px) {
+            .size-card[data-size="4k"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (min-width: 1600px) and (max-width: 1919px) {
+            .size-card[data-size="wqhd"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (min-width: 1440px) and (max-width: 1599px) {
+            .size-card[data-size="qhd"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (min-width: 1366px) and (max-width: 1439px) {
+            .size-card[data-size="hd+"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (min-width: 1280px) and (max-width: 1365px) {
+            .size-card[data-size="wxga+"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            .size-card[data-size="xga"] {
+                border-color: var(--color-success);
+                background: var(--color-primary-50);
+            }
+        }
+        
+        @media (max-width: 1023px) {
+            .size-card[data-size="small"] {
+                border-color: var(--color-warning);
+                background: var(--color-warning, 0.1);
+            }
+        }
+        
+        /* Responsive adjustments for test page */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .size-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .windows-sizes {
+                grid-template-columns: 1fr;
+            }
+            
+            .test-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-test {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="current-size-indicator" id="currentSize">
+        <i class="fas fa-desktop"></i> <span id="sizeDisplay"></span>
+    </div>
+    
+    <div class="windows-test-container">
+        <div class="test-header">
+            <h1><i class="fab fa-windows"></i> {% trans "Windows Display Size Test" %}</h1>
+            <p>{% trans "Testing Academia Carbon responsiveness on different Windows screen sizes" %}</p>
+        </div>
+        
+        <div class="browser-info">
+            <h3><i class="fas fa-info-circle"></i> {% trans "Browser Information" %}</h3>
+            <p><strong>{% trans "User Agent" %}:</strong> <span id="userAgent"></span></p>
+            <p><strong>{% trans "Platform" %}:</strong> <span id="platform"></span></p>
+            <p><strong>{% trans "Screen Resolution" %}:</strong> <span id="screenRes"></span></p>
+            <p><strong>{% trans "Available Screen" %}:</strong> <span id="availScreen"></span></p>
+            <p><strong>{% trans "Color Depth" %}:</strong> <span id="colorDepth"></span></p>
+        </div>
+        
+        <div class="size-info">
+            <div class="info-card">
+                <h4><i class="fas fa-monitor"></i> {% trans "Current Window" %}</h4>
+                <p><strong>{% trans "Width" %}:</strong> <span id="windowWidth"></span>px</p>
+                <p><strong>{% trans "Height" %}:</strong> <span id="windowHeight"></span>px</p>
+                <p><strong>{% trans "Ratio" %}:</strong> <span id="aspectRatio"></span></p>
+            </div>
+            
+            <div class="info-card">
+                <h4><i class="fas fa-expand-arrows-alt"></i> {% trans "Viewport" %}</h4>
+                <p><strong>{% trans "Width" %}:</strong> <span id="viewportWidth"></span>px</p>
+                <p><strong>{% trans "Height" %}:</strong> <span id="viewportHeight"></span>px</p>
+                <p><strong>{% trans "Device Pixel Ratio" %}:</strong> <span id="pixelRatio"></span></p>
+            </div>
+            
+            <div class="info-card">
+                <h4><i class="fas fa-cogs"></i> {% trans "Display Category" %}</h4>
+                <p><strong>{% trans "Type" %}:</strong> <span id="displayType"></span></p>
+                <p><strong>{% trans "Orientation" %}:</strong> <span id="orientation"></span></p>
+                <p><strong>{% trans "Touch Support" %}:</strong> <span id="touchSupport"></span></p>
+            </div>
+        </div>
+        
+        <div class="layout-test">
+            <h3><i class="fas fa-th"></i> {% trans "Common Windows Screen Sizes" %}</h3>
+            <div class="windows-sizes">
+                <div class="size-card" data-size="4k">
+                    <h3><i class="fas fa-tv"></i> 4K UHD</h3>
+                    <div class="resolution">3840 × 2160</div>
+                    <div class="description">{% trans "Ultra High Definition - Premium displays" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(3840, 2160)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+                
+                <div class="size-card" data-size="wqhd">
+                    <h3><i class="fas fa-desktop"></i> WQHD</h3>
+                    <div class="resolution">2560 × 1440</div>
+                    <div class="description">{% trans "Wide Quad HD - Gaming monitors" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(2560, 1440)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+                
+                <div class="size-card" data-size="qhd">
+                    <h3><i class="fas fa-laptop"></i> QHD</h3>
+                    <div class="resolution">1440 × 900</div>
+                    <div class="description">{% trans "Quad HD - MacBook Air equivalent" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(1440, 900)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+                
+                <div class="size-card" data-size="hd+">
+                    <h3><i class="fas fa-laptop"></i> HD+</h3>
+                    <div class="resolution">1366 × 768</div>
+                    <div class="description">{% trans "Most common laptop resolution" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(1366, 768)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+                
+                <div class="size-card" data-size="wxga+">
+                    <h3><i class="fas fa-laptop"></i> WXGA+</h3>
+                    <div class="resolution">1280 × 800</div>
+                    <div class="description">{% trans "Older laptops and small monitors" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(1280, 800)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+                
+                <div class="size-card" data-size="xga">
+                    <h3><i class="fas fa-tablet-alt"></i> XGA</h3>
+                    <div class="resolution">1024 × 768</div>
+                    <div class="description">{% trans "Tablets and small screens" %}</div>
+                    <div class="test-buttons">
+                        <button class="btn-test btn-primary" onclick="testSize(1024, 768)">{% trans "Test" %}</button>
+                        <button class="btn-test btn-secondary" onclick="openDashboard()">{% trans "Dashboard" %}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="layout-test">
+            <h3><i class="fas fa-th-large"></i> {% trans "Layout Test Grid" %}</h3>
+            <p>{% trans "This grid shows how content adapts to different screen sizes" %}</p>
+            <div class="layout-grid">
+                <div class="layout-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <h4>{% trans "Dashboard" %}</h4>
+                    <p>{% trans "Main analytics" %}</p>
+                </div>
+                <div class="layout-item">
+                    <i class="fas fa-database"></i>
+                    <h4>{% trans "Data Entry" %}</h4>
+                    <p>{% trans "Input forms" %}</p>
+                </div>
+                <div class="layout-item">
+                    <i class="fas fa-chart-pie"></i>
+                    <h4>{% trans "Reports" %}</h4>
+                    <p>{% trans "Analytics view" %}</p>
+                </div>
+                <div class="layout-item">
+                    <i class="fas fa-cog"></i>
+                    <h4>{% trans "Settings" %}</h4>
+                    <p>{% trans "Configuration" %}</p>
+                </div>
+                <div class="layout-item">
+                    <i class="fas fa-users"></i>
+                    <h4>{% trans "Team" %}</h4>
+                    <p>{% trans "User management" %}</p>
+                </div>
+                <div class="layout-item">
+                    <i class="fas fa-support"></i>
+                    <h4>{% trans "Support" %}</h4>
+                    <p>{% trans "Help center" %}</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="layout-test">
+            <h3><i class="fas fa-language"></i> {% trans "Language Test" %}</h3>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+                <button onclick="setLanguage('en')" class="btn-test btn-primary">
+                    🇺🇸 English
+                </button>
+                <button onclick="setLanguage('tr')" class="btn-test btn-secondary">
+                    🇹🇷 Türkçe
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function updateDisplayInfo() {
+            // Window dimensions
+            document.getElementById('windowWidth').textContent = window.outerWidth;
+            document.getElementById('windowHeight').textContent = window.outerHeight;
+            document.getElementById('viewportWidth').textContent = window.innerWidth;
+            document.getElementById('viewportHeight').textContent = window.innerHeight;
+            
+            // Aspect ratio
+            const ratio = (window.innerWidth / window.innerHeight).toFixed(2);
+            document.getElementById('aspectRatio').textContent = ratio;
+            
+            // Device info
+            document.getElementById('pixelRatio').textContent = window.devicePixelRatio || 1;
+            document.getElementById('userAgent').textContent = navigator.userAgent;
+            document.getElementById('platform').textContent = navigator.platform;
+            
+            // Screen info
+            document.getElementById('screenRes').textContent = screen.width + ' × ' + screen.height;
+            document.getElementById('availScreen').textContent = screen.availWidth + ' × ' + screen.availHeight;
+            document.getElementById('colorDepth').textContent = screen.colorDepth + ' bits';
+            
+            // Orientation
+            const orientation = window.innerWidth > window.innerHeight ? 'Landscape' : 'Portrait';
+            document.getElementById('orientation').textContent = orientation;
+            
+            // Touch support
+            const touchSupport = 'ontouchstart' in window ? 'Yes' : 'No';
+            document.getElementById('touchSupport').textContent = touchSupport;
+            
+            // Display type
+            let displayType = 'Desktop';
+            const width = window.innerWidth;
+            if (width <= 480) displayType = 'Mobile (Small)';
+            else if (width <= 768) displayType = 'Mobile';
+            else if (width <= 1024) displayType = 'Tablet';
+            else if (width <= 1366) displayType = 'Laptop';
+            else if (width <= 1920) displayType = 'Desktop';
+            else displayType = 'Large Display';
+            
+            document.getElementById('displayType').textContent = displayType;
+            document.getElementById('sizeDisplay').textContent = width + 'px - ' + displayType;
+        }
+        
+        function testSize(width, height) {
+            alert(`Testing ${width}×${height} resolution.\n\nNote: Browser security prevents automatic window resizing.\n\nPlease manually resize your browser window to ${width}×${height} or use browser developer tools (F12) to simulate this resolution.`);
+        }
+        
+        function openDashboard() {
+            window.open('/en/', '_blank');
+        }
+        
+        function setLanguage(langCode) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/i18n/setlang/';
+            
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}';
+            
+            const langInput = document.createElement('input');
+            langInput.type = 'hidden';
+            langInput.name = 'language';
+            langInput.value = langCode;
+            
+            const nextInput = document.createElement('input');
+            nextInput.type = 'hidden';
+            nextInput.name = 'next';
+            nextInput.value = window.location.pathname;
+            
+            form.appendChild(csrfInput);
+            form.appendChild(langInput);
+            form.appendChild(nextInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+        
+        // Update info on load and resize
+        updateDisplayInfo();
+        window.addEventListener('resize', updateDisplayInfo);
+        window.addEventListener('orientationchange', function() {
+            setTimeout(updateDisplayInfo, 100);
+        });
+        
+        // Update every second to catch any changes
+        setInterval(updateDisplayInfo, 1000);
+    </script>
+</body>
+</html>
