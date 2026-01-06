@@ -20,7 +20,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/en/login/', permanent=False)),
+    path('', RedirectView.as_view(url='/en/landing/', permanent=False)),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 

@@ -4,6 +4,10 @@ from . import views, admin_views
 app_name = 'ghg'
 
 urlpatterns = [
+    # Landing page
+    path('landing/', views.landing_page, name='landing'),
+    path('test-language/', views.test_language, name='test_language'),
+    
     # Authentication
     path('login/', views.email_login_view, name='email_login'),
     path('signup/', views.email_signup_view, name='email_signup'),
@@ -52,6 +56,10 @@ urlpatterns = [
     
     # Export reports
     path('api/export-report/<str:scope>/', views.export_emission_report, name='export_report'),
+    
+    # Reporting pages
+    path('reporting/inventory/', views.inventory_report, name='inventory_report'),
+    path('reporting/pdf/', views.generate_pdf_report, name='generate_pdf_report'),
     
     # Analysis pages
     path('analysis/', views.analysis_index, name='analysis_index'),

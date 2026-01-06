@@ -10,7 +10,7 @@ from .forms import EmailLoginForm, EmailSignupForm
 def index(request):
     # Redirect to login if not authenticated
     if not request.user.is_authenticated:
-        return redirect('ghg:admin_login')
+        return redirect('ghg:email_login')
     
     countries = Country.objects.all().order_by('name')
     latest_year = EmissionData.objects.order_by('-year').first()
@@ -178,8 +178,11 @@ def emissions_summary_api(request):
 @login_required
 def dashboard_api(request):
     """API endpoint for dashboard data"""
-    from datetime import datetime
+    from datetime import datetime, date, timedelta
     from .dashboard_services import get_dashboard_metrics
+    from django.db.models import Sum, Count
+    from django.db import models
+    from decimal import Decimal
     
     # Parse optional filters
     date_from = None
@@ -197,6 +200,106 @@ def dashboard_api(request):
             date_to = datetime.strptime(request.GET.get('to'), '%Y-%m-%d').date()
         except ValueError:
             pass
+    
+    try:
+        # Get comprehensive dashboard metrics
+        metrics = get_dashboard_metrics(request.user, date_from, date_to, country)
+        
+        # Calculate additional metrics for dashboard
+        user_records = EmissionRecord.objects.filter(user=request.user)
+        
+        # Current month emissions
+        current_month_start = date.today().replace(day=1)
+        current_month_records = user_records.filter(created_at__date__gte=current_month_start)
+        current_month_kg = current_month_records.aggregate(total=Sum('emissions_kg', output_field=models.FloatField()))['total'] or 0
+        current_month_tons = float(current_month_kg) / 1000
+        
+        # Previous month for comparison
+        if current_month_start.month == 1:
+            prev_month_start = current_month_start.replace(year=current_month_start.year - 1, month=12)
+            prev_month_end = current_month_start - timedelta(days=1)
+        else:
+            prev_month_start = current_month_start.replace(month=current_month_start.month - 1)
+            prev_month_end = current_month_start - timedelta(days=1)
+        
+        prev_month_records = user_records.filter(
+            created_at__date__gte=prev_month_start,
+            created_at__date__lte=prev_month_end
+        )
+        prev_month_kg = prev_month_records.aggregate(total=Sum('emissions_kg', output_field=models.FloatField()))['total'] or 0
+        prev_month_tons = float(prev_month_kg) / 1000
+        
+        # Calculate percentage changes
+        emissions_change_pct = 0
+        records_change_pct = 0
+        
+        if prev_month_tons > 0:
+            emissions_change_pct = ((current_month_tons - prev_month_tons) / prev_month_tons) * 100
+        
+        prev_month_count = prev_month_records.count()
+        current_month_count = current_month_records.count()
+        if prev_month_count > 0:
+            records_change_pct = ((current_month_count - prev_month_count) / prev_month_count) * 100
+        
+        # Monthly trends for chart (last 6 months)
+        monthly_trends = []
+        for i in range(6):
+            month_date = current_month_start - timedelta(days=30 * i)
+            month_start = month_date.replace(day=1)
+            
+            if month_date.month == 12:
+                month_end = month_date.replace(year=month_date.year + 1, month=1, day=1) - timedelta(days=1)
+            else:
+                month_end = month_date.replace(month=month_date.month + 1, day=1) - timedelta(days=1)
+            
+            month_records = user_records.filter(
+                created_at__date__gte=month_start,
+                created_at__date__lte=month_end
+            )
+            month_kg = month_records.aggregate(total=Sum('emissions_kg', output_field=models.FloatField()))['total'] or 0
+            month_tons = float(month_kg) / 1000
+            
+            monthly_trends.append({
+                'month': month_date.strftime('%b %Y'),
+                'emissions_tons': round(month_tons, 2)
+            })
+        
+        # Reverse to show chronological order
+        monthly_trends.reverse()
+        
+        # Suppliers count
+        suppliers_count = Supplier.objects.filter(user=request.user).count()
+        
+        # Prepare response data
+        response_data = {
+            'total_emissions_tons': float(metrics.get('total_emissions_tons', 0)),
+            'total_records': metrics.get('total_records', 0),
+            'current_month_tons': round(current_month_tons, 2),
+            'suppliers_count': suppliers_count,
+            'emissions_change_pct': round(emissions_change_pct, 1),
+            'records_change_pct': round(records_change_pct, 1),
+            'month_change_pct': 0,  # Can be used for other metrics
+            'scope_breakdown': metrics.get('scope_breakdown', []),
+            'monthly_trends': monthly_trends,
+            'latest_records': metrics.get('latest_records', [])[:5],  # Last 5 records
+        }
+        
+        return JsonResponse(response_data)
+        
+    except Exception as e:
+        return JsonResponse({
+            'error': f'Failed to load dashboard data: {str(e)}',
+            'total_emissions_tons': 0,
+            'total_records': 0,
+            'current_month_tons': 0,
+            'suppliers_count': 0,
+            'emissions_change_pct': 0,
+            'records_change_pct': 0,
+            'month_change_pct': 0,
+            'scope_breakdown': [],
+            'monthly_trends': [],
+            'latest_records': []
+        }, status=500)
     
     # Get dashboard data
     data = get_dashboard_metrics(
@@ -404,19 +507,14 @@ def email_login_view(request):
         return redirect('ghg:index')
     
     if request.method == 'POST':
-        email = request.POST.get('username')  # Field name is 'username' but contains email
-        password = request.POST.get('password')
-        
-        # Authenticate using email
-        user = authenticate(request, username=email, password=password)
-        
-        if user is not None:
-            login(request, user)
-            messages.success(request, f'Welcome back, {user.first_name or user.email}!')
-            return redirect('ghg:index')
-        else:
-            messages.error(request, 'Invalid email or password. Please try again.')
-            form = EmailLoginForm()
+        form = EmailLoginForm(request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            if user:
+                login(request, user)
+                messages.success(request, f'Welcome back, {user.first_name or user.email}!')
+                return redirect('ghg:index')
+        # If form is not valid, it will show the errors
     else:
         form = EmailLoginForm()
     
@@ -445,7 +543,7 @@ def logout_view(request):
     """Logout view"""
     logout(request)
     messages.info(request, 'You have been logged out successfully')
-    return redirect('ghg:email_login')
+    return redirect('ghg:landing')
 
 
 @login_required
@@ -1642,26 +1740,17 @@ def fix_users_temp(request):
     
     try:
         with transaction.atomic():
+            result = {
+                'status': 'success',
+                'actions': [],
+                'admin_credentials': {}
+            }
+            
             # Fix duplicate users
             duplicate_email = "nazaninghafouriann@gmail.com"
             users = User.objects.filter(email=duplicate_email)
             
-            result = {
-                'status': 'success',
-                'message': f'Found {users.count()} users with email: {duplicate_email}',
-                'users': []
-            }
-            
-            for user in users:
-                result['users'].append({
-                    'id': user.id,
-                    'username': user.username,
-                    'email': user.email,
-                    'is_staff': user.is_staff,
-                    'is_superuser': user.is_superuser,
-                    'last_login': str(user.last_login) if user.last_login else None,
-                    'date_joined': str(user.date_joined)
-                })
+            result['actions'].append(f'Found {users.count()} users with email: {duplicate_email}')
             
             if users.count() > 1:
                 # Keep the user that's a superuser/staff, or the most recent one
@@ -1681,43 +1770,390 @@ def fix_users_temp(request):
                     primary_user = users.order_by('-date_joined').first()
                     users_to_delete = [u for u in users if u.id != primary_user.id]
                 
-                result['kept_user'] = {
-                    'id': primary_user.id,
-                    'username': primary_user.username,
-                    'email': primary_user.email
-                }
-                
-                result['deleted_users'] = []
                 for user in users_to_delete:
-                    result['deleted_users'].append({
-                        'id': user.id,
-                        'username': user.username
-                    })
+                    result['actions'].append(f'Deleted duplicate user: {user.username} (ID: {user.id})')
                     user.delete()
                 
-                result['message'] += f' - Fixed duplicates, kept user ID {primary_user.id}'
+                result['actions'].append(f'Kept user: {primary_user.username} (ID: {primary_user.id})')
             
-            # Ensure superuser exists
-            superusers = User.objects.filter(is_superuser=True)
-            if superusers.count() == 0:
-                admin_user = User.objects.create_user(
-                    username='admin@academiacarbon.com',
-                    email='admin@academiacarbon.com',
-                    password='AdminPass123!',
-                    first_name='Admin',
-                    last_name='User',
-                    is_staff=True,
-                    is_superuser=True
-                )
-                result['created_admin'] = {
-                    'email': admin_user.email,
-                    'password': 'AdminPass123!'
+            # Create/ensure admin superuser
+            admin_email = 'admin@academiacarbon.com'
+            admin_password = 'AdminPass123!'
+            
+            admin_user, created = User.objects.get_or_create(
+                email=admin_email,
+                defaults={
+                    'username': admin_email,
+                    'first_name': 'Admin',
+                    'last_name': 'User',
+                    'is_staff': True,
+                    'is_superuser': True
                 }
+            )
             
-            return JsonResponse(result)
+            if created:
+                admin_user.set_password(admin_password)
+                admin_user.save()
+                result['actions'].append(f'Created new admin user: {admin_email}')
+            else:
+                # Update existing admin to ensure it has correct permissions
+                admin_user.is_staff = True
+                admin_user.is_superuser = True
+                admin_user.set_password(admin_password)
+                admin_user.save()
+                result['actions'].append(f'Updated existing admin user: {admin_email}')
+            
+            result['admin_credentials'] = {
+                'url': 'https://academia-carbon.onrender.com/en/admin/',
+                'username': admin_email,
+                'password': admin_password
+            }
+            
+            # Also create a backup admin with your email
+            your_email = 'nazaninghafouriann@gmail.com'
+            your_password = 'Ladan1347'
+            
+            # Remove any duplicates first
+            User.objects.filter(email=your_email).delete()
+            
+            your_user = User.objects.create_user(
+                username=your_email,
+                email=your_email,
+                password=your_password,
+                first_name='Nazanin',
+                last_name='Ghafouri',
+                is_staff=True,
+                is_superuser=True
+            )
+            
+            result['actions'].append(f'Created backup admin user: {your_email}')
+            result['backup_credentials'] = {
+                'username': your_email,
+                'password': your_password
+            }
+            
+            return JsonResponse(result, json_dumps_params={'indent': 2})
             
     except Exception as e:
         return JsonResponse({
             'status': 'error',
             'message': str(e)
         }, status=500)
+
+@login_required
+def inventory_report(request):
+    """Inventory reporting page with filtering and PDF generation"""
+    from datetime import datetime, date
+    from django.db.models import Sum, Count, Q
+    from .models import EmissionRecord, ReportExtraInfo
+    
+    # Get filter parameters
+    date_from = request.GET.get('from')
+    date_to = request.GET.get('to')
+    scope_filter = request.GET.get('scope', 'all')
+    country_filter = request.GET.get('country', 'all')
+    
+    # Base queryset
+    records = EmissionRecord.objects.filter(user=request.user)
+    
+    # Apply filters
+    if date_from:
+        try:
+            date_from_obj = datetime.strptime(date_from, '%Y-%m-%d').date()
+            records = records.filter(created_at__date__gte=date_from_obj)
+        except ValueError:
+            date_from = None
+    
+    if date_to:
+        try:
+            date_to_obj = datetime.strptime(date_to, '%Y-%m-%d').date()
+            records = records.filter(created_at__date__lte=date_to_obj)
+        except ValueError:
+            date_to = None
+    
+    if scope_filter != 'all':
+        records = records.filter(scope=scope_filter)
+    
+    if country_filter != 'all':
+        records = records.filter(country=country_filter)
+    
+    # Calculate summary data
+    total_emissions_kg = records.aggregate(total=Sum('emissions_kg'))['total'] or 0
+    total_emissions_tons = total_emissions_kg / 1000
+    total_records = records.count()
+    
+    # Scope breakdown
+    scope_breakdown = []
+    for scope in [1, 2, 3]:
+        scope_records = records.filter(scope=scope)
+        scope_kg = scope_records.aggregate(total=Sum('emissions_kg'))['total'] or 0
+        scope_tons = scope_kg / 1000
+        scope_count = scope_records.count()
+        
+        percentage = (scope_tons / total_emissions_tons * 100) if total_emissions_tons > 0 else 0
+        
+        scope_breakdown.append({
+            'scope': scope,
+            'emissions_tons': round(scope_tons, 3),
+            'emissions_kg': scope_kg,
+            'records_count': scope_count,
+            'percentage': round(percentage, 1)
+        })
+    
+    # Top emission sources
+    top_sources = (
+        records.values('source_name', 'scope', 'category')
+        .annotate(
+            total_kg=Sum('emissions_kg'),
+            records_count=Count('id')
+        )
+        .order_by('-total_kg')[:10]
+    )
+    
+    for source in top_sources:
+        source['total_tons'] = round(source['total_kg'] / 1000, 3)
+        source['percentage'] = round((source['total_kg'] / total_emissions_kg * 100), 1) if total_emissions_kg > 0 else 0
+    
+    # Get report extra info if exists
+    try:
+        report_extra = ReportExtraInfo.objects.get(user=request.user)
+    except ReportExtraInfo.DoesNotExist:
+        report_extra = None
+    
+    # Countries for filter
+    countries = records.values_list('country', flat=True).distinct()
+    
+    context = {
+        'total_emissions_tons': round(total_emissions_tons, 3),
+        'total_emissions_kg': total_emissions_kg,
+        'total_records': total_records,
+        'scope_breakdown': scope_breakdown,
+        'top_sources': top_sources,
+        'report_extra': report_extra,
+        'countries': countries,
+        'date_from': date_from,
+        'date_to': date_to,
+        'scope_filter': scope_filter,
+        'country_filter': country_filter,
+        'active_menu': 'reporting',
+    }
+    
+    return render(request, 'reporting/inventory.html', context)
+
+
+@login_required
+def generate_pdf_report(request):
+    """Generate PDF report for emissions inventory"""
+    from django.http import HttpResponse
+    from datetime import datetime, date
+    from django.db.models import Sum, Count
+    from .models import EmissionRecord, ReportExtraInfo
+    import io
+    
+    try:
+        from reportlab.lib.pagesizes import letter, A4
+        from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+        from reportlab.lib.units import inch
+        from reportlab.lib import colors
+    except ImportError:
+        return JsonResponse({'error': 'PDF generation not available. Please install reportlab.'}, status=500)
+    
+    # Get filter parameters (same as inventory_report)
+    date_from = request.GET.get('from')
+    date_to = request.GET.get('to')
+    scope_filter = request.GET.get('scope', 'all')
+    country_filter = request.GET.get('country', 'all')
+    
+    # Base queryset
+    records = EmissionRecord.objects.filter(user=request.user)
+    
+    # Apply filters
+    if date_from:
+        try:
+            date_from_obj = datetime.strptime(date_from, '%Y-%m-%d').date()
+            records = records.filter(created_at__date__gte=date_from_obj)
+        except ValueError:
+            date_from = None
+    
+    if date_to:
+        try:
+            date_to_obj = datetime.strptime(date_to, '%Y-%m-%d').date()
+            records = records.filter(created_at__date__lte=date_to_obj)
+        except ValueError:
+            date_to = None
+    
+    if scope_filter != 'all':
+        records = records.filter(scope=scope_filter)
+    
+    if country_filter != 'all':
+        records = records.filter(country=country_filter)
+    
+    # Calculate data
+    total_emissions_kg = records.aggregate(total=Sum('emissions_kg'))['total'] or 0
+    total_emissions_tons = total_emissions_kg / 1000
+    
+    # Create PDF
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, rightMargin=72, leftMargin=72, topMargin=72, bottomMargin=18)
+    
+    # Container for the 'Flowable' objects
+    elements = []
+    
+    # Define styles
+    styles = getSampleStyleSheet()
+    title_style = ParagraphStyle(
+        'CustomTitle',
+        parent=styles['Heading1'],
+        fontSize=18,
+        spaceAfter=30,
+        textColor=colors.HexColor('#1e293b')
+    )
+    
+    heading_style = ParagraphStyle(
+        'CustomHeading',
+        parent=styles['Heading2'],
+        fontSize=14,
+        spaceAfter=12,
+        textColor=colors.HexColor('#374151')
+    )
+    
+    # Title
+    title = Paragraph("GHG Emissions Inventory Report", title_style)
+    elements.append(title)
+    
+    # Organization info
+    org_info = f"""
+    <b>Organization:</b> {request.user.username.title()}<br/>
+    <b>Report Generated:</b> {datetime.now().strftime('%B %d, %Y at %I:%M %p')}<br/>
+    <b>Reporting Standard:</b> ISO 14064-1<br/>
+    <b>Report Period:</b> {date_from or 'All time'} to {date_to or 'Present'}
+    """
+    elements.append(Paragraph(org_info, styles['Normal']))
+    elements.append(Spacer(1, 20))
+    
+    # Executive Summary
+    elements.append(Paragraph("Executive Summary", heading_style))
+    summary_text = f"""
+    This report presents the greenhouse gas (GHG) emissions inventory for {request.user.username.title()} 
+    in accordance with ISO 14064-1 standards. The total emissions for the reporting period are 
+    <b>{total_emissions_tons:.3f} tCO₂e</b> across {records.count()} emission sources.
+    """
+    elements.append(Paragraph(summary_text, styles['Normal']))
+    elements.append(Spacer(1, 20))
+    
+    # Scope breakdown table
+    elements.append(Paragraph("Emissions by Scope", heading_style))
+    
+    scope_data = [['Scope', 'Description', 'Emissions (tCO₂e)', 'Percentage']]
+    for scope in [1, 2, 3]:
+        scope_records = records.filter(scope=scope)
+        scope_kg = scope_records.aggregate(total=Sum('emissions_kg'))['total'] or 0
+        scope_tons = scope_kg / 1000
+        percentage = (scope_tons / total_emissions_tons * 100) if total_emissions_tons > 0 else 0
+        
+        descriptions = {
+            1: 'Direct emissions from owned sources',
+            2: 'Indirect emissions from purchased energy',
+            3: 'Other indirect emissions in value chain'
+        }
+        
+        scope_data.append([
+            f'Scope {scope}',
+            descriptions[scope],
+            f'{scope_tons:.3f}',
+            f'{percentage:.1f}%'
+        ])
+    
+    scope_table = Table(scope_data)
+    scope_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#1e293b')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 12),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#e5e7eb'))
+    ]))
+    
+    elements.append(scope_table)
+    elements.append(Spacer(1, 20))
+    
+    # Top sources
+    elements.append(Paragraph("Top Emission Sources", heading_style))
+    
+    top_sources = (
+        records.values('source_name', 'scope', 'category')
+        .annotate(total_kg=Sum('emissions_kg'))
+        .order_by('-total_kg')[:10]
+    )
+    
+    sources_data = [['Source', 'Scope', 'Category', 'Emissions (tCO₂e)', 'Percentage']]
+    for source in top_sources:
+        source_tons = source['total_kg'] / 1000
+        percentage = (source['total_kg'] / total_emissions_kg * 100) if total_emissions_kg > 0 else 0
+        
+        sources_data.append([
+            source['source_name'],
+            f"Scope {source['scope']}",
+            source['category'].replace('-', ' ').title(),
+            f'{source_tons:.3f}',
+            f'{percentage:.1f}%'
+        ])
+    
+    sources_table = Table(sources_data)
+    sources_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#1e293b')),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 10),
+        ('FONTSIZE', (0, 1), (-1, -1), 9),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.white),
+        ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#e5e7eb'))
+    ]))
+    
+    elements.append(sources_table)
+    elements.append(Spacer(1, 20))
+    
+    # Methodology
+    elements.append(Paragraph("Methodology", heading_style))
+    methodology_text = """
+    This inventory was prepared following ISO 14064-1:2018 guidelines for greenhouse gas inventories. 
+    Emission factors were sourced from internationally recognized databases including IPCC, Defra, EPA, 
+    and country-specific sources. All calculations follow the operational control approach for 
+    organizational boundary definition.
+    """
+    elements.append(Paragraph(methodology_text, styles['Normal']))
+    
+    # Build PDF
+    doc.build(elements)
+    
+    # Get the value of the BytesIO buffer and write it to the response
+    pdf = buffer.getvalue()
+    buffer.close()
+    
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="emissions_inventory_{datetime.now().strftime("%Y%m%d")}.pdf"'
+    response.write(pdf)
+    
+    return response
+
+def landing_page(request):
+    """صفحه لندینگ اصلی سایت"""
+    # اگر کاربر لاگین کرده باشد، به داشبورد هدایت شود
+    if request.user.is_authenticated:
+        return redirect('ghg:index')
+    
+    context = {
+        'page_title': 'Academia Carbon - Carbon Tracking Platform',
+        'meta_description': 'Professional carbon emission tracking and reporting platform for organizations. ISO 14064-1 compliant reporting, real-time analytics, and comprehensive carbon management tools.',
+    }
+    return render(request, 'landing.html', context)
+
+
+def test_language(request):
+    """Test page for language switching"""
+    return render(request, 'test_language.html')

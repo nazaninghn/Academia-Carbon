@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'tr' %}ltr{% else %}ltr{% endif %}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Academia Carbon - Professional Carbon Tracking Platform" %}</title>
+    <meta name="description" content="{% trans 'Professional carbon emission tracking and reporting platform for organizations. ISO 14064-1 compliant reporting, real-time analytics, and comprehensive carbon management tools.' %}">
+    {% csrf_token %}
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* استفاده از رنگ‌های اصلی سایت */
+            --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #7c3aed 100%);
+            --dark-gradient: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 80%, #164e3a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --surface: #ffffff;
+            --surface-elevated: #f9fafb;
+            --bg-light: #f5f7f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--dark-gradient);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gradient);
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(45, 122, 95, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        
+        .header.scrolled {
+            background: rgba(45, 122, 95, 0.98);
+            padding: 15px 0;
+            box-shadow: 0 8px 32px rgba(45, 122, 95, 0.2);
+        }
+        
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: translateY(-2px);
+            color: #4ade80;
+        }
+        
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+            position: relative;
+        }
+        
+        /* Logo design مطابق با سایت اصلی */
+        .logo-triangle {
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 14px solid #4ade80;
+            position: absolute;
+            left: 8px;
+            top: 15px;
+        }
+        
+        .logo-semicircle {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #a78bfa;
+            border-right: none;
+            border-radius: 14px 0 0 14px;
+            position: absolute;
+            right: 10px;
+            top: 15px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #4ade80;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .lang-btn {
+            padding: 8px 12px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            min-height: 44px; /* Touch-friendly minimum */
+            min-width: 44px;
+        }
+        
+        .btn-outline {
+            background: var(--glass-bg);
+            color: #e2e8f0;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--dark-gradient);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        
+        .hero-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: #4ade80;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-content .highlight {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+        
+        .hero-content .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            opacity: 0.3;
+        }
+        
+        .hero-content p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-large {
+            padding: 18px 35px;
+            font-size: 1.1rem;
+            border-radius: 15px;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary-gradient);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(59, 130, 246, 0.4);
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 25px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .hero-visual {
+            position: relative;
+            animation: slideInRight 1s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .dashboard-preview {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 30px;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dashboard-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--primary-gradient);
+            opacity: 0.05;
+            border-radius: 24px;
+        }
+        
+        .preview-header {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+        
+        .preview-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dot-red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .dot-yellow { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .dot-green { background: linear-gradient(135deg, #10b981, #059669); }
+        
+        .preview-title {
+            margin-left: auto;
+            color: #e2e8f0;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .preview-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 30px;
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+        
+        .preview-chart-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .preview-chart {
+            height: 220px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .preview-chart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+            background: var(--bg-light);
+            position: relative;
+        }
+        
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
+        }
+        
+        .features-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #f1f5f9;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 28px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+        
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 120px 0;
+            background: var(--dark-gradient);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(59, 130, 246, 0.15) 0%, transparent 50%);
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        .cta-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 30px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            color: #4ade80;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .cta h2 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        
+        .cta p {
+            font-size: 1.3rem;
+            color: #cbd5e1;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #164e3a;
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .footer-brand p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .footer-section h4 {
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #4ade80;
+        }
+        
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .footer-bottom p {
+            color: #64748b;
+            margin: 0;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-container,
+            .features-container,
+            .cta-container,
+            .footer-container {
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-container {
+                padding: 0 15px;
+            }
+            
+            .hero-container,
+            .features-container,
+            .cta-container,
+            .footer-container {
+                padding: 0 15px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 24px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container,
+            .hero-container,
+            .features-container,
+            .cta-container,
+            .footer-container {
+                padding: 0 10px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            
+            .btn-large {
+                padding: 16px 20px;
+                font-size: 1rem;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+            
+            .stat-item {
+                padding: 20px 15px;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-triangle"></div>
+                    <div class="logo-semicircle"></div>
+                </div>
+                Academia Carbon
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">{% trans "Features" %}</a></li>
+                    <li><a href="#about">{% trans "About" %}</a></li>
+                    <li><a href="#contact">{% trans "Contact" %}</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <a href="{% url 'ghg:landing' %}" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
+                       onclick="setLanguage('en')">EN</a>
+                    <a href="{% url 'ghg:landing' %}" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
+                       onclick="setLanguage('tr')">TR</a>
+                </div>
+                
+                <a href="{% url 'ghg:email_login' %}" class="btn btn-outline">
+                    <i class="fas fa-sign-in-alt"></i>
+                    {% trans "Login" %}
+                </a>
+                <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary">
+                    <i class="fas fa-rocket"></i>
+                    {% trans "Get Started" %}
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-award"></i>
+                    {% trans "ISO 14064-1 Certified Platform" %}
+                </div>
+                
+                <h1>
+                    {% trans "Professional" %}
+                    <span class="highlight">{% trans "Carbon Tracking" %}</span>
+                    {% trans "Platform" %}
+                </h1>
+                
+                <p>
+                    {% trans "Track, analyze, and report your organization's carbon emissions with precision. Our comprehensive platform provides real-time analytics, ISO 14064-1 compliant reporting, and actionable insights for sustainable growth." %}
+                </p>
+                
+                <div class="hero-buttons">
+                    <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        {% trans "Start Free Trial" %}
+                    </a>
+                    <a href="#features" class="btn btn-secondary btn-large">
+                        <i class="fas fa-play"></i>
+                        {% trans "Watch Demo" %}
+                    </a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">ISO 14064-1</span>
+                        <span class="stat-label">{% trans "Certified Standard" %}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">{% trans "Accuracy Rate" %}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">{% trans "Support" %}</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="dashboard-preview">
+                    <div class="preview-header">
+                        <div class="preview-dot dot-red"></div>
+                        <div class="preview-dot dot-yellow"></div>
+                        <div class="preview-dot dot-green"></div>
+                        <div class="preview-title">
+                            <i class="fas fa-chart-line"></i>
+                            {% trans "Carbon Analytics Dashboard" %}
+                        </div>
+                    </div>
+                    <div class="preview-content">
+                        <div class="preview-chart-title">
+                            <i class="fas fa-chart-pie"></i>
+                            {% trans "Real-time Emission Tracking" %}
+                        </div>
+                        <div class="preview-chart">
+                            <i class="fas fa-chart-area" style="font-size: 4rem; opacity: 0.9;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    {% trans "Key Features" %}
+                </div>
+                <h2 class="section-title">{% trans "Everything You Need for Carbon Management" %}</h2>
+                <p class="section-subtitle">
+                    {% trans "Comprehensive tools and features designed to help organizations track, analyze, and reduce their carbon footprint effectively." %}
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll stagger-1">
+                    <div class="feature-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "Precise Emission Calculation" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using up-to-date emission factors and international standards." %}
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll stagger-2">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "Advanced Analytics Dashboard" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Visualize emission data through interactive charts, KPI cards, and analytical reports for better understanding of your carbon performance." %}
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll stagger-3">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "ISO 14064-1 Reporting" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Generate professional reports compliant with ISO 14064-1 standards with PDF export capabilities and advanced filtering options." %}
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll stagger-4">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "Supplier Management" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Track and manage supplier carbon emissions, assess performance, and collaborate on supply chain emission reduction initiatives." %}
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll stagger-5">
+                    <div class="feature-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "Action Planning" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Set reduction targets, create action plans, and track progress towards your sustainability goals with comprehensive planning tools." %}
+                    </p>
+                </div>
+                
+                <div class="feature-card animate-on-scroll stagger-6">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">{% trans "Security & Privacy" %}</h3>
+                    <p class="feature-description">
+                        {% trans "Enterprise-grade security with advanced encryption, access controls, and full compliance with data privacy regulations." %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-container">
+            <div class="cta-badge">
+                <i class="fas fa-rocket"></i>
+                {% trans "Ready to Get Started?" %}
+            </div>
+            
+            <h2>{% trans "Start Your Carbon Journey Today" %}</h2>
+            <p>
+                {% trans "Join thousands of organizations already using Academia Carbon to track, analyze, and reduce their environmental impact. Start your free trial today." %}
+            </p>
+            
+            <div class="hero-buttons">
+                <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary btn-large">
+                    <i class="fas fa-user-plus"></i>
+                    {% trans "Create Free Account" %}
+                </a>
+                <a href="{% url 'ghg:email_login' %}" class="btn btn-outline btn-large">
+                    <i class="fas fa-sign-in-alt"></i>
+                    {% trans "Sign In" %}
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>
+                        <div style="width: 32px; height: 32px; position: relative; display: inline-flex; align-items: center; justify-content: center; background: var(--primary-gradient); border-radius: 8px; margin-right: 10px;">
+                            <div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid #4ade80; position: absolute; left: 4px; top: 11px;"></div>
+                            <div style="width: 10px; height: 10px; border: 2px solid #a78bfa; border-right: none; border-radius: 10px 0 0 10px; position: absolute; right: 6px; top: 11px;"></div>
+                        </div>
+                        Academia Carbon
+                    </h3>
+                    <p>{% trans "Professional carbon emission tracking and reporting platform for organizations worldwide. ISO 14064-1 certified and trusted by industry leaders." %}</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>{% trans "Product" %}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">{% trans "Features" %}</a></li>
+                        <li><a href="#pricing">{% trans "Pricing" %}</a></li>
+                        <li><a href="#integrations">{% trans "Integrations" %}</a></li>
+                        <li><a href="#api">{% trans "API" %}</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>{% trans "Company" %}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">{% trans "About Us" %}</a></li>
+                        <li><a href="#careers">{% trans "Careers" %}</a></li>
+                        <li><a href="#blog">{% trans "Blog" %}</a></li>
+                        <li><a href="#press">{% trans "Press" %}</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>{% trans "Support" %}</h4>
+                    <ul class="footer-links">
+                        <li><a href="#help">{% trans "Help Center" %}</a></li>
+                        <li><a href="#contact">{% trans "Contact Us" %}</a></li>
+                        <li><a href="#status">{% trans "System Status" %}</a></li>
+                        <li><a href="#security">{% trans "Security" %}</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Academia Carbon. {% trans "All rights reserved." %}</p>
+                <div style="display: flex; gap: 20px;">
+                    <a href="#privacy" style="color: #64748b; text-decoration: none;">{% trans "Privacy Policy" %}</a>
+                    <a href="#terms" style="color: #64748b; text-decoration: none;">{% trans "Terms of Service" %}</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with animate-on-scroll class
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero::before');
+            if (parallax) {
+                const speed = scrolled * 0.5;
+                parallax.style.transform = `translateY(${speed}px)`;
+            }
+        });
+        
+        // Language switching function
+        function setLanguage(langCode) {
+            // Create a form to submit language change
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/i18n/setlang/';
+            
+            // Add CSRF token
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}';
+            
+            const langInput = document.createElement('input');
+            langInput.type = 'hidden';
+            langInput.name = 'language';
+            langInput.value = langCode;
+            
+            const nextInput = document.createElement('input');
+            nextInput.type = 'hidden';
+            nextInput.name = 'next';
+            nextInput.value = '/' + langCode + '/landing/';
+            
+            form.appendChild(csrfInput);
+            form.appendChild(langInput);
+            form.appendChild(nextInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>

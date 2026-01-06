@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block page_title %}Supplier Management{% endblock %}
+{% block page_title %}{% trans "Supplier Management" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -152,20 +152,29 @@
 </style>
 {% endblock %}
 
+{% block header_actions %}
+<!-- Supplier Management specific actions -->
+<div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <label style="font-size: 13px; font-weight: 600; color: #475569;">
+            <i class="fas fa-filter" style="color: #22c55e;"></i> {% trans "Category" %}:
+        </label>
+        <select id="supplier-category" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; min-width: 140px; background: white;">
+            <option value="all" selected>{% trans "All Categories" %}</option>
+            <option value="energy">{% trans "Energy" %}</option>
+            <option value="transportation">{% trans "Transportation" %}</option>
+            <option value="materials">{% trans "Materials" %}</option>
+        </select>
+    </div>
+    <button onclick="addSupplier()" style="padding: 8px 16px; background: #0ea5e9; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">
+        <i class="fas fa-plus"></i> {% trans "Add Supplier" %}
+    </button>
+</div>
+{% endblock %}
+
 {% block content %}
 <!-- Professional Page Header -->
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">Supplier Management</h1>
-            <p style="color: #64748b; margin: 0; font-size: 14px;">
-                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
-                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
-                <span><strong>Standard:</strong> ISO 14064-1</span>
-            </p>
-        </div>
-    </div>
-</div>
+{% include 'partials/page_header.html' %}
 
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <!-- Current Supplier Stats -->
@@ -192,22 +201,20 @@
     <div class="supplier-card">
         <h3>
             <i class="fas fa-truck" style="color: #0ea5e9; margin-right: 10px;"></i>
-            Supplier Carbon Management
-            <span class="coming-soon-badge">Enhanced Features Coming Soon</span>
+            {% trans "Supplier Carbon Management" %}
+            <span class="coming-soon-badge">{% trans "Enhanced Features Coming Soon" %}</span>
         </h3>
         <p>
-            Manage your supplier relationships and track their carbon impact. Currently, you can add suppliers 
-            when entering emission data. Enhanced supplier management features are being developed to help you 
-            engage with suppliers on sustainability initiatives.
+            {% trans "Manage your supplier relationships and track their carbon impact. Currently, you can add suppliers when entering emission data. Enhanced supplier management features are being developed to help you engage with suppliers on sustainability initiatives." %}
         </p>
         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
             <a href="{% url 'ghg:data_entry' %}" class="btn-primary">
                 <i class="fas fa-plus"></i>
-                Add Supplier (via Data Entry)
+                {% trans "Add Supplier (via Data Entry)" %}
             </a>
             <a href="/en/reporting/inventory" class="btn-secondary">
                 <i class="fas fa-chart-line"></i>
-                View Supplier Emissions
+                {% trans "View Supplier Emissions" %}
             </a>
         </div>
     </div>

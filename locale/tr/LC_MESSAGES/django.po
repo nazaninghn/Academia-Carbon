@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Carbon Tracker 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-22 04:08-0800\n"
+"POT-Creation-Date: 2026-01-06 08:02-0800\n"
 "PO-Revision-Date: 2025-11-22 03:25-0800\n"
 "Last-Translator: Carbon Tracker Team\n"
 "Language-Team: Turkish\n"
@@ -17,253 +17,2142 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+# Existing translations
 #: .\ghg\admin_views.py:23
 msgid "Please enter the correct username and password."
 msgstr "Lütfen doğru kullanıcı adı ve şifre girin."
 
-#: .\templates\admin\login.html:8
+#: .\templates\admin\login.html:8 .\templates\auth\login.html:8
+#: .\templates\landing.html:1039
 msgid "Login"
 msgstr "Giriş"
 
-#: .\templates\admin\login.html:318
-msgid "Forever Free GHG Accounting"
-msgstr ""
+# Landing Page Translations
+#: .\templates\auth\login.html:9
+msgid "Login to Academia Carbon - Professional carbon tracking platform"
+msgstr "Academia Carbon'a Giriş - Profesyonel karbon izleme platformu"
 
-#: .\templates\admin\login.html:319
+#: .\templates\auth\login.html:582
+msgid "Professional Carbon Tracking"
+msgstr "Profesyonel Karbon İzleme"
+
+#: .\templates\auth\login.html:585
+msgid "Track Your"
+msgstr "İzleyin"
+
+#: .\templates\auth\login.html:586
+msgid "Carbon Impact"
+msgstr "Karbon Etkisi"
+
+#: .\templates\auth\login.html:590
 msgid ""
-"Track and analyze greenhouse gas emissions data from countries worldwide "
-"with our comprehensive monitoring platform."
+"Join organizations worldwide using Academia Carbon to measure, analyze, and "
+"reduce their environmental footprint with precision and compliance."
 msgstr ""
+"Academia Carbon'u kullanarak çevresel ayak izlerini hassasiyetle ve uyumlu "
+"şekilde ölçen, analiz eden ve azaltan dünya çapındaki kuruluşlara katılın."
 
-#: .\templates\admin\login.html:324
-msgid "GHG Emission Calculations"
-msgstr ""
+#: .\templates\auth\login.html:596
+msgid "Certified"
+msgstr "Sertifikalı"
 
-#: .\templates\admin\login.html:328
-msgid "Real-time Data Analysis"
-msgstr ""
+#: .\templates\auth\login.html:600
+msgid "Accuracy"
+msgstr "Doğruluk"
 
-#: .\templates\admin\login.html:332
-msgid "Detailed Country Reports"
-msgstr ""
+#: .\templates\auth\login.html:604 .\templates\landing.html:1094
+#: .\templates\landing.html:1270 .\templates\partials\sidebar.html:93
+msgid "Support"
+msgstr "Destek"
 
-#: .\templates\admin\login.html:336
-msgid "Interactive Visualizations"
-msgstr ""
-
-#: .\templates\admin\login.html:346
+#: .\templates\auth\login.html:613
 msgid "Welcome Back"
-msgstr ""
+msgstr "Tekrar Hoş Geldiniz"
 
-#: .\templates\admin\login.html:347
-msgid "Please log in to your account to continue"
-msgstr ""
+#: .\templates\auth\login.html:614
+msgid "Sign in to continue tracking your carbon footprint"
+msgstr "Karbon ayak izinizi izlemeye devam etmek için oturum açın"
 
-#: .\templates\admin\login.html:363
+#: .\templates\auth\login.html:638 .\templates\auth\signup.html:559
 msgid "Email Address"
-msgstr ""
+msgstr "E-posta Adresi"
 
-#: .\templates\admin\login.html:376
+#: .\templates\auth\login.html:648 .\templates\auth\signup.html:591
 msgid "Password"
 msgstr "Şifre"
 
-#: .\templates\admin\login.html:382
-msgid "Enter your password"
-msgstr "Şifrenizi girin"
+#: .\templates\auth\login.html:661 .\templates\auth\signup.html:638
+#: .\templates\landing.html:1222
+msgid "Sign In"
+msgstr "Oturum Açın"
 
-#: .\templates\admin\login.html:390
-msgid "Log In"
-msgstr "Giriş Yap"
+#: .\templates\auth\login.html:666
+msgid "or continue with"
+msgstr "veya devam edin"
 
-#: .\templates\admin\login.html:395
-msgid "Secure Login"
+#: .\templates\auth\login.html:669
+msgid "Google login coming soon!"
+msgstr "Google girişi yakında geliyor!"
+
+#: .\templates\auth\login.html:676
+msgid "Continue with Google"
+msgstr "Google ile Devam Et"
+
+#: .\templates\auth\login.html:680
+msgid "Don't have an account?"
+msgstr "Hesabınız yok mu?"
+
+#: .\templates\auth\login.html:682 .\templates\auth\signup.html:8
+msgid "Sign Up"
+msgstr "Kayıt Ol"
+
+#: .\templates\auth\signup.html:9
+msgid ""
+"Create your Academia Carbon account - Start tracking your carbon footprint"
 msgstr ""
+"Academia Carbon hesabınızı oluşturun - Karbon ayak izinizi izlemeye başlayın"
 
-#: .\templates\admin\login.html:399
-msgid "Protected by enterprise-grade security"
-msgstr ""
+#: .\templates\auth\signup.html:532
+msgid "Join Academia Carbon"
+msgstr "Academia Carbon'a Katılın"
 
-#: .\templates\base.html:9
-msgid "Carbon Tracker - GHG Emissions"
-msgstr "Karbon İzleyici - Sera Gazı Emisyonları"
+#: .\templates\auth\signup.html:533
+msgid "Create your account and start tracking your carbon footprint"
+msgstr "Hesabınızı oluşturun ve karbon ayak izinizi izlemeye başlayın"
 
-#: .\templates\base.html:19
-msgid "Carbon Tracker"
-msgstr "Karbon İzleyici"
+#: .\templates\auth\signup.html:570
+msgid "First Name"
+msgstr "Ad"
 
-#: .\templates\base.html:64
+#: .\templates\auth\signup.html:580
+msgid "Last Name"
+msgstr "Soyad"
+
+#: .\templates\auth\signup.html:604
+msgid "Confirm Password"
+msgstr "Şifreyi Onayla"
+
+#: .\templates\auth\signup.html:616
+msgid "Password Requirements:"
+msgstr "Şifre Gereksinimleri:"
+
+#: .\templates\auth\signup.html:618
+msgid "At least 8 characters long"
+msgstr "En az 8 karakter uzunluğunda"
+
+#: .\templates\auth\signup.html:619
+msgid "Not similar to your personal information"
+msgstr "Kişisel bilgilerinize benzer olmamalı"
+
+#: .\templates\auth\signup.html:620
+msgid "Not a commonly used password"
+msgstr "Yaygın kullanılan bir şifre olmamalı"
+
+#: .\templates\auth\signup.html:621
+msgid "Cannot be entirely numeric"
+msgstr "Tamamen sayısal olamaz"
+
+#: .\templates\auth\signup.html:627
+msgid "Create Account"
+msgstr "Hesap Oluştur"
+
+#: .\templates\auth\signup.html:632
+#: .\venv\Lib\site-packages\django\utils\text.py:287
+msgid "or"
+msgstr "veya"
+
+#: .\templates\auth\signup.html:636
+msgid "Already have an account?"
+msgstr "Zaten hesabınız var mı?"
+
+#: .\templates\base.html:110 .\templates\landing.html:1281
 msgid "All rights reserved."
 msgstr "Tüm hakları saklıdır."
 
-#: .\templates\index.html:168
-#, fuzzy
-#| msgid "Total Global Emissions"
-msgid "Global GHG Emissions Dashboard"
-msgstr "Toplam Küresel Emisyonlar"
+#: .\templates\dashboard_base.html:576 .\templates\index.html:5
+#: .\templates\partials\page_header.html:7 .\templates\partials\sidebar.html:32
+msgid "Dashboard"
+msgstr "Kontrol Paneli"
 
-#: .\templates\index.html:170
-#, fuzzy
-#| msgid ""
-#| "View and analyze CO2 and other greenhouse gas emissions data worldwide"
-msgid "Real-time tracking and analysis of greenhouse gas emissions worldwide"
-msgstr ""
-"Dünya çapında CO2 ve diğer sera gazı emisyon verilerini görüntüleyin ve "
-"analiz edin"
+# Dashboard translations
+#: .\templates\dashboard_base.html:585
+msgid "Logout"
+msgstr "Çıkış"
 
-#: .\templates\index.html:175
+#: .\templates\data_entry.html:164 .\templates\partials\sidebar.html:38
+msgid "Data Collection"
+msgstr "Veri Toplama"
+
+#: .\templates\data_entry_new.html:10
 #, fuzzy
-#| msgid "Total Global Emissions"
+#| msgid "Supplier Management"
+msgid "Emission Management"
+msgstr "Tedarikçi Yönetimi"
+
+#: .\templates\index.html:12
+msgid "Period"
+msgstr "Dönem"
+
+#: .\templates\index.html:17
+msgid "All Time"
+msgstr "Tüm Zamanlar"
+
+#: .\templates\index.html:21
+msgid "Refresh"
+msgstr "Yenile"
+
+#: .\templates\index.html:33
+msgid "Welcome back!"
+msgstr "Tekrar hoş geldiniz!"
+
+#: .\templates\index.html:34
+msgid "Here's what's happening with your carbon emissions today."
+msgstr "Bugün karbon emisyonlarınızla ilgili neler oluyor."
+
+#: .\templates\index.html:42
 msgid "Total Emissions"
-msgstr "Toplam Küresel Emisyonlar"
+msgstr "Toplam Emisyonlar"
+
+#: .\templates\index.html:48 .\templates\index.html:64
+#: .\templates\index.html:80 .\templates\index.html:96
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: .\templates\index.html:52 .\templates\index.html:68
+#: .\templates\index.html:84
+msgid "Calculating..."
+msgstr "Hesaplanıyor..."
+
+#: .\templates\index.html:58
+msgid "Records Count"
+msgstr "Kayıt Sayısı"
+
+#: .\templates\index.html:74
+msgid "This Month"
+msgstr "Bu Ay"
+
+#: .\templates\index.html:90 .\templates\partials\sidebar.html:68
+msgid "Suppliers"
+msgstr "Tedarikçiler"
+
+#: .\templates\index.html:99
+msgid "Active suppliers"
+msgstr "Aktif tedarikçiler"
+
+#: .\templates\index.html:108
+msgid "Emissions by Scope"
+msgstr "Kapsam Bazında Emisyonlar"
+
+#: .\templates\index.html:109
+msgid "Distribution across Scope 1, 2, and 3"
+msgstr "Kapsam 1, 2 ve 3 arasında dağılım"
+
+#: .\templates\index.html:118
+msgid "Monthly Trends"
+msgstr "Aylık Trendler"
+
+#: .\templates\index.html:119
+msgid "Emission trends over the last 6 months"
+msgstr "Son 6 ayın emisyon trendleri"
+
+#: .\templates\index.html:130
+msgid "Quick Actions"
+msgstr "Hızlı İşlemler"
+
+#: .\templates\index.html:131
+msgid "Get started with common tasks"
+msgstr "Yaygın görevlerle başlayın"
+
+#: .\templates\index.html:137
+msgid "Add Emission Data"
+msgstr "Emisyon Verisi Ekle"
+
+#: .\templates\index.html:141
+msgid "Generate Report"
+msgstr "Rapor Oluştur"
+
+#: .\templates\index.html:145
+msgid "View Analysis"
+msgstr "Analizi Görüntüle"
+
+#: .\templates\index.html:149
+msgid "View History"
+msgstr "Geçmişi Görüntüle"
+
+#: .\templates\index.html:159
+msgid "Recent Activity"
+msgstr "Son Aktiviteler"
+
+#: .\templates\index.html:168
+msgid "New emission record added"
+msgstr "Yeni emisyon kaydı eklendi"
+
+#: .\templates\index.html:169
+msgid "2 hours ago"
+msgstr "2 saat önce"
 
 #: .\templates\index.html:177
-#, fuzzy
-#| msgid "CO2 (Million tons)"
-msgid "Million tons CO2e"
-msgstr "CO2 (Milyon ton)"
+msgid "Report generated"
+msgstr "Rapor oluşturuldu"
 
-#: .\templates\index.html:180
-#, fuzzy
-#| msgid "Carbon Tracker"
-msgid "Countries Tracked"
-msgstr "Karbon İzleyici"
+#: .\templates\index.html:178
+msgid "1 day ago"
+msgstr "1 gün önce"
 
-#: .\templates\index.html:182
-msgid "Active monitoring"
-msgstr ""
-
-#: .\templates\index.html:185
-msgid "Data Points"
-msgstr ""
+#: .\templates\index.html:186
+msgid "Analysis completed"
+msgstr "Analiz tamamlandı"
 
 #: .\templates\index.html:187
-msgid "Historical records"
-msgstr ""
+msgid "3 days ago"
+msgstr "3 gün önce"
 
-#: .\templates\index.html:190
-msgid "Last Update"
-msgstr ""
+#: .\templates\index.html:196
+msgid "Tips & Insights"
+msgstr "İpuçları ve Görüşler"
 
-#: .\templates\index.html:192 .\templates\index.html:245
-msgid "Year"
-msgstr ""
+#: .\templates\index.html:204
+msgid "Reduce Scope 2 Emissions"
+msgstr "Kapsam 2 Emisyonlarını Azaltın"
 
-#: .\templates\index.html:201
+#: .\templates\index.html:205
+msgid ""
+"Consider switching to renewable energy sources to lower your electricity-"
+"based emissions."
+msgstr ""
+"Elektrik tabanlı emisyonlarınızı azaltmak için yenilenebilir enerji "
+"kaynaklarına geçmeyi düşünün."
+
+#: .\templates\index.html:213
+msgid "Track Progress"
+msgstr "İlerlemeyi İzleyin"
+
+#: .\templates\index.html:214
+msgid ""
+"Set monthly targets and monitor your emission reduction progress over time."
+msgstr ""
+"Aylık hedefler belirleyin ve zaman içinde emisyon azaltma ilerlemenizi "
+"izleyin."
+
+# Landing Page Translations
+#: .\templates\landing.html:8
+msgid "Academia Carbon - Professional Carbon Tracking Platform"
+msgstr "Academia Carbon - Profesyonel Karbon İzleme Platformu"
+
+#: .\templates\landing.html:9
+msgid ""
+"Professional carbon emission tracking and reporting platform for "
+"organizations. ISO 14064-1 compliant reporting, real-time analytics, and "
+"comprehensive carbon management tools."
+msgstr ""
+"Kuruluşlar için profesyonel karbon emisyon izleme ve raporlama platformu. "
+"ISO 14064-1 uyumlu raporlama, gerçek zamanlı analitik ve kapsamlı karbon "
+"yönetim araçları."
+
+#: .\templates\landing.html:1023 .\templates\landing.html:1252
+msgid "Features"
+msgstr "Özellikler"
+
+#: .\templates\landing.html:1024
+msgid "About"
+msgstr "Hakkında"
+
+#: .\templates\landing.html:1025
+msgid "Contact"
+msgstr "İletişim"
+
+#: .\templates\landing.html:1043
+msgid "Get Started"
+msgstr "Başlayın"
+
+#: .\templates\landing.html:1059
+msgid "ISO 14064-1 Certified Platform"
+msgstr "ISO 14064-1 Sertifikalı Platform"
+
+#: .\templates\landing.html:1063
+msgid "Professional"
+msgstr "Profesyonel"
+
+#: .\templates\landing.html:1064
+msgid "Carbon Tracking"
+msgstr "Karbon İzleme"
+
+#: .\templates\landing.html:1065
+msgid "Platform"
+msgstr "Platform"
+
+#: .\templates\landing.html:1069
+msgid ""
+"Track, analyze, and report your organization's carbon emissions with "
+"precision. Our comprehensive platform provides real-time analytics, ISO "
+"14064-1 compliant reporting, and actionable insights for sustainable growth."
+msgstr ""
+"Kuruluşunuzun karbon emisyonlarını hassasiyetle izleyin, analiz edin ve "
+"raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 "
+"uyumlu raporlama ve sürdürülebilir büyüme için eyleme dönüştürülebilir "
+"içgörüler sağlar."
+
+#: .\templates\landing.html:1075
+msgid "Start Free Trial"
+msgstr "Ücretsiz Deneme Başlatın"
+
+#: .\templates\landing.html:1079
+msgid "Watch Demo"
+msgstr "Demo İzleyin"
+
+#: .\templates\landing.html:1086
+msgid "Certified Standard"
+msgstr "Sertifikalı Standart"
+
+#: .\templates\landing.html:1090
+msgid "Accuracy Rate"
+msgstr "Doğruluk Oranı"
+
+#: .\templates\landing.html:1107
+msgid "Carbon Analytics Dashboard"
+msgstr "Karbon Analitik Panosu"
+
+#: .\templates\landing.html:1113
+msgid "Real-time Emission Tracking"
+msgstr "Gerçek Zamanlı Emisyon İzleme"
+
+#: .\templates\landing.html:1130
+msgid "Key Features"
+msgstr "Temel Özellikler"
+
+#: .\templates\landing.html:1132
+msgid "Everything You Need for Carbon Management"
+msgstr "Karbon Yönetimi İçin İhtiyacınız Olan Her Şey"
+
+#: .\templates\landing.html:1134
+msgid ""
+"Comprehensive tools and features designed to help organizations track, "
+"analyze, and reduce their carbon footprint effectively."
+msgstr ""
+"Kuruluşların karbon ayak izlerini etkili bir şekilde izlemelerine, analiz "
+"etmelerine ve azaltmalarına yardımcı olmak için tasarlanmış kapsamlı araçlar "
+"ve özellikler."
+
+#: .\templates\landing.html:1143
+msgid "Precise Emission Calculation"
+msgstr "Hassas Emisyon Hesaplama"
+
+#: .\templates\landing.html:1145
+msgid ""
+"Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using "
+"up-to-date emission factors and international standards."
+msgstr ""
+"Güncel emisyon faktörleri ve uluslararası standartları kullanarak üç kapsam "
+"(1, 2, 3) boyunca sera gazı emisyonlarını hesaplayın."
+
+#: .\templates\landing.html:1153
+msgid "Advanced Analytics Dashboard"
+msgstr "Gelişmiş Analitik Panosu"
+
+#: .\templates\landing.html:1155
+msgid ""
+"Visualize emission data through interactive charts, KPI cards, and "
+"analytical reports for better understanding of your carbon performance."
+msgstr ""
+"Karbon performansınızı daha iyi anlamak için etkileşimli grafikler, KPI "
+"kartları ve analitik raporlar aracılığıyla emisyon verilerini görselleştirin."
+
+#: .\templates\landing.html:1163
+msgid "ISO 14064-1 Reporting"
+msgstr "ISO 14064-1 Raporlama"
+
+#: .\templates\landing.html:1165
+msgid ""
+"Generate professional reports compliant with ISO 14064-1 standards with PDF "
+"export capabilities and advanced filtering options."
+msgstr ""
+"PDF dışa aktarma yetenekleri ve gelişmiş filtreleme seçenekleri ile ISO "
+"14064-1 standartlarına uygun profesyonel raporlar oluşturun."
+
+#: .\templates\landing.html:1173
+msgid "Supplier Management"
+msgstr "Tedarikçi Yönetimi"
+
+#: .\templates\landing.html:1175
+msgid ""
+"Track and manage supplier carbon emissions, assess performance, and "
+"collaborate on supply chain emission reduction initiatives."
+msgstr ""
+"Tedarikçi karbon emisyonlarını izleyin ve yönetin, performansı değerlendirin "
+"ve tedarik zinciri emisyon azaltma girişimlerinde işbirliği yapın."
+
+#: .\templates\landing.html:1183 .\templates\partials\sidebar.html:62
+msgid "Action Planning"
+msgstr "Eylem Planlaması"
+
+#: .\templates\landing.html:1185
+msgid ""
+"Set reduction targets, create action plans, and track progress towards your "
+"sustainability goals with comprehensive planning tools."
+msgstr ""
+"Kapsamlı planlama araçları ile azaltım hedefleri belirleyin, eylem planları "
+"oluşturun ve sürdürülebilirlik hedeflerinize doğru ilerlemeyi izleyin."
+
+#: .\templates\landing.html:1193
+msgid "Security & Privacy"
+msgstr "Güvenlik ve Gizlilik"
+
+#: .\templates\landing.html:1195
+msgid ""
+"Enterprise-grade security with advanced encryption, access controls, and "
+"full compliance with data privacy regulations."
+msgstr ""
+"Gelişmiş şifreleme, erişim kontrolleri ve veri gizliliği düzenlemelerine tam "
+"uyum ile kurumsal düzeyde güvenlik."
+
+#: .\templates\landing.html:1207
+msgid "Ready to Get Started?"
+msgstr "Başlamaya Hazır mısınız?"
+
+#: .\templates\landing.html:1210
+msgid "Start Your Carbon Journey Today"
+msgstr "Karbon Yolculuğunuza Bugün Başlayın"
+
+#: .\templates\landing.html:1212
+msgid ""
+"Join thousands of organizations already using Academia Carbon to track, "
+"analyze, and reduce their environmental impact. Start your free trial today."
+msgstr ""
+"Çevresel etkilerini izlemek, analiz etmek ve azaltmak için Academia Carbon'u "
+"zaten kullanan binlerce kuruluşa katılın. Ücretsiz denemenizi bugün başlatın."
+
+#: .\templates\landing.html:1218
+msgid "Create Free Account"
+msgstr "Ücretsiz Hesap Oluşturun"
+
+#: .\templates\landing.html:1240
+msgid ""
+"Professional carbon emission tracking and reporting platform for "
+"organizations worldwide. ISO 14064-1 certified and trusted by industry "
+"leaders."
+msgstr ""
+"Dünya çapındaki kuruluşlar için profesyonel karbon emisyon izleme ve "
+"raporlama platformu. ISO 14064-1 sertifikalı ve endüstri liderleri "
+"tarafından güvenilen."
+
+#: .\templates\landing.html:1250
+msgid "Product"
+msgstr "Ürün"
+
+#: .\templates\landing.html:1253
+msgid "Pricing"
+msgstr "Fiyatlandırma"
+
+#: .\templates\landing.html:1254
+msgid "Integrations"
+msgstr "Entegrasyonlar"
+
+#: .\templates\landing.html:1255
+msgid "API"
+msgstr "API"
+
+#: .\templates\landing.html:1260
+msgid "Company"
+msgstr "Şirket"
+
+#: .\templates\landing.html:1262
+msgid "About Us"
+msgstr "Hakkımızda"
+
+#: .\templates\landing.html:1263
+msgid "Careers"
+msgstr "Kariyer"
+
+#: .\templates\landing.html:1264
+msgid "Blog"
+msgstr "Blog"
+
+#: .\templates\landing.html:1265
+msgid "Press"
+msgstr "Basın"
+
+#: .\templates\landing.html:1272
+msgid "Help Center"
+msgstr "Yardım Merkezi"
+
+#: .\templates\landing.html:1273
+msgid "Contact Us"
+msgstr "Bize Ulaşın"
+
+#: .\templates\landing.html:1274
+msgid "System Status"
+msgstr "Sistem Durumu"
+
+#: .\templates\landing.html:1275
+msgid "Security"
+msgstr "Güvenlik"
+
+#: .\templates\landing.html:1283
+msgid "Privacy Policy"
+msgstr "Gizlilik Politikası"
+
+#: .\templates\landing.html:1284
+msgid "Terms of Service"
+msgstr "Hizmet Şartları"
+
+#: .\templates\partials\sidebar.html:14
 #, fuzzy
-#| msgid "CO2 Emissions Trend"
-msgid "Global Emissions Trend"
-msgstr "CO2 Emisyon Trendi"
+#| msgid "Carbon Tracking"
+msgid "GHG Tracking"
+msgstr "Sera Gazı İzleme"
 
-#: .\templates\index.html:207
-#, fuzzy
-#| msgid "Country Data"
-msgid "Country Analysis"
-msgstr "Ülke Verileri"
+#: .\templates\partials\sidebar.html:21
+msgid "Add Data"
+msgstr "Veri Ekle"
 
-#: .\templates\index.html:209
-msgid "Select a country to view detailed data"
+#: .\templates\partials\sidebar.html:25
+msgid "MENU"
+msgstr "MENÜ"
+
+#: .\templates\partials\sidebar.html:44
+msgid "Emissions"
+msgstr "Emisyonlar"
+
+#: .\templates\partials\sidebar.html:50
+msgid "Analysis"
+msgstr "Analiz"
+
+#: .\templates\partials\sidebar.html:56
+msgid "Reporting"
+msgstr "Raporlama"
+
+#: .\templates\partials\sidebar.html:81
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: .\templates\partials\sidebar.html:87
+msgid "Help & Guide"
+msgstr "Yardım ve Rehber"
+
+#: .\templates\partials\sidebar.html:101
+msgid "24/7 Support Available"
+msgstr "7/24 Destek Mevcut"
+
+#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
+msgid "Messages"
 msgstr ""
 
-#: .\templates\index.html:221
-#, fuzzy
-#| msgid "Total Emissions Over Time"
-msgid "Emissions Over Time"
-msgstr "Zaman İçinde Toplam Emisyonlar"
-
-#: .\templates\index.html:227
-msgid "Gas Composition"
+#: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
+msgid "Site Maps"
 msgstr ""
 
-#: .\templates\index.html:234
-#, fuzzy
-#| msgid "CO2 Emissions Trend"
-msgid "CO2 Emissions by Year"
-msgstr "CO2 Emisyon Trendi"
-
-#: .\templates\index.html:240
-msgid "Detailed Emissions Data"
+#: .\venv\Lib\site-packages\django\contrib\staticfiles\apps.py:9
+msgid "Static Files"
 msgstr ""
 
-#: .\templates\index.html:246 .\templates\index.html:277
-msgid "CO2"
+#: .\venv\Lib\site-packages\django\contrib\syndication\apps.py:7
+msgid "Syndication"
 msgstr ""
 
-#: .\templates\index.html:247
-#, fuzzy
-#| msgid "Methane (CH4)"
-msgid "Methane"
-msgstr "Metan (CH4)"
-
-#: .\templates\index.html:248
-msgid "N2O"
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: .\venv\Lib\site-packages\django\core\paginator.py:30
+msgid "…"
 msgstr ""
 
-#: .\templates\index.html:249
-msgid "Total"
+#: .\venv\Lib\site-packages\django\core\paginator.py:32
+msgid "That page number is not an integer"
 msgstr ""
 
-#: .\templates\index.html:250
-msgid "Trend"
+#: .\venv\Lib\site-packages\django\core\paginator.py:33
+msgid "That page number is less than 1"
 msgstr ""
 
-#: .\templates\index.html:256
-#, fuzzy
-#| msgid "Select a country"
-msgid "Select a country to view data"
-msgstr "Bir ülke seçin"
-
-#: .\templates\index.html:267
-msgid "Top Emitters (2023)"
+#: .\venv\Lib\site-packages\django\core\paginator.py:34
+msgid "That page contains no results"
 msgstr ""
 
-#: .\templates\index.html:276
-msgid "Global Emissions (Million tons CO2)"
-msgstr "Küresel Emisyonlar (Milyon ton CO2)"
+#: .\venv\Lib\site-packages\django\core\validators.py:22
+msgid "Enter a valid value."
+msgstr ""
 
-#: .\templates\index.html:278
-msgid "Methane (CH4)"
-msgstr "Metan (CH4)"
+#: .\venv\Lib\site-packages\django\core\validators.py:70
+msgid "Enter a valid domain name."
+msgstr ""
 
-#: .\templates\index.html:279
-msgid "Nitrous Oxide (N2O)"
-msgstr "Azot Oksit (N2O)"
+#: .\venv\Lib\site-packages\django\core\validators.py:153
+#: .\venv\Lib\site-packages\django\forms\fields.py:775
+msgid "Enter a valid URL."
+msgstr ""
 
-#: .\templates\index.html:280
-#, fuzzy
-#| msgid "Total Emissions (CO2 equivalent)"
-msgid "Total Emissions (CO2e)"
-msgstr "Toplam Emisyonlar (CO2 eşdeğeri)"
+#: .\venv\Lib\site-packages\django\core\validators.py:200
+msgid "Enter a valid integer."
+msgstr ""
 
-#: .\templates\index.html:281
-#, fuzzy
-#| msgid "CO2 (Million tons)"
-msgid "Million tons"
-msgstr "CO2 (Milyon ton)"
+#: .\venv\Lib\site-packages\django\core\validators.py:211
+msgid "Enter a valid email address."
+msgstr ""
 
-#~ msgid "Admin Login"
-#~ msgstr "Yönetici Girişi"
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: .\venv\Lib\site-packages\django\core\validators.py:289
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
 
-#~ msgid "Username"
-#~ msgstr "Kullanıcı Adı"
+#: .\venv\Lib\site-packages\django\core\validators.py:297
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
 
-#~ msgid "Enter your username"
-#~ msgstr "Kullanıcı adınızı girin"
-
-#~ msgid "or connect with"
-#~ msgstr "veya bağlan"
-
-#~ msgid "Back to"
-#~ msgstr "Geri dön"
-
-#~ msgid "Home Page"
-#~ msgstr "Ana Sayfa"
-
-#~ msgid "Greenhouse Gas Emissions Tracker"
-#~ msgstr "Sera Gazı Emisyon İzleyici"
-
+#: .\venv\Lib\site-packages\django\core\validators.py:309
+#: .\venv\Lib\site-packages\django\core\validators.py:318
+#: .\venv\Lib\site-packages\django\core\validators.py:332
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2220
 #, python-format
-#~ msgid "Million tons CO2 equivalent (%(year)s)"
-#~ msgstr "Milyon ton CO2 eşdeğeri (%(year)s)"
+msgid "Enter a valid %(protocol)s address."
+msgstr ""
 
-#~ msgid "Greenhouse Gas Comparison"
-#~ msgstr "Sera Gazı Karşılaştırması"
+#: .\venv\Lib\site-packages\django\core\validators.py:311
+msgid "IPv4"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:320
+#: .\venv\Lib\site-packages\django\utils\ipv6.py:43
+msgid "IPv6"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:334
+msgid "IPv4 or IPv6"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:375
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:381
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:416
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:425
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:434
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:441
+#, python-format
+msgid ""
+"Ensure this value is a multiple of step size %(limit_value)s, starting from "
+"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:473
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:491
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:514
+#: .\venv\Lib\site-packages\django\forms\fields.py:366
+#: .\venv\Lib\site-packages\django\forms\fields.py:405
+msgid "Enter a number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:516
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:521
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:526
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:597
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\core\validators.py:659
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1600
+#: .\venv\Lib\site-packages\django\forms\models.py:908
+msgid "and"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\base.py:1602
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\constraints.py:22
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:134
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
+msgid "This field cannot be null."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:136
+msgid "This field cannot be blank."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:137
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:141
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:180
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1162
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1163
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1165
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1215
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1217
+msgid "String (unlimited)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1326
+msgid "Comma-separated integers"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1427
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1431
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1566
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1435
+msgid "Date (without time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1562
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
+"HH:MM[:ss[.uuuuuu]][TZ] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1570
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1575
+msgid "Date (with time)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1702
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1704
+msgid "Decimal number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1864
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] "
+"[[HH:]MM:]ss[.uuuuuu] format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1868
+#, fuzzy
+#| msgid "Integrations"
+msgid "Duration"
+msgstr "Entegrasyonlar"
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1920
+msgid "Email address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1945
+msgid "File path"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2023
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2025
+msgid "Floating point number"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2065
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2067
+#, fuzzy
+#| msgid "Integrations"
+msgid "Integer"
+msgstr "Entegrasyonlar"
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2163
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2180
+msgid "Small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2188
+msgid "IPv4 address"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2219
+#, fuzzy
+#| msgid "Press"
+msgid "IP address"
+msgstr "Basın"
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2310
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2311
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2313
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2364
+msgid "Positive big integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2379
+msgid "Positive integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2394
+msgid "Positive small integer"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2410
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2446
+msgid "Text"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2526
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2530
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2534
+msgid "Time"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2642
+msgid "URL"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2666
+msgid "Raw binary data"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2731
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2733
+msgid "Universally unique identifier"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:244
+msgid "File"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\files.py:420
+msgid "Image"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:24
+msgid "A JSON object"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:979
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r is not a valid choice."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:982
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1276
+msgid "One-to-one relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1333
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1335
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1383
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: .\venv\Lib\site-packages\django\forms\boundfield.py:185
+msgid ":?.!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:95
+msgid "This field is required."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:315
+msgid "Enter a whole number."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:486
+#: .\venv\Lib\site-packages\django\forms\fields.py:1267
+msgid "Enter a valid date."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:509
+#: .\venv\Lib\site-packages\django\forms\fields.py:1268
+msgid "Enter a valid time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:536
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:570
+msgid "Enter a valid duration."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:571
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:640
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:641
+msgid "No file was submitted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:642
+msgid "The submitted file is empty."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:644
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:649
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:717
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:889
+#: .\venv\Lib\site-packages\django\forms\fields.py:975
+#: .\venv\Lib\site-packages\django\forms\models.py:1592
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:977
+#: .\venv\Lib\site-packages\django\forms\fields.py:1096
+#: .\venv\Lib\site-packages\django\forms\models.py:1590
+msgid "Enter a list of values."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1097
+msgid "Enter a complete value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1339
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\fields.py:1369
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: .\venv\Lib\site-packages\django\forms\forms.py:97
+msgid ":"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\forms.py:239
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:61
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:65
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:70
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:484
+#: .\venv\Lib\site-packages\django\forms\formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:901
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:906
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:913
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:922
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1359
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1450
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\models.py:1594
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\utils.py:229
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:527
+msgid "Clear"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:528
+msgid "Currently"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:529
+msgid "Change"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:866
+msgid "Unknown"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:867
+msgid "Yes"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\forms\widgets.py:868
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:873
+msgid "yes,no,maybe"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:903
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:920
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:922
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:924
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:926
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:928
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\template\defaultfilters.py:930
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:74
+msgid "p.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:75
+msgid "a.m."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:80
+msgid "PM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:81
+msgid "AM"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:153
+msgid "midnight"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dateformat.py:155
+msgid "noon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:25
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:26
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:27
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:28
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:29
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:30
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:31
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:32
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:33
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:34
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:35
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:36
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:39
+msgid "jan"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:40
+msgid "feb"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:41
+msgid "mar"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:42
+msgid "apr"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:43
+#, fuzzy
+#| msgid "Company"
+msgid "may"
+msgstr "Şirket"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:44
+msgid "jun"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:45
+msgid "jul"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:46
+msgid "aug"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:47
+msgid "sep"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:48
+#, fuzzy
+#| msgid "Contact"
+msgid "oct"
+msgstr "İletişim"
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:49
+msgid "nov"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:50
+msgid "dec"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\text.py:76
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: .\venv\Lib\site-packages\django\utils\text.py:306
+#: .\venv\Lib\site-packages\django\utils\timesince.py:135
+msgid ", "
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\utils\timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:29
+msgid "Forbidden"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:30
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:34
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:40
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:45
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:54
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:60
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\csrf.py:66
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:64
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:115
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:353
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:384
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:680
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because "
+"%(class_name)s.allow_future is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\dates.py:720
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\generic\list.py:173
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:49
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:51
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\static.py:68
+#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:8
+#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:11
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:204
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:208
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:217
+msgid "Django Documentation"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:218
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:226
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:227
+msgid "Get started with Django"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:235
+msgid "Django Community"
+msgstr ""
+
+#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#~ msgid "Carbon Tracker - GHG Emissions"
+#~ msgstr "Karbon İzleyici - Sera Gazı Emisyonları"
+
+# Analysis Page Translations
+msgid "Analysis"
+msgstr "Analiz"
+
+msgid "Emissions Analysis"
+msgstr "Emisyon Analizi"
+
+msgid "Professional ISO 14064-1 compliant emissions reporting and analysis dashboard."
+msgstr "Profesyonel ISO 14064-1 uyumlu emisyon raporlama ve analiz panosu."
+
+msgid "Scope-wise emission breakdown"
+msgstr "Kapsam bazında emisyon dağılımı"
+
+msgid "Date range filtering"
+msgstr "Tarih aralığı filtreleme"
+
+msgid "Source contribution analysis"
+msgstr "Kaynak katkı analizi"
+
+msgid "Audit-ready reporting"
+msgstr "Denetim için hazır raporlama"
+
+msgid "Comparative Analysis"
+msgstr "Karşılaştırmalı Analiz"
+
+msgid "Compare your emissions with industry benchmarks and similar organizations."
+msgstr "Emisyonlarınızı sektör kıyaslamaları ve benzer kuruluşlarla karşılaştırın."
+
+msgid "Coming Soon"
+msgstr "Yakında Geliyor"
+
+msgid "Industry benchmarking"
+msgstr "Sektör kıyaslama"
+
+msgid "Peer comparison"
+msgstr "Eş karşılaştırma"
+
+msgid "Best practice insights"
+msgstr "En iyi uygulama içgörüleri"
+
+msgid "Improvement recommendations"
+msgstr "İyileştirme önerileri"
+
+msgid "Performance Analysis"
+msgstr "Performans Analizi"
+
+msgid "Track your carbon reduction performance and goal achievement over time."
+msgstr "Zaman içinde karbon azaltım performansınızı ve hedef başarınızı izleyin."
+
+msgid "Goal tracking & progress"
+msgstr "Hedef izleme ve ilerleme"
+
+msgid "Reduction trend analysis"
+msgstr "Azaltım trend analizi"
+
+msgid "Performance scoring"
+msgstr "Performans puanlama"
+
+msgid "Achievement milestones"
+msgstr "Başarı kilometre taşları"
+
+msgid "Supplier Analysis"
+msgstr "Tedarikçi Analizi"
+
+msgid "Analyze emissions from your supply chain and supplier carbon footprint."
+msgstr "Tedarik zincirinizden ve tedarikçi karbon ayak izinden emisyonları analiz edin."
+
+msgid "NEW"
+msgstr "YENİ"
+
+msgid "Supplier carbon footprint"
+msgstr "Tedarikçi karbon ayak izi"
+
+msgid "Supply chain emissions"
+msgstr "Tedarik zinciri emisyonları"
+
+msgid "Vendor sustainability scoring"
+msgstr "Satıcı sürdürülebilirlik puanlama"
+
+msgid "Procurement recommendations"
+msgstr "Tedarik önerileri"
+
+# Emissions Page Translations
+msgid "Method"
+msgstr "Yöntem"
+
+msgid "GHG-Based"
+msgstr "GHG Tabanlı"
+
+msgid "ISO 14064-1"
+msgstr "ISO 14064-1"
+
+msgid "Export All"
+msgstr "Tümünü Dışa Aktar"
+
+# Reporting Page Translations
+msgid "Filter"
+msgstr "Filtre"
+
+msgid "All Scopes"
+msgstr "Tüm Kapsamlar"
+
+msgid "Scope 1"
+msgstr "Kapsam 1"
+
+msgid "Scope 2"
+msgstr "Kapsam 2"
+
+msgid "Scope 3"
+msgstr "Kapsam 3"
+
+msgid "Generate PDF"
+msgstr "PDF Oluştur"
+
+# Action Planning Page Translations
+msgid "Target Year"
+msgstr "Hedef Yıl"
+
+msgid "New Plan"
+msgstr "Yeni Plan"
+
+msgid "Carbon Reduction Action Planning"
+msgstr "Karbon Azaltım Eylem Planlaması"
+
+msgid "Develop and track your organization's carbon reduction initiatives. Set targets, create action plans, and monitor progress towards your sustainability goals with our comprehensive action planning tools."
+msgstr "Kuruluşunuzun karbon azaltım girişimlerini geliştirin ve izleyin. Hedefler belirleyin, eylem planları oluşturun ve kapsamlı eylem planlama araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi izleyin."
+
+msgid "Start with Data Collection"
+msgstr "Veri Toplama ile Başlayın"
+
+msgid "View Current Emissions"
+msgstr "Mevcut Emisyonları Görüntüle"
+
+# Supplier Management Page Translations
+msgid "Category"
+msgstr "Kategori"
+
+msgid "Add Supplier"
+msgstr "Tedarikçi Ekle"
+
+msgid "Supplier Carbon Management"
+msgstr "Tedarikçi Karbon Yönetimi"
+
+msgid "Enhanced Features Coming Soon"
+msgstr "Gelişmiş Özellikler Yakında Geliyor"
+
+msgid "Manage your supplier relationships and track their carbon impact. Currently, you can add suppliers when entering emission data. Enhanced supplier management features are being developed to help you engage with suppliers on sustainability initiatives."
+msgstr "Tedarikçi ilişkilerinizi yönetin ve karbon etkilerini izleyin. Şu anda emisyon verisi girerken tedarikçi ekleyebilirsiniz. Tedarikçilerle sürdürülebilirlik girişimlerinde etkileşim kurmanıza yardımcı olmak için gelişmiş tedarikçi yönetimi özellikleri geliştirilmektedir."
+
+msgid "Add Supplier (via Data Entry)"
+msgstr "Tedarikçi Ekle (Veri Girişi ile)"
+
+msgid "View Supplier Emissions"
+msgstr "Tedarikçi Emisyonlarını Görüntüle"
+
+# Settings Page Translations
+msgid "Reset"
+msgstr "Sıfırla"
+
+msgid "Account Settings"
+msgstr "Hesap Ayarları"
+
+msgid "Manage your personal account information and preferences."
+msgstr "Kişisel hesap bilgilerinizi ve tercihlerinizi yönetin."
+
+msgid "Notifications"
+msgstr "Bildirimler"
+
+msgid "Configure how and when you receive notifications about your emissions data."
+msgstr "Emisyon verileriniz hakkında bildirimleri nasıl ve ne zaman alacağınızı yapılandırın."
+
+msgid "Organization Settings"
+msgstr "Kuruluş Ayarları"
+
+msgid "Configure organization-wide settings and preferences for emission tracking."
+msgstr "Emisyon izleme için kuruluş genelinde ayarları ve tercihleri yapılandırın."
+
+msgid "Data & Privacy"
+msgstr "Veri ve Gizlilik"
+
+msgid "Manage your data privacy settings and export options."
+msgstr "Veri gizliliği ayarlarınızı ve dışa aktarma seçeneklerinizi yönetin."
+
+msgid "System Information"
+msgstr "Sistem Bilgileri"
+
+msgid "Current system status and version information."
+msgstr "Mevcut sistem durumu ve sürüm bilgileri."
+
+# Support Page Translations
+msgid "Status"
+msgstr "Durum"
+
+msgid "Email Support"
+msgstr "E-posta Desteği"
+
+msgid "Help & Support"
+msgstr "Yardım ve Destek"
+
+msgid "Contact Support"
+msgstr "Destek ile İletişim"
+
+msgid "Send us a message and we'll get back to you within 24 hours during business days."
+msgstr "Bize bir mesaj gönderin, iş günlerinde 24 saat içinde size geri döneceğiz."
+
+msgid "Frequently Asked Questions"
+msgstr "Sık Sorulan Sorular"
+
+msgid "Find quick answers to common questions about using Academia Carbon."
+msgstr "Academia Carbon kullanımı hakkında yaygın sorulara hızlı cevaplar bulun."
+
+msgid "Direct Contact"
+msgstr "Doğrudan İletişim"
+
+msgid "Email us directly at support@academiacarbon.com for immediate assistance."
+msgstr "Anında yardım için doğrudan support@academiacarbon.com adresine e-posta gönderin."
+
+msgid "Documentation"
+msgstr "Dokümantasyon"
+
+msgid "Access comprehensive guides and documentation for all platform features."
+msgstr "Tüm platform özellikleri için kapsamlı kılavuzlara ve dokümantasyona erişin."
+
+# User Guide Page Translations
+msgid "Help & Guide"
+msgstr "Yardım ve Rehber"
+
+msgid "Complete User Guide"
+msgstr "Kapsamlı Kullanıcı Kılavuzu"
+
+msgid "Master greenhouse gas emissions tracking with our comprehensive guide"
+msgstr "Kapsamlı kılavuzumuzla sera gazı emisyon izlemeyi öğrenin"
+
+msgid "Getting Started"
+msgstr "Başlarken"
+
+msgid "Quick start guide to begin tracking emissions in minutes"
+msgstr "Dakikalar içinde emisyon izlemeye başlamak için hızlı başlangıç kılavuzu"
+
+msgid "Understanding Scopes"
+msgstr "Kapsamları Anlama"
+
+msgid "Complete guide to Scope 1, 2, and 3 emissions"
+msgstr "Kapsam 1, 2 ve 3 emisyonları için kapsamlı kılavuz"
+
+msgid "Best Practices"
+msgstr "En İyi Uygulamalar"
+
+msgid "Tips for accurate and efficient emission tracking"
+msgstr "Doğru ve verimli emisyon izleme için ipuçları"
+
+msgid "Troubleshooting"
+msgstr "Sorun Giderme"
+
+msgid "Common issues and solutions"
+msgstr "Yaygın sorunlar ve çözümler"
+
+# Additional translations for new strings
+msgid "All Categories"
+msgstr "Tüm Kategoriler"
+
+msgid "Energy"
+msgstr "Enerji"
+
+msgid "Transportation"
+msgstr "Ulaşım"
+
+msgid "Materials"
+msgstr "Malzemeler"
+
+msgid "All Settings"
+msgstr "Tüm Ayarlar"
+
+msgid "Account"
+msgstr "Hesap"
+
+msgid "Organization"
+msgstr "Kuruluş"
+
+msgid "Privacy"
+msgstr "Gizlilik"
+
+msgid "Online"
+msgstr "Çevrimiçi"
+
+msgid "Learn how to enter and manage your emission data"
+msgstr "Emisyon verilerinizi nasıl gireceğinizi ve yöneteceğinizi öğrenin"
+
+msgid "Generate professional compliance reports"
+msgstr "Profesyonel uyumluluk raporları oluşturun"

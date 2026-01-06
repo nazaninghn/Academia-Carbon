@@ -1,7 +1,30 @@
 {% extends 'dashboard_base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block page_title %}Emissions{% endblock %}
+{% block page_title %}{% trans "Emissions" %}{% endblock %}
+
+{% block header_actions %}
+<!-- Emissions specific actions -->
+<div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <label style="font-size: 13px; font-weight: 600; color: #475569;">
+            <i class="fas fa-filter" style="color: #22c55e;"></i> {% trans "Method" %}:
+        </label>
+        <select id="header-method" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; min-width: 120px; background: white;">
+            <option value="ghg" selected>{% trans "GHG-Based" %}</option>
+            <option value="iso">{% trans "ISO 14064-1" %}</option>
+        </select>
+    </div>
+    <button onclick="exportAllData()" style="padding: 8px 16px; background: #3b82f6; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">
+        <i class="fas fa-download"></i> {% trans "Export All" %}
+    </button>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Professional Page Header -->
+{% include 'partials/page_header.html' %}
 
 {% block extra_css %}
 <style>

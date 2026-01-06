@@ -35,30 +35,31 @@ def get_dashboard_metrics(
         qs = qs.filter(country=country)
     
     # Calculate totals
+    from django.db import models
     totals = qs.aggregate(
-        total_t=Coalesce(Sum("emissions_tons"), Decimal("0.0")),
-        total_kg=Coalesce(Sum("emissions_kg"), Decimal("0.0")),
+        total_t=Coalesce(Sum("emissions_tons", output_field=models.FloatField()), 0.0),
+        total_kg=Coalesce(Sum("emissions_kg", output_field=models.FloatField()), 0.0),
         records=Coalesce(Count("id"), 0),
     )
     
-    total_t = _to_decimal(totals["total_t"])
+    total_t = float(totals["total_t"] or 0)
     
     # Scope breakdown
     by_scope = list(
         qs.values("scope")
-        .annotate(value_t=Coalesce(Sum("emissions_tons"), Decimal("0.0")))
+        .annotate(value_t=Coalesce(Sum("emissions_tons", output_field=models.FloatField()), 0.0))
         .order_by("scope")
     )
     
     scope_breakdown = []
     for row in by_scope:
-        value_t = _to_decimal(row["value_t"])
-        pct = (value_t / total_t * 100) if total_t > 0 else Decimal("0")
+        value_t = float(row["value_t"] or 0)
+        pct = (value_t / total_t * 100) if total_t > 0 else 0
         scope_breakdown.append(
             {
                 "scope": f"Scope {row['scope']}",
-                "value_t": float(value_t),
-                "percentage": float(pct),
+                "value_t": value_t,
+                "percentage": pct,
             }
         )
     
@@ -87,7 +88,7 @@ def get_dashboard_metrics(
         qs.filter(created_at__gte=six_months_ago)
         .extra(select={'month': "strftime('%%Y-%%m', created_at)"})
         .values('month')
-        .annotate(total=Sum('emissions_tons'))
+        .annotate(total=Sum('emissions_tons', output_field=models.FloatField()))
         .order_by('month')
     )
     
@@ -96,18 +97,16 @@ def get_dashboard_metrics(
     completion_percentage = len(scopes_with_data) * 33.33  # Each scope = ~33%
     
     return {
-        "kpis": {
-            "total_tco2e": float(total_t),
-            "records_count": int(totals["records"]),
-            "suppliers_count": int(suppliers_count),
-            "pending_requests": int(pending_requests),
-        },
+        "total_emissions_tons": total_t,
+        "total_records": int(totals["records"]),
+        "suppliers_count": int(suppliers_count),
+        "pending_requests": int(pending_requests),
         "scope_breakdown": scope_breakdown,
         "completion_percentage": min(100, completion_percentage),
-        "monthly_trend": [
+        "monthly_trends": [
             {
                 "month": m["month"],
-                "emissions": float(m["total"]),
+                "emissions_tons": float(m["total"] or 0),
             }
             for m in monthly_data
         ],
@@ -117,7 +116,7 @@ def get_dashboard_metrics(
                 "scope": f"Scope {r['scope']}",
                 "category": r["category"],
                 "source_name": r["source_name"],
-                "emissions_tons": float(r["emissions_tons"]),
+                "emissions_tons": float(r["emissions_tons"] or 0),
                 "country": r["country"],
                 "description": r["description"] or "",
             }

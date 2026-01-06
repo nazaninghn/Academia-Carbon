@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 
 <!-- Sidebar -->
 <div class="sidebar" id="sidebar">
@@ -10,61 +11,61 @@
         </div>
         <div class="logo-text">
             <h2>Academia Carbon</h2>
-            <p>GHG Tracking</p>
+            <p>{% trans "GHG Tracking" %}</p>
         </div>
     </div>
 
     <!-- Data Entry Button -->
     <a href="{% url 'ghg:data_entry' %}" class="data-entry-btn">
         <i class="fas fa-plus"></i>
-        Add Data
+        {% trans "Add Data" %}
     </a>
 
     <!-- Menu Label -->
-    <div class="menu-label">MENU</div>
+    <div class="menu-label">{% trans "MENU" %}</div>
 
     <!-- Main Menu -->
     <ul class="sidebar-menu">
         <li class="menu-item">
             <a href="{% url 'ghg:index' %}" class="{% if active_menu == 'dashboard' %}active{% endif %}">
                 <i class="fas fa-home"></i>
-                Dashboard
+                {% trans "Dashboard" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:data_entry' %}" class="{% if active_menu == 'emission_management' %}active{% endif %}">
                 <i class="fas fa-database"></i>
-                Data Collection
+                {% trans "Data Collection" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:emissions' %}" class="{% if active_menu == 'emissions' %}active{% endif %}">
                 <i class="fas fa-chart-pie"></i>
-                Emissions
+                {% trans "Emissions" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:analysis' %}" class="{% if active_menu == 'analysis' %}active{% endif %}">
                 <i class="fas fa-chart-line"></i>
-                Analysis
+                {% trans "Analysis" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="/en/reporting/inventory" class="{% if active_menu == 'reporting' %}active{% endif %}">
                 <i class="fas fa-file-alt"></i>
-                Reporting
+                {% trans "Reporting" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:action_planning' %}" class="{% if active_menu == 'action_planning' %}active{% endif %}">
                 <i class="fas fa-tasks"></i>
-                Action Planning
+                {% trans "Action Planning" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:suppliers' %}" class="{% if active_menu == 'suppliers' %}active{% endif %}">
                 <i class="fas fa-truck"></i>
-                Suppliers
+                {% trans "Suppliers" %}
             </a>
         </li>
     </ul>
@@ -77,19 +78,19 @@
         <li class="menu-item">
             <a href="{% url 'ghg:settings' %}" class="{% if active_menu == 'settings' %}active{% endif %}">
                 <i class="fas fa-cog"></i>
-                Settings
+                {% trans "Settings" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:user_guide' %}" class="{% if active_menu == 'user_guide' %}active{% endif %}">
                 <i class="fas fa-question-circle"></i>
-                Help & Guide
+                {% trans "Help & Guide" %}
             </a>
         </li>
         <li class="menu-item">
             <a href="{% url 'ghg:support' %}" class="{% if active_menu == 'support' %}active{% endif %}">
                 <i class="fas fa-headset"></i>
-                Support
+                {% trans "Support" %}
             </a>
         </li>
     </ul>
@@ -97,6 +98,6 @@
     <!-- Footer -->
     <div class="sidebar-footer">
         <i class="fas fa-headphones-alt"></i>
-        <p>24/7 Support Available</p>
+        <p>{% trans "24/7 Support Available" %}</p>
     </div>
 </div>

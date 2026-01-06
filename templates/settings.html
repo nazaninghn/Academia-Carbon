@@ -180,20 +180,29 @@
 </style>
 {% endblock %}
 
+{% block header_actions %}
+<!-- Settings specific actions -->
+<div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <label style="font-size: 13px; font-weight: 600; color: #475569;">
+            <i class="fas fa-cog" style="color: #22c55e;"></i> {% trans "Category" %}:
+        </label>
+        <select id="settings-category" style="padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px; min-width: 140px; background: white;">
+            <option value="all" selected>{% trans "All Settings" %}</option>
+            <option value="account">{% trans "Account" %}</option>
+            <option value="organization">{% trans "Organization" %}</option>
+            <option value="privacy">{% trans "Privacy" %}</option>
+        </select>
+    </div>
+    <button onclick="resetToDefaults()" style="padding: 8px 16px; background: #6b7280; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">
+        <i class="fas fa-undo"></i> {% trans "Reset" %}
+    </button>
+</div>
+{% endblock %}
+
 {% block content %}
 <!-- Professional Page Header -->
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">Settings</h1>
-            <p style="color: #64748b; margin: 0; font-size: 14px;">
-                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
-                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
-                <span><strong>Standard:</strong> ISO 14064-1</span>
-            </p>
-        </div>
-    </div>
-</div>
+{% include 'partials/page_header.html' %}
 
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <div class="settings-grid">
@@ -201,9 +210,9 @@
         <div class="settings-card">
             <h3>
                 <i class="fas fa-user" style="color: #10b981;"></i>
-                Account Settings
+                {% trans "Account Settings" %}
             </h3>
-            <p>Manage your personal account information and preferences.</p>
+            <p>{% trans "Manage your personal account information and preferences." %}</p>
             
             <div class="form-group">
                 <label>Full Name</label>

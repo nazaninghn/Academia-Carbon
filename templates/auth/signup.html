@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+{% load static %}
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'tr' %}ltr{% else %}ltr{% endif %}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <meta name="description" content="Sign up for Academia Carbon - Start tracking your organization's carbon footprint">
-    <meta name="theme-color" content="#7ea05a">
-    <title>Academia Carbon - Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Sign Up" %} - Academia Carbon</title>
+    <meta name="description" content="{% trans 'Create your Academia Carbon account - Start tracking your carbon footprint' %}">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        :root {
+            /* استفاده از رنگ‌های اصلی سایت */
+            --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
+            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #7c3aed 100%);
+            --dark-gradient: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 80%, #164e3a 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --surface: #ffffff;
+            --surface-elevated: #f9fafb;
+            --bg-light: #f5f7f9;
+        }
         
         * {
             margin: 0;
@@ -17,38 +35,65 @@
             box-sizing: border-box;
         }
         
-        html {
-            overflow-y: auto;
-            overflow-x: hidden;
-            height: 100%;
-        }
-        
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, #f5c5c5 0%, #e8b4b8 20%, #c9a8c4 50%, #8b9dc3 80%, #6b8e9f 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--dark-gradient);
             min-height: 100vh;
-            height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
-            overflow-y: auto;
+            padding: 20px;
+            overflow-x: hidden;
         }
         
+        /* Background Effects */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bg-effects::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+        
+        /* Signup Container */
         .signup-container {
-            max-width: 550px;
+            max-width: 95%;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
-            overflow: visible;
-            backdrop-filter: blur(10px);
-            margin: 20px auto;
+            background: var(--surface);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 10;
         }
         
+        /* Header */
         .signup-header {
-            background: linear-gradient(135deg, #7ea05a 0%, #6b8e4e 100%);
-            padding: 40px 40px;
+            background: var(--dark-gradient);
+            padding: 50px 40px;
             text-align: center;
             color: white;
             position: relative;
@@ -62,50 +107,50 @@
             right: -20%;
             width: 300px;
             height: 300px;
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
             border-radius: 50%;
+            backdrop-filter: blur(20px);
         }
         
         .signup-header .logo {
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            backdrop-filter: blur(10px);
             position: relative;
             z-index: 1;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
         
-        /* Triangle A (Green) */
+        /* Logo design مطابق با سایت اصلی */
         .signup-logo-triangle {
             width: 0;
             height: 0;
-            border-left: 14px solid transparent;
-            border-right: 14px solid transparent;
-            border-bottom: 24px solid #4ade80;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 20px solid #4ade80;
             position: absolute;
-            left: 18px;
-            top: 28px;
+            left: 17px;
+            top: 25px;
         }
         
-        /* Semi-circle C (Purple) */
         .signup-logo-semicircle {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             border: 3px solid #a78bfa;
             border-right: none;
-            border-radius: 24px 0 0 24px;
+            border-radius: 20px 0 0 20px;
             position: absolute;
-            right: 18px;
-            top: 28px;
+            right: 17px;
+            top: 25px;
         }
         
         .signup-header h1 {
-            font-size: 32px;
+            font-size: 2rem;
             font-weight: 700;
             margin-bottom: 8px;
             position: relative;
@@ -113,79 +158,164 @@
         }
         
         .signup-header p {
-            font-size: 15px;
-            opacity: 0.95;
+            font-size: 1rem;
+            opacity: 0.9;
             margin: 0;
             position: relative;
             z-index: 1;
+            color: #cbd5e1;
         }
         
+        /* Form Body */
         .signup-body {
-            padding: 40px 40px;
+            padding: 50px 40px;
+        }
+        
+        .language-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .lang-btn {
+            padding: 8px 16px;
+            background: var(--surface-elevated);
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .lang-btn.active,
+        .lang-btn:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
         }
         
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .form-label {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 600;
-            color: #374151;
-            margin-bottom: 6px;
+            color: var(--text-primary);
+            margin-bottom: 8px;
             display: block;
         }
         
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 16px 20px;
             border: 2px solid #e5e7eb;
-            border-radius: 14px;
-            font-size: 14px;
-            transition: all 0.3s;
-            font-family: 'Poppins', sans-serif;
-            background: #f9fafb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: var(--surface-elevated);
+            transition: all 0.3s ease;
+            color: var(--text-primary);
         }
         
         .form-control:focus {
             outline: none;
-            border-color: #7ea05a;
-            box-shadow: 0 0 0 4px rgba(126, 160, 90, 0.1);
-            background: white;
+            border-color: #10b981;
+            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+            background: var(--surface);
         }
         
         .form-control::placeholder {
-            color: #9ca3af;
+            color: var(--text-light);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .password-toggle {
+            position: relative;
+        }
+        
+        .password-toggle .toggle-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+        
+        .password-toggle .toggle-icon:hover {
+            color: #10b981;
         }
         
         .btn-signup {
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #7ea05a 0%, #6b8e4e 100%);
+            padding: 16px 24px;
+            background: var(--primary-gradient);
             color: white;
             border: none;
-            border-radius: 14px;
+            border-radius: 12px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            min-height: 48px; /* Touch-friendly */
         }
         
         .btn-signup:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(126, 160, 90, 0.3);
+            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
         }
         
         .btn-signup:active {
             transform: translateY(0);
         }
         
+        .password-requirements {
+            background: var(--surface-elevated);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .password-requirements strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        .password-requirements ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .password-requirements li {
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+        
         .divider {
             text-align: center;
-            margin: 20px 0;
+            margin: 30px 0;
             position: relative;
         }
         
@@ -200,106 +330,67 @@
         }
         
         .divider span {
-            background: white;
-            padding: 0 15px;
-            color: #6b7280;
-            font-size: 13px;
+            background: var(--surface);
+            padding: 0 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
             position: relative;
             z-index: 1;
         }
         
         .login-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 30px;
             font-size: 14px;
-            color: #6b7280;
+            color: var(--text-secondary);
         }
         
         .login-link a {
-            color: #7ea05a;
+            color: #10b981;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
         
         .login-link a:hover {
-            color: #6b8e4e;
+            color: #059669;
             text-decoration: underline;
         }
         
         .alert {
-            padding: 12px 16px;
+            padding: 14px 18px;
             border-radius: 12px;
-            margin-bottom: 20px;
-            font-size: 13px;
+            margin-bottom: 25px;
+            font-size: 14px;
             border: none;
         }
         
         .alert-danger {
             background: #fee2e2;
             color: #991b1b;
+            border: 1px solid #fecaca;
         }
         
         .alert-success {
             background: #d1fae5;
             color: #065f46;
-        }
-        
-        .password-toggle {
-            position: relative;
-        }
-        
-        .password-toggle .toggle-icon {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #9ca3af;
-            transition: color 0.3s;
-        }
-        
-        .password-toggle .toggle-icon:hover {
-            color: #7ea05a;
-        }
-        
-        .password-toggle .toggle-icon {
-            right: 18px;
-            left: auto;
+            border: 1px solid #a7f3d0;
         }
         
         .text-danger {
             color: #dc2626;
             font-size: 12px;
-            margin-top: 4px;
+            margin-top: 5px;
             display: block;
         }
         
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-        
-        .password-requirements {
-            background: #f9fafb;
-            border-radius: 10px;
-            padding: 12px;
-            margin-top: 15px;
-            font-size: 12px;
-            color: #6b7280;
-        }
-        
-        .password-requirements ul {
-            margin: 8px 0 0 0;
-            padding-right: 20px;
-        }
-        
-        .password-requirements li {
-            margin-bottom: 4px;
-        }
-        
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .signup-container {
+                max-width: 90%;
+            }
+        }
+        
         @media (max-width: 768px) {
             .signup-container {
                 max-width: 95%;
@@ -307,39 +398,35 @@
             }
             
             .signup-header {
-                padding: 30px 25px;
+                padding: 40px 30px;
             }
             
             .signup-header h1 {
-                font-size: 26px;
+                font-size: 1.75rem;
             }
             
             .signup-body {
-                padding: 30px 25px;
+                padding: 40px 30px;
             }
             
-            .form-control {
-                padding: 12px 16px;
-                font-size: 13px;
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
             
-            .btn-signup {
-                padding: 14px;
-                font-size: 15px;
+            body {
+                padding: 20px 15px;
             }
         }
         
-        @media (max-width: 576px) {
-            body {
-                padding: 20px 10px;
-            }
-            
+        @media (max-width: 480px) {
             .signup-container {
-                border-radius: 15px;
+                border-radius: 16px;
+                max-width: 100%;
             }
             
             .signup-header {
-                padding: 25px 20px;
+                padding: 30px 25px;
             }
             
             .signup-header .logo {
@@ -348,172 +435,208 @@
                 margin-bottom: 15px;
             }
             
+            .signup-logo-triangle {
+                border-left: 10px solid transparent;
+                border-right: 10px solid transparent;
+                border-bottom: 16px solid #4ade80;
+                left: 15px;
+                top: 22px;
+            }
+            
+            .signup-logo-semicircle {
+                width: 16px;
+                height: 16px;
+                border: 2px solid #a78bfa;
+                right: 15px;
+                top: 22px;
+            }
+            
             .signup-header h1 {
-                font-size: 22px;
+                font-size: 1.5rem;
             }
             
             .signup-header p {
-                font-size: 13px;
+                font-size: 0.9rem;
             }
             
             .signup-body {
-                padding: 25px 20px;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                padding: 30px 20px;
             }
             
             .form-control {
-                padding: 10px 14px;
-                font-size: 13px;
-            }
-            
-            .btn-signup {
-                padding: 12px;
+                padding: 14px 16px;
                 font-size: 14px;
             }
             
+            .btn-signup {
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+            
             .password-requirements {
-                padding: 10px;
-                font-size: 11px;
+                padding: 12px;
+                font-size: 12px;
             }
             
-            .password-requirements ul {
-                padding-right: 15px;
-            }
-            
-            .divider {
-                margin: 15px 0;
-            }
-            
-            .login-link {
-                font-size: 13px;
+            body {
+                padding: 15px 10px;
             }
         }
         
         @media (max-width: 400px) {
             .signup-header {
+                padding: 25px 20px;
+            }
+            
+            .signup-body {
+                padding: 25px 15px;
+            }
+            
+            .signup-header h1 {
+                font-size: 1.25rem;
+            }
+        }
+        
+        @media (max-width: 320px) {
+            .signup-header {
                 padding: 20px 15px;
             }
             
             .signup-body {
-                padding: 20px 15px;
+                padding: 20px 10px;
+            }
+            
+            .form-control {
+                padding: 12px 14px;
+                font-size: 13px;
             }
             
             .signup-header h1 {
-                font-size: 20px;
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Background Effects -->
+    <div class="bg-effects"></div>
+    
+    <!-- Signup Container -->
     <div class="signup-container">
-        <div class="signup-card">
-            <div class="signup-header">
-                <div class="logo">
-                    <div class="signup-logo-triangle"></div>
-                    <div class="signup-logo-semicircle"></div>
-                </div>
-                <h1>Join Academia Carbon</h1>
-                <p>Create your account and start tracking</p>
+        <!-- Header -->
+        <div class="signup-header">
+            <div class="logo">
+                <div class="signup-logo-triangle"></div>
+                <div class="signup-logo-semicircle"></div>
+            </div>
+            <h1>{% trans "Join Academia Carbon" %}</h1>
+            <p>{% trans "Create your account and start tracking your carbon footprint" %}</p>
+        </div>
+        
+        <!-- Form Body -->
+        <div class="signup-body">
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <a href="{% url 'ghg:email_signup' %}" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
+                   onclick="setLanguage('en')">EN</a>
+                <a href="{% url 'ghg:email_signup' %}" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
+                   onclick="setLanguage('tr')">TR</a>
             </div>
             
-            <div class="signup-body">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="alert alert-{{ message.tags }}">
-                            {{ message }}
-                        </div>
-                    {% endfor %}
-                {% endif %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <form method="post" action="{% url 'ghg:email_signup' %}">
+                {% csrf_token %}
                 
-                <form method="post" action="{% url 'ghg:email_signup' %}">
-                    {% csrf_token %}
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="id_email">
-                            <i class="fas fa-envelope"></i> Email Address *
-                        </label>
-                        {{ form.email }}
-                        {% if form.email.errors %}
-                            <small class="text-danger">{{ form.email.errors.0 }}</small>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label" for="id_first_name">
-                                <i class="fas fa-user"></i> First Name
-                            </label>
-                            {{ form.first_name }}
-                            {% if form.first_name.errors %}
-                                <small class="text-danger">{{ form.first_name.errors.0 }}</small>
-                            {% endif %}
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="form-label" for="id_last_name">
-                                <i class="fas fa-user"></i> Last Name
-                            </label>
-                            {{ form.last_name }}
-                            {% if form.last_name.errors %}
-                                <small class="text-danger">{{ form.last_name.errors.0 }}</small>
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="id_password1">
-                            <i class="fas fa-lock"></i> Password *
-                        </label>
-                        <div class="password-toggle">
-                            {{ form.password1 }}
-                            <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password1', this)"></i>
-                        </div>
-                        {% if form.password1.errors %}
-                            <small class="text-danger">{{ form.password1.errors.0 }}</small>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" for="id_password2">
-                            <i class="fas fa-lock"></i> Confirm Password *
-                        </label>
-                        <div class="password-toggle">
-                            {{ form.password2 }}
-                            <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password2', this)"></i>
-                        </div>
-                        {% if form.password2.errors %}
-                            <small class="text-danger">{{ form.password2.errors.0 }}</small>
-                        {% endif %}
-                    </div>
-                    
-                    <div class="password-requirements">
-                        <strong>Password Requirements:</strong>
-                        <ul>
-                            <li>At least 8 characters</li>
-                            <li>Not similar to personal information</li>
-                            <li>Not a commonly used password</li>
-                        </ul>
-                    </div>
-                    
-                    <button type="submit" class="btn-signup">
-                        <i class="fas fa-check-circle"></i> Create Account
-                    </button>
-                </form>
-                
-                <div class="divider">
-                    <span>or</span>
+                <div class="form-group">
+                    <label class="form-label" for="id_email">
+                        <i class="fas fa-envelope"></i> {% trans "Email Address" %} *
+                    </label>
+                    {{ form.email }}
+                    {% if form.email.errors %}
+                        <small class="text-danger">{{ form.email.errors.0 }}</small>
+                    {% endif %}
                 </div>
                 
-                <div class="login-link">
-                    Already have an account?
-                    <a href="{% url 'ghg:email_login' %}">
-                        <i class="fas fa-sign-in-alt"></i> Sign In
-                    </a>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="id_first_name">
+                            <i class="fas fa-user"></i> {% trans "First Name" %}
+                        </label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}
+                            <small class="text-danger">{{ form.first_name.errors.0 }}</small>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="id_last_name">
+                            <i class="fas fa-user"></i> {% trans "Last Name" %}
+                        </label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}
+                            <small class="text-danger">{{ form.last_name.errors.0 }}</small>
+                        {% endif %}
+                    </div>
                 </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="id_password1">
+                        <i class="fas fa-lock"></i> {% trans "Password" %} *
+                    </label>
+                    <div class="password-toggle">
+                        {{ form.password1 }}
+                        <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password1', this)"></i>
+                    </div>
+                    {% if form.password1.errors %}
+                        <small class="text-danger">{{ form.password1.errors.0 }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="id_password2">
+                        <i class="fas fa-lock"></i> {% trans "Confirm Password" %} *
+                    </label>
+                    <div class="password-toggle">
+                        {{ form.password2 }}
+                        <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password2', this)"></i>
+                    </div>
+                    {% if form.password2.errors %}
+                        <small class="text-danger">{{ form.password2.errors.0 }}</small>
+                    {% endif %}
+                </div>
+                
+                <div class="password-requirements">
+                    <strong>{% trans "Password Requirements:" %}</strong>
+                    <ul>
+                        <li>{% trans "At least 8 characters long" %}</li>
+                        <li>{% trans "Not similar to your personal information" %}</li>
+                        <li>{% trans "Not a commonly used password" %}</li>
+                        <li>{% trans "Cannot be entirely numeric" %}</li>
+                    </ul>
+                </div>
+                
+                <button type="submit" class="btn-signup">
+                    <i class="fas fa-user-plus"></i>
+                    {% trans "Create Account" %}
+                </button>
+            </form>
+            
+            <div class="divider">
+                <span>{% trans "or" %}</span>
+            </div>
+            
+            <div class="login-link">
+                {% trans "Already have an account?" %}
+                <a href="{% url 'ghg:email_login' %}">
+                    <i class="fas fa-sign-in-alt"></i> {% trans "Sign In" %}
+                </a>
             </div>
         </div>
     </div>
@@ -531,6 +654,36 @@
                 icon.classList.remove('fa-eye-slash');
                 icon.classList.add('fa-eye');
             }
+        }
+        
+        function setLanguage(langCode) {
+            // Create a form to submit language change
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/i18n/setlang/';
+            
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}';
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = csrfToken;
+            
+            const langInput = document.createElement('input');
+            langInput.type = 'hidden';
+            langInput.name = 'language';
+            langInput.value = langCode;
+            
+            const nextInput = document.createElement('input');
+            nextInput.type = 'hidden';
+            nextInput.name = 'next';
+            nextInput.value = '/' + langCode + '/signup/';
+            
+            form.appendChild(csrfInput);
+            form.appendChild(langInput);
+            form.appendChild(nextInput);
+            
+            document.body.appendChild(form);
+            form.submit();
         }
     </script>
 </body>

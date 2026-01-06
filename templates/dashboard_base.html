@@ -1,7 +1,7 @@
 {% load static %}
 {% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
@@ -573,7 +573,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <div class="top-navbar">
-                <h1 class="page-title">{% block page_title %}Dashboard{% endblock %}</h1>
+                <h1 class="page-title">{% block page_title %}{% trans "Dashboard" %}{% endblock %}</h1>
                 <div class="user-section">
                     <div class="user-info">
                         <p class="user-name">{{ user.first_name|default:user.email|title }}</p>
@@ -582,7 +582,7 @@
                     <div class="user-avatar">
                         {{ user.first_name|first|default:user.email|first|upper }}
                     </div>
-                    <a href="{% url 'ghg:logout' %}" class="btn-logout" title="خروج / Logout">
+                    <a href="{% url 'ghg:logout' %}" class="btn-logout" title="{% trans 'Logout' %}">
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
                 </div>

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 
-class EmailLoginForm(AuthenticationForm):
+class EmailLoginForm(forms.Form):
     """Custom login form using email instead of username"""
     username = forms.EmailField(
         label='Email',
@@ -23,6 +23,26 @@ class EmailLoginForm(AuthenticationForm):
             'id': 'id_password'
         })
     )
+    
+    def clean(self):
+        """Custom validation that uses email authentication"""
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        
+        if username and password:
+            from django.contrib.auth import authenticate
+            self.user_cache = authenticate(username=username, password=password)
+            if self.user_cache is None:
+                raise forms.ValidationError('Invalid email or password.')
+            elif not self.user_cache.is_active:
+                raise forms.ValidationError('This account is inactive.')
+        
+        return cleaned_data
+    
+    def get_user(self):
+        """Return the authenticated user"""
+        return getattr(self, 'user_cache', None)
 
 
 class EmailSignupForm(UserCreationForm):

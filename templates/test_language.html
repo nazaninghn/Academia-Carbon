@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Test</title>
+    {% csrf_token %}
+</head>
+<body>
+    <h1>Current Language: {{ LANGUAGE_CODE }}</h1>
+    <h2>{% trans "Welcome" %}</h2>
+    <p>{% trans "This is a test page" %}</p>
+    
+    <form action="{% url 'set_language' %}" method="post">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+        <select name="language" onchange="this.form.submit()">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% for lang_code, lang_name in LANGUAGES %}
+                <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %}selected{% endif %}>
+                    {{ lang_name }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+    
+    <hr>
+    
+    <h3>Manual Language Switch:</h3>
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('tr')">Türkçe</button>
+    
+    <script>
+        function setLanguage(langCode) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/i18n/setlang/';
+            
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrfmiddlewaretoken';
+            csrfInput.value = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}';
+            
+            const langInput = document.createElement('input');
+            langInput.type = 'hidden';
+            langInput.name = 'language';
+            langInput.value = langCode;
+            
+            const nextInput = document.createElement('input');
+            nextInput.type = 'hidden';
+            nextInput.name = 'next';
+            nextInput.value = window.location.pathname;
+            
+            form.appendChild(csrfInput);
+            form.appendChild(langInput);
+            form.appendChild(nextInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+</html>

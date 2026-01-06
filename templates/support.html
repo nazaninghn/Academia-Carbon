@@ -199,26 +199,24 @@
 </style>
 {% endblock %}
 
+{% block header_actions %}
+<!-- Support specific actions -->
+<div style="display: flex; align-items: center; gap: 15px;">
+    <div style="display: flex; align-items: center; gap: 8px;">
+        <label style="font-size: 13px; font-weight: 600; color: #475569;">
+            <i class="fas fa-headset" style="color: #22c55e;"></i> {% trans "Status" %}:
+        </label>
+        <span class="status-badge status-online">● {% trans "Online" %}</span>
+    </div>
+    <button onclick="window.open('mailto:support@academiacarbon.com', '_blank')" style="padding: 8px 16px; background: #10b981; color: white; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">
+        <i class="fas fa-envelope"></i> {% trans "Email Support" %}
+    </button>
+</div>
+{% endblock %}
+
 {% block content %}
 <!-- Professional Page Header -->
-<div style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-bottom: 1px solid #e2e8f0; padding: 24px 30px; margin-bottom: 30px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">Help & Support</h1>
-            <p style="color: #64748b; margin: 0; font-size: 14px;">
-                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
-                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
-                <span><strong>Standard:</strong> ISO 14064-1</span>
-            </p>
-        </div>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <div style="text-align: right; font-size: 12px; color: #64748b;">
-                <div><strong>Support Status:</strong></div>
-                <div><span class="status-badge status-online">● Online</span></div>
-            </div>
-        </div>
-    </div>
-</div>
+{% include 'partials/page_header.html' %}
 
 <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
     <!-- Support Options -->
@@ -228,8 +226,8 @@
                 <i class="fas fa-envelope"></i>
             </div>
             <div class="support-content">
-                <h4>Contact Support</h4>
-                <p>Send us a message and we'll get back to you within 24 hours during business days.</p>
+                <h4>{% trans "Contact Support" %}</h4>
+                <p>{% trans "Send us a message and we'll get back to you within 24 hours during business days." %}</p>
             </div>
         </div>
 
@@ -238,8 +236,8 @@
                 <i class="fas fa-question-circle"></i>
             </div>
             <div class="support-content">
-                <h4>Frequently Asked Questions</h4>
-                <p>Find quick answers to common questions about using Academia Carbon.</p>
+                <h4>{% trans "Frequently Asked Questions" %}</h4>
+                <p>{% trans "Find quick answers to common questions about using Academia Carbon." %}</p>
             </div>
         </div>
 
@@ -248,8 +246,8 @@
                 <i class="fas fa-phone"></i>
             </div>
             <div class="support-content">
-                <h4>Direct Contact</h4>
-                <p>Email us directly at support@academiacarbon.com for immediate assistance.</p>
+                <h4>{% trans "Direct Contact" %}</h4>
+                <p>{% trans "Email us directly at support@academiacarbon.com for immediate assistance." %}</p>
             </div>
         </div>
 
@@ -258,8 +256,8 @@
                 <i class="fas fa-book"></i>
             </div>
             <div class="support-content">
-                <h4>Documentation</h4>
-                <p>Access comprehensive guides and documentation for all platform features.</p>
+                <h4>{% trans "Documentation" %}</h4>
+                <p>{% trans "Access comprehensive guides and documentation for all platform features." %}</p>
             </div>
         </div>
     </div>
