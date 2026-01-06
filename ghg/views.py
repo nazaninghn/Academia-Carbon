@@ -2159,11 +2159,3 @@ def test_language(request):
     return render(request, 'test_language.html')
 
 
-def responsive_test(request):
-    """Test page for responsive design"""
-    return render(request, 'responsive_test.html')
-
-
-def windows_test(request):
-    """Test page for Windows display sizes"""
-    return render(request, 'windows_test.html')

@@ -1,33 +1,28 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'tr' %}ltr{% else %}ltr{% endif %}">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% trans "Sign Up" %} - Academia Carbon</title>
     <meta name="description" content="{% trans 'Create your Academia Carbon account - Start tracking your carbon footprint' %}">
+    <meta name="csrf-token" content="{{ csrf_token }}">>
     
-    <!-- Fonts -->
+    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/auth-responsive.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
         :root {
-            /* استفاده از رنگ‌های اصلی سایت */
             --primary-gradient: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
-            --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 50%, #1d4ed8 100%);
-            --accent-gradient: linear-gradient(135deg, #a855f7 0%, #9333ea 50%, #7c3aed 100%);
             --dark-gradient: linear-gradient(180deg, #2d7a5f 0%, #1e5a45 80%, #164e3a 100%);
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
             --text-primary: #111827;
             --text-secondary: #6b7280;
             --text-light: #9ca3af;
             --surface: #ffffff;
             --surface-elevated: #f9fafb;
-            --bg-light: #f5f7f9;
         }
         
         * {
@@ -38,623 +33,452 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
             background: var(--dark-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+        }
+
+        .lang-btn {
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .lang-btn:hover,
+        .lang-btn.active {
+            background: #10b981;
+            color: white;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Main Container */
+        .auth-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            overflow-x: hidden;
         }
-        
-        /* Background Effects */
-        .bg-effects {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-            overflow: hidden;
-        }
-        
-        .bg-effects::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 60%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-        
-        /* Signup Container */
-        .signup-container {
-            max-width: 600px;
+
+        .auth-wrapper {
             width: 100%;
-            background: var(--surface);
+            max-width: 600px;
+            background: white;
             border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
-        
-        /* Header */
-        .signup-header {
-            background: var(--dark-gradient);
-            padding: 50px 40px;
+
+        /* Form Container */
+        .auth-form-container {
+            padding: 60px 40px;
+        }
+
+        .auth-form-header {
             text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            margin-bottom: 40px;
         }
-        
-        .signup-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 300px;
-            height: 300px;
-            background: var(--glass-bg);
-            border-radius: 50%;
-            backdrop-filter: blur(20px);
-        }
-        
-        .signup-header .logo {
-            width: 70px;
-            height: 70px;
-            background: var(--primary-gradient);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 1;
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
-        }
-        
-        /* Logo design مطابق با سایت اصلی */
-        .signup-logo-triangle {
-            width: 0;
-            height: 0;
-            border-left: 12px solid transparent;
-            border-right: 12px solid transparent;
-            border-bottom: 20px solid #4ade80;
-            position: absolute;
-            left: 17px;
-            top: 25px;
-        }
-        
-        .signup-logo-semicircle {
-            width: 20px;
-            height: 20px;
-            border: 3px solid #a78bfa;
-            border-right: none;
-            border-radius: 20px 0 0 20px;
-            position: absolute;
-            right: 17px;
-            top: 25px;
-        }
-        
-        .signup-header h1 {
-            font-size: 2rem;
+
+        .auth-form-title {
+            font-size: 28px;
             font-weight: 700;
+            color: var(--text-primary);
             margin-bottom: 8px;
-            position: relative;
-            z-index: 1;
         }
-        
-        .signup-header p {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-            color: #cbd5e1;
-        }
-        
-        /* Form Body */
-        .signup-body {
-            padding: 50px 40px;
-        }
-        
-        .language-switcher {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-        
-        .lang-btn {
-            padding: 8px 16px;
-            background: var(--surface-elevated);
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+
+        .auth-form-subtitle {
+            font-size: 16px;
             color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
         }
-        
-        .lang-btn.active,
-        .lang-btn:hover {
-            background: var(--primary-gradient);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            display: block;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 16px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            background: var(--surface-elevated);
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: #10b981;
-            box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
-            background: var(--surface);
-        }
-        
-        .form-control::placeholder {
-            color: var(--text-light);
-        }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
+            margin-bottom: 24px;
         }
-        
-        .password-toggle {
-            position: relative;
+
+        .form-group {
+            margin-bottom: 24px;
         }
-        
-        .password-toggle .toggle-icon {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px 20px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: white;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .form-control::placeholder {
             color: var(--text-light);
-            transition: color 0.3s ease;
         }
-        
-        .password-toggle .toggle-icon:hover {
-            color: #10b981;
+
+        .password-requirements {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 14px;
         }
-        
-        .btn-signup {
+
+        .password-requirements h6 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .password-requirements ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .password-requirements li {
+            margin-bottom: 4px;
+        }
+
+        .btn-primary {
             width: 100%;
             padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
             background: var(--primary-gradient);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            min-height: 48px; /* Touch-friendly */
+            margin-bottom: 24px;
+            min-height: 48px;
         }
-        
-        .btn-signup:hover {
+
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
         }
-        
-        .btn-signup:active {
-            transform: translateY(0);
-        }
-        
-        .password-requirements {
-            background: var(--surface-elevated);
-            border-radius: 12px;
-            padding: 16px;
-            margin-top: 15px;
-            font-size: 13px;
-            color: var(--text-secondary);
-            border: 1px solid #e5e7eb;
-        }
-        
-        .password-requirements strong {
-            color: var(--text-primary);
-            display: block;
-            margin-bottom: 8px;
-        }
-        
-        .password-requirements ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        
-        .password-requirements li {
-            margin-bottom: 4px;
-            line-height: 1.5;
-        }
-        
-        .divider {
+
+        .auth-divider {
             text-align: center;
-            margin: 30px 0;
+            margin: 24px 0;
             position: relative;
+            color: var(--text-light);
+            font-size: 14px;
         }
-        
-        .divider::before {
+
+        .auth-divider::before {
             content: '';
             position: absolute;
-            left: 0;
             top: 50%;
-            width: 100%;
+            left: 0;
+            right: 0;
             height: 1px;
             background: #e5e7eb;
-        }
-        
-        .divider span {
-            background: var(--surface);
-            padding: 0 20px;
-            color: var(--text-secondary);
-            font-size: 14px;
-            position: relative;
             z-index: 1;
         }
-        
-        .login-link {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: var(--text-secondary);
+
+        .auth-divider span {
+            background: white;
+            padding: 0 16px;
+            position: relative;
+            z-index: 2;
         }
-        
-        .login-link a {
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .auth-footer a {
             color: #10b981;
             text-decoration: none;
             font-weight: 600;
-            transition: color 0.3s ease;
         }
-        
-        .login-link a:hover {
-            color: #059669;
+
+        .auth-footer a:hover {
             text-decoration: underline;
         }
-        
+
         .alert {
-            padding: 14px 18px;
-            border-radius: 12px;
-            margin-bottom: 25px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
             font-size: 14px;
-            border: none;
         }
-        
+
         .alert-danger {
             background: #fee2e2;
             color: #991b1b;
             border: 1px solid #fecaca;
         }
-        
-        .alert-success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #a7f3d0;
-        }
-        
+
         .text-danger {
             color: #dc2626;
             font-size: 12px;
             margin-top: 5px;
             display: block;
         }
-        
+
         /* Responsive Design */
-        @media (max-width: 1024px) {
-            .signup-container {
-                max-width: 550px;
-            }
-        }
-        
         @media (max-width: 768px) {
-            .signup-container {
-                max-width: 500px;
-                border-radius: 20px;
+            .auth-container {
+                padding: 15px;
             }
             
-            .signup-header {
+            .auth-wrapper {
+                border-radius: 16px;
+                max-width: 100%;
+            }
+            
+            .auth-form-container {
                 padding: 40px 30px;
             }
             
-            .signup-header h1 {
-                font-size: 1.75rem;
-            }
-            
-            .signup-body {
-                padding: 40px 30px;
+            .auth-form-title {
+                font-size: 24px;
             }
             
             .form-row {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 0;
             }
             
-            body {
-                padding: 20px 15px;
+            .language-switcher {
+                top: 15px;
+                right: 15px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .signup-container {
-                border-radius: 16px;
-                max-width: 400px;
+
+        @media (max-width: 576px) {
+            .auth-container {
+                padding: 10px;
             }
             
-            .signup-header {
-                padding: 30px 25px;
-            }
-            
-            .signup-header .logo {
-                width: 60px;
-                height: 60px;
-                margin-bottom: 15px;
-            }
-            
-            .signup-logo-triangle {
-                border-left: 10px solid transparent;
-                border-right: 10px solid transparent;
-                border-bottom: 16px solid #4ade80;
-                left: 15px;
-                top: 22px;
-            }
-            
-            .signup-logo-semicircle {
-                width: 16px;
-                height: 16px;
-                border: 2px solid #a78bfa;
-                right: 15px;
-                top: 22px;
-            }
-            
-            .signup-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .signup-header p {
-                font-size: 0.9rem;
-            }
-            
-            .signup-body {
+            .auth-form-container {
                 padding: 30px 20px;
+            }
+            
+            .auth-form-title {
+                font-size: 20px;
             }
             
             .form-control {
                 padding: 14px 16px;
-                font-size: 14px;
+                font-size: 16px;
             }
             
-            .btn-signup {
-                padding: 16px 20px;
-                font-size: 15px;
-            }
-            
-            .password-requirements {
-                padding: 12px;
-                font-size: 12px;
-            }
-            
-            body {
-                padding: 15px 10px;
+            .btn-primary {
+                padding: 14px 20px;
             }
         }
-        
-        @media (max-width: 400px) {
-            .signup-header {
-                padding: 25px 20px;
-            }
-            
-            .signup-body {
-                padding: 25px 15px;
-            }
-            
-            .signup-header h1 {
-                font-size: 1.25rem;
-            }
-        }
-        
-        @media (max-width: 320px) {
-            .signup-header {
-                padding: 20px 15px;
-            }
-            
-            .signup-body {
-                padding: 20px 10px;
-            }
-            
-            .form-control {
-                padding: 12px 14px;
+
+        @media (max-width: 480px) {
+            .lang-btn {
+                min-width: 40px;
                 font-size: 13px;
-            }
-            
-            .signup-header h1 {
-                font-size: 1.2rem;
+                padding: 6px 12px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Background Effects -->
-    <div class="bg-effects"></div>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <a href="#" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
+           onclick="setLanguage('en')">EN</a>
+        <a href="#" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
+           onclick="setLanguage('tr')">TR</a>
+    </div>
     
-    <!-- Signup Container -->
-    <div class="signup-container">
-        <!-- Header -->
-        <div class="signup-header">
-            <div class="logo">
-                <div class="signup-logo-triangle"></div>
-                <div class="signup-logo-semicircle"></div>
-            </div>
-            <h1>{% trans "Join Academia Carbon" %}</h1>
-            <p>{% trans "Create your account and start tracking your carbon footprint" %}</p>
-        </div>
-        
-        <!-- Form Body -->
-        <div class="signup-body">
-            <!-- Language Switcher -->
-            <div class="language-switcher">
-                <a href="{% url 'ghg:email_signup' %}" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
-                   onclick="setLanguage('en')">EN</a>
-                <a href="{% url 'ghg:email_signup' %}" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
-                   onclick="setLanguage('tr')">TR</a>
-            </div>
-            
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            
-            <form method="post" action="{% url 'ghg:email_signup' %}">
-                {% csrf_token %}
-                
-                <div class="form-group">
-                    <label class="form-label" for="id_email">
-                        <i class="fas fa-envelope"></i> {% trans "Email Address" %} *
-                    </label>
-                    {{ form.email }}
-                    {% if form.email.errors %}
-                        <small class="text-danger">{{ form.email.errors.0 }}</small>
-                    {% endif %}
+    <div class="auth-container">
+        <div class="auth-wrapper">
+            <div class="auth-form-container">
+                <div class="auth-form-header">
+                    <h2 class="auth-form-title">{% trans "Join Academia Carbon" %}</h2>
+                    <p class="auth-form-subtitle">{% trans "Create your account and start tracking your carbon footprint" %}</p>
                 </div>
                 
-                <div class="form-row">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
+                <form method="post" action="{% url 'ghg:email_signup' %}">
+                    {% csrf_token %}
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="id_first_name">
+                                <i class="fas fa-user"></i> {% trans "First Name" %}
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="id_first_name" 
+                                   name="first_name" 
+                                   placeholder="{% trans 'Enter your first name' %}"
+                                   value="{{ form.first_name.value|default:'' }}"
+                                   required>
+                            {% if form.first_name.errors %}
+                                <small class="text-danger">{{ form.first_name.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label" for="id_last_name">
+                                <i class="fas fa-user"></i> {% trans "Last Name" %}
+                            </label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="id_last_name" 
+                                   name="last_name" 
+                                   placeholder="{% trans 'Enter your last name' %}"
+                                   value="{{ form.last_name.value|default:'' }}"
+                                   required>
+                            {% if form.last_name.errors %}
+                                <small class="text-danger">{{ form.last_name.errors.0 }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
                     <div class="form-group">
-                        <label class="form-label" for="id_first_name">
-                            <i class="fas fa-user"></i> {% trans "First Name" %}
+                        <label class="form-label" for="id_email">
+                            <i class="fas fa-envelope"></i> {% trans "Email Address" %}
                         </label>
-                        {{ form.first_name }}
-                        {% if form.first_name.errors %}
-                            <small class="text-danger">{{ form.first_name.errors.0 }}</small>
+                        <input type="email" 
+                               class="form-control" 
+                               id="id_email" 
+                               name="email" 
+                               placeholder="{% trans 'Enter your email address' %}"
+                               value="{{ form.email.value|default:'' }}"
+                               required>
+                        {% if form.email.errors %}
+                            <small class="text-danger">{{ form.email.errors.0 }}</small>
                         {% endif %}
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label" for="id_last_name">
-                            <i class="fas fa-user"></i> {% trans "Last Name" %}
+                        <label class="form-label" for="id_password1">
+                            <i class="fas fa-lock"></i> {% trans "Password" %}
                         </label>
-                        {{ form.last_name }}
-                        {% if form.last_name.errors %}
-                            <small class="text-danger">{{ form.last_name.errors.0 }}</small>
+                        <input type="password" 
+                               class="form-control" 
+                               id="id_password1" 
+                               name="password1" 
+                               placeholder="{% trans 'Create a strong password' %}"
+                               required>
+                        {% if form.password1.errors %}
+                            <small class="text-danger">{{ form.password1.errors.0 }}</small>
                         {% endif %}
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" for="id_password1">
-                        <i class="fas fa-lock"></i> {% trans "Password" %} *
-                    </label>
-                    <div class="password-toggle">
-                        {{ form.password1 }}
-                        <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password1', this)"></i>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="id_password2">
+                            <i class="fas fa-lock"></i> {% trans "Confirm Password" %}
+                        </label>
+                        <input type="password" 
+                               class="form-control" 
+                               id="id_password2" 
+                               name="password2" 
+                               placeholder="{% trans 'Confirm your password' %}"
+                               required>
+                        {% if form.password2.errors %}
+                            <small class="text-danger">{{ form.password2.errors.0 }}</small>
+                        {% endif %}
+                        
+                        <div class="password-requirements">
+                            <h6>{% trans "Password Requirements:" %}</h6>
+                            <ul>
+                                <li>{% trans "At least 8 characters long" %}</li>
+                                <li>{% trans "Not similar to your personal information" %}</li>
+                                <li>{% trans "Not a commonly used password" %}</li>
+                                <li>{% trans "Cannot be entirely numeric" %}</li>
+                            </ul>
+                        </div>
                     </div>
-                    {% if form.password1.errors %}
-                        <small class="text-danger">{{ form.password1.errors.0 }}</small>
-                    {% endif %}
+                    
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-user-plus"></i>
+                        {% trans "Create Account" %}
+                    </button>
+                </form>
+                
+                <div class="auth-divider">
+                    <span>{% trans "or" %}</span>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label" for="id_password2">
-                        <i class="fas fa-lock"></i> {% trans "Confirm Password" %} *
-                    </label>
-                    <div class="password-toggle">
-                        {{ form.password2 }}
-                        <i class="fas fa-eye toggle-icon" onclick="togglePassword('id_password2', this)"></i>
-                    </div>
-                    {% if form.password2.errors %}
-                        <small class="text-danger">{{ form.password2.errors.0 }}</small>
-                    {% endif %}
-                </div>
-                
-                <div class="password-requirements">
-                    <strong>{% trans "Password Requirements:" %}</strong>
-                    <ul>
-                        <li>{% trans "At least 8 characters long" %}</li>
-                        <li>{% trans "Not similar to your personal information" %}</li>
-                        <li>{% trans "Not a commonly used password" %}</li>
-                        <li>{% trans "Cannot be entirely numeric" %}</li>
-                    </ul>
-                </div>
-                
-                <button type="submit" class="btn-signup">
-                    <i class="fas fa-user-plus"></i>
-                    {% trans "Create Account" %}
+                <button class="btn btn-outline-secondary w-100 mb-3" onclick="alert('{% trans "Google signup coming soon!" %}')">
+                    <i class="fab fa-google"></i>
+                    {% trans "Continue with Google" %}
                 </button>
-            </form>
-            
-            <div class="divider">
-                <span>{% trans "or" %}</span>
-            </div>
-            
-            <div class="login-link">
-                {% trans "Already have an account?" %}
-                <a href="{% url 'ghg:email_login' %}">
-                    <i class="fas fa-sign-in-alt"></i> {% trans "Sign In" %}
-                </a>
+                
+                <div class="auth-footer">
+                    {% trans "Already have an account?" %}
+                    <a href="{% url 'ghg:email_login' %}">
+                        {% trans "Sign In" %}
+                    </a>
+                </div>
             </div>
         </div>
     </div>
     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function togglePassword(inputId, icon) {
-            const passwordInput = document.getElementById(inputId);
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
+        // Get CSRF token from cookie
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
             }
+            return cookieValue;
         }
         
         function setLanguage(langCode) {
@@ -663,7 +487,24 @@
             form.method = 'POST';
             form.action = '/i18n/setlang/';
             
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]')?.value || '{{ csrf_token }}';
+            // Try multiple ways to get CSRF token
+            let csrfToken = getCookie('csrftoken');
+            if (!csrfToken) {
+                const csrfInput = document.querySelector('[name=csrfmiddlewaretoken]');
+                if (csrfInput) {
+                    csrfToken = csrfInput.value;
+                }
+            }
+            if (!csrfToken) {
+                const metaTag = document.querySelector('meta[name="csrf-token"]');
+                if (metaTag) {
+                    csrfToken = metaTag.getAttribute('content');
+                }
+            }
+            if (!csrfToken) {
+                csrfToken = '{{ csrf_token }}';
+            }
+            
             const csrfInput = document.createElement('input');
             csrfInput.type = 'hidden';
             csrfInput.name = 'csrfmiddlewaretoken';
