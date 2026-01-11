@@ -329,8 +329,8 @@
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="liters">{% trans "Liters" %}</option>
                             <option value="kg">{% trans "Kilograms" %}</option>
-                            <option value="gj">Gigajoules (GJ)</option>
-                            <option value="km">Kilometers</option>
+                            <option value="gj">{% trans "Gigajoules (GJ)" %}</option>
+                            <option value="km">{% trans "Kilometers" %}</option>
                         </select>
                     </div>
 
@@ -387,7 +387,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" id="fugitive-unit" disabled>
                             <option value="kg">Kilograms (kg)</option>
                         </select>
@@ -422,7 +422,7 @@
                     </div>
 
                     <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
-                        You can <strong>add your proof document</strong> here (i.e. gas bills).
+                        You can <strong>{% trans 'add your proof document' %}</strong> here (i.e. gas bills).
                     </p>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -441,7 +441,7 @@
                         Electricity
                         <i class="fas fa-chevron-down help-icon" title="Emissions from purchased electricity"></i>
                     </h3>
-                    <p>Emissions from purchased electricity consumption</p>
+                    <p>{% trans 'Emissions from purchased electricity consumption' %}</p>
                 </div>
 
                 <div id="electricity-form" style="display: none; margin-bottom: 30px;">
@@ -459,7 +459,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
                             <option value="kwh">kWh</option>
                         </select>
@@ -490,7 +490,7 @@
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
                     </p>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -510,21 +510,21 @@
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="steam-heat-source">
                             <option value="">{% trans "Select Emission Source" %}</option>
-                            <option value="district-heating">District Heating</option>
-                            <option value="district-cooling">District Cooling</option>
-                            <option value="steam">Steam</option>
-                            <option value="chilled-water">Chilled Water</option>
+                            <option value="district-heating">{% trans 'District Heating' %}</option>
+                            <option value="district-cooling">{% trans 'District Cooling' %}</option>
+                            <option value="steam">{% trans 'Steam' %}</option>
+                            <option value="chilled-water">{% trans 'Chilled Water' %}</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="kwh">kWh</option>
                             <option value="mj">MJ (Megajoules)</option>
-                            <option value="mmbtu">MMBtu</option>
-                            <option value="tons">Tons</option>
+                            <option value="mmbtu">{% trans 'MMBtu' %}</option>
+                            <option value="tons">{% trans 'Tons' %}</option>
                         </select>
                     </div>
 
@@ -552,7 +552,7 @@
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
                     </p>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -572,7 +572,7 @@
                         Purchased Goods and Services
                         <i class="fas fa-chevron-down help-icon" title="Emissions from purchased goods and services"></i>
                     </h3>
-                    <p>Emissions from production of purchased goods and services</p>
+                    <p>{% trans 'Emissions from production of purchased goods and services' %}</p>
                 </div>
 
                 <div id="purchased-goods-form" style="display: none; margin-bottom: 30px;">
@@ -591,25 +591,25 @@
                         <select class="form-control" id="purchased-goods-source" onchange="handlePurchasedGoodsSourceChange(this)">
                             <option value="">{% trans "Select Emission Source" %}</option>
                             <optgroup label="Turkey-Specific (ATOM KABLO ISO 14064-1)">
-                                <option value="chemical">Chemical</option>
-                                <option value="chemical-oil">Chemical Oil</option>
-                                <option value="plastic">Plastic</option>
-                                <option value="carton">Carton</option>
+                                <option value="chemical">{% trans 'Chemical' %}</option>
+                                <option value="chemical-oil">{% trans 'Chemical Oil' %}</option>
+                                <option value="plastic">{% trans 'Plastic' %}</option>
+                                <option value="carton">{% trans 'Carton' %}</option>
                                 <option value="metal-primary">Metal (Primary)</option>
                                 <option value="metal-recycled">Metal (Recycled)</option>
-                                <option value="wood">Wood</option>
-                                <option value="foam-tape">Foam Tape</option>
+                                <option value="wood">{% trans 'Wood' %}</option>
+                                <option value="foam-tape">{% trans 'Foam Tape' %}</option>
                             </optgroup>
                             <optgroup label="Global (Defra 2024)">
                                 <option value="electrical-large">Electrical Items - Large</option>
                                 <option value="electrical-small">Electrical Items - Small</option>
                                 <option value="electrical-fridges-freezers">Electrical Items - Fridges & Freezers</option>
                                 <option value="electrical-it">Electrical Items - IT</option>
-                                <option value="glass">Glass</option>
-                                <option value="metal-aluminium-cans-foil">Metal: Aluminium Cans & Foil</option>
-                                <option value="metal-mixed-cans">Metal: Mixed Cans</option>
-                                <option value="metal-steel-cans">Metal: Steel Cans</option>
-                                <option value="mineral-oil">Mineral Oil</option>
+                                <option value="glass">{% trans 'Glass' %}</option>
+                                <option value="metal-aluminium-cans-foil">{% trans 'Metal' %}: Aluminium Cans & Foil</option>
+                                <option value="metal-mixed-cans">{% trans 'Metal' %}: Mixed Cans</option>
+                                <option value="metal-steel-cans">{% trans 'Metal' %}: Steel Cans</option>
+                                <option value="mineral-oil">{% trans 'Mineral Oil' %}</option>
                                 <option value="paper-mixed">Paper & Board: Mixed</option>
                                 <option value="plastic-average">Plastics: Average</option>
                                 <option value="plastic-hdpe">Plastics: HDPE</option>
@@ -627,10 +627,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
-                            <option value="kg">Kilograms</option>
+                            <option value="kg">{% trans 'Kilograms' %}</option>
                             <option value="units">Units</option>
                         </select>
                     </div>
@@ -659,7 +659,7 @@
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">add your proof document</a> here (i.e. gas bills).
+                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
                     </p>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -688,7 +688,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="units">Units</option>
@@ -730,11 +730,11 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="kwh">kWh</option>
-                            <option value="liters">Liters</option>
+                            <option value="liters">{% trans 'Liters' %}</option>
                         </select>
                     </div>
 
@@ -773,7 +773,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
                             <option value="tonne-km">Tonne-km</option>
                         </select>
@@ -812,7 +812,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
                             <option value="m3">Cubic Meters (m³)</option>
                         </select>
@@ -880,9 +880,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
-                            <option value="kg">Kilograms</option>
+                            <option value="kg">{% trans 'Kilograms' %}</option>
                         </select>
                     </div>
 
@@ -938,9 +938,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
-                            <option value="km">Kilometers</option>
+                            <option value="km">{% trans 'Kilometers' %}</option>
                         </select>
                     </div>
 
@@ -993,9 +993,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
-                            <option value="km">Kilometers</option>
+                            <option value="km">{% trans 'Kilometers' %}</option>
                         </select>
                     </div>
 
@@ -1033,7 +1033,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="m2">Square Meters (m²)</option>
@@ -1075,7 +1075,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control">
                             <option value="">{% trans "Select Unit" %}</option>
                             <option value="tonne-km">Tonne-km</option>
@@ -1117,9 +1117,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
-                            <option value="kg">Kilograms</option>
+                            <option value="kg">{% trans 'Kilograms' %}</option>
                         </select>
                     </div>
 
@@ -1154,7 +1154,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
                             <option value="franchises">Number of Franchises</option>
                         </select>
@@ -1193,7 +1193,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Unit</label>
+                        <label>{% trans 'Unit' %}</label>
                         <select class="form-control" disabled>
                             <option value="usd">USD</option>
                         </select>
@@ -1687,10 +1687,10 @@ function updateMobileFields() {
         // Show all units if no source selected
         unitSelect.innerHTML = `
             <option value="">{% trans "Select Unit" %}</option>
-            <option value="liters">Liters</option>
+            <option value="liters">{% trans 'Liters' %}</option>
             <option value="kg">Kilograms (kg)</option>
             <option value="gj">Gigajoules (GJ)</option>
-            <option value="km">Kilometers</option>
+            <option value="km">{% trans 'Kilometers' %}</option>
         `;
     }
 }
@@ -1738,7 +1738,7 @@ function updateStationaryFields() {
         // Show all units if no source selected
         unitSelect.innerHTML = `
             <option value="">{% trans "Select Unit" %}</option>
-            <option value="liters">Liters</option>
+            <option value="liters">{% trans 'Liters' %}</option>
             <option value="kg">Kilograms (kg)</option>
             <option value="m3">Cubic Meters (m³)</option>
             <option value="gj">Gigajoules (GJ)</option>

@@ -1,0 +1,156 @@
+{% load i18n %}
+<script>
+// Global translations for JavaScript
+window.TRANSLATIONS = {
+    // Common actions
+    add: "{% trans 'Add' %}",
+    save: "{% trans 'Save' %}",
+    cancel: "{% trans 'Cancel' %}",
+    delete: "{% trans 'Delete' %}",
+    edit: "{% trans 'Edit' %}",
+    view: "{% trans 'View' %}",
+    close: "{% trans 'Close' %}",
+    open: "{% trans 'Open' %}",
+    back: "{% trans 'Back' %}",
+    next: "{% trans 'Next' %}",
+    previous: "{% trans 'Previous' %}",
+    confirm: "{% trans 'Confirm' %}",
+    submit: "{% trans 'Submit' %}",
+    reset: "{% trans 'Reset' %}",
+    clear: "{% trans 'Clear' %}",
+    refresh: "{% trans 'Refresh' %}",
+    search: "{% trans 'Search' %}",
+    filter: "{% trans 'Filter' %}",
+    export: "{% trans 'Export' %}",
+    import: "{% trans 'Import' %}",
+    download: "{% trans 'Download' %}",
+    upload: "{% trans 'Upload' %}",
+    
+    // Navigation
+    home: "{% trans 'Home' %}",
+    dashboard: "{% trans 'Dashboard' %}",
+    dataCollection: "{% trans 'Data Collection' %}",
+    analysis: "{% trans 'Analysis' %}",
+    reporting: "{% trans 'Reporting' %}",
+    settings: "{% trans 'Settings' %}",
+    help: "{% trans 'Help' %}",
+    support: "{% trans 'Support' %}",
+    
+    // Emissions
+    emissions: "{% trans 'Emissions' %}",
+    carbonFootprint: "{% trans 'Carbon Footprint' %}",
+    scope1: "{% trans 'Scope 1' %}",
+    scope2: "{% trans 'Scope 2' %}",
+    scope3: "{% trans 'Scope 3' %}",
+    co2Equivalent: "{% trans 'CO2 Equivalent' %}",
+    emissionFactor: "{% trans 'Emission Factor' %}",
+    activityData: "{% trans 'Activity Data' %}",
+    
+    // Time periods
+    today: "{% trans 'Today' %}",
+    yesterday: "{% trans 'Yesterday' %}",
+    thisWeek: "{% trans 'This Week' %}",
+    thisMonth: "{% trans 'This Month' %}",
+    thisYear: "{% trans 'This Year' %}",
+    lastMonth: "{% trans 'Last Month' %}",
+    lastYear: "{% trans 'Last Year' %}",
+    
+    // Status messages
+    success: "{% trans 'Success' %}",
+    error: "{% trans 'Error' %}",
+    warning: "{% trans 'Warning' %}",
+    info: "{% trans 'Info' %}",
+    loading: "{% trans 'Loading' %}",
+    pleaseWait: "{% trans 'Please wait' %}",
+    
+    // User management
+    profile: "{% trans 'Profile' %}",
+    account: "{% trans 'Account' %}",
+    login: "{% trans 'Login' %}",
+    logout: "{% trans 'Logout' %}",
+    user: "{% trans 'User' %}",
+    admin: "{% trans 'Admin' %}",
+    permissions: "{% trans 'Permissions' %}",
+    password: "{% trans 'Password' %}",
+    email: "{% trans 'Email' %}",
+    username: "{% trans 'Username' %}",
+    
+    // Organization
+    organization: "{% trans 'Organization' %}",
+    company: "{% trans 'Company' %}",
+    department: "{% trans 'Department' %}",
+    team: "{% trans 'Team' %}",
+    location: "{% trans 'Location' %}",
+    address: "{% trans 'Address' %}",
+    phone: "{% trans 'Phone' %}",
+    
+    // Reports
+    report: "{% trans 'Report' %}",
+    chart: "{% trans 'Chart' %}",
+    table: "{% trans 'Table' %}",
+    summary: "{% trans 'Summary' %}",
+    details: "{% trans 'Details' %}",
+    statistics: "{% trans 'Statistics' %}",
+    trends: "{% trans 'Trends' %}",
+    
+    // Common phrases
+    welcomeBack: "{% trans 'Welcome back!' %}",
+    getStarted: "{% trans 'Get Started' %}",
+    learnMore: "{% trans 'Learn More' %}",
+    readMore: "{% trans 'Read More' %}",
+    showMore: "{% trans 'Show More' %}",
+    showLess: "{% trans 'Show Less' %}",
+    
+    // Form validation
+    required: "{% trans 'This field is required' %}",
+    invalidEmail: "{% trans 'Please enter a valid email address' %}",
+    passwordTooShort: "{% trans 'Password is too short' %}",
+    passwordsDoNotMatch: "{% trans 'Passwords do not match' %}",
+    
+    // Confirmation messages
+    confirmDelete: "{% trans 'Are you sure you want to delete this item?' %}",
+    confirmSave: "{% trans 'Are you sure you want to save changes?' %}",
+    unsavedChanges: "{% trans 'You have unsaved changes. Are you sure you want to leave?' %}",
+    
+    // Data entry
+    selectOption: "{% trans 'Select an option' %}",
+    enterValue: "{% trans 'Enter value' %}",
+    chooseFile: "{% trans 'Choose file' %}",
+    noFileSelected: "{% trans 'No file selected' %}",
+    
+    // Placeholders
+    searchPlaceholder: "{% trans 'Search...' %}",
+    emailPlaceholder: "{% trans 'Enter your email' %}",
+    passwordPlaceholder: "{% trans 'Enter your password' %}",
+    namePlaceholder: "{% trans 'Enter your name' %}",
+    
+    // Units
+    kg: "{% trans 'kg' %}",
+    tons: "{% trans 'tons' %}",
+    kwh: "{% trans 'kWh' %}",
+    liters: "{% trans 'liters' %}",
+    meters: "{% trans 'meters' %}",
+    
+    // Months
+    january: "{% trans 'January' %}",
+    february: "{% trans 'February' %}",
+    march: "{% trans 'March' %}",
+    april: "{% trans 'April' %}",
+    may: "{% trans 'May' %}",
+    june: "{% trans 'June' %}",
+    july: "{% trans 'July' %}",
+    august: "{% trans 'August' %}",
+    september: "{% trans 'September' %}",
+    october: "{% trans 'October' %}",
+    november: "{% trans 'November' %}",
+    december: "{% trans 'December' %}"
+};
+
+// Helper function to get translation
+function getTranslation(key) {
+    return window.TRANSLATIONS[key] || key;
+}
+
+// Alias for shorter usage
+window.t = getTranslation;
+</script>

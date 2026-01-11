@@ -1,0 +1,17 @@
+# Test minimal PO file
+msgid ""
+msgstr ""
+"Project-Id-Version: Test\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Emissions"
+msgstr "Emisyonlar"
+
+msgid "Natural Gas"
+msgstr "Doğal Gaz"
+
+msgid "Stationary Combustion"
+msgstr "Sabit Yanma"

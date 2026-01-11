@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-11 13:10-0800\n"
+"POT-Creation-Date: 2026-01-11 13:58-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,589 +17,897 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-#: .\ghg\admin_views.py:23
-msgid "Please enter the correct username and password."
+
+#: .\templates\landing.html:2743
+msgid ""
+"Academia Carbon has transformed how we track and report our emissions. The "
+"ISO 14064-1 compliance features saved us months of work, and the real-time "
+"analytics help us make better decisions daily."
 msgstr ""
 
-
-#: .\templates\action_planning.html:5 .\templates\landing.html:2444
-#: .\templates\partials\sidebar.html:62
-msgid "Action Planning"
+#: .\templates\support.html:260
+msgid ""
+"Access comprehensive guides and documentation for all platform features."
 msgstr ""
 
-#: .\templates\action_planning.html:132
-msgid "Target Year"
+#: .\templates\user_guide.html:595
+msgid ""
+"Access your data through Dashboard, Analysis, or generate ISO 14064-1 reports"
 msgstr ""
 
-#: .\templates\action_planning.html:141
-msgid "New Plan"
+#: .\templates\data_entry.html:1272
+msgid ""
+"Add a custom emission factor provided by your supplier or from your own "
+"calculations."
 msgstr ""
 
-#: .\templates\action_planning.html:155
-msgid "Carbon Reduction Action Planning"
-msgstr ""
-
-#: .\templates\action_planning.html:156 .\templates\analysis.html:311
-#: .\templates\analysis.html:333
-msgid "Coming Soon"
-msgstr ""
-
-#: .\templates\action_planning.html:159
-#: .\templates\action_planning.html:164
-msgid "Start with Data Collection"
-msgstr ""
-
-#: .\templates\action_planning.html:168
-msgid "View Current Emissions"
-msgstr ""
-
-#: .\templates\action_planning.html:180
-msgid "Set Reduction Targets"
-msgstr ""
-
-#: .\templates\action_planning.html:181
-#: .\templates\action_planning.html:190
-msgid "Create Action Plans"
-msgstr ""
-
-#: .\templates\action_planning.html:191
-#: .\templates\action_planning.html:200 .\templates\index.html:213
-msgid "Track Progress"
-msgstr ""
-
-#: .\templates\action_planning.html:201
-#: .\templates\action_planning.html:210
-msgid "Smart Recommendations"
-msgstr ""
-
-#: .\templates\action_planning.html:211
-#: .\templates\action_planning.html:220
-msgid "Team Collaboration"
+#: .\templates\user_guide.html:930
+msgid ""
+"All emission factors are based on international standards (IPCC, EPA, DEFRA) "
+"and country-specific data from official sources like IEA and Turkish "
+"Ministry of Environment. Turkey-specific factors are updated annually and "
+"provide higher accuracy for Turkish organizations."
 msgstr ""
 
 #: .\templates\action_planning.html:221
-#: .\templates\action_planning.html:230
-msgid "Progress Reports"
+msgid ""
+"Assign tasks, share progress updates, and collaborate with team members "
+"across different departments."
 msgstr ""
 
-#: .\templates\action_planning.html:231
-#: .\templates\action_planning.html:240
-msgid "Development Status"
+#: .\templates\landing.html:2406
+msgid ""
+"Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using "
+"up-to-date emission factors and international standards."
 msgstr ""
 
-#: .\templates\action_planning.html:243
-#: .\templates\action_planning.html:246
-msgid "Continue collecting emission data to establish your baseline"
+#: .\templates\data_entry.html:225
+msgid ""
+"Calculate your emissions more precisely by accessing additional emission "
+"sources with the Booster Plan."
 msgstr ""
 
-#: .\templates\action_planning.html:247
-msgid "Generate reports to understand your current emission profile"
+#: .\templates\data_entry.html:1362
+msgid ""
+"Can't find your material in the system? Request it and our team will add the "
+"emission factor from official sources (Defra, IPCC, etc.)."
 msgstr ""
 
-#: .\templates\action_planning.html:248
-msgid "Analyze your data to identify reduction opportunities"
-msgstr ""
-
-#: .\templates\action_planning.html:249
-msgid "Contact our support team for guidance on reduction strategies"
-msgstr ""
-
-msgid "Login"
-msgstr "Giriş"
-
-msgid "Analysis"
-msgstr "Analiz"
-
-#: .\templates\analysis.html:272 .\templates\analysis.html:376
-msgid "Emissions Analysis"
-msgstr ""
-
-#: .\templates\analysis.html:273
-#: .\templates\analysis.html:278
-msgid "Scope-wise emission breakdown"
-msgstr ""
-
-#: .\templates\analysis.html:279
-msgid "Date range filtering"
-msgstr ""
-
-#: .\templates\analysis.html:280
-msgid "Source contribution analysis"
-msgstr ""
-
-#: .\templates\analysis.html:281
-msgid "Audit-ready reporting"
-msgstr ""
-
-#: .\templates\analysis.html:308
-msgid "Comparative Analysis"
+#: .\templates\user_guide.html:571
+msgid ""
+"Choose Turkey for Turkish organizations or Global Average for international "
+"use"
 msgstr ""
 
 #: .\templates\analysis.html:309
-#: .\templates\analysis.html:315
-msgid "Industry benchmarking"
+msgid ""
+"Compare your emissions with industry benchmarks and similar organizations."
 msgstr ""
 
-#: .\templates\analysis.html:316
-msgid "Peer comparison"
+#: .\templates\landing.html:2807
+msgid ""
+"Complete guides for getting started, advanced features, and best practices "
+"for carbon management."
 msgstr ""
 
-#: .\templates\analysis.html:317
-msgid "Best practice insights"
+#: .\templates\landing.html:2793
+msgid ""
+"Comprehensive guides, API documentation, and integration resources to help "
+"you get the most out of Academia Carbon."
 msgstr ""
 
-#: .\templates\analysis.html:318
-msgid "Improvement recommendations"
+#: .\templates\landing.html:2395
+msgid ""
+"Comprehensive tools and features designed to help organizations track, "
+"analyze, and reduce their carbon footprint effectively."
 msgstr ""
 
-#: .\templates\analysis.html:330
-msgid "Performance Analysis"
+#: .\templates\index.html:205
+msgid ""
+"Consider switching to renewable energy sources to lower your electricity-"
+"based emissions."
 msgstr ""
 
-#: .\templates\analysis.html:331
-msgid "Track your carbon reduction performance and goal achievement over time."
+#: .\templates\user_guide.html:626
+msgid ""
+"Country affects electricity grid, fuel composition, and transport factors"
 msgstr ""
 
-#: .\templates\analysis.html:337
-msgid "Goal tracking & progress"
+#: .\templates\auth\signup.html:9
+msgid ""
+"Create your Academia Carbon account - Start tracking your carbon footprint"
 msgstr ""
 
-#: .\templates\analysis.html:338
-msgid "Reduction trend analysis"
+#: .\templates\action_planning.html:181
+msgid ""
+"Define science-based targets aligned with your organization's sustainability "
+"commitments and industry benchmarks."
 msgstr ""
 
-#: .\templates\analysis.html:339
-msgid "Performance scoring"
+#: .\templates\landing.html:3510
+msgid ""
+"Demo video would play here. In production, this would open a video modal or "
+"redirect to the live demo."
 msgstr ""
 
-#: .\templates\analysis.html:340
-msgid "Achievement milestones"
+#: .\templates\action_planning.html:159
+msgid ""
+"Develop and track your organization's carbon reduction initiatives. Set "
+"targets, create action plans, and monitor progress towards your "
+"sustainability goals with our comprehensive action planning tools."
 msgstr ""
 
-#: .\templates\analysis.html:352
-msgid "Supplier Analysis"
+#: .\templates\action_planning.html:191
+msgid ""
+"Develop detailed roadmaps with specific initiatives, timelines, and "
+"responsible parties for emission reductions."
 msgstr ""
 
-#: .\templates\analysis.html:353
-msgid "Analyze emissions from your supply chain and supplier carbon footprint."
+#: .\templates\data_entry.html:1554
+msgid ""
+"Don't see your industry type in the list? Request it and our team will add "
+"it to the system for better emission factor categorization."
 msgstr ""
 
-#: .\templates\analysis.html:357
-msgid "NEW"
+#: .\templates\support.html:250
+msgid ""
+"Email us directly at support@academiacarbon.com for immediate assistance."
 msgstr ""
 
-#: .\templates\analysis.html:362
-msgid "Supplier carbon footprint"
+#: .\templates\user_guide.html:829
+msgid ""
+"Ensure you have data for all relevant Scope 1, 2, and 3 emissions for your "
+"reporting period"
 msgstr ""
 
-#: .\templates\analysis.html:363
-msgid "Supply chain emissions"
+#: .\templates\landing.html:2456
+msgid ""
+"Enterprise-grade security with advanced encryption, access controls, and "
+"full compliance with data privacy regulations."
 msgstr ""
 
-#: .\templates\analysis.html:364
-msgid "Vendor sustainability scoring"
+#: .\templates\landing.html:2473
+msgid ""
+"Experience our comprehensive carbon tracking platform with real-time "
+"analytics, professional reporting, and intuitive dashboard interface."
 msgstr ""
 
-#: .\templates\analysis.html:365
-msgid "Procurement recommendations"
+#: .\templates\user_guide.html:583
+msgid ""
+"Fill in the emission source, activity amount, and unit. Add supplier info if "
+"available"
 msgstr ""
 
-#: .\templates\analysis\emissions.html:76
-msgid "TOTAL"
+#: .\templates\landing.html:2993
+msgid ""
+"Flexible pricing options designed to scale with your carbon management "
+"needs. Start free and upgrade as you grow."
 msgstr ""
 
-#: .\templates\analysis\emissions.html:145
-msgid "Next"
+#: .\templates\user_guide.html:557
+msgid ""
+"Follow these steps to calculate your first emission and understand the "
+"platform"
 msgstr ""
 
-#: .\templates\auth\login.html:9
-msgid "Login to Academia Carbon - Professional carbon tracking platform"
+#: .\templates\landing.html:2547
+msgid ""
+"Generate comprehensive carbon footprint reports that meet international "
+"standards. Export to PDF, customize templates, and share with stakeholders."
 msgstr ""
 
-#: .\templates\auth\login.html:456
-msgid "Professional Carbon Tracking"
+#: .\templates\action_planning.html:231
+msgid ""
+"Generate comprehensive reports showing your reduction achievements and "
+"progress towards targets."
 msgstr ""
 
-#: .\templates\auth\login.html:457
-msgid "Track Your"
+#: .\templates\landing.html:2426
+msgid ""
+"Generate professional reports compliant with ISO 14064-1 standards with PDF "
+"export capabilities and advanced filtering options."
 msgstr ""
 
-#: .\templates\auth\login.html:457
-msgid "Carbon Impact"
+#: .\templates\action_planning.html:211
+msgid ""
+"Get AI-powered suggestions for reduction opportunities based on your "
+"emission profile and industry best practices."
+msgstr ""
+
+#: .\templates\landing.html:2769
+msgid ""
+"Implementation was seamless, and the support team is outstanding. The "
+"platform scales perfectly with our multi-location operations, and the API "
+"integration with our ERP system works flawlessly."
 msgstr ""
 
 #: .\templates\auth\login.html:459
-#: .\templates\auth\login.html:467
-msgid "Certified"
+msgid ""
+"Join organizations worldwide using Academia Carbon to measure, analyze, and "
+"reduce their environmental footprint with precision and compliance."
+msgstr ""
+
+#: .\templates\landing.html:3376
+msgid ""
+"Join thousands of organizations already using Academia Carbon to track, "
+"analyze, and reduce their environmental impact. Start your free trial today."
+msgstr ""
+
+#: .\templates\suppliers.html:208
+msgid ""
+"Manage your supplier relationships and track their carbon impact. Currently, "
+"you can add suppliers when entering emission data. Enhanced supplier "
+"management features are being developed to help you engage with suppliers on "
+"sustainability initiatives."
+msgstr ""
+
+#: .\templates\action_planning.html:201
+msgid ""
+"Monitor the effectiveness of your initiatives with real-time progress "
+"tracking and performance analytics."
+msgstr ""
+
+#: .\templates\landing.html:2499
+msgid ""
+"Monitor your organization's carbon footprint with our advanced analytics "
+"dashboard. Track emissions across all scopes, visualize trends, and get "
+"actionable insights for reduction strategies."
+msgstr ""
+
+#: .\templates\user_guide.html:940
+msgid ""
+"No, once a calculation is saved, the country cannot be changed as it affects "
+"the emission factors used. Always select your country before calculating. "
+"You can delete the record and recalculate if needed."
+msgstr ""
+
+#: .\templates\landing.html:3193
+msgid ""
+"Our team combines decades of experience in environmental science, software "
+"engineering, and sustainability consulting to deliver the most comprehensive "
+"carbon management platform."
+msgstr ""
+
+#: .\templates\landing.html:2862
+msgid ""
+"Powerful REST API for integrating carbon tracking into your existing systems "
+"and workflows."
+msgstr ""
+
+#: .\templates\landing.html:2919
+msgid ""
+"Pre-built integrations with popular business systems and data sources for "
+"seamless data flow."
+msgstr ""
+
+#: .\templates\user_guide.html:760
+msgid ""
+"Primarily lignite coal from domestic sources with higher emission factors"
+msgstr ""
+
+#: .\templates\analysis.html:273
+msgid ""
+"Professional ISO 14064-1 compliant emissions reporting and analysis "
+"dashboard."
+msgstr ""
+
+#: .\templates\landing.html:3404
+msgid ""
+"Professional carbon emission tracking and reporting platform for "
+"organizations worldwide. ISO 14064-1 certified and trusted by industry "
+"leaders."
+msgstr ""
+
+#: .\templates\landing.html:9
+msgid ""
+"Professional carbon emission tracking and reporting platform for "
+"organizations. ISO 14064-1 compliant reporting, real-time analytics, and "
+"comprehensive carbon management tools."
+msgstr ""
+
+#: .\templates\user_guide.html:577
+msgid ""
+"Select Scope 1 (direct), Scope 2 (energy), or Scope 3 (indirect) based on "
+"your activity"
+msgstr ""
+
+#: .\templates\support.html:230
+msgid ""
+"Send us a message and we'll get back to you within 24 hours during business "
+"days."
+msgstr ""
+
+#: .\templates\index.html:214
+msgid ""
+"Set monthly targets and monitor your emission reduction progress over time."
+msgstr ""
+
+#: .\templates\landing.html:2446
+msgid ""
+"Set reduction targets, create action plans, and track progress towards your "
+"sustainability goals with comprehensive planning tools."
+msgstr ""
+
+#: .\templates\user_guide.html:813
+#, python-format
+msgid ""
+"Taking the train from Istanbul to Ankara produces 85%% less emissions than "
+"flying! Metro and dolmuş are also efficient options for urban transport."
+msgstr ""
+
+#: .\templates\action_planning.html:243
+msgid ""
+"The Action Planning module is currently under development. In the meantime, "
+"you can:"
+msgstr ""
+
+#: .\templates\landing.html:2756
+msgid ""
+"The supplier management features are incredible. We can now track our entire "
+"supply chain's carbon footprint and work collaboratively on reduction "
+"initiatives. Game-changer for our Scope 3 reporting."
+msgstr ""
+
+#: .\templates\landing.html:2436
+msgid ""
+"Track and manage supplier carbon emissions, assess performance, and "
+"collaborate on supply chain emission reduction initiatives."
+msgstr ""
+
+#: .\templates\landing.html:2595
+msgid ""
+"Track emissions from all sources with our intelligent calculation engine. "
+"Automatic factor updates, multi-location support, and supplier integration."
+msgstr ""
+
+#: .\templates\landing.html:2300
+msgid ""
+"Track, analyze, and report your organization's carbon emissions with "
+"precision. Our comprehensive platform provides real-time analytics, ISO "
+"14064-1 compliant reporting, and actionable insights for sustainable growth."
+msgstr ""
+
+#: .\templates\user_guide.html:752
+msgid ""
+"Turkey has unique emission factors based on IEA 2023 data and Turkish "
+"Ministry of Environment guidelines, providing more accurate results for "
+"Turkish organizations."
+msgstr ""
+
+#: .\templates\user_guide.html:665
+msgid ""
+"Use actual bills and invoices when possible. Monthly data entry provides "
+"better tracking than annual estimates. Always double-check units (kWh vs "
+"MWh, liters vs gallons)."
+msgstr ""
+
+#: .\templates\user_guide.html:859
+msgid ""
+"Use the report for compliance, stakeholder communication, or certification"
+msgstr ""
+
+#: .\templates\user_guide.html:607
+msgid ""
+"Video tutorials coming soon! For now, follow the step-by-step guide above."
+msgstr ""
+
+#: .\templates\landing.html:2416
+msgid ""
+"Visualize emission data through interactive charts, KPI cards, and "
+"analytical reports for better understanding of your carbon performance."
+msgstr ""
+
+#: .\templates\user_guide.html:960
+msgid ""
+"We recommend monthly tracking for Scope 1 and 2 emissions (electricity, "
+"fuel) and quarterly for Scope 3 emissions (travel, waste). This provides a "
+"good balance between accuracy and effort while enabling trend analysis."
+msgstr ""
+
+#: .\templates\user_guide.html:980
+msgid ""
+"Yes! You can add custom emission factors from supplier certificates, LCA "
+"studies, or your own calculations. Use the \\"
+msgstr ""
+
+#: .\templates\user_guide.html:970
+msgid ""
+"Yes, your data is stored securely using industry-standard encryption. We "
+"never share your emission data with third parties without your explicit "
+"consent. You can export or delete your data at any time from the Settings "
+"page."
+msgstr ""
+
+#: .\templates\user_guide.html:950
+msgid ""
+"You can request new industries or materials directly from the system. Click "
+"\\"
+msgstr ""
+
+#: .\templates\user_guide.html:867
+msgid ""
+"✓ All material emissions included • ✓ Consistent methodology • ✓ Appropriate "
+"emission factors • ✓ Clear organizational boundary • ✓ Complete documentation"
+msgstr ""
+
+#: .\templates\user_guide.html:911
+msgid ""
+"✓ Electricity bills • ✓ Natural gas bills • ✓ Fuel purchases • ✓ Business "
+"travel records • ✓ Waste disposal receipts • ✓ Review dashboard totals"
+msgstr ""
+
+#: .\templates\landing.html:3008 .\templates\landing.html:3064
+msgid "/month"
+msgstr ""
+
+#: .\templates\index.html:178
+msgid "1 day ago"
+msgstr ""
+
+#: .\templates\landing.html:3040
+msgid "1 user account"
+msgstr ""
+
+#: .\templates\landing.html:3319
+msgid "10+ years sustainability consulting"
+msgstr ""
+
+#: .\templates\landing.html:2655
+#, python-format
+msgid "12%% vs last month"
+msgstr ""
+
+#: .\templates\landing.html:2671
+#, python-format
+msgid "15%% improvement"
+msgstr ""
+
+#: .\templates\landing.html:3221
+msgid "15+ years carbon accounting experience"
+msgstr ""
+
+#: .\templates\index.html:169
+msgid "2 hours ago"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:101
+msgid "24/7 Support Available"
+msgstr ""
+
+#: .\templates\landing.html:3158
+msgid "24/7 premium support"
+msgstr ""
+
+#: .\templates\index.html:187
+msgid "3 days ago"
+msgstr ""
+
+#: .\templates\landing.html:2359
+msgid "3-Minute Product Demo"
+msgstr ""
+
+#: .\templates\landing.html:2663
+#, python-format
+msgid "8%% reduction"
+msgstr ""
+
+#: .\templates\landing.html:3331
+#, python-format
+msgid "98%% customer satisfaction rate"
+msgstr ""
+
+#: .\templates\data_entry.html:1268
+msgid "ADD CUSTOM EMISSION FACTOR"
+msgstr ""
+
+#: .\templates\data_entry.html:1440
+msgid "ADD NEW SUPPLIER"
+msgstr ""
+
+#: .\templates\landing.html:2226 .\templates\landing.html:2266
+msgid "API"
+msgstr ""
+
+#: .\templates\landing.html:3439
+msgid "API Documentation"
+msgstr ""
+
+#: .\templates\landing.html:2584
+msgid "API Integration"
+msgstr ""
+
+#: .\templates\landing.html:2972
+msgid "API Playground"
+msgstr ""
+
+#: .\templates\landing.html:3459
+msgid "About Us"
+msgstr ""
+
+#: .\templates\admin\login.html:425 .\templates\base.html:74
+#: .\templates\partials\sidebar.html:13
+msgid "Academia Carbon"
+msgstr ""
+
+#: .\templates\landing.html:8
+msgid "Academia Carbon - Professional Carbon Tracking Platform"
+msgstr ""
+
+#: .\templates\user_guide.html:834
+msgid "Access Reporting"
+msgstr ""
+
+#: .\templates\partials\translations.html:68 .\templates\settings.html:192
+msgid "Account"
+msgstr ""
+
+#: .\templates\support.html:361
+msgid "Account Management"
+msgstr ""
+
+#: .\templates\settings.html:213
+msgid "Account Settings"
+msgstr ""
+
+#: .\templates\landing.html:2933
+msgid "Accounting software (QuickBooks, Xero)"
 msgstr ""
 
 #: .\templates\auth\login.html:473
 msgid "Accuracy"
 msgstr ""
 
-msgid "Support"
-msgstr "Destek"
-
-#: .\templates\auth\login.html:487
-msgid "Welcome Back"
+#: .\templates\landing.html:2321
+msgid "Accuracy Rate"
 msgstr ""
 
-#: .\templates\auth\login.html:488
-msgid "Sign in to continue tracking your carbon footprint"
+#: .\templates\analysis.html:340
+msgid "Achievement milestones"
 msgstr ""
 
-#: .\templates\auth\login.html:504 .\templates\auth\signup.html:387
-#: .\templates\settings.html:223 .\templates\support.html:349
-msgid "Email Address"
+#: .\templates\action_planning.html:5 .\templates\landing.html:2444
+#: .\templates\partials\sidebar.html:62
+msgid "Action Planning"
 msgstr ""
 
-#: .\templates\auth\login.html:510
-msgid "Enter your email address"
+#: .\templates\suppliers.html:188
+msgid "Active Suppliers"
 msgstr ""
 
-#: .\templates\auth\login.html:520 .\templates\auth\signup.html:403
-msgid "Password"
+#: .\templates\index.html:99
+msgid "Active suppliers"
 msgstr ""
 
-#: .\templates\auth\login.html:526
-msgid "Enter your password"
+#: .\templates\data_entry.html:1482
+msgid "Activity"
 msgstr ""
 
-#: .\templates\auth\login.html:535 .\templates\auth\signup.html:459
-#: .\templates\landing.html:3386
-msgid "Sign In"
+#: .\templates\data_entry.html:261 .\templates\data_entry.html:338
+#: .\templates\data_entry.html:397 .\templates\data_entry.html:469
+#: .\templates\data_entry.html:532 .\templates\data_entry.html:639
+#: .\templates\data_entry.html:700 .\templates\data_entry.html:742
+#: .\templates\data_entry.html:890 .\templates\data_entry.html:948
+#: .\templates\data_entry.html:1003 .\templates\data_entry.html:1045
+#: .\templates\data_entry.html:1087 .\templates\data_entry.html:1127
+#: .\templates\data_entry.html:1164 .\templates\data_entry.html:1967
+#: .\templates\data_entry_new.html:87 .\templates\emission_history.html:734
+#: .\templates\partials\translations.html:47
+msgid "Activity Data"
+msgstr "Faaliyet Verisi"
+
+#: .\templates\data_entry.html:276 .\templates\data_entry.html:353
+#: .\templates\data_entry.html:412 .\templates\data_entry.html:837
+#: .\templates\data_entry_new.html:102 .\templates\partials\translations.html:6
+msgid "Add"
+msgstr "Ekle"
+
+#: .\templates\partials\sidebar.html:21
+msgid "Add Data"
 msgstr ""
 
-#: .\templates\auth\login.html:540
-msgid "or continue with"
-msgstr ""
-
-#: .\templates\auth\login.html:543
-msgid "Google login coming soon!"
-msgstr ""
-
-#: .\templates\auth\login.html:545 .\templates\auth\signup.html:453
-msgid "Continue with Google"
-msgstr ""
-
-#: .\templates\auth\login.html:549
-msgid "Don't have an account?"
-msgstr ""
-
-#: .\templates\auth\login.html:551 .\templates\auth\signup.html:8
-msgid "Sign Up"
-msgstr ""
-
-#: .\templates\auth\signup.html:9
-#: .\templates\auth\signup.html:336
-msgid "Join Academia Carbon"
-msgstr ""
-
-#: .\templates\auth\signup.html:337
-msgid "Create your account and start tracking your carbon footprint"
-msgstr ""
-
-#: .\templates\auth\signup.html:354
-msgid "First Name"
-msgstr ""
-
-#: .\templates\auth\signup.html:370
-msgid "Last Name"
-msgstr ""
-
-#: .\templates\auth\signup.html:418
-msgid "Confirm Password"
-msgstr ""
-
-#: .\templates\auth\signup.html:431
-msgid "Password Requirements:"
-msgstr ""
-
-#: .\templates\auth\signup.html:433
-msgid "At least 8 characters long"
-msgstr ""
-
-#: .\templates\auth\signup.html:434
-msgid "Not similar to your personal information"
-msgstr ""
-
-#: .\templates\auth\signup.html:435
-msgid "Not a commonly used password"
-msgstr ""
-
-#: .\templates\auth\signup.html:436
-msgid "Cannot be entirely numeric"
-msgstr ""
-
-#: .\templates\auth\signup.html:443
-msgid "Create Account"
-msgstr ""
-
-#: .\templates\auth\signup.html:448
-msgid "or"
-msgstr ""
-
-#: .\templates\auth\signup.html:451
-msgid "Google signup coming soon!"
-msgstr ""
-
-#: .\templates\auth\signup.html:457
-msgid "Already have an account?"
-msgstr ""
-
-#: .\templates\base.html:96 .\templates\dashboard_base.html:836
-msgid "Logout"
-msgstr ""
-
-#: .\templates\base.html:110 .\templates\landing.html:3482
-msgid "All rights reserved."
-msgstr ""
-
-msgid "Dashboard"
-msgstr "Kontrol Paneli"
-
-msgid "Data Collection"
-msgstr "Veri Toplama"
-
-#: .\templates\data_entry.html:166 .\templates\data_entry_new.html:11
-#: .\templates\settings.html:193
-msgid "Organization"
-msgstr ""
-
-#: .\templates\data_entry.html:167 .\templates\index.html:12
-msgid "Period"
-msgstr ""
-
-#: .\templates\data_entry.html:168
-msgid "Standard"
-msgstr ""
-
-#: .\templates\data_entry.html:175 .\templates\data_entry.html:1498
-msgid "Country"
-msgstr ""
-
-#: .\templates\data_entry.html:178 .\templates\data_entry_new.html:20
-msgid "Global Average"
-msgstr ""
-
-#: .\templates\data_entry.html:179 .\templates\data_entry.html:1501
-msgid "Turkey"
-msgstr ""
-
-msgid "Scope 1"
-msgstr "Kapsam 1"
-
-msgid "Scope 2"
-msgstr "Kapsam 2"
-
-msgid "Scope 3"
-msgstr "Kapsam 3"
-
-#: .\templates\data_entry.html:198 .\templates\user_guide.html:679
-msgid "Scope 1 - Direct Emissions"
-msgstr ""
-
-#: .\templates\data_entry.html:202 .\templates\data_entry_new.html:51
-msgid "Stationary combustion"
-msgstr ""
-
-#: .\templates\data_entry.html:205 .\templates\data_entry_new.html:52
-msgid "Emissions from fuel combustion in stationary equipment"
-msgstr ""
-
-msgid "Emission Source"
-msgstr "Emisyon Kaynağı"
-
-#: .\templates\data_entry.html:212 .\templates\data_entry.html:236
-#: .\templates\data_entry.html:252 .\templates\data_entry.html:273
-#: .\templates\data_entry.html:306 .\templates\data_entry.html:329
-#: .\templates\data_entry.html:350 .\templates\data_entry.html:378
-#: .\templates\data_entry.html:409 .\templates\data_entry.html:451
-#: .\templates\data_entry.html:480 .\templates\data_entry.html:512
-#: .\templates\data_entry.html:523 .\templates\data_entry.html:543
-#: .\templates\data_entry.html:592 .\templates\data_entry.html:632
-#: .\templates\data_entry.html:650 .\templates\data_entry.html:682
-#: .\templates\data_entry.html:693 .\templates\data_entry.html:725
-#: .\templates\data_entry.html:735 .\templates\data_entry.html:767
-#: .\templates\data_entry.html:808 .\templates\data_entry.html:834
-#: .\templates\data_entry.html:863 .\templates\data_entry.html:915
-#: .\templates\data_entry.html:973 .\templates\data_entry.html:1028
-#: .\templates\data_entry.html:1038 .\templates\data_entry.html:1070
-#: .\templates\data_entry.html:1080 .\templates\data_entry.html:1112
-#: .\templates\data_entry.html:1189 .\templates\data_entry.html:1284
-#: .\templates\data_entry.html:1306 .\templates\data_entry.html:1324
-#: .\templates\data_entry.html:1374 .\templates\data_entry.html:1403
-#: .\templates\data_entry.html:1484 .\templates\data_entry.html:1500
-#: .\templates\data_entry.html:1662 .\templates\data_entry.html:1689
-#: .\templates\data_entry.html:1712 .\templates\data_entry.html:1740
-#: .\templates\data_entry_new.html:63 .\templates\data_entry_new.html:77
-#: .\templates\data_entry_new.html:99 .\templates\support.html:357
-#, python-format
-msgid "{%% trans "
-msgstr ""
-
-#: .\templates\data_entry.html:213
-msgid "Coal (industrial) - Defra 2024"
-msgstr ""
-
-#: .\templates\data_entry.html:214
-msgid "Coal (generic) - IPCC 2006"
-msgstr ""
-
-#: .\templates\data_entry.html:215
-msgid "Gas/Diesel Oil (energy basis) - IPCC 2019"
-msgstr ""
-
-#: .\templates\data_entry.html:216
-msgid "Liquefied Petroleum Gas (LPG) - Defra 2024"
-msgstr ""
-
-#: .\templates\data_entry.html:217
-msgid "Propane - Defra 2024"
-msgstr ""
-
-#: .\templates\data_entry.html:218
-msgid "Motor Gasoline - IPCC 2019"
-msgstr ""
-
-#: .\templates\data_entry.html:219
-msgid "Natural Gas - IPCC 2019"
-msgstr ""
-
-#: .\templates\data_entry.html:220
-msgid "Diesel (volume) - IPCC 2006"
-msgstr ""
-
-#: .\templates\data_entry.html:221
-msgid "Fuel Oil - IPCC 2006"
-msgstr ""
-
-#: .\templates\data_entry.html:222 .\templates\data_entry_new.html:67
-msgid "Other / Not Listed"
-msgstr ""
-
-#: .\templates\data_entry.html:225
-#: .\templates\data_entry.html:226
-msgid "Learn more"
-msgstr ""
-
-#: .\templates\data_entry.html:232
-msgid "Industry Type"
+#: .\templates\index.html:137
+msgid "Add Emission Data"
 msgstr ""
 
 #: .\templates\data_entry.html:241
 msgid "Add Industry"
 msgstr ""
 
-#: .\templates\data_entry.html:245
-msgid "Don't see your industry? Click 'Add Industry' to request a new one."
+#: .\templates\suppliers.html:170
+msgid "Add Supplier"
 msgstr ""
 
-msgid "Unit"
-msgstr "Birim"
-
-#: .\templates\data_entry.html:253 .\templates\data_entry.html:330
-#: .\templates\data_entry.html:1308 .\templates\data_entry.html:1405
-#: .\templates\data_entry_new.html:78
-msgid "Liters"
-msgstr ""
-
-#: .\templates\data_entry.html:254 .\templates\data_entry.html:331
-#: .\templates\data_entry_new.html:79
-msgid "Kilograms"
-msgstr ""
-
-#: .\templates\data_entry.html:255 .\templates\data_entry.html:1309
-#: .\templates\data_entry.html:1406 .\templates\data_entry_new.html:80
-msgid "Cubic Meters (m³)"
-msgstr ""
-
-#: .\templates\data_entry.html:256
-msgid "kWh"
-msgstr ""
-
-msgid "Activity Data"
-msgstr "Faaliyet Verisi"
-
-#: .\templates\data_entry.html:270 .\templates\data_entry.html:347
-#: .\templates\data_entry.html:406 .\templates\data_entry.html:478
-#: .\templates\data_entry.html:541 .\templates\data_entry.html:648
-#: .\templates\data_entry.html:831 .\templates\data_entry.html:1322
-#: .\templates\data_entry_new.html:96
-msgid "Supplier (Optional)"
-msgstr ""
-
-msgid "Add"
-msgstr "Ekle"
-
-#: .\templates\data_entry.html:282 .\templates\data_entry.html:358
-#: .\templates\data_entry.html:488 .\templates\data_entry.html:550
-#: .\templates\data_entry.html:657 .\templates\data_entry.html:842
-#: .\templates\data_entry_new.html:108 .\templates\emission_history.html:744
-msgid "Description (Optional)"
-msgstr ""
-
-#: .\templates\data_entry.html:287 .\templates\data_entry_new.html:115
-msgid "You can"
-msgstr ""
-
-#: .\templates\data_entry.html:287 .\templates\data_entry_new.html:115
-msgid "add your proof document"
-msgstr ""
-
-#: .\templates\data_entry.html:287
-msgid "here (i.e. gas bills)."
-msgstr ""
-
-msgid "Calculate"
-msgstr "Hesapla"
-
-#: .\templates\data_entry.html:296 .\templates\data_entry_new.html:128
-msgid "Mobile combustion"
-msgstr ""
-
-#: .\templates\data_entry.html:299 .\templates\data_entry_new.html:129
-msgid "Emissions from fuel combustion in mobile equipment"
-msgstr ""
-
-#: .\templates\data_entry.html:585
-msgid "Request New Material"
-msgstr ""
-
-#: .\templates\data_entry.html:1223
-msgid "Material Not Listed"
-msgstr ""
-
-#: .\templates\data_entry.html:1226
-msgid "What would you like to do?"
-msgstr ""
-
-#: .\templates\data_entry.html:1236
-msgid "I Have the Emission Factor"
+#: .\templates\suppliers.html:213
+msgid "Add Supplier (via Data Entry)"
 msgstr ""
 
 #: .\templates\data_entry.html:1237
 msgid "Add a custom emission factor from your supplier or calculations"
 msgstr ""
 
-#: .\templates\data_entry.html:1249
-msgid "I Need Help Finding It"
+#: .\templates\data_entry.html:283 .\templates\data_entry.html:359
+#: .\templates\data_entry.html:418 .\templates\data_entry.html:489
+#: .\templates\data_entry.html:551 .\templates\data_entry.html:658
+#: .\templates\data_entry.html:843 .\templates\data_entry_new.html:109
+msgid "Add description"
 msgstr ""
 
-#: .\templates\data_entry.html:1250
-msgid "Request our team to research and add the emission factor"
+#: .\templates\user_guide.html:886
+msgid "Add descriptions and supplier information"
 msgstr ""
 
+#: .\templates\user_guide.html:654
+msgid "Add factors from supplier certificates"
+msgstr ""
+
+#: .\templates\data_entry.html:1444
+msgid "Add new suppliers to your database."
+msgstr ""
+
+#: .\templates\user_guide.html:644
+msgid "Add supplier details when entering data"
+msgstr ""
+
+#: .\templates\data_entry.html:1337
+msgid "Additional details about this material"
+msgstr ""
+
+#: .\templates\partials\translations.html:84
+msgid "Address"
+msgstr "Adres"
+
+#: .\templates\data_entry.html:1529
+msgid "Address / Notes"
+msgstr ""
+
+#: .\templates\partials\translations.html:72
+msgid "Admin"
+msgstr "Yönetici"
+
+#: .\templates\landing.html:2414
+msgid "Advanced Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:3090
+msgid "Advanced analytics dashboard"
+msgstr ""
+
+#: .\templates\emissions.html:652
+msgid "All"
+msgstr ""
+
+#: .\templates\suppliers.html:163
+msgid "All Categories"
+msgstr ""
+
+#: .\templates\reporting\inventory.html:17
+msgid "All Scopes"
+msgstr ""
+
+#: .\templates\settings.html:191
+msgid "All Settings"
+msgstr ""
+
+#: .\templates\index.html:17
+msgid "All Time"
+msgstr "Tüm Zamanlar"
+
+#: .\templates\user_guide.html:700
+msgid "All other indirect emissions in your value chain:"
+msgstr ""
+
+#: .\templates\base.html:110 .\templates\landing.html:3482
+msgid "All rights reserved."
+msgstr ""
+
+#: .\templates\auth\signup.html:457
+msgid "Already have an account?"
+msgstr ""
+
+#: .\templates\analysis.html:5 .\templates\partials\sidebar.html:50
+#: .\templates\partials\translations.html:33
+msgid "Analysis"
+msgstr "Analiz"
+
+#: .\templates\index.html:186
+msgid "Analysis completed"
+msgstr ""
+
+#: .\templates\landing.html:2481
+msgid "Analytics Dashboard"
+msgstr ""
+
+#: .\templates\analysis.html:353
+msgid "Analyze emissions from your supply chain and supplier carbon footprint."
+msgstr ""
+
+#: .\templates\action_planning.html:248
+msgid "Analyze your data to identify reduction opportunities"
+msgstr ""
+
+#: .\templates\landing.html:2774
+msgid "Anna Lopez"
+msgstr ""
+
+#: .\templates\landing.html:2700
+msgid "Apr"
+msgstr ""
+
+#: .\templates\partials\translations.html:138
+msgid "April"
+msgstr ""
+
+#: .\templates\partials\translations.html:111
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+#: .\templates\partials\translations.html:112
+msgid "Are you sure you want to save changes?"
+msgstr ""
+
+#: .\templates\user_guide.html:704
+msgid "As defined by GHG Protocol"
+msgstr ""
+
+#: .\templates\auth\signup.html:433
+msgid "At least 8 characters long"
+msgstr ""
+
+#: .\templates\analysis.html:281
+msgid "Audit-ready reporting"
+msgstr ""
+
+#: .\templates\landing.html:2704
+msgid "Aug"
+msgstr ""
+
+#: .\templates\partials\translations.html:142
+msgid "August"
+msgstr ""
+
+#: .\templates\landing.html:2519
+msgid "Automated calculations with latest emission factors"
+msgstr ""
+
+#: .\templates\landing.html:2561
+msgid "Automated data validation and verification"
+msgstr ""
+
+#: .\templates\landing.html:2615
+msgid "Automated emission factor updates"
+msgstr ""
+
+#: .\templates\partials\translations.html:14
+msgid "Back"
+msgstr "Geri"
+
+#: .\templates\landing.html:3022
+msgid "Basic emission calculations (Scope 1 & 2)"
+msgstr ""
+
+#: .\templates\user_guide.html:1038
+msgid "Begin calculating emissions"
+msgstr ""
+
+#: .\templates\user_guide.html:533 .\templates\user_guide.html:876
+msgid "Best Practices"
+msgstr ""
+
+#: .\templates\analysis.html:317
+msgid "Best practice insights"
+msgstr ""
+
+#: .\templates\landing.html:3451
+msgid "Blog"
+msgstr ""
+
+#: .\templates\user_guide.html:682
+msgid "Boilers, furnaces, generators"
+msgstr ""
+
+#: .\templates\user_guide.html:646
+msgid "Build supplier database for engagement"
+msgstr ""
+
+#: .\templates\partials\translations.html:45
+msgid "CO2 Equivalent"
+msgstr "CO2 Eşdeğeri"
+
+#: .\templates\data_entry.html:290 .\templates\data_entry.html:362
+#: .\templates\data_entry.html:428 .\templates\data_entry.html:496
+#: .\templates\data_entry.html:558 .\templates\data_entry.html:665
+#: .\templates\data_entry.html:708 .\templates\data_entry.html:750
+#: .\templates\data_entry.html:791 .\templates\data_entry.html:846
+#: .\templates\data_entry.html:898 .\templates\data_entry.html:956
+#: .\templates\data_entry.html:1011 .\templates\data_entry.html:1053
+#: .\templates\data_entry.html:1095 .\templates\data_entry.html:1135
+#: .\templates\data_entry.html:1172 .\templates\data_entry.html:1211
+#: .\templates\data_entry_new.html:119
+msgid "Calculate"
+msgstr "Hesapla"
+
+#: .\templates\user_guide.html:588
+msgid "Calculate & Review"
+msgstr ""
+
+#: .\templates\index.html:52 .\templates\index.html:68
+#: .\templates\index.html:84
+msgid "Calculating..."
+msgstr ""
+
+#: .\templates\emissions.html:611
+msgid "Calculation Standard"
+msgstr ""
+
+#: .\templates\user_guide.html:997
+msgid "Calculation not working:"
+msgstr ""
+
+#: .\templates\user_guide.html:936
+msgid "Can I change the country after calculating?"
+msgstr ""
+
+#: .\templates\user_guide.html:976
+msgid "Can I use custom emission factors?"
+msgstr ""
+
+#: .\templates\data_entry.html:1257 .\templates\data_entry.html:1343
+#: .\templates\data_entry.html:1425 .\templates\data_entry.html:1536
+#: .\templates\data_entry.html:1599 .\templates\emission_history.html:749
+#: .\templates\partials\translations.html:8
 msgid "Cancel"
 msgstr "İptal"
 
-#: .\templates\data_entry.html:1268
-msgid "ADD CUSTOM EMISSION FACTOR"
+#: .\templates\auth\signup.html:436
+msgid "Cannot be entirely numeric"
 msgstr ""
 
-#: .\templates\data_entry.html:1272
-#: .\templates\data_entry.html:1276 .\templates\data_entry.html:1366
-msgid "Material/Product Name"
+#: .\templates\data_entry.html:1288 .\templates\data_entry.html:1378
+msgid "Capital Goods"
+msgstr ""
+
+#: .\templates\landing.html:2338 .\templates\landing.html:2645
+msgid "Carbon Analytics Dashboard"
+msgstr ""
+
+#: .\templates\partials\translations.html:41
+msgid "Carbon Footprint"
+msgstr "Karbon Ayak İzi"
+
+#: .\templates\auth\login.html:457
+msgid "Carbon Impact"
+msgstr ""
+
+#: .\templates\landing.html:2667
+msgid "Carbon Intensity"
+msgstr ""
+
+#: .\templates\action_planning.html:155
+msgid "Carbon Reduction Action Planning"
+msgstr ""
+
+#: .\templates\landing.html:2295
+msgid "Carbon Tracking"
+msgstr ""
+
+#: .\templates\landing.html:3460
+msgid "Careers"
+msgstr ""
+
+#: .\templates\data_entry.html:597
+msgid "Carton"
+msgstr "Karton"
+
+#: .\templates\landing.html:3450
+msgid "Case Studies"
+msgstr ""
+
+#: .\templates\suppliers.html:192
+msgid "Categories"
+msgstr ""
+
+#: .\templates\user_guide.html:645
+msgid "Categorize by activity type (Energy, Fuel, etc.)"
 msgstr ""
 
 #: .\templates\data_entry.html:1282 .\templates\data_entry.html:1372
@@ -611,1823 +919,137 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: .\templates\data_entry.html:1285 .\templates\data_entry.html:1375
-msgid "Purchased Goods & Services"
+#: .\templates\landing.html:3474
+msgid "Certification"
 msgstr ""
 
-#: .\templates\data_entry.html:1286 .\templates\data_entry.html:1376
-msgid "Stationary Combustion"
-msgstr ""
-
-#: .\templates\data_entry.html:1287 .\templates\data_entry.html:1377
-msgid "Mobile Combustion"
-msgstr ""
-
-#: .\templates\data_entry.html:1288 .\templates\data_entry.html:1378
-msgid "Capital Goods"
-msgstr ""
-
-#: .\templates\data_entry.html:1289 .\templates\data_entry.html:1379
-msgid "Upstream Transportation"
-msgstr ""
-
-#: .\templates\data_entry.html:1290 .\templates\data_entry.html:1380
-msgid "Waste"
-msgstr ""
-
-#: .\templates\data_entry.html:1291 .\templates\data_entry.html:1381
-#: .\templates\data_entry.html:1491 .\templates\support.html:363
-msgid "Other"
-msgstr ""
-
-#: .\templates\data_entry.html:1297 .\templates\user_guide.html:781
-msgid "Emission Factor"
-msgstr ""
-
-#: .\templates\data_entry.html:1299
-msgid "kg CO2e per unit"
-msgstr ""
-
-#: .\templates\data_entry.html:1307 .\templates\data_entry.html:1404
-msgid "Kilograms (kg)"
-msgstr ""
-
-#: .\templates\data_entry.html:1310 .\templates\data_entry.html:1407
-msgid "Square Meters (m²)"
-msgstr ""
-
-#: .\templates\data_entry.html:1311 .\templates\data_entry.html:1408
-msgid "Kilowatt-hours (kWh)"
-msgstr ""
-
-#: .\templates\data_entry.html:1312 .\templates\data_entry.html:1409
-msgid "Gigajoules (GJ)"
-msgstr ""
-
-#: .\templates\data_entry.html:1313 .\templates\data_entry.html:1410
-msgid "Kilometers (km)"
-msgstr ""
-
-#: .\templates\data_entry.html:1314 .\templates\data_entry.html:1411
-msgid "Tonne-kilometers (tonne-km)"
-msgstr ""
-
-#: .\templates\data_entry.html:1315 .\templates\data_entry.html:1412
-msgid "Units (for equipment/machinery)"
-msgstr ""
-
-#: .\templates\data_entry.html:1316 .\templates\data_entry.html:1413
-msgid "Packages (for delivery)"
-msgstr ""
-
-#: .\templates\data_entry.html:1330
-msgid "Source/Reference"
-msgstr ""
-
-#: .\templates\data_entry.html:1336 .\templates\data_entry.html:1387
-msgid "Description"
-msgstr ""
-
-#: .\templates\data_entry.html:1346
-msgid "Save Custom Factor"
-msgstr ""
-
-#: .\templates\data_entry.html:1358
-msgid "REQUEST NEW MATERIAL"
-msgstr ""
-
-#: .\templates\data_entry.html:1362
-#: .\templates\data_entry.html:1394
-msgid "Do you have a suggested emission factor?"
-msgstr ""
-
-#: .\templates\data_entry.html:1397
-msgid "Suggested Factor (Optional)"
-msgstr ""
-
-#: .\templates\data_entry.html:1401
-msgid "Unit (Optional)"
-msgstr ""
-
-#: .\templates\data_entry.html:1417
-msgid "Source (Optional)"
-msgstr ""
-
-#: .\templates\data_entry.html:1428
-msgid "Submit Request"
-msgstr ""
-
-#: .\templates\data_entry.html:1440
-msgid "ADD NEW SUPPLIER"
-msgstr ""
-
-#: .\templates\data_entry.html:1444
-msgid "Add new suppliers to your database."
-msgstr ""
-
-#: .\templates\data_entry.html:1448
-msgid "Supplier name"
-msgstr ""
-
-#: .\templates\data_entry.html:1454
-msgid "Contact name"
-msgstr ""
-
-#: .\templates\data_entry.html:1460
-msgid "Email"
-msgstr ""
-
-#: .\templates\data_entry.html:1466
-msgid "Phone number"
-msgstr ""
-
-#: .\templates\data_entry.html:1482
-msgid "Activity"
-msgstr ""
-
-#: .\templates\data_entry.html:1485 .\templates\suppliers.html:164
-msgid "Energy"
-msgstr ""
-
-#: .\templates\data_entry.html:1486
-msgid "Fuel"
-msgstr ""
-
-#: .\templates\data_entry.html:1487 .\templates\suppliers.html:165
-msgid "Transportation"
-msgstr ""
-
-#: .\templates\data_entry.html:1488
-msgid "Waste Management"
-msgstr ""
-
-#: .\templates\data_entry.html:1489
-msgid "Manufacturing"
-msgstr ""
-
-#: .\templates\data_entry.html:1490
-msgid "Construction"
-msgstr ""
-
-#: .\templates\data_entry.html:1502
-msgid "United States"
-msgstr ""
-
-#: .\templates\data_entry.html:1503
-msgid "United Kingdom"
-msgstr ""
-
-#: .\templates\data_entry.html:1504
-msgid "Germany"
-msgstr ""
-
-#: .\templates\data_entry.html:1505
-msgid "France"
-msgstr ""
-
-#: .\templates\data_entry.html:1506
-msgid "China"
-msgstr ""
-
-#: .\templates\data_entry.html:1510
-msgid "City"
-msgstr ""
-
-#: .\templates\data_entry.html:1517
-msgid "Tax number"
-msgstr ""
-
-#: .\templates\data_entry.html:1523
-msgid "Company Website"
-msgstr ""
-
-#: .\templates\data_entry.html:1529
-msgid "Address / Notes"
-msgstr ""
-
-msgid "Save"
-msgstr "Kaydet"
-
-#: .\templates\data_entry.html:1550
-msgid "REQUEST NEW INDUSTRY TYPE"
-msgstr ""
-
-#: .\templates\data_entry.html:1554
-#: .\templates\data_entry.html:1558
-msgid "Industry Name"
-msgstr ""
-
-#: .\templates\data_entry.html:1561
-msgid "characters"
-msgstr ""
-
-#: .\templates\data_entry.html:2761
-msgid "🔄 Loading industries..."
-msgstr ""
-
-#: .\templates\data_entry.html:2777 .\templates\data_entry.html:2835
-msgid "Select Industry Type"
-msgstr ""
-
-#: .\templates\data_entry.html:2802
-msgid "No industries available"
-msgstr ""
-
-#: .\templates\data_entry.html:2807
-msgid "❌ Failed to load industries"
-msgstr ""
-
-#: .\templates\data_entry_new.html:10
-msgid "Emission Management"
-msgstr ""
-
-#: .\templates\data_entry_new.html:17
-msgid "Country/Region"
-msgstr ""
-
-#: .\templates\data_entry_new.html:21
-msgid "Turkey (Türkiye)"
-msgstr ""
-
-#: .\templates\data_entry_new.html:24
-msgid "Using Turkey-specific emission factors"
-msgstr ""
-
-#: .\templates\data_entry_new.html:42
-msgid "Direct Emissions"
-msgstr ""
-
-#: .\templates\data_entry_new.html:43
-msgid "Emissions from sources owned or controlled by your organization"
-msgstr ""
-
-#: .\templates\data_entry_new.html:64
-msgid "Coal (industrial)"
-msgstr ""
-
-#: .\templates\data_entry_new.html:65
-msgid "Natural Gas"
-msgstr ""
-
-#: .\templates\data_entry_new.html:66
-msgid "Diesel (volume)"
-msgstr ""
-
-#: .\templates\data_entry_new.html:115
-msgid "here"
-msgstr ""
-
-#: .\templates\data_entry_new.html:115
-msgid "i.e. gas bills"
-msgstr ""
-
-#: .\templates\data_entry_new.html:137
-msgid "Mobile combustion form will be similar to stationary"
-msgstr ""
-
-#: .\templates\data_entry_new.html:144
-msgid "Fugitive emissions"
-msgstr ""
-
-#: .\templates\data_entry_new.html:145
-msgid "Emissions from refrigerants, air conditioning, and other sources"
-msgstr ""
-
-#: .\templates\data_entry_new.html:153
-msgid "Fugitive emissions form will be similar to stationary"
-msgstr ""
-
-#: .\templates\data_entry_new.html:163
-msgid "Indirect Emissions (Energy)"
-msgstr ""
-
-#: .\templates\data_entry_new.html:164
-msgid "Emissions from purchased electricity, steam, heat, and cooling"
-msgstr ""
-
-#: .\templates\data_entry_new.html:167
-msgid "Scope 2 content will be implemented here"
-msgstr ""
-
-#: .\templates\data_entry_new.html:176
-msgid "Other Indirect Emissions"
-msgstr ""
-
-#: .\templates\data_entry_new.html:177
-msgid "Emissions from value chain activities"
-msgstr ""
-
-#: .\templates\data_entry_new.html:183
-msgid "Use Custom Factor"
-msgstr ""
-
-#: .\templates\data_entry_new.html:186
-msgid "Request Material"
-msgstr ""
-
-#: .\templates\data_entry_new.html:190
-msgid "Scope 3 content will be implemented here"
-msgstr ""
-
-#: .\templates\emission_history.html:656
-#: .\templates\reporting\inventory_pdf.html:336
-msgid "Date"
-msgstr ""
-
-#: .\templates\emissions.html:5 .\templates\partials\sidebar.html:44
-msgid "Emissions"
-msgstr ""
-
-#: .\templates\emissions.html:12
-msgid "Method"
-msgstr ""
-
-#: .\templates\emissions.html:15 .\templates\emissions.html:612
-msgid "GHG-Based"
-msgstr ""
-
-#: .\templates\emissions.html:16 .\templates\emissions.html:613
-msgid "ISO 14064-1"
-msgstr ""
-
-#: .\templates\emissions.html:20
-msgid "Export All"
-msgstr ""
-
-#: .\templates\emissions.html:611
-msgid "Calculation Standard"
-msgstr ""
-
-#: .\templates\emissions.html:614
-msgid "Market-Based"
-msgstr ""
-
-#: .\templates\emissions.html:615
-msgid "Location-Based"
-msgstr ""
-
-#: .\templates\emissions.html:619
-msgid "Date Range"
-msgstr ""
-
-#: .\templates\emissions.html:639 .\templates\emissions.html:767
-#: .\templates\emissions.html:773 .\templates\emissions.html:797
-#: .\templates\emissions.html:803
-msgid "Select All"
-msgstr ""
-
-#: .\templates\emissions.html:642 .\templates\emissions.html:653
-msgid "Clear"
-msgstr ""
-
-#: .\templates\emissions.html:652
-msgid "All"
-msgstr ""
-
-#: .\templates\emissions.html:776 .\templates\emissions.html:806
-msgid "Clear All"
-msgstr ""
-
-msgid "All Time"
-msgstr "Tüm Zamanlar"
-
-msgid "Refresh"
-msgstr "Yenile"
-
-msgid "Welcome back!"
-msgstr "Tekrar hoş geldiniz!"
-
-#: .\templates\index.html:34
-msgid "Here's what's happening with your carbon emissions today."
-msgstr ""
-
-msgid "Total Emissions"
-msgstr "Toplam Emisyonlar"
-
-msgid "Loading..."
-msgstr "Yükleniyor..."
-
-#: .\templates\index.html:52 .\templates\index.html:68
-#: .\templates\index.html:84
-msgid "Calculating..."
-msgstr ""
-
-#: .\templates\index.html:58
-msgid "Records Count"
-msgstr ""
-
-msgid "This Month"
-msgstr "Bu Ay"
-
-msgid "Suppliers"
-msgstr "Tedarikçiler"
-
-#: .\templates\index.html:99
-msgid "Active suppliers"
-msgstr ""
-
-#: .\templates\index.html:108
-msgid "Emissions by Scope"
-msgstr ""
-
-#: .\templates\index.html:109
-msgid "Distribution across Scope 1, 2, and 3"
-msgstr ""
-
-#: .\templates\index.html:118
-msgid "Monthly Trends"
-msgstr ""
-
-#: .\templates\index.html:119
-msgid "Emission trends over the last 6 months"
-msgstr ""
-
-#: .\templates\index.html:130
-msgid "Quick Actions"
-msgstr ""
-
-#: .\templates\index.html:131
-msgid "Get started with common tasks"
-msgstr ""
-
-#: .\templates\index.html:137
-msgid "Add Emission Data"
-msgstr ""
-
-#: .\templates\index.html:141 .\templates\user_guide.html:1049
-msgid "Generate Report"
-msgstr ""
-
-#: .\templates\index.html:145
-msgid "View Analysis"
-msgstr ""
-
-#: .\templates\index.html:149 .\templates\user_guide.html:1043
-msgid "View History"
-msgstr ""
-
-#: .\templates\index.html:159
-msgid "Recent Activity"
-msgstr ""
-
-#: .\templates\index.html:168
-msgid "New emission record added"
-msgstr ""
-
-#: .\templates\index.html:169
-msgid "2 hours ago"
-msgstr ""
-
-#: .\templates\index.html:177
-msgid "Report generated"
-msgstr ""
-
-#: .\templates\index.html:178
-msgid "1 day ago"
-msgstr ""
-
-#: .\templates\index.html:186
-msgid "Analysis completed"
-msgstr ""
-
-#: .\templates\index.html:187
-msgid "3 days ago"
-msgstr ""
-
-#: .\templates\index.html:196
-msgid "Tips & Insights"
-msgstr ""
-
-#: .\templates\index.html:204
-msgid "Reduce Scope 2 Emissions"
-msgstr ""
-
-#: .\templates\index.html:205
-#: .\templates\index.html:214
-#: .\templates\landing.html:8
-msgid "Academia Carbon - Professional Carbon Tracking Platform"
-msgstr ""
-
-#: .\templates\landing.html:9
-#: .\templates\landing.html:2222 .\templates\landing.html:2262
-#: .\templates\landing.html:3435
-msgid "Features"
-msgstr ""
-
-#: .\templates\landing.html:2223 .\templates\landing.html:2263
-msgid "Demo"
-msgstr ""
-
-#: .\templates\landing.html:2224 .\templates\landing.html:2264
-#: .\templates\landing.html:3437
-msgid "Pricing"
-msgstr ""
-
-#: .\templates\landing.html:2225 .\templates\landing.html:2265
-#: .\templates\support.html:259
-msgid "Documentation"
-msgstr ""
-
-#: .\templates\landing.html:2226 .\templates\landing.html:2266
-msgid "API"
-msgstr ""
-
-#: .\templates\landing.html:2227 .\templates\landing.html:2267
-msgid "Contact"
-msgstr ""
-
-#: .\templates\landing.html:2245 .\templates\landing.html:2284
-msgid "Get Started"
-msgstr ""
-
-#: .\templates\landing.html:2294 .\templates\landing.html:3056
-msgid "Professional"
-msgstr ""
-
-#: .\templates\landing.html:2295
-msgid "Carbon Tracking"
-msgstr ""
-
-#: .\templates\landing.html:2296
-msgid "Platform"
-msgstr ""
-
-#: .\templates\landing.html:2300
-#: .\templates\landing.html:2306
-msgid "See Live Demo"
-msgstr ""
-
-#: .\templates\landing.html:2310
-msgid "Watch Demo Video"
+#: .\templates\auth\login.html:467
+msgid "Certified"
 msgstr ""
 
 #: .\templates\landing.html:2317
 msgid "Certified Standard"
 msgstr ""
 
-#: .\templates\landing.html:2321
-msgid "Accuracy Rate"
-msgstr ""
-
-#: .\templates\landing.html:2338 .\templates\landing.html:2645
-msgid "Carbon Analytics Dashboard"
-msgstr ""
-
-#: .\templates\landing.html:2344
-msgid "Watch Live Demo Video"
-msgstr ""
-
-#: .\templates\landing.html:2359
-msgid "3-Minute Product Demo"
-msgstr ""
-
-#: .\templates\landing.html:2360
-msgid "See how Fortune 500 companies track their carbon footprint"
-msgstr ""
-
-#: .\templates\landing.html:2368
-msgid "Tons CO2 Tracked"
-msgstr ""
-
-#: .\templates\landing.html:2372
-msgid "Companies"
-msgstr ""
-
-#: .\templates\landing.html:2376
-msgid "Uptime"
-msgstr ""
-
-#: .\templates\landing.html:2391
-msgid "Key Features"
-msgstr ""
-
-#: .\templates\landing.html:2393
-msgid "Everything You Need for Carbon Management"
-msgstr ""
-
-#: .\templates\landing.html:2395
-#: .\templates\landing.html:2404
-msgid "Precise Emission Calculation"
-msgstr ""
-
-#: .\templates\landing.html:2406
-#: .\templates\landing.html:2414
-msgid "Advanced Analytics Dashboard"
-msgstr ""
-
-#: .\templates\landing.html:2416
-#: .\templates\landing.html:2424 .\templates\user_guide.html:525
-#: .\templates\user_guide.html:822
-msgid "ISO 14064-1 Reporting"
-msgstr ""
-
-#: .\templates\landing.html:2426
-#: .\templates\landing.html:2434 .\templates\suppliers.html:5
-#: .\templates\user_guide.html:641
-msgid "Supplier Management"
-msgstr ""
-
-#: .\templates\landing.html:2436
-#: .\templates\landing.html:2446
-#: .\templates\landing.html:2454
-msgid "Security & Privacy"
-msgstr ""
-
-#: .\templates\landing.html:2456
-#: .\templates\landing.html:2469 .\templates\landing.html:3436
-msgid "Live Demo"
-msgstr ""
-
-#: .\templates\landing.html:2471
-msgid "See Academia Carbon in Action"
-msgstr ""
-
-#: .\templates\landing.html:2473
-#: .\templates\landing.html:2481
-msgid "Analytics Dashboard"
-msgstr ""
-
-#: .\templates\landing.html:2485
-msgid "ISO Reports"
-msgstr ""
-
-#: .\templates\landing.html:2489
-msgid "Emission Tracking"
-msgstr ""
-
-#: .\templates\landing.html:2497
-msgid "Real-time Carbon Analytics Dashboard"
-msgstr ""
-
-#: .\templates\landing.html:2499
-#: .\templates\landing.html:2507
-msgid "Real-time emission tracking across Scope 1, 2, and 3"
-msgstr ""
-
-#: .\templates\landing.html:2513
-msgid "Interactive charts and KPI visualizations"
-msgstr ""
-
-#: .\templates\landing.html:2519
-msgid "Automated calculations with latest emission factors"
-msgstr ""
-
-#: .\templates\landing.html:2525
-msgid "ISO 14064-1 compliant reporting and PDF export"
-msgstr ""
-
-#: .\templates\landing.html:2532
-msgid "Try Live Demo"
-msgstr ""
-
-#: .\templates\landing.html:2536 .\templates\landing.html:2845
-msgid "View Documentation"
-msgstr ""
-
-#: .\templates\landing.html:2545
-msgid "Professional ISO 14064-1 Reports"
-msgstr ""
-
-#: .\templates\landing.html:2547
-#: .\templates\landing.html:2555
-msgid "ISO 14064-1 compliant report templates"
-msgstr ""
-
-#: .\templates\landing.html:2561
-msgid "Automated data validation and verification"
-msgstr ""
-
-#: .\templates\landing.html:2567
-msgid "Custom branding and white-label options"
-msgstr ""
-
-#: .\templates\landing.html:2573
-msgid "Multi-format export (PDF, Excel, CSV)"
-msgstr ""
-
-#: .\templates\landing.html:2580
-msgid "Generate Sample Report"
-msgstr ""
-
-#: .\templates\landing.html:2584
-msgid "API Integration"
-msgstr ""
-
-#: .\templates\landing.html:2593
-msgid "Comprehensive Emission Tracking"
-msgstr ""
-
-#: .\templates\landing.html:2595
-#: .\templates\landing.html:2603
-msgid "Multi-location and facility management"
-msgstr ""
-
-#: .\templates\landing.html:2609
-msgid "Supplier carbon footprint integration"
-msgstr ""
-
-#: .\templates\landing.html:2615
-msgid "Automated emission factor updates"
-msgstr ""
-
-#: .\templates\landing.html:2621
-msgid "Data import from ERP and accounting systems"
-msgstr ""
-
-#: .\templates\landing.html:2628
-msgid "Start Tracking"
-msgstr ""
-
-#: .\templates\landing.html:2632 .\templates\landing.html:2957
-msgid "View Integrations"
-msgstr ""
-
-#: .\templates\landing.html:2655
-#, python-format
-msgid "12%% vs last month"
-msgstr ""
-
-#: .\templates\landing.html:2659
-msgid "Scope 1 Emissions"
-msgstr ""
-
-#: .\templates\landing.html:2663
-#, python-format
-msgid "8%% reduction"
-msgstr ""
-
-#: .\templates\landing.html:2667
-msgid "Carbon Intensity"
-msgstr ""
-
-#: .\templates\landing.html:2671
-#, python-format
-msgid "15%% improvement"
-msgstr ""
-
-#: .\templates\landing.html:2679
-msgid "Monthly Emissions Trend"
-msgstr ""
-
-#: .\templates\landing.html:2680
-msgid "Last 12 Months"
-msgstr ""
-
-#: .\templates\landing.html:2697
-msgid "Jan"
-msgstr ""
-
-#: .\templates\landing.html:2698
-msgid "Feb"
-msgstr ""
-
-#: .\templates\landing.html:2699
-msgid "Mar"
-msgstr ""
-
-#: .\templates\landing.html:2700
-msgid "Apr"
-msgstr ""
-
-#: .\templates\landing.html:2701
-msgid "May"
-msgstr ""
-
-#: .\templates\landing.html:2702
-msgid "Jun"
-msgstr ""
-
-#: .\templates\landing.html:2703
-msgid "Jul"
-msgstr ""
-
-#: .\templates\landing.html:2704
-msgid "Aug"
-msgstr ""
-
-#: .\templates\landing.html:2705
-msgid "Sep"
-msgstr ""
-
-#: .\templates\landing.html:2706
-msgid "Oct"
-msgstr ""
-
-#: .\templates\landing.html:2707
-msgid "Nov"
-msgstr ""
-
-#: .\templates\landing.html:2708
-msgid "Dec"
-msgstr ""
-
-#: .\templates\landing.html:2720
-msgid "Trusted by Leading Organizations Worldwide"
-msgstr ""
-
-#: .\templates\landing.html:2743
-#: .\templates\landing.html:2748
-msgid "Sarah Mitchell"
-msgstr ""
-
-#: .\templates\landing.html:2749
-msgid "Sustainability Director, TechCorp"
-msgstr ""
-
-#: .\templates\landing.html:2756
-#: .\templates\landing.html:2761
-msgid "James Davis"
-msgstr ""
-
-#: .\templates\landing.html:2762
-msgid "Environmental Manager, GreenEnergy"
-msgstr ""
-
-#: .\templates\landing.html:2769
-#: .\templates\landing.html:2774
-msgid "Anna Lopez"
-msgstr ""
-
-#: .\templates\landing.html:2775
-msgid "Chief Operations Officer, Manufacturing Co"
-msgstr ""
-
-#: .\templates\landing.html:2789
-msgid "Developer Resources"
-msgstr ""
-
-#: .\templates\landing.html:2791
-msgid "Documentation & API Integration"
-msgstr ""
-
-#: .\templates\landing.html:2793
-#: .\templates\landing.html:2805
-msgid "User Documentation"
-msgstr ""
-
-#: .\templates\landing.html:2807
-#: .\templates\landing.html:2815
-msgid "Quick start guide and tutorials"
-msgstr ""
-
-#: .\templates\landing.html:2821
-msgid "Feature documentation with examples"
-msgstr ""
-
-#: .\templates\landing.html:2827
-msgid "ISO 14064-1 compliance guidelines"
-msgstr ""
-
-#: .\templates\landing.html:2833
-msgid "Video tutorials and webinars"
-msgstr ""
-
-#: .\templates\landing.html:2839
-msgid "Troubleshooting and FAQ"
-msgstr ""
-
-#: .\templates\landing.html:2853
-msgid "Developer Favorite"
-msgstr ""
-
-#: .\templates\landing.html:2860
-msgid "REST API"
-msgstr ""
-
-#: .\templates\landing.html:2862
-#: .\templates\landing.html:2870
-msgid "Complete REST API documentation"
-msgstr ""
-
-#: .\templates\landing.html:2876
-msgid "Interactive API explorer"
-msgstr ""
-
-#: .\templates\landing.html:2882
-msgid "SDKs for Python, JavaScript, PHP"
-msgstr ""
-
-#: .\templates\landing.html:2888
-msgid "Webhook support for real-time updates"
-msgstr ""
-
-#: .\templates\landing.html:2894
-msgid "Rate limiting and authentication"
-msgstr ""
-
-#: .\templates\landing.html:2900
-msgid "Sandbox environment for testing"
-msgstr ""
-
-#: .\templates\landing.html:2906
-msgid "Explore API"
-msgstr ""
-
-#: .\templates\landing.html:2917 .\templates\landing.html:3438
-msgid "Integrations"
-msgstr ""
-
-#: .\templates\landing.html:2919
-#: .\templates\landing.html:2927
-msgid "ERP systems (SAP, Oracle, NetSuite)"
-msgstr ""
-
-#: .\templates\landing.html:2933
-msgid "Accounting software (QuickBooks, Xero)"
-msgstr ""
-
-#: .\templates\landing.html:2939
-msgid "Energy management systems"
-msgstr ""
-
-#: .\templates\landing.html:2945
-msgid "Supply chain platforms"
-msgstr ""
-
-#: .\templates\landing.html:2951
-msgid "Custom integration support"
-msgstr ""
-
-#: .\templates\landing.html:2964
-msgid "Quick Access"
-msgstr ""
-
-#: .\templates\landing.html:2968
-msgid "Try Interactive Demo"
-msgstr ""
-
-#: .\templates\landing.html:2972
-msgid "API Playground"
-msgstr ""
-
-#: .\templates\landing.html:2976 .\templates\landing.html:3471
-#: .\templates\user_guide.html:1055
-msgid "Get Support"
-msgstr ""
-
-#: .\templates\landing.html:2989
-msgid "Pricing Plans"
-msgstr ""
-
-#: .\templates\landing.html:2991
-msgid "Choose the Right Plan for Your Organization"
-msgstr ""
-
-#: .\templates\landing.html:2993
-#: .\templates\landing.html:3000
-msgid "Starter"
-msgstr ""
-
-#: .\templates\landing.html:3002
-msgid "Perfect for small organizations getting started with carbon tracking"
-msgstr ""
-
-#: .\templates\landing.html:3008 .\templates\landing.html:3064
-msgid "/month"
-msgstr ""
-
-#: .\templates\landing.html:3016
-msgid "Up to 100 data entries per month"
-msgstr ""
-
-#: .\templates\landing.html:3022
-msgid "Basic emission calculations (Scope 1 & 2)"
-msgstr ""
-
-#: .\templates\landing.html:3028
-msgid "Standard reporting templates"
-msgstr ""
-
-#: .\templates\landing.html:3034
-msgid "Email support"
-msgstr ""
-
-#: .\templates\landing.html:3040
-msgid "1 user account"
-msgstr ""
-
-#: .\templates\landing.html:3046
-msgid "Start Free"
-msgstr ""
-
-#: .\templates\landing.html:3054
-msgid "Most Popular"
-msgstr ""
-
-#: .\templates\landing.html:3058
-msgid "Comprehensive carbon management for growing organizations"
-msgstr ""
-
-#: .\templates\landing.html:3072
-msgid "Unlimited data entries"
-msgstr ""
-
-#: .\templates\landing.html:3078
-msgid "Full Scope 1, 2, 3 calculations"
-msgstr ""
-
-#: .\templates\landing.html:3084
-msgid "ISO 14064-1 compliant reporting"
-msgstr ""
-
-#: .\templates\landing.html:3090
-msgid "Advanced analytics dashboard"
-msgstr ""
-
-#: .\templates\landing.html:3096
-msgid "Supplier management tools"
-msgstr ""
-
-#: .\templates\landing.html:3102
-msgid "Priority support & training"
-msgstr ""
-
-#: .\templates\landing.html:3108
-msgid "Up to 10 user accounts"
-msgstr ""
-
-#: .\templates\landing.html:3114
-msgid "Start 14-Day Trial"
-msgstr ""
-
-#: .\templates\landing.html:3120
-msgid "Enterprise"
-msgstr ""
-
-#: .\templates\landing.html:3122
-msgid "Custom solutions for large organizations with complex needs"
-msgstr ""
-
-#: .\templates\landing.html:3126
-msgid "Custom"
-msgstr ""
-
-#: .\templates\landing.html:3134
-msgid "Everything in Professional"
-msgstr ""
-
-#: .\templates\landing.html:3140
-msgid "Custom integrations & API access"
-msgstr ""
-
-#: .\templates\landing.html:3146
-msgid "White-label solutions"
-msgstr ""
-
-#: .\templates\landing.html:3152
-msgid "Dedicated account manager"
-msgstr ""
-
-#: .\templates\landing.html:3158
-msgid "24/7 premium support"
-msgstr ""
-
-#: .\templates\landing.html:3164
-msgid "Unlimited users"
-msgstr ""
-
-#: .\templates\landing.html:3170
-msgid "On-premise deployment options"
-msgstr ""
-
-#: .\templates\landing.html:3176 .\templates\landing.html:3463
-msgid "Contact Sales"
-msgstr ""
-
-#: .\templates\landing.html:3189
-msgid "Our Team"
-msgstr ""
-
-#: .\templates\landing.html:3191
-msgid "Meet the Carbon Experts Behind Academia Carbon"
-msgstr ""
-
-#: .\templates\landing.html:3193
-#: .\templates\landing.html:3207
-msgid "Chief Environmental Officer"
-msgstr ""
-
-#: .\templates\landing.html:3215
-msgid "PhD Environmental Science, MIT"
-msgstr ""
-
-#: .\templates\landing.html:3221
-msgid "15+ years carbon accounting experience"
-msgstr ""
-
-#: .\templates\landing.html:3227
-msgid "ISO 14064-1 Lead Auditor"
-msgstr ""
-
-#: .\templates\landing.html:3233
-msgid "Former UN Climate Change Advisor"
-msgstr ""
-
-#: .\templates\landing.html:3254
-msgid "Michael Kim"
-msgstr ""
-
-#: .\templates\landing.html:3256
-msgid "Chief Technology Officer"
-msgstr ""
-
-#: .\templates\landing.html:3264
-msgid "MS Computer Science, Stanford"
-msgstr ""
-
-#: .\templates\landing.html:3270
-msgid "Former Senior Engineer at Tesla"
-msgstr ""
-
-#: .\templates\landing.html:3276
-msgid "Expert in scalable cloud architecture"
-msgstr ""
-
 #: .\templates\landing.html:3282
 msgid "Certified in enterprise security"
 msgstr ""
 
-#: .\templates\landing.html:3303
-msgid "Sofia Patel"
-msgstr ""
-
-#: .\templates\landing.html:3305
-msgid "Head of Customer Success"
-msgstr ""
-
-#: .\templates\landing.html:3313
-msgid "MBA Sustainable Business, Wharton"
-msgstr ""
-
-#: .\templates\landing.html:3319
-msgid "10+ years sustainability consulting"
-msgstr ""
-
-#: .\templates\landing.html:3325
-msgid "Led 200+ carbon reduction projects"
-msgstr ""
-
-#: .\templates\landing.html:3331
-#, python-format
-msgid "98%% customer satisfaction rate"
-msgstr ""
-
-#: .\templates\landing.html:3351
-msgid "Team Members"
-msgstr ""
-
-#: .\templates\landing.html:3355
-msgid "Countries Served"
-msgstr ""
-
-#: .\templates\landing.html:3359
-msgid "Projects Completed"
-msgstr ""
-
-#: .\templates\landing.html:3371
-msgid "Ready to Get Started?"
-msgstr ""
-
-#: .\templates\landing.html:3374
-msgid "Start Your Carbon Journey Today"
-msgstr ""
-
-#: .\templates\landing.html:3376
-#: .\templates\landing.html:3382
-msgid "Create Free Account"
-msgstr ""
-
-#: .\templates\landing.html:3404
-#: .\templates\landing.html:3407
-msgid "Contact Information"
-msgstr ""
-
-#: .\templates\landing.html:3419
-msgid "San Francisco, CA, USA"
-msgstr ""
-
-#: .\templates\landing.html:3433
-msgid "Product"
-msgstr ""
-
-#: .\templates\landing.html:3439
-msgid "API Documentation"
+#: .\templates\user_guide.html:901
+msgid "Change methodology mid-year"
 msgstr ""
 
 #: .\templates\landing.html:3440
 msgid "Changelog"
 msgstr ""
 
-#: .\templates\landing.html:3445
-msgid "Resources"
-msgstr ""
-
-#: .\templates\landing.html:3447
-msgid "Help Center"
-msgstr ""
-
-#: .\templates\landing.html:3448
-msgid "User Guides"
-msgstr ""
-
-#: .\templates\landing.html:3449
-msgid "Webinars"
-msgstr ""
-
-#: .\templates\landing.html:3450
-msgid "Case Studies"
-msgstr ""
-
-#: .\templates\landing.html:3451
-msgid "Blog"
-msgstr ""
-
-#: .\templates\landing.html:3452
-msgid "Downloads"
-msgstr ""
-
-#: .\templates\landing.html:3457
-msgid "Company"
-msgstr ""
-
-#: .\templates\landing.html:3459
-msgid "About Us"
-msgstr ""
-
-#: .\templates\landing.html:3460
-msgid "Careers"
-msgstr ""
-
-#: .\templates\landing.html:3461
-msgid "Press Kit"
-msgstr ""
-
-#: .\templates\landing.html:3462
-msgid "Partners"
-msgstr ""
-
-#: .\templates\landing.html:3464
-msgid "System Status"
-msgstr ""
-
-#: .\templates\landing.html:3472
-msgid "Community"
-msgstr ""
-
-#: .\templates\landing.html:3473
-msgid "Training"
-msgstr ""
-
-#: .\templates\landing.html:3474
-msgid "Certification"
-msgstr ""
-
-#: .\templates\landing.html:3475
-msgid "Security"
-msgstr ""
-
-#: .\templates\landing.html:3476
-msgid "Compliance"
-msgstr ""
-
-#: .\templates\landing.html:3484
-msgid "Privacy Policy"
-msgstr ""
-
-#: .\templates\landing.html:3485
-msgid "Terms of Service"
-msgstr ""
-
-#: .\templates\landing.html:3486
-msgid "Cookie Policy"
-msgstr ""
-
-#: .\templates\landing.html:3487
-msgid "GDPR"
-msgstr ""
-
-#: .\templates\landing.html:3510
-#: .\templates\partials\sidebar.html:14
-msgid "GHG Tracking"
-msgstr ""
-
-#: .\templates\partials\sidebar.html:21
-msgid "Add Data"
-msgstr ""
-
-#: .\templates\partials\sidebar.html:25
-msgid "MENU"
-msgstr ""
-
-msgid "Reporting"
-msgstr "Raporlama"
-
-msgid "Settings"
-msgstr "Ayarlar"
-
-msgid "Help & Guide"
-msgstr "Yardım ve Rehber"
-
-#: .\templates\partials\sidebar.html:101
-msgid "24/7 Support Available"
-msgstr ""
-
-#: .\templates\reporting\inventory.html:14
-msgid "Filter"
-msgstr ""
-
-#: .\templates\reporting\inventory.html:17
-msgid "All Scopes"
-msgstr ""
-
-#: .\templates\reporting\inventory.html:24
-msgid "Generate PDF"
-msgstr ""
-
-#: .\templates\settings.html:191
-msgid "All Settings"
-msgstr ""
-
-#: .\templates\settings.html:192
-msgid "Account"
-msgstr ""
-
-#: .\templates\settings.html:194
-msgid "Privacy"
-msgstr ""
-
-#: .\templates\settings.html:198
-msgid "Reset"
-msgstr ""
-
-#: .\templates\settings.html:213
-msgid "Account Settings"
-msgstr ""
-
-#: .\templates\settings.html:215
-msgid "Manage your personal account information and preferences."
-msgstr ""
-
-#: .\templates\settings.html:218
-msgid "Full Name"
-msgstr ""
-
-#: .\templates\settings.html:225
-msgid "Contact support to change your email address"
-msgstr ""
-
-#: .\templates\settings.html:229
-msgid "Organization Name"
-msgstr ""
-
-#: .\templates\settings.html:339
-msgid "Select Industry"
-msgstr ""
-
-#: .\templates\suppliers.html:163
-msgid "All Categories"
-msgstr ""
-
-#: .\templates\suppliers.html:166
-msgid "Materials"
-msgstr ""
-
-#: .\templates\suppliers.html:170
-msgid "Add Supplier"
-msgstr ""
-
-#: .\templates\suppliers.html:184
-msgid "Total Suppliers"
-msgstr ""
-
-#: .\templates\suppliers.html:188
-msgid "Active Suppliers"
-msgstr ""
-
-#: .\templates\suppliers.html:192
-msgid "Categories"
-msgstr ""
-
-#: .\templates\suppliers.html:196
-msgid "Countries"
-msgstr ""
-
-#: .\templates\suppliers.html:204
-msgid "Supplier Carbon Management"
-msgstr ""
-
-#: .\templates\suppliers.html:205
-msgid "Enhanced Features Coming Soon"
-msgstr ""
-
-#: .\templates\suppliers.html:208
-#: .\templates\suppliers.html:213
-msgid "Add Supplier (via Data Entry)"
-msgstr ""
-
-#: .\templates\suppliers.html:217
-msgid "View Supplier Emissions"
-msgstr ""
-
-#: .\templates\support.html:207
-msgid "Status"
-msgstr ""
-
-#: .\templates\support.html:209
-msgid "Online"
-msgstr ""
-
-#: .\templates\support.html:212
-msgid "Email Support"
-msgstr ""
-
-#: .\templates\support.html:229
-msgid "Contact Support"
-msgstr ""
-
-#: .\templates\support.html:230
-#: .\templates\support.html:239 .\templates\user_guide.html:920
-msgid "Frequently Asked Questions"
-msgstr ""
-
-#: .\templates\support.html:240
-msgid "Find quick answers to common questions about using Academia Carbon."
-msgstr ""
-
-#: .\templates\support.html:249
-msgid "Direct Contact"
-msgstr ""
+#: .\templates\partials\translations.html:89
+msgid "Chart"
+msgstr "Grafik"
 
-#: .\templates\support.html:250
-#: .\templates\support.html:260
-#: .\templates\support.html:345
-msgid "Your Name"
+#: .\templates\user_guide.html:997
+msgid "Check all required fields are filled"
 msgstr ""
 
-#: .\templates\support.html:355
-msgid "Subject"
+#: .\templates\user_guide.html:1009
+msgid "Check internet:"
 msgstr ""
 
-#: .\templates\support.html:358
-msgid "Data Entry Help"
+#: .\templates\user_guide.html:841
+msgid "Check the automatically generated report for completeness and accuracy"
 msgstr ""
 
-#: .\templates\support.html:359
-msgid "Reporting Issues"
-msgstr ""
-
-#: .\templates\support.html:360
-msgid "Technical Problems"
-msgstr ""
-
-#: .\templates\support.html:361
-msgid "Account Management"
-msgstr ""
-
-#: .\templates\support.html:362
-msgid "Feature Request"
-msgstr ""
-
-#: .\templates\test_language.html:13
-msgid "Welcome"
-msgstr ""
-
-#: .\templates\test_language.html:14
-msgid "This is a test page"
-msgstr ""
-
-#: .\templates\user_guide.html:480
-msgid "Organization:"
-msgstr ""
-
-#: .\templates\user_guide.html:481
-msgid "Period:"
-msgstr ""
-
-#: .\templates\user_guide.html:482
-msgid "Standard:"
-msgstr ""
-
-#: .\templates\user_guide.html:491
-msgid "Complete User Guide"
-msgstr ""
+#: .\templates\data_entry.html:594
+msgid "Chemical"
+msgstr "Kimyasal"
 
-#: .\templates\user_guide.html:492
-msgid "Master greenhouse gas emissions tracking with our comprehensive guide"
-msgstr ""
-
-#: .\templates\user_guide.html:501 .\templates\user_guide.html:550
-msgid "Getting Started"
-msgstr ""
-
-#: .\templates\user_guide.html:502
-msgid "Quick start guide to begin tracking emissions in minutes"
-msgstr ""
-
-#: .\templates\user_guide.html:510
-msgid "Learn how to enter and manage your emission data"
-msgstr ""
-
-#: .\templates\user_guide.html:517
-msgid "Understanding Scopes"
-msgstr ""
-
-#: .\templates\user_guide.html:518
-msgid "Complete guide to Scope 1, 2, and 3 emissions"
-msgstr ""
-
-#: .\templates\user_guide.html:526
-msgid "Generate professional compliance reports"
-msgstr ""
-
-#: .\templates\user_guide.html:533 .\templates\user_guide.html:876
-msgid "Best Practices"
-msgstr ""
+#: .\templates\data_entry.html:595
+msgid "Chemical Oil"
+msgstr "Kimyasal Yağ"
 
-#: .\templates\user_guide.html:534
-msgid "Tips for accurate and efficient emission tracking"
+#: .\templates\landing.html:3207
+msgid "Chief Environmental Officer"
 msgstr ""
 
-#: .\templates\user_guide.html:541
-msgid "Troubleshooting"
+#: .\templates\landing.html:2775
+msgid "Chief Operations Officer, Manufacturing Co"
 msgstr ""
 
-#: .\templates\user_guide.html:542
-msgid "Common issues and solutions"
+#: .\templates\landing.html:3256
+msgid "Chief Technology Officer"
 msgstr ""
 
-#: .\templates\user_guide.html:556
-msgid "Quick Start in 5 Minutes"
-msgstr ""
-
-#: .\templates\user_guide.html:557
-#: .\templates\user_guide.html:564
-msgid "Navigate to Data Collection"
-msgstr ""
-
-#: .\templates\user_guide.html:565
-msgid "Click on \\"
-msgstr ""
+#: .\templates\data_entry.html:516
+msgid "Chilled Water"
+msgstr "Soğutulmuş Su"
 
-#: .\templates\user_guide.html:570
-msgid "Select Your Country"
+#: .\templates\data_entry.html:1506
+msgid "China"
 msgstr ""
 
-#: .\templates\user_guide.html:571
 #: .\templates\user_guide.html:576
 msgid "Choose Emission Scope"
 msgstr ""
 
-#: .\templates\user_guide.html:577
-#: .\templates\user_guide.html:582
-msgid "Enter Activity Data"
+#: .\templates\user_guide.html:1031
+msgid "Choose an action below to begin your emission tracking journey"
 msgstr ""
 
-#: .\templates\user_guide.html:583
-#: .\templates\user_guide.html:588
-msgid "Calculate & Review"
+#: .\templates\partials\translations.html:118
+msgid "Choose file"
 msgstr ""
 
-#: .\templates\user_guide.html:589
-msgid "Click \\"
-msgstr ""
-
-#: .\templates\user_guide.html:594
-msgid "View Reports"
-msgstr ""
-
-#: .\templates\user_guide.html:595
-#: .\templates\user_guide.html:603
-msgid "Video Tutorial"
-msgstr ""
-
-#: .\templates\user_guide.html:604
-msgid "Watch our 3-minute getting started video"
-msgstr ""
-
-#: .\templates\user_guide.html:607
-#: .\templates\user_guide.html:616
-msgid "Data Collection Guide"
-msgstr ""
-
-#: .\templates\user_guide.html:621
-msgid "Country Selection"
+#: .\templates\landing.html:2991
+msgid "Choose the Right Plan for Your Organization"
 msgstr ""
 
 #: .\templates\user_guide.html:622
 msgid "Choose the right country for accurate emission factors:"
 msgstr ""
 
-#: .\templates\user_guide.html:624
-msgid "Turkey:"
+#: .\templates\user_guide.html:1010
+msgid "Chrome, Firefox, or Edge"
 msgstr ""
 
-#: .\templates\user_guide.html:624
-msgid "Use for Turkish organizations (recommended)"
+#: .\templates\data_entry.html:1510
+msgid "City"
 msgstr ""
 
-#: .\templates\user_guide.html:625
-msgid "Global Average:"
+#: .\templates\emissions.html:642 .\templates\emissions.html:653
+#: .\templates\partials\translations.html:20
+msgid "Clear"
 msgstr ""
 
-#: .\templates\user_guide.html:625
-msgid "International standard factors"
+#: .\templates\emissions.html:776 .\templates\emissions.html:806
+msgid "Clear All"
 msgstr ""
 
-#: .\templates\user_guide.html:626
-#: .\templates\user_guide.html:631
-msgid "Industry Types"
+#: .\templates\user_guide.html:1008
+msgid "Clear browser cache:"
 msgstr ""
 
-#: .\templates\user_guide.html:632
-msgid "Select your industry for better categorization:"
+#: .\templates\user_guide.html:589
+msgid "Click \\"
 msgstr ""
 
-#: .\templates\user_guide.html:634
-msgid "Manufacturing, Services, Technology, Healthcare"
+#: .\templates\user_guide.html:565
+msgid "Click on \\"
 msgstr ""
 
-#: .\templates\user_guide.html:635
-msgid "Request new industries if yours isn't listed"
+#: .\templates\partials\translations.html:12
+msgid "Close"
+msgstr "Kapat"
+
+#: .\templates\data_entry.html:214
+msgid "Coal (generic) - IPCC 2006"
 msgstr ""
 
-#: .\templates\user_guide.html:636
-msgid "Helps with benchmarking and reporting"
+#: .\templates\data_entry_new.html:64
+msgid "Coal (industrial)"
 msgstr ""
 
-#: .\templates\user_guide.html:642
-msgid "Track emissions by supplier:"
-msgstr ""
-
-#: .\templates\user_guide.html:644
-msgid "Add supplier details when entering data"
-msgstr ""
-
-#: .\templates\user_guide.html:645
-msgid "Categorize by activity type (Energy, Fuel, etc.)"
-msgstr ""
-
-#: .\templates\user_guide.html:646
-msgid "Build supplier database for engagement"
-msgstr ""
-
-#: .\templates\user_guide.html:651
-msgid "Custom Factors"
-msgstr ""
-
-#: .\templates\user_guide.html:652
-msgid "Use your own emission factors:"
-msgstr ""
-
-#: .\templates\user_guide.html:654
-msgid "Add factors from supplier certificates"
-msgstr ""
-
-#: .\templates\user_guide.html:655
-msgid "Use LCA study results"
-msgstr ""
-
-#: .\templates\user_guide.html:656
-msgid "Request new materials from our team"
-msgstr ""
-
-#: .\templates\user_guide.html:664
-msgid "Data Quality Tips"
-msgstr ""
-
-#: .\templates\user_guide.html:665
-#: .\templates\user_guide.html:674
-msgid "Understanding Emission Scopes"
-msgstr ""
-
-#: .\templates\user_guide.html:680
-msgid "Emissions from sources you own or control:"
-msgstr ""
-
-#: .\templates\user_guide.html:682
-msgid "Stationary Combustion:"
-msgstr ""
-
-#: .\templates\user_guide.html:682
-msgid "Boilers, furnaces, generators"
-msgstr ""
-
-#: .\templates\user_guide.html:683
-msgid "Mobile Combustion:"
-msgstr ""
-
-#: .\templates\user_guide.html:683
-msgid "Company vehicles, forklifts"
-msgstr ""
-
-#: .\templates\user_guide.html:684
-msgid "Fugitive Emissions:"
-msgstr ""
-
-#: .\templates\user_guide.html:684
-msgid "Refrigerant leaks, methane"
-msgstr ""
-
-#: .\templates\user_guide.html:689
-msgid "Scope 2 - Energy Indirect"
-msgstr ""
-
-#: .\templates\user_guide.html:690
-msgid "Emissions from purchased energy:"
-msgstr ""
-
-#: .\templates\user_guide.html:692
-msgid "Electricity:"
-msgstr ""
-
-#: .\templates\user_guide.html:692
-msgid "Grid electricity consumption"
-msgstr ""
-
-#: .\templates\user_guide.html:693
-msgid "Steam, Heat & Cooling:"
-msgstr ""
-
-#: .\templates\user_guide.html:693
-msgid "District heating/cooling systems"
-msgstr ""
-
-#: .\templates\user_guide.html:694
-msgid "Grid average factors"
-msgstr ""
-
-#: .\templates\user_guide.html:699
-msgid "Scope 3 - Other Indirect"
-msgstr ""
-
-#: .\templates\user_guide.html:700
-msgid "All other indirect emissions in your value chain:"
-msgstr ""
-
-#: .\templates\user_guide.html:702
-msgid "Upstream:"
-msgstr ""
-
-#: .\templates\user_guide.html:702
-msgid "Purchased goods, business travel"
-msgstr ""
-
-#: .\templates\user_guide.html:703
-msgid "Downstream:"
-msgstr ""
-
-#: .\templates\user_guide.html:703
-msgid "Product use, end-of-life treatment"
-msgstr ""
-
-#: .\templates\user_guide.html:704
-msgid "As defined by GHG Protocol"
-msgstr ""
-
-#: .\templates\user_guide.html:712
-msgid "Scope"
-msgstr ""
-
-#: .\templates\user_guide.html:713
-#, python-format
-msgid "Typical %%"
-msgstr ""
-
-#: .\templates\user_guide.html:714
-msgid "Data Accuracy"
-msgstr ""
-
-#: .\templates\user_guide.html:715
-msgid "Reporting Priority"
-msgstr ""
-
-#: .\templates\user_guide.html:722
-msgid "High (bills, receipts)"
-msgstr ""
-
-#: .\templates\user_guide.html:723 .\templates\user_guide.html:729
-msgid "Mandatory"
-msgstr ""
-
-#: .\templates\user_guide.html:728
-msgid "High (electricity bills)"
-msgstr ""
-
-#: .\templates\user_guide.html:734
-msgid "Medium (estimates)"
-msgstr ""
-
-#: .\templates\user_guide.html:735
-msgid "Recommended"
-msgstr ""
-
-#: .\templates\user_guide.html:751
-msgid "Why Turkey-Specific Factors Matter"
-msgstr ""
-
-#: .\templates\user_guide.html:752
-#: .\templates\user_guide.html:756
-msgid "Turkey's Energy Mix (2023)"
+#: .\templates\data_entry.html:213
+msgid "Coal (industrial) - Defra 2024"
 msgstr ""
 
 #: .\templates\user_guide.html:759
@@ -2435,19 +1057,1713 @@ msgstr ""
 msgid "Coal: 37%%"
 msgstr ""
 
-#: .\templates\user_guide.html:760
-#: .\templates\user_guide.html:763
-#, python-format
-msgid "Natural Gas: 26%%"
+#: .\templates\user_guide.html:828
+msgid "Collect Complete Data"
 msgstr ""
 
-#: .\templates\user_guide.html:764
-msgid "Imported natural gas for power generation and heating"
+#: .\templates\action_planning.html:156 .\templates\analysis.html:311
+#: .\templates\analysis.html:333
+msgid "Coming Soon"
+msgstr ""
+
+#: .\templates\user_guide.html:995
+msgid "Common Issues"
+msgstr ""
+
+#: .\templates\user_guide.html:542
+msgid "Common issues and solutions"
+msgstr ""
+
+#: .\templates\landing.html:3472
+msgid "Community"
+msgstr ""
+
+#: .\templates\landing.html:2372
+msgid "Companies"
+msgstr ""
+
+#: .\templates\landing.html:3457 .\templates\partials\translations.html:80
+msgid "Company"
+msgstr ""
+
+#: .\templates\data_entry.html:1523
+msgid "Company Website"
+msgstr ""
+
+#: .\templates\user_guide.html:683
+msgid "Company vehicles, forklifts"
+msgstr ""
+
+#: .\templates\analysis.html:308
+msgid "Comparative Analysis"
+msgstr ""
+
+#: .\templates\landing.html:2870
+msgid "Complete REST API documentation"
+msgstr ""
+
+#: .\templates\user_guide.html:491
+msgid "Complete User Guide"
+msgstr ""
+
+#: .\templates\user_guide.html:518
+msgid "Complete guide to Scope 1, 2, and 3 emissions"
+msgstr ""
+
+#: .\templates\landing.html:3476
+msgid "Compliance"
+msgstr ""
+
+#: .\templates\landing.html:2593
+msgid "Comprehensive Emission Tracking"
+msgstr ""
+
+#: .\templates\landing.html:3058
+msgid "Comprehensive carbon management for growing organizations"
+msgstr ""
+
+#: .\templates\partials\translations.html:17
+msgid "Confirm"
+msgstr "Onayla"
+
+#: .\templates\auth\signup.html:418
+msgid "Confirm Password"
+msgstr ""
+
+#: .\templates\auth\signup.html:424
+msgid "Confirm your password"
+msgstr ""
+
+#: .\templates\data_entry.html:1490
+msgid "Construction"
+msgstr ""
+
+#: .\templates\landing.html:2227 .\templates\landing.html:2267
+msgid "Contact"
+msgstr ""
+
+#: .\templates\landing.html:3407
+msgid "Contact Information"
+msgstr ""
+
+#: .\templates\landing.html:3176 .\templates\landing.html:3463
+msgid "Contact Sales"
+msgstr ""
+
+#: .\templates\support.html:229
+msgid "Contact Support"
+msgstr ""
+
+#: .\templates\data_entry.html:1454
+msgid "Contact name"
+msgstr ""
+
+#: .\templates\action_planning.html:249
+msgid "Contact our support team for guidance on reduction strategies"
+msgstr ""
+
+#: .\templates\user_guide.html:1056
+msgid "Contact our team"
+msgstr ""
+
+#: .\templates\settings.html:225
+msgid "Contact support to change your email address"
+msgstr ""
+
+#: .\templates\action_planning.html:246
+msgid "Continue collecting emission data to establish your baseline"
+msgstr ""
+
+#: .\templates\auth\login.html:545 .\templates\auth\signup.html:453
+msgid "Continue with Google"
+msgstr ""
+
+#: .\templates\landing.html:3486
+msgid "Cookie Policy"
+msgstr ""
+
+#: .\templates\suppliers.html:196
+msgid "Countries"
+msgstr ""
+
+#: .\templates\landing.html:3355
+msgid "Countries Served"
+msgstr ""
+
+#: .\templates\data_entry.html:175 .\templates\data_entry.html:1498
+msgid "Country"
+msgstr ""
+
+#: .\templates\user_guide.html:621
+msgid "Country Selection"
+msgstr ""
+
+#: .\templates\user_guide.html:1000
+msgid "Country issues:"
+msgstr ""
+
+#: .\templates\data_entry_new.html:17
+msgid "Country/Region"
+msgstr ""
+
+#: .\templates\auth\signup.html:443
+msgid "Create Account"
+msgstr ""
+
+#: .\templates\action_planning.html:190
+msgid "Create Action Plans"
+msgstr ""
+
+#: .\templates\landing.html:3382
+msgid "Create Free Account"
+msgstr ""
+
+#: .\templates\user_guide.html:1050
+msgid "Create ISO 14064-1 report"
+msgstr ""
+
+#: .\templates\auth\signup.html:409
+msgid "Create a strong password"
+msgstr ""
+
+#: .\templates\auth\signup.html:337
+msgid "Create your account and start tracking your carbon footprint"
+msgstr ""
+
+#: .\templates\data_entry.html:255 .\templates\data_entry.html:1309
+#: .\templates\data_entry.html:1406 .\templates\data_entry_new.html:80
+msgid "Cubic Meters (m³)"
+msgstr ""
+
+#: .\templates\landing.html:3126
+msgid "Custom"
+msgstr ""
+
+#: .\templates\user_guide.html:651
+msgid "Custom Factors"
+msgstr ""
+
+#: .\templates\landing.html:2567
+msgid "Custom branding and white-label options"
+msgstr ""
+
+#: .\templates\landing.html:2951
+msgid "Custom integration support"
+msgstr ""
+
+#: .\templates\landing.html:3140
+msgid "Custom integrations & API access"
+msgstr ""
+
+#: .\templates\landing.html:3122
+msgid "Custom solutions for large organizations with complex needs"
+msgstr ""
+
+#: .\templates\user_guide.html:881
+msgid "DO"
+msgstr ""
+
+#: .\templates\user_guide.html:894
+msgid "DON'T"
+msgstr ""
+
+#: .\simple_i18n_test.py:26 .\simple_i18n_test.py:34 .\simple_i18n_test.py:40
+#: .\simple_i18n_test.py:44 .\templates\dashboard_base.html:794
+#: .\templates\index.html:5 .\templates\partials\page_header.html:7
+#: .\templates\partials\sidebar.html:32
+#: .\templates\partials\translations.html:31 .\test_complete_i18n.py:26
+#: .\test_complete_i18n.py:30
+msgid "Dashboard"
+msgstr "Kontrol Paneli"
+
+#: .\templates\user_guide.html:714
+msgid "Data Accuracy"
+msgstr ""
+
+#: .\templates\data_entry.html:5 .\templates\data_entry.html:164
+#: .\templates\partials\sidebar.html:38
+#: .\templates\partials\translations.html:32 .\templates\user_guide.html:509
+msgid "Data Collection"
+msgstr "Veri Toplama"
+
+#: .\templates\user_guide.html:616
+msgid "Data Collection Guide"
+msgstr ""
+
+#: .\templates\support.html:358
+msgid "Data Entry Help"
+msgstr ""
+
+#: .\templates\user_guide.html:664
+msgid "Data Quality Tips"
+msgstr ""
+
+#: .\templates\landing.html:2621
+msgid "Data import from ERP and accounting systems"
+msgstr ""
+
+#: .\templates\emission_history.html:656
+#: .\templates\reporting\inventory_pdf.html:336
+msgid "Date"
+msgstr ""
+
+#: .\templates\emissions.html:619
+msgid "Date Range"
+msgstr ""
+
+#: .\templates\analysis.html:279
+msgid "Date range filtering"
+msgstr ""
+
+#: .\templates\landing.html:2708
+msgid "Dec"
+msgstr ""
+
+#: .\templates\partials\translations.html:146
+msgid "December"
+msgstr ""
+
+#: .\templates\landing.html:3152
+msgid "Dedicated account manager"
+msgstr ""
+
+#: .\templates\partials\translations.html:9
+msgid "Delete"
+msgstr "Sil"
+
+#: .\templates\landing.html:2223 .\templates\landing.html:2263
+msgid "Demo"
+msgstr ""
+
+#: .\templates\partials\translations.html:81
+msgid "Department"
+msgstr "Departman"
+
+#: .\templates\data_entry.html:1388
+msgid "Describe the material and why you need it"
+msgstr ""
+
+#: .\templates\data_entry.html:1580
+msgid "Describe what this industry does and its main activities..."
+msgstr ""
+
+#: .\templates\data_entry.html:282 .\templates\data_entry.html:358
+#: .\templates\data_entry.html:488 .\templates\data_entry.html:550
+#: .\templates\data_entry.html:657 .\templates\data_entry.html:842
+#: .\templates\data_entry_new.html:108 .\templates\emission_history.html:744
+msgid "Description (Optional)"
+msgstr ""
+
+#: .\templates\partials\translations.html:92
+msgid "Details"
+msgstr "Detaylar"
+
+#: .\templates\landing.html:2853
+msgid "Developer Favorite"
+msgstr ""
+
+#: .\templates\landing.html:2789
+msgid "Developer Resources"
+msgstr ""
+
+#: .\templates\action_planning.html:240
+msgid "Development Status"
+msgstr ""
+
+#: .\templates\data_entry_new.html:66
+msgid "Diesel (volume)"
+msgstr ""
+
+#: .\templates\data_entry.html:220
+msgid "Diesel (volume) - IPCC 2006"
+msgstr ""
+
+#: .\templates\support.html:249
+msgid "Direct Contact"
+msgstr ""
+
+#: .\templates\data_entry_new.html:42
+msgid "Direct Emissions"
+msgstr ""
+
+#: .\templates\analysis\emissions.html:122 .\templates\emissions.html:904
+msgid "Distribution"
+msgstr "Dağılım"
+
+#: .\templates\index.html:109
+msgid "Distribution across Scope 1, 2, and 3"
+msgstr ""
+
+#: .\templates\data_entry.html:514
+msgid "District Cooling"
+msgstr "Bölgesel Soğutma"
+
+#: .\templates\data_entry.html:513
+msgid "District Heating"
+msgstr "Bölgesel Isıtma"
+
+#: .\templates\user_guide.html:693
+msgid "District heating/cooling systems"
+msgstr ""
+
+#: .\templates\data_entry.html:1394
+msgid "Do you have a suggested emission factor?"
+msgstr ""
+
+#: .\templates\landing.html:2225 .\templates\landing.html:2265
+#: .\templates\support.html:259
+msgid "Documentation"
+msgstr ""
+
+#: .\templates\landing.html:2791
+msgid "Documentation & API Integration"
+msgstr ""
+
+#: .\templates\auth\login.html:549
+msgid "Don't have an account?"
+msgstr ""
+
+#: .\templates\data_entry.html:245
+msgid "Don't see your industry? Click 'Add Industry' to request a new one."
+msgstr ""
+
+#: .\templates\partials\translations.html:26
+msgid "Download"
+msgstr "İndir"
+
+#: .\templates\user_guide.html:852
+msgid "Download PDF"
+msgstr ""
+
+#: .\templates\landing.html:3452
+msgid "Downloads"
+msgstr ""
+
+#: .\templates\user_guide.html:703
+msgid "Downstream:"
+msgstr ""
+
+#: .\templates\landing.html:2927
+msgid "ERP systems (SAP, Oracle, NetSuite)"
+msgstr ""
+
+#: .\templates\partials\translations.html:10
+msgid "Edit"
+msgstr "Düzenle"
+
+#: .\templates\user_guide.html:692
+msgid "Electricity:"
+msgstr ""
+
+#: .\templates\data_entry.html:1460 .\templates\partials\translations.html:75
+msgid "Email"
+msgstr ""
+
+#: .\templates\auth\login.html:504 .\templates\auth\signup.html:387
+#: .\templates\settings.html:223 .\templates\support.html:349
+msgid "Email Address"
+msgstr ""
+
+#: .\templates\support.html:212
+msgid "Email Support"
+msgstr ""
+
+#: .\templates\admin\login.html:448
+msgid "Email or Phone"
+msgstr ""
+
+#: .\templates\landing.html:3034
+msgid "Email support"
+msgstr ""
+
+#: .\templates\data_entry.html:1297 .\templates\partials\translations.html:46
+#: .\templates\user_guide.html:781
+msgid "Emission Factor"
+msgstr ""
+
+#: .\templates\data_entry_new.html:10
+msgid "Emission Management"
+msgstr ""
+
+#: .\templates\data_entry.html:210 .\templates\data_entry.html:304
+#: .\templates\data_entry.html:376 .\templates\data_entry.html:449
+#: .\templates\data_entry.html:510 .\templates\data_entry.html:590
+#: .\templates\data_entry.html:680 .\templates\data_entry.html:723
+#: .\templates\data_entry.html:765 .\templates\data_entry.html:806
+#: .\templates\data_entry.html:861 .\templates\data_entry.html:913
+#: .\templates\data_entry.html:971 .\templates\data_entry.html:1026
+#: .\templates\data_entry.html:1068 .\templates\data_entry.html:1110
+#: .\templates\data_entry.html:1150 .\templates\data_entry.html:1187
+#: .\templates\data_entry_new.html:61
+msgid "Emission Source"
+msgstr "Emisyon Kaynağı"
+
+#: .\templates\landing.html:2489
+msgid "Emission Tracking"
+msgstr ""
+
+#: .\templates\index.html:119
+msgid "Emission trends over the last 6 months"
+msgstr ""
+
+#: .\simple_i18n_test.py:27 .\simple_i18n_test.py:35 .\simple_i18n_test.py:41
+#: .\simple_i18n_test.py:45 .\templates\emissions.html:5
+#: .\templates\partials\sidebar.html:44
+#: .\templates\partials\translations.html:40
+msgid "Emissions"
+msgstr "Emisyonlar"
+
+#: .\templates\analysis.html:272 .\templates\analysis.html:376
+msgid "Emissions Analysis"
+msgstr ""
+
+#: .\templates\index.html:108
+msgid "Emissions by Scope"
+msgstr ""
+
+#: .\templates\data_entry.html:299 .\templates\data_entry_new.html:129
+msgid "Emissions from fuel combustion in mobile equipment"
+msgstr ""
+
+#: .\templates\data_entry.html:205 .\templates\data_entry_new.html:52
+msgid "Emissions from fuel combustion in stationary equipment"
+msgstr ""
+
+#: .\templates\data_entry.html:575
+msgid "Emissions from production of purchased goods and services"
+msgstr "Satın alınan mal ve hizmetlerin üretiminden emisyonlar"
+
+#: .\templates\data_entry.html:444
+msgid "Emissions from purchased electricity consumption"
+msgstr "Satın alınan elektrik tüketiminden emisyonlar"
+
+#: .\templates\data_entry_new.html:164
+msgid "Emissions from purchased electricity, steam, heat, and cooling"
+msgstr ""
+
+#: .\templates\user_guide.html:690
+msgid "Emissions from purchased energy:"
+msgstr ""
+
+#: .\templates\data_entry_new.html:145
+msgid "Emissions from refrigerants, air conditioning, and other sources"
+msgstr ""
+
+#: .\templates\data_entry_new.html:43
+msgid "Emissions from sources owned or controlled by your organization"
+msgstr ""
+
+#: .\templates\user_guide.html:680
+msgid "Emissions from sources you own or control:"
+msgstr ""
+
+#: .\templates\data_entry_new.html:177
+msgid "Emissions from value chain activities"
+msgstr ""
+
+#: .\templates\data_entry.html:1485 .\templates\suppliers.html:164
+msgid "Energy"
+msgstr ""
+
+#: .\templates\landing.html:2939
+msgid "Energy management systems"
+msgstr ""
+
+#: .\templates\user_guide.html:846
+msgid "Enhance Accuracy"
+msgstr ""
+
+#: .\templates\suppliers.html:205
+msgid "Enhanced Features Coming Soon"
+msgstr ""
+
+#: .\templates\user_guide.html:999
+msgid "Ensure activity data is greater than 0"
+msgstr ""
+
+#: .\templates\user_guide.html:1009
+msgid "Ensure stable connection"
+msgstr ""
+
+#: .\templates\user_guide.html:582
+msgid "Enter Activity Data"
+msgstr ""
+
+#: .\templates\data_entry.html:264 .\templates\data_entry.html:341
+#: .\templates\data_entry.html:400 .\templates\data_entry.html:472
+#: .\templates\data_entry.html:535 .\templates\data_entry.html:642
+#: .\templates\data_entry.html:703 .\templates\data_entry.html:745
+#: .\templates\data_entry.html:786 .\templates\data_entry.html:1048
+#: .\templates\data_entry.html:1090 .\templates\data_entry_new.html:90
+#, fuzzy
+#| msgid "Activity Data"
+msgid "Enter activity data"
+msgstr "Faaliyet Verisi"
+
+#: .\templates\data_entry.html:1530
+msgid "Enter address or additional notes"
+msgstr ""
+
+#: .\templates\data_entry.html:1524
+msgid "Enter company website"
+msgstr ""
+
+#: .\templates\user_guide.html:885
+msgid "Enter data monthly for better tracking"
+msgstr ""
+
+#: .\templates\data_entry.html:951 .\templates\data_entry.html:1006
+msgid "Enter distance"
+msgstr ""
+
+#: .\templates\data_entry.html:1206
+msgid "Enter investment amount"
+msgstr ""
+
+#: .\templates\data_entry.html:1167
+msgid "Enter number of franchises"
+msgstr ""
+
+#: .\templates\data_entry.html:1476
+msgid "Enter phone number"
+msgstr ""
+
+#: .\templates\data_entry.html:1461
+msgid "Enter primary contact email"
+msgstr ""
+
+#: .\templates\data_entry.html:1455
+msgid "Enter primary contact name"
+msgstr ""
+
+#: .\templates\data_entry.html:1449
+msgid "Enter supplier name"
+msgstr ""
+
+#: .\templates\data_entry.html:1518
+msgid "Enter tax number"
+msgstr ""
+
+#: .\templates\partials\translations.html:117
+msgid "Enter value"
+msgstr ""
+
+#: .\templates\data_entry.html:825
+msgid "Enter volume"
+msgstr ""
+
+#: .\templates\data_entry.html:893 .\templates\data_entry.html:1130
+msgid "Enter weight"
+msgstr ""
+
+#: .\templates\partials\translations.html:123
+msgid "Enter your email"
+msgstr ""
+
+#: .\templates\auth\login.html:510 .\templates\auth\signup.html:393
+msgid "Enter your email address"
+msgstr ""
+
+#: .\templates\auth\signup.html:360
+msgid "Enter your first name"
+msgstr ""
+
+#: .\templates\auth\signup.html:376
+msgid "Enter your last name"
+msgstr ""
+
+#: .\templates\partials\translations.html:125
+msgid "Enter your name"
+msgstr ""
+
+#: .\templates\auth\login.html:526 .\templates\partials\translations.html:124
+msgid "Enter your password"
+msgstr ""
+
+#: .\templates\landing.html:3120
+msgid "Enterprise"
+msgstr ""
+
+#: .\templates\landing.html:2762
+msgid "Environmental Manager, GreenEnergy"
+msgstr ""
+
+#: .\templates\partials\translations.html:60
+msgid "Error"
+msgstr "Hata"
+
+#: .\templates\landing.html:2393
+msgid "Everything You Need for Carbon Management"
+msgstr ""
+
+#: .\templates\landing.html:3134
+msgid "Everything in Professional"
+msgstr ""
+
+#: .\templates\user_guide.html:782
+msgid "Example Calculation"
+msgstr ""
+
+#: .\templates\landing.html:3276
+msgid "Expert in scalable cloud architecture"
+msgstr ""
+
+#: .\templates\landing.html:2906
+msgid "Explore API"
+msgstr ""
+
+#: .\templates\partials\translations.html:24
+msgid "Export"
+msgstr "Dışa Aktar"
+
+#: .\templates\emissions.html:20
+msgid "Export All"
+msgstr ""
+
+#: .\templates\support.html:362
+msgid "Feature Request"
+msgstr ""
+
+#: .\templates\landing.html:2821
+msgid "Feature documentation with examples"
+msgstr ""
+
+#: .\templates\landing.html:2222 .\templates\landing.html:2262
+#: .\templates\landing.html:3435
+msgid "Features"
+msgstr ""
+
+#: .\templates\landing.html:2698
+msgid "Feb"
+msgstr ""
+
+#: .\templates\partials\translations.html:136
+msgid "February"
+msgstr ""
+
+#: .\templates\partials\translations.html:23
+#: .\templates\reporting\inventory.html:14
+msgid "Filter"
+msgstr ""
+
+#: .\templates\support.html:240
+msgid "Find quick answers to common questions about using Academia Carbon."
+msgstr ""
+
+#: .\templates\auth\signup.html:354
+msgid "First Name"
+msgstr ""
+
+#: .\templates\data_entry.html:601
+msgid "Foam Tape"
+msgstr "Köpük Bant"
+
+#: .\templates\user_guide.html:1008
+msgid "For persistent issues"
+msgstr ""
+
+#: .\templates\user_guide.html:898
+msgid "Forget to check units (kWh vs MWh)"
+msgstr ""
+
+#: .\templates\user_guide.html:902
+msgid "Forget to document assumptions"
+msgstr ""
+
+#: .\templates\landing.html:3270
+msgid "Former Senior Engineer at Tesla"
+msgstr ""
+
+#: .\templates\landing.html:3233
+msgid "Former UN Climate Change Advisor"
+msgstr ""
+
+#: .\templates\data_entry.html:1505
+msgid "France"
+msgstr ""
+
+#: .\templates\support.html:239 .\templates\user_guide.html:920
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: .\templates\data_entry.html:1486
+msgid "Fuel"
+msgstr ""
+
+#: .\templates\data_entry.html:221
+msgid "Fuel Oil - IPCC 2006"
+msgstr ""
+
+msgid "Fugitive Emissions"
+msgstr "Kaçak Emisyonlar"
+
+#: .\templates\user_guide.html:684
+msgid "Fugitive Emissions:"
+msgstr ""
+
+#: .\templates\data_entry_new.html:144
+msgid "Fugitive emissions"
+msgstr ""
+
+#: .\templates\data_entry_new.html:153
+msgid "Fugitive emissions form will be similar to stationary"
+msgstr ""
+
+#: .\templates\settings.html:218
+msgid "Full Name"
+msgstr ""
+
+#: .\templates\landing.html:3078
+msgid "Full Scope 1, 2, 3 calculations"
+msgstr ""
+
+#: .\templates\landing.html:3487
+msgid "GDPR"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:14
+msgid "GHG Tracking"
+msgstr ""
+
+#: .\templates\emissions.html:15 .\templates\emissions.html:612
+msgid "GHG-Based"
+msgstr ""
+
+#: .\templates\data_entry.html:215
+msgid "Gas/Diesel Oil (energy basis) - IPCC 2019"
+msgstr ""
+
+#: .\templates\reporting\inventory.html:24
+msgid "Generate PDF"
+msgstr ""
+
+#: .\templates\index.html:141 .\templates\user_guide.html:1049
+msgid "Generate Report"
+msgstr ""
+
+#: .\templates\landing.html:2580
+msgid "Generate Sample Report"
+msgstr ""
+
+#: .\templates\user_guide.html:853
+msgid "Generate and download your professional ISO 14064-1 compliant report"
+msgstr ""
+
+#: .\templates\user_guide.html:526
+msgid "Generate professional compliance reports"
+msgstr ""
+
+#: .\templates\action_planning.html:247
+msgid "Generate reports to understand your current emission profile"
+msgstr ""
+
+#: .\templates\data_entry.html:1504
+msgid "Germany"
+msgstr ""
+
+#: .\templates\landing.html:2245 .\templates\landing.html:2284
+#: .\templates\partials\translations.html:98
+msgid "Get Started"
+msgstr ""
+
+#: .\templates\landing.html:2976 .\templates\landing.html:3471
+#: .\templates\user_guide.html:1055
+msgid "Get Support"
+msgstr ""
+
+#: .\templates\index.html:131
+msgid "Get started with common tasks"
+msgstr ""
+
+#: .\templates\user_guide.html:501 .\templates\user_guide.html:550
+msgid "Getting Started"
+msgstr ""
+
+#: .\templates\data_entry.html:332 .\templates\data_entry.html:1312
+#: .\templates\data_entry.html:1409
+msgid "Gigajoules (GJ)"
+msgstr ""
+
+#: .\templates\data_entry.html:608
+msgid "Glass"
+msgstr "Cam"
+
+#: .\templates\data_entry.html:178 .\templates\data_entry_new.html:20
+msgid "Global Average"
+msgstr ""
+
+#: .\templates\user_guide.html:625
+msgid "Global Average:"
+msgstr ""
+
+#: .\templates\analysis.html:337
+msgid "Goal tracking & progress"
+msgstr ""
+
+#: .\templates\auth\login.html:543
+msgid "Google login coming soon!"
+msgstr ""
+
+#: .\templates\auth\signup.html:451
+msgid "Google signup coming soon!"
+msgstr ""
+
+#: .\templates\user_guide.html:694
+msgid "Grid average factors"
+msgstr ""
+
+#: .\templates\user_guide.html:692
+msgid "Grid electricity consumption"
+msgstr ""
+
+#: .\templates\user_guide.html:772
+msgid "Growing wind and solar capacity"
+msgstr ""
+
+#: .\templates\landing.html:3305
+msgid "Head of Customer Success"
+msgstr ""
+
+#: .\templates\partials\translations.html:36
+msgid "Help"
+msgstr "Yardım"
+
+#: .\templates\partials\sidebar.html:87 .\templates\user_guide.html:5
+#: .\templates\user_guide.html:478
+msgid "Help & Guide"
+msgstr "Yardım ve Rehber"
+
+#: .\templates\landing.html:3447
+msgid "Help Center"
+msgstr ""
+
+#: .\templates\user_guide.html:636
+msgid "Helps with benchmarking and reporting"
+msgstr ""
+
+#: .\templates\index.html:34
+msgid "Here's what's happening with your carbon emissions today."
+msgstr ""
+
+#: .\templates\user_guide.html:722
+msgid "High (bills, receipts)"
+msgstr ""
+
+#: .\templates\user_guide.html:728
+msgid "High (electricity bills)"
+msgstr ""
+
+#: .\templates\partials\translations.html:30
+msgid "Home"
+msgstr "Ana Sayfa"
+
+#: .\templates\user_guide.html:926
+msgid "How accurate are the emission factors?"
+msgstr ""
+
+#: .\templates\user_guide.html:956
+msgid "How often should I track emissions?"
 msgstr ""
 
 #: .\templates\user_guide.html:767
 #, python-format
 msgid "Hydropower: 25%%"
+msgstr ""
+
+#: .\templates\data_entry.html:1236
+msgid "I Have the Emission Factor"
+msgstr ""
+
+#: .\templates\data_entry.html:1249
+msgid "I Need Help Finding It"
+msgstr ""
+
+#: .\templates\emissions.html:16 .\templates\emissions.html:613
+msgid "ISO 14064-1"
+msgstr ""
+
+#: .\templates\landing.html:3227
+msgid "ISO 14064-1 Lead Auditor"
+msgstr ""
+
+#: .\templates\landing.html:2424 .\templates\user_guide.html:525
+#: .\templates\user_guide.html:822
+msgid "ISO 14064-1 Reporting"
+msgstr ""
+
+#: .\templates\landing.html:2827
+msgid "ISO 14064-1 compliance guidelines"
+msgstr ""
+
+#: .\templates\landing.html:2555
+msgid "ISO 14064-1 compliant report templates"
+msgstr ""
+
+#: .\templates\landing.html:3084
+msgid "ISO 14064-1 compliant reporting"
+msgstr ""
+
+#: .\templates\landing.html:2525
+msgid "ISO 14064-1 compliant reporting and PDF export"
+msgstr ""
+
+#: .\templates\landing.html:2485
+msgid "ISO Reports"
+msgstr ""
+
+#: .\templates\user_guide.html:1019
+msgid "If you can't find the answer here, visit our"
+msgstr ""
+
+#: .\templates\user_guide.html:900
+msgid "Ignore data quality issues"
+msgstr ""
+
+#: .\templates\partials\translations.html:25
+msgid "Import"
+msgstr "İçe Aktar"
+
+#: .\templates\user_guide.html:764
+msgid "Imported natural gas for power generation and heating"
+msgstr ""
+
+#: .\templates\analysis.html:318
+msgid "Improvement recommendations"
+msgstr ""
+
+#: .\templates\user_guide.html:889
+msgid "Include all material emission sources"
+msgstr ""
+
+#: .\templates\data_entry_new.html:163
+msgid "Indirect Emissions (Energy)"
+msgstr ""
+
+#: .\templates\data_entry.html:1558
+msgid "Industry Name"
+msgstr ""
+
+#: .\templates\data_entry.html:232
+msgid "Industry Type"
+msgstr ""
+
+#: .\templates\user_guide.html:631
+msgid "Industry Types"
+msgstr ""
+
+#: .\templates\analysis.html:315
+msgid "Industry benchmarking"
+msgstr ""
+
+#: .\templates\partials\translations.html:62
+msgid "Info"
+msgstr "Bilgi"
+
+#: .\templates\landing.html:2917 .\templates\landing.html:3438
+msgid "Integrations"
+msgstr ""
+
+#: .\templates\landing.html:2876
+msgid "Interactive API explorer"
+msgstr ""
+
+#: .\templates\landing.html:2513
+msgid "Interactive charts and KPI visualizations"
+msgstr ""
+
+#: .\templates\user_guide.html:625
+msgid "International standard factors"
+msgstr ""
+
+#: .\templates\user_guide.html:966
+msgid "Is my data secure and private?"
+msgstr ""
+
+#: .\templates\landing.html:2761
+msgid "James Davis"
+msgstr ""
+
+#: .\templates\landing.html:2697
+msgid "Jan"
+msgstr ""
+
+#: .\templates\partials\translations.html:135
+msgid "January"
+msgstr ""
+
+#: .\templates\auth\signup.html:336
+msgid "Join Academia Carbon"
+msgstr ""
+
+#: .\templates\landing.html:2703
+msgid "Jul"
+msgstr ""
+
+#: .\templates\partials\translations.html:141
+msgid "July"
+msgstr ""
+
+#: .\templates\landing.html:2702
+msgid "Jun"
+msgstr ""
+
+#: .\templates\partials\translations.html:140
+msgid "June"
+msgstr ""
+
+#: .\templates\user_guide.html:888
+msgid "Keep supporting documentation"
+msgstr ""
+
+#: .\templates\landing.html:2391
+msgid "Key Features"
+msgstr ""
+
+#: .\templates\data_entry.html:254 .\templates\data_entry.html:331
+#: .\templates\data_entry.html:633 .\templates\data_entry.html:885
+#: .\templates\data_entry.html:1122
+msgid "Kilograms"
+msgstr "Kilogram"
+
+#: .\templates\data_entry.html:1307 .\templates\data_entry.html:1404
+msgid "Kilograms (kg)"
+msgstr ""
+
+#: .\templates\data_entry.html:333 .\templates\data_entry.html:943
+#: .\templates\data_entry.html:998 .\templates\data_entry.html:1693
+msgid "Kilometers"
+msgstr "Kilometre"
+
+#: .\templates\data_entry.html:1313 .\templates\data_entry.html:1410
+msgid "Kilometers (km)"
+msgstr ""
+
+#: .\templates\data_entry.html:1311 .\templates\data_entry.html:1408
+msgid "Kilowatt-hours (kWh)"
+msgstr ""
+
+#: .\templates\landing.html:2680
+msgid "Last 12 Months"
+msgstr ""
+
+#: .\templates\partials\translations.html:55
+msgid "Last Month"
+msgstr "Geçen Ay"
+
+#: .\templates\auth\signup.html:370
+msgid "Last Name"
+msgstr ""
+
+#: .\templates\partials\translations.html:56
+msgid "Last Year"
+msgstr "Geçen Yıl"
+
+#: .\templates\partials\translations.html:99
+msgid "Learn More"
+msgstr ""
+
+#: .\templates\user_guide.html:510
+msgid "Learn how to enter and manage your emission data"
+msgstr ""
+
+#: .\templates\data_entry.html:226
+msgid "Learn more"
+msgstr ""
+
+#: .\templates\landing.html:3325
+msgid "Led 200+ carbon reduction projects"
+msgstr ""
+
+#: .\templates\data_entry.html:216
+msgid "Liquefied Petroleum Gas (LPG) - Defra 2024"
+msgstr ""
+
+#: .\templates\data_entry.html:253 .\templates\data_entry.html:330
+#: .\templates\data_entry.html:737 .\templates\data_entry.html:1308
+#: .\templates\data_entry.html:1405 .\templates\data_entry.html:1690
+#: .\templates\data_entry.html:1741
+msgid "Liters"
+msgstr "Litre"
+
+#: .\templates\landing.html:2469 .\templates\landing.html:3436
+msgid "Live Demo"
+msgstr ""
+
+#: .\templates\partials\translations.html:63
+msgid "Loading"
+msgstr "Yükleniyor"
+
+#: .\templates\data_entry.html:236
+msgid "Loading industry types..."
+msgstr ""
+
+#: .\templates\index.html:48 .\templates\index.html:64
+#: .\templates\index.html:80 .\templates\index.html:96
+#: .\templates\index.html:451
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: .\templates\partials\translations.html:83
+msgid "Location"
+msgstr "Konum"
+
+#: .\templates\emissions.html:615
+msgid "Location-Based"
+msgstr ""
+
+#: .\templates\admin\login.html:9 .\templates\auth\login.html:8
+#: .\templates\landing.html:2241 .\templates\landing.html:2280
+#: .\templates\partials\translations.html:69
+msgid "Login"
+msgstr "Giriş"
+
+#: .\templates\auth\login.html:9
+msgid "Login to Academia Carbon - Professional carbon tracking platform"
+msgstr ""
+
+#: .\templates\base.html:96 .\templates\dashboard_base.html:839
+#: .\templates\partials\translations.html:70
+msgid "Logout"
+msgstr ""
+
+#: .\templates\landing.html:3313
+msgid "MBA Sustainable Business, Wharton"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:25
+msgid "MENU"
+msgstr ""
+
+#: .\templates\data_entry.html:526
+msgid "MMBtu"
+msgstr "MMBtu"
+
+#: .\templates\landing.html:3264
+msgid "MS Computer Science, Stanford"
+msgstr ""
+
+#: .\templates\settings.html:215
+msgid "Manage your personal account information and preferences."
+msgstr ""
+
+#: .\templates\user_guide.html:723 .\templates\user_guide.html:729
+msgid "Mandatory"
+msgstr ""
+
+#: .\templates\data_entry.html:1489
+msgid "Manufacturing"
+msgstr ""
+
+#: .\templates\user_guide.html:634
+msgid "Manufacturing, Services, Technology, Healthcare"
+msgstr ""
+
+#: .\templates\landing.html:2699
+msgid "Mar"
+msgstr ""
+
+#: .\templates\partials\translations.html:137
+#, fuzzy
+#| msgid "Search"
+msgid "March"
+msgstr "Ara"
+
+#: .\templates\emissions.html:614
+msgid "Market-Based"
+msgstr ""
+
+#: .\templates\user_guide.html:492
+msgid "Master greenhouse gas emissions tracking with our comprehensive guide"
+msgstr ""
+
+#: .\templates\data_entry.html:1223
+msgid "Material Not Listed"
+msgstr ""
+
+#: .\templates\data_entry.html:1276 .\templates\data_entry.html:1366
+msgid "Material/Product Name"
+msgstr ""
+
+#: .\templates\suppliers.html:166
+msgid "Materials"
+msgstr ""
+
+#: .\templates\landing.html:2701 .\templates\partials\translations.html:139
+msgid "May"
+msgstr ""
+
+#: .\templates\user_guide.html:734
+msgid "Medium (estimates)"
+msgstr ""
+
+#: .\templates\landing.html:3191
+msgid "Meet the Carbon Experts Behind Academia Carbon"
+msgstr ""
+
+#: .\templates\data_entry.html:609 .\templates\data_entry.html:610
+#: .\templates\data_entry.html:611
+msgid "Metal"
+msgstr "Metal"
+
+#: .\templates\emissions.html:12
+msgid "Method"
+msgstr ""
+
+#: .\templates\landing.html:3254
+msgid "Michael Kim"
+msgstr ""
+
+#: .\templates\data_entry.html:612
+msgid "Mineral Oil"
+msgstr "Mineral Yağ"
+
+#: .\templates\user_guide.html:999
+msgid "Missing data:"
+msgstr ""
+
+#: .\templates\user_guide.html:897
+msgid "Mix different time periods in one calculation"
+msgstr ""
+
+msgid "Mobile Combustion"
+msgstr "Mobil Yanma"
+
+#: .\templates\user_guide.html:683
+msgid "Mobile Combustion:"
+msgstr ""
+
+#: .\templates\data_entry.html:296 .\templates\data_entry_new.html:128
+msgid "Mobile combustion"
+msgstr ""
+
+#: .\templates\data_entry_new.html:137
+msgid "Mobile combustion form will be similar to stationary"
+msgstr ""
+
+#: .\templates\user_guide.html:910
+msgid "Monthly Data Collection Checklist"
+msgstr ""
+
+#: .\templates\landing.html:2679
+msgid "Monthly Emissions Trend"
+msgstr ""
+
+#: .\templates\index.html:118
+msgid "Monthly Trends"
+msgstr ""
+
+#: .\templates\landing.html:3054
+msgid "Most Popular"
+msgstr ""
+
+msgid "Motor Gasoline"
+msgstr "Motor Benzini"
+
+#: .\templates\data_entry.html:218
+msgid "Motor Gasoline - IPCC 2019"
+msgstr ""
+
+#: .\templates\landing.html:2573
+msgid "Multi-format export (PDF, Excel, CSV)"
+msgstr ""
+
+#: .\templates\landing.html:2603
+msgid "Multi-location and facility management"
+msgstr ""
+
+#: .\templates\analysis.html:357
+msgid "NEW"
+msgstr ""
+
+#: .\simple_i18n_test.py:28 .\simple_i18n_test.py:36
+msgid "Natural Gas"
+msgstr "Doğal Gaz"
+
+#: .\templates\data_entry.html:219
+msgid "Natural Gas - IPCC 2019"
+msgstr ""
+
+#: .\templates\user_guide.html:763
+#, python-format
+msgid "Natural Gas: 26%%"
+msgstr ""
+
+#: .\templates\user_guide.html:564
+msgid "Navigate to Data Collection"
+msgstr ""
+
+#: .\templates\user_guide.html:835
+msgid "Navigate to \\"
+msgstr ""
+
+#: .\templates\user_guide.html:1018
+msgid "Need More Help?"
+msgstr ""
+
+#: .\templates\action_planning.html:141
+msgid "New Plan"
+msgstr ""
+
+#: .\templates\index.html:168
+msgid "New emission record added"
+msgstr ""
+
+#: .\templates\analysis\emissions.html:145
+#: .\templates\partials\translations.html:15
+msgid "Next"
+msgstr ""
+
+#: .\templates\partials\translations.html:119
+msgid "No file selected"
+msgstr ""
+
+#: .\templates\data_entry.html:2802
+msgid "No industries available"
+msgstr ""
+
+#: .\templates\auth\signup.html:435
+msgid "Not a commonly used password"
+msgstr ""
+
+#: .\templates\auth\signup.html:434
+msgid "Not similar to your personal information"
+msgstr ""
+
+#: .\templates\landing.html:2707
+msgid "Nov"
+msgstr ""
+
+#: .\templates\partials\translations.html:145
+msgid "November"
+msgstr ""
+
+#: .\templates\landing.html:2706
+msgid "Oct"
+msgstr ""
+
+#: .\templates\partials\translations.html:144
+msgid "October"
+msgstr ""
+
+#: .\templates\landing.html:3170
+msgid "On-premise deployment options"
+msgstr ""
+
+#: .\templates\support.html:209
+msgid "Online"
+msgstr ""
+
+#: .\templates\partials\translations.html:13
+msgid "Open"
+msgstr "Aç"
+
+#: .\templates\data_entry.html:166 .\templates\data_entry_new.html:11
+#: .\templates\partials\translations.html:79 .\templates\settings.html:193
+msgid "Organization"
+msgstr ""
+
+#: .\templates\settings.html:229
+msgid "Organization Name"
+msgstr ""
+
+#: .\templates\user_guide.html:480
+msgid "Organization:"
+msgstr ""
+
+#: .\templates\data_entry.html:1291 .\templates\data_entry.html:1381
+#: .\templates\data_entry.html:1491 .\templates\support.html:363
+msgid "Other"
+msgstr ""
+
+#: .\templates\data_entry.html:222 .\templates\data_entry_new.html:67
+msgid "Other / Not Listed"
+msgstr ""
+
+#: .\templates\data_entry_new.html:176
+msgid "Other Indirect Emissions"
+msgstr ""
+
+#: .\templates\landing.html:3189
+msgid "Our Team"
+msgstr ""
+
+#: .\templates\data_entry.html:1316 .\templates\data_entry.html:1413
+msgid "Packages (for delivery)"
+msgstr ""
+
+#: .\templates\landing.html:3462
+msgid "Partners"
+msgstr ""
+
+#: .\templates\admin\login.html:461 .\templates\auth\login.html:520
+#: .\templates\auth\signup.html:403 .\templates\partials\translations.html:74
+msgid "Password"
+msgstr ""
+
+#: .\templates\auth\signup.html:431
+msgid "Password Requirements:"
+msgstr ""
+
+#: .\templates\partials\translations.html:107
+msgid "Password is too short"
+msgstr ""
+
+#: .\templates\partials\translations.html:108
+msgid "Passwords do not match"
+msgstr ""
+
+#: .\templates\analysis.html:316
+msgid "Peer comparison"
+msgstr ""
+
+#: .\templates\analysis.html:542 .\templates\reporting\inventory.html:85
+#: .\templates\reporting\inventory_pdf.html:257
+#: .\templates\reporting\inventory_pdf.html:283
+#: .\templates\reporting\inventory_pdf.html:311
+msgid "Percentage"
+msgstr "Yüzde"
+
+#: .\templates\landing.html:3002
+msgid "Perfect for small organizations getting started with carbon tracking"
+msgstr ""
+
+#: .\templates\analysis.html:330
+msgid "Performance Analysis"
+msgstr ""
+
+#: .\templates\analysis.html:339
+msgid "Performance scoring"
+msgstr ""
+
+#: .\templates\data_entry.html:167 .\templates\index.html:12
+msgid "Period"
+msgstr ""
+
+#: .\templates\user_guide.html:481
+msgid "Period:"
+msgstr ""
+
+#: .\templates\partials\translations.html:73
+msgid "Permissions"
+msgstr "İzinler"
+
+#: .\templates\landing.html:3215
+msgid "PhD Environmental Science, MIT"
+msgstr ""
+
+#: .\templates\partials\translations.html:85
+msgid "Phone"
+msgstr "Telefon"
+
+#: .\templates\data_entry.html:1466
+msgid "Phone number"
+msgstr ""
+
+#: .\templates\data_entry.html:596
+msgid "Plastic"
+msgstr "Plastik"
+
+#: .\templates\landing.html:2296
+msgid "Platform"
+msgstr ""
+
+#: .\templates\support.html:379
+msgid "Please describe your issue or question in detail..."
+msgstr ""
+
+#: .\templates\partials\translations.html:106
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: .\ghg\admin_views.py:23
+msgid "Please enter the correct username and password."
+msgstr ""
+
+#: .\templates\partials\translations.html:64
+msgid "Please wait"
+msgstr "Lütfen bekleyin"
+
+#: .\templates\landing.html:2404
+msgid "Precise Emission Calculation"
+msgstr ""
+
+#: .\templates\landing.html:3461
+msgid "Press Kit"
+msgstr ""
+
+#: .\templates\partials\translations.html:16
+msgid "Previous"
+msgstr "Önceki"
+
+#: .\templates\landing.html:2224 .\templates\landing.html:2264
+#: .\templates\landing.html:3437
+msgid "Pricing"
+msgstr ""
+
+#: .\templates\landing.html:2989
+msgid "Pricing Plans"
+msgstr ""
+
+#: .\templates\landing.html:3102
+msgid "Priority support & training"
+msgstr ""
+
+#: .\templates\settings.html:194
+msgid "Privacy"
+msgstr ""
+
+#: .\templates\landing.html:3484
+msgid "Privacy Policy"
+msgstr ""
+
+msgid "Process Emissions"
+msgstr "Proses Emisyonları"
+
+#: .\templates\analysis.html:365
+msgid "Procurement recommendations"
+msgstr ""
+
+#: .\templates\landing.html:3433
+msgid "Product"
+msgstr ""
+
+#: .\templates\user_guide.html:703
+msgid "Product use, end-of-life treatment"
+msgstr ""
+
+#: .\templates\landing.html:2294 .\templates\landing.html:3056
+msgid "Professional"
+msgstr ""
+
+#: .\templates\auth\login.html:456
+msgid "Professional Carbon Tracking"
+msgstr ""
+
+#: .\templates\landing.html:2545
+msgid "Professional ISO 14064-1 Reports"
+msgstr ""
+
+#: .\templates\partials\translations.html:67
+msgid "Profile"
+msgstr "Profil"
+
+#: .\templates\action_planning.html:230
+msgid "Progress Reports"
+msgstr ""
+
+#: .\templates\landing.html:3359
+msgid "Projects Completed"
+msgstr ""
+
+msgid "Propane"
+msgstr "Propan"
+
+#: .\templates\data_entry.html:217
+msgid "Propane - Defra 2024"
+msgstr ""
+
+#: .\templates\data_entry.html:1285 .\templates\data_entry.html:1375
+msgid "Purchased Goods & Services"
+msgstr ""
+
+#: .\templates\user_guide.html:702
+msgid "Purchased goods, business travel"
+msgstr ""
+
+#: .\templates\landing.html:2964
+msgid "Quick Access"
+msgstr ""
+
+#: .\templates\index.html:130
+msgid "Quick Actions"
+msgstr ""
+
+#: .\templates\user_guide.html:1005
+msgid "Quick Fixes"
+msgstr ""
+
+#: .\templates\user_guide.html:556
+msgid "Quick Start in 5 Minutes"
+msgstr ""
+
+#: .\templates\landing.html:2815
+msgid "Quick start guide and tutorials"
+msgstr ""
+
+#: .\templates\user_guide.html:502
+msgid "Quick start guide to begin tracking emissions in minutes"
+msgstr ""
+
+#: .\templates\data_entry.html:1550
+msgid "REQUEST NEW INDUSTRY TYPE"
+msgstr ""
+
+#: .\templates\data_entry.html:1358
+msgid "REQUEST NEW MATERIAL"
+msgstr ""
+
+#: .\templates\landing.html:2860
+msgid "REST API"
+msgstr ""
+
+#: .\templates\landing.html:2894
+msgid "Rate limiting and authentication"
+msgstr ""
+
+#: .\templates\partials\translations.html:100
+msgid "Read More"
+msgstr ""
+
+#: .\templates\landing.html:3371
+msgid "Ready to Get Started?"
+msgstr ""
+
+#: .\templates\user_guide.html:1028
+msgid "Ready to Start?"
+msgstr ""
+
+#: .\templates\landing.html:2497
+msgid "Real-time Carbon Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:2507
+msgid "Real-time emission tracking across Scope 1, 2, and 3"
+msgstr ""
+
+#: .\templates\index.html:159
+msgid "Recent Activity"
+msgstr ""
+
+#: .\templates\user_guide.html:735
+msgid "Recommended"
+msgstr ""
+
+#: .\templates\index.html:58
+msgid "Records Count"
+msgstr ""
+
+#: .\templates\index.html:204
+msgid "Reduce Scope 2 Emissions"
+msgstr ""
+
+#: .\templates\analysis.html:338
+msgid "Reduction trend analysis"
+msgstr ""
+
+#: .\templates\index.html:21 .\templates\partials\translations.html:21
+msgid "Refresh"
+msgstr "Yenile"
+
+#: .\templates\user_guide.html:1007
+msgid "Refresh page:"
+msgstr ""
+
+#: .\templates\user_guide.html:684
+msgid "Refrigerant leaks, methane"
+msgstr ""
+
+#: .\templates\user_guide.html:1007
+msgid "Reload if forms aren't responding"
 msgstr ""
 
 #: .\templates\user_guide.html:768
@@ -2459,302 +2775,1016 @@ msgstr ""
 msgid "Renewables: 12%%"
 msgstr ""
 
-#: .\templates\user_guide.html:772
-msgid "Growing wind and solar capacity"
+#: .\templates\partials\translations.html:88
+msgid "Report"
+msgstr "Rapor"
+
+#: .\templates\user_guide.html:866
+msgid "Report Quality Checklist"
 msgstr ""
 
-#: .\templates\user_guide.html:776
-msgid "Unique Transportation Options"
+#: .\templates\index.html:177
+msgid "Report generated"
 msgstr ""
 
-#: .\templates\user_guide.html:780
-msgid "Transport Mode"
+#: .\templates\partials\sidebar.html:56
+#: .\templates\partials\translations.html:34
+#: .\templates\reporting\inventory.html:5
+#: .\templates\reporting\inventory.html:7
+msgid "Reporting"
+msgstr "Raporlama"
+
+#: .\templates\support.html:359
+msgid "Reporting Issues"
 msgstr ""
 
-#: .\templates\user_guide.html:782
-msgid "Example Calculation"
+#: .\templates\user_guide.html:715
+msgid "Reporting Priority"
 msgstr ""
 
-#: .\templates\user_guide.html:812
-msgid "Sustainable Transport in Turkey"
+#: .\templates\data_entry_new.html:186
+msgid "Request Material"
 msgstr ""
 
-#: .\templates\user_guide.html:813
-#, python-format
-#: .\templates\user_guide.html:828
-msgid "Collect Complete Data"
+#: .\templates\data_entry.html:585
+msgid "Request New Material"
 msgstr ""
 
-#: .\templates\user_guide.html:829
-#: .\templates\user_guide.html:834
-msgid "Access Reporting"
+#: .\templates\user_guide.html:635
+msgid "Request new industries if yours isn't listed"
 msgstr ""
 
-#: .\templates\user_guide.html:835
-msgid "Navigate to \\"
+#: .\templates\user_guide.html:656
+msgid "Request new materials from our team"
+msgstr ""
+
+#: .\templates\data_entry.html:1250
+msgid "Request our team to research and add the emission factor"
+msgstr ""
+
+#: .\templates\partials\translations.html:19 .\templates\settings.html:198
+msgid "Reset"
+msgstr ""
+
+#: .\templates\landing.html:3445
+msgid "Resources"
 msgstr ""
 
 #: .\templates\user_guide.html:840
 msgid "Review Report"
 msgstr ""
 
-#: .\templates\user_guide.html:841
-msgid "Check the automatically generated report for completeness and accuracy"
-msgstr ""
-
-#: .\templates\user_guide.html:846
-msgid "Enhance Accuracy"
-msgstr ""
-
-#: .\templates\user_guide.html:847
-msgid "Use the \\"
-msgstr ""
-
-#: .\templates\user_guide.html:852
-msgid "Download PDF"
-msgstr ""
-
-#: .\templates\user_guide.html:853
-msgid "Generate and download your professional ISO 14064-1 compliant report"
-msgstr ""
-
-#: .\templates\user_guide.html:858
-msgid "Share & Submit"
-msgstr ""
-
-#: .\templates\user_guide.html:859
-#: .\templates\user_guide.html:866
-msgid "Report Quality Checklist"
-msgstr ""
-
-#: .\templates\user_guide.html:867
-#: .\templates\user_guide.html:881
-msgid "DO"
-msgstr ""
-
-#: .\templates\user_guide.html:883
-msgid "Select correct country before calculating"
-msgstr ""
-
-#: .\templates\user_guide.html:884
-msgid "Use actual bills and invoices when available"
-msgstr ""
-
-#: .\templates\user_guide.html:885
-msgid "Enter data monthly for better tracking"
-msgstr ""
-
-#: .\templates\user_guide.html:886
-msgid "Add descriptions and supplier information"
-msgstr ""
-
 #: .\templates\user_guide.html:887
 msgid "Review and validate all entries"
 msgstr ""
 
-#: .\templates\user_guide.html:888
-msgid "Keep supporting documentation"
+#: .\templates\landing.html:2882
+msgid "SDKs for Python, JavaScript, PHP"
 msgstr ""
 
-#: .\templates\user_guide.html:889
-msgid "Include all material emission sources"
+#: .\templates\landing.html:3419
+msgid "San Francisco, CA, USA"
 msgstr ""
 
-#: .\templates\user_guide.html:894
-msgid "DON'T"
+#: .\templates\landing.html:2900
+msgid "Sandbox environment for testing"
 msgstr ""
 
-#: .\templates\user_guide.html:896
-msgid "Use estimates when actual data is available"
+#: .\templates\landing.html:2748
+msgid "Sarah Mitchell"
 msgstr ""
 
-#: .\templates\user_guide.html:897
-msgid "Mix different time periods in one calculation"
+#: .\templates\data_entry.html:1539 .\templates\partials\translations.html:7
+msgid "Save"
+msgstr "Kaydet"
+
+#: .\templates\data_entry.html:1346
+msgid "Save Custom Factor"
 msgstr ""
 
-#: .\templates\user_guide.html:898
-msgid "Forget to check units (kWh vs MWh)"
+#: .\templates\analysis\emissions.html:119
+#: .\templates\emission_history.html:657 .\templates\emissions.html:901
+#: .\templates\reporting\inventory.html:82
+#: .\templates\reporting\inventory.html:118
+#: .\templates\reporting\inventory_pdf.html:255
+#: .\templates\reporting\inventory_pdf.html:280
+#: .\templates\reporting\inventory_pdf.html:307
+#: .\templates\reporting\inventory_pdf.html:337
+msgid "Scope"
 msgstr ""
 
-#: .\templates\user_guide.html:899
-msgid "Skip Scope 3 emissions entirely"
+#: .\templates\data_entry.html:190 .\templates\data_entry_new.html:32
+#: .\templates\data_entry_new.html:42 .\templates\emissions.html:650
+#: .\templates\partials\translations.html:42
+#: .\templates\reporting\inventory.html:18 .\templates\user_guide.html:720
+msgid "Scope 1"
+msgstr "Kapsam 1"
+
+#: .\templates\data_entry.html:198 .\templates\user_guide.html:679
+msgid "Scope 1 - Direct Emissions"
 msgstr ""
 
-#: .\templates\user_guide.html:900
-msgid "Ignore data quality issues"
+#: .\templates\landing.html:2659
+msgid "Scope 1 Emissions"
 msgstr ""
 
-#: .\templates\user_guide.html:901
-msgid "Change methodology mid-year"
+#: .\templates\data_entry.html:191 .\templates\data_entry_new.html:33
+#: .\templates\data_entry_new.html:163 .\templates\emissions.html:764
+#: .\templates\partials\translations.html:43
+#: .\templates\reporting\inventory.html:19 .\templates\user_guide.html:726
+msgid "Scope 2"
+msgstr "Kapsam 2"
+
+#: .\templates\user_guide.html:689
+msgid "Scope 2 - Energy Indirect"
 msgstr ""
 
-#: .\templates\user_guide.html:902
-msgid "Forget to document assumptions"
+#: .\templates\data_entry_new.html:167
+msgid "Scope 2 content will be implemented here"
 msgstr ""
 
-#: .\templates\user_guide.html:910
-msgid "Monthly Data Collection Checklist"
+#: .\templates\data_entry.html:192 .\templates\data_entry_new.html:34
+#: .\templates\data_entry_new.html:176 .\templates\emissions.html:794
+#: .\templates\partials\translations.html:44
+#: .\templates\reporting\inventory.html:20 .\templates\user_guide.html:732
+msgid "Scope 3"
+msgstr "Kapsam 3"
+
+#: .\templates\user_guide.html:699
+msgid "Scope 3 - Other Indirect"
 msgstr ""
 
-#: .\templates\user_guide.html:911
-#: .\templates\user_guide.html:926
-msgid "How accurate are the emission factors?"
+#: .\templates\data_entry_new.html:190
+msgid "Scope 3 content will be implemented here"
 msgstr ""
 
-#: .\templates\user_guide.html:930
-#: .\templates\user_guide.html:936
-msgid "Can I change the country after calculating?"
+msgid "Scope Summary"
+msgstr "Kapsam Özeti"
+
+#: .\templates\analysis.html:278
+msgid "Scope-wise emission breakdown"
 msgstr ""
 
-#: .\templates\user_guide.html:940
-#: .\templates\user_guide.html:946
-msgid "What if my industry or material isn't listed?"
+#: .\templates\partials\translations.html:22
+msgid "Search"
+msgstr "Ara"
+
+#: .\templates\data_entry.html:238
+msgid "Search industries..."
 msgstr ""
 
-#: .\templates\user_guide.html:950
-#: .\templates\user_guide.html:956
-msgid "How often should I track emissions?"
+#: .\templates\analysis\emissions.html:50
+msgid "Search sources..."
 msgstr ""
 
-#: .\templates\user_guide.html:960
-#: .\templates\user_guide.html:966
-msgid "Is my data secure and private?"
+#: .\templates\partials\translations.html:122
+#, fuzzy
+#| msgid "Search"
+msgid "Search..."
+msgstr "Ara"
+
+#: .\templates\landing.html:3475
+msgid "Security"
 msgstr ""
 
-#: .\templates\user_guide.html:970
-#: .\templates\user_guide.html:976
-msgid "Can I use custom emission factors?"
+#: .\templates\landing.html:2454
+msgid "Security & Privacy"
 msgstr ""
 
-#: .\templates\user_guide.html:980
-#: .\templates\user_guide.html:995
-msgid "Common Issues"
+#: .\templates\landing.html:2471
+msgid "See Academia Carbon in Action"
 msgstr ""
 
-#: .\templates\user_guide.html:997
-msgid "Calculation not working:"
+#: .\templates\landing.html:2306
+msgid "See Live Demo"
 msgstr ""
 
-#: .\templates\user_guide.html:997
-msgid "Check all required fields are filled"
-msgstr ""
-
-#: .\templates\user_guide.html:998
-msgid "Wrong units:"
-msgstr ""
-
-#: .\templates\user_guide.html:998
-msgid "Verify unit selection matches your data"
-msgstr ""
-
-#: .\templates\user_guide.html:999
-msgid "Missing data:"
-msgstr ""
-
-#: .\templates\user_guide.html:999
-msgid "Ensure activity data is greater than 0"
-msgstr ""
-
-#: .\templates\user_guide.html:1000
-msgid "Country issues:"
-msgstr ""
-
-#: .\templates\user_guide.html:1000
-msgid "Select country before entering data"
-msgstr ""
-
-#: .\templates\user_guide.html:1005
-msgid "Quick Fixes"
-msgstr ""
-
-#: .\templates\user_guide.html:1007
-msgid "Refresh page:"
-msgstr ""
-
-#: .\templates\user_guide.html:1007
-msgid "Reload if forms aren't responding"
-msgstr ""
-
-#: .\templates\user_guide.html:1008
-msgid "Clear browser cache:"
-msgstr ""
-
-#: .\templates\user_guide.html:1008
-msgid "For persistent issues"
-msgstr ""
-
-#: .\templates\user_guide.html:1009
-msgid "Check internet:"
-msgstr ""
-
-#: .\templates\user_guide.html:1009
-msgid "Ensure stable connection"
-msgstr ""
-
-#: .\templates\user_guide.html:1010
-msgid "Try different browser:"
-msgstr ""
-
-#: .\templates\user_guide.html:1010
-msgid "Chrome, Firefox, or Edge"
-msgstr ""
-
-#: .\templates\user_guide.html:1018
-msgid "Need More Help?"
-msgstr ""
-
-#: .\templates\user_guide.html:1019
-msgid "If you can't find the answer here, visit our"
-msgstr ""
-
-#: .\templates\user_guide.html:1019
-msgid "Support Center"
-msgstr ""
-
-#: .\templates\user_guide.html:1019
-msgid "for additional resources, contact forms, and direct assistance."
-msgstr ""
-
-#: .\templates\user_guide.html:1028
-msgid "Ready to Start?"
-msgstr ""
-
-#: .\templates\user_guide.html:1031
-msgid "Choose an action below to begin your emission tracking journey"
-msgstr ""
-
-#: .\templates\user_guide.html:1037
-msgid "Start Data Entry"
-msgstr ""
-
-#: .\templates\user_guide.html:1038
-msgid "Begin calculating emissions"
+#: .\templates\landing.html:2360
+msgid "See how Fortune 500 companies track their carbon footprint"
 msgstr ""
 
 #: .\templates\user_guide.html:1044
 msgid "See your emission records"
 msgstr ""
 
-#: .\templates\user_guide.html:1050
-msgid "Create ISO 14064-1 report"
+#: .\templates\emissions.html:639 .\templates\emissions.html:767
+#: .\templates\emissions.html:773 .\templates\emissions.html:797
+#: .\templates\emissions.html:803
+msgid "Select All"
 msgstr ""
 
-#: .\templates\user_guide.html:1056
-msgid "Contact our team"
+#: .\templates\data_entry.html:1284 .\templates\data_entry.html:1374
+msgid "Select Category"
 msgstr ""
 
-msgid "Edit"
-msgstr "Düzenle"
+#: .\templates\settings.html:339
+msgid "Select Industry"
+msgstr ""
 
-msgid "Delete"
-msgstr "Sil"
+#: .\templates\data_entry.html:2777 .\templates\data_entry.html:2835
+msgid "Select Industry Type"
+msgstr ""
 
+#: .\templates\data_entry.html:273 .\templates\data_entry.html:350
+#: .\templates\data_entry.html:409 .\templates\data_entry.html:480
+#: .\templates\data_entry.html:543 .\templates\data_entry.html:650
+#: .\templates\data_entry.html:834 .\templates\data_entry.html:1324
+#: .\templates\data_entry_new.html:99
+#, fuzzy
+#| msgid "Suppliers"
+msgid "Select Supplier"
+msgstr "Tedarikçiler"
+
+#: .\templates\user_guide.html:570
+msgid "Select Your Country"
+msgstr ""
+
+#: .\templates\support.html:357
+msgid "Select a topic"
+msgstr ""
+
+#: .\templates\data_entry.html:1484
+msgid "Select activity"
+msgstr ""
+
+#: .\templates\partials\translations.html:116
+msgid "Select an option"
+msgstr "Bir seçenek seçin"
+
+#: .\templates\data_entry.html:1511
+msgid "Select city"
+msgstr ""
+
+#: .\templates\user_guide.html:883
+msgid "Select correct country before calculating"
+msgstr ""
+
+#: .\templates\data_entry.html:1500
+msgid "Select country"
+msgstr ""
+
+#: .\templates\user_guide.html:1000
+msgid "Select country before entering data"
+msgstr ""
+
+#: .\templates\user_guide.html:632
+msgid "Select your industry for better categorization:"
+msgstr ""
+
+#: .\templates\landing.html:2705
+msgid "Sep"
+msgstr ""
+
+#: .\templates\partials\translations.html:143
+msgid "September"
+msgstr ""
+
+#: .\templates\action_planning.html:180
+msgid "Set Reduction Targets"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:81
+#: .\templates\partials\translations.html:35
+msgid "Settings"
+msgstr "Ayarlar"
+
+#: .\templates\user_guide.html:858
+msgid "Share & Submit"
+msgstr ""
+
+#: .\templates\partials\translations.html:102
+msgid "Show Less"
+msgstr ""
+
+#: .\templates\partials\translations.html:101
+msgid "Show More"
+msgstr ""
+
+#: .\templates\auth\login.html:535 .\templates\auth\signup.html:459
+#: .\templates\landing.html:3386
+msgid "Sign In"
+msgstr ""
+
+#: .\templates\auth\login.html:551 .\templates\auth\signup.html:8
+msgid "Sign Up"
+msgstr ""
+
+#: .\templates\auth\login.html:488
+msgid "Sign in to continue tracking your carbon footprint"
+msgstr ""
+
+#: .\templates\user_guide.html:899
+msgid "Skip Scope 3 emissions entirely"
+msgstr ""
+
+#: .\templates\action_planning.html:210
+msgid "Smart Recommendations"
+msgstr ""
+
+#: .\templates\landing.html:3303
+msgid "Sofia Patel"
+msgstr ""
+
+#: .\templates\analysis.html:540 .\templates\analysis\emissions.html:118
+#: .\templates\emission_history.html:658 .\templates\emissions.html:869
+#: .\templates\emissions.html:900 .\templates\reporting\inventory.html:120
+#: .\templates\reporting\inventory_pdf.html:309
+#: .\templates\reporting\inventory_pdf.html:339
+msgid "Source"
+msgstr "Kaynak"
+
+#: .\templates\data_entry.html:1417
+msgid "Source (Optional)"
+msgstr ""
+
+#: .\templates\analysis.html:280
+msgid "Source contribution analysis"
+msgstr ""
+
+#: .\templates\data_entry.html:1330
+msgid "Source/Reference"
+msgstr ""
+
+#: .\templates\data_entry.html:1310 .\templates\data_entry.html:1407
+msgid "Square Meters (m²)"
+msgstr ""
+
+#: .\templates\data_entry.html:168
+msgid "Standard"
+msgstr ""
+
+#: .\templates\landing.html:3028
+msgid "Standard reporting templates"
+msgstr ""
+
+#: .\templates\user_guide.html:482
+msgid "Standard:"
+msgstr ""
+
+#: .\templates\landing.html:3114
+msgid "Start 14-Day Trial"
+msgstr ""
+
+#: .\templates\user_guide.html:1037
+msgid "Start Data Entry"
+msgstr ""
+
+#: .\templates\landing.html:3046
+msgid "Start Free"
+msgstr ""
+
+#: .\templates\landing.html:2628
+msgid "Start Tracking"
+msgstr ""
+
+#: .\templates\landing.html:3374
+msgid "Start Your Carbon Journey Today"
+msgstr ""
+
+#: .\templates\action_planning.html:164
+msgid "Start with Data Collection"
+msgstr ""
+
+#: .\templates\landing.html:3000
+msgid "Starter"
+msgstr ""
+
+msgid "Stationary Combustion"
+msgstr "Sabit Yanma"
+
+#: .\templates\user_guide.html:682
+msgid "Stationary Combustion:"
+msgstr ""
+
+#: .\templates\data_entry.html:202 .\templates\data_entry_new.html:51
+msgid "Stationary combustion"
+msgstr ""
+
+#: .\templates\partials\translations.html:93
+msgid "Statistics"
+msgstr "İstatistikler"
+
+#: .\templates\support.html:207
+msgid "Status"
+msgstr ""
+
+#: .\templates\data_entry.html:515
+msgid "Steam"
+msgstr "Buhar"
+
+#: .\templates\user_guide.html:693
+msgid "Steam, Heat & Cooling:"
+msgstr ""
+
+#: .\templates\support.html:355
+msgid "Subject"
+msgstr ""
+
+#: .\templates\partials\translations.html:18
+msgid "Submit"
+msgstr "Gönder"
+
+#: .\templates\data_entry.html:1428
+msgid "Submit Request"
+msgstr ""
+
+#: .\templates\partials\translations.html:59
 msgid "Success"
 msgstr "Başarılı"
 
-msgid "Error"
-msgstr "Hata"
+#: .\templates\data_entry.html:1397
+msgid "Suggested Factor (Optional)"
+msgstr ""
 
+#: .\templates\partials\translations.html:91
+msgid "Summary"
+msgstr "Özet"
+
+#: .\templates\data_entry.html:270 .\templates\data_entry.html:347
+#: .\templates\data_entry.html:406 .\templates\data_entry.html:478
+#: .\templates\data_entry.html:541 .\templates\data_entry.html:648
+#: .\templates\data_entry.html:831 .\templates\data_entry.html:1322
+#: .\templates\data_entry_new.html:96
+msgid "Supplier (Optional)"
+msgstr ""
+
+#: .\templates\analysis.html:352
+msgid "Supplier Analysis"
+msgstr ""
+
+#: .\templates\suppliers.html:204
+msgid "Supplier Carbon Management"
+msgstr ""
+
+#: .\templates\landing.html:2434 .\templates\suppliers.html:5
+#: .\templates\user_guide.html:641
+msgid "Supplier Management"
+msgstr ""
+
+#: .\templates\analysis.html:362
+msgid "Supplier carbon footprint"
+msgstr ""
+
+#: .\templates\landing.html:2609
+msgid "Supplier carbon footprint integration"
+msgstr ""
+
+#: .\templates\landing.html:3096
+msgid "Supplier management tools"
+msgstr ""
+
+#: .\templates\data_entry.html:1448
+msgid "Supplier name"
+msgstr ""
+
+#: .\templates\index.html:90 .\templates\partials\sidebar.html:68
+msgid "Suppliers"
+msgstr "Tedarikçiler"
+
+#: .\templates\analysis.html:363
+msgid "Supply chain emissions"
+msgstr ""
+
+#: .\templates\landing.html:2945
+msgid "Supply chain platforms"
+msgstr ""
+
+#: .\templates\auth\login.html:479 .\templates\landing.html:2325
+#: .\templates\landing.html:3469 .\templates\partials\sidebar.html:93
+#: .\templates\partials\translations.html:37
+msgid "Support"
+msgstr "Destek"
+
+#: .\templates\user_guide.html:1019
+msgid "Support Center"
+msgstr ""
+
+#: .\templates\landing.html:2749
+msgid "Sustainability Director, TechCorp"
+msgstr ""
+
+#: .\templates\user_guide.html:812
+msgid "Sustainable Transport in Turkey"
+msgstr ""
+
+#: .\templates\landing.html:3464
+msgid "System Status"
+msgstr ""
+
+#: .\templates\analysis\emissions.html:76
+msgid "TOTAL"
+msgstr ""
+
+#: .\templates\partials\translations.html:90
+msgid "Table"
+msgstr "Tablo"
+
+#: .\templates\action_planning.html:132
+msgid "Target Year"
+msgstr ""
+
+#: .\templates\data_entry.html:1517
+msgid "Tax number"
+msgstr ""
+
+#: .\templates\partials\translations.html:82
+msgid "Team"
+msgstr "Takım"
+
+#: .\templates\action_planning.html:220
+msgid "Team Collaboration"
+msgstr ""
+
+#: .\templates\landing.html:3351
+msgid "Team Members"
+msgstr ""
+
+#: .\templates\support.html:360
+msgid "Technical Problems"
+msgstr ""
+
+#: .\templates\landing.html:3485
+msgid "Terms of Service"
+msgstr ""
+
+#: .\templates\index.html:74 .\templates\partials\translations.html:53
+msgid "This Month"
+msgstr "Bu Ay"
+
+#: .\templates\partials\translations.html:52
+msgid "This Week"
+msgstr "Bu Hafta"
+
+#: .\templates\partials\translations.html:54
+msgid "This Year"
+msgstr "Bu Yıl"
+
+#: .\templates\partials\translations.html:105
+msgid "This field is required"
+msgstr ""
+
+#: .\templates\test_language.html:14
+msgid "This is a test page"
+msgstr ""
+
+#: .\templates\index.html:196
+msgid "Tips & Insights"
+msgstr ""
+
+#: .\templates\user_guide.html:534
+msgid "Tips for accurate and efficient emission tracking"
+msgstr ""
+
+#: .\templates\partials\translations.html:50
+msgid "Today"
+msgstr "Bugün"
+
+#: .\templates\data_entry.html:1314 .\templates\data_entry.html:1411
+msgid "Tonne-kilometers (tonne-km)"
+msgstr ""
+
+#: .\templates\data_entry.html:527
+msgid "Tons"
+msgstr "Ton"
+
+#: .\templates\landing.html:2368
+msgid "Tons CO2 Tracked"
+msgstr ""
+
+#: .\templates\index.html:42 .\templates\landing.html:2651
+msgid "Total Emissions"
+msgstr "Toplam Emisyonlar"
+
+#: .\templates\suppliers.html:184
+msgid "Total Suppliers"
+msgstr ""
+
+#: .\templates\action_planning.html:200 .\templates\index.html:213
+msgid "Track Progress"
+msgstr ""
+
+#: .\templates\auth\login.html:457
+msgid "Track Your"
+msgstr ""
+
+#: .\templates\user_guide.html:642
+msgid "Track emissions by supplier:"
+msgstr ""
+
+#: .\templates\analysis.html:331
+msgid "Track your carbon reduction performance and goal achievement over time."
+msgstr ""
+
+#: .\templates\landing.html:3473
+msgid "Training"
+msgstr ""
+
+#: .\templates\user_guide.html:780
+msgid "Transport Mode"
+msgstr ""
+
+#: .\templates\data_entry.html:1487 .\templates\suppliers.html:165
+msgid "Transportation"
+msgstr ""
+
+#: .\templates\partials\translations.html:94
+msgid "Trends"
+msgstr "Trendler"
+
+#: .\templates\user_guide.html:541
+msgid "Troubleshooting"
+msgstr ""
+
+#: .\templates\landing.html:2839
+msgid "Troubleshooting and FAQ"
+msgstr ""
+
+#: .\templates\landing.html:2720
+msgid "Trusted by Leading Organizations Worldwide"
+msgstr ""
+
+#: .\templates\landing.html:2968
+msgid "Try Interactive Demo"
+msgstr ""
+
+#: .\templates\landing.html:2532
+msgid "Try Live Demo"
+msgstr ""
+
+#: .\templates\user_guide.html:1010
+msgid "Try different browser:"
+msgstr ""
+
+#: .\templates\data_entry.html:179 .\templates\data_entry.html:1501
+msgid "Turkey"
+msgstr ""
+
+#: .\templates\data_entry_new.html:21
+msgid "Turkey (Türkiye)"
+msgstr ""
+
+#: .\templates\user_guide.html:756
+msgid "Turkey's Energy Mix (2023)"
+msgstr ""
+
+#: .\templates\user_guide.html:624
+msgid "Turkey:"
+msgstr ""
+
+#: .\templates\user_guide.html:713
+#, python-format
+msgid "Typical %%"
+msgstr ""
+
+#: .\templates\user_guide.html:674
+msgid "Understanding Emission Scopes"
+msgstr ""
+
+#: .\templates\user_guide.html:517
+msgid "Understanding Scopes"
+msgstr ""
+
+#: .\templates\user_guide.html:776
+msgid "Unique Transportation Options"
+msgstr ""
+
+#: .\templates\data_entry.html:250 .\templates\data_entry.html:327
+#: .\templates\data_entry.html:390 .\templates\data_entry.html:462
+#: .\templates\data_entry.html:521 .\templates\data_entry.html:630
+#: .\templates\data_entry.html:691 .\templates\data_entry.html:733
+#: .\templates\data_entry.html:776 .\templates\data_entry.html:815
+#: .\templates\data_entry.html:883 .\templates\data_entry.html:941
+#: .\templates\data_entry.html:996 .\templates\data_entry.html:1036
+#: .\templates\data_entry.html:1078 .\templates\data_entry.html:1120
+#: .\templates\data_entry.html:1157 .\templates\data_entry.html:1196
+#: .\templates\data_entry.html:1304 .\templates\emission_history.html:739
+#: .\templates\reporting\inventory_pdf.html:342
+msgid "Unit"
+msgstr "Birim"
+
+#: .\templates\data_entry.html:1401
+msgid "Unit (Optional)"
+msgstr ""
+
+#: .\templates\data_entry.html:1503
+msgid "United Kingdom"
+msgstr ""
+
+#: .\templates\data_entry.html:1502
+msgid "United States"
+msgstr ""
+
+#: .\templates\data_entry.html:1315 .\templates\data_entry.html:1412
+msgid "Units (for equipment/machinery)"
+msgstr ""
+
+#: .\templates\landing.html:3072
+msgid "Unlimited data entries"
+msgstr ""
+
+#: .\templates\landing.html:3164
+msgid "Unlimited users"
+msgstr ""
+
+#: .\templates\landing.html:3108
+msgid "Up to 10 user accounts"
+msgstr ""
+
+#: .\templates\landing.html:3016
+msgid "Up to 100 data entries per month"
+msgstr ""
+
+#: .\templates\partials\translations.html:27
+msgid "Upload"
+msgstr "Yükle"
+
+#: .\templates\data_entry.html:1289 .\templates\data_entry.html:1379
+msgid "Upstream Transportation"
+msgstr ""
+
+#: .\templates\user_guide.html:702
+msgid "Upstream:"
+msgstr ""
+
+#: .\templates\landing.html:2376
+msgid "Uptime"
+msgstr ""
+
+#: .\templates\data_entry_new.html:183
+msgid "Use Custom Factor"
+msgstr ""
+
+#: .\templates\user_guide.html:655
+msgid "Use LCA study results"
+msgstr ""
+
+#: .\templates\user_guide.html:884
+msgid "Use actual bills and invoices when available"
+msgstr ""
+
+#: .\templates\user_guide.html:896
+msgid "Use estimates when actual data is available"
+msgstr ""
+
+#: .\templates\user_guide.html:624
+msgid "Use for Turkish organizations (recommended)"
+msgstr ""
+
+#: .\templates\user_guide.html:847
+msgid "Use the \\"
+msgstr ""
+
+#: .\templates\user_guide.html:652
+msgid "Use your own emission factors:"
+msgstr ""
+
+#: .\templates\partials\translations.html:71
+msgid "User"
+msgstr "Kullanıcı"
+
+#: .\templates\landing.html:2805
+msgid "User Documentation"
+msgstr ""
+
+#: .\templates\landing.html:3448
+msgid "User Guides"
+msgstr ""
+
+#: .\templates\partials\translations.html:76
+msgid "Username"
+msgstr "Kullanıcı Adı"
+
+#: .\templates\data_entry_new.html:24
+msgid "Using Turkey-specific emission factors"
+msgstr ""
+
+#: .\templates\emissions.html:871
+msgid "Value"
+msgstr "Değer"
+
+#: .\templates\analysis.html:364
+msgid "Vendor sustainability scoring"
+msgstr ""
+
+#: .\templates\user_guide.html:998
+msgid "Verify unit selection matches your data"
+msgstr ""
+
+#: .\templates\user_guide.html:603
+msgid "Video Tutorial"
+msgstr ""
+
+#: .\templates\landing.html:2833
+msgid "Video tutorials and webinars"
+msgstr ""
+
+#: .\templates\partials\translations.html:11
+msgid "View"
+msgstr "Görüntüle"
+
+#: .\templates\index.html:145
+msgid "View Analysis"
+msgstr ""
+
+#: .\templates\action_planning.html:168
+msgid "View Current Emissions"
+msgstr ""
+
+#: .\templates\landing.html:2536 .\templates\landing.html:2845
+msgid "View Documentation"
+msgstr ""
+
+#: .\templates\index.html:149 .\templates\user_guide.html:1043
+msgid "View History"
+msgstr ""
+
+#: .\templates\landing.html:2632 .\templates\landing.html:2957
+msgid "View Integrations"
+msgstr ""
+
+#: .\templates\user_guide.html:594
+msgid "View Reports"
+msgstr ""
+
+#: .\templates\suppliers.html:217
+msgid "View Supplier Emissions"
+msgstr ""
+
+#: .\templates\partials\translations.html:61
 msgid "Warning"
 msgstr "Uyarı"
+
+#: .\templates\data_entry.html:1290 .\templates\data_entry.html:1380
+msgid "Waste"
+msgstr ""
+
+#: .\templates\data_entry.html:1488
+msgid "Waste Management"
+msgstr ""
+
+#: .\templates\landing.html:2310
+msgid "Watch Demo Video"
+msgstr ""
+
+#: .\templates\landing.html:2344
+msgid "Watch Live Demo Video"
+msgstr ""
+
+#: .\templates\user_guide.html:604
+msgid "Watch our 3-minute getting started video"
+msgstr ""
+
+#: .\templates\landing.html:2888
+msgid "Webhook support for real-time updates"
+msgstr ""
+
+#: .\templates\landing.html:3449
+msgid "Webinars"
+msgstr ""
+
+#: .\templates\test_language.html:13
+msgid "Welcome"
+msgstr ""
+
+#: .\templates\auth\login.html:487
+msgid "Welcome Back"
+msgstr ""
+
+#: .\templates\index.html:33 .\templates\partials\translations.html:97
+msgid "Welcome back!"
+msgstr "Tekrar hoş geldiniz!"
+
+#: .\templates\user_guide.html:946
+msgid "What if my industry or material isn't listed?"
+msgstr ""
+
+#: .\templates\data_entry.html:1226
+msgid "What would you like to do?"
+msgstr ""
+
+#: .\templates\data_entry.html:1418
+msgid "Where did you get this factor?"
+msgstr ""
+
+#: .\templates\landing.html:3146
+msgid "White-label solutions"
+msgstr ""
+
+#: .\templates\user_guide.html:751
+msgid "Why Turkey-Specific Factors Matter"
+msgstr ""
+
+#: .\templates\data_entry.html:600
+msgid "Wood"
+msgstr "Ahşap"
+
+#: .\templates\user_guide.html:998
+msgid "Wrong units:"
+msgstr ""
+
+#: .\templates\partials\translations.html:51
+msgid "Yesterday"
+msgstr "Dün"
+
+#: .\templates\partials\translations.html:113
+msgid "You have unsaved changes. Are you sure you want to leave?"
+msgstr ""
+
+#: .\templates\support.html:345
+msgid "Your Name"
+msgstr ""
+
+#: .\templates\data_entry.html:287 .\templates\data_entry.html:425
+#: .\templates\data_entry.html:493 .\templates\data_entry.html:555
+#: .\templates\data_entry.html:662
+msgid "add your proof document"
+msgstr ""
+
+#: .\templates\data_entry.html:1561
+msgid "characters"
+msgstr ""
+
+#: .\templates\data_entry.html:1398
+msgid "e.g., 1.5"
+msgstr ""
+
+#: .\templates\data_entry.html:1298
+msgid "e.g., 2.5"
+msgstr ""
+
+#: .\templates\data_entry.html:1367
+msgid "e.g., Bamboo Fiber, Bioplastic PLA"
+msgstr ""
+
+#: .\templates\data_entry.html:1569
+msgid "e.g., NAICS 313, SIC 22"
+msgstr ""
+
+#: .\templates\data_entry.html:1277
+msgid "e.g., Recycled Paper, Custom Steel"
+msgstr ""
+
+#: .\templates\data_entry.html:1331
+msgid "e.g., Supplier certificate, LCA study, ISO 14064-1 report"
+msgstr ""
+
+#: .\templates\data_entry.html:1559
+msgid "e.g., Textile Manufacturing, Food Processing"
+msgstr ""
+
+#: .\templates\user_guide.html:1019
+msgid "for additional resources, contact forms, and direct assistance."
+msgstr ""
+
+#: .\templates\data_entry.html:287
+msgid "here (i.e. gas bills)."
+msgstr ""
+
+#: .\templates\data_entry_new.html:115
+msgid "i.e. gas bills"
+msgstr ""
+
+#: .\templates\data_entry.html:256 .\templates\partials\translations.html:130
+msgid "kWh"
+msgstr ""
+
+#: .\templates\partials\translations.html:128
+msgid "kg"
+msgstr ""
+
+#: .\templates\data_entry.html:1299
+msgid "kg CO2e per unit"
+msgstr ""
+
+#: .\templates\partials\translations.html:131
+#, fuzzy
+#| msgid "Kilometers"
+msgid "liters"
+msgstr "Kilometre"
+
+#: .\templates\partials\translations.html:132
+#, fuzzy
+#| msgid "Kilometers"
+msgid "meters"
+msgstr "Kilometre"
+
+#: .\templates\auth\signup.html:448
+msgid "or"
+msgstr ""
+
+#: .\templates\auth\login.html:540
+msgid "or continue with"
+msgstr ""
+
+#: .\templates\partials\translations.html:129
+msgid "tons"
+msgstr ""
+
+#: .\templates\data_entry.html:2807
+msgid "❌ Failed to load industries"
+msgstr ""
+
+#: .\templates\data_entry.html:2761
+msgid "🔄 Loading industries..."
+msgstr ""
 
