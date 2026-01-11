@@ -76,7 +76,4 @@ urlpatterns = [
     
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),
-    
-    # Temporary fix endpoint (remove after use)
-    path('fix-users-temp/', views.fix_users_temp, name='fix_users_temp'),
 ]
