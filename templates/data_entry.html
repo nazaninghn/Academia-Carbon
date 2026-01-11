@@ -209,7 +209,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="stationary-source" onchange="updateStationaryFields(); handleOtherSelection(this, 'stationary')">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="coal-industrial">{% trans "Coal (industrial) - Defra 2024" %}</option>
                             <option value="coal">{% trans "Coal (generic) - IPCC 2006" %}</option>
                             <option value="gas-diesel-oil-energy">{% trans "Gas/Diesel Oil (energy basis) - IPCC 2019" %}</option>
@@ -233,9 +233,9 @@
                         <div style="display: flex; gap: 10px;">
                             <div style="flex: 1; position: relative;">
                                 <select class="form-control" id="stationary-industry-type" style="flex: 1;">
-                                    <option value="">{% trans "{% trans "Loading industry types..." %}" %}</option>
+                                    <option value="">{% trans "Loading industry types..." %}</option>
                                 </select>
-                                <input type="text" id="industry-search" class="form-control" placeholder="{% trans \'🔍 {% trans 'Search industries...' %}\' %}" style="display: none; margin-top: 5px; font-size: 13px;">
+                                <input type="text" id="industry-search" class="form-control" placeholder="{% trans 'Search industries...' %}" style="display: none; margin-top: 5px; font-size: 13px;">
                             </div>
                             <button type="button" class="btn-add-industry" onclick="showAddIndustryModal()" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
                                 <i class="fas fa-plus"></i> {% trans "Add Industry" %}
@@ -249,7 +249,7 @@
                     <div class="form-group">
                         <label>{% trans "Unit" %}</label>
                         <select class="form-control" id="stationary-unit">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="liters">{% trans "Liters" %}</option>
                             <option value="kg">{% trans "Kilograms" %}</option>
                             <option value="m3">{% trans "Cubic Meters (m³)" %}</option>
@@ -261,7 +261,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" id="stationary-activity" placeholder="{% trans \'{% trans 'Enter activity data' %}\' %}" value="0">
+                            <input type="number" class="form-control" id="stationary-activity" placeholder="{% trans 'Enter activity data' %}" value="0">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <div style="display: flex; gap: 10px;">
                             <select class="form-control supplier-select" id="stationary-supplier" style="flex: 1;">
-                                <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                                <option value="">{% trans "Select Supplier" %}</option>
                             </select>
                             <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
                                 <i class="fas fa-plus"></i> {% trans "Add" %}
@@ -280,7 +280,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %} <span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="{% trans \'{% trans 'Add description' %}\' %}"></textarea>
+                        <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
@@ -303,7 +303,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="mobile-source" onchange="updateMobileFields(); handleOtherSelection(this, 'mobile')">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="off-road-ipcc">Off-Road Equipment - IPCC 2019</option>
                             <option value="off-road-diesel">Off-Road Diesel - DESNZ 2024</option>
                             <option value="off-road-gasoline">Off-Road Gasoline - DESNZ 2024</option>
@@ -326,7 +326,7 @@
                     <div class="form-group">
                         <label>{% trans "Unit" %}</label>
                         <select class="form-control" id="mobile-unit">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="liters">{% trans "Liters" %}</option>
                             <option value="kg">{% trans "Kilograms" %}</option>
                             <option value="gj">Gigajoules (GJ)</option>
@@ -338,7 +338,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" id="mobile-activity" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" id="mobile-activity" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -347,7 +347,7 @@
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <div style="display: flex; gap: 10px;">
                             <select class="form-control supplier-select" id="mobile-supplier" style="flex: 1;">
-                                <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                                <option value="">{% trans "Select Supplier" %}</option>
                             </select>
                             <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
                                 <i class="fas fa-plus"></i>{% trans "Add" %}</button>
@@ -356,7 +356,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %}<span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" id="mobile-description" rows="3" maxlength="100" placeholder="{% trans \'Add description\' %}"></textarea>
+                        <textarea class="form-control" id="mobile-description" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -375,7 +375,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="fugitive-source" onchange="handleOtherSelection(this, 'fugitive')">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="r410a">R-410A (Refrigerant) - Defra 2024</option>
                             <option value="r432a">R-432A (Refrigerant) - Defra 2024</option>
                             <option value="r22">R-22 (HCFC-22) - Defra 2024</option>
@@ -397,7 +397,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button" onclick="adjustValue(this, -1)">−</button>
-                            <input type="number" class="form-control" id="fugitive-activity" placeholder="{% trans \'Enter activity data\' %}" value="0" min="0" step="0.1">
+                            <input type="number" class="form-control" id="fugitive-activity" placeholder="{% trans 'Enter activity data' %}" value="0" min="0" step="0.1">
                             <button type="button" onclick="adjustValue(this, 1)">+</button>
                         </div>
                     </div>
@@ -406,7 +406,7 @@
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <div style="display: flex; gap: 10px;">
                             <select class="form-control supplier-select" id="fugitive-supplier" style="flex: 1;">
-                                <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                                <option value="">{% trans "Select Supplier" %}</option>
                             </select>
                             <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
                                 <i class="fas fa-plus"></i>{% trans "Add" %}</button>
@@ -415,7 +415,7 @@
 
                     <div class="form-group">
                         <label>Description <span style="color: #999; font-weight: normal;">(Optional)</span></label>
-                        <textarea class="form-control" id="fugitive-description" placeholder="{% trans \'Add description\' %}" rows="3" maxlength="500"></textarea>
+                        <textarea class="form-control" id="fugitive-description" placeholder="{% trans 'Add description' %}" rows="3" maxlength="500"></textarea>
                         <small class="form-text text-muted" style="text-align: right; display: block;">
                             <span id="fugitive-char-count">0</span>/500
                         </small>
@@ -448,7 +448,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="electricity-source">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="turkey-grid">🇹🇷 Turkey National Grid</option>
                             <option value="grid-average">🌍 Grid Average (Global)</option>
                             <option value="us-grid">🇺🇸 US Grid</option>
@@ -469,7 +469,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -477,7 +477,7 @@
                     <div class="form-group">
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                            <option value="">{% trans "Select Supplier" %}</option>
                             <option value="supplier1">Electric Company 1</option>
                             <option value="supplier2">Electric Company 2</option>
                             <option value="supplier3">Electric Company 3</option>
@@ -486,7 +486,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %}<span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans \'Add description\' %}"></textarea>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
@@ -509,7 +509,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="steam-heat-source">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="district-heating">District Heating</option>
                             <option value="district-cooling">District Cooling</option>
                             <option value="steam">Steam</option>
@@ -520,7 +520,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="kwh">kWh</option>
                             <option value="mj">MJ (Megajoules)</option>
                             <option value="mmbtu">MMBtu</option>
@@ -532,7 +532,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -540,7 +540,7 @@
                     <div class="form-group">
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                            <option value="">{% trans "Select Supplier" %}</option>
                             <option value="supplier1">Energy Provider 1</option>
                             <option value="supplier2">Energy Provider 2</option>
                         </select>
@@ -548,7 +548,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %}<span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans \'Add description\' %}"></textarea>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
@@ -589,7 +589,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="purchased-goods-source" onchange="handlePurchasedGoodsSourceChange(this)">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <optgroup label="Turkey-Specific (ATOM KABLO ISO 14064-1)">
                                 <option value="chemical">Chemical</option>
                                 <option value="chemical-oil">Chemical Oil</option>
@@ -629,7 +629,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="kg">Kilograms</option>
                             <option value="units">Units</option>
                         </select>
@@ -639,7 +639,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -647,7 +647,7 @@
                     <div class="form-group">
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                            <option value="">{% trans "Select Supplier" %}</option>
                             <option value="supplier1">Supplier 1</option>
                             <option value="supplier2">Supplier 2</option>
                         </select>
@@ -655,7 +655,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %}<span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans \'Add description\' %}"></textarea>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <p class="text-muted" style="font-size: 13px;">
@@ -679,7 +679,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="machinery">Machinery</option>
                             <option value="vehicles">Vehicles</option>
                             <option value="buildings">Buildings/Construction</option>
@@ -690,7 +690,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="units">Units</option>
                             <option value="m2">Square Meters (m²)</option>
                         </select>
@@ -700,7 +700,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -722,7 +722,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="upstream-electricity">Upstream Electricity</option>
                             <option value="transmission-losses">Transmission & Distribution Losses</option>
                             <option value="fuel-extraction">Fuel Extraction & Processing</option>
@@ -732,7 +732,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="kwh">kWh</option>
                             <option value="liters">Liters</option>
                         </select>
@@ -742,7 +742,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -764,7 +764,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="truck-freight">Truck Freight</option>
                             <option value="rail-freight">Rail Freight</option>
                             <option value="sea-freight">Sea Freight</option>
@@ -783,7 +783,7 @@
                         <label>Activity Data (tonne-km)</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -805,7 +805,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="water-source">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="supply">Water Supply - Defra 2024</option>
                             <option value="treatment">Wastewater Treatment - Defra 2024</option>
                         </select>
@@ -822,7 +822,7 @@
                         <label>Activity Data (m³)</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter volume\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter volume' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -831,7 +831,7 @@
                         <label>{% trans "Supplier (Optional)" %}</label>
                         <div style="display: flex; gap: 10px;">
                             <select class="form-control supplier-select" id="water-supplier" style="flex: 1;">
-                                <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                                <option value="">{% trans "Select Supplier" %}</option>
                             </select>
                             <button type="button" class="btn-add-supplier" onclick="showAddSupplierModal()" style="background: #0ea5e9; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">
                                 <i class="fas fa-plus"></i>{% trans "Add" %}</button>
@@ -840,7 +840,7 @@
 
                     <div class="form-group">
                         <label>{% trans "Description (Optional)" %}<span class="text-muted">0/100</span></label>
-                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans \'Add description\' %}"></textarea>
+                        <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
@@ -860,7 +860,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="waste-source" onchange="handleOtherSelection(this, 'waste')">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <optgroup label="Turkey">
                                 <option value="landfill">Landfill (Turkey)</option>
                                 <option value="recyclable">Recyclable (Turkey)</option>
@@ -890,7 +890,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter weight\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter weight' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -912,7 +912,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="business-travel-source">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <optgroup label="Turkey Transportation">
                                 <option value="flight-domestic">🇹🇷 Domestic Flight (Turkey)</option>
                                 <option value="flight-international">✈️ International Flight</option>
@@ -948,7 +948,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter distance\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter distance' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -970,7 +970,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control" id="commuting-source">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <optgroup label="Turkey">
                                 <option value="car-gasoline">🚗 Car - Gasoline (Turkey)</option>
                                 <option value="car-diesel">🚗 Car - Diesel (Turkey)</option>
@@ -1003,7 +1003,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter distance\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter distance' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1025,7 +1025,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="office-space">Leased Office Space</option>
                             <option value="warehouse">Leased Warehouse</option>
                             <option value="vehicles">Leased Vehicles</option>
@@ -1035,7 +1035,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="m2">Square Meters (m²)</option>
                             <option value="units">Units</option>
                         </select>
@@ -1045,7 +1045,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1067,7 +1067,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="truck-delivery">Truck Delivery</option>
                             <option value="courier">Courier Service</option>
                             <option value="postal">Postal Service</option>
@@ -1077,7 +1077,7 @@
                     <div class="form-group">
                         <label>Unit</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="tonne-km">Tonne-km</option>
                             <option value="packages">Packages</option>
                         </select>
@@ -1087,7 +1087,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter activity data\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter activity data' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1109,7 +1109,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="product-recycling">Product Recycling</option>
                             <option value="product-landfill">Product to Landfill</option>
                             <option value="product-incineration">Product Incineration</option>
@@ -1127,7 +1127,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter weight\' %}" value="0" step="0.01">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter weight' %}" value="0" step="0.01">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1164,7 +1164,7 @@
                         <label>{% trans "Activity Data" %}</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter number of franchises\' %}" value="0" step="1">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter number of franchises' %}" value="0" step="1">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1186,7 +1186,7 @@
                     <div class="form-group">
                         <label>{% trans "Emission Source" %}</label>
                         <select class="form-control">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="equity-investments">Equity Investments</option>
                             <option value="debt-investments">Debt Investments</option>
                         </select>
@@ -1203,7 +1203,7 @@
                         <label>Activity Data (USD)</label>
                         <div class="activity-input">
                             <button type="button">−</button>
-                            <input type="number" class="form-control" placeholder="{% trans \'Enter investment amount\' %}" value="0" step="100">
+                            <input type="number" class="form-control" placeholder="{% trans 'Enter investment amount' %}" value="0" step="100">
                             <button type="button">+</button>
                         </div>
                     </div>
@@ -1274,14 +1274,14 @@
         <!-- Material Name (Required) -->
         <div class="form-group">
             <label>{% trans "Material/Product Name" %} <span style="color: red;">*</span></label>
-            <input type="text" id="custom-material-name" class="form-control" placeholder="{% trans \'{% trans 'e.g., Recycled Paper, Custom Steel' %}\' %}" required>
+            <input type="text" id="custom-material-name" class="form-control" placeholder="{% trans 'e.g., Recycled Paper, Custom Steel' %}" required>
         </div>
         
         <!-- Category -->
         <div class="form-group">
             <label>{% trans "Category" %} <span style="color: red;">*</span></label>
             <select id="custom-category" class="form-control" required>
-                <option value="">{% trans "{% trans "Select Category" %}" %}</option>
+                <option value="">{% trans "Select Category" %}</option>
                 <option value="purchased-goods">{% trans "Purchased Goods & Services" %}</option>
                 <option value="stationary">{% trans "Stationary Combustion" %}</option>
                 <option value="mobile">{% trans "Mobile Combustion" %}</option>
@@ -1295,7 +1295,7 @@
         <!-- Emission Factor -->
         <div class="form-group">
             <label>{% trans "Emission Factor" %} <span style="color: red;">*</span></label>
-            <input type="number" id="custom-emission-factor" class="form-control" placeholder="{% trans \'e.g., 2.5\' %}" step="0.0001" required>
+            <input type="number" id="custom-emission-factor" class="form-control" placeholder="{% trans 'e.g., 2.5' %}" step="0.0001" required>
             <small style="color: #666; font-size: 12px;">{% trans "kg CO2e per unit" %}</small>
         </div>
         
@@ -1303,7 +1303,7 @@
         <div class="form-group">
             <label>{% trans "Unit" %} <span style="color: red;">*</span></label>
             <select id="custom-unit" class="form-control" required>
-                <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                <option value="">{% trans "Select Unit" %}</option>
                 <option value="kg">{% trans "Kilograms (kg)" %}</option>
                 <option value="liters">{% trans "Liters" %}</option>
                 <option value="m3">{% trans "Cubic Meters (m³)" %}</option>
@@ -1321,20 +1321,20 @@
         <div class="form-group">
             <label>{% trans "Supplier (Optional)" %}</label>
             <select id="custom-supplier" class="form-control supplier-select">
-                <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                <option value="">{% trans "Select Supplier" %}</option>
             </select>
         </div>
         
         <!-- Source/Reference -->
         <div class="form-group">
             <label>{% trans "Source/Reference" %}</label>
-            <textarea id="custom-source-reference" class="form-control" rows="2" placeholder="{% trans \'e.g., Supplier certificate, LCA study, ISO 14064-1 report\' %}"></textarea>
+            <textarea id="custom-source-reference" class="form-control" rows="2" placeholder="{% trans 'e.g., Supplier certificate, LCA study, ISO 14064-1 report' %}"></textarea>
         </div>
         
         <!-- Description -->
         <div class="form-group">
             <label>{% trans "Description" %}</label>
-            <textarea id="custom-description" class="form-control" rows="2" placeholder="{% trans \'Additional details about this material\' %}"></textarea>
+            <textarea id="custom-description" class="form-control" rows="2" placeholder="{% trans 'Additional details about this material' %}"></textarea>
         </div>
         
         <!-- Buttons -->
@@ -1364,14 +1364,14 @@
         <!-- Material Name (Required) -->
         <div class="form-group">
             <label>{% trans "Material/Product Name" %} <span style="color: red;">*</span></label>
-            <input type="text" id="request-material-name" class="form-control" placeholder="{% trans \'{% trans 'e.g., Bamboo Fiber, Bioplastic PLA' %}\' %}" required>
+            <input type="text" id="request-material-name" class="form-control" placeholder="{% trans 'e.g., Bamboo Fiber, Bioplastic PLA' %}" required>
         </div>
         
         <!-- Category -->
         <div class="form-group">
             <label>{% trans "Category" %} <span style="color: red;">*</span></label>
             <select id="request-category" class="form-control" required>
-                <option value="">{% trans "{% trans "Select Category" %}" %}</option>
+                <option value="">{% trans "Select Category" %}</option>
                 <option value="purchased-goods">{% trans "Purchased Goods & Services" %}</option>
                 <option value="stationary">{% trans "Stationary Combustion" %}</option>
                 <option value="mobile">{% trans "Mobile Combustion" %}</option>
@@ -1385,7 +1385,7 @@
         <!-- Description -->
         <div class="form-group">
             <label>{% trans "Description" %} <span style="color: red;">*</span></label>
-            <textarea id="request-description" class="form-control" rows="3" placeholder="{% trans \'{% trans 'Describe the material and why you need it' %}\' %}" required></textarea>
+            <textarea id="request-description" class="form-control" rows="3" placeholder="{% trans 'Describe the material and why you need it' %}" required></textarea>
         </div>
         
         <!-- Optional: Suggested Factor -->
@@ -1395,12 +1395,12 @@
             </p>
             <div class="form-group" style="margin-bottom: 10px;">
                 <label>{% trans "Suggested Factor (Optional)" %}</label>
-                <input type="number" id="request-suggested-factor" class="form-control" placeholder="{% trans \'{% trans 'e.g., 1.5' %}\' %}" step="0.0001">
+                <input type="number" id="request-suggested-factor" class="form-control" placeholder="{% trans 'e.g., 1.5' %}" step="0.0001">
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
                 <label>{% trans "Unit (Optional)" %}</label>
                 <select id="request-suggested-unit" class="form-control">
-                    <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                    <option value="">{% trans "Select Unit" %}</option>
                     <option value="kg">{% trans "Kilograms (kg)" %}</option>
                     <option value="liters">{% trans "Liters" %}</option>
                     <option value="m3">{% trans "Cubic Meters (m³)" %}</option>
@@ -1415,7 +1415,7 @@
             </div>
             <div class="form-group" style="margin-bottom: 0;">
                 <label>{% trans "Source (Optional)" %}</label>
-                <textarea id="request-suggested-source" class="form-control" rows="2" placeholder="{% trans \'{% trans 'Where did you get this factor?' %}\' %}"></textarea>
+                <textarea id="request-suggested-source" class="form-control" rows="2" placeholder="{% trans 'Where did you get this factor?' %}"></textarea>
             </div>
         </div>
         
@@ -1446,19 +1446,19 @@
         <!-- Supplier Name (Required) -->
         <div class="form-group">
             <label>{% trans "Supplier name" %} <span style="color: red;">*</span></label>
-            <input type="text" id="modal-supplier-name" class="form-control" placeholder="{% trans \'{% trans 'Enter supplier name' %}\' %}" required>
+            <input type="text" id="modal-supplier-name" class="form-control" placeholder="{% trans 'Enter supplier name' %}" required>
         </div>
         
         <!-- Contact Name -->
         <div class="form-group">
             <label>{% trans "Contact name" %}</label>
-            <input type="text" id="modal-contact-name" class="form-control" placeholder="{% trans \'{% trans 'Enter primary contact name' %}\' %}">
+            <input type="text" id="modal-contact-name" class="form-control" placeholder="{% trans 'Enter primary contact name' %}">
         </div>
         
         <!-- Email -->
         <div class="form-group">
             <label>{% trans "Email" %}</label>
-            <input type="email" id="modal-email" class="form-control" placeholder="{% trans \'{% trans 'Enter primary contact email' %}\' %}">
+            <input type="email" id="modal-email" class="form-control" placeholder="{% trans 'Enter primary contact email' %}">
         </div>
         
         <!-- Phone Number -->
@@ -1473,7 +1473,7 @@
                     <option value="+33">🇫🇷 +33</option>
                     <option value="+86">🇨🇳 +86</option>
                 </select>
-                <input type="tel" id="modal-phone" class="form-control" placeholder="{% trans \'{% trans 'Enter phone number' %}\' %}" style="flex: 1;">
+                <input type="tel" id="modal-phone" class="form-control" placeholder="{% trans 'Enter phone number' %}" style="flex: 1;">
             </div>
         </div>
         
@@ -1481,7 +1481,7 @@
         <div class="form-group">
             <label>{% trans "Activity" %}</label>
             <select id="modal-supplier-type" class="form-control">
-                <option value="">{% trans "{% trans "Select activity" %}" %}</option>
+                <option value="">{% trans "Select activity" %}</option>
                 <option value="Energy">{% trans "Energy" %}</option>
                 <option value="Fuel">{% trans "Fuel" %}</option>
                 <option value="Transportation">{% trans "Transportation" %}</option>
@@ -1497,7 +1497,7 @@
             <div class="form-group">
                 <label>{% trans "Country" %}</label>
                 <select id="modal-country" class="form-control">
-                    <option value="">{% trans "{% trans "Select country" %}" %}</option>
+                    <option value="">{% trans "Select country" %}</option>
                     <option value="Turkey">🇹🇷 {% trans "Turkey" %}</option>
                     <option value="USA">🇺🇸 {% trans "United States" %}</option>
                     <option value="UK">🇬🇧 {% trans "United Kingdom" %}</option>
@@ -1508,26 +1508,26 @@
             </div>
             <div class="form-group">
                 <label>{% trans "City" %}</label>
-                <input type="text" id="modal-city" class="form-control" placeholder="{% trans \'{% trans 'Select city' %}\' %}">
+                <input type="text" id="modal-city" class="form-control" placeholder="{% trans 'Select city' %}">
             </div>
         </div>
         
         <!-- Tax Number -->
         <div class="form-group">
             <label>{% trans "Tax number" %}</label>
-            <input type="text" id="modal-tax-number" class="form-control" placeholder="{% trans \'{% trans 'Enter tax number' %}\' %}">
+            <input type="text" id="modal-tax-number" class="form-control" placeholder="{% trans 'Enter tax number' %}">
         </div>
         
         <!-- Company Website -->
         <div class="form-group">
             <label>{% trans "Company Website" %}</label>
-            <input type="url" id="modal-website" class="form-control" placeholder="{% trans \'{% trans 'Enter company website' %}\' %}">
+            <input type="url" id="modal-website" class="form-control" placeholder="{% trans 'Enter company website' %}">
         </div>
         
         <!-- Address/Notes -->
         <div class="form-group">
             <label>{% trans "Address / Notes" %}</label>
-            <textarea id="modal-notes" class="form-control" rows="3" placeholder="{% trans \'{% trans 'Enter address or additional notes' %}\' %}"></textarea>
+            <textarea id="modal-notes" class="form-control" rows="3" placeholder="{% trans 'Enter address or additional notes' %}"></textarea>
         </div>
         
         <!-- Buttons -->
@@ -1556,7 +1556,7 @@
         <!-- Industry Name -->
         <div class="form-group">
             <label>{% trans "Industry Name" %} <span style="color: red;">*</span></label>
-            <input type="text" id="modal-industry-name" class="form-control" placeholder="{% trans \'{% trans 'e.g., Textile Manufacturing, Food Processing' %}\' %}" required maxlength="200" oninput="updateCharCount('modal-industry-name', 'name-char-count', 200)">
+            <input type="text" id="modal-industry-name" class="form-control" placeholder="{% trans 'e.g., Textile Manufacturing, Food Processing' %}" required maxlength="200" oninput="updateCharCount('modal-industry-name', 'name-char-count', 200)">
             <small style="color: #666; font-size: 11px; float: right;">
                 <span id="name-char-count">0</span>/200 {% trans "characters" %}
             </small>
@@ -1566,7 +1566,7 @@
         <!-- Industry Code (Optional) -->
         <div class="form-group">
             <label>Industry Code (Optional)</label>
-            <input type="text" id="modal-industry-code" class="form-control" placeholder="{% trans \'e.g., NAICS 313, SIC 22\' %}" maxlength="20" oninput="updateCharCount('modal-industry-code', 'code-char-count', 20)">
+            <input type="text" id="modal-industry-code" class="form-control" placeholder="{% trans 'e.g., NAICS 313, SIC 22' %}" maxlength="20" oninput="updateCharCount('modal-industry-code', 'code-char-count', 20)">
             <small style="color: #666; font-size: 11px;">
                 If you know the NAICS, SIC, or other industry classification code
                 <span style="float: right;"><span id="code-char-count">0</span>/20 characters</span>
@@ -1577,7 +1577,7 @@
         <!-- Description -->
         <div class="form-group">
             <label>Industry Description <span style="color: red;">*</span></label>
-            <textarea id="modal-industry-description" class="form-control" rows="3" placeholder="{% trans \'Describe what this industry does and its main activities...\' %}" required maxlength="1000" oninput="updateCharCount('modal-industry-description', 'desc-char-count', 1000)"></textarea>
+            <textarea id="modal-industry-description" class="form-control" rows="3" placeholder="{% trans 'Describe what this industry does and its main activities...' %}" required maxlength="1000" oninput="updateCharCount('modal-industry-description', 'desc-char-count', 1000)"></textarea>
             <small style="color: #666; font-size: 11px; float: right;">
                 <span id="desc-char-count">0</span>/1000 characters
             </small>
@@ -1659,7 +1659,7 @@ function updateMobileFields() {
     const selectedSource = sourceSelect.value;
     
     // Clear current options
-    unitSelect.innerHTML = '<option value="">{% trans "{% trans "Select Unit" %}" %}</option>';
+    unitSelect.innerHTML = '<option value="">{% trans "Select Unit" %}</option>';
     
     if (selectedSource && mobileUnits[selectedSource]) {
         const allowedUnits = mobileUnits[selectedSource];
@@ -1686,7 +1686,7 @@ function updateMobileFields() {
     } else {
         // Show all units if no source selected
         unitSelect.innerHTML = `
-            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+            <option value="">{% trans "Select Unit" %}</option>
             <option value="liters">Liters</option>
             <option value="kg">Kilograms (kg)</option>
             <option value="gj">Gigajoules (GJ)</option>
@@ -1709,7 +1709,7 @@ function updateStationaryFields() {
     }
     
     // Clear current options
-    unitSelect.innerHTML = '<option value="">{% trans "{% trans "Select Unit" %}" %}</option>';
+    unitSelect.innerHTML = '<option value="">{% trans "Select Unit" %}</option>';
     
     if (selectedSource && stationaryUnits[selectedSource]) {
         const allowedUnits = stationaryUnits[selectedSource];
@@ -1737,7 +1737,7 @@ function updateStationaryFields() {
     } else {
         // Show all units if no source selected
         unitSelect.innerHTML = `
-            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+            <option value="">{% trans "Select Unit" %}</option>
             <option value="liters">Liters</option>
             <option value="kg">Kilograms (kg)</option>
             <option value="m3">Cubic Meters (m³)</option>

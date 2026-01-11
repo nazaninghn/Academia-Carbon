@@ -357,7 +357,7 @@
                                    class="form-control" 
                                    id="id_first_name" 
                                    name="first_name" 
-                                   placeholder="{% trans \'{% trans 'Enter your first name' %}\' %}"
+                                   placeholder="{% trans 'Enter your first name' %}"
                                    value="{{ form.first_name.value|default:'' }}"
                                    required>
                             {% if form.first_name.errors %}
@@ -373,7 +373,7 @@
                                    class="form-control" 
                                    id="id_last_name" 
                                    name="last_name" 
-                                   placeholder="{% trans \'{% trans 'Enter your last name' %}\' %}"
+                                   placeholder="{% trans 'Enter your last name' %}"
                                    value="{{ form.last_name.value|default:'' }}"
                                    required>
                             {% if form.last_name.errors %}
@@ -390,7 +390,7 @@
                                class="form-control" 
                                id="id_email" 
                                name="email" 
-                               placeholder="{% trans \'{% trans 'Enter your email address' %}\' %}"
+                               placeholder="{% trans 'Enter your email address' %}"
                                value="{{ form.email.value|default:'' }}"
                                required>
                         {% if form.email.errors %}
@@ -406,7 +406,7 @@
                                class="form-control" 
                                id="id_password1" 
                                name="password1" 
-                               placeholder="{% trans \'{% trans 'Create a strong password' %}\' %}"
+                               placeholder="{% trans 'Create a strong password' %}"
                                required>
                         {% if form.password1.errors %}
                             <small class="text-danger">{{ form.password1.errors.0 }}</small>
@@ -421,7 +421,7 @@
                                class="form-control" 
                                id="id_password2" 
                                name="password2" 
-                               placeholder="{% trans \'{% trans 'Confirm your password' %}\' %}"
+                               placeholder="{% trans 'Confirm your password' %}"
                                required>
                         {% if form.password2.errors %}
                             <small class="text-danger">{{ form.password2.errors.0 }}</small>

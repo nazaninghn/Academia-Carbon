@@ -60,7 +60,7 @@
                     <div class="form-group">
                         <label class="form-label">{% trans "Emission Source" %}</label>
                         <select class="form-control" id="stationary-source" onchange="updateStationaryFields(); handleOtherSelection(this, 'stationary')">
-                            <option value="">{% trans "{% trans "Select Emission Source" %}" %}</option>
+                            <option value="">{% trans "Select Emission Source" %}</option>
                             <option value="coal-industrial">{% trans "Coal (industrial)" %} - Defra 2024</option>
                             <option value="natural-gas">{% trans "Natural Gas" %} - IPCC 2019</option>
                             <option value="diesel">{% trans "Diesel (volume)" %} - IPCC 2006</option>
@@ -74,7 +74,7 @@
                     <div class="form-group">
                         <label class="form-label">{% trans "Unit" %}</label>
                         <select class="form-control" id="stationary-unit">
-                            <option value="">{% trans "{% trans "Select Unit" %}" %}</option>
+                            <option value="">{% trans "Select Unit" %}</option>
                             <option value="liters">{% trans "Liters" %}</option>
                             <option value="kg">{% trans "Kilograms" %}</option>
                             <option value="m3">{% trans "Cubic Meters (m³)" %}</option>
@@ -87,7 +87,7 @@
                     <label class="form-label">{% trans "Activity Data" %}</label>
                     <div class="flex items-center gap-2">
                         <button type="button" class="btn btn-outline btn-sm">−</button>
-                        <input type="number" class="form-control" id="stationary-activity" placeholder="{% trans \'{% trans 'Enter activity data' %}\' %}" value="0">
+                        <input type="number" class="form-control" id="stationary-activity" placeholder="{% trans 'Enter activity data' %}" value="0">
                         <button type="button" class="btn btn-outline btn-sm">+</button>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                     <label class="form-label">{% trans "Supplier (Optional)" %}</label>
                     <div class="flex gap-2">
                         <select class="form-control flex-1" id="stationary-supplier">
-                            <option value="">{% trans "{% trans "Select Supplier" %}" %}</option>
+                            <option value="">{% trans "Select Supplier" %}</option>
                         </select>
                         <button type="button" class="btn btn-secondary" onclick="showAddSupplierModal()">
                             <i class="fas fa-plus"></i> {% trans "Add" %}
@@ -106,7 +106,7 @@
 
                 <div class="form-group">
                     <label class="form-label">{% trans "Description (Optional)" %}</label>
-                    <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="{% trans \'{% trans 'Add description' %}\' %}"></textarea>
+                    <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     <p class="form-help text-right">0/100</p>
                 </div>
 
