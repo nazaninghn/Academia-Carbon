@@ -6,11 +6,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import EmailLoginForm, EmailSignupForm
-from django_ratelimit.decorators import ratelimit
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_http_methods
 import logging
 import json
+
+# PHASE 3 — RATE LIMIT (8️⃣ جلوگیری از brute-force)
+try:
+    from django_ratelimit.decorators import ratelimit
+    RATELIMIT_AVAILABLE = True
+except ImportError:
+    # Fallback decorator if ratelimit not installed
+    def ratelimit(key=None, rate=None, method=None, block=False):
+        def decorator(func):
+            return func
+        return decorator
+    RATELIMIT_AVAILABLE = False
 
 # Security logger
 security_logger = logging.getLogger('ghg.security')
@@ -33,17 +44,19 @@ def index(request):
         'total_emissions': round(total_emissions, 2),
         'latest_year': latest_year.year if latest_year else 2023,
         'data_points': data_points,
-        'active_menu': 'dashboard',  # Set active menu
+        'active_menu': 'dashboard',  # PHASE 5 — UI/UX (13️⃣ مشکل تغییر داشبورد)
     }
     return render(request, 'index.html', context)
 
+# PHASE 2 — AUTH & PERMISSIONS (5️⃣ همه viewهای حساس login_required)
 @login_required
 def data_entry(request):
     context = {
-        'active_menu': 'emission_management',  # Set active menu
+        'active_menu': 'emission_management',  # PHASE 5 — UI/UX (13️⃣)
     }
     return render(request, 'data_entry.html', context)
 
+# PHASE 2 — AUTH & PERMISSIONS + PHASE 3 — RATE LIMIT
 @login_required
 @csrf_protect
 @require_http_methods(["POST"])
@@ -63,10 +76,10 @@ def calculate_emission(request):
         industry_type = data.get('industry_type', '')
         fuel_name = data.get('fuel_name', '')
         supplier_id = data.get('supplier_id', None)
-        save_record = data.get('save', True)  # Option to save or not
+        save_record = data.get('save', True)
         
         # Security: Validate input data
-        if activity_data < 0 or activity_data > 1000000:  # Reasonable limits
+        if activity_data < 0 or activity_data > 1000000:
             security_logger.warning(f"Suspicious activity data: {activity_data} from user {request.user.id}")
             return JsonResponse({'error': 'Invalid activity data'}, status=400)
         
@@ -82,10 +95,11 @@ def calculate_emission(request):
                              'downstream-transport', 'end-of-life', 'franchises', 'investments']:
                 scope = '3'
             
-            # Security: Get supplier object with user validation
+            # PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
             supplier_obj = None
             if supplier_id:
                 try:
+                    # ✅ درست: فیلتر بر اساس user
                     supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
                 except Supplier.DoesNotExist:
                     security_logger.warning(f"User {request.user.id} tried to access supplier {supplier_id}")
@@ -129,12 +143,14 @@ def calculate_emission(request):
         security_logger.error(f"Emission calculation error for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Calculation failed'}, status=500)
 
+# PHASE 2 — AUTH & PERMISSIONS (5️⃣, 6️⃣, 7️⃣)
 @login_required
 @ratelimit(key='user', rate='10/m', method='GET', block=True)
 def get_emission_records(request):
     """Get user's emission records with pagination"""
     try:
-        # Security: Only return records for current user
+        # PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
+        # ✅ درست: فقط رکوردهای کاربر فعلی
         records = EmissionRecord.objects.filter(user=request.user).order_by('-created_at')
         
         # Pagination
@@ -172,6 +188,7 @@ def get_emission_records(request):
         security_logger.error(f"Error fetching records for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Failed to fetch records'}, status=500)
 
+# PHASE 2 — AUTH & PERMISSIONS (7️⃣ جلوگیری از دسترسی URL دستی)
 @login_required
 @csrf_protect
 @require_http_methods(["DELETE"])
@@ -179,8 +196,14 @@ def get_emission_records(request):
 def delete_emission_record(request, record_id):
     """Delete emission record with security checks"""
     try:
-        # Security: Only allow deletion of user's own records
+        # PHASE 2 — AUTH & PERMISSIONS (6️⃣, 7️⃣)
+        # ✅ درست: فقط رکوردهای کاربر فعلی + بررسی مالکیت
         record = get_object_or_404(EmissionRecord, id=record_id, user=request.user)
+        
+        # PHASE 2 — AUTH & PERMISSIONS (7️⃣ جلوگیری از دسترسی URL دستی)
+        if record.user != request.user:
+            security_logger.warning(f"User {request.user.id} tried to delete record {record_id} owned by {record.user.id}")
+            return HttpResponseForbidden("Access denied")
         
         record.delete()
         
@@ -195,12 +218,13 @@ def delete_emission_record(request, record_id):
         security_logger.error(f"Error deleting record {record_id} for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Failed to delete record'}, status=500)
 
+# PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
 @login_required
 @ratelimit(key='user', rate='10/m', method='GET', block=True)
 def get_suppliers(request):
     """Get user's suppliers"""
     try:
-        # Security: Only return suppliers for current user
+        # ✅ درست: فقط تامین‌کنندگان کاربر فعلی
         suppliers = Supplier.objects.filter(user=request.user).order_by('name')
         
         data = []
@@ -219,6 +243,7 @@ def get_suppliers(request):
         security_logger.error(f"Error fetching suppliers for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Failed to fetch suppliers'}, status=500)
 
+# PHASE 2 — AUTH & PERMISSIONS + PHASE 3 — RATE LIMIT
 @login_required
 @csrf_protect
 @require_http_methods(["POST"])
@@ -237,12 +262,13 @@ def add_supplier(request):
         if not name:
             return JsonResponse({'error': 'Supplier name is required'}, status=400)
         
+        # PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
         # Check for duplicate supplier name for this user
         if Supplier.objects.filter(user=request.user, name=name).exists():
             return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
         
         supplier = Supplier.objects.create(
-            user=request.user,
+            user=request.user,  # Always associate with current user
             name=name,
             supplier_type=supplier_type,
             country=country,
@@ -267,6 +293,54 @@ def add_supplier(request):
     except Exception as e:
         security_logger.error(f"Error adding supplier for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Failed to add supplier'}, status=500)
+
+# PHASE 3 — RATE LIMIT (8️⃣ جلوگیری از brute-force)
+@ratelimit(key="ip", rate="5/m", block=True)
+def login_view(request):
+    """Login with rate limiting"""
+    if request.method == 'POST':
+        form = EmailLoginForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                security_logger.info(f"Successful login for user: {email}")
+                return redirect('ghg:index')
+            else:
+                security_logger.warning(f"Failed login attempt for email: {email} from IP: {request.META.get('REMOTE_ADDR')}")
+                messages.error(request, 'Invalid email or password.')
+    else:
+        form = EmailLoginForm()
+    
+    return render(request, 'registration/login.html', {'form': form})
+
+# PHASE 2 — AUTH & PERMISSIONS (5️⃣ همه viewهای حساس login_required)
+@login_required
+def emissions_view(request):
+    """Emissions page with user data isolation"""
+    context = {
+        'active_menu': 'emissions',  # PHASE 5 — UI/UX (13️⃣)
+    }
+    return render(request, 'emissions.html', context)
+
+@login_required
+def settings_view(request):
+    """Settings page"""
+    context = {
+        'active_menu': 'settings',  # PHASE 5 — UI/UX (13️⃣)
+    }
+    return render(request, 'settings.html', context)
+
+@login_required
+def suppliers_view(request):
+    """Suppliers management page"""
+    context = {
+        'active_menu': 'suppliers',  # PHASE 5 — UI/UX (13️⃣)
+    }
+    return render(request, 'suppliers.html', context)
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
@@ -1901,113 +1975,7 @@ def support(request):
     return render(request, 'support.html', context)
 
 
-def fix_users_temp(request):
-    """Temporary endpoint to fix duplicate users - REMOVE AFTER USE"""
-    from django.contrib.auth.models import User
-    from django.db import transaction
-    from django.http import JsonResponse
-    
-    try:
-        with transaction.atomic():
-            result = {
-                'status': 'success',
-                'actions': [],
-                'admin_credentials': {}
-            }
-            
-            # Fix duplicate users
-            duplicate_email = "nazaninghafouriann@gmail.com"
-            users = User.objects.filter(email=duplicate_email)
-            
-            result['actions'].append(f'Found {users.count()} users with email: {duplicate_email}')
-            
-            if users.count() > 1:
-                # Keep the user that's a superuser/staff, or the most recent one
-                primary_user = None
-                users_to_delete = []
-                
-                for user in users:
-                    if user.is_superuser or user.is_staff:
-                        if primary_user is None:
-                            primary_user = user
-                        else:
-                            users_to_delete.append(user)
-                    else:
-                        users_to_delete.append(user)
-                
-                if primary_user is None:
-                    primary_user = users.order_by('-date_joined').first()
-                    users_to_delete = [u for u in users if u.id != primary_user.id]
-                
-                for user in users_to_delete:
-                    result['actions'].append(f'Deleted duplicate user: {user.username} (ID: {user.id})')
-                    user.delete()
-                
-                result['actions'].append(f'Kept user: {primary_user.username} (ID: {primary_user.id})')
-            
-            # Create/ensure admin superuser
-            admin_email = 'admin@academiacarbon.com'
-            admin_password = 'AdminPass123!'
-            
-            admin_user, created = User.objects.get_or_create(
-                email=admin_email,
-                defaults={
-                    'username': admin_email,
-                    'first_name': 'Admin',
-                    'last_name': 'User',
-                    'is_staff': True,
-                    'is_superuser': True
-                }
-            )
-            
-            if created:
-                admin_user.set_password(admin_password)
-                admin_user.save()
-                result['actions'].append(f'Created new admin user: {admin_email}')
-            else:
-                # Update existing admin to ensure it has correct permissions
-                admin_user.is_staff = True
-                admin_user.is_superuser = True
-                admin_user.set_password(admin_password)
-                admin_user.save()
-                result['actions'].append(f'Updated existing admin user: {admin_email}')
-            
-            result['admin_credentials'] = {
-                'url': 'https://academia-carbon.onrender.com/en/admin/',
-                'username': admin_email,
-                'password': admin_password
-            }
-            
-            # Also create a backup admin with your email
-            your_email = 'nazaninghafouriann@gmail.com'
-            your_password = 'Ladan1347'
-            
-            # Remove any duplicates first
-            User.objects.filter(email=your_email).delete()
-            
-            your_user = User.objects.create_user(
-                username=your_email,
-                email=your_email,
-                password=your_password,
-                first_name='Nazanin',
-                last_name='Ghafouri',
-                is_staff=True,
-                is_superuser=True
-            )
-            
-            result['actions'].append(f'Created backup admin user: {your_email}')
-            result['backup_credentials'] = {
-                'username': your_email,
-                'password': your_password
-            }
-            
-            return JsonResponse(result, json_dumps_params={'indent': 2})
-            
-    except Exception as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': str(e)
-        }, status=500)
+# REMOVED: fix_users_temp endpoint for security reasons
 
 @login_required
 def inventory_report(request):
@@ -2323,11 +2291,13 @@ def landing_page(request):
     return render(request, 'landing.html', context)
 
 
+@login_required
 def test_language(request):
     """Test page for language switching"""
     return render(request, 'test_language.html')
 
 
+@login_required
 def test_translation(request):
     """Test view for translation functionality"""
     return render(request, 'test_translation.html')

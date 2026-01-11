@@ -19,39 +19,30 @@ import secrets
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# PHASE 1 — HARD SECURITY (الزامی)
+# =================================
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
+# 1️⃣ Secure DEBUG and SECRET_KEY
+DEBUG = os.environ.get("DEBUG", "False") == "True"
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# Generate a secure secret key if not provided
+# Generate secure SECRET_KEY if not provided
 def generate_secret_key():
     return secrets.token_urlsafe(50)
 
-SECRET_KEY = config('SECRET_KEY', default=generate_secret_key())
+SECRET_KEY = os.environ.get("SECRET_KEY") or generate_secret_key()
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# Force DEBUG=False if we detect production environment
-if 'onrender.com' in os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''):
-    DEBUG = False
-else:
-    DEBUG = config('DEBUG', default='False') == 'True'
-
-# ALLOWED_HOSTS configuration - Always allow production domain
-ALLOWED_HOSTS = []
-
-# Always allow production domain
-ALLOWED_HOSTS.extend([
-    'academia-carbon.onrender.com',
-    '.onrender.com',
-])
+# 1️⃣ ALLOWED_HOSTS - Always allow production domain
+ALLOWED_HOSTS = [
+    "academia-carbon.onrender.com",
+    ".onrender.com",
+]
 
 # Add development hosts if in debug mode
 if DEBUG:
-    ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost', 'testserver'])
+    ALLOWED_HOSTS.extend(["127.0.0.1", "localhost", "testserver"])
 
 # Add custom domains from environment
-custom_hosts = config('ALLOWED_HOSTS', default='')
+custom_hosts = os.environ.get('ALLOWED_HOSTS', '')
 if custom_hosts:
     ALLOWED_HOSTS.extend([host.strip() for host in custom_hosts.split(',')])
 
@@ -146,10 +137,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# PHASE 4 — MULTI-LANGUAGE (مشکل ترجمه)
+# ====================================
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.2/topics/i18n/
-
+# 10️⃣ فعال‌سازی i18n
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
@@ -195,10 +186,10 @@ csrf_origins_env = config('CSRF_TRUSTED_ORIGINS', default='')
 if csrf_origins_env:
     CSRF_TRUSTED_ORIGINS.extend([origin.strip() for origin in csrf_origins_env.split(',')])
 
-# SECURITY SETTINGS - Production Ready
-# =================================
+# PHASE 1 — SECURITY SETTINGS (2️⃣ HTTPS + Cookies, 3️⃣ Clickjacking)
+# ================================================================
 
-# Force HTTPS in production
+# 2️⃣ HTTPS + Cookies
 SECURE_SSL_REDIRECT = not DEBUG
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -215,7 +206,10 @@ CSRF_COOKIE_SAMESITE = 'Lax'
 # Security Headers
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
+
+# 3️⃣ Clickjacking Protection
+X_FRAME_OPTIONS = "DENY"
+
 SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
 
 # HSTS (HTTP Strict Transport Security)

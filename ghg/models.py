@@ -244,40 +244,7 @@ class MaterialRequest(models.Model):
         return f"Scope {self.scope}"
 
 
-class CustomEmissionFactor(models.Model):
-    """Custom emission factors provided by suppliers or calculated by users"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custom_factors')
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, blank=True, null=True, 
-                                 related_name='custom_factors', help_text="Supplier who provided this factor")
-    
-    # Material/Source information
-    material_name = models.CharField(max_length=200, help_text="Name of material/product")
-    category = models.CharField(max_length=50, help_text="Category (e.g., purchased-goods, stationary)")
-    description = models.TextField(blank=True, null=True, help_text="Detailed description")
-    
-    # Emission factor details
-    emission_factor = models.FloatField(help_text="Emission factor value (kg CO2e per unit)")
-    unit = models.CharField(max_length=20, help_text="Unit of measurement (kg, liters, m3, etc.)")
-    
-    # Source/Reference
-    source_reference = models.TextField(blank=True, null=True, 
-                                       help_text="Reference/source of this emission factor (e.g., supplier certificate, LCA study)")
-    certificate_file = models.FileField(upload_to='emission_certificates/', blank=True, null=True,
-                                       help_text="Upload certificate or documentation")
-    
-    # Verification status
-    is_verified = models.BooleanField(default=False, help_text="Verified by admin")
-    verified_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,
-                                   related_name='verified_factors', help_text="Admin who verified")
-    verified_at = models.DateTimeField(blank=True, null=True)
-    
-    # Metadata
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        ordering = ['-created_at']
-        verbose_name = "Custom Emission Factor"
+# Note: CustomEmissionFactor model is defined above with proper security validation
         verbose_name_plural = "Custom Emission Factors"
     
     def __str__(self):
