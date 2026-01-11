@@ -1587,7 +1587,7 @@
         <!-- Business Context -->
         <div class="form-group">
             <label>How does this relate to your business? (Optional)</label>
-            <textarea id="modal-business-context" class="form-control" rows="2" placeholder="Explain how this industry type relates to your organization's activities..." maxlength="1000" oninput="updateCharCount('modal-business-context', 'context-char-count', 1000)"></textarea>
+            <textarea id="modal-business-context" class="form-control" rows="2" placeholder="{% trans 'Explain how this industry type relates to your organization activities' %}" maxlength="1000" oninput="updateCharCount('modal-business-context', 'context-char-count', 1000)"></textarea>
             <small style="color: #666; font-size: 11px; float: right;">
                 <span id="context-char-count">0</span>/1000 characters
             </small>
