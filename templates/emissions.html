@@ -608,15 +608,15 @@
     <!-- Header Controls -->
     <div class="emissions-header">
         <div class="calculation-methods">
-            <span style="font-size: 13px; color: #6b7280; margin-right: 10px;">Calculation Standard:</span>
-            <button class="method-btn active" data-method="ghg">GHG-Based</button>
-            <button class="method-btn" data-method="iso">ISO 14064-1</button>
-            <button class="method-btn" disabled style="opacity: 0.5;">Market-Based</button>
-            <button class="method-btn" disabled style="opacity: 0.5;">Location-Based</button>
+            <span style="font-size: 13px; color: #6b7280; margin-right: 10px;">{% trans "Calculation Standard" %}:</span>
+            <button class="method-btn active" data-method="ghg">{% trans "GHG-Based" %}</button>
+            <button class="method-btn" data-method="iso">{% trans "ISO 14064-1" %}</button>
+            <button class="method-btn" disabled style="opacity: 0.5;">{% trans "Market-Based" %}</button>
+            <button class="method-btn" disabled style="opacity: 0.5;">{% trans "Location-Based" %}</button>
         </div>
         
         <div class="date-range-picker">
-            <span style="font-size: 13px; color: #6b7280;">Date Range:</span>
+            <span style="font-size: 13px; color: #6b7280;">{% trans "Date Range" %}:</span>
             <input type="date" class="date-input" id="dateFrom" value="{{ date_from }}">
             <span style="color: #9ca3af;">—</span>
             <input type="date" class="date-input" id="dateTo" value="{{ date_to }}">
@@ -636,10 +636,10 @@
                 </div>
                 <div class="filter-actions">
                     <button class="filter-action-btn" onclick="selectAllFilters()">
-                        <i class="fas fa-check-square"></i> Select All
+                        <i class="fas fa-check-square"></i> {% trans "Select All" %}
                     </button>
                     <button class="filter-action-btn" onclick="clearAllFilters()">
-                        <i class="fas fa-times"></i> Clear
+                        <i class="fas fa-times"></i> {% trans "Clear" %}
                     </button>
                 </div>
                 
@@ -647,10 +647,10 @@
                     <!-- Scope 1 -->
                     <li class="scope-item">
                         <div class="scope-header scope1-header">
-                            <span style="font-weight: 600; color: #111827;">Scope 1</span>
+                            <span style="font-weight: 600; color: #111827;">{% trans "Scope 1" %}</span>
                             <div class="scope-controls">
-                                <button class="scope-control-btn active" onclick="selectAllScope1()">All</button>
-                                <button class="scope-control-btn" onclick="clearScope1()">Clear</button>
+                                <button class="scope-control-btn active" onclick="selectAllScope1()">{% trans "All" %}</button>
+                                <button class="scope-control-btn" onclick="clearScope1()">{% trans "Clear" %}</button>
                                 <i class="fas fa-chevron-up" style="margin-left: 8px; color: #9ca3af;"></i>
                             </div>
                         </div>
@@ -761,19 +761,19 @@
                     <!-- Scope 2 -->
                     <li class="scope-item">
                         <div class="scope-header scope2-header">
-                            <span style="font-weight: 600; color: #111827;">Scope 2</span>
+                            <span style="font-weight: 600; color: #111827;">{% trans "Scope 2" %}</span>
                             <div class="scope-controls">
                                 <button class="scope-dropdown-btn" onclick="toggleScope2Dropdown()">
-                                    Select All <i class="fas fa-chevron-down"></i>
+                                    {% trans "Select All" %} <i class="fas fa-chevron-down"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="scope-dropdown" id="scope2Dropdown" style="display: none;">
                             <div class="dropdown-item" onclick="selectAllScope2()">
-                                <i class="fas fa-check-square"></i> Select All
+                                <i class="fas fa-check-square"></i> {% trans "Select All" %}
                             </div>
                             <div class="dropdown-item" onclick="clearScope2()">
-                                <i class="fas fa-times"></i> Clear All
+                                <i class="fas fa-times"></i> {% trans "Clear All" %}
                             </div>
                             <div class="dropdown-divider"></div>
                             <div class="dropdown-item" onclick="toggleScope2Category('electricity')">
@@ -791,19 +791,19 @@
                     <!-- Scope 3 -->
                     <li class="scope-item">
                         <div class="scope-header scope3-header">
-                            <span style="font-weight: 600; color: #111827;">Scope 3</span>
+                            <span style="font-weight: 600; color: #111827;">{% trans "Scope 3" %}</span>
                             <div class="scope-controls">
                                 <button class="scope-dropdown-btn" onclick="toggleScope3Dropdown()">
-                                    Select All <i class="fas fa-chevron-down"></i>
+                                    {% trans "Select All" %} <i class="fas fa-chevron-down"></i>
                                 </button>
                             </div>
                         </div>
                         <div class="scope-dropdown" id="scope3Dropdown" style="display: none;">
                             <div class="dropdown-item" onclick="selectAllScope3()">
-                                <i class="fas fa-check-square"></i> Select All
+                                <i class="fas fa-check-square"></i> {% trans "Select All" %}
                             </div>
                             <div class="dropdown-item" onclick="clearScope3()">
-                                <i class="fas fa-times"></i> Clear All
+                                <i class="fas fa-times"></i> {% trans "Clear All" %}
                             </div>
                             <div class="dropdown-divider"></div>
                             <div class="dropdown-item" onclick="toggleScope3Category('purchased-goods')">

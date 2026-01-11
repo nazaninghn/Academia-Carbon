@@ -51,7 +51,7 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="/en/reporting/inventory" class="{% if active_menu == 'reporting' %}active{% endif %}">
+            <a href="{% url 'ghg:inventory_report' %}" class="{% if active_menu == 'reporting' %}active{% endif %}">
                 <i class="fas fa-file-alt"></i>
                 {% trans "Reporting" %}
             </a>

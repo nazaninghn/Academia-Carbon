@@ -181,19 +181,19 @@
     <div class="supplier-stats">
         <div class="stat-item">
             <div class="stat-value">{{ supplier_count|default:"0" }}</div>
-            <div class="stat-label">Total Suppliers</div>
+            <div class="stat-label">{% trans "Total Suppliers" %}</div>
         </div>
         <div class="stat-item">
             <div class="stat-value">{{ active_suppliers|default:"0" }}</div>
-            <div class="stat-label">Active Suppliers</div>
+            <div class="stat-label">{% trans "Active Suppliers" %}</div>
         </div>
         <div class="stat-item">
             <div class="stat-value">{{ supplier_categories|default:"0" }}</div>
-            <div class="stat-label">Categories</div>
+            <div class="stat-label">{% trans "Categories" %}</div>
         </div>
         <div class="stat-item">
             <div class="stat-value">{{ countries_count|default:"0" }}</div>
-            <div class="stat-label">Countries</div>
+            <div class="stat-label">{% trans "Countries" %}</div>
         </div>
     </div>
 

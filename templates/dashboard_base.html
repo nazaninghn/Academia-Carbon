@@ -790,6 +790,42 @@
                 </button>
                 <h1 class="page-title">{% block page_title %}{% trans "Dashboard" %}{% endblock %}</h1>
                 <div class="user-section">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher" style="margin-right: 20px;">
+                        <div class="dropdown">
+                            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border: 1px solid #d1d5db; padding: 6px 12px; font-size: 13px;">
+                                <i class="fas fa-globe"></i>
+                                {% if LANGUAGE_CODE == 'tr' %}
+                                    🇹🇷 Türkçe
+                                {% else %}
+                                    🇺🇸 English
+                                {% endif %}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                                <li>
+                                    <form action="{% url 'set_language' %}" method="post" style="margin: 0;">
+                                        {% csrf_token %}
+                                        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+                                        <input name="language" type="hidden" value="en" />
+                                        <button type="submit" class="dropdown-item" style="border: none; background: none; width: 100%; text-align: left; padding: 8px 16px;">
+                                            🇺🇸 English
+                                        </button>
+                                    </form>
+                                </li>
+                                <li>
+                                    <form action="{% url 'set_language' %}" method="post" style="margin: 0;">
+                                        {% csrf_token %}
+                                        <input name="next" type="hidden" value="{{ request.get_full_path }}" />
+                                        <input name="language" type="hidden" value="tr" />
+                                        <button type="submit" class="dropdown-item" style="border: none; background: none; width: 100%; text-align: left; padding: 8px 16px;">
+                                            🇹🇷 Türkçe
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
                     <div class="user-info">
                         <p class="user-name">{{ user.first_name|default:user.email|title }}</p>
                         <p class="user-role">{{ user.email }}</p>

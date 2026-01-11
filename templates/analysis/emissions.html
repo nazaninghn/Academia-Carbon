@@ -1,6 +1,7 @@
 {% extends 'dashboard_base.html' %}
 {% load static %}
 
+{% load i18n %}
 {% block page_title %}Emissions Analysis{% endblock %}
 
 {% block extra_css %}
@@ -46,7 +47,7 @@
         <aside class="panel">
             <div class="panel-header">
                 <div class="search-wrap">
-                    <input id="treeSearch" type="text" placeholder="Search sources..." />
+                    <input id="treeSearch" type="text" placeholder="{% trans \'Search sources...\' %}" />
                     <button id="clearSearch" class="link">Clear</button>
                 </div>
                 <button id="clearAll" class="link">Clear All</button>
@@ -72,7 +73,7 @@
                         <div class="chart-wrap">
                             <canvas id="scopeDonut"></canvas>
                             <div class="total">
-                                <div class="total-label">TOTAL</div>
+                                <div class="total-label">{% trans "TOTAL" %}</div>
                                 <div id="totalValue" class="total-value">0.00 tCO₂e</div>
                             </div>
                         </div>
@@ -141,8 +142,7 @@
                                 <button id="prevPage" class="btn btn-secondary">
                                     <i class="fas fa-chevron-left"></i> Prev
                                 </button>
-                                <button id="nextPage" class="btn btn-secondary">
-                                    Next <i class="fas fa-chevron-right"></i>
+                                <button id="nextPage" class="btn btn-secondary">{% trans "Next" %}<i class="fas fa-chevron-right"></i>
                                 </button>
                             </div>
                         </div>

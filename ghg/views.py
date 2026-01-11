@@ -2159,3 +2159,6 @@ def test_language(request):
     return render(request, 'test_language.html')
 
 
+def test_translation(request):
+    """Test view for translation functionality"""
+    return render(request, 'test_translation.html')

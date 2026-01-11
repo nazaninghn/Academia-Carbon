@@ -2,7 +2,7 @@
 {% load static %}
 {% load i18n %}
 
-{% block page_title %}Help & Guide{% endblock %}
+{% block page_title %}{% trans "Help & Guide" %}{% endblock %}
 
 {% block extra_css %}
 <style>
@@ -477,9 +477,9 @@
         <div>
             <h1 style="font-size: 28px; font-weight: 700; color: #1e293b; margin: 0 0 8px 0;">{% trans "Help & Guide" %}</h1>
             <p style="color: #64748b; margin: 0; font-size: 14px;">
-                <span style="margin-right: 20px;"><strong>Organization:</strong> {{ user.username|title }}</span>
-                <span style="margin-right: 20px;"><strong>Period:</strong> 2024</span>
-                <span><strong>Standard:</strong> ISO 14064-1</span>
+                <span style="margin-right: 20px;"><strong>{% trans "Organization:" %}</strong> {{ user.username|title }}</span>
+                <span style="margin-right: 20px;"><strong>{% trans "Period:" %}</strong> 2024</span>
+                <span><strong>{% trans "Standard:" %}</strong> ISO 14064-1</span>
             </p>
         </div>
     </div>
@@ -547,52 +547,52 @@
     <div class="section-card" id="getting-started">
         <h2 class="section-title">
             <i class="fas fa-rocket"></i>
-            Getting Started
+            {% trans "Getting Started" %}
         </h2>
         
         <div class="info-box success">
             <i class="fas fa-lightbulb info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Quick Start in 5 Minutes</h4>
-                <p>Follow these steps to calculate your first emission and understand the platform</p>
+                <h4>{% trans "Quick Start in 5 Minutes" %}</h4>
+                <p>{% trans "Follow these steps to calculate your first emission and understand the platform" %}</p>
             </div>
         </div>
 
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number">1</div>
-                <h4>Navigate to Data Collection</h4>
-                <p>Click on "Data Collection" in the sidebar menu to access the emission entry form</p>
+                <h4>{% trans "Navigate to Data Collection" %}</h4>
+                <p>{% trans "Click on \"Data Collection\" in the sidebar menu to access the emission entry form" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">2</div>
-                <h4>Select Your Country</h4>
-                <p>Choose Turkey for Turkish organizations or Global Average for international use</p>
+                <h4>{% trans "Select Your Country" %}</h4>
+                <p>{% trans "Choose Turkey for Turkish organizations or Global Average for international use" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">3</div>
-                <h4>Choose Emission Scope</h4>
-                <p>Select Scope 1 (direct), Scope 2 (energy), or Scope 3 (indirect) based on your activity</p>
+                <h4>{% trans "Choose Emission Scope" %}</h4>
+                <p>{% trans "Select Scope 1 (direct), Scope 2 (energy), or Scope 3 (indirect) based on your activity" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">4</div>
-                <h4>Enter Activity Data</h4>
-                <p>Fill in the emission source, activity amount, and unit. Add supplier info if available</p>
+                <h4>{% trans "Enter Activity Data" %}</h4>
+                <p>{% trans "Fill in the emission source, activity amount, and unit. Add supplier info if available" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">5</div>
-                <h4>Calculate & Review</h4>
-                <p>Click "Calculate" to see results. Review the emission factor and total CO2e emissions</p>
+                <h4>{% trans "Calculate & Review" %}</h4>
+                <p>{% trans "Click \"Calculate\" to see results. Review the emission factor and total CO2e emissions" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">6</div>
-                <h4>View Reports</h4>
-                <p>Access your data through Dashboard, Analysis, or generate ISO 14064-1 reports</p>
+                <h4>{% trans "View Reports" %}</h4>
+                <p>{% trans "Access your data through Dashboard, Analysis, or generate ISO 14064-1 reports" %}</p>
             </div>
         </div>
 
@@ -600,11 +600,11 @@
         <div class="video-section">
             <div class="video-placeholder">
                 <i class="fas fa-play-circle"></i>
-                <h3 style="margin: 0 0 8px 0;">Video Tutorial</h3>
-                <p style="margin: 0; opacity: 0.8;">Watch our 3-minute getting started video</p>
+                <h3 style="margin: 0 0 8px 0;">{% trans "Video Tutorial" %}</h3>
+                <p style="margin: 0; opacity: 0.8;">{% trans "Watch our 3-minute getting started video" %}</p>
             </div>
             <p style="margin: 0; color: #64748b; font-size: 14px;">
-                <i class="fas fa-info-circle"></i> Video tutorials coming soon! For now, follow the step-by-step guide above.
+                <i class="fas fa-info-circle"></i> {% trans "Video tutorials coming soon! For now, follow the step-by-step guide above." %}
             </p>
         </div>
     </div>
@@ -613,47 +613,47 @@
     <div class="section-card" id="data-collection">
         <h2 class="section-title">
             <i class="fas fa-database"></i>
-            Data Collection Guide
+            {% trans "Data Collection Guide" %}
         </h2>
 
         <div class="feature-grid">
             <div class="feature-card">
-                <h4><i class="fas fa-globe"></i> Country Selection</h4>
-                <p>Choose the right country for accurate emission factors:</p>
+                <h4><i class="fas fa-globe"></i> {% trans "Country Selection" %}</h4>
+                <p>{% trans "Choose the right country for accurate emission factors:" %}</p>
                 <ul>
-                    <li><strong>Turkey:</strong> Use for Turkish organizations (recommended)</li>
-                    <li><strong>Global Average:</strong> International standard factors</li>
-                    <li>Country affects electricity grid, fuel composition, and transport factors</li>
+                    <li><strong>{% trans "Turkey:" %}</strong> {% trans "Use for Turkish organizations (recommended)" %}</li>
+                    <li><strong>{% trans "Global Average:" %}</strong> {% trans "International standard factors" %}</li>
+                    <li>{% trans "Country affects electricity grid, fuel composition, and transport factors" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card">
-                <h4><i class="fas fa-industry"></i> Industry Types</h4>
-                <p>Select your industry for better categorization:</p>
+                <h4><i class="fas fa-industry"></i> {% trans "Industry Types" %}</h4>
+                <p>{% trans "Select your industry for better categorization:" %}</p>
                 <ul>
-                    <li>Manufacturing, Services, Technology, Healthcare</li>
-                    <li>Request new industries if yours isn't listed</li>
-                    <li>Helps with benchmarking and reporting</li>
+                    <li>{% trans "Manufacturing, Services, Technology, Healthcare" %}</li>
+                    <li>{% trans "Request new industries if yours isn't listed" %}</li>
+                    <li>{% trans "Helps with benchmarking and reporting" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card">
-                <h4><i class="fas fa-truck"></i> Supplier Management</h4>
-                <p>Track emissions by supplier:</p>
+                <h4><i class="fas fa-truck"></i> {% trans "Supplier Management" %}</h4>
+                <p>{% trans "Track emissions by supplier:" %}</p>
                 <ul>
-                    <li>Add supplier details when entering data</li>
-                    <li>Categorize by activity type (Energy, Fuel, etc.)</li>
-                    <li>Build supplier database for engagement</li>
+                    <li>{% trans "Add supplier details when entering data" %}</li>
+                    <li>{% trans "Categorize by activity type (Energy, Fuel, etc.)" %}</li>
+                    <li>{% trans "Build supplier database for engagement" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card">
-                <h4><i class="fas fa-calculator"></i> Custom Factors</h4>
-                <p>Use your own emission factors:</p>
+                <h4><i class="fas fa-calculator"></i> {% trans "Custom Factors" %}</h4>
+                <p>{% trans "Use your own emission factors:" %}</p>
                 <ul>
-                    <li>Add factors from supplier certificates</li>
-                    <li>Use LCA study results</li>
-                    <li>Request new materials from our team</li>
+                    <li>{% trans "Add factors from supplier certificates" %}</li>
+                    <li>{% trans "Use LCA study results" %}</li>
+                    <li>{% trans "Request new materials from our team" %}</li>
                 </ul>
             </div>
         </div>
@@ -661,8 +661,8 @@
         <div class="info-box info">
             <i class="fas fa-chart-line info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Data Quality Tips</h4>
-                <p>Use actual bills and invoices when possible. Monthly data entry provides better tracking than annual estimates. Always double-check units (kWh vs MWh, liters vs gallons).</p>
+                <h4>{% trans "Data Quality Tips" %}</h4>
+                <p>{% trans "Use actual bills and invoices when possible. Monthly data entry provides better tracking than annual estimates. Always double-check units (kWh vs MWh, liters vs gallons)." %}</p>
             </div>
         </div>
     </div>
@@ -671,37 +671,37 @@
     <div class="section-card" id="scopes-guide">
         <h2 class="section-title">
             <i class="fas fa-layer-group"></i>
-            Understanding Emission Scopes
+            {% trans "Understanding Emission Scopes" %}
         </h2>
 
         <div class="feature-grid">
             <div class="feature-card" style="border-left: 4px solid #ef4444;">
-                <h4><i class="fas fa-fire" style="color: #ef4444;"></i> Scope 1 - Direct Emissions</h4>
-                <p>Emissions from sources you own or control:</p>
+                <h4><i class="fas fa-fire" style="color: #ef4444;"></i> {% trans "Scope 1 - Direct Emissions" %}</h4>
+                <p>{% trans "Emissions from sources you own or control:" %}</p>
                 <ul>
-                    <li><strong>Stationary Combustion:</strong> Boilers, furnaces, generators</li>
-                    <li><strong>Mobile Combustion:</strong> Company vehicles, forklifts</li>
-                    <li><strong>Fugitive Emissions:</strong> Refrigerant leaks, methane</li>
+                    <li><strong>{% trans "Stationary Combustion:" %}</strong> {% trans "Boilers, furnaces, generators" %}</li>
+                    <li><strong>{% trans "Mobile Combustion:" %}</strong> {% trans "Company vehicles, forklifts" %}</li>
+                    <li><strong>{% trans "Fugitive Emissions:" %}</strong> {% trans "Refrigerant leaks, methane" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card" style="border-left: 4px solid #f59e0b;">
-                <h4><i class="fas fa-bolt" style="color: #f59e0b;"></i> Scope 2 - Energy Indirect</h4>
-                <p>Emissions from purchased energy:</p>
+                <h4><i class="fas fa-bolt" style="color: #f59e0b;"></i> {% trans "Scope 2 - Energy Indirect" %}</h4>
+                <p>{% trans "Emissions from purchased energy:" %}</p>
                 <ul>
-                    <li><strong>Electricity:</strong> Grid electricity consumption</li>
-                    <li><strong>Steam/Heat:</strong> District heating and cooling</li>
-                    <li><strong>Location-based:</strong> Grid average factors</li>
+                    <li><strong>{% trans "Electricity:" %}</strong> {% trans "Grid electricity consumption" %}</li>
+                    <li><strong>{% trans "Steam, Heat & Cooling:" %}</strong> {% trans "District heating/cooling systems" %}</li>
+                    <li><strong>Location-based:</strong> {% trans "Grid average factors" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card" style="border-left: 4px solid #3b82f6;">
-                <h4><i class="fas fa-network-wired" style="color: #3b82f6;"></i> Scope 3 - Other Indirect</h4>
-                <p>All other indirect emissions in your value chain:</p>
+                <h4><i class="fas fa-network-wired" style="color: #3b82f6;"></i> {% trans "Scope 3 - Other Indirect" %}</h4>
+                <p>{% trans "All other indirect emissions in your value chain:" %}</p>
                 <ul>
-                    <li><strong>Upstream:</strong> Purchased goods, business travel</li>
-                    <li><strong>Downstream:</strong> Product use, end-of-life treatment</li>
-                    <li><strong>15 Categories:</strong> As defined by GHG Protocol</li>
+                    <li><strong>{% trans "Upstream:" %}</strong> {% trans "Purchased goods, business travel" %}</li>
+                    <li><strong>{% trans "Downstream:" %}</strong> {% trans "Product use, end-of-life treatment" %}</li>
+                    <li><strong>15 Categories:</strong> {% trans "As defined by GHG Protocol" %}</li>
                 </ul>
             </div>
         </div>
@@ -709,30 +709,30 @@
         <div class="comparison-table">
             <thead>
                 <tr>
-                    <th>Scope</th>
-                    <th>Typical % of Total</th>
-                    <th>Data Availability</th>
-                    <th>Reporting Priority</th>
+                    <th>{% trans "Scope" %}</th>
+                    <th>{% trans "Typical %" %}</th>
+                    <th>{% trans "Data Accuracy" %}</th>
+                    <th>{% trans "Reporting Priority" %}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><span class="badge red">Scope 1</span></td>
+                    <td><span class="badge red">{% trans "Scope 1" %}</span></td>
                     <td>10-30%</td>
-                    <td>High (bills, receipts)</td>
-                    <td>Mandatory</td>
+                    <td>{% trans "High (bills, receipts)" %}</td>
+                    <td>{% trans "Mandatory" %}</td>
                 </tr>
                 <tr>
-                    <td><span class="badge yellow">Scope 2</span></td>
+                    <td><span class="badge yellow">{% trans "Scope 2" %}</span></td>
                     <td>20-50%</td>
-                    <td>High (electricity bills)</td>
-                    <td>Mandatory</td>
+                    <td>{% trans "High (electricity bills)" %}</td>
+                    <td>{% trans "Mandatory" %}</td>
                 </tr>
                 <tr>
-                    <td><span class="badge blue">Scope 3</span></td>
+                    <td><span class="badge blue">{% trans "Scope 3" %}</span></td>
                     <td>40-80%</td>
-                    <td>Medium (estimates)</td>
-                    <td>Recommended</td>
+                    <td>{% trans "Medium (estimates)" %}</td>
+                    <td>{% trans "Recommended" %}</td>
                 </tr>
             </tbody>
         </table>
@@ -748,38 +748,38 @@
         <div class="info-box info">
             <i class="fas fa-info-circle info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Why Turkey-Specific Factors Matter</h4>
-                <p>Turkey has unique emission factors based on IEA 2023 data and Turkish Ministry of Environment guidelines, providing more accurate results for Turkish organizations.</p>
+                <h4>{% trans "Why Turkey-Specific Factors Matter" %}</h4>
+                <p>{% trans "Turkey has unique emission factors based on IEA 2023 data and Turkish Ministry of Environment guidelines, providing more accurate results for Turkish organizations." %}</p>
             </div>
         </div>
 
-        <h3 style="font-size: 20px; font-weight: 600; margin: 20px 0 15px 0;">Turkey's Energy Mix (2023)</h3>
+        <h3 style="font-size: 20px; font-weight: 600; margin: 20px 0 15px 0;">{% trans "Turkey's Energy Mix (2023)" %}</h3>
         <div class="feature-grid">
             <div class="feature-card">
-                <h4>🏭 Coal: 37%</h4>
-                <p>Primarily lignite coal from domestic sources with higher emission factors</p>
+                <h4>🏭 {% trans "Coal: 37%" %}</h4>
+                <p>{% trans "Primarily lignite coal from domestic sources with higher emission factors" %}</p>
             </div>
             <div class="feature-card">
-                <h4>⚡ Natural Gas: 26%</h4>
-                <p>Imported natural gas for power generation and heating</p>
+                <h4>⚡ {% trans "Natural Gas: 26%" %}</h4>
+                <p>{% trans "Imported natural gas for power generation and heating" %}</p>
             </div>
             <div class="feature-card">
-                <h4>💧 Hydropower: 25%</h4>
-                <p>Renewable hydroelectric power, zero operational emissions</p>
+                <h4>💧 {% trans "Hydropower: 25%" %}</h4>
+                <p>{% trans "Renewable hydroelectric power, zero operational emissions" %}</p>
             </div>
             <div class="feature-card">
-                <h4>🌞 Renewables: 12%</h4>
-                <p>Growing wind and solar capacity</p>
+                <h4>🌞 {% trans "Renewables: 12%" %}</h4>
+                <p>{% trans "Growing wind and solar capacity" %}</p>
             </div>
         </div>
 
-        <h3 style="font-size: 20px; font-weight: 600; margin: 20px 0 15px 0;">Unique Transportation Options</h3>
+        <h3 style="font-size: 20px; font-weight: 600; margin: 20px 0 15px 0;">{% trans "Unique Transportation Options" %}</h3>
         <div class="comparison-table">
             <thead>
                 <tr>
-                    <th>Transport Mode</th>
-                    <th>Emission Factor</th>
-                    <th>Example Calculation</th>
+                    <th>{% trans "Transport Mode" %}</th>
+                    <th>{% trans "Emission Factor" %}</th>
+                    <th>{% trans "Example Calculation" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -809,8 +809,8 @@
         <div class="info-box success">
             <i class="fas fa-leaf info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Sustainable Transport in Turkey</h4>
-                <p>Taking the train from Istanbul to Ankara produces <strong>85% less emissions</strong> than flying! Metro and dolmuş are also efficient options for urban transport.</p>
+                <h4>{% trans "Sustainable Transport in Turkey" %}</h4>
+                <p>{% trans "Taking the train from Istanbul to Ankara produces 85% less emissions than flying! Metro and dolmuş are also efficient options for urban transport." %}</p>
             </div>
         </div>
     </div>
@@ -819,52 +819,52 @@
     <div class="section-card" id="reporting">
         <h2 class="section-title">
             <i class="fas fa-file-alt"></i>
-            ISO 14064-1 Reporting
+            {% trans "ISO 14064-1 Reporting" %}
         </h2>
 
         <div class="steps-grid">
             <div class="step-card">
                 <div class="step-number">1</div>
-                <h4>Collect Complete Data</h4>
-                <p>Ensure you have data for all relevant Scope 1, 2, and 3 emissions for your reporting period</p>
+                <h4>{% trans "Collect Complete Data" %}</h4>
+                <p>{% trans "Ensure you have data for all relevant Scope 1, 2, and 3 emissions for your reporting period" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">2</div>
-                <h4>Access Reporting</h4>
-                <p>Navigate to "Reporting" in the sidebar to access the ISO 14064-1 report generator</p>
+                <h4>{% trans "Access Reporting" %}</h4>
+                <p>{% trans "Navigate to \"Reporting\" in the sidebar to access the ISO 14064-1 report generator" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">3</div>
-                <h4>Review Report</h4>
-                <p>Check the automatically generated report for completeness and accuracy</p>
+                <h4>{% trans "Review Report" %}</h4>
+                <p>{% trans "Check the automatically generated report for completeness and accuracy" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">4</div>
-                <h4>Enhance Accuracy</h4>
-                <p>Use the "Improve report accuracy" feature to add organizational details</p>
+                <h4>{% trans "Enhance Accuracy" %}</h4>
+                <p>{% trans "Use the \"Improve report accuracy\" feature to add organizational details" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">5</div>
-                <h4>Download PDF</h4>
-                <p>Generate and download your professional ISO 14064-1 compliant report</p>
+                <h4>{% trans "Download PDF" %}</h4>
+                <p>{% trans "Generate and download your professional ISO 14064-1 compliant report" %}</p>
             </div>
 
             <div class="step-card">
                 <div class="step-number">6</div>
-                <h4>Share & Submit</h4>
-                <p>Use the report for compliance, stakeholder communication, or certification</p>
+                <h4>{% trans "Share & Submit" %}</h4>
+                <p>{% trans "Use the report for compliance, stakeholder communication, or certification" %}</p>
             </div>
         </div>
 
         <div class="info-box warning">
             <i class="fas fa-exclamation-triangle info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Report Quality Checklist</h4>
-                <p>✓ All material emissions included • ✓ Consistent methodology • ✓ Appropriate emission factors • ✓ Clear organizational boundary • ✓ Complete documentation</p>
+                <h4>{% trans "Report Quality Checklist" %}</h4>
+                <p>{% trans "✓ All material emissions included • ✓ Consistent methodology • ✓ Appropriate emission factors • ✓ Clear organizational boundary • ✓ Complete documentation" %}</p>
             </div>
         </div>
     </div>
@@ -873,33 +873,33 @@
     <div class="section-card" id="best-practices">
         <h2 class="section-title">
             <i class="fas fa-star"></i>
-            Best Practices
+            {% trans "Best Practices" %}
         </h2>
 
         <div class="feature-grid">
             <div class="feature-card" style="border-left: 4px solid #10b981;">
-                <h4><i class="fas fa-check-circle" style="color: #10b981;"></i> DO</h4>
+                <h4><i class="fas fa-check-circle" style="color: #10b981;"></i> {% trans "DO" %}</h4>
                 <ul>
-                    <li>Select correct country before calculating</li>
-                    <li>Use actual bills and invoices when available</li>
-                    <li>Enter data monthly for better tracking</li>
-                    <li>Add descriptions and supplier information</li>
-                    <li>Review and validate all entries</li>
-                    <li>Keep supporting documentation</li>
-                    <li>Include all material emission sources</li>
+                    <li>{% trans "Select correct country before calculating" %}</li>
+                    <li>{% trans "Use actual bills and invoices when available" %}</li>
+                    <li>{% trans "Enter data monthly for better tracking" %}</li>
+                    <li>{% trans "Add descriptions and supplier information" %}</li>
+                    <li>{% trans "Review and validate all entries" %}</li>
+                    <li>{% trans "Keep supporting documentation" %}</li>
+                    <li>{% trans "Include all material emission sources" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card" style="border-left: 4px solid #ef4444;">
-                <h4><i class="fas fa-times-circle" style="color: #ef4444;"></i> DON'T</h4>
+                <h4><i class="fas fa-times-circle" style="color: #ef4444;"></i> {% trans "DON'T" %}</h4>
                 <ul>
-                    <li>Use estimates when actual data is available</li>
-                    <li>Mix different time periods in one calculation</li>
-                    <li>Forget to check units (kWh vs MWh)</li>
-                    <li>Skip Scope 3 emissions entirely</li>
-                    <li>Ignore data quality issues</li>
-                    <li>Change methodology mid-year</li>
-                    <li>Forget to document assumptions</li>
+                    <li>{% trans "Use estimates when actual data is available" %}</li>
+                    <li>{% trans "Mix different time periods in one calculation" %}</li>
+                    <li>{% trans "Forget to check units (kWh vs MWh)" %}</li>
+                    <li>{% trans "Skip Scope 3 emissions entirely" %}</li>
+                    <li>{% trans "Ignore data quality issues" %}</li>
+                    <li>{% trans "Change methodology mid-year" %}</li>
+                    <li>{% trans "Forget to document assumptions" %}</li>
                 </ul>
             </div>
         </div>
@@ -907,8 +907,8 @@
         <div class="info-box success">
             <i class="fas fa-calendar-check info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Monthly Data Collection Checklist</h4>
-                <p>✓ Electricity bills • ✓ Natural gas bills • ✓ Fuel purchases • ✓ Business travel records • ✓ Waste disposal receipts • ✓ Review dashboard totals</p>
+                <h4>{% trans "Monthly Data Collection Checklist" %}</h4>
+                <p>{% trans "✓ Electricity bills • ✓ Natural gas bills • ✓ Fuel purchases • ✓ Business travel records • ✓ Waste disposal receipts • ✓ Review dashboard totals" %}</p>
             </div>
         </div>
     </div>
@@ -917,67 +917,67 @@
     <div class="section-card">
         <h2 class="section-title">
             <i class="fas fa-question-circle"></i>
-            Frequently Asked Questions
+            {% trans "Frequently Asked Questions" %}
         </h2>
 
         <div class="faq-section">
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>How accurate are the emission factors?</span>
+                    <span>{% trans "How accurate are the emission factors?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>All emission factors are based on international standards (IPCC, EPA, DEFRA) and country-specific data from official sources like IEA and Turkish Ministry of Environment. Turkey-specific factors are updated annually and provide higher accuracy for Turkish organizations.</p>
+                    <p>{% trans "All emission factors are based on international standards (IPCC, EPA, DEFRA) and country-specific data from official sources like IEA and Turkish Ministry of Environment. Turkey-specific factors are updated annually and provide higher accuracy for Turkish organizations." %}</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>Can I change the country after calculating?</span>
+                    <span>{% trans "Can I change the country after calculating?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>No, once a calculation is saved, the country cannot be changed as it affects the emission factors used. Always select your country before calculating. You can delete the record and recalculate if needed.</p>
+                    <p>{% trans "No, once a calculation is saved, the country cannot be changed as it affects the emission factors used. Always select your country before calculating. You can delete the record and recalculate if needed." %}</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>What if my industry or material isn't listed?</span>
+                    <span>{% trans "What if my industry or material isn't listed?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>You can request new industries or materials directly from the system. Click "Add Industry" or select "Other" when choosing materials, then submit a request with details. Our team will research and add appropriate emission factors from official sources.</p>
+                    <p>{% trans "You can request new industries or materials directly from the system. Click \"Add Industry\" or select \"Other\" when choosing materials, then submit a request with details. Our team will research and add appropriate emission factors from official sources." %}</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>How often should I track emissions?</span>
+                    <span>{% trans "How often should I track emissions?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>We recommend monthly tracking for Scope 1 and 2 emissions (electricity, fuel) and quarterly for Scope 3 emissions (travel, waste). This provides a good balance between accuracy and effort while enabling trend analysis.</p>
+                    <p>{% trans "We recommend monthly tracking for Scope 1 and 2 emissions (electricity, fuel) and quarterly for Scope 3 emissions (travel, waste). This provides a good balance between accuracy and effort while enabling trend analysis." %}</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>Is my data secure and private?</span>
+                    <span>{% trans "Is my data secure and private?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, your data is stored securely using industry-standard encryption. We never share your emission data with third parties without your explicit consent. You can export or delete your data at any time from the Settings page.</p>
+                    <p>{% trans "Yes, your data is stored securely using industry-standard encryption. We never share your emission data with third parties without your explicit consent. You can export or delete your data at any time from the Settings page." %}</p>
                 </div>
             </div>
 
             <div class="faq-item">
                 <div class="faq-question">
-                    <span>Can I use custom emission factors?</span>
+                    <span>{% trans "Can I use custom emission factors?" %}</span>
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes! You can add custom emission factors from supplier certificates, LCA studies, or your own calculations. Use the "Custom Factor" option when entering data, or request new materials from our team for official factors.</p>
+                    <p>{% trans "Yes! You can add custom emission factors from supplier certificates, LCA studies, or your own calculations. Use the \"Custom Factor\" option when entering data, or request new materials from our team for official factors." %}</p>
                 </div>
             </div>
         </div>
@@ -992,22 +992,22 @@
 
         <div class="feature-grid">
             <div class="feature-card">
-                <h4><i class="fas fa-exclamation-triangle"></i> Common Issues</h4>
+                <h4><i class="fas fa-exclamation-triangle"></i> {% trans "Common Issues" %}</h4>
                 <ul>
-                    <li><strong>Calculation not working:</strong> Check all required fields are filled</li>
-                    <li><strong>Wrong units:</strong> Verify unit selection matches your data</li>
-                    <li><strong>Missing data:</strong> Ensure activity data is greater than 0</li>
-                    <li><strong>Country issues:</strong> Select country before entering data</li>
+                    <li><strong>{% trans "Calculation not working:" %}</strong> {% trans "Check all required fields are filled" %}</li>
+                    <li><strong>{% trans "Wrong units:" %}</strong> {% trans "Verify unit selection matches your data" %}</li>
+                    <li><strong>{% trans "Missing data:" %}</strong> {% trans "Ensure activity data is greater than 0" %}</li>
+                    <li><strong>{% trans "Country issues:" %}</strong> {% trans "Select country before entering data" %}</li>
                 </ul>
             </div>
 
             <div class="feature-card">
-                <h4><i class="fas fa-redo"></i> Quick Fixes</h4>
+                <h4><i class="fas fa-redo"></i> {% trans "Quick Fixes" %}</h4>
                 <ul>
-                    <li><strong>Refresh page:</strong> Reload if forms aren't responding</li>
-                    <li><strong>Clear browser cache:</strong> For persistent issues</li>
-                    <li><strong>Check internet:</strong> Ensure stable connection</li>
-                    <li><strong>Try different browser:</strong> Chrome, Firefox, or Edge</li>
+                    <li><strong>{% trans "Refresh page:" %}</strong> {% trans "Reload if forms aren't responding" %}</li>
+                    <li><strong>{% trans "Clear browser cache:" %}</strong> {% trans "For persistent issues" %}</li>
+                    <li><strong>{% trans "Check internet:" %}</strong> {% trans "Ensure stable connection" %}</li>
+                    <li><strong>{% trans "Try different browser:" %}</strong> {% trans "Chrome, Firefox, or Edge" %}</li>
                 </ul>
             </div>
         </div>
@@ -1015,8 +1015,8 @@
         <div class="info-box warning">
             <i class="fas fa-life-ring info-box-icon"></i>
             <div class="info-box-content">
-                <h4>Need More Help?</h4>
-                <p>If you can't find the answer here, visit our <a href="{% url 'ghg:support' %}" style="color: #10b981; font-weight: 600;">Support Center</a> for additional resources, contact forms, and direct assistance.</p>
+                <h4>{% trans "Need More Help?" %}</h4>
+                <p>{% trans "If you can't find the answer here, visit our" %} <a href="{% url 'ghg:support' %}" style="color: #10b981; font-weight: 600;">{% trans "Support Center" %}</a> {% trans "for additional resources, contact forms, and direct assistance." %}</p>
             </div>
         </div>
     </div>
@@ -1025,35 +1025,35 @@
     <div class="section-card" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #10b981;">
         <h2 class="section-title" style="margin-bottom: 16px;">
             <i class="fas fa-rocket"></i>
-            Ready to Start?
+            {% trans "Ready to Start?" %}
         </h2>
         <p style="color: #64748b; margin-bottom: 20px;">
-            Choose an action below to begin your emission tracking journey
+            {% trans "Choose an action below to begin your emission tracking journey" %}
         </p>
         
         <div class="action-cards">
             <a href="{% url 'ghg:data_entry' %}" class="action-card">
                 <i class="fas fa-plus-circle"></i>
-                <h4>Start Data Entry</h4>
-                <p>Begin calculating emissions</p>
+                <h4>{% trans "Start Data Entry" %}</h4>
+                <p>{% trans "Begin calculating emissions" %}</p>
             </a>
 
             <a href="{% url 'ghg:emission_history' %}" class="action-card">
                 <i class="fas fa-history"></i>
-                <h4>View History</h4>
-                <p>See your emission records</p>
+                <h4>{% trans "View History" %}</h4>
+                <p>{% trans "See your emission records" %}</p>
             </a>
 
             <a href="/en/reporting/inventory" class="action-card">
                 <i class="fas fa-file-alt"></i>
-                <h4>Generate Report</h4>
-                <p>Create ISO 14064-1 report</p>
+                <h4>{% trans "Generate Report" %}</h4>
+                <p>{% trans "Create ISO 14064-1 report" %}</p>
             </a>
 
             <a href="{% url 'ghg:support' %}" class="action-card">
                 <i class="fas fa-headset"></i>
-                <h4>Get Support</h4>
-                <p>Contact our team</p>
+                <h4>{% trans "Get Support" %}</h4>
+                <p>{% trans "Contact our team" %}</p>
             </a>
         </div>
     </div>

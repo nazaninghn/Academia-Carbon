@@ -7,6 +7,7 @@ urlpatterns = [
     # Landing page
     path('landing/', views.landing_page, name='landing'),
     path('test-language/', views.test_language, name='test_language'),
+    path('test-translation/', views.test_translation, name='test_translation'),
     
     # Authentication
     path('login/', views.email_login_view, name='email_login'),

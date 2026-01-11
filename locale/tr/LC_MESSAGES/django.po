@@ -3,1970 +3,388 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Carbon Tracker 1.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-06 08:02-0800\n"
-"PO-Revision-Date: 2025-11-22 03:25-0800\n"
-"Last-Translator: Carbon Tracker Team\n"
-"Language-Team: Turkish\n"
-"Language: tr\n"
+"POT-Creation-Date: 2026-01-11 13:10-0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-# Existing translations
 #: .\ghg\admin_views.py:23
 msgid "Please enter the correct username and password."
-msgstr "Lütfen doğru kullanıcı adı ve şifre girin."
+msgstr ""
 
-#: .\templates\admin\login.html:8 .\templates\auth\login.html:8
-#: .\templates\landing.html:1039
+
+#: .\templates\action_planning.html:5 .\templates\landing.html:2444
+#: .\templates\partials\sidebar.html:62
+msgid "Action Planning"
+msgstr ""
+
+#: .\templates\action_planning.html:132
+msgid "Target Year"
+msgstr ""
+
+#: .\templates\action_planning.html:141
+msgid "New Plan"
+msgstr ""
+
+#: .\templates\action_planning.html:155
+msgid "Carbon Reduction Action Planning"
+msgstr ""
+
+#: .\templates\action_planning.html:156 .\templates\analysis.html:311
+#: .\templates\analysis.html:333
+msgid "Coming Soon"
+msgstr ""
+
+#: .\templates\action_planning.html:159
+#: .\templates\action_planning.html:164
+msgid "Start with Data Collection"
+msgstr ""
+
+#: .\templates\action_planning.html:168
+msgid "View Current Emissions"
+msgstr ""
+
+#: .\templates\action_planning.html:180
+msgid "Set Reduction Targets"
+msgstr ""
+
+#: .\templates\action_planning.html:181
+#: .\templates\action_planning.html:190
+msgid "Create Action Plans"
+msgstr ""
+
+#: .\templates\action_planning.html:191
+#: .\templates\action_planning.html:200 .\templates\index.html:213
+msgid "Track Progress"
+msgstr ""
+
+#: .\templates\action_planning.html:201
+#: .\templates\action_planning.html:210
+msgid "Smart Recommendations"
+msgstr ""
+
+#: .\templates\action_planning.html:211
+#: .\templates\action_planning.html:220
+msgid "Team Collaboration"
+msgstr ""
+
+#: .\templates\action_planning.html:221
+#: .\templates\action_planning.html:230
+msgid "Progress Reports"
+msgstr ""
+
+#: .\templates\action_planning.html:231
+#: .\templates\action_planning.html:240
+msgid "Development Status"
+msgstr ""
+
+#: .\templates\action_planning.html:243
+#: .\templates\action_planning.html:246
+msgid "Continue collecting emission data to establish your baseline"
+msgstr ""
+
+#: .\templates\action_planning.html:247
+msgid "Generate reports to understand your current emission profile"
+msgstr ""
+
+#: .\templates\action_planning.html:248
+msgid "Analyze your data to identify reduction opportunities"
+msgstr ""
+
+#: .\templates\action_planning.html:249
+msgid "Contact our support team for guidance on reduction strategies"
+msgstr ""
+
 msgid "Login"
 msgstr "Giriş"
 
-# Landing Page Translations
+msgid "Analysis"
+msgstr "Analiz"
+
+#: .\templates\analysis.html:272 .\templates\analysis.html:376
+msgid "Emissions Analysis"
+msgstr ""
+
+#: .\templates\analysis.html:273
+#: .\templates\analysis.html:278
+msgid "Scope-wise emission breakdown"
+msgstr ""
+
+#: .\templates\analysis.html:279
+msgid "Date range filtering"
+msgstr ""
+
+#: .\templates\analysis.html:280
+msgid "Source contribution analysis"
+msgstr ""
+
+#: .\templates\analysis.html:281
+msgid "Audit-ready reporting"
+msgstr ""
+
+#: .\templates\analysis.html:308
+msgid "Comparative Analysis"
+msgstr ""
+
+#: .\templates\analysis.html:309
+#: .\templates\analysis.html:315
+msgid "Industry benchmarking"
+msgstr ""
+
+#: .\templates\analysis.html:316
+msgid "Peer comparison"
+msgstr ""
+
+#: .\templates\analysis.html:317
+msgid "Best practice insights"
+msgstr ""
+
+#: .\templates\analysis.html:318
+msgid "Improvement recommendations"
+msgstr ""
+
+#: .\templates\analysis.html:330
+msgid "Performance Analysis"
+msgstr ""
+
+#: .\templates\analysis.html:331
+msgid "Track your carbon reduction performance and goal achievement over time."
+msgstr ""
+
+#: .\templates\analysis.html:337
+msgid "Goal tracking & progress"
+msgstr ""
+
+#: .\templates\analysis.html:338
+msgid "Reduction trend analysis"
+msgstr ""
+
+#: .\templates\analysis.html:339
+msgid "Performance scoring"
+msgstr ""
+
+#: .\templates\analysis.html:340
+msgid "Achievement milestones"
+msgstr ""
+
+#: .\templates\analysis.html:352
+msgid "Supplier Analysis"
+msgstr ""
+
+#: .\templates\analysis.html:353
+msgid "Analyze emissions from your supply chain and supplier carbon footprint."
+msgstr ""
+
+#: .\templates\analysis.html:357
+msgid "NEW"
+msgstr ""
+
+#: .\templates\analysis.html:362
+msgid "Supplier carbon footprint"
+msgstr ""
+
+#: .\templates\analysis.html:363
+msgid "Supply chain emissions"
+msgstr ""
+
+#: .\templates\analysis.html:364
+msgid "Vendor sustainability scoring"
+msgstr ""
+
+#: .\templates\analysis.html:365
+msgid "Procurement recommendations"
+msgstr ""
+
+#: .\templates\analysis\emissions.html:76
+msgid "TOTAL"
+msgstr ""
+
+#: .\templates\analysis\emissions.html:145
+msgid "Next"
+msgstr ""
+
 #: .\templates\auth\login.html:9
 msgid "Login to Academia Carbon - Professional carbon tracking platform"
-msgstr "Academia Carbon'a Giriş - Profesyonel karbon izleme platformu"
-
-#: .\templates\auth\login.html:582
-msgid "Professional Carbon Tracking"
-msgstr "Profesyonel Karbon İzleme"
-
-#: .\templates\auth\login.html:585
-msgid "Track Your"
-msgstr "İzleyin"
-
-#: .\templates\auth\login.html:586
-msgid "Carbon Impact"
-msgstr "Karbon Etkisi"
-
-#: .\templates\auth\login.html:590
-msgid ""
-"Join organizations worldwide using Academia Carbon to measure, analyze, and "
-"reduce their environmental footprint with precision and compliance."
 msgstr ""
-"Academia Carbon'u kullanarak çevresel ayak izlerini hassasiyetle ve uyumlu "
-"şekilde ölçen, analiz eden ve azaltan dünya çapındaki kuruluşlara katılın."
 
-#: .\templates\auth\login.html:596
+#: .\templates\auth\login.html:456
+msgid "Professional Carbon Tracking"
+msgstr ""
+
+#: .\templates\auth\login.html:457
+msgid "Track Your"
+msgstr ""
+
+#: .\templates\auth\login.html:457
+msgid "Carbon Impact"
+msgstr ""
+
+#: .\templates\auth\login.html:459
+#: .\templates\auth\login.html:467
 msgid "Certified"
-msgstr "Sertifikalı"
+msgstr ""
 
-#: .\templates\auth\login.html:600
+#: .\templates\auth\login.html:473
 msgid "Accuracy"
-msgstr "Doğruluk"
+msgstr ""
 
-#: .\templates\auth\login.html:604 .\templates\landing.html:1094
-#: .\templates\landing.html:1270 .\templates\partials\sidebar.html:93
 msgid "Support"
 msgstr "Destek"
 
-#: .\templates\auth\login.html:613
+#: .\templates\auth\login.html:487
 msgid "Welcome Back"
-msgstr "Tekrar Hoş Geldiniz"
+msgstr ""
 
-#: .\templates\auth\login.html:614
+#: .\templates\auth\login.html:488
 msgid "Sign in to continue tracking your carbon footprint"
-msgstr "Karbon ayak izinizi izlemeye devam etmek için oturum açın"
+msgstr ""
 
-#: .\templates\auth\login.html:638 .\templates\auth\signup.html:559
+#: .\templates\auth\login.html:504 .\templates\auth\signup.html:387
+#: .\templates\settings.html:223 .\templates\support.html:349
 msgid "Email Address"
-msgstr "E-posta Adresi"
+msgstr ""
 
-#: .\templates\auth\login.html:648 .\templates\auth\signup.html:591
+#: .\templates\auth\login.html:510
+msgid "Enter your email address"
+msgstr ""
+
+#: .\templates\auth\login.html:520 .\templates\auth\signup.html:403
 msgid "Password"
-msgstr "Şifre"
+msgstr ""
 
-#: .\templates\auth\login.html:661 .\templates\auth\signup.html:638
-#: .\templates\landing.html:1222
+#: .\templates\auth\login.html:526
+msgid "Enter your password"
+msgstr ""
+
+#: .\templates\auth\login.html:535 .\templates\auth\signup.html:459
+#: .\templates\landing.html:3386
 msgid "Sign In"
-msgstr "Oturum Açın"
+msgstr ""
 
-#: .\templates\auth\login.html:666
+#: .\templates\auth\login.html:540
 msgid "or continue with"
-msgstr "veya devam edin"
+msgstr ""
 
-#: .\templates\auth\login.html:669
+#: .\templates\auth\login.html:543
 msgid "Google login coming soon!"
-msgstr "Google girişi yakında geliyor!"
+msgstr ""
 
-#: .\templates\auth\login.html:676
+#: .\templates\auth\login.html:545 .\templates\auth\signup.html:453
 msgid "Continue with Google"
-msgstr "Google ile Devam Et"
+msgstr ""
 
-#: .\templates\auth\login.html:680
+#: .\templates\auth\login.html:549
 msgid "Don't have an account?"
-msgstr "Hesabınız yok mu?"
+msgstr ""
 
-#: .\templates\auth\login.html:682 .\templates\auth\signup.html:8
+#: .\templates\auth\login.html:551 .\templates\auth\signup.html:8
 msgid "Sign Up"
-msgstr "Kayıt Ol"
+msgstr ""
 
 #: .\templates\auth\signup.html:9
-msgid ""
-"Create your Academia Carbon account - Start tracking your carbon footprint"
-msgstr ""
-"Academia Carbon hesabınızı oluşturun - Karbon ayak izinizi izlemeye başlayın"
-
-#: .\templates\auth\signup.html:532
+#: .\templates\auth\signup.html:336
 msgid "Join Academia Carbon"
-msgstr "Academia Carbon'a Katılın"
+msgstr ""
 
-#: .\templates\auth\signup.html:533
+#: .\templates\auth\signup.html:337
 msgid "Create your account and start tracking your carbon footprint"
-msgstr "Hesabınızı oluşturun ve karbon ayak izinizi izlemeye başlayın"
+msgstr ""
 
-#: .\templates\auth\signup.html:570
+#: .\templates\auth\signup.html:354
 msgid "First Name"
-msgstr "Ad"
+msgstr ""
 
-#: .\templates\auth\signup.html:580
+#: .\templates\auth\signup.html:370
 msgid "Last Name"
-msgstr "Soyad"
+msgstr ""
 
-#: .\templates\auth\signup.html:604
+#: .\templates\auth\signup.html:418
 msgid "Confirm Password"
-msgstr "Şifreyi Onayla"
+msgstr ""
 
-#: .\templates\auth\signup.html:616
+#: .\templates\auth\signup.html:431
 msgid "Password Requirements:"
-msgstr "Şifre Gereksinimleri:"
+msgstr ""
 
-#: .\templates\auth\signup.html:618
+#: .\templates\auth\signup.html:433
 msgid "At least 8 characters long"
-msgstr "En az 8 karakter uzunluğunda"
+msgstr ""
 
-#: .\templates\auth\signup.html:619
+#: .\templates\auth\signup.html:434
 msgid "Not similar to your personal information"
-msgstr "Kişisel bilgilerinize benzer olmamalı"
+msgstr ""
 
-#: .\templates\auth\signup.html:620
+#: .\templates\auth\signup.html:435
 msgid "Not a commonly used password"
-msgstr "Yaygın kullanılan bir şifre olmamalı"
+msgstr ""
 
-#: .\templates\auth\signup.html:621
+#: .\templates\auth\signup.html:436
 msgid "Cannot be entirely numeric"
-msgstr "Tamamen sayısal olamaz"
+msgstr ""
 
-#: .\templates\auth\signup.html:627
+#: .\templates\auth\signup.html:443
 msgid "Create Account"
-msgstr "Hesap Oluştur"
+msgstr ""
 
-#: .\templates\auth\signup.html:632
-#: .\venv\Lib\site-packages\django\utils\text.py:287
+#: .\templates\auth\signup.html:448
 msgid "or"
-msgstr "veya"
+msgstr ""
 
-#: .\templates\auth\signup.html:636
+#: .\templates\auth\signup.html:451
+msgid "Google signup coming soon!"
+msgstr ""
+
+#: .\templates\auth\signup.html:457
 msgid "Already have an account?"
-msgstr "Zaten hesabınız var mı?"
+msgstr ""
 
-#: .\templates\base.html:110 .\templates\landing.html:1281
+#: .\templates\base.html:96 .\templates\dashboard_base.html:836
+msgid "Logout"
+msgstr ""
+
+#: .\templates\base.html:110 .\templates\landing.html:3482
 msgid "All rights reserved."
-msgstr "Tüm hakları saklıdır."
+msgstr ""
 
-#: .\templates\dashboard_base.html:576 .\templates\index.html:5
-#: .\templates\partials\page_header.html:7 .\templates\partials\sidebar.html:32
 msgid "Dashboard"
 msgstr "Kontrol Paneli"
 
-# Dashboard translations
-#: .\templates\dashboard_base.html:585
-msgid "Logout"
-msgstr "Çıkış"
-
-#: .\templates\data_entry.html:164 .\templates\partials\sidebar.html:38
 msgid "Data Collection"
 msgstr "Veri Toplama"
 
-#: .\templates\data_entry_new.html:10
-#, fuzzy
-#| msgid "Supplier Management"
-msgid "Emission Management"
-msgstr "Tedarikçi Yönetimi"
+#: .\templates\data_entry.html:166 .\templates\data_entry_new.html:11
+#: .\templates\settings.html:193
+msgid "Organization"
+msgstr ""
 
-#: .\templates\index.html:12
+#: .\templates\data_entry.html:167 .\templates\index.html:12
 msgid "Period"
-msgstr "Dönem"
-
-#: .\templates\index.html:17
-msgid "All Time"
-msgstr "Tüm Zamanlar"
-
-#: .\templates\index.html:21
-msgid "Refresh"
-msgstr "Yenile"
-
-#: .\templates\index.html:33
-msgid "Welcome back!"
-msgstr "Tekrar hoş geldiniz!"
-
-#: .\templates\index.html:34
-msgid "Here's what's happening with your carbon emissions today."
-msgstr "Bugün karbon emisyonlarınızla ilgili neler oluyor."
-
-#: .\templates\index.html:42
-msgid "Total Emissions"
-msgstr "Toplam Emisyonlar"
-
-#: .\templates\index.html:48 .\templates\index.html:64
-#: .\templates\index.html:80 .\templates\index.html:96
-msgid "Loading..."
-msgstr "Yükleniyor..."
-
-#: .\templates\index.html:52 .\templates\index.html:68
-#: .\templates\index.html:84
-msgid "Calculating..."
-msgstr "Hesaplanıyor..."
-
-#: .\templates\index.html:58
-msgid "Records Count"
-msgstr "Kayıt Sayısı"
-
-#: .\templates\index.html:74
-msgid "This Month"
-msgstr "Bu Ay"
-
-#: .\templates\index.html:90 .\templates\partials\sidebar.html:68
-msgid "Suppliers"
-msgstr "Tedarikçiler"
-
-#: .\templates\index.html:99
-msgid "Active suppliers"
-msgstr "Aktif tedarikçiler"
-
-#: .\templates\index.html:108
-msgid "Emissions by Scope"
-msgstr "Kapsam Bazında Emisyonlar"
-
-#: .\templates\index.html:109
-msgid "Distribution across Scope 1, 2, and 3"
-msgstr "Kapsam 1, 2 ve 3 arasında dağılım"
-
-#: .\templates\index.html:118
-msgid "Monthly Trends"
-msgstr "Aylık Trendler"
-
-#: .\templates\index.html:119
-msgid "Emission trends over the last 6 months"
-msgstr "Son 6 ayın emisyon trendleri"
-
-#: .\templates\index.html:130
-msgid "Quick Actions"
-msgstr "Hızlı İşlemler"
-
-#: .\templates\index.html:131
-msgid "Get started with common tasks"
-msgstr "Yaygın görevlerle başlayın"
-
-#: .\templates\index.html:137
-msgid "Add Emission Data"
-msgstr "Emisyon Verisi Ekle"
-
-#: .\templates\index.html:141
-msgid "Generate Report"
-msgstr "Rapor Oluştur"
-
-#: .\templates\index.html:145
-msgid "View Analysis"
-msgstr "Analizi Görüntüle"
-
-#: .\templates\index.html:149
-msgid "View History"
-msgstr "Geçmişi Görüntüle"
-
-#: .\templates\index.html:159
-msgid "Recent Activity"
-msgstr "Son Aktiviteler"
-
-#: .\templates\index.html:168
-msgid "New emission record added"
-msgstr "Yeni emisyon kaydı eklendi"
-
-#: .\templates\index.html:169
-msgid "2 hours ago"
-msgstr "2 saat önce"
-
-#: .\templates\index.html:177
-msgid "Report generated"
-msgstr "Rapor oluşturuldu"
-
-#: .\templates\index.html:178
-msgid "1 day ago"
-msgstr "1 gün önce"
-
-#: .\templates\index.html:186
-msgid "Analysis completed"
-msgstr "Analiz tamamlandı"
-
-#: .\templates\index.html:187
-msgid "3 days ago"
-msgstr "3 gün önce"
-
-#: .\templates\index.html:196
-msgid "Tips & Insights"
-msgstr "İpuçları ve Görüşler"
-
-#: .\templates\index.html:204
-msgid "Reduce Scope 2 Emissions"
-msgstr "Kapsam 2 Emisyonlarını Azaltın"
-
-#: .\templates\index.html:205
-msgid ""
-"Consider switching to renewable energy sources to lower your electricity-"
-"based emissions."
-msgstr ""
-"Elektrik tabanlı emisyonlarınızı azaltmak için yenilenebilir enerji "
-"kaynaklarına geçmeyi düşünün."
-
-#: .\templates\index.html:213
-msgid "Track Progress"
-msgstr "İlerlemeyi İzleyin"
-
-#: .\templates\index.html:214
-msgid ""
-"Set monthly targets and monitor your emission reduction progress over time."
-msgstr ""
-"Aylık hedefler belirleyin ve zaman içinde emisyon azaltma ilerlemenizi "
-"izleyin."
-
-# Landing Page Translations
-#: .\templates\landing.html:8
-msgid "Academia Carbon - Professional Carbon Tracking Platform"
-msgstr "Academia Carbon - Profesyonel Karbon İzleme Platformu"
-
-#: .\templates\landing.html:9
-msgid ""
-"Professional carbon emission tracking and reporting platform for "
-"organizations. ISO 14064-1 compliant reporting, real-time analytics, and "
-"comprehensive carbon management tools."
-msgstr ""
-"Kuruluşlar için profesyonel karbon emisyon izleme ve raporlama platformu. "
-"ISO 14064-1 uyumlu raporlama, gerçek zamanlı analitik ve kapsamlı karbon "
-"yönetim araçları."
-
-#: .\templates\landing.html:1023 .\templates\landing.html:1252
-msgid "Features"
-msgstr "Özellikler"
-
-#: .\templates\landing.html:1024
-msgid "About"
-msgstr "Hakkında"
-
-#: .\templates\landing.html:1025
-msgid "Contact"
-msgstr "İletişim"
-
-#: .\templates\landing.html:1043
-msgid "Get Started"
-msgstr "Başlayın"
-
-#: .\templates\landing.html:1059
-msgid "ISO 14064-1 Certified Platform"
-msgstr "ISO 14064-1 Sertifikalı Platform"
-
-#: .\templates\landing.html:1063
-msgid "Professional"
-msgstr "Profesyonel"
-
-#: .\templates\landing.html:1064
-msgid "Carbon Tracking"
-msgstr "Karbon İzleme"
-
-#: .\templates\landing.html:1065
-msgid "Platform"
-msgstr "Platform"
-
-#: .\templates\landing.html:1069
-msgid ""
-"Track, analyze, and report your organization's carbon emissions with "
-"precision. Our comprehensive platform provides real-time analytics, ISO "
-"14064-1 compliant reporting, and actionable insights for sustainable growth."
-msgstr ""
-"Kuruluşunuzun karbon emisyonlarını hassasiyetle izleyin, analiz edin ve "
-"raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 "
-"uyumlu raporlama ve sürdürülebilir büyüme için eyleme dönüştürülebilir "
-"içgörüler sağlar."
-
-#: .\templates\landing.html:1075
-msgid "Start Free Trial"
-msgstr "Ücretsiz Deneme Başlatın"
-
-#: .\templates\landing.html:1079
-msgid "Watch Demo"
-msgstr "Demo İzleyin"
-
-#: .\templates\landing.html:1086
-msgid "Certified Standard"
-msgstr "Sertifikalı Standart"
-
-#: .\templates\landing.html:1090
-msgid "Accuracy Rate"
-msgstr "Doğruluk Oranı"
-
-#: .\templates\landing.html:1107
-msgid "Carbon Analytics Dashboard"
-msgstr "Karbon Analitik Panosu"
-
-#: .\templates\landing.html:1113
-msgid "Real-time Emission Tracking"
-msgstr "Gerçek Zamanlı Emisyon İzleme"
-
-#: .\templates\landing.html:1130
-msgid "Key Features"
-msgstr "Temel Özellikler"
-
-#: .\templates\landing.html:1132
-msgid "Everything You Need for Carbon Management"
-msgstr "Karbon Yönetimi İçin İhtiyacınız Olan Her Şey"
-
-#: .\templates\landing.html:1134
-msgid ""
-"Comprehensive tools and features designed to help organizations track, "
-"analyze, and reduce their carbon footprint effectively."
-msgstr ""
-"Kuruluşların karbon ayak izlerini etkili bir şekilde izlemelerine, analiz "
-"etmelerine ve azaltmalarına yardımcı olmak için tasarlanmış kapsamlı araçlar "
-"ve özellikler."
-
-#: .\templates\landing.html:1143
-msgid "Precise Emission Calculation"
-msgstr "Hassas Emisyon Hesaplama"
-
-#: .\templates\landing.html:1145
-msgid ""
-"Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using "
-"up-to-date emission factors and international standards."
-msgstr ""
-"Güncel emisyon faktörleri ve uluslararası standartları kullanarak üç kapsam "
-"(1, 2, 3) boyunca sera gazı emisyonlarını hesaplayın."
-
-#: .\templates\landing.html:1153
-msgid "Advanced Analytics Dashboard"
-msgstr "Gelişmiş Analitik Panosu"
-
-#: .\templates\landing.html:1155
-msgid ""
-"Visualize emission data through interactive charts, KPI cards, and "
-"analytical reports for better understanding of your carbon performance."
-msgstr ""
-"Karbon performansınızı daha iyi anlamak için etkileşimli grafikler, KPI "
-"kartları ve analitik raporlar aracılığıyla emisyon verilerini görselleştirin."
-
-#: .\templates\landing.html:1163
-msgid "ISO 14064-1 Reporting"
-msgstr "ISO 14064-1 Raporlama"
-
-#: .\templates\landing.html:1165
-msgid ""
-"Generate professional reports compliant with ISO 14064-1 standards with PDF "
-"export capabilities and advanced filtering options."
-msgstr ""
-"PDF dışa aktarma yetenekleri ve gelişmiş filtreleme seçenekleri ile ISO "
-"14064-1 standartlarına uygun profesyonel raporlar oluşturun."
-
-#: .\templates\landing.html:1173
-msgid "Supplier Management"
-msgstr "Tedarikçi Yönetimi"
-
-#: .\templates\landing.html:1175
-msgid ""
-"Track and manage supplier carbon emissions, assess performance, and "
-"collaborate on supply chain emission reduction initiatives."
-msgstr ""
-"Tedarikçi karbon emisyonlarını izleyin ve yönetin, performansı değerlendirin "
-"ve tedarik zinciri emisyon azaltma girişimlerinde işbirliği yapın."
-
-#: .\templates\landing.html:1183 .\templates\partials\sidebar.html:62
-msgid "Action Planning"
-msgstr "Eylem Planlaması"
-
-#: .\templates\landing.html:1185
-msgid ""
-"Set reduction targets, create action plans, and track progress towards your "
-"sustainability goals with comprehensive planning tools."
-msgstr ""
-"Kapsamlı planlama araçları ile azaltım hedefleri belirleyin, eylem planları "
-"oluşturun ve sürdürülebilirlik hedeflerinize doğru ilerlemeyi izleyin."
-
-#: .\templates\landing.html:1193
-msgid "Security & Privacy"
-msgstr "Güvenlik ve Gizlilik"
-
-#: .\templates\landing.html:1195
-msgid ""
-"Enterprise-grade security with advanced encryption, access controls, and "
-"full compliance with data privacy regulations."
-msgstr ""
-"Gelişmiş şifreleme, erişim kontrolleri ve veri gizliliği düzenlemelerine tam "
-"uyum ile kurumsal düzeyde güvenlik."
-
-#: .\templates\landing.html:1207
-msgid "Ready to Get Started?"
-msgstr "Başlamaya Hazır mısınız?"
-
-#: .\templates\landing.html:1210
-msgid "Start Your Carbon Journey Today"
-msgstr "Karbon Yolculuğunuza Bugün Başlayın"
-
-#: .\templates\landing.html:1212
-msgid ""
-"Join thousands of organizations already using Academia Carbon to track, "
-"analyze, and reduce their environmental impact. Start your free trial today."
-msgstr ""
-"Çevresel etkilerini izlemek, analiz etmek ve azaltmak için Academia Carbon'u "
-"zaten kullanan binlerce kuruluşa katılın. Ücretsiz denemenizi bugün başlatın."
-
-#: .\templates\landing.html:1218
-msgid "Create Free Account"
-msgstr "Ücretsiz Hesap Oluşturun"
-
-#: .\templates\landing.html:1240
-msgid ""
-"Professional carbon emission tracking and reporting platform for "
-"organizations worldwide. ISO 14064-1 certified and trusted by industry "
-"leaders."
-msgstr ""
-"Dünya çapındaki kuruluşlar için profesyonel karbon emisyon izleme ve "
-"raporlama platformu. ISO 14064-1 sertifikalı ve endüstri liderleri "
-"tarafından güvenilen."
-
-#: .\templates\landing.html:1250
-msgid "Product"
-msgstr "Ürün"
-
-#: .\templates\landing.html:1253
-msgid "Pricing"
-msgstr "Fiyatlandırma"
-
-#: .\templates\landing.html:1254
-msgid "Integrations"
-msgstr "Entegrasyonlar"
-
-#: .\templates\landing.html:1255
-msgid "API"
-msgstr "API"
-
-#: .\templates\landing.html:1260
-msgid "Company"
-msgstr "Şirket"
-
-#: .\templates\landing.html:1262
-msgid "About Us"
-msgstr "Hakkımızda"
-
-#: .\templates\landing.html:1263
-msgid "Careers"
-msgstr "Kariyer"
-
-#: .\templates\landing.html:1264
-msgid "Blog"
-msgstr "Blog"
-
-#: .\templates\landing.html:1265
-msgid "Press"
-msgstr "Basın"
-
-#: .\templates\landing.html:1272
-msgid "Help Center"
-msgstr "Yardım Merkezi"
-
-#: .\templates\landing.html:1273
-msgid "Contact Us"
-msgstr "Bize Ulaşın"
-
-#: .\templates\landing.html:1274
-msgid "System Status"
-msgstr "Sistem Durumu"
-
-#: .\templates\landing.html:1275
-msgid "Security"
-msgstr "Güvenlik"
-
-#: .\templates\landing.html:1283
-msgid "Privacy Policy"
-msgstr "Gizlilik Politikası"
-
-#: .\templates\landing.html:1284
-msgid "Terms of Service"
-msgstr "Hizmet Şartları"
-
-#: .\templates\partials\sidebar.html:14
-#, fuzzy
-#| msgid "Carbon Tracking"
-msgid "GHG Tracking"
-msgstr "Sera Gazı İzleme"
-
-#: .\templates\partials\sidebar.html:21
-msgid "Add Data"
-msgstr "Veri Ekle"
-
-#: .\templates\partials\sidebar.html:25
-msgid "MENU"
-msgstr "MENÜ"
-
-#: .\templates\partials\sidebar.html:44
-msgid "Emissions"
-msgstr "Emisyonlar"
-
-#: .\templates\partials\sidebar.html:50
-msgid "Analysis"
-msgstr "Analiz"
-
-#: .\templates\partials\sidebar.html:56
-msgid "Reporting"
-msgstr "Raporlama"
-
-#: .\templates\partials\sidebar.html:81
-msgid "Settings"
-msgstr "Ayarlar"
-
-#: .\templates\partials\sidebar.html:87
-msgid "Help & Guide"
-msgstr "Yardım ve Rehber"
-
-#: .\templates\partials\sidebar.html:101
-msgid "24/7 Support Available"
-msgstr "7/24 Destek Mevcut"
-
-#: .\venv\Lib\site-packages\django\contrib\messages\apps.py:16
-msgid "Messages"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\contrib\sitemaps\apps.py:8
-msgid "Site Maps"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\contrib\staticfiles\apps.py:9
-msgid "Static Files"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\contrib\syndication\apps.py:7
-msgid "Syndication"
-msgstr ""
-
-#. Translators: String used to replace omitted page numbers in elided page
-#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
-#: .\venv\Lib\site-packages\django\core\paginator.py:30
-msgid "…"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\paginator.py:32
-msgid "That page number is not an integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\paginator.py:33
-msgid "That page number is less than 1"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\paginator.py:34
-msgid "That page contains no results"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:22
-msgid "Enter a valid value."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:70
-msgid "Enter a valid domain name."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:153
-#: .\venv\Lib\site-packages\django\forms\fields.py:775
-msgid "Enter a valid URL."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:200
-msgid "Enter a valid integer."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:211
-msgid "Enter a valid email address."
-msgstr ""
-
-#. Translators: "letters" means latin letters: a-z and A-Z.
-#: .\venv\Lib\site-packages\django\core\validators.py:289
-msgid ""
-"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:297
-msgid ""
-"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
-"hyphens."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:309
-#: .\venv\Lib\site-packages\django\core\validators.py:318
-#: .\venv\Lib\site-packages\django\core\validators.py:332
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2220
-#, python-format
-msgid "Enter a valid %(protocol)s address."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:311
-msgid "IPv4"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:320
-#: .\venv\Lib\site-packages\django\utils\ipv6.py:43
-msgid "IPv6"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:334
-msgid "IPv4 or IPv6"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:375
-msgid "Enter only digits separated by commas."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:381
-#, python-format
-msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:416
-#, python-format
-msgid "Ensure this value is less than or equal to %(limit_value)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:425
-#, python-format
-msgid "Ensure this value is greater than or equal to %(limit_value)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:434
-#, python-format
-msgid "Ensure this value is a multiple of step size %(limit_value)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:441
-#, python-format
-msgid ""
-"Ensure this value is a multiple of step size %(limit_value)s, starting from "
-"%(offset)s, e.g. %(offset)s, %(valid_value1)s, %(valid_value2)s, and so on."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:473
-#, python-format
-msgid ""
-"Ensure this value has at least %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at least %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:491
-#, python-format
-msgid ""
-"Ensure this value has at most %(limit_value)d character (it has "
-"%(show_value)d)."
-msgid_plural ""
-"Ensure this value has at most %(limit_value)d characters (it has "
-"%(show_value)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:514
-#: .\venv\Lib\site-packages\django\forms\fields.py:366
-#: .\venv\Lib\site-packages\django\forms\fields.py:405
-msgid "Enter a number."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:516
-#, python-format
-msgid "Ensure that there are no more than %(max)s digit in total."
-msgid_plural "Ensure that there are no more than %(max)s digits in total."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:521
-#, python-format
-msgid "Ensure that there are no more than %(max)s decimal place."
-msgid_plural "Ensure that there are no more than %(max)s decimal places."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:526
-#, python-format
-msgid ""
-"Ensure that there are no more than %(max)s digit before the decimal point."
-msgid_plural ""
-"Ensure that there are no more than %(max)s digits before the decimal point."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:597
-#, python-format
-msgid ""
-"File extension “%(extension)s” is not allowed. Allowed extensions are: "
-"%(allowed_extensions)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\core\validators.py:659
-msgid "Null characters are not allowed."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\base.py:1600
-#: .\venv\Lib\site-packages\django\forms\models.py:908
-msgid "and"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\base.py:1602
-#, python-format
-msgid "%(model_name)s with this %(field_labels)s already exists."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\constraints.py:22
-#, python-format
-msgid "Constraint “%(name)s” is violated."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:134
-#, python-format
-msgid "Value %(value)r is not a valid choice."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:135
-msgid "This field cannot be null."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:136
-msgid "This field cannot be blank."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:137
-#, python-format
-msgid "%(model_name)s with this %(field_label)s already exists."
-msgstr ""
-
-#. Translators: The 'lookup_type' is one of 'date', 'year' or
-#. 'month'. Eg: "Title must be unique for pub_date year"
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:141
-#, python-format
-msgid ""
-"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:180
-#, python-format
-msgid "Field of type: %(field_type)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1162
-#, python-format
-msgid "“%(value)s” value must be either True or False."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1163
-#, python-format
-msgid "“%(value)s” value must be either True, False, or None."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1165
-msgid "Boolean (Either True or False)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1215
-#, python-format
-msgid "String (up to %(max_length)s)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1217
-msgid "String (unlimited)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1326
-msgid "Comma-separated integers"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1427
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
-"format."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1431
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1566
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
-"date."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1435
-msgid "Date (without time)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1562
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD "
-"HH:MM[:ss[.uuuuuu]][TZ] format."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1570
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
-"[TZ]) but it is an invalid date/time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1575
-msgid "Date (with time)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1702
-#, python-format
-msgid "“%(value)s” value must be a decimal number."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1704
-msgid "Decimal number"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1864
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in [DD] "
-"[[HH:]MM:]ss[.uuuuuu] format."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1868
-#, fuzzy
-#| msgid "Integrations"
-msgid "Duration"
-msgstr "Entegrasyonlar"
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1920
-msgid "Email address"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1945
-msgid "File path"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2023
-#, python-format
-msgid "“%(value)s” value must be a float."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2025
-msgid "Floating point number"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2065
-#, python-format
-msgid "“%(value)s” value must be an integer."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2067
-#, fuzzy
-#| msgid "Integrations"
-msgid "Integer"
-msgstr "Entegrasyonlar"
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2163
-msgid "Big (8 byte) integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2180
-msgid "Small integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2188
-msgid "IPv4 address"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2219
-#, fuzzy
-#| msgid "Press"
-msgid "IP address"
-msgstr "Basın"
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2310
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2311
-#, python-format
-msgid "“%(value)s” value must be either None, True or False."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2313
-msgid "Boolean (Either True, False or None)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2364
-msgid "Positive big integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2379
-msgid "Positive integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2394
-msgid "Positive small integer"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2410
-#, python-format
-msgid "Slug (up to %(max_length)s)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2446
-msgid "Text"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2526
-#, python-format
-msgid ""
-"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
-"format."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2530
-#, python-format
-msgid ""
-"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
-"invalid time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2534
-msgid "Time"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2642
-msgid "URL"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2666
-msgid "Raw binary data"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2731
-#, python-format
-msgid "“%(value)s” is not a valid UUID."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:2733
-msgid "Universally unique identifier"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\files.py:244
-msgid "File"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\files.py:420
-msgid "Image"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\json.py:24
-msgid "A JSON object"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\json.py:26
-msgid "Value must be valid JSON."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:979
-#, python-format
-msgid "%(model)s instance with %(field)s %(value)r is not a valid choice."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:982
-msgid "Foreign Key (type determined by related field)"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1276
-msgid "One-to-one relationship"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1333
-#, python-format
-msgid "%(from)s-%(to)s relationship"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1335
-#, python-format
-msgid "%(from)s-%(to)s relationships"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\db\models\fields\related.py:1383
-msgid "Many-to-many relationship"
-msgstr ""
-
-#. Translators: If found as last label character, these punctuation
-#. characters will prevent the default label_suffix to be appended to the label
-#: .\venv\Lib\site-packages\django\forms\boundfield.py:185
-msgid ":?.!"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:95
-msgid "This field is required."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:315
-msgid "Enter a whole number."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:486
-#: .\venv\Lib\site-packages\django\forms\fields.py:1267
-msgid "Enter a valid date."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:509
-#: .\venv\Lib\site-packages\django\forms\fields.py:1268
-msgid "Enter a valid time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:536
-msgid "Enter a valid date/time."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:570
-msgid "Enter a valid duration."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:571
-#, python-brace-format
-msgid "The number of days must be between {min_days} and {max_days}."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:640
-msgid "No file was submitted. Check the encoding type on the form."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:641
-msgid "No file was submitted."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:642
-msgid "The submitted file is empty."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:644
-#, python-format
-msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
-msgid_plural ""
-"Ensure this filename has at most %(max)d characters (it has %(length)d)."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:649
-msgid "Please either submit a file or check the clear checkbox, not both."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:717
-msgid ""
-"Upload a valid image. The file you uploaded was either not an image or a "
-"corrupted image."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:889
-#: .\venv\Lib\site-packages\django\forms\fields.py:975
-#: .\venv\Lib\site-packages\django\forms\models.py:1592
-#, python-format
-msgid "Select a valid choice. %(value)s is not one of the available choices."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:977
-#: .\venv\Lib\site-packages\django\forms\fields.py:1096
-#: .\venv\Lib\site-packages\django\forms\models.py:1590
-msgid "Enter a list of values."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:1097
-msgid "Enter a complete value."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:1339
-msgid "Enter a valid UUID."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\fields.py:1369
-msgid "Enter a valid JSON."
-msgstr ""
-
-#. Translators: This is the default suffix added to form field labels
-#: .\venv\Lib\site-packages\django\forms\forms.py:97
-msgid ":"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\forms.py:239
-#, python-format
-msgid "(Hidden field %(name)s) %(error)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:61
-#, python-format
-msgid ""
-"ManagementForm data is missing or has been tampered with. Missing fields: "
-"%(field_names)s. You may need to file a bug report if the issue persists."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:65
-#, python-format
-msgid "Please submit at most %(num)d form."
-msgid_plural "Please submit at most %(num)d forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:70
-#, python-format
-msgid "Please submit at least %(num)d form."
-msgid_plural "Please submit at least %(num)d forms."
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:484
-#: .\venv\Lib\site-packages\django\forms\formsets.py:491
-msgid "Order"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:499
-msgid "Delete"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:901
-#, python-format
-msgid "Please correct the duplicate data for %(field)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:906
-#, python-format
-msgid "Please correct the duplicate data for %(field)s, which must be unique."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:913
-#, python-format
-msgid ""
-"Please correct the duplicate data for %(field_name)s which must be unique "
-"for the %(lookup)s in %(date_field)s."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:922
-msgid "Please correct the duplicate values below."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:1359
-msgid "The inline value did not match the parent instance."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:1450
-msgid "Select a valid choice. That choice is not one of the available choices."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\models.py:1594
-#, python-format
-msgid "“%(pk)s” is not a valid value."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\utils.py:229
-#, python-format
-msgid ""
-"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
-"may be ambiguous or it may not exist."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:527
-msgid "Clear"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\forms\widgets.py:528
-msgid "Currently"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\forms\widgets.py:529
-msgid "Change"
+#: .\templates\data_entry.html:168
+msgid "Standard"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\forms\widgets.py:866
-msgid "Unknown"
+#: .\templates\data_entry.html:175 .\templates\data_entry.html:1498
+msgid "Country"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\forms\widgets.py:867
-msgid "Yes"
+#: .\templates\data_entry.html:178 .\templates\data_entry_new.html:20
+msgid "Global Average"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\forms\widgets.py:868
-msgid "No"
+#: .\templates\data_entry.html:179 .\templates\data_entry.html:1501
+msgid "Turkey"
 msgstr ""
-
-#. Translators: Please do not add spaces around commas.
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:873
-msgid "yes,no,maybe"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:903
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:920
-#, python-format
-msgid "%(size)d byte"
-msgid_plural "%(size)d bytes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:922
-#, python-format
-msgid "%s KB"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:924
-#, python-format
-msgid "%s MB"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:926
-#, python-format
-msgid "%s GB"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:928
-#, python-format
-msgid "%s TB"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\template\defaultfilters.py:930
-#, python-format
-msgid "%s PB"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:74
-msgid "p.m."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:75
-msgid "a.m."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:80
-msgid "PM"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:81
-msgid "AM"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:153
-msgid "midnight"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dateformat.py:155
-msgid "noon"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:7
-msgid "Monday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:8
-msgid "Tuesday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:9
-msgid "Wednesday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:10
-msgid "Thursday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:11
-msgid "Friday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:12
-msgid "Saturday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:13
-msgid "Sunday"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:16
-msgid "Mon"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:17
-msgid "Tue"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:18
-msgid "Wed"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:19
-msgid "Thu"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:20
-msgid "Fri"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:21
-msgid "Sat"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:22
-msgid "Sun"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:25
-msgid "January"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:26
-msgid "February"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:27
-msgid "March"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:28
-msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:29
-msgid "May"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:30
-msgid "June"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:31
-msgid "July"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:32
-msgid "August"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:33
-msgid "September"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:34
-msgid "October"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:35
-msgid "November"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:36
-msgid "December"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:39
-msgid "jan"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:40
-msgid "feb"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:41
-msgid "mar"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:42
-msgid "apr"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:43
-#, fuzzy
-#| msgid "Company"
-msgid "may"
-msgstr "Şirket"
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:44
-msgid "jun"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:45
-msgid "jul"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:46
-msgid "aug"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:47
-msgid "sep"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:48
-#, fuzzy
-#| msgid "Contact"
-msgid "oct"
-msgstr "İletişim"
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:49
-msgid "nov"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:50
-msgid "dec"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:53
-msgctxt "abbrev. month"
-msgid "Jan."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:54
-msgctxt "abbrev. month"
-msgid "Feb."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:55
-msgctxt "abbrev. month"
-msgid "March"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:56
-msgctxt "abbrev. month"
-msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:57
-msgctxt "abbrev. month"
-msgid "May"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:58
-msgctxt "abbrev. month"
-msgid "June"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:59
-msgctxt "abbrev. month"
-msgid "July"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:60
-msgctxt "abbrev. month"
-msgid "Aug."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:61
-msgctxt "abbrev. month"
-msgid "Sept."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:62
-msgctxt "abbrev. month"
-msgid "Oct."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:63
-msgctxt "abbrev. month"
-msgid "Nov."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:64
-msgctxt "abbrev. month"
-msgid "Dec."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:67
-msgctxt "alt. month"
-msgid "January"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:68
-msgctxt "alt. month"
-msgid "February"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:69
-msgctxt "alt. month"
-msgid "March"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:70
-msgctxt "alt. month"
-msgid "April"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:71
-msgctxt "alt. month"
-msgid "May"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:72
-msgctxt "alt. month"
-msgid "June"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:73
-msgctxt "alt. month"
-msgid "July"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:74
-msgctxt "alt. month"
-msgid "August"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:75
-msgctxt "alt. month"
-msgid "September"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:76
-msgctxt "alt. month"
-msgid "October"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:77
-msgctxt "alt. month"
-msgid "November"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\dates.py:78
-msgctxt "alt. month"
-msgid "December"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\ipv6.py:20
-msgid "This is not a valid IPv6 address."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\text.py:76
-#, python-format
-msgctxt "String to return when truncating text"
-msgid "%(truncated_text)s…"
-msgstr ""
-
-#. Translators: This string is used as a separator between list elements
-#: .\venv\Lib\site-packages\django\utils\text.py:306
-#: .\venv\Lib\site-packages\django\utils\timesince.py:135
-msgid ", "
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:8
-#, python-format
-msgid "%(num)d year"
-msgid_plural "%(num)d years"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:9
-#, python-format
-msgid "%(num)d month"
-msgid_plural "%(num)d months"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:10
-#, python-format
-msgid "%(num)d week"
-msgid_plural "%(num)d weeks"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:11
-#, python-format
-msgid "%(num)d day"
-msgid_plural "%(num)d days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:12
-#, python-format
-msgid "%(num)d hour"
-msgid_plural "%(num)d hours"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\utils\timesince.py:13
-#, python-format
-msgid "%(num)d minute"
-msgid_plural "%(num)d minutes"
-msgstr[0] ""
-msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:29
-msgid "Forbidden"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:30
-msgid "CSRF verification failed. Request aborted."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:34
-msgid ""
-"You are seeing this message because this HTTPS site requires a “Referer "
-"header” to be sent by your web browser, but none was sent. This header is "
-"required for security reasons, to ensure that your browser is not being "
-"hijacked by third parties."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:40
-msgid ""
-"If you have configured your browser to disable “Referer” headers, please re-"
-"enable them, at least for this site, or for HTTPS connections, or for “same-"
-"origin” requests."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:45
-msgid ""
-"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
-"including the “Referrer-Policy: no-referrer” header, please remove them. The "
-"CSRF protection requires the “Referer” header to do strict referer checking. "
-"If you’re concerned about privacy, use alternatives like <a "
-"rel=\"noreferrer\" …> for links to third-party sites."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:54
-msgid ""
-"You are seeing this message because this site requires a CSRF cookie when "
-"submitting forms. This cookie is required for security reasons, to ensure "
-"that your browser is not being hijacked by third parties."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:60
-msgid ""
-"If you have configured your browser to disable cookies, please re-enable "
-"them, at least for this site, or for “same-origin” requests."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\csrf.py:66
-msgid "More information is available with DEBUG=True."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:44
-msgid "No year specified"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:64
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:115
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:214
-msgid "Date out of range"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:94
-msgid "No month specified"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:147
-msgid "No day specified"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:194
-msgid "No week specified"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:353
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:384
-#, python-format
-msgid "No %(verbose_name_plural)s available"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:680
-#, python-format
-msgid ""
-"Future %(verbose_name_plural)s not available because "
-"%(class_name)s.allow_future is False."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\dates.py:720
-#, python-format
-msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\detail.py:56
-#, python-format
-msgid "No %(verbose_name)s found matching the query"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\list.py:70
-msgid "Page is not “last”, nor can it be converted to an int."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\list.py:77
-#, python-format
-msgid "Invalid page (%(page_number)s): %(message)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\generic\list.py:173
-#, python-format
-msgid "Empty list and “%(class_name)s.allow_empty” is False."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\static.py:49
-msgid "Directory indexes are not allowed here."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\static.py:51
-#, python-format
-msgid "“%(path)s” does not exist"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\static.py:68
-#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:8
-#: .\venv\Lib\site-packages\django\views\templates\directory_index.html:11
-#, python-format
-msgid "Index of %(directory)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:204
-msgid "The install worked successfully! Congratulations!"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:206
-#, python-format
-msgid ""
-"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
-"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:208
-#, python-format
-msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" "
-"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
-"configured any URLs."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:217
-msgid "Django Documentation"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:218
-msgid "Topics, references, &amp; how-to’s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:226
-msgid "Tutorial: A Polling App"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:227
-msgid "Get started with Django"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:235
-msgid "Django Community"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
-msgid "Connect, get help, or contribute"
-msgstr ""
-
-#~ msgid "Carbon Tracker - GHG Emissions"
-#~ msgstr "Karbon İzleyici - Sera Gazı Emisyonları"
-
-# Analysis Page Translations
-msgid "Analysis"
-msgstr "Analiz"
-
-msgid "Emissions Analysis"
-msgstr "Emisyon Analizi"
-
-msgid "Professional ISO 14064-1 compliant emissions reporting and analysis dashboard."
-msgstr "Profesyonel ISO 14064-1 uyumlu emisyon raporlama ve analiz panosu."
-
-msgid "Scope-wise emission breakdown"
-msgstr "Kapsam bazında emisyon dağılımı"
-
-msgid "Date range filtering"
-msgstr "Tarih aralığı filtreleme"
-
-msgid "Source contribution analysis"
-msgstr "Kaynak katkı analizi"
-
-msgid "Audit-ready reporting"
-msgstr "Denetim için hazır raporlama"
-
-msgid "Comparative Analysis"
-msgstr "Karşılaştırmalı Analiz"
-
-msgid "Compare your emissions with industry benchmarks and similar organizations."
-msgstr "Emisyonlarınızı sektör kıyaslamaları ve benzer kuruluşlarla karşılaştırın."
-
-msgid "Coming Soon"
-msgstr "Yakında Geliyor"
-
-msgid "Industry benchmarking"
-msgstr "Sektör kıyaslama"
-
-msgid "Peer comparison"
-msgstr "Eş karşılaştırma"
-
-msgid "Best practice insights"
-msgstr "En iyi uygulama içgörüleri"
-
-msgid "Improvement recommendations"
-msgstr "İyileştirme önerileri"
-
-msgid "Performance Analysis"
-msgstr "Performans Analizi"
-
-msgid "Track your carbon reduction performance and goal achievement over time."
-msgstr "Zaman içinde karbon azaltım performansınızı ve hedef başarınızı izleyin."
-
-msgid "Goal tracking & progress"
-msgstr "Hedef izleme ve ilerleme"
-
-msgid "Reduction trend analysis"
-msgstr "Azaltım trend analizi"
-
-msgid "Performance scoring"
-msgstr "Performans puanlama"
-
-msgid "Achievement milestones"
-msgstr "Başarı kilometre taşları"
-
-msgid "Supplier Analysis"
-msgstr "Tedarikçi Analizi"
-
-msgid "Analyze emissions from your supply chain and supplier carbon footprint."
-msgstr "Tedarik zincirinizden ve tedarikçi karbon ayak izinden emisyonları analiz edin."
-
-msgid "NEW"
-msgstr "YENİ"
-
-msgid "Supplier carbon footprint"
-msgstr "Tedarikçi karbon ayak izi"
-
-msgid "Supply chain emissions"
-msgstr "Tedarik zinciri emisyonları"
-
-msgid "Vendor sustainability scoring"
-msgstr "Satıcı sürdürülebilirlik puanlama"
-
-msgid "Procurement recommendations"
-msgstr "Tedarik önerileri"
-
-# Emissions Page Translations
-msgid "Method"
-msgstr "Yöntem"
-
-msgid "GHG-Based"
-msgstr "GHG Tabanlı"
-
-msgid "ISO 14064-1"
-msgstr "ISO 14064-1"
-
-msgid "Export All"
-msgstr "Tümünü Dışa Aktar"
-
-# Reporting Page Translations
-msgid "Filter"
-msgstr "Filtre"
-
-msgid "All Scopes"
-msgstr "Tüm Kapsamlar"
 
 msgid "Scope 1"
 msgstr "Kapsam 1"
@@ -1977,182 +395,2366 @@ msgstr "Kapsam 2"
 msgid "Scope 3"
 msgstr "Kapsam 3"
 
-msgid "Generate PDF"
-msgstr "PDF Oluştur"
+#: .\templates\data_entry.html:198 .\templates\user_guide.html:679
+msgid "Scope 1 - Direct Emissions"
+msgstr ""
 
-# Action Planning Page Translations
-msgid "Target Year"
-msgstr "Hedef Yıl"
+#: .\templates\data_entry.html:202 .\templates\data_entry_new.html:51
+msgid "Stationary combustion"
+msgstr ""
 
-msgid "New Plan"
-msgstr "Yeni Plan"
+#: .\templates\data_entry.html:205 .\templates\data_entry_new.html:52
+msgid "Emissions from fuel combustion in stationary equipment"
+msgstr ""
 
-msgid "Carbon Reduction Action Planning"
-msgstr "Karbon Azaltım Eylem Planlaması"
+msgid "Emission Source"
+msgstr "Emisyon Kaynağı"
 
-msgid "Develop and track your organization's carbon reduction initiatives. Set targets, create action plans, and monitor progress towards your sustainability goals with our comprehensive action planning tools."
-msgstr "Kuruluşunuzun karbon azaltım girişimlerini geliştirin ve izleyin. Hedefler belirleyin, eylem planları oluşturun ve kapsamlı eylem planlama araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi izleyin."
+#: .\templates\data_entry.html:212 .\templates\data_entry.html:236
+#: .\templates\data_entry.html:252 .\templates\data_entry.html:273
+#: .\templates\data_entry.html:306 .\templates\data_entry.html:329
+#: .\templates\data_entry.html:350 .\templates\data_entry.html:378
+#: .\templates\data_entry.html:409 .\templates\data_entry.html:451
+#: .\templates\data_entry.html:480 .\templates\data_entry.html:512
+#: .\templates\data_entry.html:523 .\templates\data_entry.html:543
+#: .\templates\data_entry.html:592 .\templates\data_entry.html:632
+#: .\templates\data_entry.html:650 .\templates\data_entry.html:682
+#: .\templates\data_entry.html:693 .\templates\data_entry.html:725
+#: .\templates\data_entry.html:735 .\templates\data_entry.html:767
+#: .\templates\data_entry.html:808 .\templates\data_entry.html:834
+#: .\templates\data_entry.html:863 .\templates\data_entry.html:915
+#: .\templates\data_entry.html:973 .\templates\data_entry.html:1028
+#: .\templates\data_entry.html:1038 .\templates\data_entry.html:1070
+#: .\templates\data_entry.html:1080 .\templates\data_entry.html:1112
+#: .\templates\data_entry.html:1189 .\templates\data_entry.html:1284
+#: .\templates\data_entry.html:1306 .\templates\data_entry.html:1324
+#: .\templates\data_entry.html:1374 .\templates\data_entry.html:1403
+#: .\templates\data_entry.html:1484 .\templates\data_entry.html:1500
+#: .\templates\data_entry.html:1662 .\templates\data_entry.html:1689
+#: .\templates\data_entry.html:1712 .\templates\data_entry.html:1740
+#: .\templates\data_entry_new.html:63 .\templates\data_entry_new.html:77
+#: .\templates\data_entry_new.html:99 .\templates\support.html:357
+#, python-format
+msgid "{%% trans "
+msgstr ""
 
-msgid "Start with Data Collection"
-msgstr "Veri Toplama ile Başlayın"
+#: .\templates\data_entry.html:213
+msgid "Coal (industrial) - Defra 2024"
+msgstr ""
 
-msgid "View Current Emissions"
-msgstr "Mevcut Emisyonları Görüntüle"
+#: .\templates\data_entry.html:214
+msgid "Coal (generic) - IPCC 2006"
+msgstr ""
 
-# Supplier Management Page Translations
+#: .\templates\data_entry.html:215
+msgid "Gas/Diesel Oil (energy basis) - IPCC 2019"
+msgstr ""
+
+#: .\templates\data_entry.html:216
+msgid "Liquefied Petroleum Gas (LPG) - Defra 2024"
+msgstr ""
+
+#: .\templates\data_entry.html:217
+msgid "Propane - Defra 2024"
+msgstr ""
+
+#: .\templates\data_entry.html:218
+msgid "Motor Gasoline - IPCC 2019"
+msgstr ""
+
+#: .\templates\data_entry.html:219
+msgid "Natural Gas - IPCC 2019"
+msgstr ""
+
+#: .\templates\data_entry.html:220
+msgid "Diesel (volume) - IPCC 2006"
+msgstr ""
+
+#: .\templates\data_entry.html:221
+msgid "Fuel Oil - IPCC 2006"
+msgstr ""
+
+#: .\templates\data_entry.html:222 .\templates\data_entry_new.html:67
+msgid "Other / Not Listed"
+msgstr ""
+
+#: .\templates\data_entry.html:225
+#: .\templates\data_entry.html:226
+msgid "Learn more"
+msgstr ""
+
+#: .\templates\data_entry.html:232
+msgid "Industry Type"
+msgstr ""
+
+#: .\templates\data_entry.html:241
+msgid "Add Industry"
+msgstr ""
+
+#: .\templates\data_entry.html:245
+msgid "Don't see your industry? Click 'Add Industry' to request a new one."
+msgstr ""
+
+msgid "Unit"
+msgstr "Birim"
+
+#: .\templates\data_entry.html:253 .\templates\data_entry.html:330
+#: .\templates\data_entry.html:1308 .\templates\data_entry.html:1405
+#: .\templates\data_entry_new.html:78
+msgid "Liters"
+msgstr ""
+
+#: .\templates\data_entry.html:254 .\templates\data_entry.html:331
+#: .\templates\data_entry_new.html:79
+msgid "Kilograms"
+msgstr ""
+
+#: .\templates\data_entry.html:255 .\templates\data_entry.html:1309
+#: .\templates\data_entry.html:1406 .\templates\data_entry_new.html:80
+msgid "Cubic Meters (m³)"
+msgstr ""
+
+#: .\templates\data_entry.html:256
+msgid "kWh"
+msgstr ""
+
+msgid "Activity Data"
+msgstr "Faaliyet Verisi"
+
+#: .\templates\data_entry.html:270 .\templates\data_entry.html:347
+#: .\templates\data_entry.html:406 .\templates\data_entry.html:478
+#: .\templates\data_entry.html:541 .\templates\data_entry.html:648
+#: .\templates\data_entry.html:831 .\templates\data_entry.html:1322
+#: .\templates\data_entry_new.html:96
+msgid "Supplier (Optional)"
+msgstr ""
+
+msgid "Add"
+msgstr "Ekle"
+
+#: .\templates\data_entry.html:282 .\templates\data_entry.html:358
+#: .\templates\data_entry.html:488 .\templates\data_entry.html:550
+#: .\templates\data_entry.html:657 .\templates\data_entry.html:842
+#: .\templates\data_entry_new.html:108 .\templates\emission_history.html:744
+msgid "Description (Optional)"
+msgstr ""
+
+#: .\templates\data_entry.html:287 .\templates\data_entry_new.html:115
+msgid "You can"
+msgstr ""
+
+#: .\templates\data_entry.html:287 .\templates\data_entry_new.html:115
+msgid "add your proof document"
+msgstr ""
+
+#: .\templates\data_entry.html:287
+msgid "here (i.e. gas bills)."
+msgstr ""
+
+msgid "Calculate"
+msgstr "Hesapla"
+
+#: .\templates\data_entry.html:296 .\templates\data_entry_new.html:128
+msgid "Mobile combustion"
+msgstr ""
+
+#: .\templates\data_entry.html:299 .\templates\data_entry_new.html:129
+msgid "Emissions from fuel combustion in mobile equipment"
+msgstr ""
+
+#: .\templates\data_entry.html:585
+msgid "Request New Material"
+msgstr ""
+
+#: .\templates\data_entry.html:1223
+msgid "Material Not Listed"
+msgstr ""
+
+#: .\templates\data_entry.html:1226
+msgid "What would you like to do?"
+msgstr ""
+
+#: .\templates\data_entry.html:1236
+msgid "I Have the Emission Factor"
+msgstr ""
+
+#: .\templates\data_entry.html:1237
+msgid "Add a custom emission factor from your supplier or calculations"
+msgstr ""
+
+#: .\templates\data_entry.html:1249
+msgid "I Need Help Finding It"
+msgstr ""
+
+#: .\templates\data_entry.html:1250
+msgid "Request our team to research and add the emission factor"
+msgstr ""
+
+msgid "Cancel"
+msgstr "İptal"
+
+#: .\templates\data_entry.html:1268
+msgid "ADD CUSTOM EMISSION FACTOR"
+msgstr ""
+
+#: .\templates\data_entry.html:1272
+#: .\templates\data_entry.html:1276 .\templates\data_entry.html:1366
+msgid "Material/Product Name"
+msgstr ""
+
+#: .\templates\data_entry.html:1282 .\templates\data_entry.html:1372
+#: .\templates\reporting\inventory.html:119
+#: .\templates\reporting\inventory_pdf.html:281
+#: .\templates\reporting\inventory_pdf.html:308
+#: .\templates\reporting\inventory_pdf.html:338 .\templates\settings.html:188
+#: .\templates\suppliers.html:160
 msgid "Category"
-msgstr "Kategori"
+msgstr ""
 
-msgid "Add Supplier"
-msgstr "Tedarikçi Ekle"
+#: .\templates\data_entry.html:1285 .\templates\data_entry.html:1375
+msgid "Purchased Goods & Services"
+msgstr ""
 
-msgid "Supplier Carbon Management"
-msgstr "Tedarikçi Karbon Yönetimi"
+#: .\templates\data_entry.html:1286 .\templates\data_entry.html:1376
+msgid "Stationary Combustion"
+msgstr ""
 
-msgid "Enhanced Features Coming Soon"
-msgstr "Gelişmiş Özellikler Yakında Geliyor"
+#: .\templates\data_entry.html:1287 .\templates\data_entry.html:1377
+msgid "Mobile Combustion"
+msgstr ""
 
-msgid "Manage your supplier relationships and track their carbon impact. Currently, you can add suppliers when entering emission data. Enhanced supplier management features are being developed to help you engage with suppliers on sustainability initiatives."
-msgstr "Tedarikçi ilişkilerinizi yönetin ve karbon etkilerini izleyin. Şu anda emisyon verisi girerken tedarikçi ekleyebilirsiniz. Tedarikçilerle sürdürülebilirlik girişimlerinde etkileşim kurmanıza yardımcı olmak için gelişmiş tedarikçi yönetimi özellikleri geliştirilmektedir."
+#: .\templates\data_entry.html:1288 .\templates\data_entry.html:1378
+msgid "Capital Goods"
+msgstr ""
 
-msgid "Add Supplier (via Data Entry)"
-msgstr "Tedarikçi Ekle (Veri Girişi ile)"
+#: .\templates\data_entry.html:1289 .\templates\data_entry.html:1379
+msgid "Upstream Transportation"
+msgstr ""
 
-msgid "View Supplier Emissions"
-msgstr "Tedarikçi Emisyonlarını Görüntüle"
+#: .\templates\data_entry.html:1290 .\templates\data_entry.html:1380
+msgid "Waste"
+msgstr ""
 
-# Settings Page Translations
-msgid "Reset"
-msgstr "Sıfırla"
+#: .\templates\data_entry.html:1291 .\templates\data_entry.html:1381
+#: .\templates\data_entry.html:1491 .\templates\support.html:363
+msgid "Other"
+msgstr ""
 
-msgid "Account Settings"
-msgstr "Hesap Ayarları"
+#: .\templates\data_entry.html:1297 .\templates\user_guide.html:781
+msgid "Emission Factor"
+msgstr ""
 
-msgid "Manage your personal account information and preferences."
-msgstr "Kişisel hesap bilgilerinizi ve tercihlerinizi yönetin."
+#: .\templates\data_entry.html:1299
+msgid "kg CO2e per unit"
+msgstr ""
 
-msgid "Notifications"
-msgstr "Bildirimler"
+#: .\templates\data_entry.html:1307 .\templates\data_entry.html:1404
+msgid "Kilograms (kg)"
+msgstr ""
 
-msgid "Configure how and when you receive notifications about your emissions data."
-msgstr "Emisyon verileriniz hakkında bildirimleri nasıl ve ne zaman alacağınızı yapılandırın."
+#: .\templates\data_entry.html:1310 .\templates\data_entry.html:1407
+msgid "Square Meters (m²)"
+msgstr ""
 
-msgid "Organization Settings"
-msgstr "Kuruluş Ayarları"
+#: .\templates\data_entry.html:1311 .\templates\data_entry.html:1408
+msgid "Kilowatt-hours (kWh)"
+msgstr ""
 
-msgid "Configure organization-wide settings and preferences for emission tracking."
-msgstr "Emisyon izleme için kuruluş genelinde ayarları ve tercihleri yapılandırın."
+#: .\templates\data_entry.html:1312 .\templates\data_entry.html:1409
+msgid "Gigajoules (GJ)"
+msgstr ""
 
-msgid "Data & Privacy"
-msgstr "Veri ve Gizlilik"
+#: .\templates\data_entry.html:1313 .\templates\data_entry.html:1410
+msgid "Kilometers (km)"
+msgstr ""
 
-msgid "Manage your data privacy settings and export options."
-msgstr "Veri gizliliği ayarlarınızı ve dışa aktarma seçeneklerinizi yönetin."
+#: .\templates\data_entry.html:1314 .\templates\data_entry.html:1411
+msgid "Tonne-kilometers (tonne-km)"
+msgstr ""
 
-msgid "System Information"
-msgstr "Sistem Bilgileri"
+#: .\templates\data_entry.html:1315 .\templates\data_entry.html:1412
+msgid "Units (for equipment/machinery)"
+msgstr ""
 
-msgid "Current system status and version information."
-msgstr "Mevcut sistem durumu ve sürüm bilgileri."
+#: .\templates\data_entry.html:1316 .\templates\data_entry.html:1413
+msgid "Packages (for delivery)"
+msgstr ""
 
-# Support Page Translations
-msgid "Status"
-msgstr "Durum"
+#: .\templates\data_entry.html:1330
+msgid "Source/Reference"
+msgstr ""
 
-msgid "Email Support"
-msgstr "E-posta Desteği"
+#: .\templates\data_entry.html:1336 .\templates\data_entry.html:1387
+msgid "Description"
+msgstr ""
 
-msgid "Help & Support"
-msgstr "Yardım ve Destek"
+#: .\templates\data_entry.html:1346
+msgid "Save Custom Factor"
+msgstr ""
 
-msgid "Contact Support"
-msgstr "Destek ile İletişim"
+#: .\templates\data_entry.html:1358
+msgid "REQUEST NEW MATERIAL"
+msgstr ""
 
-msgid "Send us a message and we'll get back to you within 24 hours during business days."
-msgstr "Bize bir mesaj gönderin, iş günlerinde 24 saat içinde size geri döneceğiz."
+#: .\templates\data_entry.html:1362
+#: .\templates\data_entry.html:1394
+msgid "Do you have a suggested emission factor?"
+msgstr ""
 
-msgid "Frequently Asked Questions"
-msgstr "Sık Sorulan Sorular"
+#: .\templates\data_entry.html:1397
+msgid "Suggested Factor (Optional)"
+msgstr ""
 
-msgid "Find quick answers to common questions about using Academia Carbon."
-msgstr "Academia Carbon kullanımı hakkında yaygın sorulara hızlı cevaplar bulun."
+#: .\templates\data_entry.html:1401
+msgid "Unit (Optional)"
+msgstr ""
 
-msgid "Direct Contact"
-msgstr "Doğrudan İletişim"
+#: .\templates\data_entry.html:1417
+msgid "Source (Optional)"
+msgstr ""
 
-msgid "Email us directly at support@academiacarbon.com for immediate assistance."
-msgstr "Anında yardım için doğrudan support@academiacarbon.com adresine e-posta gönderin."
+#: .\templates\data_entry.html:1428
+msgid "Submit Request"
+msgstr ""
 
+#: .\templates\data_entry.html:1440
+msgid "ADD NEW SUPPLIER"
+msgstr ""
+
+#: .\templates\data_entry.html:1444
+msgid "Add new suppliers to your database."
+msgstr ""
+
+#: .\templates\data_entry.html:1448
+msgid "Supplier name"
+msgstr ""
+
+#: .\templates\data_entry.html:1454
+msgid "Contact name"
+msgstr ""
+
+#: .\templates\data_entry.html:1460
+msgid "Email"
+msgstr ""
+
+#: .\templates\data_entry.html:1466
+msgid "Phone number"
+msgstr ""
+
+#: .\templates\data_entry.html:1482
+msgid "Activity"
+msgstr ""
+
+#: .\templates\data_entry.html:1485 .\templates\suppliers.html:164
+msgid "Energy"
+msgstr ""
+
+#: .\templates\data_entry.html:1486
+msgid "Fuel"
+msgstr ""
+
+#: .\templates\data_entry.html:1487 .\templates\suppliers.html:165
+msgid "Transportation"
+msgstr ""
+
+#: .\templates\data_entry.html:1488
+msgid "Waste Management"
+msgstr ""
+
+#: .\templates\data_entry.html:1489
+msgid "Manufacturing"
+msgstr ""
+
+#: .\templates\data_entry.html:1490
+msgid "Construction"
+msgstr ""
+
+#: .\templates\data_entry.html:1502
+msgid "United States"
+msgstr ""
+
+#: .\templates\data_entry.html:1503
+msgid "United Kingdom"
+msgstr ""
+
+#: .\templates\data_entry.html:1504
+msgid "Germany"
+msgstr ""
+
+#: .\templates\data_entry.html:1505
+msgid "France"
+msgstr ""
+
+#: .\templates\data_entry.html:1506
+msgid "China"
+msgstr ""
+
+#: .\templates\data_entry.html:1510
+msgid "City"
+msgstr ""
+
+#: .\templates\data_entry.html:1517
+msgid "Tax number"
+msgstr ""
+
+#: .\templates\data_entry.html:1523
+msgid "Company Website"
+msgstr ""
+
+#: .\templates\data_entry.html:1529
+msgid "Address / Notes"
+msgstr ""
+
+msgid "Save"
+msgstr "Kaydet"
+
+#: .\templates\data_entry.html:1550
+msgid "REQUEST NEW INDUSTRY TYPE"
+msgstr ""
+
+#: .\templates\data_entry.html:1554
+#: .\templates\data_entry.html:1558
+msgid "Industry Name"
+msgstr ""
+
+#: .\templates\data_entry.html:1561
+msgid "characters"
+msgstr ""
+
+#: .\templates\data_entry.html:2761
+msgid "🔄 Loading industries..."
+msgstr ""
+
+#: .\templates\data_entry.html:2777 .\templates\data_entry.html:2835
+msgid "Select Industry Type"
+msgstr ""
+
+#: .\templates\data_entry.html:2802
+msgid "No industries available"
+msgstr ""
+
+#: .\templates\data_entry.html:2807
+msgid "❌ Failed to load industries"
+msgstr ""
+
+#: .\templates\data_entry_new.html:10
+msgid "Emission Management"
+msgstr ""
+
+#: .\templates\data_entry_new.html:17
+msgid "Country/Region"
+msgstr ""
+
+#: .\templates\data_entry_new.html:21
+msgid "Turkey (Türkiye)"
+msgstr ""
+
+#: .\templates\data_entry_new.html:24
+msgid "Using Turkey-specific emission factors"
+msgstr ""
+
+#: .\templates\data_entry_new.html:42
+msgid "Direct Emissions"
+msgstr ""
+
+#: .\templates\data_entry_new.html:43
+msgid "Emissions from sources owned or controlled by your organization"
+msgstr ""
+
+#: .\templates\data_entry_new.html:64
+msgid "Coal (industrial)"
+msgstr ""
+
+#: .\templates\data_entry_new.html:65
+msgid "Natural Gas"
+msgstr ""
+
+#: .\templates\data_entry_new.html:66
+msgid "Diesel (volume)"
+msgstr ""
+
+#: .\templates\data_entry_new.html:115
+msgid "here"
+msgstr ""
+
+#: .\templates\data_entry_new.html:115
+msgid "i.e. gas bills"
+msgstr ""
+
+#: .\templates\data_entry_new.html:137
+msgid "Mobile combustion form will be similar to stationary"
+msgstr ""
+
+#: .\templates\data_entry_new.html:144
+msgid "Fugitive emissions"
+msgstr ""
+
+#: .\templates\data_entry_new.html:145
+msgid "Emissions from refrigerants, air conditioning, and other sources"
+msgstr ""
+
+#: .\templates\data_entry_new.html:153
+msgid "Fugitive emissions form will be similar to stationary"
+msgstr ""
+
+#: .\templates\data_entry_new.html:163
+msgid "Indirect Emissions (Energy)"
+msgstr ""
+
+#: .\templates\data_entry_new.html:164
+msgid "Emissions from purchased electricity, steam, heat, and cooling"
+msgstr ""
+
+#: .\templates\data_entry_new.html:167
+msgid "Scope 2 content will be implemented here"
+msgstr ""
+
+#: .\templates\data_entry_new.html:176
+msgid "Other Indirect Emissions"
+msgstr ""
+
+#: .\templates\data_entry_new.html:177
+msgid "Emissions from value chain activities"
+msgstr ""
+
+#: .\templates\data_entry_new.html:183
+msgid "Use Custom Factor"
+msgstr ""
+
+#: .\templates\data_entry_new.html:186
+msgid "Request Material"
+msgstr ""
+
+#: .\templates\data_entry_new.html:190
+msgid "Scope 3 content will be implemented here"
+msgstr ""
+
+#: .\templates\emission_history.html:656
+#: .\templates\reporting\inventory_pdf.html:336
+msgid "Date"
+msgstr ""
+
+#: .\templates\emissions.html:5 .\templates\partials\sidebar.html:44
+msgid "Emissions"
+msgstr ""
+
+#: .\templates\emissions.html:12
+msgid "Method"
+msgstr ""
+
+#: .\templates\emissions.html:15 .\templates\emissions.html:612
+msgid "GHG-Based"
+msgstr ""
+
+#: .\templates\emissions.html:16 .\templates\emissions.html:613
+msgid "ISO 14064-1"
+msgstr ""
+
+#: .\templates\emissions.html:20
+msgid "Export All"
+msgstr ""
+
+#: .\templates\emissions.html:611
+msgid "Calculation Standard"
+msgstr ""
+
+#: .\templates\emissions.html:614
+msgid "Market-Based"
+msgstr ""
+
+#: .\templates\emissions.html:615
+msgid "Location-Based"
+msgstr ""
+
+#: .\templates\emissions.html:619
+msgid "Date Range"
+msgstr ""
+
+#: .\templates\emissions.html:639 .\templates\emissions.html:767
+#: .\templates\emissions.html:773 .\templates\emissions.html:797
+#: .\templates\emissions.html:803
+msgid "Select All"
+msgstr ""
+
+#: .\templates\emissions.html:642 .\templates\emissions.html:653
+msgid "Clear"
+msgstr ""
+
+#: .\templates\emissions.html:652
+msgid "All"
+msgstr ""
+
+#: .\templates\emissions.html:776 .\templates\emissions.html:806
+msgid "Clear All"
+msgstr ""
+
+msgid "All Time"
+msgstr "Tüm Zamanlar"
+
+msgid "Refresh"
+msgstr "Yenile"
+
+msgid "Welcome back!"
+msgstr "Tekrar hoş geldiniz!"
+
+#: .\templates\index.html:34
+msgid "Here's what's happening with your carbon emissions today."
+msgstr ""
+
+msgid "Total Emissions"
+msgstr "Toplam Emisyonlar"
+
+msgid "Loading..."
+msgstr "Yükleniyor..."
+
+#: .\templates\index.html:52 .\templates\index.html:68
+#: .\templates\index.html:84
+msgid "Calculating..."
+msgstr ""
+
+#: .\templates\index.html:58
+msgid "Records Count"
+msgstr ""
+
+msgid "This Month"
+msgstr "Bu Ay"
+
+msgid "Suppliers"
+msgstr "Tedarikçiler"
+
+#: .\templates\index.html:99
+msgid "Active suppliers"
+msgstr ""
+
+#: .\templates\index.html:108
+msgid "Emissions by Scope"
+msgstr ""
+
+#: .\templates\index.html:109
+msgid "Distribution across Scope 1, 2, and 3"
+msgstr ""
+
+#: .\templates\index.html:118
+msgid "Monthly Trends"
+msgstr ""
+
+#: .\templates\index.html:119
+msgid "Emission trends over the last 6 months"
+msgstr ""
+
+#: .\templates\index.html:130
+msgid "Quick Actions"
+msgstr ""
+
+#: .\templates\index.html:131
+msgid "Get started with common tasks"
+msgstr ""
+
+#: .\templates\index.html:137
+msgid "Add Emission Data"
+msgstr ""
+
+#: .\templates\index.html:141 .\templates\user_guide.html:1049
+msgid "Generate Report"
+msgstr ""
+
+#: .\templates\index.html:145
+msgid "View Analysis"
+msgstr ""
+
+#: .\templates\index.html:149 .\templates\user_guide.html:1043
+msgid "View History"
+msgstr ""
+
+#: .\templates\index.html:159
+msgid "Recent Activity"
+msgstr ""
+
+#: .\templates\index.html:168
+msgid "New emission record added"
+msgstr ""
+
+#: .\templates\index.html:169
+msgid "2 hours ago"
+msgstr ""
+
+#: .\templates\index.html:177
+msgid "Report generated"
+msgstr ""
+
+#: .\templates\index.html:178
+msgid "1 day ago"
+msgstr ""
+
+#: .\templates\index.html:186
+msgid "Analysis completed"
+msgstr ""
+
+#: .\templates\index.html:187
+msgid "3 days ago"
+msgstr ""
+
+#: .\templates\index.html:196
+msgid "Tips & Insights"
+msgstr ""
+
+#: .\templates\index.html:204
+msgid "Reduce Scope 2 Emissions"
+msgstr ""
+
+#: .\templates\index.html:205
+#: .\templates\index.html:214
+#: .\templates\landing.html:8
+msgid "Academia Carbon - Professional Carbon Tracking Platform"
+msgstr ""
+
+#: .\templates\landing.html:9
+#: .\templates\landing.html:2222 .\templates\landing.html:2262
+#: .\templates\landing.html:3435
+msgid "Features"
+msgstr ""
+
+#: .\templates\landing.html:2223 .\templates\landing.html:2263
+msgid "Demo"
+msgstr ""
+
+#: .\templates\landing.html:2224 .\templates\landing.html:2264
+#: .\templates\landing.html:3437
+msgid "Pricing"
+msgstr ""
+
+#: .\templates\landing.html:2225 .\templates\landing.html:2265
+#: .\templates\support.html:259
 msgid "Documentation"
-msgstr "Dokümantasyon"
+msgstr ""
 
-msgid "Access comprehensive guides and documentation for all platform features."
-msgstr "Tüm platform özellikleri için kapsamlı kılavuzlara ve dokümantasyona erişin."
+#: .\templates\landing.html:2226 .\templates\landing.html:2266
+msgid "API"
+msgstr ""
 
-# User Guide Page Translations
+#: .\templates\landing.html:2227 .\templates\landing.html:2267
+msgid "Contact"
+msgstr ""
+
+#: .\templates\landing.html:2245 .\templates\landing.html:2284
+msgid "Get Started"
+msgstr ""
+
+#: .\templates\landing.html:2294 .\templates\landing.html:3056
+msgid "Professional"
+msgstr ""
+
+#: .\templates\landing.html:2295
+msgid "Carbon Tracking"
+msgstr ""
+
+#: .\templates\landing.html:2296
+msgid "Platform"
+msgstr ""
+
+#: .\templates\landing.html:2300
+#: .\templates\landing.html:2306
+msgid "See Live Demo"
+msgstr ""
+
+#: .\templates\landing.html:2310
+msgid "Watch Demo Video"
+msgstr ""
+
+#: .\templates\landing.html:2317
+msgid "Certified Standard"
+msgstr ""
+
+#: .\templates\landing.html:2321
+msgid "Accuracy Rate"
+msgstr ""
+
+#: .\templates\landing.html:2338 .\templates\landing.html:2645
+msgid "Carbon Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:2344
+msgid "Watch Live Demo Video"
+msgstr ""
+
+#: .\templates\landing.html:2359
+msgid "3-Minute Product Demo"
+msgstr ""
+
+#: .\templates\landing.html:2360
+msgid "See how Fortune 500 companies track their carbon footprint"
+msgstr ""
+
+#: .\templates\landing.html:2368
+msgid "Tons CO2 Tracked"
+msgstr ""
+
+#: .\templates\landing.html:2372
+msgid "Companies"
+msgstr ""
+
+#: .\templates\landing.html:2376
+msgid "Uptime"
+msgstr ""
+
+#: .\templates\landing.html:2391
+msgid "Key Features"
+msgstr ""
+
+#: .\templates\landing.html:2393
+msgid "Everything You Need for Carbon Management"
+msgstr ""
+
+#: .\templates\landing.html:2395
+#: .\templates\landing.html:2404
+msgid "Precise Emission Calculation"
+msgstr ""
+
+#: .\templates\landing.html:2406
+#: .\templates\landing.html:2414
+msgid "Advanced Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:2416
+#: .\templates\landing.html:2424 .\templates\user_guide.html:525
+#: .\templates\user_guide.html:822
+msgid "ISO 14064-1 Reporting"
+msgstr ""
+
+#: .\templates\landing.html:2426
+#: .\templates\landing.html:2434 .\templates\suppliers.html:5
+#: .\templates\user_guide.html:641
+msgid "Supplier Management"
+msgstr ""
+
+#: .\templates\landing.html:2436
+#: .\templates\landing.html:2446
+#: .\templates\landing.html:2454
+msgid "Security & Privacy"
+msgstr ""
+
+#: .\templates\landing.html:2456
+#: .\templates\landing.html:2469 .\templates\landing.html:3436
+msgid "Live Demo"
+msgstr ""
+
+#: .\templates\landing.html:2471
+msgid "See Academia Carbon in Action"
+msgstr ""
+
+#: .\templates\landing.html:2473
+#: .\templates\landing.html:2481
+msgid "Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:2485
+msgid "ISO Reports"
+msgstr ""
+
+#: .\templates\landing.html:2489
+msgid "Emission Tracking"
+msgstr ""
+
+#: .\templates\landing.html:2497
+msgid "Real-time Carbon Analytics Dashboard"
+msgstr ""
+
+#: .\templates\landing.html:2499
+#: .\templates\landing.html:2507
+msgid "Real-time emission tracking across Scope 1, 2, and 3"
+msgstr ""
+
+#: .\templates\landing.html:2513
+msgid "Interactive charts and KPI visualizations"
+msgstr ""
+
+#: .\templates\landing.html:2519
+msgid "Automated calculations with latest emission factors"
+msgstr ""
+
+#: .\templates\landing.html:2525
+msgid "ISO 14064-1 compliant reporting and PDF export"
+msgstr ""
+
+#: .\templates\landing.html:2532
+msgid "Try Live Demo"
+msgstr ""
+
+#: .\templates\landing.html:2536 .\templates\landing.html:2845
+msgid "View Documentation"
+msgstr ""
+
+#: .\templates\landing.html:2545
+msgid "Professional ISO 14064-1 Reports"
+msgstr ""
+
+#: .\templates\landing.html:2547
+#: .\templates\landing.html:2555
+msgid "ISO 14064-1 compliant report templates"
+msgstr ""
+
+#: .\templates\landing.html:2561
+msgid "Automated data validation and verification"
+msgstr ""
+
+#: .\templates\landing.html:2567
+msgid "Custom branding and white-label options"
+msgstr ""
+
+#: .\templates\landing.html:2573
+msgid "Multi-format export (PDF, Excel, CSV)"
+msgstr ""
+
+#: .\templates\landing.html:2580
+msgid "Generate Sample Report"
+msgstr ""
+
+#: .\templates\landing.html:2584
+msgid "API Integration"
+msgstr ""
+
+#: .\templates\landing.html:2593
+msgid "Comprehensive Emission Tracking"
+msgstr ""
+
+#: .\templates\landing.html:2595
+#: .\templates\landing.html:2603
+msgid "Multi-location and facility management"
+msgstr ""
+
+#: .\templates\landing.html:2609
+msgid "Supplier carbon footprint integration"
+msgstr ""
+
+#: .\templates\landing.html:2615
+msgid "Automated emission factor updates"
+msgstr ""
+
+#: .\templates\landing.html:2621
+msgid "Data import from ERP and accounting systems"
+msgstr ""
+
+#: .\templates\landing.html:2628
+msgid "Start Tracking"
+msgstr ""
+
+#: .\templates\landing.html:2632 .\templates\landing.html:2957
+msgid "View Integrations"
+msgstr ""
+
+#: .\templates\landing.html:2655
+#, python-format
+msgid "12%% vs last month"
+msgstr ""
+
+#: .\templates\landing.html:2659
+msgid "Scope 1 Emissions"
+msgstr ""
+
+#: .\templates\landing.html:2663
+#, python-format
+msgid "8%% reduction"
+msgstr ""
+
+#: .\templates\landing.html:2667
+msgid "Carbon Intensity"
+msgstr ""
+
+#: .\templates\landing.html:2671
+#, python-format
+msgid "15%% improvement"
+msgstr ""
+
+#: .\templates\landing.html:2679
+msgid "Monthly Emissions Trend"
+msgstr ""
+
+#: .\templates\landing.html:2680
+msgid "Last 12 Months"
+msgstr ""
+
+#: .\templates\landing.html:2697
+msgid "Jan"
+msgstr ""
+
+#: .\templates\landing.html:2698
+msgid "Feb"
+msgstr ""
+
+#: .\templates\landing.html:2699
+msgid "Mar"
+msgstr ""
+
+#: .\templates\landing.html:2700
+msgid "Apr"
+msgstr ""
+
+#: .\templates\landing.html:2701
+msgid "May"
+msgstr ""
+
+#: .\templates\landing.html:2702
+msgid "Jun"
+msgstr ""
+
+#: .\templates\landing.html:2703
+msgid "Jul"
+msgstr ""
+
+#: .\templates\landing.html:2704
+msgid "Aug"
+msgstr ""
+
+#: .\templates\landing.html:2705
+msgid "Sep"
+msgstr ""
+
+#: .\templates\landing.html:2706
+msgid "Oct"
+msgstr ""
+
+#: .\templates\landing.html:2707
+msgid "Nov"
+msgstr ""
+
+#: .\templates\landing.html:2708
+msgid "Dec"
+msgstr ""
+
+#: .\templates\landing.html:2720
+msgid "Trusted by Leading Organizations Worldwide"
+msgstr ""
+
+#: .\templates\landing.html:2743
+#: .\templates\landing.html:2748
+msgid "Sarah Mitchell"
+msgstr ""
+
+#: .\templates\landing.html:2749
+msgid "Sustainability Director, TechCorp"
+msgstr ""
+
+#: .\templates\landing.html:2756
+#: .\templates\landing.html:2761
+msgid "James Davis"
+msgstr ""
+
+#: .\templates\landing.html:2762
+msgid "Environmental Manager, GreenEnergy"
+msgstr ""
+
+#: .\templates\landing.html:2769
+#: .\templates\landing.html:2774
+msgid "Anna Lopez"
+msgstr ""
+
+#: .\templates\landing.html:2775
+msgid "Chief Operations Officer, Manufacturing Co"
+msgstr ""
+
+#: .\templates\landing.html:2789
+msgid "Developer Resources"
+msgstr ""
+
+#: .\templates\landing.html:2791
+msgid "Documentation & API Integration"
+msgstr ""
+
+#: .\templates\landing.html:2793
+#: .\templates\landing.html:2805
+msgid "User Documentation"
+msgstr ""
+
+#: .\templates\landing.html:2807
+#: .\templates\landing.html:2815
+msgid "Quick start guide and tutorials"
+msgstr ""
+
+#: .\templates\landing.html:2821
+msgid "Feature documentation with examples"
+msgstr ""
+
+#: .\templates\landing.html:2827
+msgid "ISO 14064-1 compliance guidelines"
+msgstr ""
+
+#: .\templates\landing.html:2833
+msgid "Video tutorials and webinars"
+msgstr ""
+
+#: .\templates\landing.html:2839
+msgid "Troubleshooting and FAQ"
+msgstr ""
+
+#: .\templates\landing.html:2853
+msgid "Developer Favorite"
+msgstr ""
+
+#: .\templates\landing.html:2860
+msgid "REST API"
+msgstr ""
+
+#: .\templates\landing.html:2862
+#: .\templates\landing.html:2870
+msgid "Complete REST API documentation"
+msgstr ""
+
+#: .\templates\landing.html:2876
+msgid "Interactive API explorer"
+msgstr ""
+
+#: .\templates\landing.html:2882
+msgid "SDKs for Python, JavaScript, PHP"
+msgstr ""
+
+#: .\templates\landing.html:2888
+msgid "Webhook support for real-time updates"
+msgstr ""
+
+#: .\templates\landing.html:2894
+msgid "Rate limiting and authentication"
+msgstr ""
+
+#: .\templates\landing.html:2900
+msgid "Sandbox environment for testing"
+msgstr ""
+
+#: .\templates\landing.html:2906
+msgid "Explore API"
+msgstr ""
+
+#: .\templates\landing.html:2917 .\templates\landing.html:3438
+msgid "Integrations"
+msgstr ""
+
+#: .\templates\landing.html:2919
+#: .\templates\landing.html:2927
+msgid "ERP systems (SAP, Oracle, NetSuite)"
+msgstr ""
+
+#: .\templates\landing.html:2933
+msgid "Accounting software (QuickBooks, Xero)"
+msgstr ""
+
+#: .\templates\landing.html:2939
+msgid "Energy management systems"
+msgstr ""
+
+#: .\templates\landing.html:2945
+msgid "Supply chain platforms"
+msgstr ""
+
+#: .\templates\landing.html:2951
+msgid "Custom integration support"
+msgstr ""
+
+#: .\templates\landing.html:2964
+msgid "Quick Access"
+msgstr ""
+
+#: .\templates\landing.html:2968
+msgid "Try Interactive Demo"
+msgstr ""
+
+#: .\templates\landing.html:2972
+msgid "API Playground"
+msgstr ""
+
+#: .\templates\landing.html:2976 .\templates\landing.html:3471
+#: .\templates\user_guide.html:1055
+msgid "Get Support"
+msgstr ""
+
+#: .\templates\landing.html:2989
+msgid "Pricing Plans"
+msgstr ""
+
+#: .\templates\landing.html:2991
+msgid "Choose the Right Plan for Your Organization"
+msgstr ""
+
+#: .\templates\landing.html:2993
+#: .\templates\landing.html:3000
+msgid "Starter"
+msgstr ""
+
+#: .\templates\landing.html:3002
+msgid "Perfect for small organizations getting started with carbon tracking"
+msgstr ""
+
+#: .\templates\landing.html:3008 .\templates\landing.html:3064
+msgid "/month"
+msgstr ""
+
+#: .\templates\landing.html:3016
+msgid "Up to 100 data entries per month"
+msgstr ""
+
+#: .\templates\landing.html:3022
+msgid "Basic emission calculations (Scope 1 & 2)"
+msgstr ""
+
+#: .\templates\landing.html:3028
+msgid "Standard reporting templates"
+msgstr ""
+
+#: .\templates\landing.html:3034
+msgid "Email support"
+msgstr ""
+
+#: .\templates\landing.html:3040
+msgid "1 user account"
+msgstr ""
+
+#: .\templates\landing.html:3046
+msgid "Start Free"
+msgstr ""
+
+#: .\templates\landing.html:3054
+msgid "Most Popular"
+msgstr ""
+
+#: .\templates\landing.html:3058
+msgid "Comprehensive carbon management for growing organizations"
+msgstr ""
+
+#: .\templates\landing.html:3072
+msgid "Unlimited data entries"
+msgstr ""
+
+#: .\templates\landing.html:3078
+msgid "Full Scope 1, 2, 3 calculations"
+msgstr ""
+
+#: .\templates\landing.html:3084
+msgid "ISO 14064-1 compliant reporting"
+msgstr ""
+
+#: .\templates\landing.html:3090
+msgid "Advanced analytics dashboard"
+msgstr ""
+
+#: .\templates\landing.html:3096
+msgid "Supplier management tools"
+msgstr ""
+
+#: .\templates\landing.html:3102
+msgid "Priority support & training"
+msgstr ""
+
+#: .\templates\landing.html:3108
+msgid "Up to 10 user accounts"
+msgstr ""
+
+#: .\templates\landing.html:3114
+msgid "Start 14-Day Trial"
+msgstr ""
+
+#: .\templates\landing.html:3120
+msgid "Enterprise"
+msgstr ""
+
+#: .\templates\landing.html:3122
+msgid "Custom solutions for large organizations with complex needs"
+msgstr ""
+
+#: .\templates\landing.html:3126
+msgid "Custom"
+msgstr ""
+
+#: .\templates\landing.html:3134
+msgid "Everything in Professional"
+msgstr ""
+
+#: .\templates\landing.html:3140
+msgid "Custom integrations & API access"
+msgstr ""
+
+#: .\templates\landing.html:3146
+msgid "White-label solutions"
+msgstr ""
+
+#: .\templates\landing.html:3152
+msgid "Dedicated account manager"
+msgstr ""
+
+#: .\templates\landing.html:3158
+msgid "24/7 premium support"
+msgstr ""
+
+#: .\templates\landing.html:3164
+msgid "Unlimited users"
+msgstr ""
+
+#: .\templates\landing.html:3170
+msgid "On-premise deployment options"
+msgstr ""
+
+#: .\templates\landing.html:3176 .\templates\landing.html:3463
+msgid "Contact Sales"
+msgstr ""
+
+#: .\templates\landing.html:3189
+msgid "Our Team"
+msgstr ""
+
+#: .\templates\landing.html:3191
+msgid "Meet the Carbon Experts Behind Academia Carbon"
+msgstr ""
+
+#: .\templates\landing.html:3193
+#: .\templates\landing.html:3207
+msgid "Chief Environmental Officer"
+msgstr ""
+
+#: .\templates\landing.html:3215
+msgid "PhD Environmental Science, MIT"
+msgstr ""
+
+#: .\templates\landing.html:3221
+msgid "15+ years carbon accounting experience"
+msgstr ""
+
+#: .\templates\landing.html:3227
+msgid "ISO 14064-1 Lead Auditor"
+msgstr ""
+
+#: .\templates\landing.html:3233
+msgid "Former UN Climate Change Advisor"
+msgstr ""
+
+#: .\templates\landing.html:3254
+msgid "Michael Kim"
+msgstr ""
+
+#: .\templates\landing.html:3256
+msgid "Chief Technology Officer"
+msgstr ""
+
+#: .\templates\landing.html:3264
+msgid "MS Computer Science, Stanford"
+msgstr ""
+
+#: .\templates\landing.html:3270
+msgid "Former Senior Engineer at Tesla"
+msgstr ""
+
+#: .\templates\landing.html:3276
+msgid "Expert in scalable cloud architecture"
+msgstr ""
+
+#: .\templates\landing.html:3282
+msgid "Certified in enterprise security"
+msgstr ""
+
+#: .\templates\landing.html:3303
+msgid "Sofia Patel"
+msgstr ""
+
+#: .\templates\landing.html:3305
+msgid "Head of Customer Success"
+msgstr ""
+
+#: .\templates\landing.html:3313
+msgid "MBA Sustainable Business, Wharton"
+msgstr ""
+
+#: .\templates\landing.html:3319
+msgid "10+ years sustainability consulting"
+msgstr ""
+
+#: .\templates\landing.html:3325
+msgid "Led 200+ carbon reduction projects"
+msgstr ""
+
+#: .\templates\landing.html:3331
+#, python-format
+msgid "98%% customer satisfaction rate"
+msgstr ""
+
+#: .\templates\landing.html:3351
+msgid "Team Members"
+msgstr ""
+
+#: .\templates\landing.html:3355
+msgid "Countries Served"
+msgstr ""
+
+#: .\templates\landing.html:3359
+msgid "Projects Completed"
+msgstr ""
+
+#: .\templates\landing.html:3371
+msgid "Ready to Get Started?"
+msgstr ""
+
+#: .\templates\landing.html:3374
+msgid "Start Your Carbon Journey Today"
+msgstr ""
+
+#: .\templates\landing.html:3376
+#: .\templates\landing.html:3382
+msgid "Create Free Account"
+msgstr ""
+
+#: .\templates\landing.html:3404
+#: .\templates\landing.html:3407
+msgid "Contact Information"
+msgstr ""
+
+#: .\templates\landing.html:3419
+msgid "San Francisco, CA, USA"
+msgstr ""
+
+#: .\templates\landing.html:3433
+msgid "Product"
+msgstr ""
+
+#: .\templates\landing.html:3439
+msgid "API Documentation"
+msgstr ""
+
+#: .\templates\landing.html:3440
+msgid "Changelog"
+msgstr ""
+
+#: .\templates\landing.html:3445
+msgid "Resources"
+msgstr ""
+
+#: .\templates\landing.html:3447
+msgid "Help Center"
+msgstr ""
+
+#: .\templates\landing.html:3448
+msgid "User Guides"
+msgstr ""
+
+#: .\templates\landing.html:3449
+msgid "Webinars"
+msgstr ""
+
+#: .\templates\landing.html:3450
+msgid "Case Studies"
+msgstr ""
+
+#: .\templates\landing.html:3451
+msgid "Blog"
+msgstr ""
+
+#: .\templates\landing.html:3452
+msgid "Downloads"
+msgstr ""
+
+#: .\templates\landing.html:3457
+msgid "Company"
+msgstr ""
+
+#: .\templates\landing.html:3459
+msgid "About Us"
+msgstr ""
+
+#: .\templates\landing.html:3460
+msgid "Careers"
+msgstr ""
+
+#: .\templates\landing.html:3461
+msgid "Press Kit"
+msgstr ""
+
+#: .\templates\landing.html:3462
+msgid "Partners"
+msgstr ""
+
+#: .\templates\landing.html:3464
+msgid "System Status"
+msgstr ""
+
+#: .\templates\landing.html:3472
+msgid "Community"
+msgstr ""
+
+#: .\templates\landing.html:3473
+msgid "Training"
+msgstr ""
+
+#: .\templates\landing.html:3474
+msgid "Certification"
+msgstr ""
+
+#: .\templates\landing.html:3475
+msgid "Security"
+msgstr ""
+
+#: .\templates\landing.html:3476
+msgid "Compliance"
+msgstr ""
+
+#: .\templates\landing.html:3484
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\templates\landing.html:3485
+msgid "Terms of Service"
+msgstr ""
+
+#: .\templates\landing.html:3486
+msgid "Cookie Policy"
+msgstr ""
+
+#: .\templates\landing.html:3487
+msgid "GDPR"
+msgstr ""
+
+#: .\templates\landing.html:3510
+#: .\templates\partials\sidebar.html:14
+msgid "GHG Tracking"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:21
+msgid "Add Data"
+msgstr ""
+
+#: .\templates\partials\sidebar.html:25
+msgid "MENU"
+msgstr ""
+
+msgid "Reporting"
+msgstr "Raporlama"
+
+msgid "Settings"
+msgstr "Ayarlar"
+
 msgid "Help & Guide"
 msgstr "Yardım ve Rehber"
 
-msgid "Complete User Guide"
-msgstr "Kapsamlı Kullanıcı Kılavuzu"
+#: .\templates\partials\sidebar.html:101
+msgid "24/7 Support Available"
+msgstr ""
 
-msgid "Master greenhouse gas emissions tracking with our comprehensive guide"
-msgstr "Kapsamlı kılavuzumuzla sera gazı emisyon izlemeyi öğrenin"
+#: .\templates\reporting\inventory.html:14
+msgid "Filter"
+msgstr ""
 
-msgid "Getting Started"
-msgstr "Başlarken"
+#: .\templates\reporting\inventory.html:17
+msgid "All Scopes"
+msgstr ""
 
-msgid "Quick start guide to begin tracking emissions in minutes"
-msgstr "Dakikalar içinde emisyon izlemeye başlamak için hızlı başlangıç kılavuzu"
+#: .\templates\reporting\inventory.html:24
+msgid "Generate PDF"
+msgstr ""
 
-msgid "Understanding Scopes"
-msgstr "Kapsamları Anlama"
-
-msgid "Complete guide to Scope 1, 2, and 3 emissions"
-msgstr "Kapsam 1, 2 ve 3 emisyonları için kapsamlı kılavuz"
-
-msgid "Best Practices"
-msgstr "En İyi Uygulamalar"
-
-msgid "Tips for accurate and efficient emission tracking"
-msgstr "Doğru ve verimli emisyon izleme için ipuçları"
-
-msgid "Troubleshooting"
-msgstr "Sorun Giderme"
-
-msgid "Common issues and solutions"
-msgstr "Yaygın sorunlar ve çözümler"
-
-# Additional translations for new strings
-msgid "All Categories"
-msgstr "Tüm Kategoriler"
-
-msgid "Energy"
-msgstr "Enerji"
-
-msgid "Transportation"
-msgstr "Ulaşım"
-
-msgid "Materials"
-msgstr "Malzemeler"
-
+#: .\templates\settings.html:191
 msgid "All Settings"
-msgstr "Tüm Ayarlar"
+msgstr ""
 
+#: .\templates\settings.html:192
 msgid "Account"
-msgstr "Hesap"
+msgstr ""
 
-msgid "Organization"
-msgstr "Kuruluş"
-
+#: .\templates\settings.html:194
 msgid "Privacy"
-msgstr "Gizlilik"
+msgstr ""
 
+#: .\templates\settings.html:198
+msgid "Reset"
+msgstr ""
+
+#: .\templates\settings.html:213
+msgid "Account Settings"
+msgstr ""
+
+#: .\templates\settings.html:215
+msgid "Manage your personal account information and preferences."
+msgstr ""
+
+#: .\templates\settings.html:218
+msgid "Full Name"
+msgstr ""
+
+#: .\templates\settings.html:225
+msgid "Contact support to change your email address"
+msgstr ""
+
+#: .\templates\settings.html:229
+msgid "Organization Name"
+msgstr ""
+
+#: .\templates\settings.html:339
+msgid "Select Industry"
+msgstr ""
+
+#: .\templates\suppliers.html:163
+msgid "All Categories"
+msgstr ""
+
+#: .\templates\suppliers.html:166
+msgid "Materials"
+msgstr ""
+
+#: .\templates\suppliers.html:170
+msgid "Add Supplier"
+msgstr ""
+
+#: .\templates\suppliers.html:184
+msgid "Total Suppliers"
+msgstr ""
+
+#: .\templates\suppliers.html:188
+msgid "Active Suppliers"
+msgstr ""
+
+#: .\templates\suppliers.html:192
+msgid "Categories"
+msgstr ""
+
+#: .\templates\suppliers.html:196
+msgid "Countries"
+msgstr ""
+
+#: .\templates\suppliers.html:204
+msgid "Supplier Carbon Management"
+msgstr ""
+
+#: .\templates\suppliers.html:205
+msgid "Enhanced Features Coming Soon"
+msgstr ""
+
+#: .\templates\suppliers.html:208
+#: .\templates\suppliers.html:213
+msgid "Add Supplier (via Data Entry)"
+msgstr ""
+
+#: .\templates\suppliers.html:217
+msgid "View Supplier Emissions"
+msgstr ""
+
+#: .\templates\support.html:207
+msgid "Status"
+msgstr ""
+
+#: .\templates\support.html:209
 msgid "Online"
-msgstr "Çevrimiçi"
+msgstr ""
 
+#: .\templates\support.html:212
+msgid "Email Support"
+msgstr ""
+
+#: .\templates\support.html:229
+msgid "Contact Support"
+msgstr ""
+
+#: .\templates\support.html:230
+#: .\templates\support.html:239 .\templates\user_guide.html:920
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: .\templates\support.html:240
+msgid "Find quick answers to common questions about using Academia Carbon."
+msgstr ""
+
+#: .\templates\support.html:249
+msgid "Direct Contact"
+msgstr ""
+
+#: .\templates\support.html:250
+#: .\templates\support.html:260
+#: .\templates\support.html:345
+msgid "Your Name"
+msgstr ""
+
+#: .\templates\support.html:355
+msgid "Subject"
+msgstr ""
+
+#: .\templates\support.html:358
+msgid "Data Entry Help"
+msgstr ""
+
+#: .\templates\support.html:359
+msgid "Reporting Issues"
+msgstr ""
+
+#: .\templates\support.html:360
+msgid "Technical Problems"
+msgstr ""
+
+#: .\templates\support.html:361
+msgid "Account Management"
+msgstr ""
+
+#: .\templates\support.html:362
+msgid "Feature Request"
+msgstr ""
+
+#: .\templates\test_language.html:13
+msgid "Welcome"
+msgstr ""
+
+#: .\templates\test_language.html:14
+msgid "This is a test page"
+msgstr ""
+
+#: .\templates\user_guide.html:480
+msgid "Organization:"
+msgstr ""
+
+#: .\templates\user_guide.html:481
+msgid "Period:"
+msgstr ""
+
+#: .\templates\user_guide.html:482
+msgid "Standard:"
+msgstr ""
+
+#: .\templates\user_guide.html:491
+msgid "Complete User Guide"
+msgstr ""
+
+#: .\templates\user_guide.html:492
+msgid "Master greenhouse gas emissions tracking with our comprehensive guide"
+msgstr ""
+
+#: .\templates\user_guide.html:501 .\templates\user_guide.html:550
+msgid "Getting Started"
+msgstr ""
+
+#: .\templates\user_guide.html:502
+msgid "Quick start guide to begin tracking emissions in minutes"
+msgstr ""
+
+#: .\templates\user_guide.html:510
 msgid "Learn how to enter and manage your emission data"
-msgstr "Emisyon verilerinizi nasıl gireceğinizi ve yöneteceğinizi öğrenin"
+msgstr ""
 
+#: .\templates\user_guide.html:517
+msgid "Understanding Scopes"
+msgstr ""
+
+#: .\templates\user_guide.html:518
+msgid "Complete guide to Scope 1, 2, and 3 emissions"
+msgstr ""
+
+#: .\templates\user_guide.html:526
 msgid "Generate professional compliance reports"
-msgstr "Profesyonel uyumluluk raporları oluşturun"
+msgstr ""
+
+#: .\templates\user_guide.html:533 .\templates\user_guide.html:876
+msgid "Best Practices"
+msgstr ""
+
+#: .\templates\user_guide.html:534
+msgid "Tips for accurate and efficient emission tracking"
+msgstr ""
+
+#: .\templates\user_guide.html:541
+msgid "Troubleshooting"
+msgstr ""
+
+#: .\templates\user_guide.html:542
+msgid "Common issues and solutions"
+msgstr ""
+
+#: .\templates\user_guide.html:556
+msgid "Quick Start in 5 Minutes"
+msgstr ""
+
+#: .\templates\user_guide.html:557
+#: .\templates\user_guide.html:564
+msgid "Navigate to Data Collection"
+msgstr ""
+
+#: .\templates\user_guide.html:565
+msgid "Click on \\"
+msgstr ""
+
+#: .\templates\user_guide.html:570
+msgid "Select Your Country"
+msgstr ""
+
+#: .\templates\user_guide.html:571
+#: .\templates\user_guide.html:576
+msgid "Choose Emission Scope"
+msgstr ""
+
+#: .\templates\user_guide.html:577
+#: .\templates\user_guide.html:582
+msgid "Enter Activity Data"
+msgstr ""
+
+#: .\templates\user_guide.html:583
+#: .\templates\user_guide.html:588
+msgid "Calculate & Review"
+msgstr ""
+
+#: .\templates\user_guide.html:589
+msgid "Click \\"
+msgstr ""
+
+#: .\templates\user_guide.html:594
+msgid "View Reports"
+msgstr ""
+
+#: .\templates\user_guide.html:595
+#: .\templates\user_guide.html:603
+msgid "Video Tutorial"
+msgstr ""
+
+#: .\templates\user_guide.html:604
+msgid "Watch our 3-minute getting started video"
+msgstr ""
+
+#: .\templates\user_guide.html:607
+#: .\templates\user_guide.html:616
+msgid "Data Collection Guide"
+msgstr ""
+
+#: .\templates\user_guide.html:621
+msgid "Country Selection"
+msgstr ""
+
+#: .\templates\user_guide.html:622
+msgid "Choose the right country for accurate emission factors:"
+msgstr ""
+
+#: .\templates\user_guide.html:624
+msgid "Turkey:"
+msgstr ""
+
+#: .\templates\user_guide.html:624
+msgid "Use for Turkish organizations (recommended)"
+msgstr ""
+
+#: .\templates\user_guide.html:625
+msgid "Global Average:"
+msgstr ""
+
+#: .\templates\user_guide.html:625
+msgid "International standard factors"
+msgstr ""
+
+#: .\templates\user_guide.html:626
+#: .\templates\user_guide.html:631
+msgid "Industry Types"
+msgstr ""
+
+#: .\templates\user_guide.html:632
+msgid "Select your industry for better categorization:"
+msgstr ""
+
+#: .\templates\user_guide.html:634
+msgid "Manufacturing, Services, Technology, Healthcare"
+msgstr ""
+
+#: .\templates\user_guide.html:635
+msgid "Request new industries if yours isn't listed"
+msgstr ""
+
+#: .\templates\user_guide.html:636
+msgid "Helps with benchmarking and reporting"
+msgstr ""
+
+#: .\templates\user_guide.html:642
+msgid "Track emissions by supplier:"
+msgstr ""
+
+#: .\templates\user_guide.html:644
+msgid "Add supplier details when entering data"
+msgstr ""
+
+#: .\templates\user_guide.html:645
+msgid "Categorize by activity type (Energy, Fuel, etc.)"
+msgstr ""
+
+#: .\templates\user_guide.html:646
+msgid "Build supplier database for engagement"
+msgstr ""
+
+#: .\templates\user_guide.html:651
+msgid "Custom Factors"
+msgstr ""
+
+#: .\templates\user_guide.html:652
+msgid "Use your own emission factors:"
+msgstr ""
+
+#: .\templates\user_guide.html:654
+msgid "Add factors from supplier certificates"
+msgstr ""
+
+#: .\templates\user_guide.html:655
+msgid "Use LCA study results"
+msgstr ""
+
+#: .\templates\user_guide.html:656
+msgid "Request new materials from our team"
+msgstr ""
+
+#: .\templates\user_guide.html:664
+msgid "Data Quality Tips"
+msgstr ""
+
+#: .\templates\user_guide.html:665
+#: .\templates\user_guide.html:674
+msgid "Understanding Emission Scopes"
+msgstr ""
+
+#: .\templates\user_guide.html:680
+msgid "Emissions from sources you own or control:"
+msgstr ""
+
+#: .\templates\user_guide.html:682
+msgid "Stationary Combustion:"
+msgstr ""
+
+#: .\templates\user_guide.html:682
+msgid "Boilers, furnaces, generators"
+msgstr ""
+
+#: .\templates\user_guide.html:683
+msgid "Mobile Combustion:"
+msgstr ""
+
+#: .\templates\user_guide.html:683
+msgid "Company vehicles, forklifts"
+msgstr ""
+
+#: .\templates\user_guide.html:684
+msgid "Fugitive Emissions:"
+msgstr ""
+
+#: .\templates\user_guide.html:684
+msgid "Refrigerant leaks, methane"
+msgstr ""
+
+#: .\templates\user_guide.html:689
+msgid "Scope 2 - Energy Indirect"
+msgstr ""
+
+#: .\templates\user_guide.html:690
+msgid "Emissions from purchased energy:"
+msgstr ""
+
+#: .\templates\user_guide.html:692
+msgid "Electricity:"
+msgstr ""
+
+#: .\templates\user_guide.html:692
+msgid "Grid electricity consumption"
+msgstr ""
+
+#: .\templates\user_guide.html:693
+msgid "Steam, Heat & Cooling:"
+msgstr ""
+
+#: .\templates\user_guide.html:693
+msgid "District heating/cooling systems"
+msgstr ""
+
+#: .\templates\user_guide.html:694
+msgid "Grid average factors"
+msgstr ""
+
+#: .\templates\user_guide.html:699
+msgid "Scope 3 - Other Indirect"
+msgstr ""
+
+#: .\templates\user_guide.html:700
+msgid "All other indirect emissions in your value chain:"
+msgstr ""
+
+#: .\templates\user_guide.html:702
+msgid "Upstream:"
+msgstr ""
+
+#: .\templates\user_guide.html:702
+msgid "Purchased goods, business travel"
+msgstr ""
+
+#: .\templates\user_guide.html:703
+msgid "Downstream:"
+msgstr ""
+
+#: .\templates\user_guide.html:703
+msgid "Product use, end-of-life treatment"
+msgstr ""
+
+#: .\templates\user_guide.html:704
+msgid "As defined by GHG Protocol"
+msgstr ""
+
+#: .\templates\user_guide.html:712
+msgid "Scope"
+msgstr ""
+
+#: .\templates\user_guide.html:713
+#, python-format
+msgid "Typical %%"
+msgstr ""
+
+#: .\templates\user_guide.html:714
+msgid "Data Accuracy"
+msgstr ""
+
+#: .\templates\user_guide.html:715
+msgid "Reporting Priority"
+msgstr ""
+
+#: .\templates\user_guide.html:722
+msgid "High (bills, receipts)"
+msgstr ""
+
+#: .\templates\user_guide.html:723 .\templates\user_guide.html:729
+msgid "Mandatory"
+msgstr ""
+
+#: .\templates\user_guide.html:728
+msgid "High (electricity bills)"
+msgstr ""
+
+#: .\templates\user_guide.html:734
+msgid "Medium (estimates)"
+msgstr ""
+
+#: .\templates\user_guide.html:735
+msgid "Recommended"
+msgstr ""
+
+#: .\templates\user_guide.html:751
+msgid "Why Turkey-Specific Factors Matter"
+msgstr ""
+
+#: .\templates\user_guide.html:752
+#: .\templates\user_guide.html:756
+msgid "Turkey's Energy Mix (2023)"
+msgstr ""
+
+#: .\templates\user_guide.html:759
+#, python-format
+msgid "Coal: 37%%"
+msgstr ""
+
+#: .\templates\user_guide.html:760
+#: .\templates\user_guide.html:763
+#, python-format
+msgid "Natural Gas: 26%%"
+msgstr ""
+
+#: .\templates\user_guide.html:764
+msgid "Imported natural gas for power generation and heating"
+msgstr ""
+
+#: .\templates\user_guide.html:767
+#, python-format
+msgid "Hydropower: 25%%"
+msgstr ""
+
+#: .\templates\user_guide.html:768
+msgid "Renewable hydroelectric power, zero operational emissions"
+msgstr ""
+
+#: .\templates\user_guide.html:771
+#, python-format
+msgid "Renewables: 12%%"
+msgstr ""
+
+#: .\templates\user_guide.html:772
+msgid "Growing wind and solar capacity"
+msgstr ""
+
+#: .\templates\user_guide.html:776
+msgid "Unique Transportation Options"
+msgstr ""
+
+#: .\templates\user_guide.html:780
+msgid "Transport Mode"
+msgstr ""
+
+#: .\templates\user_guide.html:782
+msgid "Example Calculation"
+msgstr ""
+
+#: .\templates\user_guide.html:812
+msgid "Sustainable Transport in Turkey"
+msgstr ""
+
+#: .\templates\user_guide.html:813
+#, python-format
+#: .\templates\user_guide.html:828
+msgid "Collect Complete Data"
+msgstr ""
+
+#: .\templates\user_guide.html:829
+#: .\templates\user_guide.html:834
+msgid "Access Reporting"
+msgstr ""
+
+#: .\templates\user_guide.html:835
+msgid "Navigate to \\"
+msgstr ""
+
+#: .\templates\user_guide.html:840
+msgid "Review Report"
+msgstr ""
+
+#: .\templates\user_guide.html:841
+msgid "Check the automatically generated report for completeness and accuracy"
+msgstr ""
+
+#: .\templates\user_guide.html:846
+msgid "Enhance Accuracy"
+msgstr ""
+
+#: .\templates\user_guide.html:847
+msgid "Use the \\"
+msgstr ""
+
+#: .\templates\user_guide.html:852
+msgid "Download PDF"
+msgstr ""
+
+#: .\templates\user_guide.html:853
+msgid "Generate and download your professional ISO 14064-1 compliant report"
+msgstr ""
+
+#: .\templates\user_guide.html:858
+msgid "Share & Submit"
+msgstr ""
+
+#: .\templates\user_guide.html:859
+#: .\templates\user_guide.html:866
+msgid "Report Quality Checklist"
+msgstr ""
+
+#: .\templates\user_guide.html:867
+#: .\templates\user_guide.html:881
+msgid "DO"
+msgstr ""
+
+#: .\templates\user_guide.html:883
+msgid "Select correct country before calculating"
+msgstr ""
+
+#: .\templates\user_guide.html:884
+msgid "Use actual bills and invoices when available"
+msgstr ""
+
+#: .\templates\user_guide.html:885
+msgid "Enter data monthly for better tracking"
+msgstr ""
+
+#: .\templates\user_guide.html:886
+msgid "Add descriptions and supplier information"
+msgstr ""
+
+#: .\templates\user_guide.html:887
+msgid "Review and validate all entries"
+msgstr ""
+
+#: .\templates\user_guide.html:888
+msgid "Keep supporting documentation"
+msgstr ""
+
+#: .\templates\user_guide.html:889
+msgid "Include all material emission sources"
+msgstr ""
+
+#: .\templates\user_guide.html:894
+msgid "DON'T"
+msgstr ""
+
+#: .\templates\user_guide.html:896
+msgid "Use estimates when actual data is available"
+msgstr ""
+
+#: .\templates\user_guide.html:897
+msgid "Mix different time periods in one calculation"
+msgstr ""
+
+#: .\templates\user_guide.html:898
+msgid "Forget to check units (kWh vs MWh)"
+msgstr ""
+
+#: .\templates\user_guide.html:899
+msgid "Skip Scope 3 emissions entirely"
+msgstr ""
+
+#: .\templates\user_guide.html:900
+msgid "Ignore data quality issues"
+msgstr ""
+
+#: .\templates\user_guide.html:901
+msgid "Change methodology mid-year"
+msgstr ""
+
+#: .\templates\user_guide.html:902
+msgid "Forget to document assumptions"
+msgstr ""
+
+#: .\templates\user_guide.html:910
+msgid "Monthly Data Collection Checklist"
+msgstr ""
+
+#: .\templates\user_guide.html:911
+#: .\templates\user_guide.html:926
+msgid "How accurate are the emission factors?"
+msgstr ""
+
+#: .\templates\user_guide.html:930
+#: .\templates\user_guide.html:936
+msgid "Can I change the country after calculating?"
+msgstr ""
+
+#: .\templates\user_guide.html:940
+#: .\templates\user_guide.html:946
+msgid "What if my industry or material isn't listed?"
+msgstr ""
+
+#: .\templates\user_guide.html:950
+#: .\templates\user_guide.html:956
+msgid "How often should I track emissions?"
+msgstr ""
+
+#: .\templates\user_guide.html:960
+#: .\templates\user_guide.html:966
+msgid "Is my data secure and private?"
+msgstr ""
+
+#: .\templates\user_guide.html:970
+#: .\templates\user_guide.html:976
+msgid "Can I use custom emission factors?"
+msgstr ""
+
+#: .\templates\user_guide.html:980
+#: .\templates\user_guide.html:995
+msgid "Common Issues"
+msgstr ""
+
+#: .\templates\user_guide.html:997
+msgid "Calculation not working:"
+msgstr ""
+
+#: .\templates\user_guide.html:997
+msgid "Check all required fields are filled"
+msgstr ""
+
+#: .\templates\user_guide.html:998
+msgid "Wrong units:"
+msgstr ""
+
+#: .\templates\user_guide.html:998
+msgid "Verify unit selection matches your data"
+msgstr ""
+
+#: .\templates\user_guide.html:999
+msgid "Missing data:"
+msgstr ""
+
+#: .\templates\user_guide.html:999
+msgid "Ensure activity data is greater than 0"
+msgstr ""
+
+#: .\templates\user_guide.html:1000
+msgid "Country issues:"
+msgstr ""
+
+#: .\templates\user_guide.html:1000
+msgid "Select country before entering data"
+msgstr ""
+
+#: .\templates\user_guide.html:1005
+msgid "Quick Fixes"
+msgstr ""
+
+#: .\templates\user_guide.html:1007
+msgid "Refresh page:"
+msgstr ""
+
+#: .\templates\user_guide.html:1007
+msgid "Reload if forms aren't responding"
+msgstr ""
+
+#: .\templates\user_guide.html:1008
+msgid "Clear browser cache:"
+msgstr ""
+
+#: .\templates\user_guide.html:1008
+msgid "For persistent issues"
+msgstr ""
+
+#: .\templates\user_guide.html:1009
+msgid "Check internet:"
+msgstr ""
+
+#: .\templates\user_guide.html:1009
+msgid "Ensure stable connection"
+msgstr ""
+
+#: .\templates\user_guide.html:1010
+msgid "Try different browser:"
+msgstr ""
+
+#: .\templates\user_guide.html:1010
+msgid "Chrome, Firefox, or Edge"
+msgstr ""
+
+#: .\templates\user_guide.html:1018
+msgid "Need More Help?"
+msgstr ""
+
+#: .\templates\user_guide.html:1019
+msgid "If you can't find the answer here, visit our"
+msgstr ""
+
+#: .\templates\user_guide.html:1019
+msgid "Support Center"
+msgstr ""
+
+#: .\templates\user_guide.html:1019
+msgid "for additional resources, contact forms, and direct assistance."
+msgstr ""
+
+#: .\templates\user_guide.html:1028
+msgid "Ready to Start?"
+msgstr ""
+
+#: .\templates\user_guide.html:1031
+msgid "Choose an action below to begin your emission tracking journey"
+msgstr ""
+
+#: .\templates\user_guide.html:1037
+msgid "Start Data Entry"
+msgstr ""
+
+#: .\templates\user_guide.html:1038
+msgid "Begin calculating emissions"
+msgstr ""
+
+#: .\templates\user_guide.html:1044
+msgid "See your emission records"
+msgstr ""
+
+#: .\templates\user_guide.html:1050
+msgid "Create ISO 14064-1 report"
+msgstr ""
+
+#: .\templates\user_guide.html:1056
+msgid "Contact our team"
+msgstr ""
+
+msgid "Edit"
+msgstr "Düzenle"
+
+msgid "Delete"
+msgstr "Sil"
+
+msgid "Success"
+msgstr "Başarılı"
+
+msgid "Error"
+msgstr "Hata"
+
+msgid "Warning"
+msgstr "Uyarı"
+

@@ -448,7 +448,7 @@ function showErrorState() {
 function refreshDashboard() {
     // Show loading state
     document.querySelectorAll('.stat-value').forEach(el => {
-        el.innerHTML = '<div class="loading-spinner">Loading...</div>';
+        el.innerHTML = '<div class="loading-spinner">{% trans "Loading..." %}</div>';
     });
     
     document.querySelectorAll('.stat-change').forEach(el => {
