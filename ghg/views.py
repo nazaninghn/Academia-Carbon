@@ -1,11 +1,19 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import JsonResponse, HttpResponseForbidden
 from .models import Country, EmissionData, EmissionRecord, Supplier, MaterialRequest
 from django.db.models import Sum, Avg, Count, FloatField
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import EmailLoginForm, EmailSignupForm
+from django_ratelimit.decorators import ratelimit
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.http import require_http_methods
+import logging
+import json
+
+# Security logger
+security_logger = logging.getLogger('ghg.security')
 
 def index(request):
     # Redirect to login if not authenticated
@@ -37,9 +45,12 @@ def data_entry(request):
     return render(request, 'data_entry.html', context)
 
 @login_required
+@csrf_protect
+@require_http_methods(["POST"])
+@ratelimit(key='user', rate='30/m', method='POST', block=True)
 def calculate_emission(request):
-    if request.method == 'POST':
-        import json
+    """Calculate emissions with security checks"""
+    try:
         from .emission_factors import calculate_emissions
         from .models import EmissionRecord, Supplier
         
@@ -54,6 +65,11 @@ def calculate_emission(request):
         supplier_id = data.get('supplier_id', None)
         save_record = data.get('save', True)  # Option to save or not
         
+        # Security: Validate input data
+        if activity_data < 0 or activity_data > 1000000:  # Reasonable limits
+            security_logger.warning(f"Suspicious activity data: {activity_data} from user {request.user.id}")
+            return JsonResponse({'error': 'Invalid activity data'}, status=400)
+        
         result = calculate_emissions(category, source, activity_data, country)
         
         if 'error' not in result and save_record:
@@ -66,17 +82,18 @@ def calculate_emission(request):
                              'downstream-transport', 'end-of-life', 'franchises', 'investments']:
                 scope = '3'
             
-            # Get supplier object if provided
+            # Security: Get supplier object with user validation
             supplier_obj = None
             if supplier_id:
                 try:
                     supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
                 except Supplier.DoesNotExist:
+                    security_logger.warning(f"User {request.user.id} tried to access supplier {supplier_id}")
                     pass
             
-            # Save to database
+            # Save to database with user association
             record = EmissionRecord.objects.create(
-                user=request.user,
+                user=request.user,  # Always associate with current user
                 scope=scope,
                 category=category,
                 source=source,
@@ -88,16 +105,168 @@ def calculate_emission(request):
                 emissions_tons=result['emissions_tons'],
                 country=country,
                 reference=result.get('reference', ''),
-                description=description,
-                industry_type=industry_type or None,
-                fuel_name=fuel_name or None,
+                description=description[:500],  # Limit description length
+                industry_type=industry_type[:100] if industry_type else None,
+                fuel_name=fuel_name[:100] if fuel_name else None,
                 supplier=supplier_obj
             )
             
             result['record_id'] = record.id
             result['saved'] = True
+            
+            # Log successful emission calculation
+            security_logger.info(f"Emission calculated by user {request.user.id}: {result['emissions_kg']} kg CO2e")
         
         return JsonResponse(result)
+        
+    except json.JSONDecodeError:
+        security_logger.warning(f"Invalid JSON from user {request.user.id}")
+        return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+    except ValueError as e:
+        security_logger.warning(f"Invalid data from user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Invalid input data'}, status=400)
+    except Exception as e:
+        security_logger.error(f"Emission calculation error for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Calculation failed'}, status=500)
+
+@login_required
+@ratelimit(key='user', rate='10/m', method='GET', block=True)
+def get_emission_records(request):
+    """Get user's emission records with pagination"""
+    try:
+        # Security: Only return records for current user
+        records = EmissionRecord.objects.filter(user=request.user).order_by('-created_at')
+        
+        # Pagination
+        page = int(request.GET.get('page', 1))
+        per_page = min(int(request.GET.get('per_page', 20)), 100)  # Max 100 per page
+        
+        start = (page - 1) * per_page
+        end = start + per_page
+        
+        records_page = records[start:end]
+        
+        data = []
+        for record in records_page:
+            data.append({
+                'id': record.id,
+                'scope': record.scope,
+                'category': record.category,
+                'source_name': record.source_name,
+                'activity_data': record.activity_data,
+                'unit': record.unit,
+                'emissions_kg': record.emissions_kg,
+                'emissions_tons': record.emissions_tons,
+                'created_at': record.created_at.isoformat(),
+                'description': record.description,
+            })
+        
+        return JsonResponse({
+            'records': data,
+            'total': records.count(),
+            'page': page,
+            'per_page': per_page,
+        })
+        
+    except Exception as e:
+        security_logger.error(f"Error fetching records for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Failed to fetch records'}, status=500)
+
+@login_required
+@csrf_protect
+@require_http_methods(["DELETE"])
+@ratelimit(key='user', rate='20/m', method='DELETE', block=True)
+def delete_emission_record(request, record_id):
+    """Delete emission record with security checks"""
+    try:
+        # Security: Only allow deletion of user's own records
+        record = get_object_or_404(EmissionRecord, id=record_id, user=request.user)
+        
+        record.delete()
+        
+        security_logger.info(f"User {request.user.id} deleted emission record {record_id}")
+        
+        return JsonResponse({'success': True})
+        
+    except EmissionRecord.DoesNotExist:
+        security_logger.warning(f"User {request.user.id} tried to delete non-existent record {record_id}")
+        return JsonResponse({'error': 'Record not found'}, status=404)
+    except Exception as e:
+        security_logger.error(f"Error deleting record {record_id} for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Failed to delete record'}, status=500)
+
+@login_required
+@ratelimit(key='user', rate='10/m', method='GET', block=True)
+def get_suppliers(request):
+    """Get user's suppliers"""
+    try:
+        # Security: Only return suppliers for current user
+        suppliers = Supplier.objects.filter(user=request.user).order_by('name')
+        
+        data = []
+        for supplier in suppliers:
+            data.append({
+                'id': supplier.id,
+                'name': supplier.name,
+                'supplier_type': supplier.supplier_type,
+                'country': supplier.country,
+                'email': supplier.email,
+            })
+        
+        return JsonResponse({'suppliers': data})
+        
+    except Exception as e:
+        security_logger.error(f"Error fetching suppliers for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Failed to fetch suppliers'}, status=500)
+
+@login_required
+@csrf_protect
+@require_http_methods(["POST"])
+@ratelimit(key='user', rate='10/m', method='POST', block=True)
+def add_supplier(request):
+    """Add new supplier with validation"""
+    try:
+        data = json.loads(request.body)
+        
+        # Security: Validate and sanitize input
+        name = data.get('name', '').strip()[:200]
+        supplier_type = data.get('supplier_type', '').strip()[:100]
+        country = data.get('country', '').strip()[:100]
+        email = data.get('email', '').strip()[:254]
+        
+        if not name:
+            return JsonResponse({'error': 'Supplier name is required'}, status=400)
+        
+        # Check for duplicate supplier name for this user
+        if Supplier.objects.filter(user=request.user, name=name).exists():
+            return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
+        
+        supplier = Supplier.objects.create(
+            user=request.user,
+            name=name,
+            supplier_type=supplier_type,
+            country=country,
+            email=email,
+        )
+        
+        security_logger.info(f"User {request.user.id} added supplier: {name}")
+        
+        return JsonResponse({
+            'success': True,
+            'supplier': {
+                'id': supplier.id,
+                'name': supplier.name,
+                'supplier_type': supplier.supplier_type,
+                'country': supplier.country,
+                'email': supplier.email,
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+    except Exception as e:
+        security_logger.error(f"Error adding supplier for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Failed to add supplier'}, status=500)
     
     return JsonResponse({'error': 'Invalid request'}, status=400)
 

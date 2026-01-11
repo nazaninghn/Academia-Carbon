@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 import dj_database_url
 from decouple import config
+import secrets
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,23 +24,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-hb@0-4*53iza=(08tohqr@v5=^&6(66dwsu1xdla0g%ppcyxmt')
+# Generate a secure secret key if not provided
+def generate_secret_key():
+    return secrets.token_urlsafe(50)
+
+SECRET_KEY = config('SECRET_KEY', default=generate_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default='True') == 'True'
+DEBUG = config('DEBUG', default='False') == 'True'
 
-# ALLOWED_HOSTS configuration
-allowed_hosts_str = config('ALLOWED_HOSTS', default='127.0.0.1,localhost,testserver')
-ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',')]
-
-# Add Render domain if not in list
-if '.onrender.com' not in str(ALLOWED_HOSTS):
-    ALLOWED_HOSTS.append('.onrender.com')
-
-# Always allow Render domain in production
-if not DEBUG:
-    ALLOWED_HOSTS.append('academia-carbon.onrender.com')
-    ALLOWED_HOSTS.append('.onrender.com')
+# ALLOWED_HOSTS configuration - Strict for production
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+else:
+    # Production: Only allow specific domains
+    ALLOWED_HOSTS = [
+        'academia-carbon.onrender.com',
+        '.onrender.com',  # Allow subdomains
+    ]
+    
+    # Add custom domains from environment
+    custom_hosts = config('ALLOWED_HOSTS', default='')
+    if custom_hosts:
+        ALLOWED_HOSTS.extend([host.strip() for host in custom_hosts.split(',')])
 
 
 # Application definition
@@ -56,7 +63,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # Add WhiteNoise
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'ghg.middleware.SecurityHeadersMiddleware',  # Custom security headers
+    'ghg.middleware.RateLimitMiddleware',  # Rate limiting
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -64,6 +73,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ghg.middleware.SecurityLoggingMiddleware',  # Security logging
 ]
 
 ROOT_URLCONF = 'carbon_tracker.urls'
@@ -90,9 +100,6 @@ WSGI_APPLICATION = 'carbon_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-# Database
-# https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
 # Use PostgreSQL in production, SQLite in development
 if config('DATABASE_URL', default=None):
     DATABASES = {
@@ -111,7 +118,7 @@ else:
     }
 
 
-# Password validation
+# Password validation - Enhanced for security
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -120,6 +127,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 12,  # Increased from default 8
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -161,32 +171,56 @@ LOGIN_URL = '/en/login/'
 LOGIN_REDIRECT_URL = '/en/'
 LOGOUT_REDIRECT_URL = '/en/login/'
 
-# CSRF settings
+# CSRF settings - Enhanced security
 CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
-    'https://*.onrender.com',
     'https://academia-carbon.onrender.com',
 ]
+
+# Add development origins only in DEBUG mode
+if DEBUG:
+    CSRF_TRUSTED_ORIGINS.extend([
+        'http://127.0.0.1:8000',
+        'http://localhost:8000',
+    ])
 
 # Get additional CSRF origins from environment
 csrf_origins_env = config('CSRF_TRUSTED_ORIGINS', default='')
 if csrf_origins_env:
     CSRF_TRUSTED_ORIGINS.extend([origin.strip() for origin in csrf_origins_env.split(',')])
 
-# Security settings for production
-if not DEBUG:
-    CSRF_COOKIE_SECURE = True
-    CSRF_COOKIE_HTTPONLY = True
-    SESSION_COOKIE_SECURE = True
-    SECURE_SSL_REDIRECT = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    X_FRAME_OPTIONS = 'DENY'
-else:
-    CSRF_COOKIE_SECURE = False
-    CSRF_COOKIE_HTTPONLY = False
+# SECURITY SETTINGS - Production Ready
+# =================================
 
+# Force HTTPS in production
+SECURE_SSL_REDIRECT = not DEBUG
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Cookie Security
+SESSION_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_AGE = 3600  # 1 hour session timeout
+
+CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Security Headers
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+
+# HSTS (HTTP Strict Transport Security)
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# File Upload Security
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
@@ -196,10 +230,9 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # WhiteNoise configuration
-if DEBUG:
-    STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
-# Logging configuration
+# Enhanced Logging with Security Events
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -209,7 +242,11 @@ LOGGING = {
             'style': '{',
         },
         'simple': {
-            'format': '{levelname} {message}',
+            'format': '{levelname} {asctime} {message}',
+            'style': '{',
+        },
+        'security': {
+            'format': 'SECURITY {levelname} {asctime} {module} {message}',
             'style': '{',
         },
     },
@@ -217,6 +254,11 @@ LOGGING = {
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose' if DEBUG else 'simple',
+        },
+        'security_file': {
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'security.log',
+            'formatter': 'security',
         },
     },
     'root': {
@@ -229,45 +271,31 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
+        'django.security': {
+            'handlers': ['console', 'security_file'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
         'ghg': {
             'handlers': ['console'],
             'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': False,
         },
+        'ghg.security': {
+            'handlers': ['console', 'security_file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
     },
 }
 
-# Static files storage for production
-if not DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# Create logs directory if it doesn't exist
+os.makedirs(BASE_DIR / 'logs', exist_ok=True)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Logging configuration for production debugging
-if not DEBUG:
-    LOGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'console': {
-                'class': 'logging.StreamHandler',
-            },
-        },
-        'root': {
-            'handlers': ['console'],
-            'level': 'INFO',
-        },
-        'loggers': {
-            'django': {
-                'handlers': ['console'],
-                'level': 'INFO',
-                'propagate': False,
-            },
-        },
-    }
 
 # Email Configuration
 EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
@@ -283,4 +311,20 @@ ADMIN_NOTIFICATION_EMAILS = config('ADMIN_NOTIFICATION_EMAILS', default='admin@a
 
 # Site configuration
 SITE_NAME = 'Academia Carbon'
-SITE_URL = config('SITE_URL', default='http://127.0.0.1:8000')
+SITE_URL = config('SITE_URL', default='https://academia-carbon.onrender.com' if not DEBUG else 'http://127.0.0.1:8000')
+
+# Rate Limiting Configuration
+RATELIMIT_ENABLE = True
+RATELIMIT_USE_CACHE = 'default'
+
+# Cache Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 300,
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000,
+        }
+    }
+}

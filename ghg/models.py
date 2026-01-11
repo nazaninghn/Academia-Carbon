@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.core.exceptions import ValidationError
+from .validators import validate_document_file, sanitize_filename
+import os
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
@@ -26,6 +29,21 @@ class EmissionData(models.Model):
     
     def __str__(self):
         return f"{self.country.name} - {self.year}"
+
+
+def secure_upload_path(instance, filename):
+    """Generate secure upload path"""
+    # Sanitize filename
+    filename = sanitize_filename(filename)
+    
+    # Create path: uploads/user_id/year/month/filename
+    return os.path.join(
+        'uploads',
+        str(instance.user.id),
+        timezone.now().strftime('%Y'),
+        timezone.now().strftime('%m'),
+        filename
+    )
 
 
 class Supplier(models.Model):
@@ -88,6 +106,15 @@ class EmissionRecord(models.Model):
     supplier = models.ForeignKey(Supplier, on_delete=models.SET_NULL, blank=True, null=True, 
                                  related_name='emission_records', help_text="Supplier/Vendor")
     
+    # Security: Add proof document with validation
+    proof_document = models.FileField(
+        upload_to=secure_upload_path,
+        blank=True,
+        null=True,
+        validators=[validate_document_file],
+        help_text="Supporting document (PDF, DOC, DOCX, TXT - Max 10MB)"
+    )
+    
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -95,9 +122,123 @@ class EmissionRecord(models.Model):
         ordering = ['-created_at']
         verbose_name = "Emission Record"
         verbose_name_plural = "Emission Records"
+        # Security: Add database-level constraint
+        indexes = [
+            models.Index(fields=['user', '-created_at']),
+            models.Index(fields=['user', 'scope']),
+        ]
     
     def __str__(self):
         return f"{self.user.username} - {self.source_name} - {self.emissions_kg} kg CO2e"
+    
+    def clean(self):
+        """Additional validation"""
+        super().clean()
+        
+        # Validate activity data ranges
+        if self.activity_data < 0:
+            raise ValidationError("Activity data cannot be negative")
+        
+        if self.activity_data > 1000000:  # 1 million units max
+            raise ValidationError("Activity data seems unreasonably high")
+        
+        # Validate emissions
+        if self.emissions_kg < 0:
+            raise ValidationError("Emissions cannot be negative")
+
+
+class CustomEmissionFactor(models.Model):
+    """Custom emission factors with secure file handling"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custom_factors')
+    name = models.CharField(max_length=200, help_text="Factor name")
+    category = models.CharField(max_length=100, help_text="Category (e.g., fuel, electricity)")
+    factor_value = models.FloatField(help_text="Emission factor (kg CO2e per unit)")
+    unit = models.CharField(max_length=50, help_text="Unit (e.g., liter, kWh, kg)")
+    
+    description = models.TextField(blank=True, null=True, help_text="Description and methodology")
+    reference_source = models.CharField(max_length=500, blank=True, null=True, help_text="Reference source")
+    
+    # Security: Secure file upload with validation
+    certificate_file = models.FileField(
+        upload_to=secure_upload_path,
+        blank=True,
+        null=True,
+        validators=[validate_document_file],
+        help_text="Certificate or supporting document (PDF, DOC, DOCX - Max 10MB)"
+    )
+    
+    is_verified = models.BooleanField(default=False, help_text="Verified by admin")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Custom Emission Factor"
+        verbose_name_plural = "Custom Emission Factors"
+        unique_together = ['user', 'name']
+        indexes = [
+            models.Index(fields=['user', 'category']),
+        ]
+    
+    def __str__(self):
+        return f"{self.name} - {self.factor_value} kg CO2e/{self.unit}"
+    
+    def clean(self):
+        """Validation for custom factors"""
+        super().clean()
+        
+        if self.factor_value < 0:
+            raise ValidationError("Emission factor cannot be negative")
+        
+        if self.factor_value > 1000:  # Reasonable upper limit
+            raise ValidationError("Emission factor seems unreasonably high")
+
+
+class MaterialRequest(models.Model):
+    """Material/Industry requests with security"""
+    REQUEST_TYPES = [
+        ('material', 'Material'),
+        ('industry', 'Industry Type'),
+        ('emission_factor', 'Emission Factor'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('approved', 'Approved'),
+        ('rejected', 'Rejected'),
+    ]
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='material_requests')
+    request_type = models.CharField(max_length=20, choices=REQUEST_TYPES)
+    name = models.CharField(max_length=200, help_text="Name of requested item")
+    description = models.TextField(help_text="Detailed description")
+    
+    # Security: Limit additional info length
+    additional_info = models.TextField(
+        blank=True, 
+        null=True, 
+        max_length=2000,
+        help_text="Additional information (max 2000 characters)"
+    )
+    
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
+    admin_notes = models.TextField(blank=True, null=True, help_text="Admin notes")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Material Request"
+        verbose_name_plural = "Material Requests"
+        indexes = [
+            models.Index(fields=['user', 'status']),
+            models.Index(fields=['request_type', 'status']),
+        ]
+    
+    def __str__(self):
+        return f"{self.get_request_type_display()}: {self.name} - {self.get_status_display()}"
     
     def get_scope_display_short(self):
         return f"Scope {self.scope}"
