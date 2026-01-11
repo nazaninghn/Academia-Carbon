@@ -31,22 +31,29 @@ def generate_secret_key():
 SECRET_KEY = config('SECRET_KEY', default=generate_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default='False') == 'True'
-
-# ALLOWED_HOSTS configuration - Strict for production
-if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
+# Force DEBUG=False if we detect production environment
+if 'onrender.com' in os.environ.get('RENDER_EXTERNAL_HOSTNAME', ''):
+    DEBUG = False
 else:
-    # Production: Only allow specific domains
-    ALLOWED_HOSTS = [
-        'academia-carbon.onrender.com',
-        '.onrender.com',  # Allow subdomains
-    ]
-    
-    # Add custom domains from environment
-    custom_hosts = config('ALLOWED_HOSTS', default='')
-    if custom_hosts:
-        ALLOWED_HOSTS.extend([host.strip() for host in custom_hosts.split(',')])
+    DEBUG = config('DEBUG', default='False') == 'True'
+
+# ALLOWED_HOSTS configuration - Always allow production domain
+ALLOWED_HOSTS = []
+
+# Always allow production domain
+ALLOWED_HOSTS.extend([
+    'academia-carbon.onrender.com',
+    '.onrender.com',
+])
+
+# Add development hosts if in debug mode
+if DEBUG:
+    ALLOWED_HOSTS.extend(['127.0.0.1', 'localhost', 'testserver'])
+
+# Add custom domains from environment
+custom_hosts = config('ALLOWED_HOSTS', default='')
+if custom_hosts:
+    ALLOWED_HOSTS.extend([host.strip() for host in custom_hosts.split(',')])
 
 
 # Application definition
