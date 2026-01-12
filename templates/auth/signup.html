@@ -321,12 +321,9 @@
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
+    <!-- Fixed Language Switcher -->
     <div class="language-switcher">
-        <a href="#" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
-           onclick="setLanguage('en')">EN</a>
-        <a href="#" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
-           onclick="setLanguage('tr')">TR</a>
+        {% include 'partials/language_switcher_fixed.html' %}
     </div>
     
     <div class="auth-container">

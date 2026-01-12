@@ -1,4 +1,0 @@
-Deployment forced at: 2026-01-11 22:35:00 UTC
-Reason: Production cache serving old template with syntax error
-Fixed: Line 1590 in data_entry.html template syntax error
-Status: Force deployment to clear Render.com cache

@@ -2301,3 +2301,9 @@ def test_language(request):
 def test_translation(request):
     """Test view for translation functionality"""
     return render(request, 'test_translation.html')
+
+def test_lang_switch(request):
+    """Test page for language switching"""
+    return render(request, 'test_lang_switch.html', {
+        'active_menu': 'test'
+    })

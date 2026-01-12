@@ -1,0 +1,115 @@
+{% load i18n %}
+<!-- Ultra Simple Language Switcher - Direct Links -->
+<div class="simple-lang-switcher">
+    <a href="/en{{ request.get_full_path|slice:'3:' }}" 
+       class="lang-link {% if LANGUAGE_CODE == 'en' %}active{% endif %}"
+       title="Switch to English">
+        🇺🇸 EN
+    </a>
+    
+    <a href="/tr{{ request.get_full_path|slice:'3:' }}" 
+       class="lang-link {% if LANGUAGE_CODE == 'tr' %}active{% endif %}"
+       title="Türkçe'ye geç">
+        🇹🇷 TR
+    </a>
+</div>
+
+<style>
+.simple-lang-switcher {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 4px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.lang-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: transparent;
+    border-radius: 20px;
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 55px;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.lang-link.active {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.lang-link:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.2);
+    color: #4ade80;
+    transform: scale(1.05);
+}
+
+/* Tablet responsive */
+@media (max-width: 1024px) {
+    .simple-lang-switcher {
+        gap: 4px;
+        padding: 3px;
+    }
+    
+    .lang-link {
+        padding: 8px 12px;
+        font-size: 13px;
+        min-width: 50px;
+        gap: 5px;
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .simple-lang-switcher {
+        gap: 2px;
+        padding: 2px;
+        border-radius: 20px;
+    }
+    
+    .lang-link {
+        padding: 6px 10px;
+        font-size: 12px;
+        min-width: 45px;
+        gap: 4px;
+        border-radius: 16px;
+    }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+    .simple-lang-switcher {
+        gap: 1px;
+        padding: 2px;
+    }
+    
+    .lang-link {
+        padding: 5px 8px;
+        font-size: 11px;
+        min-width: 40px;
+        gap: 3px;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+    .lang-link {
+        padding: 4px 6px;
+        font-size: 10px;
+        min-width: 35px;
+        gap: 2px;
+    }
+}
+</style>
