@@ -71,20 +71,20 @@ class SupplierAdmin(admin.ModelAdmin):
 
 @admin.register(CustomEmissionFactor)
 class CustomEmissionFactorAdmin(admin.ModelAdmin):
-    list_display = ['material_name', 'user', 'emission_factor', 'unit', 'category', 'is_verified', 'created_at']
+    list_display = ['name', 'user', 'factor_value', 'unit', 'category', 'is_verified', 'created_at']
     list_filter = ['is_verified', 'category', 'created_at']
-    search_fields = ['material_name', 'user__username', 'description']
-    readonly_fields = ['created_at', 'updated_at', 'verified_at', 'verified_by']
+    search_fields = ['name', 'user__username', 'description']
+    readonly_fields = ['created_at', 'updated_at']
     
     fieldsets = (
         ('Material Information', {
-            'fields': ('user', 'supplier', 'material_name', 'category', 'description')
+            'fields': ('user', 'name', 'category', 'description')
         }),
         ('Emission Factor', {
-            'fields': ('emission_factor', 'unit', 'source_reference', 'certificate_file')
+            'fields': ('factor_value', 'unit', 'reference_source', 'certificate_file')
         }),
         ('Verification', {
-            'fields': ('is_verified', 'verified_by', 'verified_at')
+            'fields': ('is_verified',)
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at'),
@@ -95,8 +95,7 @@ class CustomEmissionFactorAdmin(admin.ModelAdmin):
     actions = ['verify_factors']
     
     def verify_factors(self, request, queryset):
-        for factor in queryset:
-            factor.verify(request.user)
+        queryset.update(is_verified=True)
         self.message_user(request, f"{queryset.count()} custom factors verified successfully.")
     verify_factors.short_description = "Verify selected custom factors"
 

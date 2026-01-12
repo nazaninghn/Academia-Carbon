@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # =================================
 
 # 1️⃣ Secure DEBUG and SECRET_KEY
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+# In development, allow DEBUG=True if no environment variable is set
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
 # Generate secure SECRET_KEY if not provided
 def generate_secret_key():
@@ -155,6 +156,7 @@ LOCALE_PATHS = [
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
+USE_L10N = True
 
 USE_TZ = True
 
