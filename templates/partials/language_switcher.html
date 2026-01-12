@@ -1,0 +1,21 @@
+
+    <!-- Improved Language Switcher -->
+    <div class="language-switcher">
+        <button type="button" class="lang-btn {% if LANGUAGE_CODE == 'en' %}active{% endif %}" 
+                onclick="setLanguageModern('en')" 
+                title="Switch to English">
+            🇺🇸 EN
+        </button>
+        <button type="button" class="lang-btn {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" 
+                onclick="setLanguageModern('tr')" 
+                title="Türkçe'ye geç">
+            🇹🇷 TR
+        </button>
+    </div>
+    
+    <!-- Debug info (remove in production) -->
+    <div id="lang-debug" style="display: none;">
+        Current language: {{ LANGUAGE_CODE }}
+        Current path: {{ request.path }}
+    </div>
+    
