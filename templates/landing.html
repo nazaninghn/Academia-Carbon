@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<html lang="{{ LANGUAGE_CODE }}" dir="{% if LANGUAGE_CODE == 'tr' %}ltr{% else %}ltr{% endif %}">
+<html lang="{{ LANGUAGE_CODE }}" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% trans "Academia Carbon - Professional Carbon Tracking Platform" %}</title>
-    <meta name="description" content="{% trans 'meta_description' %}">
+    <title>{% trans "Academia Carbon - Professional Carbon Management Platform" %}</title>
+    <meta name="description" content="{% trans 'Advanced carbon tracking and management platform for universities and research institutions' %}">
     {% csrf_token %}
     
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --primary-light: #34d399;
-            --secondary: #3b82f6;
-            --accent: #8b5cf6;
-            --dark: #0f172a;
-            --darker: #020617;
-            --light: #f8fafc;
-            --white: #ffffff;
+            /* Light carbon-themed colors */
+            --carbon-primary: #2c5530;
+            --carbon-secondary: #4a7c59;
+            --carbon-light: #6b9080;
+            --carbon-accent: #a4c3a2;
+            
+            /* Green sustainability colors */
+            --eco-green: #16a34a;
+            --eco-light: #22c55e;
+            --eco-dark: #15803d;
+            --eco-soft: #dcfce7;
+            
+            /* Professional light grays */
             --gray-50: #f8fafc;
             --gray-100: #f1f5f9;
             --gray-200: #e2e8f0;
@@ -35,17 +38,9 @@
             --gray-800: #1e293b;
             --gray-900: #0f172a;
             
-            --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, #2563eb 100%);
-            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, #7c3aed 100%);
-            --gradient-dark: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
-            
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --white: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
         
         * {
@@ -60,25 +55,6 @@
             color: var(--gray-900);
             background: var(--white);
             overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        /* Modern Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: var(--gray-100);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 3px;
-        }
-        
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--gradient-secondary);
         }
         
         /* Header */
@@ -87,19 +63,13 @@
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
             padding: 20px 0;
+            border-bottom: 1px solid var(--gray-200);
             transition: all 0.3s ease;
-            border-bottom: 1px solid var(--gray-100);
-        }
-        
-        .header.scrolled {
-            padding: 16px 0;
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: var(--shadow-sm);
         }
         
         .nav-container {
@@ -114,62 +84,66 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--gray-900);
+            gap: 16px;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
         
         .logo:hover {
-            transform: translateY(-1px);
+            transform: scale(1.02);
         }
         
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-primary);
-            border-radius: 10px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            box-shadow: var(--shadow-md);
             position: relative;
+            box-shadow: var(--shadow);
         }
         
-        .logo-triangle {
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 10px solid #4ade80;
+        .logo-icon::before {
+            content: '';
             position: absolute;
-            left: 6px;
-            top: 12px;
+            width: 24px;
+            height: 24px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.5" fill="none"/><circle cx="6" cy="6" r="2" fill="white" opacity="0.9"/><circle cx="18" cy="6" r="2" fill="white" opacity="0.9"/><circle cx="6" cy="18" r="2" fill="white" opacity="0.9"/><circle cx="18" cy="18" r="2" fill="white" opacity="0.9"/><line x1="8" y1="8" x2="10" y2="10" stroke="white" stroke-width="1.5" opacity="0.7"/><line x1="14" y1="10" x2="16" y2="8" stroke="white" stroke-width="1.5" opacity="0.7"/><line x1="8" y1="16" x2="10" y2="14" stroke="white" stroke-width="1.5" opacity="0.7"/><line x1="14" y1="14" x2="16" y2="16" stroke="white" stroke-width="1.5" opacity="0.7"/></svg>') no-repeat center;
+            background-size: contain;
         }
         
-        .logo-semicircle {
-            width: 10px;
-            height: 10px;
-            border: 2px solid #a78bfa;
-            border-right: none;
-            border-radius: 10px 0 0 10px;
-            position: absolute;
-            right: 8px;
-            top: 12px;
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+        
+        .logo-main {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--carbon-primary);
+            letter-spacing: -0.5px;
+        }
+        
+        .logo-sub {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--eco-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 40px;
             list-style: none;
             align-items: center;
         }
         
         .nav-links a {
-            color: var(--gray-700);
+            color: var(--gray-600);
             text-decoration: none;
             font-weight: 500;
             font-size: 15px;
@@ -184,12 +158,12 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--gradient-primary);
+            background: var(--eco-green);
             transition: width 0.3s ease;
         }
         
         .nav-links a:hover {
-            color: var(--primary);
+            color: var(--carbon-primary);
         }
         
         .nav-links a:hover::after {
@@ -202,651 +176,21 @@
             align-items: center;
         }
         
-        .language-switcher {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-        
-        /* Language buttons - Enhanced visibility */
-        .lang-btn {
-            padding: 12px 18px;
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            border-radius: 10px;
-            color: white;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 800;
-            transition: all 0.3s ease;
-            min-width: 55px;
-            text-align: center;
-            cursor: pointer;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-        }
-        
-        .lang-btn.active {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            border-color: #10b981;
-            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.5);
-            transform: translateY(-1px);
-        }
-        
-        .lang-btn:hover:not(.active) {
-            background: rgba(255, 255, 255, 0.35);
-            border-color: rgba(255, 255, 255, 0.6);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            min-height: 40px;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--gray-700);
-            border: 1px solid var(--gray-300);
-        }
-        
-        .btn-outline:hover {
-            background: var(--gray-50);
-            border-color: var(--gray-400);
-            transform: translateY(-1px);
-        }
-        
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            background: linear-gradient(135deg, var(--gray-50) 0%, var(--white) 100%);
-            padding-top: 100px;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(1deg); }
-        }
-        
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 32px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 50px;
-            color: var(--primary-dark);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-        
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 24px;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
-        }
-        
-        .hero-content .highlight {
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-content p {
-            font-size: 1.25rem;
-            color: var(--gray-600);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 60px;
-        }
-        
-        .btn-large {
-            padding: 18px 36px;
-            font-size: 17px;
-            border-radius: 12px;
-        }
-        
-        .btn-secondary {
-            background: var(--gradient-secondary);
-            color: white;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .btn-secondary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 20px 16px;
-            background: white;
-            border: 1px solid var(--gray-200);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .stat-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-        
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-            margin-bottom: 4px;
-        }
-        
-        .stat-label {
-            color: var(--gray-600);
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .hero-visual {
-            position: relative;
-            animation: slideInRight 0.8s ease-out;
-        }
-        
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .dashboard-preview {
-            background: white;
-            border: 1px solid var(--gray-200);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: var(--shadow-2xl);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .preview-header {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
-            align-items: center;
-        }
-        
-        .preview-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-        
-        .dot-red { background: #ef4444; }
-        .dot-yellow { background: #f59e0b; }
-        .dot-green { background: #10b981; }
-        
-        .preview-title {
-            margin-left: auto;
-            color: var(--gray-500);
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .preview-content {
-            background: var(--gray-50);
-            border-radius: 12px;
-            padding: 24px;
-            position: relative;
-        }
-        
-        .preview-chart-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--gray-900);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .preview-chart {
-            height: 200px;
-            background: var(--gradient-primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .preview-chart::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: white;
-        }
-        
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(16, 185, 129, 0.1);
-            color: var(--primary-dark);
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--gray-900);
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-        
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray-600);
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 32px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 16px;
-            padding: 32px 28px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            border-radius: 16px 16px 0 0;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-xl);
-        }
-        
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .feature-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 12px;
-        }
-        
-        .feature-description {
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            padding: 80px 0;
-            background: var(--gray-50);
-        }
-        
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            text-align: center;
-        }
-        
-        .stats-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 48px;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 32px;
-        }
-        
-        .stats-card {
-            background: white;
-            padding: 32px 24px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--gray-200);
-            transition: all 0.3s ease;
-        }
-        
-        .stats-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .stats-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-        
-        .stats-label {
-            color: var(--gray-600);
-            font-weight: 600;
-        }
-        
-        /* CTA Section */
-        .cta {
-            padding: 100px 0;
-            background: var(--gradient-dark);
-            color: white;
-        }
-        
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 24px;
-            text-align: center;
-        }
-        
-        .cta-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            color: var(--primary-light);
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-        
-        .cta h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .cta p {
-            font-size: 1.2rem;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-        
-        /* Footer */
-        .footer {
-            background: var(--gray-900);
-            padding: 60px 0 30px;
-            color: white;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-brand h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .footer-brand p {
-            color: var(--gray-400);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .footer-section h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 8px;
-        }
-        
-        .footer-links a {
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary-light);
-        }
-        
-        .footer-bottom {
-            padding-top: 30px;
-            border-top: 1px solid var(--gray-700);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        
-        .footer-bottom p {
-            color: var(--gray-500);
-            margin: 0;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-        
-        .social-links a {
-            width: 36px;
-            height: 36px;
-            background: var(--gray-800);
-            border: 1px solid var(--gray-700);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--gray-400);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        /* Mobile Menu */
         .mobile-menu-btn {
             display: none;
             background: none;
             border: none;
-            color: var(--gray-700);
+            color: var(--carbon-primary);
             font-size: 20px;
             cursor: pointer;
             padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-btn:hover {
+            background: var(--gray-100);
+            color: var(--eco-green);
         }
         
         .mobile-menu {
@@ -855,7 +199,9 @@
             left: -100%;
             width: 100%;
             height: 100vh;
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             z-index: 9999;
             transition: left 0.3s ease;
             display: flex;
@@ -873,9 +219,17 @@
             right: 20px;
             background: none;
             border: none;
-            color: var(--gray-700);
+            color: var(--carbon-primary);
             font-size: 24px;
             cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-close:hover {
+            background: var(--gray-100);
+            color: var(--eco-green);
         }
         
         .mobile-nav-links {
@@ -883,64 +237,723 @@
             margin-bottom: 32px;
         }
         
-        .mobile-nav-links li {
-            margin-bottom: 16px;
-        }
-        
         .mobile-nav-links a {
-            color: var(--gray-700);
+            color: var(--carbon-primary);
             text-decoration: none;
             font-size: 18px;
             font-weight: 600;
             display: block;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gray-200);
+            padding: 16px 0;
+            border-bottom: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-nav-links a:hover {
+            color: var(--eco-green);
+            padding-left: 8px;
         }
         
         .mobile-actions {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
         }
         
-        /* Responsive Design */
+        .mobile-actions .btn {
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
+            background: linear-gradient(135deg, var(--eco-dark) 0%, var(--eco-green) 100%);
+        }
+        
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--carbon-primary);
+            border: 2px solid var(--gray-300);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: var(--eco-green);
+            color: var(--eco-green);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(22, 163, 74, 0.15);
+        }
+        
+        .btn-large {
+            padding: 18px 36px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+        }
+        
+        .btn-white {
+            background: white;
+            color: var(--carbon-primary);
+            border: 2px solid white;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-white:hover {
+            background: var(--gray-50);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.4);
+            color: var(--eco-green);
+        }
+        
+        /* Special button animations */
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+        }
+        
+        .btn-outline:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(22, 163, 74, 0.15);
+        }
+        
+        .btn-white:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Icon styling in buttons */
+        .btn i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        
+        .btn:hover i {
+            transform: scale(1.1);
+        }
+        
+        /* Loading state for buttons */
+        .btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .btn.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 24px 80px;
+            background: 
+                linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--gray-50) 100%),
+                radial-gradient(circle at 20% 20%, rgba(0, 200, 81, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(10, 10, 10, 0.03) 0%, transparent 50%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="carbon-pattern" width="80" height="80" patternUnits="userSpaceOnUse"><circle cx="40" cy="40" r="2" fill="%2316a34a" opacity="0.1"/><circle cx="20" cy="20" r="1.5" fill="%232c5530" opacity="0.08"/><circle cx="60" cy="60" r="1.5" fill="%232c5530" opacity="0.08"/></pattern></defs><rect width="100%" height="100%" fill="url(%23carbon-pattern)"/></svg>') repeat;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content {
+            animation: fadeInLeft 1s ease-out;
+        }
+        
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(0, 200, 81, 0.1);
+            border: 1px solid rgba(0, 200, 81, 0.2);
+            border-radius: 50px;
+            color: var(--eco-dark);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--carbon-primary);
+            letter-spacing: -0.02em;
+        }
+        
+        .hero .highlight {
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-dark) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+        
+        .hero-buttons .btn-large {
+            padding: 20px 40px;
+            font-size: 17px;
+            border-radius: 16px;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        .hero-buttons .btn-primary {
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 50%, var(--eco-dark) 100%);
+            box-shadow: 0 6px 20px rgba(22, 163, 74, 0.4);
+        }
+        
+        .hero-buttons .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(22, 163, 74, 0.5);
+        }
+        
+        .hero-buttons .btn-outline {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid rgba(22, 163, 74, 0.2);
+        }
+        
+        .hero-buttons .btn-outline:hover {
+            background: white;
+            border-color: var(--eco-green);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(22, 163, 74, 0.2);
+        }
+        
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeInRight 1s ease-out;
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .carbon-diagram {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-50) 100%);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carbon-diagram::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><defs><radialGradient id="carbonGrad" cx="50%" cy="50%" r="50%"><stop offset="0%" style="stop-color:%2316a34a;stop-opacity:0.15" /><stop offset="100%" style="stop-color:%2316a34a;stop-opacity:0" /></radialGradient></defs><rect width="100%" height="100%" fill="url(%23carbonGrad)"/><g transform="translate(200,200)"><circle cx="0" cy="0" r="20" fill="%232c5530" opacity="0.9"><animate attributeName="r" values="18;22;18" dur="3s" repeatCount="indefinite"/></circle><circle cx="-60" cy="-60" r="12" fill="%2316a34a" opacity="0.8"><animate attributeName="cy" values="-60;-65;-60" dur="2s" repeatCount="indefinite"/></circle><circle cx="60" cy="-60" r="12" fill="%2316a34a" opacity="0.8"><animate attributeName="cy" values="-60;-55;-60" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="-60" cy="60" r="12" fill="%2316a34a" opacity="0.8"><animate attributeName="cy" values="60;65;60" dur="2.2s" repeatCount="indefinite"/></circle><circle cx="60" cy="60" r="12" fill="%2316a34a" opacity="0.8"><animate attributeName="cy" values="60;55;60" dur="2.8s" repeatCount="indefinite"/></circle><line x1="0" y1="0" x2="-60" y2="-60" stroke="%234a7c59" stroke-width="2" opacity="0.7"/><line x1="0" y1="0" x2="60" y2="-60" stroke="%234a7c59" stroke-width="2" opacity="0.7"/><line x1="0" y1="0" x2="-60" y2="60" stroke="%234a7c59" stroke-width="2" opacity="0.7"/><line x1="0" y1="0" x2="60" y2="60" stroke="%234a7c59" stroke-width="2" opacity="0.7"/><text x="0" y="5" text-anchor="middle" font-size="14" fill="%23ffffff" font-weight="bold">C</text><text x="-60" y="-55" text-anchor="middle" font-size="10" fill="%23ffffff" font-weight="bold">O</text><text x="60" y="-55" text-anchor="middle" font-size="10" fill="%23ffffff" font-weight="bold">O</text><text x="-60" y="65" text-anchor="middle" font-size="10" fill="%23ffffff" font-weight="bold">₂</text><text x="60" y="65" text-anchor="middle" font-size="10" fill="%23ffffff" font-weight="bold">₂</text></g></svg>') no-repeat center;
+            background-size: contain;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 40px;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--eco-green);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--eco-green);
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 100px 24px;
+            background: var(--white);
+        }
+        
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .section-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--eco-soft);
+            border: 1px solid rgba(22, 163, 74, 0.2);
+            border-radius: 50px;
+            color: var(--eco-dark);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--carbon-primary);
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 32px;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 40px 32px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--eco-green) 0%, var(--eco-dark) 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--eco-green);
+        }
+        
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-size: 24px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--carbon-primary);
+            margin-bottom: 16px;
+        }
+        
+        .feature-description {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 24px;
+            background: linear-gradient(135deg, var(--carbon-primary) 0%, var(--carbon-secondary) 100%);
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="cta-pattern" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23cta-pattern)"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+        
+        .cta .btn-white {
+            background: white;
+            color: var(--carbon-primary);
+            border: 2px solid white;
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+            padding: 20px 40px;
+            font-size: 17px;
+            border-radius: 16px;
+            min-width: 220px;
+            justify-content: center;
+        }
+        
+        .cta .btn-white:hover {
+            background: var(--gray-50);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 255, 255, 0.6);
+            color: var(--eco-green);
+        }
+        
+        .cta .btn-white::before {
+            background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 100px 24px;
+            background: var(--gray-50);
+        }
+        
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        
+        .contact-info {
+            display: grid;
+            gap: 32px;
+        }
+        
+        .contact-card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--eco-green);
+        }
+        
+        .contact-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 20px;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--carbon-primary);
+            margin-bottom: 12px;
+        }
+        
+        .contact-details {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+        
+        .contact-details a {
+            color: var(--eco-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-details a:hover {
+            color: var(--eco-dark);
+            text-decoration: underline;
+        }
+        
+        .contact-form {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--carbon-primary);
+            margin-bottom: 32px;
+            text-align: center;
+        }
+        
+        .contact-form-fields {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .contact-form .btn {
+            margin-top: 8px;
+            justify-content: center;
+            font-size: 15px;
+            padding: 16px 32px;
+        }
+        
+        .contact-form .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(22, 163, 74, 0.3);
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            padding: 16px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--eco-green);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 40px 24px;
+            background: var(--gray-50);
+            text-align: center;
+            border-top: 1px solid var(--gray-200);
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            color: var(--gray-600);
+        }
+        
+        /* Mobile Responsive */
         @media (max-width: 1024px) {
-            .nav-container {
-                padding: 0 24px;
-            }
-            
-            .hero {
-                padding-top: 90px;
-            }
-            
             .hero-container {
-                padding: 0 24px;
+                grid-template-columns: 1fr;
+                gap: 60px;
+                text-align: center;
             }
             
-            .hero-content h1 {
-                font-size: 3rem;
+            .hero-visual {
+                order: -1;
             }
             
-            .hero-content p {
-                font-size: 1.1rem;
+            .carbon-diagram {
+                width: 350px;
+                height: 350px;
             }
             
             .features-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .nav-container {
-                padding: 0 20px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
             }
             
-            .logo {
-                font-size: 24px;
-            }
-            
-            .header-actions {
-                gap: 12px;
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
             }
         }
         
@@ -958,27 +971,44 @@
             }
             
             .hero {
-                padding-top: 80px;
+                padding: 100px 20px 60px;
             }
             
             .hero-container {
-                padding: 0 20px;
+                gap: 40px;
             }
             
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .hero h1 {
+                font-size: 2.8rem;
             }
             
-            .hero-content p {
-                font-size: 1rem;
+            .hero p {
+                font-size: 1.1rem;
             }
             
             .hero-buttons {
-                gap: 12px;
+                flex-direction: column;
+                align-items: center;
+                gap: 16px;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .hero-buttons .btn-large {
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .carbon-diagram {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+            
+            .features {
+                padding: 80px 20px;
             }
             
             .features-grid {
@@ -986,123 +1016,371 @@
                 gap: 24px;
             }
             
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 16px;
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cta {
+                padding: 80px 20px;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .contact {
+                padding: 80px 20px;
+            }
+            
+            .contact-form {
+                padding: 32px 24px;
+            }
+            
+            .footer {
+                padding: 32px 20px;
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 640px) {
+            .header {
+                padding: 16px 0;
+            }
+            
             .nav-container {
                 padding: 0 16px;
             }
             
+            .logo-main {
+                font-size: 20px;
+            }
+            
+            .logo-sub {
+                font-size: 10px;
+            }
+            
             .hero {
-                padding-top: 70px;
+                padding: 90px 16px 50px;
             }
             
-            .hero-container {
-                padding: 0 16px;
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
             }
             
-            .hero-content h1 {
-                font-size: 2rem;
+            .hero p {
+                font-size: 1rem;
             }
             
-            .hero-content p {
-                font-size: 0.95rem;
+            .hero-buttons .btn-large {
+                padding: 16px 28px;
+                font-size: 15px;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .carbon-diagram {
+                width: 240px;
+                height: 240px;
+            }
+            
+            .hero-stats {
+                grid-template-columns: 1fr;
                 gap: 12px;
             }
             
-            .btn-large {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
+            .stat-card {
+                padding: 16px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .stat-label {
+                font-size: 0.85rem;
+            }
+            
+            .features {
+                padding: 60px 16px;
             }
             
             .section-title {
                 font-size: 1.8rem;
             }
-        }
             
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
+            .section-subtitle {
+                font-size: 1rem;
             }
             
-            .btn {
-                width: 100%;
-                max-width: 280px;
-                justify-content: center;
+            .feature-card {
+                padding: 32px 24px;
+            }
+            
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+                font-size: 20px;
+            }
+            
+            .feature-title {
+                font-size: 1.1rem;
+            }
+            
+            .feature-description {
+                font-size: 14px;
+            }
+            
+            .cta {
+                padding: 60px 16px;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cta .btn-white {
+                padding: 16px 32px;
+                font-size: 15px;
+                min-width: 200px;
+            }
+            
+            .contact {
+                padding: 60px 16px;
+            }
+            
+            .contact-card {
+                padding: 24px 20px;
+            }
+            
+            .contact-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+            
+            .contact-title {
+                font-size: 1rem;
+            }
+            
+            .contact-details {
+                font-size: 14px;
+            }
+            
+            .contact-form {
+                padding: 24px 20px;
+            }
+            
+            .form-title {
+                font-size: 1.3rem;
+            }
+            
+            .form-group input,
+            .form-group textarea {
+                padding: 14px;
+                font-size: 14px;
+            }
+            
+            .footer {
+                padding: 24px 16px;
             }
             
             .footer-content {
-                grid-template-columns: 1fr;
-                gap: 32px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
+                font-size: 14px;
             }
         }
         
         @media (max-width: 480px) {
-            .nav-container,
-            .hero-container,
-            .features-container,
-            .stats-container,
-            .cta-container,
-            .footer-container {
-                padding: 0 16px;
+            .hero h1 {
+                font-size: 1.9rem;
             }
             
-            .hero-content h1 {
-                font-size: 2rem;
+            .hero-badge {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            
+            .carbon-diagram {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hero-buttons .btn-large {
+                padding: 14px 24px;
+                font-size: 14px;
+            }
+            
+            .section-badge {
+                padding: 6px 12px;
+                font-size: 12px;
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             
-            .cta h2 {
-                font-size: 2rem;
+            .cta-title {
+                font-size: 1.6rem;
             }
             
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .contact-card {
+                padding: 20px 16px;
+            }
+            
+            .contact-form {
+                padding: 20px 16px;
+            }
+            
+            .form-title {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-main {
+                font-size: 18px;
+            }
+            
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            
+            .carbon-diagram {
+                width: 180px;
+                height: 180px;
+            }
+            
+            .hero-buttons .btn-large {
+                padding: 12px 20px;
+                font-size: 13px;
+                min-width: 160px;
+            }
+            
+            .feature-card {
+                padding: 24px 16px;
+            }
+            
+            .feature-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 18px;
+            }
+            
+            .cta .btn-white {
+                padding: 14px 24px;
+                font-size: 14px;
+                min-width: 180px;
+            }
+        }
+        
+        /* Landscape orientation fixes */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .hero {
+                min-height: auto;
+                padding: 80px 24px 40px;
+            }
+            
+            .hero-container {
+                gap: 30px;
+            }
+            
+            .carbon-diagram {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .hero-stats {
+                margin-top: 20px;
+            }
+        }
+        
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .carbon-diagram::before,
+            .hero::before,
+            .auth-branding::before {
+                background-size: contain;
+            }
+        }
+        
+        /* Print styles */
+        @media print {
+            .header,
+            .language-switcher,
+            .hero-buttons,
+            .cta,
+            .contact-form {
+                display: none;
+            }
+            
+            .hero,
+            .features,
+            .contact {
+                padding: 20px 0;
+            }
+            
+            * {
+                color: black !important;
+                background: white !important;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header class="header" id="header">
+    <header class="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon">
-                    <div class="logo-triangle"></div>
-                    <div class="logo-semicircle"></div>
+                <div class="logo-icon"></div>
+                <div class="logo-text">
+                    <span class="logo-main">ACADEMIA</span>
+                    <span class="logo-sub">CARBON</span>
                 </div>
-                Academia Carbon
             </a>
             
             <nav class="nav-links">
-                <a href="#features">{% trans "Features" %}</a>
-                <a href="#demo">{% trans "Demo" %}</a>
-                <a href="#pricing">{% trans "Pricing" %}</a>
-                <a href="#docs">{% trans "Documentation" %}</a>
-                <a href="#contact">{% trans "Contact" %}</a>
+                <a href="#features">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Özellikler
+                    {% else %}
+                        Features
+                    {% endif %}
+                </a>
+                <a href="#calculator">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Hesaplayıcı
+                    {% else %}
+                        Calculator
+                    {% endif %}
+                </a>
+                <a href="#pricing">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Fiyatlar
+                    {% else %}
+                        Pricing
+                    {% endif %}
+                </a>
+                <a href="#contact">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        İletişim
+                    {% else %}
+                        Contact
+                    {% endif %}
+                </a>
             </nav>
             
             <div class="header-actions">
@@ -1110,79 +1388,179 @@
                 {% include 'partials/language_switcher_fixed.html' %}
                 
                 <a href="{% url 'ghg:email_login' %}" class="btn btn-outline">
-                    {% trans "Login" %}
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Giriş
+                    {% else %}
+                        Login
+                    {% endif %}
                 </a>
                 <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary">
-                    {% trans "Get Started" %}
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Başlayın
+                    {% else %}
+                        Get Started
+                    {% endif %}
                 </a>
                 
-                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <!-- Mobile Menu Button -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
-            <button class="mobile-menu-close" onclick="toggleMobileMenu()">
-                <i class="fas fa-times"></i>
-            </button>
-            
-            <ul class="mobile-nav-links">
-                <li><a href="#features">{% trans "Features" %}</a></li>
-                <li><a href="#demo">{% trans "Demo" %}</a></li>
-                <li><a href="#pricing">{% trans "Pricing" %}</a></li>
-                <li><a href="#docs">{% trans "Documentation" %}</a></li>
-                <li><a href="#contact">{% trans "Contact" %}</a></li>
-            </ul>
-            
-            <div class="mobile-actions">
-                <a href="{% url 'ghg:email_login' %}" class="btn btn-outline">{% trans "Login" %}</a>
-                <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary">{% trans "Get Started" %}</a>
-            </div>
-        </div>
     </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <ul class="mobile-nav-links">
+            <li>
+                <a href="#features">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Özellikler
+                    {% else %}
+                        Features
+                    {% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="#calculator">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Hesaplayıcı
+                    {% else %}
+                        Calculator
+                    {% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="#pricing">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Fiyatlar
+                    {% else %}
+                        Pricing
+                    {% endif %}
+                </a>
+            </li>
+            <li>
+                <a href="#contact">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        İletişim
+                    {% else %}
+                        Contact
+                    {% endif %}
+                </a>
+            </li>
+        </ul>
+        
+        <div class="mobile-actions">
+            <div style="margin-bottom: 16px;">
+                {% include 'partials/language_switcher_fixed.html' %}
+            </div>
+            <a href="{% url 'ghg:email_login' %}" class="btn btn-outline">
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Giriş
+                {% else %}
+                    Login
+                {% endif %}
+            </a>
+            <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary">
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Başlayın
+                {% else %}
+                    Get Started
+                {% endif %}
+            </a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-calculator"></i>
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Karbon Hesaplama Platformu
+                    {% else %}
+                        Carbon Calculation Platform
+                    {% endif %}
+                </div>
                 
                 <h1>
-                    {% trans "Professional" %} <span class="highlight">{% trans "Carbon Tracking" %}</span> {% trans "Platform" %}
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Profesyonel <span class="highlight">Karbon Hesaplama</span> Platformu
+                    {% else %}
+                        Professional <span class="highlight">Carbon Calculation</span> Platform
+                    {% endif %}
                 </h1>
                 
                 <p>
-                    {% trans "Developed by IT Valley at Istinye University, our comprehensive carbon tracking platform helps Turkish organizations monitor, analyze, and report their greenhouse gas emissions with precision. ISO 14064-1 compliant solution with real-time analytics for sustainable business operations." %}
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        İşletmenizin karbon ayak izini hassas bir şekilde hesaplayın ve yönetin. Emisyon verilerinizi analiz edin, raporlar oluşturun ve sürdürülebilirlik hedeflerinize ulaşın.
+                    {% else %}
+                        Calculate and manage your business carbon footprint with precision. Analyze emission data, generate reports, and achieve your sustainability goals.
+                    {% endif %}
                 </p>
                 
                 <div class="hero-buttons">
                     <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary btn-large">
-                        <i class="fas fa-rocket"></i>
-                        {% trans "See Live Demo" %}
+                        <i class="fas fa-calculator"></i>
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Hesaplamaya Başla
+                        {% else %}
+                            Start Calculating
+                        {% endif %}
                     </a>
-                    <button onclick="playDemoVideo()" class="btn btn-secondary btn-large">
+                    <a href="#features" class="btn btn-outline btn-large">
                         <i class="fas fa-play"></i>
-                        {% trans "Watch Demo Video" %}
-                    </button>
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Demo İzle
+                        {% else %}
+                            View Demo
+                        {% endif %}
+                    </a>
                 </div>
                 
                 <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">ISO</span>
-                        <span class="stat-label">{% trans "Certified Standard" %}</span>
+                    <div class="stat-card">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Şirket
+                            {% else %}
+                                Companies
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">99.9%</span>
-                        <span class="stat-label">{% trans "Accuracy Rate" %}</span>
+                    <div class="stat-card">
+                        <div class="stat-number">2.5M</div>
+                        <div class="stat-label">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Ton CO₂
+                            {% else %}
+                                Tons CO₂
+                            {% endif %}
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">24/7</span>
-                        <span class="stat-label">{% trans "Support" %}</span>
+                    <div class="stat-card">
+                        <div class="stat-number">45%</div>
+                        <div class="stat-label">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Azalma
+                            {% else %}
+                                Reduction
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
             
+            <div class="hero-visual">
+                <div class="carbon-diagram"></div>
+            </div>
         </div>
     </section>
     
@@ -1191,12 +1569,26 @@
         <div class="features-container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i class="fas fa-star"></i>
-                    {% trans "Key Features" %}
+                    <i class="fas fa-calculator"></i>
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Platform Özellikleri
+                    {% else %}
+                        Platform Features
+                    {% endif %}
                 </div>
-                <h2 class="section-title">{% trans "Everything You Need for Carbon Management" %}</h2>
+                <h2 class="section-title">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Eksiksiz Karbon Hesaplama Paketi
+                    {% else %}
+                        Complete Carbon Calculation Suite
+                    {% endif %}
+                </h2>
                 <p class="section-subtitle">
-                    {% trans "Comprehensive tools and features designed to help organizations track, analyze, and reduce their carbon footprint effectively." %}
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        İşletmenizin karbon ayak izini hesaplamak, analiz etmek ve azaltmak için ihtiyacınız olan her şey
+                    {% else %}
+                        Everything you need to calculate, analyze, and reduce your business carbon footprint
+                    {% endif %}
                 </p>
             </div>
             
@@ -1205,9 +1597,19 @@
                     <div class="feature-icon">
                         <i class="fas fa-calculator"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "Precise Emission Calculation" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Hassas Emisyon Hesaplama
+                        {% else %}
+                            Precise Emission Calculation
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using up-to-date emission factors and international standards." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Uluslararası standartlar ve güncel emisyon faktörleri kullanarak tüm kapsam 1, 2 ve 3 sera gazı emisyonlarını hesaplayın.
+                        {% else %}
+                            Calculate all scope 1, 2, and 3 greenhouse gas emissions using international standards and up-to-date emission factors.
+                        {% endif %}
                     </p>
                 </div>
                 
@@ -1215,9 +1617,19 @@
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "Advanced Analytics Dashboard" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Gelişmiş Analitik Dashboard
+                        {% else %}
+                            Advanced Analytics Dashboard
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Visualize emission data through interactive charts, KPI cards, and analytical reports for better understanding and decision-making." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Emisyon verilerinizi interaktif grafikler, KPI kartları ve analitik raporlar ile görselleştirin.
+                        {% else %}
+                            Visualize your emission data through interactive charts, KPI cards, and analytical reports.
+                        {% endif %}
                     </p>
                 </div>
                 
@@ -1225,9 +1637,19 @@
                     <div class="feature-icon">
                         <i class="fas fa-file-alt"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "ISO 14064-1 Reporting" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            ISO 14064-1 Raporlama
+                        {% else %}
+                            ISO 14064-1 Reporting
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Generate professional reports compliant with ISO 14064-1 standards with PDF export capabilities and advanced filtering options." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            ISO 14064-1 standartlarına uygun profesyonel raporlar oluşturun. PDF dışa aktarma ve gelişmiş filtreleme seçenekleri.
+                        {% else %}
+                            Generate professional reports compliant with ISO 14064-1 standards. PDF export and advanced filtering options.
+                        {% endif %}
                     </p>
                 </div>
                 
@@ -1235,9 +1657,19 @@
                     <div class="feature-icon">
                         <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "Supplier Management" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Tedarikçi Yönetimi
+                        {% else %}
+                            Supplier Management
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Track and manage supplier carbon emissions, assess performance, and collaborate on supply chain emission reduction initiatives." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Tedarikçi karbon emisyonlarını takip edin, performansı değerlendirin ve tedarik zinciri emisyon azaltma girişimlerinde işbirliği yapın.
+                        {% else %}
+                            Track supplier carbon emissions, assess performance, and collaborate on supply chain emission reduction initiatives.
+                        {% endif %}
                     </p>
                 </div>
                 
@@ -1245,9 +1677,19 @@
                     <div class="feature-icon">
                         <i class="fas fa-bullseye"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "Action Planning" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Eylem Planlaması
+                        {% else %}
+                            Action Planning
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Set reduction targets, create action plans, and track progress towards your sustainability goals with our comprehensive planning tools." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Azaltma hedefleri belirleyin, eylem planları oluşturun ve kapsamlı planlama araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi takip edin.
+                        {% else %}
+                            Set reduction targets, create action plans, and track progress towards your sustainability goals with comprehensive planning tools.
+                        {% endif %}
                     </p>
                 </div>
                 
@@ -1255,55 +1697,20 @@
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="feature-title">{% trans "Security & Privacy" %}</h3>
+                    <h3 class="feature-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Güvenlik ve Gizlilik
+                        {% else %}
+                            Security & Privacy
+                        {% endif %}
+                    </h3>
                     <p class="feature-description">
-                        {% trans "Enterprise-grade security with advanced encryption, access controls, and full compliance with international data protection standards." %}
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Gelişmiş şifreleme, erişim kontrolleri ve uluslararası veri koruma standartlarına tam uyumluluk ile kurumsal düzeyde güvenlik.
+                        {% else %}
+                            Enterprise-grade security with advanced encryption, access controls, and full compliance with international data protection standards.
+                        {% endif %}
                     </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-container">
-            <h2 class="stats-title">{% trans "Developed at Istinye University - Serving Turkish Businesses" %}</h2>
-            
-            <div class="stats-grid">
-                <div class="stats-card">
-                    <div class="stats-number">50+</div>
-                    <div class="stats-label">{% trans "Turkish Companies" %}</div>
-                </div>
-                <div class="stats-card">
-                    <div class="stats-number">100K+</div>
-                    <div class="stats-label">{% trans "Tons CO2 Tracked" %}</div>
-                </div>
-                <div class="stats-card">
-                    <div class="stats-number">99.5%</div>
-                    <div class="stats-label">{% trans "Platform Uptime" %}</div>
-                </div>
-                <div class="stats-card">
-                    <div class="stats-number">2024</div>
-                    <div class="stats-label">{% trans "Founded" %}</div>
-                </div>
-            </div>
-            
-            <!-- Industry Recognition -->
-            <div style="margin-top: 60px;">
-                <h4 style="color: var(--gray-600); font-size: 1rem; margin-bottom: 30px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">{% trans "Industry Recognition & Certifications" %}</h4>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 15px 25px; background: white; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--gray-200);">
-                        <i class="fas fa-certificate" style="color: var(--primary); font-size: 1.5rem;"></i>
-                        <span style="font-weight: 600; color: var(--gray-900);">ISO 14064-1 Certified</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 15px 25px; background: white; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--gray-200);">
-                        <i class="fas fa-shield-alt" style="color: var(--secondary); font-size: 1.5rem;"></i>
-                        <span style="font-weight: 600; color: var(--gray-900);">SOC 2 Compliant</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; padding: 15px 25px; background: white; border-radius: 12px; box-shadow: var(--shadow-md); border: 1px solid var(--gray-200);">
-                        <i class="fas fa-award" style="color: var(--accent); font-size: 1.5rem;"></i>
-                        <span style="font-weight: 600; color: var(--gray-900);">GHG Protocol Aligned</span>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1312,153 +1719,221 @@
     <!-- CTA Section -->
     <section class="cta">
         <div class="cta-container">
-            <div class="cta-badge">
-                <i class="fas fa-rocket"></i>
-                {% trans "Ready to Get Started?" %}
+            <h2 class="cta-title">
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Karbon Ayak İzinizi Hesaplamaya Hazır mısınız?
+                {% else %}
+                    Ready to Calculate Your Carbon Footprint?
+                {% endif %}
+            </h2>
+            <p class="cta-subtitle">
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Dünya çapında binlerce şirketin güvendiği profesyonel karbon hesaplama platformuna katılın
+                {% else %}
+                    Join thousands of companies worldwide trusting our professional carbon calculation platform
+                {% endif %}
+            </p>
+            <a href="{% url 'ghg:email_signup' %}" class="btn btn-white btn-large">
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Ücretsiz Başlayın
+                {% else %}
+                    Start Free Trial
+                {% endif %}
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="contact-header">
+                <div class="section-badge">
+                    <i class="fas fa-envelope"></i>
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        İletişim
+                    {% else %}
+                        Contact
+                    {% endif %}
+                </div>
+                <h2 class="section-title">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Bizimle İletişime Geçin
+                    {% else %}
+                        Get in Touch
+                    {% endif %}
+                </h2>
+                <p class="section-subtitle">
+                    {% if LANGUAGE_CODE == 'tr' %}
+                        Karbon hesaplama çözümlerimiz hakkında daha fazla bilgi almak için bizimle iletişime geçin
+                    {% else %}
+                        Contact us to learn more about our carbon calculation solutions
+                    {% endif %}
+                </p>
             </div>
             
-            <h2>{% trans "Start Your Carbon Journey Today" %}</h2>
-            <p>
-                {% trans "Join thousands of organizations already using Academia Carbon to track, analyze, and reduce their environmental impact. Start your free trial today." %}
-            </p>
-            
-            <div class="hero-buttons">
-                <a href="{% url 'ghg:email_signup' %}" class="btn btn-primary btn-large">
-                    <i class="fas fa-user-plus"></i>
-                    {% trans "Create Free Account" %}
-                </a>
-                <a href="{% url 'ghg:email_login' %}" class="btn btn-outline btn-large" style="color: white; border-color: rgba(255,255,255,0.3);">
-                    <i class="fas fa-sign-in-alt"></i>
-                    {% trans "Sign In" %}
-                </a>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="contact-title">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Ofis Adresimiz
+                            {% else %}
+                                Office Address
+                            {% endif %}
+                        </h3>
+                        <p class="contact-details">
+                            IT Valley - İstinye Üniversitesi<br>
+                            Ayazağa Mahallesi, Kemerburgaz Caddesi<br>
+                            Vadi İstanbul Park<br>
+                            Blok 7A, No: 7B, İç Kapı No: 4<br>
+                            Sarıyer / İstanbul
+                        </p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <h3 class="contact-title">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Telefon
+                            {% else %}
+                                Phone
+                            {% endif %}
+                        </h3>
+                        <p class="contact-details">
+                            <a href="tel:+902126135880">+90 212 613 58 80</a>
+                        </p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-fax"></i>
+                        </div>
+                        <h3 class="contact-title">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Faks
+                            {% else %}
+                                Fax
+                            {% endif %}
+                        </h3>
+                        <p class="contact-details">
+                            +90 212 322 04 11
+                        </p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="contact-title">
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                E-posta
+                            {% else %}
+                                Email
+                            {% endif %}
+                        </h3>
+                        <p class="contact-details">
+                            <a href="mailto:info@academiacarbon.com">info@academiacarbon.com</a>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h3 class="form-title">
+                        {% if LANGUAGE_CODE == 'tr' %}
+                            Bize Mesaj Gönderin
+                        {% else %}
+                            Send us a Message
+                        {% endif %}
+                    </h3>
+                    <form class="contact-form-fields">
+                        <div class="form-group">
+                            <input type="text" placeholder="{% if LANGUAGE_CODE == 'tr' %}Adınız{% else %}Your Name{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="{% if LANGUAGE_CODE == 'tr' %}E-posta Adresiniz{% else %}Your Email{% endif %}" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="{% if LANGUAGE_CODE == 'tr' %}Şirket Adı{% else %}Company Name{% endif %}">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="{% if LANGUAGE_CODE == 'tr' %}Mesajınız{% else %}Your Message{% endif %}" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fas fa-paper-plane"></i>
+                            {% if LANGUAGE_CODE == 'tr' %}
+                                Mesaj Gönder
+                            {% else %}
+                                Send Message
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" id="contact">
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <h3>
-                        <div style="width: 32px; height: 32px; position: relative; display: inline-flex; align-items: center; justify-content: center; background: var(--gradient-primary); border-radius: 8px; margin-right: 10px;">
-                            <div style="width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 10px solid #4ade80; position: absolute; left: 4px; top: 11px;"></div>
-                            <div style="width: 10px; height: 10px; border: 2px solid #a78bfa; border-right: none; border-radius: 10px 0 0 10px; position: absolute; right: 6px; top: 11px;"></div>
-                        </div>
-                        Academia Carbon
-                    </h3>
-                    <p>{% trans "Professional carbon emission tracking and reporting platform developed by IT Valley at Istinye University. ISO 14064-1 certified solution for sustainable business operations in Turkey and globally." %}</p>
-                    
-                    <div style="margin: 25px 0;">
-                        <h4 style="color: white; font-size: 16px; margin-bottom: 15px;">{% trans "Contact Information" %}</h4>
-                        <div style="color: var(--gray-400); line-height: 1.8;">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <i class="fas fa-envelope" style="width: 16px;"></i>
-                                <span>info@itvalley.com.tr</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <i class="fas fa-phone" style="width: 16px;"></i>
-                                <span>+90 212 613 58 80</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <i class="fas fa-fax" style="width: 16px;"></i>
-                                <span>+90 212 322 04 11</span>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-                                <i class="fas fa-map-marker-alt" style="width: 16px;"></i>
-                                <span>{% trans "IT Valley - Istinye University, Ayazağa Neighborhood, Kemerburgaz Street, Vadi İstanbul Park Block 7A, No: 7B, Inner Door No: 4, Sarıyer / Istanbul, Turkey" %}</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/academia-dan%C4%B1%C5%9Fmanl%C4%B1k-ba915725/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="mailto:info@itvalley.com.tr" title="Contact"><i class="fas fa-envelope"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>{% trans "Product" %}</h4>
-                    <ul class="footer-links">
-                        <li><a href="#features">{% trans "Features" %}</a></li>
-                        <li><a href="#demo">{% trans "Live Demo" %}</a></li>
-                        <li><a href="#pricing">{% trans "Pricing" %}</a></li>
-                        <li><a href="#integrations">{% trans "Integrations" %}</a></li>
-                        <li><a href="#api">{% trans "API Documentation" %}</a></li>
-                        <li><a href="#changelog">{% trans "Changelog" %}</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>{% trans "Resources" %}</h4>
-                    <ul class="footer-links">
-                        <li><a href="{% url 'ghg:support' %}">{% trans "Help Center" %}</a></li>
-                        <li><a href="{% url 'ghg:user_guide' %}">{% trans "User Guides" %}</a></li>
-                        <li><a href="#webinars">{% trans "Webinars" %}</a></li>
-                        <li><a href="#case-studies">{% trans "Case Studies" %}</a></li>
-                        <li><a href="#blog">{% trans "Blog" %}</a></li>
-                        <li><a href="#downloads">{% trans "Downloads" %}</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>{% trans "Company" %}</h4>
-                    <ul class="footer-links">
-                        <li><a href="#about">{% trans "About Us" %}</a></li>
-                        <li><a href="#careers">{% trans "Careers" %}</a></li>
-                        <li><a href="#press">{% trans "Press Kit" %}</a></li>
-                        <li><a href="#partners">{% trans "Partners" %}</a></li>
-                        <li><a href="#contact">{% trans "Contact Sales" %}</a></li>
-                        <li><a href="#status">{% trans "System Status" %}</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2024 Academia Carbon - IT Valley, Istinye University. {% trans "All rights reserved." %}</p>
-                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                    <a href="#privacy" style="color: var(--gray-500); text-decoration: none;">{% trans "Privacy Policy" %}</a>
-                    <a href="#terms" style="color: var(--gray-500); text-decoration: none;">{% trans "Terms of Service" %}</a>
-                    <a href="#cookies" style="color: var(--gray-500); text-decoration: none;">{% trans "Cookie Policy" %}</a>
-                    <a href="#gdpr" style="color: var(--gray-500); text-decoration: none;">{% trans "GDPR" %}</a>
-                </div>
-            </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Academia Carbon. 
+                {% if LANGUAGE_CODE == 'tr' %}
+                    Profesyonel karbon hesaplama çözümleri.
+                {% else %}
+                    Professional carbon calculation solutions.
+                {% endif %}
+            </p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('active');
-            
-            // Prevent body scroll when menu is open
-            if (mobileMenu.classList.contains('active')) {
-                document.body.style.overflow = 'hidden';
-            } else {
-                document.body.style.overflow = '';
-            }
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        // Demo video play function
-        function playDemoVideo() {
-            // In a real implementation, this would open a video modal or redirect to demo
-            alert('{% trans "Demo video would play here. In production, this would open a video modal or redirect to the live demo." %}');
-            // For now, redirect to signup for demo
-            window.location.href = "{% url 'ghg:email_signup' %}";
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMobileMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close mobile menu when clicking outside
+        mobileMenu.addEventListener('click', function(e) {
+            if (e.target === mobileMenu) {
+                closeMobileMenu();
             }
         });
 
-        // Smooth scrolling for anchor links
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1472,13 +1947,13 @@
             });
         });
 
-        // Animation on scroll
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver(function(entries) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
@@ -1487,56 +1962,31 @@
             });
         }, observerOptions);
 
-        // Observe all cards for animation
-        document.querySelectorAll('.feature-card, .stats-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
+        // Observe sections for scroll animations
+        document.querySelectorAll('.features, .cta, .contact').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            
-            if (mobileMenu.classList.contains('active') && 
-                !mobileMenu.contains(e.target) && 
-                !mobileMenuBtn.contains(e.target)) {
-                toggleMobileMenu();
-            }
-        });
-        
-        // Close mobile menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const mobileMenu = document.getElementById('mobileMenu');
-                if (mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMobileMenu();
             }
         });
 
-        // Add hover effects to cards
-        document.querySelectorAll('.feature-card, .stats-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-4px) scale(1.02)';
+        // Prevent zoom on iOS when focusing inputs
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            document.querySelectorAll('input, textarea, select').forEach(element => {
+                element.addEventListener('focus', function() {
+                    if (element.style.fontSize !== '16px') {
+                        element.style.fontSize = '16px';
+                    }
+                });
             });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                const speed = scrolled * 0.5;
-                hero.style.transform = `translateY(${speed * 0.1}px)`;
-            }
-        });
+        }
     </script>
 </body>
 </html>

@@ -2291,6 +2291,19 @@ def landing_page(request):
     return render(request, 'landing.html', context)
 
 
+def landing_nature(request):
+    """صفحه لندینگ با طراحی طبیعی"""
+    # اگر کاربر لاگین کرده باشد، به داشبورد هدایت شود
+    if request.user.is_authenticated:
+        return redirect('ghg:index')
+    
+    context = {
+        'page_title': 'Carbon Track - Sustainable Carbon Management Solutions',
+        'meta_description': 'World-class carbon tracking platform building sustainable solutions for modern businesses. Tailored solutions for every stage of your sustainability journey.',
+    }
+    return render(request, 'landing_nature.html', context)
+
+
 @login_required
 def test_language(request):
     """Test page for language switching"""
