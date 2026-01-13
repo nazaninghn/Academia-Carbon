@@ -1,0 +1,725 @@
+/* =========================================================
+   DATA ENTRY PAGE RESPONSIVE DESIGN
+   Academia Carbon - Data Collection Forms
+========================================================= */
+
+/* =========================================================
+   BASE RESPONSIVE LAYOUT
+========================================================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .container {
+        padding: 0 10px;
+    }
+}
+
+/* =========================================================
+   SCOPE TABS RESPONSIVE
+========================================================= */
+
+.scope-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid #e0e0e0;
+    margin-bottom: 30px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.scope-tab {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    color: #666;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+    font-size: 14px;
+    white-space: nowrap;
+    min-width: 120px;
+}
+
+@media (max-width: 768px) {
+    .scope-tabs {
+        margin-bottom: 20px;
+        gap: 0;
+        justify-content: space-around;
+    }
+    
+    .scope-tab {
+        padding: 10px 16px;
+        font-size: 13px;
+        min-width: 100px;
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .scope-tab {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scope-tabs {
+        flex-direction: column;
+        border-bottom: none;
+        gap: 2px;
+        margin-bottom: 15px;
+    }
+    
+    .scope-tab {
+        border-bottom: none;
+        border-left: 3px solid transparent;
+        border-radius: 6px;
+        margin-bottom: 2px;
+        text-align: left;
+        min-width: auto;
+    }
+    
+    .scope-tab.active {
+        border-left-color: #22c55e;
+        background: #f0fdf4;
+    }
+}
+
+/* =========================================================
+   FORM CARD RESPONSIVE
+========================================================= */
+
+.form-card {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-card {
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+    }
+}
+
+/* =========================================================
+   EMISSION CATEGORY RESPONSIVE
+========================================================= */
+
+.emission-category {
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.emission-category h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.emission-category p {
+    font-size: 13px;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+@media (max-width: 768px) {
+    .emission-category {
+        padding: 15px;
+        margin-bottom: 12px;
+    }
+    
+    .emission-category h3 {
+        font-size: 15px;
+    }
+    
+    .emission-category p {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .emission-category {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .emission-category h3 {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .emission-category p {
+        font-size: 11px;
+        margin-top: 3px;
+    }
+}
+
+/* =========================================================
+   FORM GROUPS RESPONSIVE
+========================================================= */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    min-height: 44px; /* Touch-friendly */
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+}
+
+@media (max-width: 768px) {
+    .form-group {
+        margin-bottom: 16px;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .form-control {
+        padding: 14px 16px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        border-radius: 6px;
+    }
+}
+
+@media (max-width: 576px) {
+    .form-group {
+        margin-bottom: 14px;
+    }
+    
+    .form-group label {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+    
+    .form-control {
+        padding: 12px 14px;
+        font-size: 16px;
+    }
+}
+
+/* =========================================================
+   ACTIVITY INPUT RESPONSIVE
+========================================================= */
+
+.activity-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.activity-input input {
+    flex: 1;
+}
+
+.activity-input button {
+    background: #22c55e;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+}
+
+.activity-input button:hover {
+    background: #16a34a;
+}
+
+@media (max-width: 768px) {
+    .activity-input {
+        gap: 8px;
+    }
+    
+    .activity-input button {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+        min-width: 44px;
+    }
+}
+
+@media (max-width: 576px) {
+    .activity-input button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        min-width: 36px;
+        border-radius: 6px;
+    }
+}
+
+/* =========================================================
+   BUTTON RESPONSIVE
+========================================================= */
+
+.btn-calculate {
+    background: #22c55e;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    float: right;
+    min-height: 44px;
+}
+
+.btn-calculate:hover {
+    background: #16a34a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+@media (max-width: 768px) {
+    .btn-calculate {
+        float: none;
+        width: 100%;
+        padding: 14px 24px;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-calculate {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Add/Edit Buttons */
+.btn-add-supplier,
+.btn-add-industry {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    font-size: 13px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-add-supplier:hover,
+.btn-add-industry:hover {
+    background: #2563eb;
+}
+
+@media (max-width: 768px) {
+    .btn-add-supplier,
+    .btn-add-industry {
+        padding: 12px 16px;
+        font-size: 12px;
+        white-space: normal;
+        text-align: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-add-supplier,
+    .btn-add-industry {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+    
+    .btn-add-supplier i,
+    .btn-add-industry i {
+        display: none;
+    }
+}
+
+/* =========================================================
+   FLEX LAYOUTS RESPONSIVE
+========================================================= */
+
+/* Supplier/Industry Selection */
+.form-group > div[style*="display: flex"] {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+}
+
+@media (max-width: 768px) {
+    .form-group > div[style*="display: flex"] {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .form-group > div[style*="display: flex"] > select,
+    .form-group > div[style*="display: flex"] > input {
+        flex: none;
+    }
+}
+
+/* =========================================================
+   HEADER SECTION RESPONSIVE
+========================================================= */
+
+.emissions-header,
+div[style*="background: linear-gradient(135deg, #f8fafc"] {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-bottom: 1px solid #e2e8f0;
+    padding: 24px 30px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+
+.emissions-header > div,
+div[style*="display: flex; justify-content: space-between"] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .emissions-header,
+    div[style*="background: linear-gradient(135deg, #f8fafc"] {
+        padding: 20px 20px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+    }
+    
+    .emissions-header > div,
+    div[style*="display: flex; justify-content: space-between"] {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .emissions-header,
+    div[style*="background: linear-gradient(135deg, #f8fafc"] {
+        padding: 15px 15px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Header Title */
+h1[style*="font-size: 28px"] {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0 0 8px 0;
+}
+
+@media (max-width: 768px) {
+    h1[style*="font-size: 28px"] {
+        font-size: 24px;
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 576px) {
+    h1[style*="font-size: 28px"] {
+        font-size: 20px;
+        margin-bottom: 4px;
+    }
+}
+
+/* Header Info */
+p[style*="color: #64748b"] {
+    color: #64748b;
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    p[style*="color: #64748b"] {
+        font-size: 13px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    p[style*="color: #64748b"] {
+        font-size: 12px;
+        gap: 6px;
+    }
+}
+
+/* Country Selector */
+div[style*="display: flex; align-items: center; gap: 8px"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+select[style*="padding: 8px 12px"] {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 13px;
+    min-width: 160px;
+    background: white;
+    min-height: 36px;
+}
+
+@media (max-width: 768px) {
+    div[style*="display: flex; align-items: center; gap: 8px"] {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    select[style*="padding: 8px 12px"] {
+        min-width: 200px;
+        padding: 10px 12px;
+        font-size: 14px;
+        min-height: 40px;
+    }
+}
+
+@media (max-width: 576px) {
+    select[style*="padding: 8px 12px"] {
+        min-width: 100%;
+        padding: 12px;
+        font-size: 16px; /* Prevent zoom on iOS */
+        min-height: 44px;
+    }
+}
+
+/* =========================================================
+   TEXT AREAS RESPONSIVE
+========================================================= */
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 80px;
+}
+
+@media (max-width: 768px) {
+    textarea.form-control {
+        min-height: 70px;
+        padding: 12px 14px;
+    }
+}
+
+@media (max-width: 576px) {
+    textarea.form-control {
+        min-height: 60px;
+        padding: 10px 12px;
+    }
+}
+
+/* =========================================================
+   HELPER TEXT RESPONSIVE
+========================================================= */
+
+.text-muted,
+p[style*="font-size: 12px"],
+p[style*="font-size: 13px"] {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+    .text-muted,
+    p[style*="font-size: 12px"],
+    p[style*="font-size: 13px"] {
+        font-size: 12px;
+        margin-top: 6px;
+    }
+}
+
+@media (max-width: 576px) {
+    .text-muted,
+    p[style*="font-size: 12px"],
+    p[style*="font-size: 13px"] {
+        font-size: 11px;
+        margin-top: 4px;
+    }
+}
+
+/* =========================================================
+   CLEARFIX RESPONSIVE
+========================================================= */
+
+div[style*="clear: both"] {
+    clear: both;
+}
+
+@media (max-width: 768px) {
+    div[style*="clear: both"] {
+        margin-top: 10px;
+    }
+}
+
+/* =========================================================
+   TOUCH OPTIMIZATIONS
+========================================================= */
+
+@media (hover: none) and (pointer: coarse) {
+    .scope-tab,
+    .emission-category,
+    .btn-calculate,
+    .btn-add-supplier,
+    .btn-add-industry,
+    .activity-input button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .form-control,
+    select {
+        min-height: 44px;
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+    
+    /* Remove hover effects on touch devices */
+    .emission-category:hover,
+    .btn-calculate:hover,
+    .activity-input button:hover {
+        transform: none;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY IMPROVEMENTS
+========================================================= */
+
+/* Focus styles */
+.scope-tab:focus,
+.emission-category:focus,
+.btn-calculate:focus,
+.btn-add-supplier:focus,
+.btn-add-industry:focus {
+    outline: 2px solid #22c55e;
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .scope-tab,
+    .emission-category,
+    .btn-calculate,
+    .activity-input button {
+        transition: none;
+    }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+    .form-card,
+    .emission-category {
+        border: 2px solid #000;
+    }
+    
+    .btn-calculate,
+    .btn-add-supplier,
+    .btn-add-industry {
+        border: 2px solid #000;
+    }
+}
+
+/* =========================================================
+   PRINT STYLES
+========================================================= */
+
+@media print {
+    .scope-tabs {
+        display: none;
+    }
+    
+    .scope-content {
+        display: block !important;
+    }
+    
+    .btn-calculate,
+    .btn-add-supplier,
+    .btn-add-industry {
+        display: none;
+    }
+    
+    .form-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+    
+    .emission-category {
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}

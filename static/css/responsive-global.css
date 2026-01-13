@@ -1,0 +1,740 @@
+/* =========================================================
+   GLOBAL RESPONSIVE DESIGN SYSTEM
+   Academia Carbon - Complete Website Responsiveness
+========================================================= */
+
+/* =========================================================
+   ROOT VARIABLES & BASE SETUP
+========================================================= */
+:root {
+    /* Breakpoints */
+    --breakpoint-xs: 360px;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-xxl: 1400px;
+    
+    /* Spacing Scale */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-xxl: 48px;
+    
+    /* Typography Scale */
+    --text-xs: 12px;
+    --text-sm: 14px;
+    --text-base: 16px;
+    --text-lg: 18px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
+    --text-3xl: 30px;
+    --text-4xl: 36px;
+    
+    /* Container Widths */
+    --container-sm: 540px;
+    --container-md: 720px;
+    --container-lg: 960px;
+    --container-xl: 1140px;
+    --container-xxl: 1320px;
+}
+
+/* =========================================================
+   GLOBAL RESPONSIVE UTILITIES
+========================================================= */
+
+/* Container System */
+.container-responsive {
+    width: 100%;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 576px) {
+    .container-responsive {
+        max-width: var(--container-sm);
+        padding-left: var(--space-lg);
+        padding-right: var(--space-lg);
+    }
+}
+
+@media (min-width: 768px) {
+    .container-responsive {
+        max-width: var(--container-md);
+        padding-left: var(--space-xl);
+        padding-right: var(--space-xl);
+    }
+}
+
+@media (min-width: 992px) {
+    .container-responsive {
+        max-width: var(--container-lg);
+    }
+}
+
+@media (min-width: 1200px) {
+    .container-responsive {
+        max-width: var(--container-xl);
+    }
+}
+
+@media (min-width: 1400px) {
+    .container-responsive {
+        max-width: var(--container-xxl);
+    }
+}
+
+/* Grid System */
+.grid-responsive {
+    display: grid;
+    gap: var(--space-md);
+}
+
+.grid-1 { grid-template-columns: 1fr; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 768px) {
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .grid-3,
+    .grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Flexbox Utilities */
+.flex-responsive {
+    display: flex;
+    gap: var(--space-md);
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-column-mobile {
+    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+    .flex-column-mobile {
+        flex-direction: column;
+    }
+}
+
+/* =========================================================
+   TYPOGRAPHY RESPONSIVE
+========================================================= */
+.text-responsive-xs { font-size: var(--text-xs); }
+.text-responsive-sm { font-size: var(--text-sm); }
+.text-responsive-base { font-size: var(--text-base); }
+.text-responsive-lg { font-size: var(--text-lg); }
+.text-responsive-xl { font-size: var(--text-xl); }
+.text-responsive-2xl { font-size: var(--text-2xl); }
+.text-responsive-3xl { font-size: var(--text-3xl); }
+.text-responsive-4xl { font-size: var(--text-4xl); }
+
+/* Responsive Headings */
+.heading-responsive-1 {
+    font-size: var(--text-4xl);
+    line-height: 1.2;
+}
+
+.heading-responsive-2 {
+    font-size: var(--text-3xl);
+    line-height: 1.3;
+}
+
+.heading-responsive-3 {
+    font-size: var(--text-2xl);
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .heading-responsive-1 {
+        font-size: var(--text-3xl);
+    }
+    
+    .heading-responsive-2 {
+        font-size: var(--text-2xl);
+    }
+    
+    .heading-responsive-3 {
+        font-size: var(--text-xl);
+    }
+}
+
+@media (max-width: 576px) {
+    .heading-responsive-1 {
+        font-size: var(--text-2xl);
+    }
+    
+    .heading-responsive-2 {
+        font-size: var(--text-xl);
+    }
+    
+    .heading-responsive-3 {
+        font-size: var(--text-lg);
+    }
+}
+
+/* =========================================================
+   BUTTON RESPONSIVE SYSTEM
+========================================================= */
+.btn-responsive {
+    padding: 12px 24px;
+    font-size: var(--text-base);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 44px; /* Touch-friendly */
+    text-decoration: none;
+}
+
+.btn-responsive-sm {
+    padding: 8px 16px;
+    font-size: var(--text-sm);
+    min-height: 36px;
+}
+
+.btn-responsive-lg {
+    padding: 16px 32px;
+    font-size: var(--text-lg);
+    min-height: 52px;
+}
+
+@media (max-width: 768px) {
+    .btn-responsive {
+        padding: 14px 20px;
+        font-size: var(--text-sm);
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .btn-responsive-sm {
+        padding: 10px 16px;
+        font-size: var(--text-xs);
+    }
+    
+    .btn-responsive-lg {
+        padding: 18px 24px;
+        font-size: var(--text-base);
+    }
+}
+
+@media (max-width: 576px) {
+    .btn-responsive {
+        padding: 12px 16px;
+        font-size: var(--text-sm);
+    }
+}
+
+/* =========================================================
+   FORM RESPONSIVE SYSTEM
+========================================================= */
+.form-responsive {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+}
+
+.form-group-responsive {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+}
+
+.form-row-responsive {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    .form-row-responsive {
+        grid-template-columns: 1fr;
+    }
+}
+
+.input-responsive {
+    padding: 12px 16px;
+    font-size: var(--text-base);
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    min-height: 44px; /* Touch-friendly */
+}
+
+.input-responsive:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+@media (max-width: 768px) {
+    .input-responsive {
+        padding: 14px 16px;
+        font-size: var(--text-base); /* Keep 16px to prevent zoom on iOS */
+    }
+}
+
+.label-responsive {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: #374151;
+}
+
+@media (max-width: 768px) {
+    .label-responsive {
+        font-size: var(--text-sm);
+    }
+}
+
+/* =========================================================
+   TABLE RESPONSIVE SYSTEM
+========================================================= */
+.table-responsive-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.table-responsive {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Minimum width before horizontal scroll */
+}
+
+.table-responsive th,
+.table-responsive td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.table-responsive th {
+    background: #f9fafb;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: #374151;
+}
+
+.table-responsive td {
+    font-size: var(--text-sm);
+}
+
+@media (max-width: 768px) {
+    .table-responsive th,
+    .table-responsive td {
+        padding: 8px;
+        font-size: var(--text-xs);
+    }
+    
+    .table-responsive {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: 576px) {
+    .table-responsive th,
+    .table-responsive td {
+        padding: 6px;
+    }
+    
+    .table-responsive {
+        min-width: 400px;
+    }
+}
+
+/* =========================================================
+   CARD RESPONSIVE SYSTEM
+========================================================= */
+.card-responsive {
+    background: white;
+    border-radius: 12px;
+    padding: var(--space-xl);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+    .card-responsive {
+        padding: var(--space-lg);
+        border-radius: 8px;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-responsive {
+        padding: var(--space-md);
+        border-radius: 6px;
+    }
+}
+
+.card-header-responsive {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-lg);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+@media (max-width: 768px) {
+    .card-header-responsive {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+}
+
+/* =========================================================
+   NAVIGATION RESPONSIVE SYSTEM
+========================================================= */
+.nav-responsive {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-md) var(--space-xl);
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.nav-brand-responsive {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    text-decoration: none;
+    color: #111827;
+}
+
+.nav-links-responsive {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link-responsive {
+    color: #6b7280;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-link-responsive:hover {
+    color: #10b981;
+}
+
+.nav-toggle-responsive {
+    display: none;
+    background: none;
+    border: none;
+    font-size: var(--text-xl);
+    cursor: pointer;
+    color: #374151;
+}
+
+@media (max-width: 992px) {
+    .nav-responsive {
+        padding: var(--space-md) var(--space-lg);
+    }
+    
+    .nav-links-responsive {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        padding: var(--space-lg);
+        border-bottom: 1px solid #e5e7eb;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .nav-links-responsive.active {
+        display: flex;
+    }
+    
+    .nav-toggle-responsive {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-responsive {
+        padding: var(--space-md);
+    }
+    
+    .nav-brand-responsive {
+        font-size: var(--text-base);
+        gap: var(--space-sm);
+    }
+}
+
+/* =========================================================
+   MODAL RESPONSIVE SYSTEM
+========================================================= */
+.modal-responsive {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: var(--space-lg);
+}
+
+.modal-content-responsive {
+    background: white;
+    border-radius: 12px;
+    padding: var(--space-xl);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+    .modal-responsive {
+        padding: var(--space-md);
+        align-items: flex-start;
+        padding-top: var(--space-xl);
+    }
+    
+    .modal-content-responsive {
+        padding: var(--space-lg);
+        border-radius: 8px;
+        max-height: 85vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .modal-responsive {
+        padding: var(--space-sm);
+        padding-top: var(--space-lg);
+    }
+    
+    .modal-content-responsive {
+        padding: var(--space-md);
+        border-radius: 6px;
+        max-height: 80vh;
+    }
+}
+
+/* =========================================================
+   SPACING RESPONSIVE UTILITIES
+========================================================= */
+.spacing-responsive-xs { margin: var(--space-xs); }
+.spacing-responsive-sm { margin: var(--space-sm); }
+.spacing-responsive-md { margin: var(--space-md); }
+.spacing-responsive-lg { margin: var(--space-lg); }
+.spacing-responsive-xl { margin: var(--space-xl); }
+.spacing-responsive-xxl { margin: var(--space-xxl); }
+
+.padding-responsive-xs { padding: var(--space-xs); }
+.padding-responsive-sm { padding: var(--space-sm); }
+.padding-responsive-md { padding: var(--space-md); }
+.padding-responsive-lg { padding: var(--space-lg); }
+.padding-responsive-xl { padding: var(--space-xl); }
+.padding-responsive-xxl { padding: var(--space-xxl); }
+
+/* Margin utilities */
+.mt-responsive-sm { margin-top: var(--space-sm); }
+.mt-responsive-md { margin-top: var(--space-md); }
+.mt-responsive-lg { margin-top: var(--space-lg); }
+.mt-responsive-xl { margin-top: var(--space-xl); }
+
+.mb-responsive-sm { margin-bottom: var(--space-sm); }
+.mb-responsive-md { margin-bottom: var(--space-md); }
+.mb-responsive-lg { margin-bottom: var(--space-lg); }
+.mb-responsive-xl { margin-bottom: var(--space-xl); }
+
+/* =========================================================
+   VISIBILITY UTILITIES
+========================================================= */
+.hide-mobile {
+    display: block;
+}
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none;
+    }
+    
+    .show-mobile {
+        display: block;
+    }
+}
+
+.hide-tablet {
+    display: block;
+}
+
+.show-tablet {
+    display: none;
+}
+
+@media (min-width: 769px) and (max-width: 992px) {
+    .hide-tablet {
+        display: none;
+    }
+    
+    .show-tablet {
+        display: block;
+    }
+}
+
+.hide-desktop {
+    display: block;
+}
+
+.show-desktop {
+    display: none;
+}
+
+@media (min-width: 993px) {
+    .hide-desktop {
+        display: none;
+    }
+    
+    .show-desktop {
+        display: block;
+    }
+}
+
+/* =========================================================
+   TOUCH OPTIMIZATIONS
+========================================================= */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device optimizations */
+    .btn-responsive,
+    .input-responsive,
+    .nav-link-responsive {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Larger tap targets */
+    .clickable-responsive {
+        min-height: 44px;
+        min-width: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Remove hover effects on touch devices */
+    .btn-responsive:hover,
+    .card-responsive:hover,
+    .nav-link-responsive:hover {
+        transform: none;
+    }
+}
+
+/* =========================================================
+   PRINT STYLES
+========================================================= */
+@media print {
+    .hide-print {
+        display: none !important;
+    }
+    
+    .show-print {
+        display: block !important;
+    }
+    
+    .card-responsive {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    .btn-responsive {
+        border: 1px solid #ccc;
+        background: white !important;
+        color: black !important;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY IMPROVEMENTS
+========================================================= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus styles for keyboard navigation */
+.btn-responsive:focus,
+.input-responsive:focus,
+.nav-link-responsive:focus {
+    outline: 2px solid #10b981;
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .card-responsive {
+        border: 2px solid #000;
+    }
+    
+    .btn-responsive {
+        border: 2px solid #000;
+    }
+}
+
+/* =========================================================
+   DARK MODE SUPPORT (OPTIONAL)
+========================================================= */
+@media (prefers-color-scheme: dark) {
+    .card-responsive {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f9fafb;
+    }
+    
+    .input-responsive {
+        background: #374151;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+    
+    .nav-responsive {
+        background: #1f2937;
+        border-color: #374151;
+    }
+}
