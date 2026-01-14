@@ -313,6 +313,11 @@ DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@academiacarbo
 # Admin notification emails
 ADMIN_NOTIFICATION_EMAILS = config('ADMIN_NOTIFICATION_EMAILS', default='admin@academiacarbon.com').split(',')
 
+# Google reCAPTCHA v3 Configuration
+RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY', default='')
+RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY', default='')
+RECAPTCHA_ENABLED = config('RECAPTCHA_ENABLED', default='True') == 'True'
+
 # Site configuration
 SITE_NAME = 'Academia Carbon'
 SITE_URL = config('SITE_URL', default='https://academia-carbon.onrender.com' if not DEBUG else 'http://127.0.0.1:8000')

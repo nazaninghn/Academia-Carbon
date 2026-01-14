@@ -4,6 +4,10 @@
 
 {% block page_title %}{% trans "Dashboard" %}{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard-modern.css' %}">
+{% endblock %}
+
 {% block header_actions %}
 <!-- Dashboard specific actions -->
 <div style="display: flex; align-items: center; gap: 15px;">
@@ -29,9 +33,9 @@
 
 <!-- Welcome Section -->
 <div class="mb-8">
-    <div style="background: white; border-radius: 12px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">{% trans "Welcome back!" %} 👋</h2>
-        <p class="text-gray-600">{% trans "Here's what's happening with your carbon emissions today." %}</p>
+    <div class="welcome-card">
+        <h2>{% trans "Welcome back!" %} 👋</h2>
+        <p>{% trans "Here's what's happening with your carbon emissions today." %}</p>
     </div>
 </div>
 
@@ -105,21 +109,25 @@
 <div class="grid grid-cols-2 gap-6 mb-8">
     <div class="card">
         <div class="card-header">
-            <h3 class="text-lg font-semibold text-gray-900">{% trans "Emissions by Scope" %}</h3>
-            <p class="text-sm text-gray-600">{% trans "Distribution across Scope 1, 2, and 3" %}</p>
+            <h3>{% trans "Emissions by Scope" %}</h3>
+            <p>{% trans "Distribution across Scope 1, 2, and 3" %}</p>
         </div>
         <div class="card-body">
-            <canvas id="scopeChart" width="400" height="200"></canvas>
+            <div class="chart-container">
+                <canvas id="scopeChart"></canvas>
+            </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="text-lg font-semibold text-gray-900">{% trans "Monthly Trends" %}</h3>
-            <p class="text-sm text-gray-600">{% trans "Emission trends over the last 6 months" %}</p>
+            <h3>{% trans "Monthly Trends" %}</h3>
+            <p>{% trans "Emission trends over the last 6 months" %}</p>
         </div>
         <div class="card-body">
-            <canvas id="trendsChart" width="400" height="200"></canvas>
+            <div class="chart-container">
+                <canvas id="trendsChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -127,8 +135,8 @@
 <!-- Quick Actions -->
 <div class="card mb-8">
     <div class="card-header">
-        <h2 class="text-xl font-semibold text-gray-900">{% trans "Quick Actions" %}</h2>
-        <p class="text-sm text-gray-600">{% trans "Get started with common tasks" %}</p>
+        <h2>{% trans "Quick Actions" %}</h2>
+        <p>{% trans "Get started with common tasks" %}</p>
     </div>
     <div class="card-body">
         <div class="grid grid-cols-2 gap-4">
@@ -156,35 +164,35 @@
 <div class="grid grid-cols-2 gap-6">
     <div class="card">
         <div class="card-header">
-            <h3 class="text-lg font-semibold text-gray-900">{% trans "Recent Activity" %}</h3>
+            <h3>{% trans "Recent Activity" %}</h3>
         </div>
         <div class="card-body">
             <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-plus text-green-600 text-sm"></i>
+                <div class="activity-item">
+                    <div class="activity-icon green">
+                        <i class="fas fa-plus"></i>
                     </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">{% trans "New emission record added" %}</p>
-                        <p class="text-xs text-gray-500">{% trans "2 hours ago" %}</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-file-alt text-blue-600 text-sm"></i>
-                    </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">{% trans "Report generated" %}</p>
-                        <p class="text-xs text-gray-500">{% trans "1 day ago" %}</p>
+                    <div class="activity-content">
+                        <p class="activity-title">{% trans "New emission record added" %}</p>
+                        <p class="activity-time">{% trans "2 hours ago" %}</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-chart-line text-purple-600 text-sm"></i>
+                <div class="activity-item">
+                    <div class="activity-icon blue">
+                        <i class="fas fa-file-alt"></i>
                     </div>
-                    <div class="flex-1">
-                        <p class="text-sm font-medium text-gray-900">{% trans "Analysis completed" %}</p>
-                        <p class="text-xs text-gray-500">{% trans "3 days ago" %}</p>
+                    <div class="activity-content">
+                        <p class="activity-title">{% trans "Report generated" %}</p>
+                        <p class="activity-time">{% trans "1 day ago" %}</p>
+                    </div>
+                </div>
+                <div class="activity-item">
+                    <div class="activity-icon purple">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="activity-content">
+                        <p class="activity-title">{% trans "Analysis completed" %}</p>
+                        <p class="activity-time">{% trans "3 days ago" %}</p>
                     </div>
                 </div>
             </div>
@@ -193,25 +201,25 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="text-lg font-semibold text-gray-900">{% trans "Tips & Insights" %}</h3>
+            <h3>{% trans "Tips & Insights" %}</h3>
         </div>
         <div class="card-body">
             <div class="space-y-4">
-                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
-                    <div class="flex items-start gap-3">
-                        <i class="fas fa-lightbulb text-green-600 mt-1"></i>
-                        <div>
-                            <h4 class="text-sm font-semibold text-green-900">{% trans "Reduce Scope 2 Emissions" %}</h4>
-                            <p class="text-xs text-green-700 mt-1">{% trans "Consider switching to renewable energy sources to lower your electricity-based emissions." %}</p>
+                <div class="tip-card green">
+                    <div class="tip-header">
+                        <i class="fas fa-lightbulb tip-icon"></i>
+                        <div class="tip-content">
+                            <h4>{% trans "Reduce Scope 2 Emissions" %}</h4>
+                            <p>{% trans "Consider switching to renewable energy sources to lower your electricity-based emissions." %}</p>
                         </div>
                     </div>
                 </div>
-                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <div class="flex items-start gap-3">
-                        <i class="fas fa-chart-bar text-blue-600 mt-1"></i>
-                        <div>
-                            <h4 class="text-sm font-semibold text-blue-900">{% trans "Track Progress" %}</h4>
-                            <p class="text-xs text-blue-700 mt-1">{% trans "Set monthly targets and monitor your emission reduction progress over time." %}</p>
+                <div class="tip-card blue">
+                    <div class="tip-header">
+                        <i class="fas fa-chart-bar tip-icon"></i>
+                        <div class="tip-content">
+                            <h4>{% trans "Track Progress" %}</h4>
+                            <p>{% trans "Set monthly targets and monitor your emission reduction progress over time." %}</p>
                         </div>
                     </div>
                 </div>
@@ -323,7 +331,8 @@ function updateScopeChart(scopeData) {
     
     const labels = scopeData.map(item => item.scope);
     const values = scopeData.map(item => item.value_t);
-    const colors = ['#10b981', '#3b82f6', '#f59e0b'];
+    // Green theme colors matching landing page
+    const colors = ['#16a34a', '#22c55e', '#86efac'];
     
     scopeChart = new Chart(ctx, {
         type: 'doughnut',
@@ -332,8 +341,10 @@ function updateScopeChart(scopeData) {
             datasets: [{
                 data: values,
                 backgroundColor: colors,
-                borderWidth: 2,
-                borderColor: '#ffffff'
+                borderWidth: 3,
+                borderColor: '#ffffff',
+                hoverBorderWidth: 4,
+                hoverBorderColor: '#ffffff'
             }]
         },
         options: {
@@ -344,10 +355,29 @@ function updateScopeChart(scopeData) {
                     position: 'bottom',
                     labels: {
                         padding: 20,
-                        usePointStyle: true
+                        usePointStyle: true,
+                        font: {
+                            family: 'Inter',
+                            size: 13,
+                            weight: '600'
+                        },
+                        color: '#334155'
                     }
                 },
                 tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                    titleFont: {
+                        family: 'Inter',
+                        size: 14,
+                        weight: '700'
+                    },
+                    bodyFont: {
+                        family: 'Inter',
+                        size: 13,
+                        weight: '500'
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
                     callbacks: {
                         label: function(context) {
                             const percentage = ((context.parsed / values.reduce((a, b) => a + b, 0)) * 100).toFixed(1);
@@ -378,15 +408,19 @@ function updateTrendsChart(trendsData) {
             datasets: [{
                 label: 'Emissions (t CO₂e)',
                 data: values,
-                borderColor: '#10b981',
-                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderColor: '#16a34a',
+                backgroundColor: 'rgba(22, 163, 74, 0.1)',
                 borderWidth: 3,
                 fill: true,
                 tension: 0.4,
-                pointBackgroundColor: '#10b981',
+                pointBackgroundColor: '#16a34a',
                 pointBorderColor: '#ffffff',
-                pointBorderWidth: 2,
-                pointRadius: 6
+                pointBorderWidth: 3,
+                pointRadius: 6,
+                pointHoverRadius: 8,
+                pointHoverBackgroundColor: '#22c55e',
+                pointHoverBorderColor: '#ffffff',
+                pointHoverBorderWidth: 3
             }]
         },
         options: {
@@ -399,6 +433,19 @@ function updateTrendsChart(trendsData) {
                 tooltip: {
                     mode: 'index',
                     intersect: false,
+                    backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                    titleFont: {
+                        family: 'Inter',
+                        size: 14,
+                        weight: '700'
+                    },
+                    bodyFont: {
+                        family: 'Inter',
+                        size: 13,
+                        weight: '500'
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
                     callbacks: {
                         label: function(context) {
                             return `${context.parsed.y.toFixed(2)} t CO₂e`;
@@ -410,14 +457,29 @@ function updateTrendsChart(trendsData) {
                 x: {
                     grid: {
                         display: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 12,
+                            weight: '600'
+                        },
+                        color: '#64748b'
                     }
                 },
                 y: {
                     beginAtZero: true,
                     grid: {
-                        color: 'rgba(0, 0, 0, 0.1)'
+                        color: 'rgba(226, 232, 240, 0.8)',
+                        drawBorder: false
                     },
                     ticks: {
+                        font: {
+                            family: 'Inter',
+                            size: 12,
+                            weight: '600'
+                        },
+                        color: '#64748b',
                         callback: function(value) {
                             return value.toFixed(1) + ' t';
                         }

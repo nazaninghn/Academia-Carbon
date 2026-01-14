@@ -44,8 +44,8 @@ Responsive form fixes for all devices
 
 .form-control:focus {
     outline: none;
-    border-color: #10b981;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
 }
 
 .form-control:disabled {
@@ -71,12 +71,12 @@ Responsive form fixes for all devices
 }
 
 .btn-primary {
-    background: #10b981;
+    background: #16a34a;
     color: white;
 }
 
 .btn-primary:hover {
-    background: #059669;
+    background: #15803d;
 }
 
 .btn-secondary {
@@ -90,12 +90,12 @@ Responsive form fixes for all devices
 
 .btn-outline {
     background: transparent;
-    color: #10b981;
-    border: 1px solid #10b981;
+    color: #16a34a;
+    border: 1px solid #16a34a;
 }
 
 .btn-outline:hover {
-    background: #10b981;
+    background: #16a34a;
     color: white;
 }
 

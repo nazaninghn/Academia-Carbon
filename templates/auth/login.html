@@ -19,6 +19,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
+    <!-- Google reCAPTCHA v3 -->
+    {% if RECAPTCHA_ENABLED %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ RECAPTCHA_SITE_KEY }}"></script>
+    {% endif %}
+    
     <style>
         :root {
             /* Light carbon-themed colors - matching landing page */
@@ -663,8 +668,11 @@
                     {% endfor %}
                 {% endif %}
                 
-                <form method="post" action="{% url 'ghg:email_login' %}">
+                <form method="post" action="{% url 'ghg:email_login' %}" id="loginForm">
                     {% csrf_token %}
+                    
+                    <!-- Hidden field for reCAPTCHA token -->
+                    <input type="hidden" name="recaptcha_token" id="recaptchaToken">
                     
                     <div class="form-group">
                         <label class="form-label" for="id_username">
@@ -786,14 +794,40 @@
         
         // Form validation and UX improvements
         document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
+            const form = document.getElementById('loginForm');
             const submitBtn = document.querySelector('.btn-primary');
             
             if (form && submitBtn) {
-                form.addEventListener('submit', function() {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
                     submitBtn.classList.add('loading');
+                    submitBtn.disabled = true;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ' + 
                         (document.documentElement.lang === 'tr' ? 'Giriş yapılıyor...' : 'Signing in...');
+                    
+                    {% if RECAPTCHA_ENABLED %}
+                    // Execute reCAPTCHA v3
+                    grecaptcha.ready(function() {
+                        grecaptcha.execute('{{ RECAPTCHA_SITE_KEY }}', {action: 'login'}).then(function(token) {
+                            // Add token to form
+                            document.getElementById('recaptchaToken').value = token;
+                            // Submit form
+                            form.submit();
+                        }).catch(function(error) {
+                            console.error('reCAPTCHA error:', error);
+                            submitBtn.disabled = false;
+                            submitBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> ' + 
+                                (document.documentElement.lang === 'tr' ? 'Giriş Yap' : 'Sign In');
+                            alert(document.documentElement.lang === 'tr' ? 
+                                'Güvenlik doğrulaması başarısız. Lütfen tekrar deneyin.' : 
+                                'Security verification failed. Please try again.');
+                        });
+                    });
+                    {% else %}
+                    // If reCAPTCHA is disabled, submit directly
+                    form.submit();
+                    {% endif %}
                 });
             }
         });

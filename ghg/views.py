@@ -745,41 +745,155 @@ def report_extra_info_api(request):
 
 
 def email_login_view(request):
-    """Login view using email"""
+    """Login view using email with account lockout protection and reCAPTCHA"""
+    from .security import AccountLockout, get_client_ip, log_security_event
+    from .captcha import ReCaptchaValidator, get_recaptcha_context
+    
     if request.user.is_authenticated:
         return redirect('ghg:index')
+    
+    # Add reCAPTCHA context
+    context = get_recaptcha_context()
     
     if request.method == 'POST':
         form = EmailLoginForm(request.POST)
+        email = request.POST.get('username', '')  # username field contains email
+        client_ip = get_client_ip(request)
+        
+        # Validate reCAPTCHA first (if enabled)
+        recaptcha_token = request.POST.get('recaptcha_token', '')
+        if context.get('RECAPTCHA_ENABLED'):
+            if not ReCaptchaValidator.is_human(recaptcha_token, action='login', remote_ip=client_ip):
+                messages.error(
+                    request,
+                    '🤖 Security verification failed. Please try again.'
+                )
+                log_security_event('recaptcha_failed', email, f'IP: {client_ip}, Action: login')
+                context['form'] = form
+                return render(request, 'auth/login.html', context)
+        
+        # Check if account or IP is locked
+        if AccountLockout.is_locked(email) or AccountLockout.is_locked(client_ip):
+            remaining_time = max(
+                AccountLockout.get_lockout_time_remaining(email),
+                AccountLockout.get_lockout_time_remaining(client_ip)
+            )
+            minutes = remaining_time // 60
+            messages.error(
+                request,
+                f'🔒 Account temporarily locked due to too many failed login attempts. '
+                f'Please try again in {minutes} minutes.'
+            )
+            log_security_event('login_blocked', email, f'IP: {client_ip}')
+            context.update({
+                'form': form,
+                'locked': True,
+                'remaining_minutes': minutes
+            })
+            return render(request, 'auth/login.html', context)
+        
         if form.is_valid():
             user = form.get_user()
             if user:
+                # Successful login - reset failed attempts
+                AccountLockout.reset_failed_attempts(email)
+                AccountLockout.reset_failed_attempts(client_ip)
+                
                 login(request, user)
                 messages.success(request, f'Welcome back, {user.first_name or user.email}!')
+                log_security_event('login_success', email, f'IP: {client_ip}')
                 return redirect('ghg:index')
-        # If form is not valid, it will show the errors
+        else:
+            # Failed login - increment attempts
+            if email:
+                email_attempts = AccountLockout.increment_failed_attempts(email)
+                ip_attempts = AccountLockout.increment_failed_attempts(client_ip)
+                
+                attempts_remaining = AccountLockout.get_attempts_remaining(email)
+                
+                if attempts_remaining > 0:
+                    messages.error(
+                        request,
+                        f'⚠️ Invalid email or password. '
+                        f'You have {attempts_remaining} attempts remaining before account lockout.'
+                    )
+                
+                log_security_event(
+                    'login_failed',
+                    email,
+                    f'IP: {client_ip}, Attempts: {email_attempts}'
+                )
     else:
         form = EmailLoginForm()
     
-    return render(request, 'auth/login.html', {'form': form})
+    context['form'] = form
+    return render(request, 'auth/login.html', context)
+
+
+@login_required
+def security_status(request):
+    """Show security status for admin users"""
+    if not request.user.is_staff:
+        return HttpResponseForbidden("Access denied")
+    
+    from .security import AccountLockout, get_client_ip
+    from django.core.cache import cache
+    
+    # Get all locked accounts from cache
+    locked_accounts = []
+    failed_attempts = []
+    
+    # This is a simplified version - in production, you'd want to store this in DB
+    context = {
+        'locked_accounts': locked_accounts,
+        'failed_attempts': failed_attempts,
+        'active_menu': 'security',
+    }
+    
+    return render(request, 'security_status.html', context)
 
 
 def email_signup_view(request):
-    """Signup view using email"""
+    """Signup view using email with reCAPTCHA protection"""
+    from .captcha import ReCaptchaValidator, get_recaptcha_context
+    from .security import get_client_ip, log_security_event
+    
     if request.user.is_authenticated:
         return redirect('ghg:index')
     
+    # Add reCAPTCHA context
+    context = get_recaptcha_context()
+    
     if request.method == 'POST':
         form = EmailSignupForm(request.POST)
+        client_ip = get_client_ip(request)
+        email = request.POST.get('email', '')
+        
+        # Validate reCAPTCHA first (if enabled)
+        recaptcha_token = request.POST.get('recaptcha_token', '')
+        if context.get('RECAPTCHA_ENABLED'):
+            if not ReCaptchaValidator.is_human(recaptcha_token, action='signup', remote_ip=client_ip):
+                messages.error(
+                    request,
+                    '🤖 Security verification failed. Please try again.'
+                )
+                log_security_event('recaptcha_failed', email, f'IP: {client_ip}, Action: signup')
+                context['form'] = form
+                return render(request, 'auth/signup.html', context)
+        
         if form.is_valid():
             user = form.save()
             login(request, user, backend='ghg.backends.EmailBackend')
             messages.success(request, 'Account created successfully! Welcome to Academia Carbon.')
+            log_security_event('signup_success', email, f'IP: {client_ip}')
             return redirect('ghg:index')
+        else:
+            log_security_event('signup_failed', email, f'IP: {client_ip}, Errors: {form.errors}')
     else:
         form = EmailSignupForm()
     
-    return render(request, 'auth/signup.html', {'form': form})
+    context['form'] = form
+    return render(request, 'auth/signup.html', context)
 
 
 def logout_view(request):

@@ -71,13 +71,13 @@ Responsive chart fixes for all devices
 
 .chart-btn:hover {
     background: #f9fafb;
-    border-color: #10b981;
+    border-color: #16a34a;
 }
 
 .chart-btn.active {
-    background: #10b981;
+    background: #16a34a;
     color: white;
-    border-color: #10b981;
+    border-color: #16a34a;
 }
 
 /* Chart legend */
