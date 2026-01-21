@@ -952,16 +952,24 @@
         }
         
         @media (max-width: 768px) {
-            /* Force pure white background for mobile */
+            /* Force pure white background for mobile - remove ALL green tints */
             body {
+                background: #ffffff !important;
+            }
+            
+            html {
                 background: #ffffff !important;
             }
             
             /* Clean Mobile Header */
             .header {
                 padding: 12px 0;
-                background: rgba(255, 255, 255, 0.98);
+                background: #ffffff !important;
                 box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            }
+            
+            .nav-container {
+                background: transparent !important;
             }
             
             .nav-container {
@@ -1029,6 +1037,22 @@
             
             .hero::after {
                 display: none !important;
+            }
+            
+            .hero-container {
+                background: transparent !important;
+            }
+            
+            .hero-content {
+                background: transparent !important;
+            }
+            
+            /* Force white backgrounds for all sections */
+            .features,
+            .cta,
+            .contact,
+            section {
+                background: #ffffff !important;
             }
             
             .hero-container {
