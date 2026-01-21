@@ -428,7 +428,7 @@
     gap: 8px;
     padding: 6px 8px;
     font-size: 13px;
-    color: #10b981;
+    color: #16a34a;
     cursor: pointer;
     border-radius: 4px;
 }
@@ -937,7 +937,7 @@
 .scope-dropdown-btn:focus,
 .category-header:focus,
 .source-item:focus {
-    outline: 2px solid #10b981;
+    outline: 2px solid #16a34a;
     outline-offset: 2px;
 }
 

@@ -68,7 +68,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 1000;
-            padding: 20px 0;
+            padding: 12px 0;
             border-bottom: 1px solid var(--gray-200);
             transition: all 0.3s ease;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -98,25 +98,13 @@
         }
         
         .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
-            flex-shrink: 0;
-        }
-        
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 28px;
-            height: 28px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3.5" stroke="white" stroke-width="2" fill="none"/><circle cx="6" cy="6" r="2.5" fill="white" opacity="1"/><circle cx="18" cy="6" r="2.5" fill="white" opacity="1"/><circle cx="6" cy="18" r="2.5" fill="white" opacity="1"/><circle cx="18" cy="18" r="2.5" fill="white" opacity="1"/><line x1="8" y1="8" x2="10" y2="10" stroke="white" stroke-width="2" opacity="0.9"/><line x1="14" y1="10" x2="16" y2="8" stroke="white" stroke-width="2" opacity="0.9"/><line x1="8" y1="16" x2="10" y2="14" stroke="white" stroke-width="2" opacity="0.9"/><line x1="14" y1="14" x2="16" y2="16" stroke="white" stroke-width="2" opacity="0.9"/></svg>') no-repeat center;
+            width: 100px;
+            height: 100px;
+            background-image: url("{% static 'images/logo.png' %}");
             background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            flex-shrink: 0;
         }
         
         .logo-text {
@@ -152,7 +140,7 @@
             color: var(--gray-600);
             text-decoration: none;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 17px;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -271,11 +259,11 @@
         }
         
         .btn {
-            padding: 14px 28px;
+            padding: 16px 32px;
             border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 16px;
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
@@ -406,7 +394,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding: 120px 24px 80px;
+            padding: 140px 24px 80px;
             background: 
                 linear-gradient(135deg, var(--gray-50) 0%, var(--white) 50%, var(--gray-50) 100%),
                 radial-gradient(circle at 20% 20%, rgba(0, 200, 81, 0.05) 0%, transparent 50%),
@@ -1007,27 +995,8 @@
             }
             
             .logo-icon {
-                width: 40px;
-                height: 40px;
-                border-radius: 10px;
-                box-shadow: 0 4px 16px rgba(22, 163, 74, 0.5);
-            }
-            
-            .logo-icon::before {
-                width: 22px;
-                height: 22px;
-            }
-            
-            .logo-main {
-                font-size: 18px;
-                font-weight: 900;
-                color: #16a34a;
-            }
-            
-            .logo-sub {
-                font-size: 10px;
-                letter-spacing: 0.7px;
-                font-weight: 800;
+                width: 50px;
+                height: 50px;
             }
             
             /* Adjust Hero padding for mobile */
@@ -1562,10 +1531,6 @@
         <div class="nav-container">
             <a href="#" class="logo">
                 <div class="logo-icon"></div>
-                <div class="logo-text">
-                    <span class="logo-main">ACADEMIA</span>
-                    <span class="logo-sub">CARBON</span>
-                </div>
             </a>
             
             <nav class="nav-links">
@@ -1696,15 +1661,6 @@
     <section class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fas fa-calculator"></i>
-                    {% if LANGUAGE_CODE == 'tr' %}
-                        Karbon Hesaplama Platformu
-                    {% else %}
-                        Carbon Calculation Platform
-                    {% endif %}
-                </div>
-                
                 <h1>
                     {% if LANGUAGE_CODE == 'tr' %}
                         Profesyonel <span class="highlight">Karbon Hesaplama</span> Platformu
@@ -1738,39 +1694,6 @@
                             View Demo
                         {% endif %}
                     </a>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="stat-card">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">
-                            {% if LANGUAGE_CODE == 'tr' %}
-                                Şirket
-                            {% else %}
-                                Companies
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2.5M</div>
-                        <div class="stat-label">
-                            {% if LANGUAGE_CODE == 'tr' %}
-                                Ton CO₂
-                            {% else %}
-                                Tons CO₂
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">45%</div>
-                        <div class="stat-label">
-                            {% if LANGUAGE_CODE == 'tr' %}
-                                Azalma
-                            {% else %}
-                                Reduction
-                            {% endif %}
-                        </div>
-                    </div>
                 </div>
             </div>
             

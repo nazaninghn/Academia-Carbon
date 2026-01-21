@@ -62,75 +62,45 @@
             min-height: 100vh;
         }
 
-        /* Sidebar - Modern Green Theme */
+        /* Sidebar - Modern White Theme */
         .sidebar {
             width: 280px;
-            background: linear-gradient(180deg, var(--eco-green) 0%, var(--eco-dark) 100%);
+            background: linear-gradient(180deg, var(--white) 0%, var(--gray-50) 100%);
             padding: 24px 0;
             display: flex;
             flex-direction: column;
-            color: white;
+            color: var(--gray-900);
             position: fixed;
             left: 0;
             top: 0;
             bottom: 0;
             overflow-y: auto;
             z-index: 100;
-            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+            border-right: 1px solid var(--gray-200);
         }
 
         .sidebar-logo {
-            padding: 0 24px 24px 24px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            margin-bottom: 24px;
-        }
-
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
+            padding: 8px 24px 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--gray-200);
+            margin-bottom: 16px;
         }
 
-        .logo-icon::before {
-            content: '';
-            position: absolute;
-            width: 26px;
-            height: 26px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="3.5" stroke="white" stroke-width="2" fill="none"/><circle cx="6" cy="6" r="2.5" fill="white" opacity="1"/><circle cx="18" cy="6" r="2.5" fill="white" opacity="1"/><circle cx="6" cy="18" r="2.5" fill="white" opacity="1"/><circle cx="18" cy="18" r="2.5" fill="white" opacity="1"/><line x1="8" y1="8" x2="10" y2="10" stroke="white" stroke-width="2" opacity="0.9"/><line x1="14" y1="10" x2="16" y2="8" stroke="white" stroke-width="2" opacity="0.9"/><line x1="8" y1="16" x2="10" y2="14" stroke="white" stroke-width="2" opacity="0.9"/><line x1="14" y1="14" x2="16" y2="16" stroke="white" stroke-width="2" opacity="0.9"/></svg>') no-repeat center;
-            background-size: contain;
-        }
-
-        .logo-text h2 {
-            font-size: 18px;
-            font-weight: 800;
-            margin: 0;
-            color: white;
-            letter-spacing: -0.5px;
-            line-height: 1.1;
-        }
-
-        .logo-text p {
-            font-size: 10px;
-            margin: 0;
-            opacity: 0.85;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-            font-weight: 700;
+        .logo-icon {
+            width: 140px;
+            height: 140px;
+            background-image: url("{% static 'images/logo.png' %}");
+            background-size: 130%;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .data-entry-btn {
-            background: rgba(255, 255, 255, 0.95);
-            color: var(--eco-green);
+            background: linear-gradient(135deg, var(--eco-green) 0%, var(--eco-light) 100%);
+            color: white;
             border: none;
             padding: 16px 24px;
             border-radius: 12px;
@@ -144,21 +114,20 @@
             justify-content: center;
             gap: 10px;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
         }
 
         .data-entry-btn:hover {
-            background: white;
+            background: linear-gradient(135deg, var(--eco-dark) 0%, var(--eco-green) 100%);
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            color: var(--eco-dark);
+            box-shadow: 0 8px 20px rgba(22, 163, 74, 0.4);
         }
 
         .menu-label {
             padding: 0 24px;
             font-size: 11px;
             font-weight: 700;
-            color: rgba(255,255,255,0.6);
+            color: var(--gray-500);
             text-transform: uppercase;
             letter-spacing: 0.8px;
             margin-bottom: 12px;
@@ -185,7 +154,7 @@
             display: flex;
             align-items: center;
             padding: 14px 24px;
-            color: rgba(255,255,255,0.9);
+            color: var(--gray-700);
             text-decoration: none;
             transition: all 0.3s;
             font-size: 15px;
@@ -194,21 +163,20 @@
         }
 
         .sidebar-menu a:hover {
-            background: rgba(255,255,255,0.1);
-            color: white;
+            background: var(--eco-soft);
+            color: var(--eco-green);
         }
 
         .sidebar-menu a.active {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
+            background: linear-gradient(90deg, rgba(22, 163, 74, 0.1) 0%, rgba(22, 163, 74, 0.05) 100%);
+            color: var(--eco-green);
             font-weight: 700;
-            border-left: 4px solid white;
+            border-left: 4px solid var(--eco-green);
             padding-left: 20px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
         }
         
         .sidebar-menu a.active i {
-            color: #ffffff;
+            color: var(--eco-green);
         }
 
         .sidebar-menu i {
@@ -216,17 +184,17 @@
             margin-right: 12px;
             font-size: 18px;
             text-align: center;
-            opacity: 0.9;
+            color: var(--gray-600);
             transition: all 0.3s;
         }
         
         .sidebar-menu a:hover i {
-            opacity: 1;
+            color: var(--eco-green);
             transform: scale(1.1);
         }
         
         .sidebar-menu a.active i {
-            opacity: 1;
+            color: var(--eco-green);
             transform: scale(1.05);
         }
 
@@ -243,7 +211,7 @@
 
         .sidebar-divider {
             height: 1px;
-            background: rgba(255,255,255,0.15);
+            background: var(--gray-200);
             margin: 16px 24px;
         }
 
