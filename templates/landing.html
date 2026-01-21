@@ -952,6 +952,11 @@
         }
         
         @media (max-width: 768px) {
+            /* Force pure white background for mobile */
+            body {
+                background: #ffffff !important;
+            }
+            
             /* Clean Mobile Header */
             .header {
                 padding: 12px 0;
@@ -1014,10 +1019,15 @@
             /* Adjust Hero padding for mobile */
             .hero {
                 padding: 90px 16px 60px;
-                background: white !important;
+                background: #ffffff !important;
+                min-height: auto !important;
             }
             
             .hero::before {
+                display: none !important;
+            }
+            
+            .hero::after {
                 display: none !important;
             }
             
