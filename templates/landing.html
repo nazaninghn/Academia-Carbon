@@ -91,6 +91,8 @@
             gap: 16px;
             text-decoration: none;
             transition: transform 0.3s ease;
+            min-width: 100px;
+            min-height: 100px;
         }
         
         .logo:hover {
@@ -102,6 +104,8 @@
             height: 100px;
             object-fit: contain;
             flex-shrink: 0;
+            background: transparent;
+            display: block;
         }
         
         .logo-text {
@@ -1530,7 +1534,7 @@
     <header class="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="Academia Carbon" class="logo-icon">
+                <img src="{% static 'images/logo.png' %}" alt="Academia Carbon" class="logo-icon" loading="eager">
             </a>
             
             <nav class="nav-links">
