@@ -100,10 +100,7 @@
         .logo-icon {
             width: 100px;
             height: 100px;
-            background-image: url("{% static 'images/logo.png' %}");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            object-fit: contain;
             flex-shrink: 0;
         }
         
@@ -999,8 +996,7 @@
             .logo-icon {
                 width: 70px;
                 height: 70px;
-                display: block !important;
-                background-size: cover;
+                object-fit: contain;
             }
             
             /* Adjust Hero padding for mobile */
@@ -1534,7 +1530,7 @@
     <header class="header">
         <div class="nav-container">
             <a href="#" class="logo">
-                <div class="logo-icon"></div>
+                <img src="{% static 'images/logo.png' %}" alt="Academia Carbon" class="logo-icon">
             </a>
             
             <nav class="nav-links">
