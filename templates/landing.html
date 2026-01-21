@@ -993,17 +993,17 @@
                 flex-shrink: 0;
                 display: flex !important;
                 align-items: center;
-                background: white !important;
-                padding: 8px 12px !important;
-                border-radius: 12px !important;
-                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+                background: transparent !important;
+                padding: 0 !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
             }
             
             .logo-icon {
                 width: 70px !important;
                 height: 70px !important;
                 object-fit: contain !important;
-                background: white !important;
+                background: transparent !important;
                 display: block !important;
                 max-width: 70px !important;
                 max-height: 70px !important;
@@ -1014,6 +1014,11 @@
             /* Adjust Hero padding for mobile */
             .hero {
                 padding: 90px 16px 60px;
+                background: white !important;
+            }
+            
+            .hero::before {
+                display: none !important;
             }
             
             .hero-container {
