@@ -102,23 +102,20 @@ class CustomEmissionFactorAdmin(admin.ModelAdmin):
 
 @admin.register(MaterialRequest)
 class MaterialRequestAdmin(admin.ModelAdmin):
-    list_display = ['material_name', 'user', 'category', 'status_badge', 'created_at', 'reviewed_by']
-    list_filter = ['status', 'category', 'created_at']
-    search_fields = ['material_name', 'user__username', 'description']
-    readonly_fields = ['created_at', 'updated_at', 'reviewed_at']
+    list_display = ['name', 'user', 'request_type', 'status_badge', 'created_at']
+    list_filter = ['status', 'request_type', 'created_at']
+    search_fields = ['name', 'user__username', 'description']
+    readonly_fields = ['created_at', 'updated_at']
     
     fieldsets = (
         ('Request Information', {
-            'fields': ('user', 'material_name', 'category', 'description')
+            'fields': ('user', 'request_type', 'name', 'description')
         }),
-        ('User Suggestions', {
-            'fields': ('suggested_factor', 'suggested_unit', 'suggested_source')
+        ('Additional Information', {
+            'fields': ('additional_info',)
         }),
         ('Admin Review', {
-            'fields': ('status', 'admin_notes', 'reviewed_by', 'reviewed_at')
-        }),
-        ('System Integration', {
-            'fields': ('added_to_system', 'system_source_key')
+            'fields': ('status', 'admin_notes')
         }),
         ('Metadata', {
             'fields': ('created_at', 'updated_at'),
@@ -126,7 +123,7 @@ class MaterialRequestAdmin(admin.ModelAdmin):
         }),
     )
     
-    actions = ['approve_requests', 'reject_requests', 'mark_in_progress']
+    actions = ['approve_requests', 'reject_requests']
     
     def status_badge(self, obj):
         colors = {

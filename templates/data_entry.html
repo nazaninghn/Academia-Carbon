@@ -3082,5 +3082,131 @@ function updateCharCount(inputId, counterId, maxLength) {
         }
     }
 }
+
+// ========================================
+// REQUEST NEW MATERIAL - SIMPLE VERSION
+// ========================================
+function openRequestModal() {
+    document.getElementById('simpleRequestModal').style.display = 'flex';
+}
+
+function closeRequestModal() {
+    document.getElementById('simpleRequestModal').style.display = 'none';
+}
+
+function submitRequest() {
+    const name = document.getElementById('req-name').value.trim();
+    const category = document.getElementById('req-category').value;
+    const desc = document.getElementById('req-desc').value.trim();
+    
+    if (!name || !category || !desc) {
+        alert('Please fill in all required fields');
+        return;
+    }
+    
+    const data = {
+        material_name: name,
+        category: category,
+        description: desc,
+        suggested_factor: document.getElementById('req-factor').value || null,
+        suggested_unit: document.getElementById('req-unit').value || null,
+        suggested_source: document.getElementById('req-source').value.trim() || null
+    };
+    
+    fetch("{% url 'ghg:request_material' %}", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(d => {
+        if (d.success) {
+            alert('✅ Request submitted successfully!');
+            closeRequestModal();
+            // Clear form
+            document.getElementById('req-name').value = '';
+            document.getElementById('req-category').value = '';
+            document.getElementById('req-desc').value = '';
+            document.getElementById('req-factor').value = '';
+            document.getElementById('req-unit').value = '';
+            document.getElementById('req-source').value = '';
+        } else {
+            alert('❌ خطا: ' + (d.error || 'مشکلی پیش آمد'));
+        }
+    })
+    .catch(e => {
+        alert('❌ Error submitting request');
+        console.error(e);
+    });
+}
 </script>
+
+<!-- Floating Action Button -->
+<button onclick="openRequestModal()" style="position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: #3b82f6; color: white; border: none; box-shadow: 0 4px 12px rgba(59,130,246,0.4); cursor: pointer; z-index: 1000; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+    <i class="fas fa-paper-plane"></i>
+</button>
+
+<!-- Simple Request Modal -->
+<div id="simpleRequestModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="background: white; border-radius: 12px; padding: 30px; max-width: 500px; width: 90%; max-height: 90vh; overflow-y: auto;">
+        <h3 style="margin: 0 0 10px 0; color: #1e293b;">📝 Request New Material</h3>
+        <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;">Request materials that are not in the system</p>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Material Name *</label>
+            <input type="text" id="req-name" placeholder="e.g., Bamboo Fiber" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px;">
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Category *</label>
+            <select id="req-category" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px;">
+                <option value="">Select Category</option>
+                <option value="stationary">Stationary Combustion</option>
+                <option value="mobile">Mobile Combustion</option>
+                <option value="purchased-goods">Purchased Goods & Services</option>
+                <option value="waste">Waste</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600; font-size: 14px;">Description *</label>
+            <textarea id="req-desc" rows="3" placeholder="Why do you need this material?" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; resize: vertical;"></textarea>
+        </div>
+        
+        <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+            <p style="font-size: 13px; font-weight: 600; margin: 0 0 10px 0;">Optional Information</p>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px; font-size: 13px;">Suggested Emission Factor</label>
+                <input type="number" id="req-factor" step="0.0001" placeholder="1.5" style="width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px;">
+            </div>
+            
+            <div style="margin-bottom: 10px;">
+                <label style="display: block; margin-bottom: 5px; font-size: 13px;">Unit</label>
+                <select id="req-unit" style="width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px;">
+                    <option value="">Select Unit</option>
+                    <option value="kg">Kilograms</option>
+                    <option value="liters">Liters</option>
+                    <option value="m3">Cubic Meters</option>
+                    <option value="kwh">Kilowatt-hours</option>
+                </select>
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 5px; font-size: 13px;">Source</label>
+                <input type="text" id="req-source" placeholder="Where did you get this factor?" style="width: 100%; padding: 8px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 13px;">
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px;">
+            <button onclick="closeRequestModal()" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #e5e7eb; color: #374151; font-weight: 600; cursor: pointer;">Cancel</button>
+            <button onclick="submitRequest()" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: #3b82f6; color: white; font-weight: 600; cursor: pointer;">Submit Request</button>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

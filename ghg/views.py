@@ -996,16 +996,19 @@ def get_custom_factors(request):
 
 
 @login_required
+@csrf_protect
+@require_http_methods(["POST"])
+@ratelimit(key='user', rate='10/m', method='POST', block=True)
 def add_custom_factor(request):
     """API endpoint to add a custom emission factor"""
     from .models import CustomEmissionFactor
-    from .notifications import send_custom_factor_notification
+    from django.db import IntegrityError
     import json
     import logging
     
     logger = logging.getLogger(__name__)
     
-    if request.method == 'POST':
+    try:
         data = json.loads(request.body)
         
         name = data.get('material_name', '').strip() or data.get('name', '').strip()
@@ -1013,35 +1016,46 @@ def add_custom_factor(request):
         unit = data.get('unit', '').strip()
         category = data.get('category', '').strip()
         
+        # Validate required fields
         if not all([name, factor_value, unit, category]):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
         
+        # Validate factor value
         try:
             factor_value = float(factor_value)
+            if factor_value < 0:
+                return JsonResponse({'error': 'Emission factor cannot be negative'}, status=400)
+            if factor_value > 1000:
+                return JsonResponse({'error': 'Emission factor seems unreasonably high'}, status=400)
         except ValueError:
             return JsonResponse({'error': 'Invalid emission factor value'}, status=400)
+        
+        # Limit field lengths for security
+        name = name[:200]
+        category = category[:100]
+        unit = unit[:50]
+        description = data.get('description', '').strip()[:2000]
+        reference_source = (data.get('source_reference', '').strip() or data.get('reference_source', '').strip())[:500]
+        
+        # Check if custom factor with same name already exists for this user
+        if CustomEmissionFactor.objects.filter(user=request.user, name=name).exists():
+            return JsonResponse({
+                'error': f'A custom emission factor with the name "{name}" already exists. Please use a different name.'
+            }, status=400)
         
         # Create custom factor
         custom_factor = CustomEmissionFactor.objects.create(
             user=request.user,
             name=name,
             category=category,
-            description=data.get('description', ''),
+            description=description,
             factor_value=factor_value,
             unit=unit,
-            reference_source=data.get('source_reference', '') or data.get('reference_source', '')
+            reference_source=reference_source
         )
         
-        # Optional: notify admins about the new custom factor
-        try:
-            notification_sent = send_custom_factor_notification(custom_factor)
-            if notification_sent:
-                logger.info(f"Notification sent for custom factor: {name}")
-            else:
-                logger.warning(f"Notification not sent for custom factor: {name}")
-        except Exception as e:
-            logger.error(f"Error sending notification: {str(e)}")
-            # Don't fail the request if notification fails
+        logger.info(f"Custom factor created: {name} by user {request.user.id}")
+        security_logger.info(f"User {request.user.id} added custom emission factor: {name}")
         
         return JsonResponse({
             'success': True,
@@ -1053,59 +1067,99 @@ def add_custom_factor(request):
                 'category': custom_factor.category,
             }
         })
-    
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+        
+    except json.JSONDecodeError:
+        security_logger.warning(f"Invalid JSON from user {request.user.id} in add_custom_factor")
+        return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+    except IntegrityError as e:
+        logger.error(f"IntegrityError in add_custom_factor for user {request.user.id}: {str(e)}")
+        return JsonResponse({
+            'error': 'A custom emission factor with this name already exists. Please use a different name.'
+        }, status=400)
+    except Exception as e:
+        logger.error(f"Error adding custom factor for user {request.user.id}: {str(e)}")
+        security_logger.error(f"Error adding custom factor for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': f'Failed to add custom factor: {str(e)}'}, status=500)
 
 
 @login_required
+@csrf_protect
+@require_http_methods(["POST"])
 def request_new_material(request):
     """API endpoint to request a new material/source"""
     from .models import MaterialRequest
-    from .notifications import send_material_request_notification
     import json
     import logging
     
     logger = logging.getLogger(__name__)
     
-    if request.method == 'POST':
+    try:
         data = json.loads(request.body)
         
         material_name = data.get('material_name', '').strip()
         category = data.get('category', '').strip()
         description = data.get('description', '').strip()
         
+        # Validate required fields
         if not all([material_name, category, description]):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
+        
+        # Limit field lengths for security
+        material_name = material_name[:200]
+        category = category[:100]
+        description = description[:2000]
+        
+        # Get optional fields
+        suggested_factor = data.get('suggested_factor')
+        suggested_unit = data.get('suggested_unit', '').strip()[:50] if data.get('suggested_unit') else None
+        suggested_source = data.get('suggested_source', '').strip()[:500] if data.get('suggested_source') else None
+        
+        # Validate suggested factor if provided
+        if suggested_factor:
+            try:
+                suggested_factor = float(suggested_factor)
+                if suggested_factor < 0:
+                    return JsonResponse({'error': 'Suggested factor cannot be negative'}, status=400)
+            except (ValueError, TypeError):
+                suggested_factor = None
+        
+        # Build additional_info string
+        additional_parts = [f"Category: {category}"]
+        if suggested_factor:
+            factor_str = f"Suggested Factor: {suggested_factor}"
+            if suggested_unit:
+                factor_str += f" {suggested_unit}"
+            additional_parts.append(factor_str)
+        if suggested_source:
+            additional_parts.append(f"Source: {suggested_source}")
+        
+        additional_info = "\n".join(additional_parts)
         
         # Create material request
         material_request = MaterialRequest.objects.create(
             user=request.user,
-            material_name=material_name,
-            category=category,
+            request_type='material',
+            name=material_name,
             description=description,
-            suggested_factor=data.get('suggested_factor'),
-            suggested_unit=data.get('suggested_unit'),
-            suggested_source=data.get('suggested_source', '')
+            additional_info=additional_info
         )
         
-        # Send notification to admin
-        try:
-            notification_sent = send_material_request_notification(material_request)
-            if notification_sent:
-                logger.info(f"Notification sent for material request: {material_name}")
-            else:
-                logger.warning(f"Notification not sent for material request: {material_name}")
-        except Exception as e:
-            logger.error(f"Error sending notification: {str(e)}")
-            # Don't fail the request if notification fails
+        logger.info(f"Material request created: {material_name} by user {request.user.id}")
+        security_logger.info(f"User {request.user.id} requested new material: {material_name}")
         
         return JsonResponse({
             'success': True,
             'message': 'Your request has been submitted. Admin will review it soon.',
             'request_id': material_request.id
         })
-    
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+        
+    except json.JSONDecodeError:
+        security_logger.warning(f"Invalid JSON from user {request.user.id} in request_new_material")
+        return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+    except Exception as e:
+        logger.error(f"Error creating material request for user {request.user.id}: {str(e)}")
+        security_logger.error(f"Error creating material request for user {request.user.id}: {str(e)}")
+        return JsonResponse({'error': 'Failed to submit request'}, status=500)
 
 
 @login_required

@@ -210,9 +210,9 @@ class MaterialRequest(models.Model):
     ]
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='material_requests')
-    request_type = models.CharField(max_length=20, choices=REQUEST_TYPES)
-    name = models.CharField(max_length=200, help_text="Name of requested item")
-    description = models.TextField(help_text="Detailed description")
+    request_type = models.CharField(max_length=20, choices=REQUEST_TYPES, default='material')
+    name = models.CharField(max_length=200, help_text="Name of requested item", default='Unknown')
+    description = models.TextField(help_text="Detailed description", default='')
     
     # Security: Limit additional info length
     additional_info = models.TextField(
@@ -255,70 +255,6 @@ class MaterialRequest(models.Model):
         self.is_verified = True
         self.verified_by = admin_user
         self.verified_at = timezone.now()
-        self.save()
-
-
-class MaterialRequest(models.Model):
-    """Requests for new materials/sources not in the system"""
-    STATUS_CHOICES = [
-        ('pending', 'Pending Review'),
-        ('approved', 'Approved - Factor Added'),
-        ('rejected', 'Rejected'),
-        ('in_progress', 'In Progress'),
-    ]
-    
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='material_requests')
-    
-    # Material information
-    material_name = models.CharField(max_length=200, help_text="Name of requested material/source")
-    category = models.CharField(max_length=50, help_text="Category (e.g., purchased-goods, stationary)")
-    description = models.TextField(help_text="Description of the material and why it's needed")
-    
-    # User's information (if they have it)
-    suggested_factor = models.FloatField(blank=True, null=True, 
-                                        help_text="User's suggested emission factor (if known)")
-    suggested_unit = models.CharField(max_length=20, blank=True, null=True,
-                                     help_text="Suggested unit")
-    suggested_source = models.TextField(blank=True, null=True,
-                                       help_text="Source of suggested factor")
-    
-    # Admin response
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    admin_notes = models.TextField(blank=True, null=True, help_text="Admin notes/response")
-    reviewed_by = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True,
-                                   related_name='reviewed_requests')
-    reviewed_at = models.DateTimeField(blank=True, null=True)
-    
-    # If approved, link to the added factor
-    added_to_system = models.BooleanField(default=False)
-    system_source_key = models.CharField(max_length=100, blank=True, null=True,
-                                        help_text="Key in emission_factors.py if added to system")
-    
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        ordering = ['-created_at']
-        verbose_name = "Material Request"
-        verbose_name_plural = "Material Requests"
-    
-    def __str__(self):
-        return f"{self.material_name} - {self.get_status_display()}"
-    
-    def approve(self, admin_user, notes=''):
-        """Approve this request"""
-        self.status = 'approved'
-        self.reviewed_by = admin_user
-        self.reviewed_at = timezone.now()
-        self.admin_notes = notes
-        self.save()
-    
-    def reject(self, admin_user, notes=''):
-        """Reject this request"""
-        self.status = 'rejected'
-        self.reviewed_by = admin_user
-        self.reviewed_at = timezone.now()
-        self.admin_notes = notes
         self.save()
 
 
