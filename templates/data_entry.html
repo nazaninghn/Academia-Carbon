@@ -284,9 +284,13 @@
                         <textarea class="form-control" id="stationary-description" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
-                    <p class="text-muted" style="font-size: 13px;">
-                        {% trans "You can" %} <a href="#" style="color: #22c55e;">{% trans "add your proof document" %}</a> {% trans "here (i.e. gas bills)." %}
-                    </p>
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="stationary-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like gas bills, invoices, etc." %}
+                        </p>
+                    </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
@@ -360,6 +364,14 @@
                         <textarea class="form-control" id="mobile-description" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="mobile-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like fuel receipts, invoices, etc." %}
+                        </p>
+                    </div>
+
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
                 </div>
@@ -422,9 +434,13 @@
                         </small>
                     </div>
 
-                    <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
-                        You can <strong>{% trans 'add your proof document' %}</strong> here (i.e. gas bills).
-                    </p>
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="fugitive-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like maintenance records, etc." %}
+                        </p>
+                    </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
@@ -490,9 +506,13 @@
                         <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
-                    <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
-                    </p>
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="electricity-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like electricity bills, invoices, etc." %}
+                        </p>
+                    </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
@@ -552,9 +572,13 @@
                         <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
-                    <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
-                    </p>
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="steam-heat-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like energy bills, invoices, etc." %}
+                        </p>
+                    </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
@@ -659,9 +683,13 @@
                         <textarea class="form-control" rows="3" maxlength="100" placeholder="{% trans 'Add description' %}"></textarea>
                     </div>
 
-                    <p class="text-muted" style="font-size: 13px;">
-                        You can <a href="#" style="color: #22c55e;">{% trans 'add your proof document' %}</a> here (i.e. gas bills).
-                    </p>
+                    <div class="form-group">
+                        <label>{% trans "Proof Document (Optional)" %} <span class="text-muted">{% trans "PDF, DOC, DOCX - Max 10MB" %}</span></label>
+                        <input type="file" class="form-control" id="scope3-proof-document" accept=".pdf,.doc,.docx,.txt" style="padding: 8px;">
+                        <p class="text-muted" style="font-size: 12px; margin-top: 5px;">
+                            {% trans "Upload supporting documents like receipts, invoices, etc." %}
+                        </p>
+                    </div>
 
                     <button class="btn-calculate">{% trans "Calculate" %}</button>
                     <div style="clear: both;"></div>
