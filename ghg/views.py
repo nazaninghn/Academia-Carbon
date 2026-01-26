@@ -66,6 +66,8 @@ def calculate_emission(request):
     try:
         from .emission_factors import calculate_emissions
         from .models import EmissionRecord, Supplier
+        import logging
+        logger = logging.getLogger(__name__)
         
         data = json.loads(request.body)
         category = data.get('category')
@@ -77,6 +79,9 @@ def calculate_emission(request):
         fuel_name = data.get('fuel_name', '')
         supplier_id = data.get('supplier_id', None)
         save_record = data.get('save', True)
+        
+        # Debug logging
+        logger.info(f"Received calculation request - industry_type: '{industry_type}', supplier_id: '{supplier_id}'")
         
         # Security: Validate input data
         if activity_data < 0 or activity_data > 1000000:
@@ -913,52 +918,51 @@ def get_suppliers(request):
 
 
 @login_required
-def add_supplier(request):
-    """API endpoint to add a new supplier"""
+@require_http_methods(["POST"])
+@ratelimit(key='user', rate='10/m', method='POST', block=True)
+def add_supplier_detailed(request):
+    """API endpoint to add a new supplier with full details"""
     from .models import Supplier
     import json
     
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        name = data.get('name', '').strip()
-        
-        if not name:
-            return JsonResponse({'error': 'Supplier name is required'}, status=400)
-        
-        # Check if supplier already exists
-        if Supplier.objects.filter(user=request.user, name=name).exists():
-            return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
-        
-        # Combine phone code and number
-        phone_code = data.get('phone_code', '')
-        phone_number = data.get('phone', '')
-        full_phone = f"{phone_code} {phone_number}".strip() if phone_code and phone_number else phone_number
-        
-        supplier = Supplier.objects.create(
-            user=request.user,
-            name=name,
-            supplier_type=data.get('supplier_type') or None,
-            contact_person=data.get('contact_person') or None,
-            email=data.get('email') or None,
-            phone=full_phone or None,
-            country=data.get('country') or None,
-            city=data.get('city') or None,
-            tax_number=data.get('tax_number') or None,
-            website=data.get('website') or None,
-            address=data.get('address') or None,
-            notes=data.get('notes') or None
-        )
-        
-        return JsonResponse({
-            'success': True,
-            'supplier': {
-                'id': supplier.id,
-                'name': supplier.name,
-                'supplier_type': supplier.supplier_type
-            }
-        })
+    data = json.loads(request.body)
+    name = data.get('name', '').strip()
     
-    return JsonResponse({'error': 'Invalid request method'}, status=400)
+    if not name:
+        return JsonResponse({'error': 'Supplier name is required'}, status=400)
+    
+    # Check if supplier already exists
+    if Supplier.objects.filter(user=request.user, name=name).exists():
+        return JsonResponse({'error': 'Supplier with this name already exists'}, status=400)
+    
+    # Combine phone code and number
+    phone_code = data.get('phone_code', '')
+    phone_number = data.get('phone', '')
+    full_phone = f"{phone_code} {phone_number}".strip() if phone_code and phone_number else phone_number
+    
+    supplier = Supplier.objects.create(
+        user=request.user,
+        name=name,
+        supplier_type=data.get('supplier_type') or None,
+        contact_person=data.get('contact_person') or None,
+        email=data.get('email') or None,
+        phone=full_phone or None,
+        country=data.get('country') or None,
+        city=data.get('city') or None,
+        tax_number=data.get('tax_number') or None,
+        website=data.get('website') or None,
+        address=data.get('address') or None,
+        notes=data.get('notes') or None
+    )
+    
+    return JsonResponse({
+        'success': True,
+        'supplier': {
+            'id': supplier.id,
+            'name': supplier.name,
+            'supplier_type': supplier.supplier_type
+        }
+    })
 
 
 
@@ -1193,12 +1197,14 @@ def request_new_industry(request):
             }, status=400)
         
         # Check industry code if provided
-        industry_code = data.get('industry_code', '').strip() or None
+        industry_code = data.get('industry_code') or ''
+        industry_code = industry_code.strip() if industry_code else None
         if industry_code and len(industry_code) > 20:
             return JsonResponse({'error': 'Industry code cannot exceed 20 characters'}, status=400)
         
         # Check business context if provided
-        business_context = data.get('business_context', '').strip() or None
+        business_context = data.get('business_context') or ''
+        business_context = business_context.strip() if business_context else None
         if business_context and len(business_context) > 1000:
             return JsonResponse({'error': 'Business context cannot exceed 1000 characters'}, status=400)
         

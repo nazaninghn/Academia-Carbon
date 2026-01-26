@@ -1913,22 +1913,26 @@ document.querySelectorAll('.btn-calculate').forEach(btn => {
         this.disabled = true;
         
         // Calculate
+        const requestData = {
+            category: categoryType,
+            source: source,
+            activity_data: activityData,
+            country: country,
+            supplier_id: supplierId || null,
+            description: description,
+            industry_type: industryType || null,
+            fuel_name: fuelName || null
+        };
+        
+        console.log('Sending calculation request:', requestData);
+        
         fetch(window.location.pathname.replace('data-entry/', 'api/calculate/'), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': getCookie('csrftoken')
             },
-            body: JSON.stringify({
-                category: categoryType,
-                source: source,
-                activity_data: activityData,
-                country: country,
-                supplier_id: supplierId || null,
-                description: description,
-                industry_type: industryType || null,
-                fuel_name: fuelName || null
-            })
+            body: JSON.stringify(requestData)
         })
         .then(response => response.json())
         .then(data => {
@@ -2098,7 +2102,7 @@ function saveSupplier() {
         notes: document.getElementById('modal-notes').value.trim()
     };
     
-    fetch('/api/suppliers/add/', {
+    fetch(window.location.pathname.replace('data-entry/', 'api/suppliers/add/'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
