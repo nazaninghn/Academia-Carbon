@@ -998,7 +998,7 @@ def get_custom_factors(request):
 @login_required
 def add_custom_factor(request):
     """API endpoint to add a custom emission factor"""
-    from .models import CustomEmissionFactor, Supplier
+    from .models import CustomEmissionFactor
     from .notifications import send_custom_factor_notification
     import json
     import logging
@@ -1008,47 +1008,37 @@ def add_custom_factor(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         
-        material_name = data.get('material_name', '').strip()
-        emission_factor = data.get('emission_factor')
+        name = data.get('material_name', '').strip() or data.get('name', '').strip()
+        factor_value = data.get('emission_factor') or data.get('factor_value')
         unit = data.get('unit', '').strip()
         category = data.get('category', '').strip()
         
-        if not all([material_name, emission_factor, unit, category]):
+        if not all([name, factor_value, unit, category]):
             return JsonResponse({'error': 'Missing required fields'}, status=400)
         
         try:
-            emission_factor = float(emission_factor)
+            factor_value = float(factor_value)
         except ValueError:
             return JsonResponse({'error': 'Invalid emission factor value'}, status=400)
-        
-        # Get supplier if provided
-        supplier_id = data.get('supplier_id')
-        supplier_obj = None
-        if supplier_id:
-            try:
-                supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
-            except Supplier.DoesNotExist:
-                pass
         
         # Create custom factor
         custom_factor = CustomEmissionFactor.objects.create(
             user=request.user,
-            supplier=supplier_obj,
-            material_name=material_name,
+            name=name,
             category=category,
             description=data.get('description', ''),
-            emission_factor=emission_factor,
+            factor_value=factor_value,
             unit=unit,
-            source_reference=data.get('source_reference', '')
+            reference_source=data.get('source_reference', '') or data.get('reference_source', '')
         )
         
         # Optional: notify admins about the new custom factor
         try:
             notification_sent = send_custom_factor_notification(custom_factor)
             if notification_sent:
-                logger.info(f"Notification sent for custom factor: {material_name}")
+                logger.info(f"Notification sent for custom factor: {name}")
             else:
-                logger.warning(f"Notification not sent for custom factor: {material_name}")
+                logger.warning(f"Notification not sent for custom factor: {name}")
         except Exception as e:
             logger.error(f"Error sending notification: {str(e)}")
             # Don't fail the request if notification fails
@@ -1057,8 +1047,8 @@ def add_custom_factor(request):
             'success': True,
             'factor': {
                 'id': custom_factor.id,
-                'material_name': custom_factor.material_name,
-                'emission_factor': custom_factor.emission_factor,
+                'name': custom_factor.name,
+                'factor_value': custom_factor.factor_value,
                 'unit': custom_factor.unit,
                 'category': custom_factor.category,
             }
