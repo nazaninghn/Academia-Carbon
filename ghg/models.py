@@ -243,21 +243,6 @@ class MaterialRequest(models.Model):
     def get_scope_display_short(self):
         return f"Scope {self.scope}"
 
-
-# Note: CustomEmissionFactor model is defined above with proper security validation
-        verbose_name_plural = "Custom Emission Factors"
-    
-    def __str__(self):
-        return f"{self.material_name} - {self.emission_factor} kg CO2e/{self.unit}"
-    
-    def verify(self, admin_user):
-        """Verify this custom factor"""
-        self.is_verified = True
-        self.verified_by = admin_user
-        self.verified_at = timezone.now()
-        self.save()
-
-
 class ReportExtraInfo(models.Model):
     """Store additional organizational details for more complete ISO 14064-1 reports"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='report_extra_info')

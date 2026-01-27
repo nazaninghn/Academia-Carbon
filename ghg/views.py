@@ -11,6 +11,9 @@ from django.views.decorators.http import require_http_methods
 import logging
 import json
 
+# Import Arcjet simulation for enhanced security
+from .arcjet_simulation import arcjet_protect
+
 # PHASE 3 — RATE LIMIT (8️⃣ جلوگیری از brute-force)
 try:
     from django_ratelimit.decorators import ratelimit
@@ -61,6 +64,7 @@ def data_entry(request):
 @csrf_protect
 @require_http_methods(["POST"])
 @ratelimit(key='user', rate='30/m', method='POST', block=True)
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def calculate_emission(request):
     """Calculate emissions with security checks"""
     try:
@@ -253,6 +257,7 @@ def get_suppliers(request):
 @csrf_protect
 @require_http_methods(["POST"])
 @ratelimit(key='user', rate='10/m', method='POST', block=True)
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def add_supplier(request):
     """Add new supplier with validation"""
     try:
@@ -301,6 +306,7 @@ def add_supplier(request):
 
 # PHASE 3 — RATE LIMIT (8️⃣ جلوگیری از brute-force)
 @ratelimit(key="ip", rate="5/m", block=True)
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def login_view(request):
     """Login with rate limiting"""
     if request.method == 'POST':
@@ -749,6 +755,7 @@ def report_extra_info_api(request):
     return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def email_login_view(request):
     """Login view using email with account lockout protection and reCAPTCHA"""
     from .security import AccountLockout, get_client_ip, log_security_event
@@ -858,6 +865,7 @@ def security_status(request):
     return render(request, 'security_status.html', context)
 
 
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def email_signup_view(request):
     """Signup view using email with reCAPTCHA protection"""
     from .captcha import ReCaptchaValidator, get_recaptcha_context
@@ -999,6 +1007,7 @@ def get_custom_factors(request):
 @csrf_protect
 @require_http_methods(["POST"])
 @ratelimit(key='user', rate='10/m', method='POST', block=True)
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def add_custom_factor(request):
     """API endpoint to add a custom emission factor"""
     from .models import CustomEmissionFactor
@@ -1085,6 +1094,7 @@ def add_custom_factor(request):
 @login_required
 @csrf_protect
 @require_http_methods(["POST"])
+@arcjet_protect()  # Enhanced security with Arcjet simulation
 def request_new_material(request):
     """API endpoint to request a new material/source"""
     from .models import MaterialRequest

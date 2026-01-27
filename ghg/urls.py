@@ -75,6 +75,18 @@ urlpatterns = [
     path('api/emissions/data/', views.emissions_data_api, name='emissions_data_api'),
     path('api/emissions/export/', views.emissions_export_api, name='emissions_export_api'),
     
+    # Admin URLs - پنل مدیریت کاربران
+    path('admin-panel/', admin_views.admin_dashboard, name='admin_dashboard'),
+    path('admin-panel/users/', admin_views.user_list, name='admin_user_list'),
+    path('admin-panel/users/<int:user_id>/', admin_views.user_detail, name='admin_user_detail'),
+    path('admin-panel/activity/', admin_views.activity_monitor, name='admin_activity_monitor'),
+    path('admin-panel/files/', admin_views.file_manager, name='admin_file_manager'),
+    path('admin-panel/security-logs/', admin_views.security_logs, name='admin_security_logs'),
+    path('admin-panel/users/<int:user_id>/export/', admin_views.export_user_data, name='admin_export_user_data'),
+    path('admin-panel/users/<int:user_id>/toggle-status/', admin_views.toggle_user_status, name='admin_toggle_user_status'),
+    path('admin-panel/users/<int:user_id>/delete-data/', admin_views.delete_user_data, name='admin_delete_user_data'),
+    path('admin-panel/api/statistics/', admin_views.user_statistics_api, name='admin_user_statistics_api'),
+    
     # Admin (legacy)
     path('admin-login/', admin_views.custom_admin_login, name='admin_login'),
 ]

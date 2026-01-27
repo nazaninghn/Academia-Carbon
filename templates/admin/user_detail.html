@@ -1,0 +1,535 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}User Details: {{ user_obj.username }} - Academia Carbon{% endblock %}
+
+{% block extra_css %}
+<style>
+.user-detail {
+    padding: 20px;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+.user-header {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.user-info h1 {
+    margin: 0 0 10px 0;
+    color: #1f2937;
+}
+
+.user-meta {
+    color: #6b7280;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3b82f6;
+    margin-bottom: 5px;
+}
+
+.stat-label {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.section {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.section-header {
+    background: #f3f4f6;
+    padding: 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+    color: #374151;
+}
+
+.section-content {
+    padding: 20px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    background: #f9fafb;
+    padding: 12px;
+    text-align: right;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.data-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #4b5563;
+}
+
+.data-table tr:hover {
+    background: #f9fafb;
+}
+
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.badge.scope1 { background: #fee2e2; color: #991b1b; }
+.badge.scope2 { background: #fef3c7; color: #92400e; }
+.badge.scope3 { background: #dbeafe; color: #1e40af; }
+.badge.verified { background: #d1fae5; color: #065f46; }
+.badge.pending { background: #fef3c7; color: #92400e; }
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-primary { background: #3b82f6; color: white; }
+.btn-success { background: #10b981; color: white; }
+.btn-warning { background: #f59e0b; color: white; }
+.btn-danger { background: #ef4444; color: white; }
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+    background: #3b82f6;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+}
+
+.file-info {
+    flex: 1;
+}
+
+.file-name {
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.file-meta {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+@media (max-width: 768px) {
+    .two-column {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .user-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .user-meta {
+        justify-content: center;
+    }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="user-detail">
+    <!-- User Header -->
+    <div class="user-header">
+        <div class="user-avatar">
+            {{ user_obj.username|first|upper }}
+        </div>
+        <div class="user-info">
+            <h1>{{ user_obj.get_full_name|default:user_obj.username }}</h1>
+            <div class="user-meta">
+                <span>📧 {{ user_obj.email }}</span>
+                <span>📅 Joined: {{ user_obj.date_joined|date:"Y/m/d" }}</span>
+                <span>🕐 Last Login: {{ user_obj.last_login|date:"Y/m/d H:i"|default:"Never" }}</span>
+                <span class="badge {% if user_obj.is_active %}verified{% else %}pending{% endif %}">
+                    {% if user_obj.is_active %}Active{% else %}Inactive{% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <a href="{% url 'ghg:admin_user_list' %}" class="btn btn-primary">← Back to List</a>
+        <a href="{% url 'ghg:admin_export_user_data' user_obj.id %}" class="btn btn-success">📊 Export Data</a>
+        <button onclick="toggleUserStatus({{ user_obj.id }})" class="btn {% if user_obj.is_active %}btn-warning{% else %}btn-success{% endif %}">
+            {% if user_obj.is_active %}🔒 Deactivate{% else %}✅ Activate{% endif %}
+        </button>
+        <button onclick="deleteUserData({{ user_obj.id }})" class="btn btn-danger">🗑️ Delete Data</button>
+    </div>
+    
+    <!-- General Statistics -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ emission_count }}</div>
+            <div class="stat-label">Carbon Calculations</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ total_emissions_tons }}</div>
+            <div class="stat-label">Total CO2 Tons</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ supplier_count }}</div>
+            <div class="stat-label">Suppliers</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ custom_factor_count }}</div>
+            <div class="stat-label">Custom Factors</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ request_count }}</div>
+            <div class="stat-label">Requests</div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-number">{{ uploaded_files|length }}</div>
+            <div class="stat-label">فایل آپلود</div>
+        </div>
+    </div>
+    
+    <div class="two-column">
+        <!-- آمار Scope -->
+        <div class="section">
+            <div class="section-header">📊 آمار بر اساس Scope</div>
+            <div class="section-content">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Scope</th>
+                            <th>تعداد</th>
+                            <th>انتشار (تن)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for scope in scope_stats %}
+                        <tr>
+                            <td><span class="badge scope{{ scope.scope }}">Scope {{ scope.scope }}</span></td>
+                            <td>{{ scope.count }}</td>
+                            <td>{{ scope.emissions_tons }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- فعالیت ماهانه -->
+        <div class="section">
+            <div class="section-header">📈 فعالیت ماهانه</div>
+            <div class="section-content">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ماه</th>
+                            <th>انتشار (تن)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for month in monthly_activity %}
+                        <tr>
+                            <td>{{ month.month }}</td>
+                            <td>{{ month.emissions_tons }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- محاسبات اخیر -->
+    <div class="section">
+        <div class="section-header">⚡ محاسبات اخیر</div>
+        <div class="section-content">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>تاریخ</th>
+                        <th>منبع</th>
+                        <th>Scope</th>
+                        <th>داده فعالیت</th>
+                        <th>انتشار (kg)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emission in recent_emissions %}
+                    <tr>
+                        <td>{{ emission.created_at|date:"Y/m/d H:i" }}</td>
+                        <td>{{ emission.source_name }}</td>
+                        <td><span class="badge scope{{ emission.scope }}">Scope {{ emission.scope }}</span></td>
+                        <td>{{ emission.activity_data }} {{ emission.unit }}</td>
+                        <td>{{ emission.emissions_kg|floatformat:2 }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #6b7280;">محاسبه‌ای یافت نشد</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- تامین‌کنندگان -->
+    {% if suppliers %}
+    <div class="section">
+        <div class="section-header">🏢 تامین‌کنندگان</div>
+        <div class="section-content">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>نوع</th>
+                        <th>کشور</th>
+                        <th>ایمیل</th>
+                        <th>تاریخ ایجاد</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for supplier in suppliers %}
+                    <tr>
+                        <td><strong>{{ supplier.name }}</strong></td>
+                        <td>{{ supplier.supplier_type|default:"-" }}</td>
+                        <td>{{ supplier.country|default:"-" }}</td>
+                        <td>{{ supplier.email|default:"-" }}</td>
+                        <td>{{ supplier.created_at|date:"Y/m/d" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- فاکتورهای سفارشی -->
+    {% if custom_factors %}
+    <div class="section">
+        <div class="section-header">🔧 فاکتورهای سفارشی</div>
+        <div class="section-content">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>نام</th>
+                        <th>مقدار</th>
+                        <th>واحد</th>
+                        <th>وضعیت</th>
+                        <th>تاریخ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for factor in custom_factors %}
+                    <tr>
+                        <td><strong>{{ factor.name }}</strong></td>
+                        <td>{{ factor.factor_value }}</td>
+                        <td>{{ factor.unit }}</td>
+                        <td>
+                            <span class="badge {% if factor.is_verified %}verified{% else %}pending{% endif %}">
+                                {% if factor.is_verified %}تایید شده{% else %}در انتظار{% endif %}
+                            </span>
+                        </td>
+                        <td>{{ factor.created_at|date:"Y/m/d" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- فایل‌های آپلود شده -->
+    {% if uploaded_files %}
+    <div class="section">
+        <div class="section-header">📁 فایل‌های آپلود شده</div>
+        <div class="section-content">
+            {% for file_info in uploaded_files %}
+            <div class="file-item">
+                <div class="file-icon">📄</div>
+                <div class="file-info">
+                    <div class="file-name">{{ file_info.file.name|default:"فایل بدون نام" }}</div>
+                    <div class="file-meta">
+                        حجم: {{ file_info.size|filesizeformat|default:"نامشخص" }}
+                        {% if file_info.record %}
+                        - مربوط به: {{ file_info.record.source_name }}
+                        {% elif file_info.factor %}
+                        - مربوط به: {{ file_info.factor.name }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <!-- اطلاعات اضافی گزارش -->
+    {% if report_extra %}
+    <div class="section">
+        <div class="section-header">📋 اطلاعات گزارش</div>
+        <div class="section-content">
+            <table class="data-table">
+                <tr>
+                    <th style="width: 200px;">نام قانونی سازمان</th>
+                    <td>{{ report_extra.legal_name|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th>صنعت</th>
+                    <td>{{ report_extra.industry|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th>دوره گزارش</th>
+                    <td>{{ report_extra.reporting_period|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th>رویکرد مرزبندی</th>
+                    <td>{{ report_extra.get_boundary_approach_display|default:"-" }}</td>
+                </tr>
+                <tr>
+                    <th>یادداشت‌ها</th>
+                    <td>{{ report_extra.notes|default:"-" }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+function toggleUserStatus(userId) {
+    if (confirm('آیا از تغییر وضعیت این کاربر اطمینان دارید؟')) {
+        fetch(`/admin/users/${userId}/toggle-status/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert('خطا در تغییر وضعیت کاربر');
+            }
+        });
+    }
+}
+
+function deleteUserData(userId) {
+    if (confirm('⚠️ هشدار: این عمل تمام داده‌های کاربر را حذف می‌کند و قابل بازگشت نیست!\n\nآیا اطمینان دارید؟')) {
+        fetch(`/admin/users/${userId}/delete-data/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('تمام داده‌های کاربر با موفقیت حذف شد');
+                location.reload();
+            } else {
+                alert('خطا در حذف داده‌های کاربر');
+            }
+        });
+    }
+}
+</script>
+{% endblock %}

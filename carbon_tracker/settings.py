@@ -19,7 +19,7 @@ import secrets
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# PHASE 1 — HARD SECURITY (الزامی)
+# PHASE 1 — HARD SECURITY (Required)
 # =================================
 
 # 1️⃣ Secure DEBUG and SECRET_KEY
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'ghg.arcjet_simulation.ArcjetSimulatorMiddleware',  # Arcjet security simulation
     'ghg.middleware.SecurityHeadersMiddleware',  # Custom security headers
     'ghg.middleware.RateLimitMiddleware',  # Rate limiting
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -138,10 +139,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# PHASE 4 — MULTI-LANGUAGE (مشکل ترجمه)
+# PHASE 4 — MULTI-LANGUAGE (Translation Issue)
 # ====================================
 
-# 10️⃣ فعال‌سازی i18n
+# 10️⃣ Enable i18n
 LANGUAGE_CODE = 'en'
 
 LANGUAGES = [
@@ -337,3 +338,8 @@ CACHES = {
         }
     }
 }
+
+# Arcjet Security Configuration
+ARCJET_KEY = config('ARCJET_KEY', default='')
+ARCJET_MODE = config('ARCJET_MODE', default='SIMULATION')  # SIMULATION, DRY_RUN, or LIVE
+ARCJET_ENABLED = config('ARCJET_ENABLED', default='True') == 'True'
