@@ -24,6 +24,11 @@ urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
+# Add Django admin with different URL to avoid template override
+urlpatterns += [
+    path('django-admin/', admin.site.urls),
+]
+
 urlpatterns += i18n_patterns(
     path('admin/', admin.site.urls),
     path('', include('ghg.urls')),
