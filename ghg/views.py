@@ -785,56 +785,80 @@ def email_login_view(request):
                 return render(request, 'auth/login.html', context)
         
         # Check if account or IP is locked
-        if AccountLockout.is_locked(email) or AccountLockout.is_locked(client_ip):
-            remaining_time = max(
-                AccountLockout.get_lockout_time_remaining(email),
-                AccountLockout.get_lockout_time_remaining(client_ip)
-            )
-            minutes = remaining_time // 60
-            messages.error(
-                request,
-                f'🔒 Account temporarily locked due to too many failed login attempts. '
-                f'Please try again in {minutes} minutes.'
-            )
-            log_security_event('login_blocked', email, f'IP: {client_ip}')
-            context.update({
-                'form': form,
-                'locked': True,
-                'remaining_minutes': minutes
-            })
-            return render(request, 'auth/login.html', context)
+        try:
+            email_locked = AccountLockout.is_locked(email) if email else False
+            ip_locked = AccountLockout.is_locked(client_ip)
+            
+            if email_locked or ip_locked:
+                remaining_time = max(
+                    AccountLockout.get_lockout_time_remaining(email) if email else 0,
+                    AccountLockout.get_lockout_time_remaining(client_ip)
+                )
+                minutes = max(1, remaining_time // 60)
+                messages.error(
+                    request,
+                    f'🔒 Account temporarily locked due to too many failed login attempts. '
+                    f'Please try again in {minutes} minutes.'
+                )
+                log_security_event('login_blocked', email, f'IP: {client_ip}')
+                context.update({
+                    'form': form,
+                    'locked': True,
+                    'remaining_minutes': minutes
+                })
+                return render(request, 'auth/login.html', context)
+        except Exception as e:
+            # If lockout check fails, log and continue (fail open)
+            security_logger.error(f"Lockout check failed: {e}")
         
         if form.is_valid():
             user = form.get_user()
             if user:
                 # Successful login - reset failed attempts
-                AccountLockout.reset_failed_attempts(email)
-                AccountLockout.reset_failed_attempts(client_ip)
+                try:
+                    AccountLockout.reset_failed_attempts(email)
+                    AccountLockout.reset_failed_attempts(client_ip)
+                except Exception as e:
+                    security_logger.error(f"Failed to reset attempts: {e}")
                 
                 login(request, user)
                 messages.success(request, f'Welcome back, {user.first_name or user.email}!')
                 log_security_event('login_success', email, f'IP: {client_ip}')
                 return redirect('ghg:index')
+            else:
+                # User not found or inactive
+                messages.error(
+                    request,
+                    '⚠️ Invalid email or password. Please check your credentials.'
+                )
         else:
             # Failed login - increment attempts
             if email:
-                email_attempts = AccountLockout.increment_failed_attempts(email)
-                ip_attempts = AccountLockout.increment_failed_attempts(client_ip)
-                
-                attempts_remaining = AccountLockout.get_attempts_remaining(email)
-                
-                if attempts_remaining > 0:
+                try:
+                    email_attempts = AccountLockout.increment_failed_attempts(email)
+                    ip_attempts = AccountLockout.increment_failed_attempts(client_ip)
+                    
+                    attempts_remaining = AccountLockout.get_attempts_remaining(email)
+                    
+                    if attempts_remaining > 0:
+                        messages.error(
+                            request,
+                            f'⚠️ Invalid email or password. '
+                            f'You have {attempts_remaining} attempts remaining before account lockout.'
+                        )
+                    
+                    log_security_event(
+                        'login_failed',
+                        email,
+                        f'IP: {client_ip}, Attempts: {email_attempts}'
+                    )
+                except Exception as e:
+                    # If increment fails, just show generic error
+                    security_logger.error(f"Failed to increment attempts: {e}")
                     messages.error(
                         request,
-                        f'⚠️ Invalid email or password. '
-                        f'You have {attempts_remaining} attempts remaining before account lockout.'
+                        '⚠️ Invalid email or password. Please check your credentials.'
                     )
-                
-                log_security_event(
-                    'login_failed',
-                    email,
-                    f'IP: {client_ip}, Attempts: {email_attempts}'
-                )
     else:
         form = EmailLoginForm()
     

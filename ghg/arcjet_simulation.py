@@ -108,12 +108,12 @@ class ArcjetSimulator:
     
     def is_rate_limited(self, ip, path):
         """Check if IP is rate limited"""
-        # Different limits for different endpoints - more relaxed for development
+        # Very relaxed limits for production to avoid blocking legitimate users
         limits = {
-            '/login/': {'max': 20, 'window': 300},  # 20 per 5 minutes (was 5)
-            '/signup/': {'max': 10, 'window': 3600},  # 10 per hour (was 3)
-            '/api/': {'max': 200, 'window': 60},  # 200 per minute (was 100)
-            'default': {'max': 500, 'window': 60}  # 500 per minute (was 200)
+            '/login/': {'max': 50, 'window': 300},  # 50 per 5 minutes
+            '/signup/': {'max': 20, 'window': 3600},  # 20 per hour
+            '/api/': {'max': 500, 'window': 60},  # 500 per minute
+            'default': {'max': 1000, 'window': 60}  # 1000 per minute
         }
         
         # Find matching limit
@@ -127,32 +127,41 @@ class ArcjetSimulator:
         cache_key = f"arcjet_rate:{hashlib.md5(f'{ip}:{path}'.encode()).hexdigest()}"
         
         # Get current count
-        current_count = cache.get(cache_key, 0)
+        try:
+            current_count = cache.get(cache_key, 0)
+            
+            if current_count >= limit_config['max']:
+                logger.warning(f"Rate limit exceeded for {ip} on {path}")
+                return True
+            
+            # Increment counter
+            cache.set(cache_key, current_count + 1, limit_config['window'])
+        except Exception as e:
+            # If cache fails, don't block the user
+            logger.error(f"Cache error in rate limiting: {e}")
+            return False
         
-        if current_count >= limit_config['max']:
-            return True
-        
-        # Increment counter
-        cache.set(cache_key, current_count + 1, limit_config['window'])
         return False
     
     def is_bot(self, user_agent, request):
         """Detect if request is from a bot"""
+        # In production, be more lenient with bot detection
         if not user_agent:
-            return True  # No user agent = suspicious
+            # Allow empty user agents in production (some browsers/proxies)
+            return False
         
-        # Check against known bot patterns
-        for pattern in self.BOT_PATTERNS:
+        # Only block obvious bots, not legitimate browsers
+        strict_bot_patterns = [
+            r'bot', r'crawler', r'spider', r'scraper'
+        ]
+        
+        # Check against strict bot patterns only
+        for pattern in strict_bot_patterns:
             if re.search(pattern, user_agent, re.IGNORECASE):
                 return True
         
-        # Check for missing common headers
-        if not request.META.get('HTTP_ACCEPT'):
-            return True
-        
-        # Check for suspicious behavior
-        if len(user_agent) < 10 or len(user_agent) > 500:
-            return True
+        # Don't check for missing headers - too strict for production
+        # Don't check user agent length - too strict for production
         
         return False
     
@@ -225,8 +234,13 @@ class ArcjetSimulatorMiddleware:
     
     def __init__(self, get_response):
         self.get_response = get_response
+        self.enabled = getattr(settings, 'ARCJET_ENABLED', True)
     
     def __call__(self, request):
+        # Check if Arcjet is disabled
+        if not self.enabled:
+            return self.get_response(request)
+        
         # Skip for static files and admin
         if (request.path.startswith('/static/') or 
             request.path.startswith('/admin/') or
@@ -234,26 +248,31 @@ class ArcjetSimulatorMiddleware:
             return self.get_response(request)
         
         # Check with Arcjet simulator
-        decision = arcjet_sim.protect(request)
-        
-        if decision.is_denied():
-            if decision.is_rate_limit():
-                return JsonResponse({
-                    'error': 'Rate limit exceeded',
-                    'retry_after': decision.details.get('reset_time', 60)
-                }, status=429)
+        try:
+            decision = arcjet_sim.protect(request)
             
-            elif decision.is_bot():
-                return JsonResponse({
-                    'error': 'Automated requests not allowed'
-                }, status=403)
-            
-            elif decision.is_shield():
-                return JsonResponse({
-                    'error': 'Request blocked by security filter'
-                }, status=403)
-            
-            return HttpResponseForbidden('Request denied')
+            if decision.is_denied():
+                if decision.is_rate_limit():
+                    return JsonResponse({
+                        'error': 'Rate limit exceeded',
+                        'retry_after': decision.details.get('reset_time', 60)
+                    }, status=429)
+                
+                elif decision.is_bot():
+                    logger.warning(f"Bot detected: {request.META.get('HTTP_USER_AGENT', '')}")
+                    return JsonResponse({
+                        'error': 'Automated requests not allowed'
+                    }, status=403)
+                
+                elif decision.is_shield():
+                    return JsonResponse({
+                        'error': 'Request blocked by security filter'
+                    }, status=403)
+                
+                return HttpResponseForbidden('Request denied')
+        except Exception as e:
+            # If Arcjet fails, log and allow request through
+            logger.error(f"Arcjet middleware error: {e}")
         
         response = self.get_response(request)
         return response
