@@ -1,3 +1,7 @@
+<div align="center">
+
+<img src="static/images/logo.png" alt="Academia Carbon Logo" width="200"/>
+
 # Academia Carbon 🌍
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -5,11 +9,63 @@
 [![Django](https://img.shields.io/badge/Django-5.2.8-green.svg)](https://www.djangoproject.com/)
 [![GitHub](https://img.shields.io/badge/GitHub-nazaninghn/Academia--Carbon-blue.svg)](https://github.com/nazaninghn/Academia-Carbon)
 
+**Professional GHG Management for Academic Excellence**
+
 A comprehensive Django web application for tracking, calculating, and reporting greenhouse gas (GHG) emissions. Designed for academic institutions, research organizations, and businesses seeking ISO 14064-1 compliant emissions management.
 
-![Academia Carbon Screenshot](https://via.placeholder.com/800x400/2d7a5f/ffffff?text=Academia+Carbon+Dashboard)
+[Live Demo](https://academia-carbon.onrender.com) • [Documentation](INSTALLATION.md) • [Quick Start](QUICKSTART.md)
+
+</div>
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+### Dashboard Overview
+<img src="https://via.placeholder.com/800x400/2d7a5f/ffffff?text=Dashboard+Overview" alt="Dashboard" width="800"/>
+
+### Analysis & Reporting
+<img src="https://via.placeholder.com/800x400/1e5a3f/ffffff?text=Analysis+Dashboard" alt="Analysis" width="800"/>
+
+### Emission Calculator
+<img src="https://via.placeholder.com/800x400/2d7a5f/ffffff?text=Emission+Calculator" alt="Calculator" width="800"/>
+
+</div>
+
+---
 
 ## 🚀 Features
+
+### 🎯 Why Academia Carbon?
+
+<table>
+<tr>
+<td width="50%">
+
+#### ✅ For Academic Institutions
+- ISO 14064-1 compliant reporting
+- Research-grade emission factors
+- Multi-language support (EN/TR)
+- Comprehensive documentation
+- Open-source & customizable
+
+</td>
+<td width="50%">
+
+#### ✅ For Businesses
+- Professional PDF reports
+- Real-time calculations
+- Supplier emission tracking
+- API integration ready
+- Secure & scalable
+
+</td>
+</tr>
+</table>
+
+---
 
 ### 📊 Emissions Management
 - **Multi-Scope Tracking**: Complete Scope 1, 2, and 3 emissions calculation
@@ -336,15 +392,36 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+<div align="center">
+
 ## 📊 Version Information
 
-- **Version**: 2.1.0
-- **Last Updated**: December 2025
-- **Data Year**: 2025 (Current)
-- **Status**: Production Ready ✅
+**Version**: 2.1.0 | **Last Updated**: January 2026 | **Status**: Production Ready ✅
 
 ---
+
+## 🌟 Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nazaninghn/Academia-Carbon&type=Date)](https://star-history.com/#nazaninghn/Academia-Carbon&Date)
+
+---
+
+## 📞 Contact & Support
+
+- **GitHub Issues**: [Report a bug](https://github.com/nazaninghn/Academia-Carbon/issues)
+- **Discussions**: [Join the conversation](https://github.com/nazaninghn/Academia-Carbon/discussions)
+- **Email**: [Contact us](mailto:support@academiacarbon.com)
+
+---
+
+<img src="static/images/logo.png" alt="Academia Carbon" width="100"/>
 
 **Academia Carbon** - Professional GHG Management for Academic Excellence 🎓🌍
 
 *Built with ❤️ for environmental sustainability and academic research*
+
+---
+
+**Made with Django** | **Powered by Open Source** | **ISO 14064-1 Compliant**
+
+</div>
