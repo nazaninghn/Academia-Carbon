@@ -309,10 +309,10 @@ EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default='True') == 'True'
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@academiacarbon.com')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='noreply@sustindex.com')
 
 # Admin notification emails
-ADMIN_NOTIFICATION_EMAILS = config('ADMIN_NOTIFICATION_EMAILS', default='admin@academiacarbon.com').split(',')
+ADMIN_NOTIFICATION_EMAILS = config('ADMIN_NOTIFICATION_EMAILS', default='admin@sustindex.com').split(',')
 
 # Google reCAPTCHA v3 Configuration
 RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY', default='')
@@ -320,7 +320,7 @@ RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY', default='')
 RECAPTCHA_ENABLED = config('RECAPTCHA_ENABLED', default='True') == 'True'
 
 # Site configuration
-SITE_NAME = 'Academia Carbon'
+SITE_NAME = 'SustIndex'
 SITE_URL = config('SITE_URL', default='https://academia-carbon.onrender.com' if not DEBUG else 'http://127.0.0.1:8000')
 
 # Rate Limiting Configuration

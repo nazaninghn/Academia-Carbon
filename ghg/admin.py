@@ -19,8 +19,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Global Admin Settings
-admin.site.site_header = "🌱 Academia Carbon - Admin Panel"
-admin.site.site_title = "Academia Carbon Admin"
+admin.site.site_header = "🌱 SustIndex - Admin Panel"
+admin.site.site_title = "SustIndex Admin"
 admin.site.index_title = "Carbon Management System"
 
 # Custom User Admin with Complete Details

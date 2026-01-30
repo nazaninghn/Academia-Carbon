@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="static/images/logo.png" alt="Academia Carbon Logo" width="200"/>
+<img src=".github/logo-banner.svg" alt="Academia Carbon" width="100%"/>
 
-# Academia Carbon 🌍
+<br/>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/downloads/)

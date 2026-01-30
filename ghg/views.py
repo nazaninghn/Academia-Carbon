@@ -921,7 +921,7 @@ def email_signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user, backend='ghg.backends.EmailBackend')
-            messages.success(request, 'Account created successfully! Welcome to Academia Carbon.')
+            messages.success(request, 'Account created successfully! Welcome to SustIndex.')
             log_security_event('signup_success', email, f'IP: {client_ip}')
             return redirect('ghg:index')
         else:
@@ -1575,7 +1575,7 @@ def export_emission_report(request, scope):
     # Add title
     ws.merge_cells('A1:H1')
     title_cell = ws['A1']
-    title_cell.value = f"Academia Carbon - {scope_titles.get(scope, 'Emission Report')}"
+    title_cell.value = f"SustIndex - {scope_titles.get(scope, 'Emission Report')}"
     title_cell.font = Font(bold=True, size=16, color="2D7A5F")
     title_cell.alignment = Alignment(horizontal="center", vertical="center")
     
@@ -2483,7 +2483,7 @@ def landing_page(request):
         return redirect('ghg:index')
     
     context = {
-        'page_title': 'Academia Carbon - Carbon Tracking Platform',
+        'page_title': 'SustIndex - Carbon Tracking Platform',
         'meta_description': 'Professional carbon emission tracking and reporting platform for organizations. ISO 14064-1 compliant reporting, real-time analytics, and comprehensive carbon management tools.',
     }
     return render(request, 'landing.html', context)

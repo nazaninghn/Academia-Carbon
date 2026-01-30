@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% if LANGUAGE_CODE == 'tr' %}
-            Kayıt Ol - Academia Carbon
+            Kayıt Ol - SustIndex
         {% else %}
-            Sign Up - Academia Carbon
+            Sign Up - SustIndex
         {% endif %}
     </title>
-    <meta name="description" content="{% if LANGUAGE_CODE == 'tr' %}Academia Carbon hesabı oluşturun - Karbon ayak izinizi takip etmeye başlayın{% else %}Create your Academia Carbon account - Start tracking your carbon footprint{% endif %}">
+    <meta name="description" content="{% if LANGUAGE_CODE == 'tr' %}SustIndex hesabı oluşturun - Karbon ayak izinizi takip etmeye başlayın{% else %}Create your SustIndex account - Start tracking your carbon footprint{% endif %}">
     {% csrf_token %}
     
     <!-- Fonts & Icons -->
@@ -630,16 +630,16 @@
                 <div class="brand-logo"></div>
                 <h1 class="brand-title">
                     {% if LANGUAGE_CODE == 'tr' %}
-                        Academia Carbon'a Katılın
+                        SustIndex'a Katılın
                     {% else %}
-                        Join Academia Carbon
+                        Join SustIndex
                     {% endif %}
                 </h1>
                 <p class="brand-subtitle">
                     {% if LANGUAGE_CODE == 'tr' %}
-                        <strong>Karbon Hesaplama</strong> Yolculuğunuzu Başlatın
+                        <strong style="color: #16a34a; font-size: 1.3em;">SustIndex</strong> ile Karbon Hesaplama Yolculuğunuzu Başlatın
                     {% else %}
-                        Start Your <strong>Carbon Calculation</strong> Journey
+                        Start Your <strong>Carbon Calculation</strong> Journey with <strong style="color: #16a34a; font-size: 1.3em;">SustIndex</strong>
                     {% endif %}
                 </p>
                 <p class="brand-description">

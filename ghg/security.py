@@ -1,5 +1,5 @@
 """
-Security utilities for Academia Carbon
+Security utilities for SustIndex
 Includes account lockout, failed login tracking, and security monitoring
 """
 

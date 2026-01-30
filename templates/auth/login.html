@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
         {% if LANGUAGE_CODE == 'tr' %}
-            Giriş - Academia Carbon
+            Giriş - SustIndex
         {% else %}
-            Login - Academia Carbon
+            Login - SustIndex
         {% endif %}
     </title>
-    <meta name="description" content="{% if LANGUAGE_CODE == 'tr' %}Academia Carbon'a giriş yapın - Profesyonel karbon hesaplama platformu{% else %}Login to Academia Carbon - Professional carbon calculation platform{% endif %}">
+    <meta name="description" content="{% if LANGUAGE_CODE == 'tr' %}SustIndex'a giriş yapın - Profesyonel karbon hesaplama platformu{% else %}Login to SustIndex - Professional carbon calculation platform{% endif %}">
     {% csrf_token %}
     
     <!-- Fonts & Icons -->
@@ -584,16 +584,16 @@
                 </h1>
                 <p class="brand-subtitle">
                     {% if LANGUAGE_CODE == 'tr' %}
-                        <strong>Karbon Ayak İzinizi</strong> Takip Edin
+                        <strong style="color: #16a34a; font-size: 1.3em;">SustIndex</strong> ile Karbon Ayak İzinizi Takip Edin
                     {% else %}
-                        Track Your <strong>Carbon Footprint</strong>
+                        Track Your <strong>Carbon Footprint</strong> with <strong style="color: #16a34a; font-size: 1.3em;">SustIndex</strong>
                     {% endif %}
                 </p>
                 <p class="brand-description">
                     {% if LANGUAGE_CODE == 'tr' %}
-                        Dünya çapında organizasyonlar Academia Carbon'u kullanarak çevresel ayak izlerini hassasiyetle ölçüyor, analiz ediyor ve azaltıyor.
+                        Dünya çapında organizasyonlar <strong style="color: #16a34a;">SustIndex</strong>'u kullanarak çevresel ayak izlerini hassasiyetle ölçüyor, analiz ediyor ve azaltıyor.
                     {% else %}
-                        Organizations worldwide use Academia Carbon to measure, analyze, and reduce their environmental footprint with precision and compliance.
+                        Organizations worldwide use <strong style="color: #16a34a;">SustIndex</strong> to measure, analyze, and reduce their environmental footprint with precision and compliance.
                     {% endif %}
                 </p>
                 

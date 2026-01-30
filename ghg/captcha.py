@@ -1,5 +1,5 @@
 """
-Google reCAPTCHA v3 Integration for Academia Carbon
+Google reCAPTCHA v3 Integration for SustIndex
 Provides invisible CAPTCHA protection for forms
 """
 
