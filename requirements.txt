@@ -8,3 +8,4 @@ python-decouple==3.8
 openpyxl==3.1.2
 reportlab==4.0.9
 django-ratelimit==4.1.0
+arcjet-python>=1.0.0
