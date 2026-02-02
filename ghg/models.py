@@ -344,3 +344,17 @@ class IndustryRequest(models.Model):
     
     def __str__(self):
         return f"{self.industry_name} - {self.get_status_display()}"
+
+
+# ============================================
+# Emission Sources Management Models
+# مدل‌های مدیریت منابع انتشار
+# ============================================
+
+from .models_emission_sources import (
+    EmissionScope,
+    EmissionCategory,
+    EmissionSource,
+    EmissionFactorData,
+    EmissionCalculationLog
+)

@@ -1173,3 +1173,433 @@ class IndustryRequestAdmin(admin.ModelAdmin):
             consent_count
         )
     has_consent.short_description = 'Consent Status'
+
+
+# ============================================
+# Emission Sources Management Admin
+# ============================================
+
+from .models_emission_sources import (
+    EmissionScope, EmissionCategory, EmissionSource, 
+    EmissionFactorData, EmissionCalculationLog
+)
+
+
+@admin.register(EmissionScope)
+class EmissionScopeAdmin(admin.ModelAdmin):
+    list_display = [
+        'scope_badge', 'name_display', 'categories_count', 
+        'is_active', 'display_order', 'created_at_short'
+    ]
+    list_filter = ['is_active', 'scope_number']
+    search_fields = ['name_en', 'name_fa', 'description_en']
+    readonly_fields = ['created_at', 'updated_at', 'created_by']
+    
+    fieldsets = (
+        ('📊 Scope Information', {
+            'fields': ('scope_number', 'name_en', 'name_fa')
+        }),
+        ('📝 Description', {
+            'fields': ('description_en', 'description_fa')
+        }),
+        ('🎨 Display Settings', {
+            'fields': ('icon', 'color', 'display_order', 'is_active')
+        }),
+        ('ℹ️ Metadata', {
+            'fields': ('created_at', 'updated_at', 'created_by'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def scope_badge(self, obj):
+        return format_html(
+            '<span style="background: {}; color: white; padding: 6px 12px; '
+            'border-radius: 6px; font-weight: bold;">{} Scope {}</span>',
+            obj.color, obj.icon, obj.scope_number
+        )
+    scope_badge.short_description = 'Scope'
+    
+    def name_display(self, obj):
+        return format_html(
+            '<div><strong>{}</strong></div>'
+            '<div style="font-size: 11px; color: #6b7280;">{}</div>',
+            obj.name_en, obj.name_fa or '-'
+        )
+    name_display.short_description = 'Name'
+    
+    def categories_count(self, obj):
+        count = obj.categories.count()
+        return format_html(
+            '<span style="background: #dbeafe; color: #1e40af; padding: 4px 8px; '
+            'border-radius: 4px; font-size: 11px;">{} categories</span>',
+            count
+        )
+    categories_count.short_description = 'Categories'
+    
+    def created_at_short(self, obj):
+        return obj.created_at.strftime('%Y/%m/%d')
+    created_at_short.short_description = 'Created'
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(EmissionCategory)
+class EmissionCategoryAdmin(admin.ModelAdmin):
+    list_display = [
+        'category_info', 'scope_badge', 'sources_count', 
+        'is_active', 'display_order', 'created_at_short'
+    ]
+    list_filter = ['scope', 'is_active', 'created_at']
+    search_fields = ['code', 'name_en', 'name_fa', 'description_en']
+    readonly_fields = ['created_at', 'updated_at', 'created_by']
+    list_per_page = 25
+    
+    fieldsets = (
+        ('📊 Basic Information', {
+            'fields': ('scope', 'code', 'name_en', 'name_fa')
+        }),
+        ('📝 Description', {
+            'fields': ('description_en', 'description_fa')
+        }),
+        ('🎨 Display Settings', {
+            'fields': ('icon', 'display_order', 'is_active')
+        }),
+        ('📚 Methodology', {
+            'fields': ('methodology_notes', 'reference_standard'),
+            'classes': ('collapse',)
+        }),
+        ('ℹ️ Metadata', {
+            'fields': ('created_at', 'updated_at', 'created_by'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def category_info(self, obj):
+        return format_html(
+            '<div style="font-weight: bold;">{} {}</div>'
+            '<div style="font-size: 11px; color: #6b7280;">{}</div>'
+            '<div style="font-size: 10px; color: #9ca3af;">Code: {}</div>',
+            obj.icon, obj.name_en, obj.name_fa or '-', obj.code
+        )
+    category_info.short_description = 'Category'
+    
+    def scope_badge(self, obj):
+        colors = {'1': '#ef4444', '2': '#f59e0b', '3': '#3b82f6'}
+        return format_html(
+            '<span style="background: {}; color: white; padding: 4px 8px; '
+            'border-radius: 12px; font-size: 11px; font-weight: bold;">'
+            'Scope {}</span>',
+            colors.get(obj.scope.scope_number, '#6b7280'), obj.scope.scope_number
+        )
+    scope_badge.short_description = 'Scope'
+    
+    def sources_count(self, obj):
+        count = obj.sources.count()
+        active_count = obj.sources.filter(is_active=True).count()
+        return format_html(
+            '<div style="text-align: center;">'
+            '<div style="font-weight: bold; color: #059669;">{}</div>'
+            '<div style="font-size: 10px; color: #6b7280;">{} active</div>'
+            '</div>',
+            count, active_count
+        )
+    sources_count.short_description = 'Sources'
+    
+    def created_at_short(self, obj):
+        return obj.created_at.strftime('%Y/%m/%d')
+    created_at_short.short_description = 'Created'
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(EmissionSource)
+class EmissionSourceAdmin(admin.ModelAdmin):
+    list_display = [
+        'source_info', 'category_link', 'scope_badge', 'default_unit',
+        'factors_count', 'is_active', 'created_at_short'
+    ]
+    list_filter = [
+        'category__scope', 'category', 'is_active', 
+        'requires_industry_type', 'requires_fuel_name', 'created_at'
+    ]
+    search_fields = ['code', 'name_en', 'name_fa', 'description_en']
+    readonly_fields = ['created_at', 'updated_at', 'created_by']
+    list_per_page = 25
+    
+    fieldsets = (
+        ('📊 Basic Information', {
+            'fields': ('category', 'code', 'name_en', 'name_fa')
+        }),
+        ('📝 Description', {
+            'fields': ('description_en', 'description_fa')
+        }),
+        ('📏 Unit Information', {
+            'fields': ('default_unit', 'alternative_units')
+        }),
+        ('🎨 Display Settings', {
+            'fields': ('icon', 'display_order', 'is_active')
+        }),
+        ('⚙️ Additional Settings', {
+            'fields': ('requires_industry_type', 'requires_fuel_name'),
+            'classes': ('collapse',)
+        }),
+        ('ℹ️ Metadata', {
+            'fields': ('created_at', 'updated_at', 'created_by'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def source_info(self, obj):
+        return format_html(
+            '<div style="font-weight: bold;">{} {}</div>'
+            '<div style="font-size: 11px; color: #6b7280;">{}</div>'
+            '<div style="font-size: 10px; color: #9ca3af;">Code: {}</div>',
+            obj.icon, obj.name_en, obj.name_fa or '-', obj.code
+        )
+    source_info.short_description = 'Source'
+    
+    def category_link(self, obj):
+        url = reverse('admin:ghg_emissioncategory_change', args=[obj.category.pk])
+        return format_html(
+            '<a href="{}" style="color: #3b82f6; text-decoration: none;">{}</a>',
+            url, obj.category.name_en
+        )
+    category_link.short_description = 'Category'
+    
+    def scope_badge(self, obj):
+        colors = {'1': '#ef4444', '2': '#f59e0b', '3': '#3b82f6'}
+        scope_num = obj.category.scope.scope_number
+        return format_html(
+            '<span style="background: {}; color: white; padding: 4px 8px; '
+            'border-radius: 12px; font-size: 11px; font-weight: bold;">'
+            'Scope {}</span>',
+            colors.get(scope_num, '#6b7280'), scope_num
+        )
+    scope_badge.short_description = 'Scope'
+    
+    def factors_count(self, obj):
+        count = obj.emission_factors.count()
+        active_count = obj.emission_factors.filter(is_active=True).count()
+        return format_html(
+            '<div style="text-align: center;">'
+            '<div style="font-weight: bold; color: #059669;">{}</div>'
+            '<div style="font-size: 10px; color: #6b7280;">{} active</div>'
+            '</div>',
+            count, active_count
+        )
+    factors_count.short_description = 'Factors'
+    
+    def created_at_short(self, obj):
+        return obj.created_at.strftime('%Y/%m/%d')
+    created_at_short.short_description = 'Created'
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        super().save_model(request, obj, form, change)
+
+
+@admin.register(EmissionFactorData)
+class EmissionFactorDataAdmin(admin.ModelAdmin):
+    list_display = [
+        'factor_info', 'source_link', 'scope_badge', 'country_flag',
+        'factor_value_display', 'quality_badge', 'is_default', 'is_active'
+    ]
+    list_filter = [
+        'source__category__scope', 'country_code', 'is_active', 
+        'is_default', 'data_quality_rating', 'reference_year'
+    ]
+    search_fields = [
+        'source__name_en', 'source__code', 'country_name', 
+        'reference_source'
+    ]
+    readonly_fields = ['created_at', 'updated_at', 'created_by']
+    list_per_page = 25
+    
+    fieldsets = (
+        ('📊 Source Information', {
+            'fields': ('source', 'country_code', 'country_name')
+        }),
+        ('🔢 Emission Factor', {
+            'fields': ('factor_value', 'unit')
+        }),
+        ('🌍 GHG Breakdown (Optional)', {
+            'fields': ('co2_factor', 'ch4_factor', 'n2o_factor'),
+            'classes': ('collapse',)
+        }),
+        ('📚 Reference Information', {
+            'fields': ('reference_source', 'reference_year', 'methodology')
+        }),
+        ('📅 Validity Period', {
+            'fields': ('valid_from', 'valid_to'),
+            'classes': ('collapse',)
+        }),
+        ('✅ Status & Quality', {
+            'fields': ('is_active', 'is_default', 'data_quality_rating', 'uncertainty_percentage')
+        }),
+        ('ℹ️ Metadata', {
+            'fields': ('created_at', 'updated_at', 'created_by'),
+            'classes': ('collapse',)
+        }),
+    )
+    
+    def factor_info(self, obj):
+        return format_html(
+            '<div style="font-weight: bold;">{}</div>'
+            '<div style="font-size: 11px; color: #6b7280;">{}</div>',
+            obj.source.name_en, obj.reference_source or 'No reference'
+        )
+    factor_info.short_description = 'Factor'
+    
+    def source_link(self, obj):
+        url = reverse('admin:ghg_emissionsource_change', args=[obj.source.pk])
+        return format_html(
+            '<a href="{}" style="color: #3b82f6; text-decoration: none;">{}</a>',
+            url, obj.source.code
+        )
+    source_link.short_description = 'Source'
+    
+    def scope_badge(self, obj):
+        colors = {'1': '#ef4444', '2': '#f59e0b', '3': '#3b82f6'}
+        scope_num = obj.source.category.scope.scope_number
+        return format_html(
+            '<span style="background: {}; color: white; padding: 4px 8px; '
+            'border-radius: 12px; font-size: 11px; font-weight: bold;">'
+            'Scope {}</span>',
+            colors.get(scope_num, '#6b7280'), scope_num
+        )
+    scope_badge.short_description = 'Scope'
+    
+    def country_flag(self, obj):
+        flags = {
+            'iran': '🇮🇷', 'turkey': '🇹🇷', 'usa': '🇺🇸', 'uk': '🇬🇧',
+            'germany': '🇩🇪', 'france': '🇫🇷', 'global': '🌍'
+        }
+        flag = flags.get(obj.country_code.lower(), '🌍')
+        return format_html('{} {}', flag, obj.country_name)
+    country_flag.short_description = 'Country'
+    
+    def factor_value_display(self, obj):
+        return format_html(
+            '<div style="text-align: center;">'
+            '<div style="font-size: 14px; font-weight: bold; color: #059669;">{}</div>'
+            '<div style="font-size: 10px; color: #6b7280;">kg CO2e/{}</div>'
+            '</div>',
+            f"{obj.factor_value:.4f}", obj.unit
+        )
+    factor_value_display.short_description = 'Factor Value'
+    
+    def quality_badge(self, obj):
+        colors = {
+            'high': '#059669',
+            'medium': '#f59e0b',
+            'low': '#ef4444',
+            'estimated': '#6b7280'
+        }
+        return format_html(
+            '<span style="background: {}; color: white; padding: 4px 8px; '
+            'border-radius: 4px; font-size: 11px;">{}</span>',
+            colors.get(obj.data_quality_rating, '#6b7280'),
+            obj.get_data_quality_rating_display()
+        )
+    quality_badge.short_description = 'Quality'
+    
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        super().save_model(request, obj, form, change)
+    
+    actions = ['set_as_default', 'activate_factors', 'deactivate_factors']
+    
+    def set_as_default(self, request, queryset):
+        for factor in queryset:
+            factor.is_default = True
+            factor.save()
+        self.message_user(request, f"{queryset.count()} factors set as default.")
+    set_as_default.short_description = "✅ Set as Default"
+    
+    def activate_factors(self, request, queryset):
+        count = queryset.update(is_active=True)
+        self.message_user(request, f"{count} factors activated.")
+    activate_factors.short_description = "🟢 Activate"
+    
+    def deactivate_factors(self, request, queryset):
+        count = queryset.update(is_active=False)
+        self.message_user(request, f"{count} factors deactivated.")
+    deactivate_factors.short_description = "🔴 Deactivate"
+
+
+@admin.register(EmissionCalculationLog)
+class EmissionCalculationLogAdmin(admin.ModelAdmin):
+    list_display = [
+        'user_link', 'source_link', 'activity_display', 
+        'emissions_display', 'created_at_formatted'
+    ]
+    list_filter = ['source__category__scope', 'created_at', 'calculation_method']
+    search_fields = ['user__username', 'user__email', 'source__name_en']
+    readonly_fields = ['created_at', 'ip_address']
+    date_hierarchy = 'created_at'
+    list_per_page = 50
+    
+    fieldsets = (
+        ('👤 User Information', {
+            'fields': ('user', 'ip_address')
+        }),
+        ('📊 Calculation Details', {
+            'fields': ('source', 'factor_used', 'activity_data', 'unit', 'calculated_emissions_kg')
+        }),
+        ('⚙️ Method', {
+            'fields': ('calculation_method',)
+        }),
+        ('🕐 Timestamp', {
+            'fields': ('created_at',)
+        }),
+    )
+    
+    def user_link(self, obj):
+        url = reverse('admin:auth_user_change', args=[obj.user.pk])
+        return format_html(
+            '<a href="{}" style="color: #3b82f6;">{}</a>',
+            url, obj.user.username
+        )
+    user_link.short_description = 'User'
+    
+    def source_link(self, obj):
+        if obj.source:
+            url = reverse('admin:ghg_emissionsource_change', args=[obj.source.pk])
+            return format_html(
+                '<a href="{}" style="color: #3b82f6;">{}</a>',
+                url, obj.source.name_en
+            )
+        return '-'
+    source_link.short_description = 'Source'
+    
+    def activity_display(self, obj):
+        return format_html(
+            '<strong>{}</strong> {}',
+            f"{obj.activity_data:,.2f}", obj.unit
+        )
+    activity_display.short_description = 'Activity Data'
+    
+    def emissions_display(self, obj):
+        return format_html(
+            '<span style="color: #059669; font-weight: bold;">{} kg CO2e</span>',
+            f"{obj.calculated_emissions_kg:,.2f}"
+        )
+    emissions_display.short_description = 'Emissions'
+    
+    def created_at_formatted(self, obj):
+        return obj.created_at.strftime('%Y/%m/%d %H:%M')
+    created_at_formatted.short_description = 'Date/Time'
+    
+    def has_add_permission(self, request):
+        return False  # Logs are created automatically
+    
+    def has_change_permission(self, request, obj=None):
+        return False  # Logs should not be modified

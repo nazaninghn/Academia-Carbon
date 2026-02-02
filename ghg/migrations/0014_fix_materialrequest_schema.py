@@ -1,6 +1,40 @@
 # Generated migration to fix MaterialRequest schema mismatch
 from django.db import migrations
 
+def add_columns_if_not_exist(apps, schema_editor):
+    """Add columns only if they don't exist (SQLite compatible)"""
+    from django.db import connection
+    
+    with connection.cursor() as cursor:
+        # Get existing columns
+        cursor.execute("PRAGMA table_info(ghg_materialrequest);")
+        existing_columns = [row[1] for row in cursor.fetchall()]
+        
+        # Add request_type if not exists
+        if 'request_type' not in existing_columns:
+            cursor.execute("ALTER TABLE ghg_materialrequest ADD COLUMN request_type VARCHAR(20) DEFAULT 'material';")
+        
+        # Add name if not exists
+        if 'name' not in existing_columns:
+            cursor.execute("ALTER TABLE ghg_materialrequest ADD COLUMN name VARCHAR(200) DEFAULT 'Unknown';")
+        
+        # Add additional_info if not exists
+        if 'additional_info' not in existing_columns:
+            cursor.execute("ALTER TABLE ghg_materialrequest ADD COLUMN additional_info TEXT;")
+
+def copy_data(apps, schema_editor):
+    """Copy data from old columns to new columns"""
+    from django.db import connection
+    
+    with connection.cursor() as cursor:
+        # Get existing columns
+        cursor.execute("PRAGMA table_info(ghg_materialrequest);")
+        existing_columns = [row[1] for row in cursor.fetchall()]
+        
+        # Copy material_name to name if material_name exists
+        if 'material_name' in existing_columns and 'name' in existing_columns:
+            cursor.execute("UPDATE ghg_materialrequest SET name = material_name WHERE material_name IS NOT NULL AND name = 'Unknown';")
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -8,33 +42,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # Add missing columns that the current model expects
-        migrations.RunSQL(
-            "ALTER TABLE ghg_materialrequest ADD COLUMN IF NOT EXISTS request_type VARCHAR(20) DEFAULT 'material';",
-            reverse_sql="ALTER TABLE ghg_materialrequest DROP COLUMN IF EXISTS request_type;"
-        ),
-        migrations.RunSQL(
-            "ALTER TABLE ghg_materialrequest ADD COLUMN IF NOT EXISTS name VARCHAR(200) DEFAULT 'Unknown';",
-            reverse_sql="ALTER TABLE ghg_materialrequest DROP COLUMN IF EXISTS name;"
-        ),
-        migrations.RunSQL(
-            "ALTER TABLE ghg_materialrequest ADD COLUMN IF NOT EXISTS additional_info TEXT;",
-            reverse_sql="ALTER TABLE ghg_materialrequest DROP COLUMN IF EXISTS additional_info;"
-        ),
-        
-        # Copy data from old columns to new columns
-        migrations.RunSQL(
-            "UPDATE ghg_materialrequest SET name = material_name WHERE material_name IS NOT NULL AND name = 'Unknown';",
-            reverse_sql=""
-        ),
-        migrations.RunSQL(
-            "UPDATE ghg_materialrequest SET description = COALESCE(description, 'Material: ' || material_name || ' (Category: ' || category || ')') WHERE description = '';",
-            reverse_sql=""
-        ),
-        
-        # Set request_type based on existing data
-        migrations.RunSQL(
-            "UPDATE ghg_materialrequest SET request_type = 'material' WHERE request_type = 'material';",
-            reverse_sql=""
-        ),
+        migrations.RunPython(add_columns_if_not_exist, migrations.RunPython.noop),
+        migrations.RunPython(copy_data, migrations.RunPython.noop),
     ]
