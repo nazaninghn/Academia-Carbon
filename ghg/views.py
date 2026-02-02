@@ -14,7 +14,7 @@ import json
 # Import Arcjet simulation for enhanced security
 from .arcjet_simulation import arcjet_protect
 
-# PHASE 3 — RATE LIMIT (8️⃣ جلوگیری از brute-force)
+# PHASE 3 — RATE LIMIT (Prevent brute-force attacks)
 try:
     from django_ratelimit.decorators import ratelimit
     RATELIMIT_AVAILABLE = True
@@ -47,11 +47,11 @@ def index(request):
         'total_emissions': round(total_emissions, 2),
         'latest_year': latest_year.year if latest_year else 2023,
         'data_points': data_points,
-        'active_menu': 'dashboard',  # PHASE 5 — UI/UX (13️⃣ مشکل تغییر داشبورد)
+        'active_menu': 'dashboard',  # PHASE 5 — UI/UX (Dashboard navigation fix)
     }
     return render(request, 'index.html', context)
 
-# PHASE 2 — AUTH & PERMISSIONS (5️⃣ همه viewهای حساس login_required)
+# PHASE 2 — AUTH & PERMISSIONS (All sensitive views require login)
 @login_required
 def data_entry(request):
     context = {
@@ -104,11 +104,11 @@ def calculate_emission(request):
                              'downstream-transport', 'end-of-life', 'franchises', 'investments']:
                 scope = '3'
             
-            # PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
+            # PHASE 2 — AUTH & PERMISSIONS (Filter data by user)
             supplier_obj = None
             if supplier_id:
                 try:
-                    # ✅ درست: فیلتر بر اساس user
+                    # Correct: Filter by user
                     supplier_obj = Supplier.objects.get(id=supplier_id, user=request.user)
                 except Supplier.DoesNotExist:
                     security_logger.warning(f"User {request.user.id} tried to access supplier {supplier_id}")
@@ -158,8 +158,8 @@ def calculate_emission(request):
 def get_emission_records(request):
     """Get user's emission records with pagination"""
     try:
-        # PHASE 2 — AUTH & PERMISSIONS (6️⃣ فیلتر داده بر اساس user)
-        # ✅ درست: فقط رکوردهای کاربر فعلی
+        # PHASE 2 — AUTH & PERMISSIONS (Filter data by user)
+        # Correct: Only current user's records
         records = EmissionRecord.objects.filter(user=request.user).order_by('-created_at')
         
         # Pagination
@@ -197,7 +197,7 @@ def get_emission_records(request):
         security_logger.error(f"Error fetching records for user {request.user.id}: {str(e)}")
         return JsonResponse({'error': 'Failed to fetch records'}, status=500)
 
-# PHASE 2 — AUTH & PERMISSIONS (7️⃣ جلوگیری از دسترسی URL دستی)
+# PHASE 2 — AUTH & PERMISSIONS (Prevent manual URL access)
 @login_required
 @csrf_protect
 @require_http_methods(["DELETE"])
@@ -205,11 +205,11 @@ def get_emission_records(request):
 def delete_emission_record(request, record_id):
     """Delete emission record with security checks"""
     try:
-        # PHASE 2 — AUTH & PERMISSIONS (6️⃣, 7️⃣)
-        # ✅ درست: فقط رکوردهای کاربر فعلی + بررسی مالکیت
+        # PHASE 2 — AUTH & PERMISSIONS (Filter and check ownership)
+        # Correct: Only current user's records + ownership check
         record = get_object_or_404(EmissionRecord, id=record_id, user=request.user)
         
-        # PHASE 2 — AUTH & PERMISSIONS (7️⃣ جلوگیری از دسترسی URL دستی)
+        # PHASE 2 — AUTH & PERMISSIONS (Prevent manual URL access)
         if record.user != request.user:
             security_logger.warning(f"User {request.user.id} tried to delete record {record_id} owned by {record.user.id}")
             return HttpResponseForbidden("Access denied")

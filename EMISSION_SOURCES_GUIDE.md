@@ -1,55 +1,55 @@
-# 📚 راهنمای سیستم مدیریت منابع انتشار
+# 📚 Emission Sources Management System Guide
 
-## 🎯 هدف
+## 🎯 Purpose
 
-این سیستم به ادمین اجازه می‌ده که برای هر Scope (1, 2, 3)، دسته‌بندی‌ها و منابع انتشار جدید اضافه کنه.
+This system allows admins to add new categories and emission sources for each Scope (1, 2, 3).
 
-## 📊 ساختار سلسله مراتبی
+## 📊 Hierarchical Structure
 
 ```
-Scope (مثلاً Scope 1)
-  └── Category (مثلاً Stationary Combustion)
-      └── Source (مثلاً Natural Gas)
-          └── Emission Factor (مثلاً 2.03 kg CO2e/m³)
+Scope (e.g., Scope 1)
+  └── Category (e.g., Stationary Combustion)
+      └── Source (e.g., Natural Gas)
+          └── Emission Factor (e.g., 2.03 kg CO2e/m³)
 ```
 
-## 🔑 مدل‌های اصلی
+## 🔑 Main Models
 
 ### 1️⃣ Emission Scopes
-**چیه؟** سه Scope اصلی انتشار (1, 2, 3)
+**What is it?** The three main emission scopes (1, 2, 3)
 
-**کی استفاده میشه؟**
-- معمولاً فقط یک بار setup میشه
-- بعداً نیازی به تغییر نیست
+**When to use?**
+- Usually set up only once
+- No need to change later
 
-**فیلدهای مهم:**
+**Important fields:**
 - Scope Number (1, 2, 3)
-- Name (English + Persian)
-- Icon & Color (برای نمایش)
+- Name (English + Turkish)
+- Icon & Color (for display)
 
-**مثال:**
+**Example:**
 ```
-Scope 1 - Direct Emissions 🔥 (قرمز)
-Scope 2 - Indirect Emissions ⚡ (نارنجی)
-Scope 3 - Other Indirect 🌍 (آبی)
+Scope 1 - Direct Emissions 🔥 (Red)
+Scope 2 - Indirect Emissions ⚡ (Orange)
+Scope 3 - Other Indirect 🌍 (Blue)
 ```
 
 ---
 
 ### 2️⃣ Emission Categories
-**چیه؟** دسته‌بندی‌های اصلی در هر Scope
+**What is it?** Main categories within each Scope
 
-**کی استفاده میشه؟**
-- وقتی می‌خوای یک دسته جدید اضافه کنی
-- مثلاً: Refrigerants, Waste, Water
+**When to use?**
+- When you want to add a new category
+- e.g., Refrigerants, Waste, Water
 
-**فیلدهای مهم:**
-- Scope (انتخاب Scope)
-- Code (کد یکتا)
-- Name (English + Persian)
+**Important fields:**
+- Scope (Select Scope)
+- Code (Unique code)
+- Name (English + Turkish)
 - Icon
 
-**مثال Scope 1:**
+**Scope 1 Example:**
 ```
 - Stationary Combustion 🏭
 - Mobile Combustion 🚗
@@ -60,20 +60,20 @@ Scope 3 - Other Indirect 🌍 (آبی)
 ---
 
 ### 3️⃣ Emission Sources
-**چیه؟** منابع انتشار در هر دسته
+**What is it?** Emission sources within each category
 
-**کی استفاده میشه؟**
-- **اینجا ادمین بیشترین کار رو می‌کنه**
-- اضافه کردن سوخت‌ها، مواد، فعالیت‌های جدید
+**When to use?**
+- **This is where admins do most of their work**
+- Adding new fuels, materials, activities
 
-**فیلدهای مهم:**
-- Category (انتخاب دسته)
-- Code (کد یکتا)
-- Name (English + Persian)
-- Default Unit (واحد پیش‌فرض)
-- Alternative Units (واحدهای جایگزین)
+**Important fields:**
+- Category (Select category)
+- Code (Unique code)
+- Name (English + Turkish)
+- Default Unit (Default unit)
+- Alternative Units (Alternative units)
 
-**مثال Stationary Combustion:**
+**Stationary Combustion Example:**
 ```
 - Natural Gas (m³, kg, GJ)
 - Diesel (liters, kg)
@@ -85,23 +85,23 @@ Scope 3 - Other Indirect 🌍 (آبی)
 ---
 
 ### 4️⃣ Emission Factor Data
-**چیه؟** ضرایب انتشار برای هر منبع
+**What is it?** Emission factors for each source
 
-**کی استفاده میشه؟**
-- وقتی می‌خوای ضریب برای کشور جدید اضافه کنی
-- وقتی ضریب آپدیت میشه (سال جدید)
+**When to use?**
+- When you want to add a factor for a new country
+- When a factor is updated (new year)
 
-**فیلدهای مهم:**
-- Source (انتخاب منبع)
+**Important fields:**
+- Source (Select source)
 - Country Code (turkey, iran, global, ...)
-- Factor Value (مقدار ضریب)
-- Unit (واحد)
-- Reference Source (منبع)
-- Reference Year (سال)
-- Is Default (پیش‌فرض؟)
-- Data Quality (کیفیت داده)
+- Factor Value (Factor value)
+- Unit (Unit)
+- Reference Source (Source)
+- Reference Year (Year)
+- Is Default (Default?)
+- Data Quality (Data quality)
 
-**مثال Natural Gas:**
+**Natural Gas Example:**
 ```
 Turkey 2025:  2.03 kg CO2e/m³  (Default, High Quality)
 Global 2006:  2.00 kg CO2e/m³  (Medium Quality)
@@ -110,30 +110,30 @@ Iran 2024:    1.95 kg CO2e/m³  (High Quality)
 
 ---
 
-## 🚀 نحوه استفاده (گام به گام)
+## 🚀 How to Use (Step by Step)
 
-### مثال: اضافه کردن "Coal" به Scope 1
+### Example: Adding "Coal" to Scope 1
 
-#### گام 1: بررسی Scope و Category
+#### Step 1: Check Scope and Category
 ```
-✅ Scope 1 موجود هست
-✅ Category "Stationary Combustion" موجود هست
+✅ Scope 1 exists
+✅ Category "Stationary Combustion" exists
 ```
 
-#### گام 2: اضافه کردن Source جدید
+#### Step 2: Add New Source
 ```
 Admin Panel → Emission Sources → Add
 
 Category: Stationary Combustion
 Code: coal
 Name (EN): Coal
-Name (FA): زغال سنگ
+Name (TR): Kömür
 Default Unit: kg
 Alternative Units: ["tons", "GJ"]
 Icon: ⚫
 ```
 
-#### گام 3: اضافه کردن Emission Factor
+#### Step 3: Add Emission Factor
 ```
 Admin Panel → Emission Factor Data → Add
 
@@ -147,63 +147,63 @@ Is Default: ✅
 Quality: High
 ```
 
-#### گام 4: تست
+#### Step 4: Test
 ```
-حالا کاربران می‌تونن "Coal" رو انتخاب کنن
-و با ضریب 2.42 محاسبه میشه
+Now users can select "Coal"
+and it will calculate with factor 2.42
 ```
 
 ---
 
-## 📋 چک‌لیست ادمین
+## 📋 Admin Checklist
 
-### Setup اولیه (یک بار):
-- [ ] Scope 1, 2, 3 ساخته شده
-- [ ] Categories اصلی اضافه شده
-- [ ] Sources پرکاربرد اضافه شده
-- [ ] Factors برای کشور اصلی اضافه شده
+### Initial Setup (One time):
+- [ ] Scope 1, 2, 3 created
+- [ ] Main categories added
+- [ ] Common sources added
+- [ ] Factors for main country added
 
-### نگهداری مداوم:
-- [ ] Source جدید وقتی کاربر درخواست میده
-- [ ] Factor جدید برای کشورهای جدید
-- [ ] آپدیت Factors سالانه
-- [ ] بررسی Quality داده‌ها
-
----
-
-## 💡 نکات مهم
-
-### ✅ انجام بده:
-- از Code های یکتا استفاده کن (مثل: natural-gas)
-- هر Source حداقل یک Default Factor داشته باشه
-- Quality Rating رو درست تنظیم کن
-- Reference Source رو حتماً بنویس
-
-### ❌ انجام نده:
-- Code تکراری نساز
-- بدون Factor، Source نساز
-- Factor های قدیمی رو حذف نکن (فقط Deactivate کن)
-- واحدهای اشتباه استفاده نکن
+### Ongoing Maintenance:
+- [ ] New source when user requests
+- [ ] New factor for new countries
+- [ ] Annual factor updates
+- [ ] Data quality review
 
 ---
 
-## 🔍 سوالات متداول
+## 💡 Important Tips
 
-**Q: چند تا Factor می‌تونم برای یک Source داشته باشم؟**
-A: نامحدود! می‌تونی برای هر کشور و هر سال یک Factor داشته باشی.
+### ✅ Do:
+- Use unique codes (e.g., natural-gas)
+- Each source should have at least one default factor
+- Set quality rating correctly
+- Always write reference source
 
-**Q: Default Factor چیه؟**
-A: Factor ای که وقتی کاربر کشور انتخاب نکرده، استفاده میشه.
-
-**Q: می‌تونم Category حذف کنم؟**
-A: بهتره Deactivate کنی تا داده‌های قبلی خراب نشن.
-
-**Q: Alternative Units چطور کار می‌کنه؟**
-A: کاربر می‌تونه با واحدهای مختلف محاسبه کنه (تبدیل خودکار انجام میشه).
+### ❌ Don't:
+- Don't create duplicate codes
+- Don't create source without factor
+- Don't delete old factors (just deactivate)
+- Don't use wrong units
 
 ---
 
-## 📊 آمار فعلی سیستم
+## 🔍 Frequently Asked Questions
+
+**Q: How many factors can I have for one source?**
+A: Unlimited! You can have one factor for each country and each year.
+
+**Q: What is a default factor?**
+A: The factor used when the user hasn't selected a country.
+
+**Q: Can I delete a category?**
+A: Better to deactivate it so previous data isn't broken.
+
+**Q: How do alternative units work?**
+A: Users can calculate with different units (automatic conversion is performed).
+
+---
+
+## 📊 Current System Stats
 
 ```
 ✅ Scopes: 3
@@ -223,26 +223,26 @@ A: کاربر می‌تونه با واحدهای مختلف محاسبه کنه
 
 ---
 
-## 🎯 اولویت‌های توسعه
+## 🎯 Development Priorities
 
-### فاز 1 (فعلی): ✅
-- [x] Scope 1 اصلی
-- [x] Scope 2 برق
-- [x] Scope 3 سفر
+### Phase 1 (Current): ✅
+- [x] Main Scope 1
+- [x] Scope 2 electricity
+- [x] Scope 3 travel
 
-### فاز 2 (بعدی):
+### Phase 2 (Next):
 - [ ] Refrigerants (Scope 1)
 - [ ] Heating/Cooling (Scope 2)
 - [ ] Waste (Scope 3)
 - [ ] Water (Scope 3)
 
-### فاز 3 (آینده):
-- [ ] ضرایب کشورهای بیشتر
+### Phase 3 (Future):
+- [ ] More country factors
 - [ ] Industry-specific factors
 - [ ] Custom calculation methods
 
 ---
 
-**آخرین آپدیت:** 2026-02-02  
-**نسخه:** 1.0  
-**وضعیت:** Production Ready ✅
+**Last Updated:** 2026-02-02  
+**Version:** 1.0  
+**Status:** Production Ready ✅

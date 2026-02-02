@@ -1,6 +1,6 @@
 """
 Emission Sources Management Models
-مدل‌های مدیریت منابع انتشار برای ادمین
+Models for managing emission sources in admin panel
 """
 
 from django.db import models
@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 class EmissionScope(models.Model):
     """
-    Scope های انتشار (1, 2, 3)
+    Emission Scopes (1, 2, 3)
     """
     SCOPE_CHOICES = [
         ('1', 'Scope 1 - Direct Emissions'),
@@ -25,9 +25,9 @@ class EmissionScope(models.Model):
         verbose_name="Scope Number"
     )
     name_en = models.CharField(max_length=200, verbose_name="Name (English)")
-    name_fa = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Persian)")
+    name_tr = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Turkish)")
     description_en = models.TextField(blank=True, null=True, verbose_name="Description (English)")
-    description_fa = models.TextField(blank=True, null=True, verbose_name="Description (Persian)")
+    description_tr = models.TextField(blank=True, null=True, verbose_name="Description (Turkish)")
     
     icon = models.CharField(max_length=50, default='🔥', verbose_name="Icon/Emoji")
     color = models.CharField(max_length=7, default='#3b82f6', verbose_name="Color (Hex)")
@@ -50,8 +50,8 @@ class EmissionScope(models.Model):
 
 class EmissionCategory(models.Model):
     """
-    دسته‌بندی‌های اصلی انتشار
-    مثل: Stationary Combustion, Mobile Combustion, Electricity
+    Main emission categories
+    e.g., Stationary Combustion, Mobile Combustion, Electricity
     """
     scope = models.ForeignKey(
         EmissionScope, 
@@ -62,10 +62,10 @@ class EmissionCategory(models.Model):
     
     code = models.CharField(max_length=50, unique=True, verbose_name="Category Code")
     name_en = models.CharField(max_length=200, verbose_name="Name (English)")
-    name_fa = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Persian)")
+    name_tr = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Turkish)")
     
     description_en = models.TextField(blank=True, null=True, verbose_name="Description (English)")
-    description_fa = models.TextField(blank=True, null=True, verbose_name="Description (Persian)")
+    description_tr = models.TextField(blank=True, null=True, verbose_name="Description (Turkish)")
     
     icon = models.CharField(max_length=50, default='📊', verbose_name="Icon/Emoji")
     
@@ -92,8 +92,8 @@ class EmissionCategory(models.Model):
 
 class EmissionSource(models.Model):
     """
-    منابع انتشار (زیردسته‌ها)
-    مثل: Natural Gas, Diesel, Petrol, Coal
+    Emission sources (subcategories)
+    e.g., Natural Gas, Diesel, Petrol, Coal
     """
     category = models.ForeignKey(
         EmissionCategory, 
@@ -104,10 +104,10 @@ class EmissionSource(models.Model):
     
     code = models.CharField(max_length=50, verbose_name="Source Code")
     name_en = models.CharField(max_length=200, verbose_name="Name (English)")
-    name_fa = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Persian)")
+    name_tr = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Turkish)")
     
     description_en = models.TextField(blank=True, null=True, verbose_name="Description (English)")
-    description_fa = models.TextField(blank=True, null=True, verbose_name="Description (Persian)")
+    description_tr = models.TextField(blank=True, null=True, verbose_name="Description (Turkish)")
     
     # Unit information
     default_unit = models.CharField(max_length=50, verbose_name="Default Unit", help_text="e.g., liters, kWh, kg")
@@ -146,8 +146,8 @@ class EmissionSource(models.Model):
 
 class EmissionFactorData(models.Model):
     """
-    ضرایب انتشار برای هر منبع
-    می‌تونه چند ضریب برای کشورهای مختلف داشته باشه
+    Emission factors for each source
+    Can have multiple factors for different countries
     """
     source = models.ForeignKey(
         EmissionSource, 
@@ -250,7 +250,7 @@ class EmissionFactorData(models.Model):
 
 class EmissionCalculationLog(models.Model):
     """
-    لاگ محاسبات انتشار - برای tracking و audit
+    Emission calculation logs - for tracking and audit
     """
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='calculation_logs')
     

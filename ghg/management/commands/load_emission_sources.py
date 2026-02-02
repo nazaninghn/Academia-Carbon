@@ -1,6 +1,6 @@
 """
 Management command to load initial emission sources data
-بارگذاری داده‌های اولیه منابع انتشار
+Load initial emission sources data
 """
 
 from django.core.management.base import BaseCommand
@@ -27,9 +27,9 @@ class Command(BaseCommand):
             scope_number='1',
             defaults={
                 'name_en': 'Direct Emissions',
-                'name_fa': 'انتشار مستقیم',
+                'name_tr': 'Doğrudan Emisyonlar',
                 'description_en': 'Direct GHG emissions from sources owned or controlled by the organization',
-                'description_fa': 'انتشار مستقیم گازهای گلخانه‌ای از منابع متعلق یا تحت کنترل سازمان',
+                'description_tr': 'Kuruluşa ait veya kontrol edilen kaynaklardan doğrudan sera gazı emisyonları',
                 'icon': '🔥',
                 'color': '#ef4444',
                 'display_order': 1,
@@ -41,9 +41,9 @@ class Command(BaseCommand):
             scope_number='2',
             defaults={
                 'name_en': 'Indirect Emissions (Energy)',
-                'name_fa': 'انتشار غیرمستقیم (انرژی)',
+                'name_tr': 'Dolaylı Emisyonlar (Enerji)',
                 'description_en': 'Indirect GHG emissions from purchased electricity, heat, or steam',
-                'description_fa': 'انتشار غیرمستقیم گازهای گلخانه‌ای از برق، گرما یا بخار خریداری شده',
+                'description_tr': 'Satın alınan elektrik, ısı veya buhardan dolaylı sera gazı emisyonları',
                 'icon': '⚡',
                 'color': '#f59e0b',
                 'display_order': 2,
@@ -55,9 +55,9 @@ class Command(BaseCommand):
             scope_number='3',
             defaults={
                 'name_en': 'Other Indirect Emissions',
-                'name_fa': 'سایر انتشارهای غیرمستقیم',
+                'name_tr': 'Diğer Dolaylı Emisyonlar',
                 'description_en': 'All other indirect GHG emissions in the value chain',
-                'description_fa': 'تمام انتشارهای غیرمستقیم دیگر در زنجیره ارزش',
+                'description_tr': 'Değer zincirindeki diğer tüm dolaylı sera gazı emisyonları',
                 'icon': '🌍',
                 'color': '#3b82f6',
                 'display_order': 3,
@@ -78,9 +78,9 @@ class Command(BaseCommand):
             code='stationary',
             defaults={
                 'name_en': 'Stationary Combustion',
-                'name_fa': 'احتراق ثابت',
+                'name_tr': 'Sabit Yanma',
                 'description_en': 'Emissions from fuel combustion in stationary equipment',
-                'description_fa': 'انتشار از احتراق سوخت در تجهیزات ثابت',
+                'description_tr': 'Sabit ekipmanlarda yakıt yanmasından kaynaklanan emisyonlar',
                 'icon': '🏭',
                 'display_order': 1,
                 'created_by': admin_user
@@ -93,9 +93,9 @@ class Command(BaseCommand):
             code='natural-gas',
             defaults={
                 'name_en': 'Natural Gas',
-                'name_fa': 'گاز طبیعی',
+                'name_tr': 'Doğal Gaz',
                 'description_en': 'Natural gas combustion',
-                'description_fa': 'احتراق گاز طبیعی',
+                'description_tr': 'Doğal gaz yanması',
                 'default_unit': 'm³',
                 'alternative_units': ['kg', 'GJ', 'kWh'],
                 'icon': '🔥',
@@ -143,9 +143,9 @@ class Command(BaseCommand):
             code='diesel',
             defaults={
                 'name_en': 'Diesel',
-                'name_fa': 'دیزل',
+                'name_tr': 'Dizel',
                 'description_en': 'Diesel fuel combustion',
-                'description_fa': 'احتراق سوخت دیزل',
+                'description_tr': 'Dizel yakıt yanması',
                 'default_unit': 'liters',
                 'alternative_units': ['kg', 'GJ'],
                 'icon': '⛽',
@@ -176,9 +176,9 @@ class Command(BaseCommand):
             code='mobile',
             defaults={
                 'name_en': 'Mobile Combustion',
-                'name_fa': 'احتراق متحرک',
+                'name_tr': 'Hareketli Yanma',
                 'description_en': 'Emissions from fuel combustion in mobile sources',
-                'description_fa': 'انتشار از احتراق سوخت در منابع متحرک',
+                'description_tr': 'Hareketli kaynaklarda yakıt yanmasından kaynaklanan emisyonlar',
                 'icon': '🚗',
                 'display_order': 2,
                 'created_by': admin_user
@@ -191,9 +191,9 @@ class Command(BaseCommand):
             code='petrol',
             defaults={
                 'name_en': 'Petrol/Gasoline',
-                'name_fa': 'بنزین',
+                'name_tr': 'Benzin',
                 'description_en': 'Petrol/Gasoline combustion in vehicles',
-                'description_fa': 'احتراق بنزین در وسایل نقلیه',
+                'description_tr': 'Araçlarda benzin yanması',
                 'default_unit': 'liters',
                 'alternative_units': ['kg', 'GJ'],
                 'icon': '⛽',
@@ -231,9 +231,9 @@ class Command(BaseCommand):
             code='electricity',
             defaults={
                 'name_en': 'Purchased Electricity',
-                'name_fa': 'برق خریداری شده',
+                'name_tr': 'Satın Alınan Elektrik',
                 'description_en': 'Emissions from purchased electricity',
-                'description_fa': 'انتشار از برق خریداری شده',
+                'description_tr': 'Satın alınan elektrikten kaynaklanan emisyonlar',
                 'icon': '⚡',
                 'display_order': 1,
                 'created_by': admin_user
@@ -246,9 +246,9 @@ class Command(BaseCommand):
             code='grid-electricity',
             defaults={
                 'name_en': 'Grid Electricity',
-                'name_fa': 'برق شبکه',
+                'name_tr': 'Şebeke Elektriği',
                 'description_en': 'Electricity from national grid',
-                'description_fa': 'برق از شبکه ملی',
+                'description_tr': 'Ulusal şebekeden elektrik',
                 'default_unit': 'kWh',
                 'alternative_units': ['MWh', 'GJ'],
                 'icon': '🔌',
@@ -302,9 +302,9 @@ class Command(BaseCommand):
             code='business-travel',
             defaults={
                 'name_en': 'Business Travel',
-                'name_fa': 'سفرهای کاری',
+                'name_tr': 'İş Seyahati',
                 'description_en': 'Emissions from business travel',
-                'description_fa': 'انتشار از سفرهای کاری',
+                'description_tr': 'İş seyahatinden kaynaklanan emisyonlar',
                 'icon': '✈️',
                 'display_order': 1,
                 'created_by': admin_user
@@ -317,9 +317,9 @@ class Command(BaseCommand):
             code='air-travel',
             defaults={
                 'name_en': 'Air Travel',
-                'name_fa': 'سفر هوایی',
+                'name_tr': 'Hava Yolu Seyahati',
                 'description_en': 'Emissions from air travel',
-                'description_fa': 'انتشار از سفر هوایی',
+                'description_tr': 'Hava yolu seyahatinden kaynaklanan emisyonlar',
                 'default_unit': 'km',
                 'alternative_units': ['miles', 'passenger-km'],
                 'icon': '✈️',

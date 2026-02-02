@@ -19,8 +19,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Global Admin Settings
-admin.site.site_header = "🌱 SustIndex - Admin Panel"
-admin.site.site_title = "SustIndex Admin"
+admin.site.site_header = "🌱 Academia Carbon - Admin Panel"
+admin.site.site_title = "Academia Carbon Admin"
 admin.site.index_title = "Carbon Management System"
 
 # Custom User Admin with Complete Details
@@ -1192,15 +1192,15 @@ class EmissionScopeAdmin(admin.ModelAdmin):
         'is_active', 'display_order', 'created_at_short'
     ]
     list_filter = ['is_active', 'scope_number']
-    search_fields = ['name_en', 'name_fa', 'description_en']
+    search_fields = ['name_en', 'name_tr', 'description_en']
     readonly_fields = ['created_at', 'updated_at', 'created_by']
     
     fieldsets = (
         ('📊 Scope Information', {
-            'fields': ('scope_number', 'name_en', 'name_fa')
+            'fields': ('scope_number', 'name_en', 'name_tr')
         }),
         ('📝 Description', {
-            'fields': ('description_en', 'description_fa')
+            'fields': ('description_en', 'description_tr')
         }),
         ('🎨 Display Settings', {
             'fields': ('icon', 'color', 'display_order', 'is_active')
@@ -1223,7 +1223,7 @@ class EmissionScopeAdmin(admin.ModelAdmin):
         return format_html(
             '<div><strong>{}</strong></div>'
             '<div style="font-size: 11px; color: #6b7280;">{}</div>',
-            obj.name_en, obj.name_fa or '-'
+            obj.name_en, obj.name_tr or '-'
         )
     name_display.short_description = 'Name'
     
@@ -1253,16 +1253,16 @@ class EmissionCategoryAdmin(admin.ModelAdmin):
         'is_active', 'display_order', 'created_at_short'
     ]
     list_filter = ['scope', 'is_active', 'created_at']
-    search_fields = ['code', 'name_en', 'name_fa', 'description_en']
+    search_fields = ['code', 'name_en', 'name_tr', 'description_en']
     readonly_fields = ['created_at', 'updated_at', 'created_by']
     list_per_page = 25
     
     fieldsets = (
         ('📊 Basic Information', {
-            'fields': ('scope', 'code', 'name_en', 'name_fa')
+            'fields': ('scope', 'code', 'name_en', 'name_tr')
         }),
         ('📝 Description', {
-            'fields': ('description_en', 'description_fa')
+            'fields': ('description_en', 'description_tr')
         }),
         ('🎨 Display Settings', {
             'fields': ('icon', 'display_order', 'is_active')
@@ -1282,7 +1282,7 @@ class EmissionCategoryAdmin(admin.ModelAdmin):
             '<div style="font-weight: bold;">{} {}</div>'
             '<div style="font-size: 11px; color: #6b7280;">{}</div>'
             '<div style="font-size: 10px; color: #9ca3af;">Code: {}</div>',
-            obj.icon, obj.name_en, obj.name_fa or '-', obj.code
+            obj.icon, obj.name_en, obj.name_tr or '-', obj.code
         )
     category_info.short_description = 'Category'
     
@@ -1328,16 +1328,16 @@ class EmissionSourceAdmin(admin.ModelAdmin):
         'category__scope', 'category', 'is_active', 
         'requires_industry_type', 'requires_fuel_name', 'created_at'
     ]
-    search_fields = ['code', 'name_en', 'name_fa', 'description_en']
+    search_fields = ['code', 'name_en', 'name_tr', 'description_en']
     readonly_fields = ['created_at', 'updated_at', 'created_by']
     list_per_page = 25
     
     fieldsets = (
         ('📊 Basic Information', {
-            'fields': ('category', 'code', 'name_en', 'name_fa')
+            'fields': ('category', 'code', 'name_en', 'name_tr')
         }),
         ('📝 Description', {
-            'fields': ('description_en', 'description_fa')
+            'fields': ('description_en', 'description_tr')
         }),
         ('📏 Unit Information', {
             'fields': ('default_unit', 'alternative_units')
@@ -1360,7 +1360,7 @@ class EmissionSourceAdmin(admin.ModelAdmin):
             '<div style="font-weight: bold;">{} {}</div>'
             '<div style="font-size: 11px; color: #6b7280;">{}</div>'
             '<div style="font-size: 10px; color: #9ca3af;">Code: {}</div>',
-            obj.icon, obj.name_en, obj.name_fa or '-', obj.code
+            obj.icon, obj.name_en, obj.name_tr or '-', obj.code
         )
     source_info.short_description = 'Source'
     
