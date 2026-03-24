@@ -57,12 +57,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',  # CORS headers for API
     'ghg',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  # CORS middleware - must be before CommonMiddleware
     'ghg.arcjet_simulation.ArcjetSimulatorMiddleware',  # Arcjet security simulation
     'ghg.middleware.SecurityHeadersMiddleware',  # Custom security headers
     'ghg.middleware.RateLimitMiddleware',  # Rate limiting
@@ -81,7 +83,7 @@ ROOT_URLCONF = 'carbon_tracker.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],  # No templates - using Next.js for frontend
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -196,16 +198,18 @@ if csrf_origins_env:
 SECURE_SSL_REDIRECT = not DEBUG
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Cookie Security
-SESSION_COOKIE_SECURE = not DEBUG
+# Cookie Security - Development Settings
+SESSION_COOKIE_SECURE = False  # Set to False for development (localhost)
 SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'  # Lax works for same-site requests
 SESSION_COOKIE_AGE = 3600  # 1 hour session timeout
+SESSION_COOKIE_DOMAIN = '127.0.0.1'  # Explicitly set domain
 
-CSRF_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = False  # Set to False for development
 CSRF_COOKIE_HTTPONLY = False  # Allow form access
-CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'  # Lax works for same-site requests
 CSRF_USE_SESSIONS = False  # Use cookies instead of sessions
+CSRF_COOKIE_DOMAIN = '127.0.0.1'  # Explicitly set domain
 
 # Security Headers
 SECURE_BROWSER_XSS_FILTER = True
@@ -343,3 +347,43 @@ CACHES = {
 ARCJET_KEY = config('ARCJET_KEY', default='')
 ARCJET_MODE = config('ARCJET_MODE', default='SIMULATION')  # SIMULATION, DRY_RUN, or LIVE
 ARCJET_ENABLED = config('ARCJET_ENABLED', default='True') == 'True'
+
+
+# CORS Configuration for Next.js Frontend
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+# CSRF Configuration for API
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:3001",
+]

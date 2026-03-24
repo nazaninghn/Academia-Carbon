@@ -18,9 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.i18n import i18n_patterns
 from django.views.generic import RedirectView
+from django.http import JsonResponse
+
+def api_root(request):
+    return JsonResponse({
+        'message': 'Carbon Tracker API',
+        'frontend': 'http://127.0.0.1:3001',
+        'api_docs': 'http://127.0.0.1:8000/en/api/',
+        'admin': 'http://127.0.0.1:8000/django-admin/'
+    })
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/en/landing/', permanent=False)),
+    path('', api_root),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 

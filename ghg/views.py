@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .forms import EmailLoginForm, EmailSignupForm
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, csrf_exempt
 from django.views.decorators.http import require_http_methods
 import logging
 import json
@@ -61,7 +61,7 @@ def data_entry(request):
 
 # PHASE 2 — AUTH & PERMISSIONS + PHASE 3 — RATE LIMIT
 @login_required
-@csrf_protect
+@csrf_exempt
 @require_http_methods(["POST"])
 @ratelimit(key='user', rate='30/m', method='POST', block=True)
 @arcjet_protect()  # Enhanced security with Arcjet simulation
@@ -254,7 +254,7 @@ def get_suppliers(request):
 
 # PHASE 2 — AUTH & PERMISSIONS + PHASE 3 — RATE LIMIT
 @login_required
-@csrf_protect
+@csrf_exempt
 @require_http_methods(["POST"])
 @ratelimit(key='user', rate='10/m', method='POST', block=True)
 @arcjet_protect()  # Enhanced security with Arcjet simulation
@@ -1457,6 +1457,77 @@ def get_emission_record(request, record_id):
 
 
 @login_required
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def user_settings_api(request):
+    """API endpoint for user settings"""
+    from django.contrib.auth.models import User
+    import json
+    
+    if request.method == 'GET':
+        # Return user settings
+        user = request.user
+        return JsonResponse({
+            'full_name': f"{user.first_name} {user.last_name}".strip() or user.username,
+            'email': user.email,
+            'username': user.username,
+            'organization': user.username,  # Using username as organization for now
+            'date_joined': user.date_joined.isoformat(),
+        })
+    
+    elif request.method == 'POST':
+        # Update user settings
+        try:
+            data = json.loads(request.body)
+            user = request.user
+            
+            # Update full name
+            full_name = data.get('full_name', '').strip()
+            if full_name:
+                name_parts = full_name.split(' ', 1)
+                user.first_name = name_parts[0]
+                user.last_name = name_parts[1] if len(name_parts) > 1 else ''
+            
+            # Update email if provided and different
+            new_email = data.get('email', '').strip()
+            if new_email and new_email != user.email:
+                # Check if email already exists
+                if User.objects.filter(email=new_email).exclude(id=user.id).exists():
+                    return JsonResponse({'error': 'Email already in use'}, status=400)
+                user.email = new_email
+            
+            # Update password if provided
+            current_password = data.get('current_password', '').strip()
+            new_password = data.get('new_password', '').strip()
+            
+            if new_password:
+                if not current_password:
+                    return JsonResponse({'error': 'Current password is required to set new password'}, status=400)
+                
+                # Verify current password
+                if not user.check_password(current_password):
+                    return JsonResponse({'error': 'Current password is incorrect'}, status=400)
+                
+                # Set new password
+                user.set_password(new_password)
+            
+            user.save()
+            
+            security_logger.info(f"User {user.id} updated settings")
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Settings updated successfully'
+            })
+            
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON data'}, status=400)
+        except Exception as e:
+            security_logger.error(f"Error updating settings for user {request.user.id}: {str(e)}")
+            return JsonResponse({'error': 'Failed to update settings'}, status=500)
+
+
+@login_required
 def update_emission_record(request, record_id):
     """API endpoint to update an emission record"""
     from .models import EmissionRecord
@@ -2477,21 +2548,34 @@ def generate_pdf_report(request):
     return response
 
 def landing_page(request):
-    """صفحه لندینگ اصلی سایت"""
-    # اگر کاربر لاگین کرده باشد، به داشبورد هدایت شود
+    """Main landing page"""
+    # If user is logged in, redirect to dashboard
     if request.user.is_authenticated:
         return redirect('ghg:index')
     
     context = {
-        'page_title': 'SustIndex - Carbon Tracking Platform',
+        'page_title': 'Academia Carbon - Carbon Tracking Platform',
         'meta_description': 'Professional carbon emission tracking and reporting platform for organizations. ISO 14064-1 compliant reporting, real-time analytics, and comprehensive carbon management tools.',
     }
     return render(request, 'landing.html', context)
 
 
+def landing_modern(request):
+    """Modern landing page with Tailwind CSS"""
+    # If user is logged in, redirect to dashboard
+    if request.user.is_authenticated:
+        return redirect('ghg:index')
+    
+    context = {
+        'page_title': 'Academia Carbon - Professional Carbon Management Platform',
+        'meta_description': 'Advanced carbon tracking and management platform designed for universities, research institutions, and organizations committed to sustainability.',
+    }
+    return render(request, 'landing_modern.html', context)
+
+
 def landing_nature(request):
-    """صفحه لندینگ با طراحی طبیعی"""
-    # اگر کاربر لاگین کرده باشد، به داشبورد هدایت شود
+    """Landing page with nature design"""
+    # If user is logged in, redirect to dashboard
     if request.user.is_authenticated:
         return redirect('ghg:index')
     
@@ -2518,3 +2602,206 @@ def test_lang_switch(request):
     return render(request, 'test_lang_switch.html', {
         'active_menu': 'test'
     })
+
+
+# API endpoint for React/Next.js signup
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+@require_http_methods(["POST"])
+def api_signup(request):
+    """JSON API endpoint for user signup"""
+    try:
+        data = json.loads(request.body)
+        username = data.get('username', '')
+        email = data.get('email', '')
+        password = data.get('password', '')
+        
+        # Validation
+        if not username or not email or not password:
+            return JsonResponse({'error': 'All fields are required'}, status=400)
+        
+        # Check if user exists
+        from django.contrib.auth.models import User
+        if User.objects.filter(username=username).exists():
+            return JsonResponse({'error': 'Username already exists'}, status=400)
+        
+        if User.objects.filter(email=email).exists():
+            return JsonResponse({'error': 'Email already exists'}, status=400)
+        
+        # Create user
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password=password
+        )
+        
+        # Log the user in
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Account created successfully',
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            }
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+
+# API endpoint for React/Next.js login
+@csrf_exempt
+@require_http_methods(["POST"])
+def api_login(request):
+    """JSON API endpoint for user login"""
+    try:
+        data = json.loads(request.body)
+        email = data.get('email', '')
+        password = data.get('password', '')
+        
+        # Validation
+        if not email or not password:
+            return JsonResponse({'error': 'Email and password are required'}, status=400)
+        
+        # Try to find user by email
+        from django.contrib.auth.models import User
+        try:
+            user = User.objects.get(email=email)
+            username = user.username
+        except User.DoesNotExist:
+            return JsonResponse({'error': 'Invalid email or password'}, status=401)
+        
+        # Authenticate
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return JsonResponse({
+                'success': True,
+                'message': 'Login successful',
+                'user': {
+                    'id': user.id,
+                    'username': user.username,
+                    'email': user.email
+                }
+            })
+        else:
+            return JsonResponse({'error': 'Invalid email or password'}, status=401)
+            
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON'}, status=400)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+
+
+# API endpoints for emission sources
+@csrf_exempt
+@require_http_methods(["GET"])
+def api_get_scopes(request):
+    """Get all emission scopes"""
+    from .models_emission_sources import EmissionScope
+    
+    scopes = EmissionScope.objects.filter(is_active=True).order_by('scope_number')
+    
+    data = []
+    for scope in scopes:
+        data.append({
+            'id': scope.scope_number,
+            'name': scope.name_en,
+            'name_tr': scope.name_tr or scope.name_en,
+            'description': scope.description_en,
+            'icon': scope.icon,
+            'color': scope.color
+        })
+    
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def api_get_categories(request):
+    """Get emission categories by scope"""
+    from .models_emission_sources import EmissionCategory
+    
+    scope_id = request.GET.get('scope')
+    
+    if scope_id:
+        categories = EmissionCategory.objects.filter(
+            scope__scope_number=scope_id,
+            is_active=True
+        ).order_by('display_order')
+    else:
+        categories = EmissionCategory.objects.filter(is_active=True).order_by('display_order')
+    
+    data = []
+    for category in categories:
+        data.append({
+            'id': category.id,
+            'code': category.code,  # Add code field
+            'name': category.name_en,
+            'name_tr': category.name_tr or category.name_en,
+            'description': category.description_en,
+            'scope': category.scope.scope_number,
+            'icon': category.icon
+        })
+    
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+@require_http_methods(["GET"])
+def api_get_sources(request):
+    """Get emission sources by category - reads from emission_factors.py"""
+    from .models_emission_sources import EmissionCategory
+    from . import emission_factors
+    
+    category_id = request.GET.get('category')
+    
+    if not category_id:
+        return JsonResponse([], safe=False)
+    
+    # Get category to find its code
+    try:
+        category = EmissionCategory.objects.get(id=category_id)
+        category_code = category.code
+    except EmissionCategory.DoesNotExist:
+        return JsonResponse([], safe=False)
+    
+    # Map category codes to emission_factors dictionaries
+    category_map = {
+        'stationary': emission_factors.STATIONARY_COMBUSTION,
+        'mobile': emission_factors.MOBILE_COMBUSTION,
+        'fugitive': emission_factors.FUGITIVE_EMISSIONS,
+        'electricity': emission_factors.ELECTRICITY,
+        'steam-heat': emission_factors.STEAM_HEAT_COOLING,
+        'business-travel': emission_factors.BUSINESS_TRAVEL,
+        'travel': emission_factors.BUSINESS_TRAVEL,
+        'commuting': emission_factors.EMPLOYEE_COMMUTING,
+        'purchased-goods': emission_factors.PURCHASED_GOODS_GLOBAL,
+        'waste': emission_factors.WASTE,
+        'water': emission_factors.WATER,
+        'upstream-transport': emission_factors.UPSTREAM_TRANSPORTATION,
+    }
+    
+    # Get the appropriate dictionary
+    sources_dict = category_map.get(category_code, {})
+    
+    # Convert dictionary to list format
+    data = []
+    for source_key, source_data in sources_dict.items():
+        data.append({
+            'id': source_key,  # Use the key as ID
+            'name': source_data.get('name', source_key),
+            'name_tr': source_data.get('name', source_key),  # Can add Turkish translations later
+            'description': source_data.get('source', ''),
+            'category': category_id,
+            'unit': source_data.get('unit', ''),
+            'emission_factor': source_data.get('factor', 0)
+        })
+    
+    return JsonResponse(data, safe=False)

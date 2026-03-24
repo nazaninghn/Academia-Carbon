@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Auth</title>
+</head>
+<body>
+    <h1>Test Authentication</h1>
+    
+    <div>
+        <h2>1. Login</h2>
+        <input type="email" id="email" value="admin@example.com" placeholder="Email">
+        <input type="password" id="password" value="admin123" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div id="login-result"></div>
+    </div>
+
+    <div>
+        <h2>2. Test Calculate</h2>
+        <button onclick="testCalculate()">Test Calculate</button>
+        <div id="calc-result"></div>
+    </div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://127.0.0.1:8000/en/api/auth/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                document.getElementById('login-result').innerHTML = 
+                    `<pre>Status: ${response.status}\n${JSON.stringify(data, null, 2)}</pre>`;
+                
+                // Show cookies
+                console.log('Cookies:', document.cookie);
+            } catch (error) {
+                document.getElementById('login-result').innerHTML = 
+                    `<pre style="color: red;">Error: ${error.message}</pre>`;
+            }
+        }
+
+        async function testCalculate() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/en/api/calculate/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify({
+                        category: 'stationary',
+                        source: 'natural-gas',
+                        activity_data: 100,
+                        country: 'global',
+                        save: false
+                    })
+                });
+                
+                const data = await response.json();
+                document.getElementById('calc-result').innerHTML = 
+                    `<pre>Status: ${response.status}\n${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (error) {
+                document.getElementById('calc-result').innerHTML = 
+                    `<pre style="color: red;">Error: ${error.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+</html>
