@@ -2,10 +2,12 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Globe2, ArrowRight, BarChart3, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import { ArrowRight, BarChart3, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import Button from './components/Button';
+import LanguageToggle, { type Locale } from './components/LanguageToggle';
 
 export default function Page() {
-  const [locale, setLocale] = useState<'en' | 'tr'>('en');
+  const [locale, setLocale] = useState<Locale>('en');
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -73,29 +75,19 @@ export default function Page() {
               />
             </div>
           </Link>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setLocale(locale === 'en' ? 'tr' : 'en')}
-              className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition flex gap-2 items-center text-sm"
-            >
-              <Globe2 size={16} />
-              {locale.toUpperCase()}
-            </button>
+          <nav className="flex items-center gap-2 sm:gap-3">
+            <LanguageToggle value={locale} onChange={setLocale} />
 
-            <Link
-              href="/auth/login"
-              className="px-4 py-2 text-sm hover:text-emerald-400"
-            >
-              {t.login}
-            </Link>
+            <span className="hidden sm:contents">
+              <Button href="/auth/login" variant="ghost" size="sm">
+                {t.login}
+              </Button>
+            </span>
 
-            <Link
-              href="/auth/login"
-              className="px-5 py-2 bg-emerald-500 hover:bg-emerald-400 rounded-xl font-semibold text-black"
-            >
+            <Button href="/auth/login" size="sm">
               {t.getStarted}
-            </Link>
-          </div>
+            </Button>
+          </nav>
         </div>
       </header>
 
@@ -112,21 +104,14 @@ export default function Page() {
           <p className="text-white/70 mt-6 text-lg max-w-xl">
             {t.heroSubtitle}
           </p>
-          <div className="flex gap-4 mt-8">
-            <Link
-              href="/auth/login"
-              className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 rounded-xl font-semibold text-black flex items-center gap-2"
-            >
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/auth/login" size="lg" icon={<ArrowRight size={18} />}>
               {t.cta}
-              <ArrowRight size={18} />
-            </Link>
+            </Button>
 
-            <Link
-              href="/auth/login"
-              className="px-6 py-3 border border-white/20 hover:border-white/40 rounded-xl"
-            >
+            <Button href="/auth/login" variant="secondary" size="lg">
               {t.secondary}
-            </Link>
+            </Button>
           </div>
         </div>
         {/* Floating card */}
