@@ -8,6 +8,89 @@ from ghg.models_emission_sources import EmissionScope, EmissionCategory, Emissio
 from ghg import emission_factors
 
 
+# Turkish names for the sources defined in emission_factors.py (keyed by English name)
+SOURCE_NAMES_TR = {
+    # Stationary combustion
+    'Coal (industrial)': 'Kömür (endüstriyel)',
+    'Gas/Diesel Oil (energy basis)': 'Gaz/Dizel Yağı (enerji bazlı)',
+    'Liquefied Petroleum Gas (LPG)': 'Sıvılaştırılmış Petrol Gazı (LPG)',
+    'Propane (mass)': 'Propan (kütle)',
+    'Motor Gasoline': 'Motor Benzini',
+    'Natural Gas': 'Doğal Gaz',
+    'Diesel (volume)': 'Dizel (hacim)',
+    'Coal (generic)': 'Kömür (genel)',
+    'Fuel Oil (volume)': 'Fuel Oil (hacim)',
+    # Mobile combustion
+    'Off-Road (IPCC 2019)': 'Arazi Araçları (IPCC 2019)',
+    'On-Road Diesel': 'Karayolu Dizel',
+    'On-Road Gasoline (Low Mileage)': 'Karayolu Benzin (Düşük Kilometre)',
+    'On-Road Gasoline (Uncontrolled)': 'Karayolu Benzin (Kontrolsüz)',
+    'On-Road Gasoline (Oxidation Catalyst)': 'Karayolu Benzin (Oksidasyon Katalizörlü)',
+    'On-Road Natural Gas': 'Karayolu Doğal Gaz',
+    'On-Road LPG': 'Karayolu LPG',
+    'Off-Road Diesel': 'Arazi Araçları Dizel',
+    'Off-Road Gasoline': 'Arazi Araçları Benzin',
+    'On-Road Petrol (DESNZ 2024)': 'Karayolu Benzin (DESNZ 2024)',
+    'On-Road Diesel (DESNZ 2024)': 'Karayolu Dizel (DESNZ 2024)',
+    'On-Road LPG (DESNZ 2024)': 'Karayolu LPG (DESNZ 2024)',
+    'Gasoline (generic)': 'Benzin (genel)',
+    'Diesel (generic)': 'Dizel (genel)',
+    'CNG': 'CNG (Sıkıştırılmış Doğal Gaz)',
+    'Vehicle distance (avg car)': 'Araç mesafesi (ortalama otomobil)',
+    # Fugitive emissions
+    'R-600a (Isobutane)': 'R-600a (İzobütan)',
+    'Methane (CH4)': 'Metan (CH4)',
+    # Electricity
+    'Grid average': 'Şebeke ortalaması',
+    'US grid': 'ABD şebekesi',
+    'EU grid': 'AB şebekesi',
+    'China grid': 'Çin şebekesi',
+    '100% renewable': '%100 yenilenebilir',
+    # Steam, heat & cooling
+    'District heating': 'Bölgesel ısıtma',
+    'District cooling': 'Bölgesel soğutma',
+    'Steam': 'Buhar',
+    'Chilled water': 'Soğutulmuş su',
+    # Business travel / employee commuting
+    'Short-haul flight (<500 km)': 'Kısa mesafeli uçuş (<500 km)',
+    'Medium-haul flight (500–3700 km)': 'Orta mesafeli uçuş (500–3700 km)',
+    'Long-haul flight (>3700 km)': 'Uzun mesafeli uçuş (>3700 km)',
+    'Train': 'Tren',
+    'Taxi': 'Taksi',
+    'Bus': 'Otobüs',
+    'Car': 'Otomobil',
+    'Motorcycle': 'Motosiklet',
+    'Bicycle': 'Bisiklet',
+    # Purchased goods
+    'Electrical items – large': 'Elektrikli eşyalar – büyük',
+    'Electrical items – small': 'Elektrikli eşyalar – küçük',
+    'Electrical items – fridges & freezers': 'Elektrikli eşyalar – buzdolabı ve dondurucular',
+    'Electrical items – IT': 'Elektrikli eşyalar – BT',
+    'Glass': 'Cam',
+    'Metal: aluminium cans & foil (excl. forming)': 'Metal: alüminyum kutu ve folyo (şekillendirme hariç)',
+    'Metal: mixed cans': 'Metal: karışık kutular',
+    'Metal: steel cans': 'Metal: çelik kutular',
+    'Mineral oil': 'Mineral yağ',
+    'Paper & board: mixed': 'Kâğıt ve karton: karışık',
+    'Plastics: average plastics': 'Plastikler: ortalama plastik',
+    'Plastics: HDPE (incl. forming)': 'Plastikler: HDPE (şekillendirme dahil)',
+    'Wood': 'Ahşap',
+    # Waste
+    'General waste (landfill)': 'Genel atık (düzenli depolama)',
+    'Recyclable waste': 'Geri dönüştürülebilir atık',
+    'Organic compost': 'Organik kompost',
+    'Waste incineration': 'Atık yakma',
+    # Water
+    'Water supply': 'Su temini',
+    'Wastewater treatment': 'Atık su arıtma',
+    # Upstream transportation
+    'Truck freight': 'Kamyon taşımacılığı',
+    'Rail freight': 'Demiryolu taşımacılığı',
+    'Sea freight': 'Deniz taşımacılığı',
+    'Air freight': 'Hava taşımacılığı',
+}
+
+
 class Command(BaseCommand):
     help = 'Import all emission sources from emission_factors.py to database'
 
@@ -97,7 +180,7 @@ class Command(BaseCommand):
                 'name_en': 'Fugitive Emissions',
                 'name_tr': 'Kaçak Emisyonlar',
                 'description_en': 'Refrigerants, methane leaks, etc.',
-                'description_tr': 'Soğutucular, metan sızıntıları vb.',
+                'description_tr': 'Soğutucu akışkan ve metan sızıntıları vb.',
                 'icon': '💨',
                 'display_order': 3,
                 'created_by': admin_user
@@ -141,7 +224,7 @@ class Command(BaseCommand):
                 'name_en': 'Business Travel',
                 'name_tr': 'İş Seyahati',
                 'description_en': 'Employee business travel',
-                'description_tr': 'Çalışan iş seyahatleri',
+                'description_tr': 'Çalışanların iş seyahatleri',
                 'icon': '✈️',
                 'display_order': 1,
                 'created_by': admin_user
@@ -209,7 +292,7 @@ class Command(BaseCommand):
             code='upstream-transport',
             defaults={
                 'name_en': 'Upstream Transportation',
-                'name_tr': 'Yukarı Akış Taşımacılık',
+                'name_tr': 'Yukarı Yönlü Taşımacılık',
                 'description_en': 'Transportation of purchased goods',
                 'description_tr': 'Satın alınan malların taşınması',
                 'icon': '🚚',
@@ -231,7 +314,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'description_en': data.get('source', ''),
                     'default_unit': data['unit'],
                     'icon': '🔥',
@@ -263,7 +346,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'description_en': data.get('source', ''),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
@@ -282,7 +365,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'description_en': data.get('source', ''),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
@@ -301,7 +384,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '⚡',
@@ -319,7 +402,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '♨️',
@@ -337,7 +420,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '✈️',
@@ -355,7 +438,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '🚌',
@@ -373,7 +456,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'description_en': data.get('source', ''),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
@@ -392,7 +475,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '🗑️',
@@ -410,7 +493,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'description_en': data.get('source', ''),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
@@ -429,7 +512,7 @@ class Command(BaseCommand):
                 code=key,
                 defaults={
                     'name_en': data['name'],
-                    'name_tr': data['name'],
+                    'name_tr': SOURCE_NAMES_TR.get(data['name'], data['name']),
                     'default_unit': data['unit'],
                     'emission_factor': data['factor'],
                     'icon': '🚚',
