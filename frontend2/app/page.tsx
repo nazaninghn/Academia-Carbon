@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BarChart3, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 import Button from './components/Button';
@@ -62,18 +63,17 @@ export default function Page() {
       {/* NAVBAR */}
       <header className="border-b border-white/10 backdrop-blur-xl bg-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg bg-emerald-500 flex items-center justify-center">
-              <img 
-                src="/logo.png" 
-                alt="Academia Carbon Logo" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement!.innerHTML = '<div class="text-black font-bold text-xs">AC</div>';
-                }}
-              />
-            </div>
+          <Link
+            href="/"
+            aria-label="Academia Carbon"
+            className="group flex items-center gap-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"
+          >
+            <span className="grid size-10 place-items-center rounded-full bg-white p-1 shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_6px_20px_-6px_rgba(52,211,153,0.5)] transition-transform duration-500 ease-out group-hover:rotate-[20deg] motion-reduce:transition-none">
+              <Image src="/logo.png" alt="" width={32} height={32} priority className="size-8" />
+            </span>
+            <span className="hidden text-[15px] font-semibold tracking-tight text-white sm:block">
+              Academia Carbon
+            </span>
           </Link>
           <nav className="flex items-center gap-2 sm:gap-3">
             <LanguageToggle value={locale} onChange={setLocale} />
