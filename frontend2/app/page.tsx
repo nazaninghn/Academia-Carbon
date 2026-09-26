@@ -1,24 +1,51 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Globe2, ArrowRight, BarChart3, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import { ArrowRight, BarChart3, ShieldCheck, Zap, Sparkles } from 'lucide-react';
+import Button from './components/Button';
+import LanguageToggle, { type Locale } from './components/LanguageToggle';
 
 export default function Page() {
-  const [locale, setLocale] = useState<'en' | 'tr'>('en');
+  const [locale, setLocale] = useState<Locale>('en');
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   const text = {
     en: {
+      login: 'Log In',
+      getStarted: 'Get Started',
+      badge: 'Carbon Platform v2.0',
       heroTitle: 'Carbon Intelligence for Modern Organizations',
       heroSubtitle: 'Track emissions, generate reports, and achieve sustainability goals with precision.',
       cta: 'Start Free Trial',
       secondary: 'View Demo',
+      totalEmissions: 'Total Emissions',
+      monthlyChange: '↓ 18% this month',
+      features: [
+        { title: 'Real-Time Analytics', body: 'Instant emission calculations and dynamic dashboards.' },
+        { title: 'Secure Infrastructure', body: 'Enterprise-grade encryption and access control.' },
+        { title: 'Automation Engine', body: 'Automate reporting and emission tracking workflows.' },
+      ],
     },
     tr: {
-      heroTitle: 'Modern Kurumlar için Karbon Zekası',
-      heroSubtitle: 'Emisyonları izleyin, raporlar oluşturun ve sürdürülebilirlik hedeflerine ulaşın.',
-      cta: 'Ücretsiz Başlayın',
-      secondary: 'Demo Görüntüle',
+      login: 'Giriş Yap',
+      getStarted: 'Hemen Başlayın',
+      badge: 'Karbon Platformu v2.0',
+      heroTitle: 'Modern Kurumlar için Karbon Zekâsı',
+      heroSubtitle: 'Emisyonlarınızı takip edin, raporlar oluşturun ve sürdürülebilirlik hedeflerinize hassasiyetle ulaşın.',
+      cta: 'Ücretsiz Denemeye Başlayın',
+      secondary: 'Demoyu Görüntüle',
+      totalEmissions: 'Toplam Emisyon',
+      monthlyChange: '↓ Bu ay %18',
+      features: [
+        { title: 'Gerçek Zamanlı Analitik', body: 'Anında emisyon hesaplamaları ve dinamik kontrol panelleri.' },
+        { title: 'Güvenli Altyapı', body: 'Kurumsal düzeyde şifreleme ve erişim kontrolü.' },
+        { title: 'Otomasyon Motoru', body: 'Raporlama ve emisyon takibi iş akışlarını otomatikleştirin.' },
+      ],
     },
   };
 
@@ -36,42 +63,31 @@ export default function Page() {
       {/* NAVBAR */}
       <header className="border-b border-white/10 backdrop-blur-xl bg-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg bg-emerald-500 flex items-center justify-center">
-              <img 
-                src="/logo.png" 
-                alt="Academia Carbon Logo" 
-                className="w-full h-full object-contain"
-                onError={(e) => {
-                  e.currentTarget.style.display = 'none';
-                  e.currentTarget.parentElement!.innerHTML = '<div class="text-black font-bold text-xs">AC</div>';
-                }}
-              />
-            </div>
+          <Link
+            href="/"
+            aria-label="Academia Carbon"
+            className="group flex items-center gap-3 rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-300"
+          >
+            <span className="grid size-10 place-items-center rounded-full bg-white p-1 shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_6px_20px_-6px_rgba(52,211,153,0.5)] transition-transform duration-500 ease-out group-hover:rotate-[20deg] motion-reduce:transition-none">
+              <Image src="/logo.png" alt="" width={32} height={32} priority className="size-8" />
+            </span>
+            <span className="hidden text-[15px] font-semibold tracking-tight text-white sm:block">
+              Academia Carbon
+            </span>
           </Link>
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setLocale(locale === 'en' ? 'tr' : 'en')}
-              className="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 transition flex gap-2 items-center text-sm"
-            >
-              <Globe2 size={16} />
-              {locale.toUpperCase()}
-            </button>
+          <nav className="flex items-center gap-2 sm:gap-3">
+            <LanguageToggle value={locale} onChange={setLocale} />
 
-            <Link
-              href="/auth/login"
-              className="px-4 py-2 text-sm hover:text-emerald-400"
-            >
-              Login
-            </Link>
+            <span className="hidden sm:contents">
+              <Button href="/auth/login" variant="ghost" size="sm">
+                {t.login}
+              </Button>
+            </span>
 
-            <Link
-              href="/auth/login"
-              className="px-5 py-2 bg-emerald-500 hover:bg-emerald-400 rounded-xl font-semibold text-black"
-            >
-              Get Started
-            </Link>
-          </div>
+            <Button href="/auth/login" size="sm">
+              {t.getStarted}
+            </Button>
+          </nav>
         </div>
       </header>
 
@@ -80,7 +96,7 @@ export default function Page() {
         <div>
           <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 rounded-full mb-6 text-sm text-emerald-400">
             <Sparkles size={14} />
-            Carbon Platform v2.0
+            {t.badge}
           </div>
           <h1 className="text-5xl md:text-6xl font-bold leading-tight">
             {t.heroTitle}
@@ -88,34 +104,27 @@ export default function Page() {
           <p className="text-white/70 mt-6 text-lg max-w-xl">
             {t.heroSubtitle}
           </p>
-          <div className="flex gap-4 mt-8">
-            <Link
-              href="/auth/login"
-              className="px-6 py-3 bg-emerald-500 hover:bg-emerald-400 rounded-xl font-semibold text-black flex items-center gap-2"
-            >
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Button href="/auth/login" size="lg" icon={<ArrowRight size={18} />}>
               {t.cta}
-              <ArrowRight size={18} />
-            </Link>
+            </Button>
 
-            <Link
-              href="/auth/login"
-              className="px-6 py-3 border border-white/20 hover:border-white/40 rounded-xl"
-            >
+            <Button href="/auth/login" variant="secondary" size="lg">
               {t.secondary}
-            </Link>
+            </Button>
           </div>
         </div>
         {/* Floating card */}
         <div className="relative">
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-2xl">
             <div className="text-sm text-white/60 mb-2">
-              Total Emissions
+              {t.totalEmissions}
             </div>
             <div className="text-4xl font-bold text-emerald-400">
-              1,248 tCO₂e
+              {locale === 'tr' ? '1.248' : '1,248'} tCO₂e
             </div>
             <div className="text-sm text-white/50 mt-2">
-              ↓ 18% this month
+              {t.monthlyChange}
             </div>
           </div>
         </div>
@@ -124,35 +133,20 @@ export default function Page() {
       {/* FEATURES */}
       <section className="max-w-7xl mx-auto px-6 pb-32">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 hover:border-emerald-400/40 transition group">
-            <BarChart3 className="text-emerald-400 mb-4 group-hover:scale-110 transition" />
-            <h3 className="font-semibold text-lg mb-2">
-              Real-Time Analytics
-            </h3>
-            <p className="text-white/60">
-              Instant emission calculations and dynamic dashboards.
-            </p>
-          </div>
-          
-          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 hover:border-emerald-400/40 transition group">
-            <ShieldCheck className="text-emerald-400 mb-4 group-hover:scale-110 transition" />
-            <h3 className="font-semibold text-lg mb-2">
-              Secure Infrastructure
-            </h3>
-            <p className="text-white/60">
-              Enterprise-grade encryption and access control.
-            </p>
-          </div>
-          
-          <div className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 hover:border-emerald-400/40 transition group">
-            <Zap className="text-emerald-400 mb-4 group-hover:scale-110 transition" />
-            <h3 className="font-semibold text-lg mb-2">
-              Automation Engine
-            </h3>
-            <p className="text-white/60">
-              Automate reporting and emission tracking workflows.
-            </p>
-          </div>
+          {[BarChart3, ShieldCheck, Zap].map((Icon, i) => (
+            <div
+              key={t.features[i].title}
+              className="bg-white/5 border border-white/10 backdrop-blur-xl rounded-2xl p-6 hover:border-emerald-400/40 transition group"
+            >
+              <Icon className="text-emerald-400 mb-4 group-hover:scale-110 transition" />
+              <h3 className="font-semibold text-lg mb-2">
+                {t.features[i].title}
+              </h3>
+              <p className="text-white/60">
+                {t.features[i].body}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
     </div>

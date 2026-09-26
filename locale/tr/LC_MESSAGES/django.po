@@ -118,17 +118,17 @@ msgstr "Akıllı Öneriler"
 msgid ""
 "Get AI-powered suggestions for reduction opportunities based on your "
 "emission profile and industry best practices."
-msgstr "Emisyon profiliniz ve sektör en iyi uygulamalarına dayalı azaltma fırsatları için AI destekli öneriler alın."
+msgstr "Emisyon profilinize ve sektördeki en iyi uygulamalara dayalı, yapay zekâ destekli azaltım önerileri alın."
 
 #: .\templates\action_planning.html:220
 msgid "Team Collaboration"
-msgstr "Takım İşbirliği"
+msgstr "Ekip İş Birliği"
 
 #: .\templates\action_planning.html:221
 msgid ""
 "Assign tasks, share progress updates, and collaborate with team members "
 "across different departments."
-msgstr "Görevler atayın, ilerleme güncellemelerini paylaşın ve farklı departmanlardan ekip üyeleriyle işbirliği yapın."
+msgstr "Görevler atayın, ilerleme güncellemelerini paylaşın ve farklı departmanlardan ekip üyeleriyle iş birliği yapın."
 
 #: .\templates\action_planning.html:230
 msgid "Progress Reports"
@@ -152,7 +152,7 @@ msgstr "Eylem Planlama modülü şu anda geliştirilme aşamasındadır. Bu arad
 
 #: .\templates\action_planning.html:246
 msgid "Continue collecting emission data to establish your baseline"
-msgstr "Eylem Planlama modülü şu anda geliştirilme aşamasındadır. Bu arada şunları yapabilirsiniz:"
+msgstr "Referans değerinizi (baz yıl) belirlemek için emisyon verisi toplamaya devam edin"
 
 #: .\templates\action_planning.html:247
 msgid "Generate reports to understand your current emission profile"
@@ -199,9 +199,7 @@ msgstr "Emisyon Analizi"
 msgid ""
 "Professional ISO 14064-1 compliant emissions reporting and analysis "
 "dashboard."
-msgstr ""
-"Profesyonel ISO 14064-1 uyumlu emisyon raporlama ve analiz panosu."
-"Profesyonel ISO 14064-1 uyumlu emisyon raporlama ve analiz panosu."
+msgstr "Profesyonel ISO 14064-1 uyumlu emisyon raporlama ve analiz panosu."
 
 #: .\templates\analysis.html:278
 msgid "Scope-wise emission breakdown"
@@ -233,7 +231,7 @@ msgstr "Sektör kıyaslaması"
 
 #: .\templates\analysis.html:316
 msgid "Peer comparison"
-msgstr "Eş karşılaştırması"
+msgstr "Benzer kuruluşlarla karşılaştırma"
 
 #: .\templates\analysis.html:317
 msgid "Best practice insights"
@@ -348,21 +346,17 @@ msgstr "Profesyonel Karbon İzleme"
 
 #: .\templates\auth\login.html:454
 msgid "Track Your"
-msgstr "Takip Edin"
+msgstr "Karbon Etkinizi"
 
 #: .\templates\auth\login.html:454
 msgid "Carbon Impact"
-msgstr "Karbon Etkisi"
+msgstr "Takip Edin"
 
 #: .\templates\auth\login.html:456
 msgid ""
 "Join organizations worldwide using Academia Carbon to measure, analyze, and "
 "reduce their environmental footprint with precision and compliance."
-msgstr ""
-"Çevresel ayak izlerini hassasiyetle ve uyumla ölçmek, analiz etmek ve "
-"azaltmak için Academia Carbon kullanan dünya çapındaki kuruluşlara katılın."
-"Çevresel ayak izlerini hassasiyetle ve uyumla ölçmek, analiz etmek ve "
-"azaltmak için Academia Carbon kullanan dünya çapındaki kuruluşlara katılın."
+msgstr "Çevresel ayak izlerini hassasiyetle ve uyumla ölçmek, analiz etmek ve azaltmak için Academia Carbon kullanan dünya çapındaki kuruluşlara katılın."
 
 #: .\templates\auth\login.html:464
 msgid "Certified"
@@ -406,7 +400,7 @@ msgstr "Giriş Yap"
 
 #: .\templates\auth\login.html:537
 msgid "or continue with"
-msgstr "veya şununla devam et"
+msgstr "veya şununla devam edin"
 
 #: .\templates\auth\login.html:540
 msgid "Google login coming soon!"
@@ -503,7 +497,7 @@ msgstr "Zaten hesabınız var mı?"
 #: .\templates\base.html:96 .\templates\dashboard_base.html:808
 #: .\templates\partials\translations.html:70
 msgid "Logout"
-msgstr "Çıkış"
+msgstr "Çıkış Yap"
 
 #: .\templates\base.html:110 .\templates\landing.html:3546
 msgid "All rights reserved."
@@ -573,7 +567,7 @@ msgstr "Kapsam 1 - Doğrudan Emisyonlar"
 
 #: .\templates\data_entry.html:202 .\templates\data_entry_new.html:51
 msgid "Stationary combustion"
-msgstr "Sabit yakma"
+msgstr "Sabit yanma"
 
 #: .\templates\data_entry.html:205 .\templates\data_entry_new.html:52
 msgid "Emissions from fuel combustion in stationary equipment"
@@ -782,17 +776,17 @@ msgstr "Açıklama ekle"
 
 #: .\templates\data_entry.html:287
 msgid "You can"
-msgstr "Yapabilirsiniz"
+msgstr "İsterseniz"
 
 #: .\templates\data_entry.html:287 .\templates\data_entry.html:425
 #: .\templates\data_entry.html:493 .\templates\data_entry.html:555
 #: .\templates\data_entry.html:662
 msgid "add your proof document"
-msgstr "kanıt belgenizi ekleyin"
+msgstr "kanıt belgenizi"
 
 #: .\templates\data_entry.html:287
 msgid "here (i.e. gas bills)."
-msgstr "buraya (örn. gaz faturaları)."
+msgstr "buraya ekleyebilirsiniz (örn. gaz faturaları)."
 
 #: .\templates\data_entry.html:290 .\templates\data_entry.html:362
 #: .\templates\data_entry.html:428 .\templates\data_entry.html:496
@@ -809,11 +803,11 @@ msgstr "Hesapla"
 
 #: .\templates\data_entry.html:296 .\templates\data_entry_new.html:128
 msgid "Mobile combustion"
-msgstr "Mobil yakma"
+msgstr "Hareketli yanma"
 
 #: .\templates\data_entry.html:299 .\templates\data_entry_new.html:129
 msgid "Emissions from fuel combustion in mobile equipment"
-msgstr "Mobil ekipmanlarda yakıt yanmasından kaynaklanan emisyonlar"
+msgstr "Hareketli ekipmanlarda yakıt yanmasından kaynaklanan emisyonlar"
 
 #: .\templates\data_entry.html:332 .\templates\data_entry.html:1312
 #: .\templates\data_entry.html:1409
@@ -967,7 +961,7 @@ msgstr "Malzeme/Ürün Adı"
 
 #: .\templates\data_entry.html:1277
 msgid "e.g., Recycled Paper, Custom Steel"
-msgstr "örn., Geri Dönüştürülmüş Kağıt, Özel Çelik"
+msgstr "örn. Geri Dönüştürülmüş Kağıt, Özel Çelik"
 
 #: .\templates\data_entry.html:1282 .\templates\data_entry.html:1372
 #: .\templates\reporting\inventory.html:119
@@ -989,12 +983,12 @@ msgstr "Satın Alınan Mal ve Hizmetler"
 #: .\templates\data_entry.html:1286 .\templates\data_entry.html:1376
 #: .\templates\emissions.html:661
 msgid "Stationary Combustion"
-msgstr "Sabit Yakma"
+msgstr "Sabit Yanma"
 
 #: .\templates\data_entry.html:1287 .\templates\data_entry.html:1377
 #: .\templates\emissions.html:696
 msgid "Mobile Combustion"
-msgstr "Mobil Yakma"
+msgstr "Hareketli Yanma"
 
 #: .\templates\data_entry.html:1288 .\templates\data_entry.html:1378
 msgid "Capital Goods"
@@ -1002,7 +996,7 @@ msgstr "Sermaye Malları"
 
 #: .\templates\data_entry.html:1289 .\templates\data_entry.html:1379
 msgid "Upstream Transportation"
-msgstr "Yukarı Akış Taşımacılığı"
+msgstr "Yukarı Yönlü Taşımacılık"
 
 #: .\templates\data_entry.html:1290 .\templates\data_entry.html:1380
 msgid "Waste"
@@ -1020,7 +1014,7 @@ msgstr "Emisyon Faktörü"
 
 #: .\templates\data_entry.html:1298
 msgid "e.g., 2.5"
-msgstr "örn., 2.5"
+msgstr "örn. 2.5"
 
 #: .\templates\data_entry.html:1299
 msgid "kg CO2e per unit"
@@ -1060,7 +1054,7 @@ msgstr "Kaynak/Referans"
 
 #: .\templates\data_entry.html:1331
 msgid "e.g., Supplier certificate, LCA study, ISO 14064-1 report"
-msgstr "örn., Tedarikçi sertifikası, LCA çalışması, ISO 14064-1 raporu"
+msgstr "örn. Tedarikçi sertifikası, LCA çalışması, ISO 14064-1 raporu"
 
 #: .\templates\data_entry.html:1336 .\templates\data_entry.html:1387
 msgid "Description"
@@ -1088,7 +1082,7 @@ msgstr ""
 
 #: .\templates\data_entry.html:1367
 msgid "e.g., Bamboo Fiber, Bioplastic PLA"
-msgstr "örn., Bambu Lifi, Biyoplastik PLA"
+msgstr "örn. Bambu Lifi, Biyoplastik PLA"
 
 #: .\templates\data_entry.html:1388
 msgid "Describe the material and why you need it"
@@ -1104,7 +1098,7 @@ msgstr "Önerilen Faktör (İsteğe Bağlı)"
 
 #: .\templates\data_entry.html:1398
 msgid "e.g., 1.5"
-msgstr "örn., 1.5"
+msgstr "örn. 1.5"
 
 #: .\templates\data_entry.html:1401
 msgid "Unit (Optional)"
@@ -1272,7 +1266,7 @@ msgstr "Sektör Adı"
 
 #: .\templates\data_entry.html:1559
 msgid "e.g., Textile Manufacturing, Food Processing"
-msgstr "örn., Tekstil İmalatı, Gıda İşleme"
+msgstr "örn. Tekstil İmalatı, Gıda İşleme"
 
 #: .\templates\data_entry.html:1561
 msgid "characters"
@@ -1280,7 +1274,7 @@ msgstr "karakter"
 
 #: .\templates\data_entry.html:1569
 msgid "e.g., NAICS 313, SIC 22"
-msgstr "örn., NAICS 313, SIC 22"
+msgstr "örn. NAICS 313, SIC 22"
 
 #: .\templates\data_entry.html:1580
 msgid "Describe what this industry does and its main activities..."
@@ -1344,7 +1338,7 @@ msgstr "örn. gaz faturaları"
 
 #: .\templates\data_entry_new.html:137
 msgid "Mobile combustion form will be similar to stationary"
-msgstr "Mobil yakma formu sabit yakma formuna benzer olacak"
+msgstr "Hareketli yanma formu sabit yanma formuna benzer olacak"
 
 #: .\templates\data_entry_new.html:144
 msgid "Fugitive emissions"
@@ -1356,7 +1350,7 @@ msgstr "Soğutucu akışkanlar, klima ve diğer kaynaklardan emisyonlar"
 
 #: .\templates\data_entry_new.html:153
 msgid "Fugitive emissions form will be similar to stationary"
-msgstr "Kaçak emisyonlar formu sabit yakma formuna benzer olacak"
+msgstr "Kaçak emisyonlar formu sabit yanma formuna benzer olacak"
 
 #: .\templates\data_entry_new.html:163
 msgid "Indirect Emissions (Energy)"
@@ -1493,7 +1487,7 @@ msgstr "Tekrar hoş geldiniz!"
 
 #: .\templates\index.html:34
 msgid "Here's what's happening with your carbon emissions today."
-msgstr "Bugün karbon emisyonlarınızla ilgili olanlar burada."
+msgstr "Karbon emisyonlarınızın bugünkü durumu."
 
 #: .\templates\index.html:42 .\templates\landing.html:2715
 msgid "Total Emissions"
@@ -1671,16 +1665,7 @@ msgid ""
 "Track, analyze, and report your organization's carbon emissions with "
 "precision. Our comprehensive platform provides real-time analytics, ISO "
 "14064-1 compliant reporting, and actionable insights for sustainable growth."
-msgstr ""
-"Kuruluşunuzun karbon emisyonlarını hassasiyetle takip edin, analiz edin ve "
-"raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 "
-"uyumlu raporlama ve sürdürülebilir büyüme için eyleme geçirilebilir öngörüler sağlar."
-"Kuruluşunuzun karbon emisyonlarını hassasiyetle takip edin, analiz edin ve "
-"raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 "
-"uyumlu raporlama ve sürdürülebilir büyüme için eyleme geçirilebilir öngörüler sağlar."
-"Kuruluşunuzun karbon emisyonlarını hassasiyetle takip edin, analiz edin ve "
-"raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 "
-"uyumlu raporlama ve sürdürülebilir büyüme için eyleme geçirilebilir öngörüler sağlar."
+msgstr "Kuruluşunuzun karbon emisyonlarını hassasiyetle takip edin, analiz edin ve raporlayın. Kapsamlı platformumuz gerçek zamanlı analitik, ISO 14064-1 uyumlu raporlama ve sürdürülebilir büyüme için eyleme geçirilebilir öngörüler sağlar."
 
 #: .\templates\landing.html:2370
 msgid "See Live Demo"
@@ -1716,7 +1701,7 @@ msgstr "Fortune 500 şirketlerinin karbon ayak izlerini nasıl takip ettiğini g
 
 #: .\templates\landing.html:2432
 msgid "Tons CO2 Tracked"
-msgstr "Takip Edilen Ton CO2"
+msgstr "Takip Edilen CO2 (Ton)"
 
 #: .\templates\landing.html:2436
 msgid "Companies"
@@ -1738,11 +1723,7 @@ msgstr "Karbon Yönetimi için İhtiyacınız Olan Her Şey"
 msgid ""
 "Comprehensive tools and features designed to help organizations track, "
 "analyze, and reduce their carbon footprint effectively."
-msgstr ""
-"Kuruluşların karbon ayak izlerini etkili bir şekilde takip etmelerine, "
-"analiz etmelerine ve azaltmalarına yardımcı olmak için tasarlanmış kapsamlı araçlar ve özellikler."
-"Kuruluşların karbon ayak izlerini etkili bir şekilde takip etmelerine, "
-"analiz etmelerine ve azaltmalarına yardımcı olmak için tasarlanmış kapsamlı araçlar ve özellikler."
+msgstr "Kuruluşların karbon ayak izlerini etkili bir şekilde takip etmelerine, analiz etmelerine ve azaltmalarına yardımcı olmak için tasarlanmış kapsamlı araçlar ve özellikler."
 
 #: .\templates\landing.html:2468
 msgid "Precise Emission Calculation"
@@ -1752,11 +1733,7 @@ msgstr "Hassas Emisyon Hesaplama"
 msgid ""
 "Calculate greenhouse gas emissions across all three scopes (1, 2, 3) using "
 "up-to-date emission factors and international standards."
-msgstr ""
-"Güncel emisyon faktörleri ve uluslararası standartları kullanarak üç kapsam "
-"(1, 2, 3) genelinde sera gazı emisyonlarını hesaplayın."
-"Güncel emisyon faktörleri ve uluslararası standartları kullanarak üç kapsam "
-"(1, 2, 3) genelinde sera gazı emisyonlarını hesaplayın."
+msgstr "Güncel emisyon faktörleri ve uluslararası standartları kullanarak üç kapsam (1, 2, 3) genelinde sera gazı emisyonlarını hesaplayın."
 
 #: .\templates\landing.html:2478
 msgid "Advanced Analytics Dashboard"
@@ -1766,11 +1743,7 @@ msgstr "Gelişmiş Analitik Panosu"
 msgid ""
 "Visualize emission data through interactive charts, KPI cards, and "
 "analytical reports for better understanding and decision-making."
-msgstr ""
-"Daha iyi anlayış ve karar verme için etkileşimli grafikler, KPI kartları ve "
-"analitik raporlar aracılığıyla emisyon verilerini görselleştirin."
-"Daha iyi anlayış ve karar verme için etkileşimli grafikler, KPI kartları ve "
-"analitik raporlar aracılığıyla emisyon verilerini görselleştirin."
+msgstr "Daha iyi anlayış ve karar verme için etkileşimli grafikler, KPI kartları ve analitik raporlar aracılığıyla emisyon verilerini görselleştirin."
 
 #: .\templates\landing.html:2488 .\templates\user_guide.html:525
 #: .\templates\user_guide.html:822
@@ -1781,11 +1754,7 @@ msgstr "ISO 14064-1 Raporlama"
 msgid ""
 "Generate professional reports compliant with ISO 14064-1 standards with PDF "
 "export capabilities and advanced filtering options."
-msgstr ""
-"PDF dışa aktarma yetenekleri ve gelişmiş filtreleme seçenekleri ile ISO "
-"14064-1 standartlarına uygun profesyonel raporlar oluşturun."
-"PDF dışa aktarma yetenekleri ve gelişmiş filtreleme seçenekleri ile ISO "
-"14064-1 standartlarına uygun profesyonel raporlar oluşturun."
+msgstr "PDF dışa aktarma yetenekleri ve gelişmiş filtreleme seçenekleri ile ISO 14064-1 standartlarına uygun profesyonel raporlar oluşturun."
 
 #: .\templates\landing.html:2498 .\templates\suppliers.html:5
 #: .\templates\user_guide.html:641
@@ -1796,21 +1765,13 @@ msgstr "Tedarikçi Yönetimi"
 msgid ""
 "Track and manage supplier carbon emissions, assess performance, and "
 "collaborate on supply chain emission reduction initiatives."
-msgstr ""
-"Tedarikçi karbon emisyonlarını takip edin ve yönetin, performansı değerlendirin ve "
-"tedarik zinciri emisyon azaltma girişimlerinde işbirliği yapın."
-"Tedarikçi karbon emisyonlarını takip edin ve yönetin, performansı değerlendirin ve "
-"tedarik zinciri emisyon azaltma girişimlerinde işbirliği yapın."
+msgstr "Tedarikçi karbon emisyonlarını takip edin ve yönetin, performansı değerlendirin ve tedarik zinciri emisyon azaltma girişimlerinde iş birliği yapın."
 
 #: .\templates\landing.html:2510
 msgid ""
 "Set reduction targets, create action plans, and track progress towards your "
 "sustainability goals with our comprehensive planning tools."
-msgstr ""
-"Azaltma hedefleri belirleyin, eylem planları oluşturun ve kapsamlı planlama "
-"araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi takip edin."
-"Azaltma hedefleri belirleyin, eylem planları oluşturun ve kapsamlı planlama "
-"araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi takip edin."
+msgstr "Azaltma hedefleri belirleyin, eylem planları oluşturun ve kapsamlı planlama araçlarımızla sürdürülebilirlik hedeflerinize doğru ilerlemeyi takip edin."
 
 #: .\templates\landing.html:2518
 msgid "Security & Privacy"
@@ -1820,11 +1781,7 @@ msgstr "Güvenlik ve Gizlilik"
 msgid ""
 "Enterprise-grade security with advanced encryption, access controls, and "
 "full compliance with international data protection standards."
-msgstr ""
-"Gelişmiş şifreleme, erişim kontrolleri ve uluslararası veri koruma "
-"standartlarına tam uyumluluk ile kurumsal düzeyde güvenlik."
-"Gelişmiş şifreleme, erişim kontrolleri ve uluslararası veri koruma "
-"standartlarına tam uyumluluk ile kurumsal düzeyde güvenlik."
+msgstr "Gelişmiş şifreleme, erişim kontrolleri ve uluslararası veri koruma standartlarına tam uyumluluk ile kurumsal düzeyde güvenlik."
 
 #: .\templates\landing.html:2533 .\templates\landing.html:3500
 msgid "Live Demo"
@@ -2013,7 +1970,7 @@ msgstr "Nis"
 
 #: .\templates\landing.html:2765 .\templates\partials\translations.html:139
 msgid "May"
-msgstr "Mayıs"
+msgstr "May"
 
 #: .\templates\landing.html:2766
 msgid "Jun"
@@ -2045,7 +2002,7 @@ msgstr "Ara"
 
 #: .\templates\landing.html:2784
 msgid "Trusted by Leading Organizations Worldwide"
-msgstr "Dünya Çapında Önde Gelen Kuruluşlar Tarafından Güvenilen"
+msgstr "Dünya Çapında Önde Gelen Kuruluşların Güvendiği Platform"
 
 #: .\templates\landing.html:2807
 msgid ""
@@ -2070,10 +2027,7 @@ msgid ""
 "The supplier management features are incredible. We can now track our entire "
 "supply chain's carbon footprint and work collaboratively on reduction "
 "initiatives. Game-changer for our Scope 3 reporting."
-msgstr ""
-"Tedarikçi yönetimi özellikleri inanılmaz. Artık tüm tedarik zincirimizin "
-"karbon ayak izini takip edebiliyor ve azaltma girişimlerinde işbirliği "
-"yapabiliyoruz. Kapsam 3 raporlamamız için oyun değiştirici."
+msgstr "Tedarikçi yönetimi özellikleri inanılmaz. Artık tüm tedarik zincirimizin karbon ayak izini takip edebiliyor ve azaltma girişimlerinde iş birliği yapabiliyoruz. Kapsam 3 raporlamamız için oyun değiştirici."
 
 #: .\templates\landing.html:2825
 msgid "James Davis"
@@ -2088,7 +2042,7 @@ msgid ""
 "Implementation was seamless, and the support team is outstanding. The "
 "platform scales perfectly with our multi-location operations, and the API "
 "integration with our ERP system works flawlessly."
-msgstr ""
+msgstr "Kurulum sorunsuz geçti ve destek ekibi mükemmel. Platform çok lokasyonlu operasyonlarımıza kusursuz şekilde ölçekleniyor ve ERP sistemimizle API entegrasyonu hatasız çalışıyor."
 
 #: .\templates\landing.html:2838
 msgid "Anna Lopez"
@@ -2110,7 +2064,7 @@ msgstr "Dokümantasyon ve API Entegrasyonu"
 msgid ""
 "Comprehensive guides, API documentation, and integration resources to help "
 "you get the most out of Academia Carbon."
-msgstr ""
+msgstr "Academia Carbon'dan en iyi şekilde yararlanmanız için kapsamlı kılavuzlar, API dokümantasyonu ve entegrasyon kaynakları."
 
 #: .\templates\landing.html:2869
 msgid "User Documentation"
@@ -2120,7 +2074,7 @@ msgstr "Kullanıcı Dokümantasyonu"
 msgid ""
 "Complete guides for getting started, advanced features, and best practices "
 "for carbon management."
-msgstr ""
+msgstr "Başlangıç, gelişmiş özellikler ve karbon yönetimindeki en iyi uygulamalar için eksiksiz kılavuzlar."
 
 #: .\templates\landing.html:2879
 msgid "Quick start guide and tutorials"
@@ -2154,7 +2108,7 @@ msgstr "REST API"
 msgid ""
 "Powerful REST API for integrating carbon tracking into your existing systems "
 "and workflows."
-msgstr ""
+msgstr "Karbon takibini mevcut sistemlerinize ve iş akışlarınıza entegre etmek için güçlü REST API."
 
 #: .\templates\landing.html:2934
 msgid "Complete REST API documentation"
@@ -2192,7 +2146,7 @@ msgstr "Entegrasyonlar"
 msgid ""
 "Pre-built integrations with popular business systems and data sources for "
 "seamless data flow."
-msgstr ""
+msgstr "Kesintisiz veri akışı için popüler iş sistemleri ve veri kaynaklarıyla hazır entegrasyonlar."
 
 #: .\templates\landing.html:2991
 msgid "ERP systems (SAP, Oracle, NetSuite)"
@@ -2243,7 +2197,7 @@ msgstr "Kuruluşunuz için Doğru Planı Seçin"
 msgid ""
 "Flexible pricing options designed to scale with your carbon management "
 "needs. Start free and upgrade as you grow."
-msgstr ""
+msgstr "Karbon yönetimi ihtiyaçlarınızla birlikte büyüyen esnek fiyatlandırma seçenekleri. Ücretsiz başlayın, büyüdükçe yükseltin."
 
 #: .\templates\landing.html:3064
 msgid "Starter"
@@ -2359,7 +2313,7 @@ msgstr "Sınırsız kullanıcı"
 
 #: .\templates\landing.html:3234
 msgid "On-premise deployment options"
-msgstr "Yerinde dağıtım seçenekleri"
+msgstr "Şirket içi (on-premise) kurulum seçenekleri"
 
 #: .\templates\landing.html:3240 .\templates\landing.html:3527
 msgid "Contact Sales"
@@ -2378,7 +2332,7 @@ msgid ""
 "Our team combines decades of experience in environmental science, software "
 "engineering, and sustainability consulting to deliver the most comprehensive "
 "carbon management platform."
-msgstr ""
+msgstr "Ekibimiz; çevre bilimi, yazılım mühendisliği ve sürdürülebilirlik danışmanlığındaki onlarca yıllık deneyimini en kapsamlı karbon yönetim platformunu sunmak için bir araya getiriyor."
 
 #: .\templates\landing.html:3271
 msgid "Chief Environmental Officer"
@@ -2473,7 +2427,7 @@ msgstr "Karbon Yolculuğunuza Bugün Başlayın"
 msgid ""
 "Join thousands of organizations already using Academia Carbon to track, "
 "analyze, and reduce their environmental impact. Start your free trial today."
-msgstr ""
+msgstr "Çevresel etkilerini takip etmek, analiz etmek ve azaltmak için Academia Carbon'u kullanan binlerce kuruluşa katılın. Ücretsiz denemenizi bugün başlatın."
 
 #: .\templates\landing.html:3446
 msgid "Create Free Account"
@@ -2600,7 +2554,7 @@ msgstr "GDPR"
 msgid ""
 "Demo video would play here. In production, this would open a video modal or "
 "redirect to the live demo."
-msgstr ""
+msgstr "Demo videosu burada oynatılacak. Canlı ortamda bu buton bir video penceresi açar veya canlı demoya yönlendirir."
 
 #: .\templates\partials\sidebar.html:14
 msgid "GHG Tracking"
@@ -2994,7 +2948,7 @@ msgstr "Kişisel hesap bilgilerinizi ve tercihlerinizi yönetin."
 
 #: .\templates\settings.html:218
 msgid "Full Name"
-msgstr "Tam Ad"
+msgstr "Ad Soyad"
 
 #: .\templates\settings.html:225
 msgid "Contact support to change your email address"
@@ -3050,7 +3004,7 @@ msgid ""
 "you can add suppliers when entering emission data. Enhanced supplier "
 "management features are being developed to help you engage with suppliers on "
 "sustainability initiatives."
-msgstr ""
+msgstr "Tedarikçi ilişkilerinizi yönetin ve karbon etkilerini takip edin. Şu anda emisyon verisi girerken tedarikçi ekleyebilirsiniz. Sürdürülebilirlik girişimlerinde tedarikçilerle iş birliği yapmanıza yardımcı olacak gelişmiş tedarikçi yönetimi özellikleri geliştirilmektedir."
 
 #: .\templates\suppliers.html:213
 msgid "Add Supplier (via Data Entry)"
@@ -3080,7 +3034,7 @@ msgstr "Destekle İletişime Geçin"
 msgid ""
 "Send us a message and we'll get back to you within 24 hours during business "
 "days."
-msgstr ""
+msgstr "Bize mesaj gönderin; iş günlerinde 24 saat içinde size dönüş yapalım."
 
 #: .\templates\support.html:239 .\templates\user_guide.html:920
 msgid "Frequently Asked Questions"
@@ -3214,7 +3168,7 @@ msgstr "5 Dakikada Hızlı Başlangıç"
 msgid ""
 "Follow these steps to calculate your first emission and understand the "
 "platform"
-msgstr ""
+msgstr "İlk emisyonunuzu hesaplamak ve platformu tanımak için bu adımları izleyin"
 
 #: .\templates\user_guide.html:564
 msgid "Navigate to Data Collection"
@@ -3232,7 +3186,7 @@ msgstr "Ülkenizi Seçin"
 msgid ""
 "Choose Turkey for Turkish organizations or Global Average for international "
 "use"
-msgstr ""
+msgstr "Türk kuruluşları için Türkiye'yi, uluslararası kullanım için Küresel Ortalama'yı seçin"
 
 #: .\templates\user_guide.html:576
 msgid "Choose Emission Scope"
@@ -3242,7 +3196,7 @@ msgstr "Emisyon Kapsamını Seçin"
 msgid ""
 "Select Scope 1 (direct), Scope 2 (energy), or Scope 3 (indirect) based on "
 "your activity"
-msgstr ""
+msgstr "Faaliyetinize göre Kapsam 1 (doğrudan), Kapsam 2 (enerji) veya Kapsam 3 (dolaylı) seçin"
 
 #: .\templates\user_guide.html:582
 msgid "Enter Activity Data"
@@ -3252,7 +3206,7 @@ msgstr "Faaliyet Verisi Girin"
 msgid ""
 "Fill in the emission source, activity amount, and unit. Add supplier info if "
 "available"
-msgstr ""
+msgstr "Emisyon kaynağını, faaliyet miktarını ve birimi girin. Varsa tedarikçi bilgisini ekleyin"
 
 #: .\templates\user_guide.html:588
 msgid "Calculate & Review"
@@ -3268,7 +3222,7 @@ msgstr "Raporları Görüntüle"
 
 #: .\templates\user_guide.html:595
 msgid "Access your data through Dashboard, Analysis, or generate ISO 14064-1 reports"
-msgstr "Verilerinize Pano, Analiz yoluyla erişin veya ISO 14064-1 raporları oluşturun"
+msgstr "Verilerinize Kontrol Paneli veya Analiz sayfasından erişin ya da ISO 14064-1 raporları oluşturun"
 
 #: .\templates\user_guide.html:603
 msgid "Video Tutorial"
@@ -3276,7 +3230,7 @@ msgstr "Video Öğreticisi"
 
 #: .\templates\user_guide.html:604
 msgid "Watch our 3-minute getting started video"
-msgstr "3 dakikalık başlangıç videomunu izleyin"
+msgstr "3 dakikalık başlangıç videomuzu izleyin"
 
 #: .\templates\user_guide.html:607
 msgid "Video tutorials coming soon! For now, follow the step-by-step guide above."
@@ -3312,7 +3266,7 @@ msgstr "Uluslararası standart faktörler"
 
 #: .\templates\user_guide.html:626
 msgid "Country affects electricity grid, fuel composition, and transport factors"
-msgstr "Ülke elektrik şebekesi, yakıt bileşimi ve ulaşım faktörlerini etkiler"
+msgstr "Ülke seçimi; elektrik şebekesi, yakıt bileşimi ve ulaşım faktörlerini etkiler"
 
 #: .\templates\user_guide.html:631
 msgid "Industry Types"
@@ -3379,7 +3333,7 @@ msgid ""
 "Use actual bills and invoices when possible. Monthly data entry provides "
 "better tracking than annual estimates. Always double-check units (kWh vs "
 "MWh, liters vs gallons)."
-msgstr ""
+msgstr "Mümkün olduğunda gerçek faturaları kullanın. Aylık veri girişi, yıllık tahminlere göre daha iyi takip sağlar. Birimleri her zaman iki kez kontrol edin (kWh / MWh, litre / galon)."
 
 #: .\templates\user_guide.html:674
 msgid "Understanding Emission Scopes"
@@ -3391,7 +3345,7 @@ msgstr "Sahip olduğunuz veya kontrol ettiğiniz kaynaklardan emisyonlar:"
 
 #: .\templates\user_guide.html:682
 msgid "Stationary Combustion:"
-msgstr "Sabit Yakma:"
+msgstr "Sabit Yanma:"
 
 #: .\templates\user_guide.html:682
 msgid "Boilers, furnaces, generators"
@@ -3399,7 +3353,7 @@ msgstr "Kazanlar, fırınlar, jeneratörler"
 
 #: .\templates\user_guide.html:683
 msgid "Mobile Combustion:"
-msgstr "Mobil Yakma:"
+msgstr "Hareketli Yanma:"
 
 #: .\templates\user_guide.html:683
 msgid "Company vehicles, forklifts"
@@ -3451,7 +3405,7 @@ msgstr "Değer zincirinizde diğer tüm dolaylı emisyonlar:"
 
 #: .\templates\user_guide.html:702
 msgid "Upstream:"
-msgstr "Yukarı Akış:"
+msgstr "Yukarı Yönlü:"
 
 #: .\templates\user_guide.html:702
 msgid "Purchased goods, business travel"
@@ -3459,7 +3413,7 @@ msgstr "Satın alınan mallar, iş seyahati"
 
 #: .\templates\user_guide.html:703
 msgid "Downstream:"
-msgstr "Aşağı Akış:"
+msgstr "Aşağı Yönlü:"
 
 #: .\templates\user_guide.html:703
 msgid "Product use, end-of-life treatment"
@@ -3504,18 +3458,18 @@ msgstr "Önerilen"
 
 #: .\templates\user_guide.html:751
 msgid "Why Turkey-Specific Factors Matter"
-msgstr "Türkiye'ye Özgü Faktörlerin Neden Önemli Olduğu"
+msgstr "Türkiye'ye Özgü Faktörler Neden Önemli?"
 
 #: .\templates\user_guide.html:752
 msgid ""
 "Turkey has unique emission factors based on IEA 2023 data and Turkish "
 "Ministry of Environment guidelines, providing more accurate results for "
 "Turkish organizations."
-msgstr ""
+msgstr "Türkiye'nin, IEA 2023 verilerine ve Çevre Bakanlığı yönergelerine dayanan kendine özgü emisyon faktörleri vardır; bu da Türk kuruluşları için daha doğru sonuçlar sağlar."
 
 #: .\templates\user_guide.html:756
 msgid "Turkey's Energy Mix (2023)"
-msgstr "Türkiye'nin Enerji Karışımı (2023)"
+msgstr "Türkiye'nin Enerji Dağılımı (2023)"
 
 #: .\templates\user_guide.html:759
 #, python-format
@@ -3524,7 +3478,7 @@ msgstr "Kömür: %%37"
 
 #: .\templates\user_guide.html:760
 msgid "Primarily lignite coal from domestic sources with higher emission factors"
-msgstr "Daha yüksek emisyon faktörlerine sahip yerli kaynaklardan öncelikle linyit kömürü"
+msgstr "Çoğunlukla yerli kaynaklardan elde edilen, emisyon faktörü yüksek linyit kömürü"
 
 #: .\templates\user_guide.html:763
 #, python-format
@@ -3574,7 +3528,7 @@ msgstr "Türkiye'de Sürdürülebilir Ulaşım"
 msgid ""
 "Taking the train from Istanbul to Ankara produces 85%% less emissions than "
 "flying! Metro and dolmuş are also efficient options for urban transport."
-msgstr ""
+msgstr "İstanbul'dan Ankara'ya trenle gitmek, uçağa göre %%85 daha az emisyon üretir! Metro ve dolmuş da şehir içi ulaşım için verimli seçeneklerdir."
 
 #: .\templates\user_guide.html:828
 msgid "Collect Complete Data"
@@ -3584,7 +3538,7 @@ msgstr "Tam Veri Toplayın"
 msgid ""
 "Ensure you have data for all relevant Scope 1, 2, and 3 emissions for your "
 "reporting period"
-msgstr ""
+msgstr "Raporlama döneminiz için ilgili tüm Kapsam 1, 2 ve 3 emisyon verilerine sahip olduğunuzdan emin olun"
 
 #: .\templates\user_guide.html:834
 msgid "Access Reporting"
@@ -3600,7 +3554,7 @@ msgstr "Raporu İnceleyin"
 
 #: .\templates\user_guide.html:841
 msgid "Check the automatically generated report for completeness and accuracy"
-msgstr "Otomatik oluşturulan raporu tamlık ve doğruluk açısından kontrol edin"
+msgstr "Otomatik oluşturulan raporu eksiksizlik ve doğruluk açısından kontrol edin"
 
 #: .\templates\user_guide.html:846
 msgid "Enhance Accuracy"
@@ -3634,7 +3588,7 @@ msgstr "Rapor Kalite Kontrol Listesi"
 msgid ""
 "✓ All material emissions included • ✓ Consistent methodology • ✓ Appropriate "
 "emission factors • ✓ Clear organizational boundary • ✓ Complete documentation"
-msgstr ""
+msgstr "✓ Tüm önemli emisyonlar dahil • ✓ Tutarlı metodoloji • ✓ Uygun emisyon faktörleri • ✓ Net kurumsal sınır • ✓ Eksiksiz dokümantasyon"
 
 #: .\templates\user_guide.html:881
 msgid "DO"
@@ -3646,7 +3600,7 @@ msgstr "Hesaplamadan önce doğru ülkeyi seçin"
 
 #: .\templates\user_guide.html:884
 msgid "Use actual bills and invoices when available"
-msgstr "Mevcut olduğunda gerçek fatura ve faturaları kullanın"
+msgstr "Mümkün olduğunda gerçek faturaları ve makbuzları kullanın"
 
 #: .\templates\user_guide.html:885
 msgid "Enter data monthly for better tracking"
@@ -3666,7 +3620,7 @@ msgstr "Destekleyici belgeleri saklayın"
 
 #: .\templates\user_guide.html:889
 msgid "Include all material emission sources"
-msgstr "Tüm maddi emisyon kaynaklarını dahil edin"
+msgstr "Tüm önemli emisyon kaynaklarını dahil edin"
 
 #: .\templates\user_guide.html:894
 msgid "DON'T"
@@ -3674,31 +3628,31 @@ msgstr "YAPMAYIN"
 
 #: .\templates\user_guide.html:896
 msgid "Use estimates when actual data is available"
-msgstr "Gerçek veri mevcut olduğunda tahmin kullanmayın"
+msgstr "Gerçek veri varken tahmin kullanmak"
 
 #: .\templates\user_guide.html:897
 msgid "Mix different time periods in one calculation"
-msgstr "Bir hesaplamada farklı zaman dilimlerini karıştırmayın"
+msgstr "Bir hesaplamada farklı dönemleri karıştırmak"
 
 #: .\templates\user_guide.html:898
 msgid "Forget to check units (kWh vs MWh)"
-msgstr "Birimleri kontrol etmeyi unutmayın (kWh vs MWh)"
+msgstr "Birimleri kontrol etmeyi unutmak (kWh / MWh)"
 
 #: .\templates\user_guide.html:899
 msgid "Skip Scope 3 emissions entirely"
-msgstr "Kapsam 3 emisyonlarını tamamen atlayın"
+msgstr "Kapsam 3 emisyonlarını tamamen atlamak"
 
 #: .\templates\user_guide.html:900
 msgid "Ignore data quality issues"
-msgstr "Veri kalitesi sorunlarını görmezden gelin"
+msgstr "Veri kalitesi sorunlarını görmezden gelmek"
 
 #: .\templates\user_guide.html:901
 msgid "Change methodology mid-year"
-msgstr "Yıl ortasında metodoloji değiştirin"
+msgstr "Yıl ortasında metodoloji değiştirmek"
 
 #: .\templates\user_guide.html:902
 msgid "Forget to document assumptions"
-msgstr "Varsayımları belgelemeyi unutmayın"
+msgstr "Varsayımları belgelemeyi unutmak"
 
 #: .\templates\user_guide.html:910
 msgid "Monthly Data Collection Checklist"
@@ -3708,7 +3662,7 @@ msgstr "Aylık Veri Toplama Kontrol Listesi"
 msgid ""
 "✓ Electricity bills • ✓ Natural gas bills • ✓ Fuel purchases • ✓ Business "
 "travel records • ✓ Waste disposal receipts • ✓ Review dashboard totals"
-msgstr ""
+msgstr "✓ Elektrik faturaları • ✓ Doğal gaz faturaları • ✓ Yakıt alımları • ✓ İş seyahati kayıtları • ✓ Atık bertaraf makbuzları • ✓ Kontrol paneli toplamlarını gözden geçirin"
 
 #: .\templates\user_guide.html:926
 msgid "How accurate are the emission factors?"
@@ -3720,7 +3674,7 @@ msgid ""
 "and country-specific data from official sources like IEA and Turkish "
 "Ministry of Environment. Turkey-specific factors are updated annually and "
 "provide higher accuracy for Turkish organizations."
-msgstr ""
+msgstr "Tüm emisyon faktörleri uluslararası standartlara (IPCC, EPA, DEFRA) ve IEA ile Çevre Bakanlığı gibi resmi kaynaklardan alınan ülkeye özgü verilere dayanır. Türkiye'ye özgü faktörler her yıl güncellenir ve Türk kuruluşları için daha yüksek doğruluk sağlar."
 
 #: .\templates\user_guide.html:936
 msgid "Can I change the country after calculating?"
@@ -3731,7 +3685,7 @@ msgid ""
 "No, once a calculation is saved, the country cannot be changed as it affects "
 "the emission factors used. Always select your country before calculating. "
 "You can delete the record and recalculate if needed."
-msgstr ""
+msgstr "Hayır. Bir hesaplama kaydedildikten sonra, kullanılan emisyon faktörlerini etkilediği için ülke değiştirilemez. Hesaplamadan önce her zaman ülkenizi seçin. Gerekirse kaydı silip yeniden hesaplayabilirsiniz."
 
 #: .\templates\user_guide.html:946
 msgid "What if my industry or material isn't listed?"
@@ -3752,7 +3706,7 @@ msgid ""
 "We recommend monthly tracking for Scope 1 and 2 emissions (electricity, "
 "fuel) and quarterly for Scope 3 emissions (travel, waste). This provides a "
 "good balance between accuracy and effort while enabling trend analysis."
-msgstr ""
+msgstr "Kapsam 1 ve 2 emisyonları (elektrik, yakıt) için aylık, Kapsam 3 emisyonları (seyahat, atık) için üç aylık takip öneriyoruz. Bu, doğruluk ile harcanan çaba arasında iyi bir denge kurar ve trend analizine olanak tanır."
 
 #: .\templates\user_guide.html:966
 msgid "Is my data secure and private?"
@@ -3764,7 +3718,7 @@ msgid ""
 "never share your emission data with third parties without your explicit "
 "consent. You can export or delete your data at any time from the Settings "
 "page."
-msgstr ""
+msgstr "Evet, verileriniz sektör standardı şifreleme ile güvenli şekilde saklanır. Emisyon verilerinizi açık izniniz olmadan asla üçüncü taraflarla paylaşmayız. Verilerinizi istediğiniz zaman Ayarlar sayfasından dışa aktarabilir veya silebilirsiniz."
 
 #: .\templates\user_guide.html:976
 msgid "Can I use custom emission factors?"
@@ -3818,15 +3772,15 @@ msgstr "Hızlı Düzeltmeler"
 
 #: .\templates\user_guide.html:1007
 msgid "Refresh page:"
-msgstr "Sayfayı yenile:"
+msgstr "Sayfayı yenileyin:"
 
 #: .\templates\user_guide.html:1007
 msgid "Reload if forms aren't responding"
-msgstr "Formlar yanıt vermiyorsa yeniden yükle"
+msgstr "Formlar yanıt vermiyorsa sayfayı yeniden yükleyin"
 
 #: .\templates\user_guide.html:1008
 msgid "Clear browser cache:"
-msgstr "Tarayıcı önbelleğini temizle:"
+msgstr "Tarayıcı önbelleğini temizleyin:"
 
 #: .\templates\user_guide.html:1008
 msgid "For persistent issues"
@@ -3834,15 +3788,15 @@ msgstr "Kalıcı sorunlar için"
 
 #: .\templates\user_guide.html:1009
 msgid "Check internet:"
-msgstr "İnterneti kontrol et:"
+msgstr "İnternet bağlantınızı kontrol edin:"
 
 #: .\templates\user_guide.html:1009
 msgid "Ensure stable connection"
-msgstr "Kararlı bağlantı sağla"
+msgstr "Bağlantınızın kararlı olduğundan emin olun"
 
 #: .\templates\user_guide.html:1010
 msgid "Try different browser:"
-msgstr "Farklı tarayıcı dene:"
+msgstr "Farklı bir tarayıcı deneyin:"
 
 #: .\templates\user_guide.html:1010
 msgid "Chrome, Firefox, or Edge"
@@ -3854,7 +3808,7 @@ msgstr "Daha Fazla Yardıma İhtiyacınız Var mı?"
 
 #: .\templates\user_guide.html:1019
 msgid "If you can't find the answer here, visit our"
-msgstr "Cevabı burada bulamazsanız, ziyaret edin"
+msgstr "Cevabı burada bulamazsanız, ek kaynaklar, iletişim formları ve doğrudan yardım için"
 
 #: .\templates\user_guide.html:1019
 msgid "Support Center"
@@ -3862,7 +3816,7 @@ msgstr "Destek Merkezi"
 
 #: .\templates\user_guide.html:1019
 msgid "for additional resources, contact forms, and direct assistance."
-msgstr "ek kaynaklar, iletişim formları ve doğrudan yardım için."
+msgstr "sayfamızı ziyaret edin."
 
 #: .\templates\user_guide.html:1028
 msgid "Ready to Start?"
@@ -3900,7 +3854,7 @@ msgid "Turkish Companies"
 msgstr "Türk Şirketleri"
 
 msgid "Founded"
-msgstr "Kuruluş"
+msgstr "Kuruluş Yılı"
 
 msgid "Developed at Istinye University - Serving Turkish Businesses"
 msgstr "İstinye Üniversitesi'nde Geliştirildi - Türk İşletmelerine Hizmet"
@@ -3913,3 +3867,22 @@ msgstr "İstinye Üniversitesi'nde IT Valley tarafından geliştirilen kapsamlı
 
 msgid "IT Valley - Istinye University, Ayazağa Neighborhood, Kemerburgaz Street, Vadi İstanbul Park Block 7A, No: 7B, Inner Door No: 4, Sarıyer / Istanbul, Turkey"
 msgstr "IT Valley - İstinye Üniversitesi, Ayazağa Mahallesi, Kemerburgaz Caddesi, Vadi İstanbul Park Blok 7A, No: 7B, İç Kapı No: 4, Sarıyer / İstanbul, Türkiye"
+#: ghg/admin_views.py
+#, python-format
+msgid "User %(username)s has been activated."
+msgstr "%(username)s kullanıcısı etkinleştirildi."
+
+#: ghg/admin_views.py
+#, python-format
+msgid "User %(username)s has been deactivated."
+msgstr "%(username)s kullanıcısı devre dışı bırakıldı."
+
+#: ghg/admin_views.py
+#, python-format
+msgid ""
+"All data for user %(username)s has been deleted: %(emissions)d emission "
+"records, %(suppliers)d suppliers, %(factors)d custom factors, %(requests)d "
+"requests"
+msgstr ""
+"%(username)s kullanıcısına ait tüm veriler silindi: %(emissions)d emisyon "
+"kaydı, %(suppliers)d tedarikçi, %(factors)d özel faktör, %(requests)d talep"

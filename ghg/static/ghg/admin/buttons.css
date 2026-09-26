@@ -1,0 +1,56 @@
+/* Minimal action buttons for the admin change lists.
+   Uses Django admin's colour variables so light and dark themes both work. */
+.ac-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 11px;
+  border-radius: 999px;
+  border: 1px solid var(--hairline-color, #e5e7eb);
+  background: transparent;
+  color: var(--body-fg, #1f2937) !important;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none !important;
+  white-space: nowrap;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease, transform .1s ease;
+}
+
+.ac-btn svg {
+  width: 13px;
+  height: 13px;
+  flex: none;
+  transition: transform .15s ease;
+}
+
+.ac-btn:hover {
+  background: #059669;
+  border-color: #059669;
+  color: #fff !important;
+}
+
+.ac-btn:hover svg {
+  transform: translateX(1px);
+}
+
+.ac-btn:active {
+  transform: scale(.96);
+}
+
+.ac-btn:focus-visible {
+  outline: 2px solid #34d399;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ac-btn,
+  .ac-btn svg {
+    transition: none;
+  }
+  .ac-btn:active,
+  .ac-btn:hover svg {
+    transform: none;
+  }
+}

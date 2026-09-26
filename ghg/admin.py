@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.utils.html import format_html
 from django.utils import timezone
 from django.urls import reverse
+from django.utils.translation import gettext
 from django.db.models import Sum, Count, Q
 from django.http import HttpResponse
 from datetime import datetime, timedelta
@@ -23,8 +24,28 @@ admin.site.site_header = "🌱 Academia Carbon - Admin Panel"
 admin.site.site_title = "Academia Carbon Admin"
 admin.site.index_title = "Carbon Management System"
 
+
+# Minimal action buttons used in the change lists (styled by ghg/admin/buttons.css)
+ACTION_BUTTON_CSS = {'all': ('ghg/admin/buttons.css',)}
+_ICONS = {
+    'view': '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+    'edit': '<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+}
+
+
+def action_button(url, label, icon):
+    return format_html(
+        '<a class="ac-btn" href="{}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+        'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{}</svg>{}</a>',
+        url, format_html(_ICONS[icon]), label,
+    )
+
+
 # Custom User Admin with Complete Details
 class UserAdmin(BaseUserAdmin):
+    class Media:
+        css = ACTION_BUTTON_CSS
+
     list_display = [
         'username', 'email', 'full_name', 'user_stats', 'activity_status', 
         'last_login_formatted', 'date_joined_formatted', 'user_actions'
@@ -97,11 +118,7 @@ class UserAdmin(BaseUserAdmin):
     date_joined_formatted.short_description = '📅 Date Joined'
     
     def user_actions(self, obj):
-        return format_html(
-            '<a href="{}" style="background: #3b82f6; color: white; padding: 4px 8px; '
-            'border-radius: 4px; text-decoration: none; font-size: 11px;">👁️ Details</a>',
-            reverse('admin:auth_user_change', args=[obj.pk])
-        )
+        return action_button(reverse('admin:auth_user_change', args=[obj.pk]), gettext('Details'), 'view')
     user_actions.short_description = '⚡ Actions'
     
     def user_statistics(self, obj):
@@ -245,6 +262,9 @@ class EmissionDataAdmin(admin.ModelAdmin):
 
 @admin.register(EmissionRecord)
 class EmissionRecordAdmin(admin.ModelAdmin):
+    class Media:
+        css = ACTION_BUTTON_CSS
+
     list_display = [
         'record_info', 'user_link', 'scope_badge', 'emissions_display', 
         'activity_info', 'country_flag', 'file_status', 'created_at_formatted', 'record_actions'
@@ -372,13 +392,7 @@ class EmissionRecordAdmin(admin.ModelAdmin):
     created_at_formatted.short_description = '🕐 Created Date'
     
     def record_actions(self, obj):
-        return format_html(
-            '<div style="display: flex; gap: 4px;">'
-            '<a href="{}" style="background: #3b82f6; color: white; padding: 2px 6px; '
-            'border-radius: 3px; text-decoration: none; font-size: 10px;">✏️</a>'
-            '</div>',
-            reverse('admin:ghg_emissionrecord_change', args=[obj.pk])
-        )
+        return action_button(reverse('admin:ghg_emissionrecord_change', args=[obj.pk]), gettext('Edit'), 'edit')
     record_actions.short_description = '⚡ Actions'
     
     def record_details(self, obj):
@@ -495,6 +509,9 @@ class EmissionRecordAdmin(admin.ModelAdmin):
 
 @admin.register(Supplier)
 class SupplierAdmin(admin.ModelAdmin):
+    class Media:
+        css = ACTION_BUTTON_CSS
+
     list_display = [
         'supplier_info', 'user_link', 'contact_details', 'location_info', 
         'business_info', 'usage_stats', 'created_at_formatted', 'supplier_actions'
@@ -639,13 +656,7 @@ class SupplierAdmin(admin.ModelAdmin):
     created_at_formatted.short_description = '🕐 Created Date'
     
     def supplier_actions(self, obj):
-        return format_html(
-            '<div style="display: flex; gap: 4px;">'
-            '<a href="{}" style="background: #3b82f6; color: white; padding: 2px 6px; '
-            'border-radius: 3px; text-decoration: none; font-size: 10px;">✏️</a>'
-            '</div>',
-            reverse('admin:ghg_supplier_change', args=[obj.pk])
-        )
+        return action_button(reverse('admin:ghg_supplier_change', args=[obj.pk]), gettext('Edit'), 'edit')
     supplier_actions.short_description = '⚡ Actions'
     
     def supplier_analytics(self, obj):
@@ -749,6 +760,9 @@ class SupplierAdmin(admin.ModelAdmin):
 
 @admin.register(CustomEmissionFactor)
 class CustomEmissionFactorAdmin(admin.ModelAdmin):
+    class Media:
+        css = ACTION_BUTTON_CSS
+
     list_display = [
         'factor_info', 'user_link', 'factor_details', 'verification_status', 
         'usage_stats', 'file_status', 'created_at_formatted', 'factor_actions'
@@ -872,14 +886,7 @@ class CustomEmissionFactorAdmin(admin.ModelAdmin):
     created_at_formatted.short_description = '🕐 Created Date'
     
     def factor_actions(self, obj):
-        verify_style = 'background: #059669;' if not obj.is_verified else 'background: #6b7280;'
-        return format_html(
-            '<div style="display: flex; gap: 4px;">'
-            '<a href="{}" style="background: #3b82f6; color: white; padding: 2px 6px; '
-            'border-radius: 3px; text-decoration: none; font-size: 10px;">✏️</a>'
-            '</div>',
-            reverse('admin:ghg_customemissionfactor_change', args=[obj.pk])
-        )
+        return action_button(reverse('admin:ghg_customemissionfactor_change', args=[obj.pk]), gettext('Edit'), 'edit')
     factor_actions.short_description = '⚡ Actions'
     
     def factor_analytics(self, obj):

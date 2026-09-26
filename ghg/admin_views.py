@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Sum, Count, Q, Avg
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from datetime import datetime, timedelta
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import user_passes_test
@@ -433,13 +434,16 @@ def toggle_user_status(request, user_id):
             f'Admin {request.user.email} {action} user {user.email}'
         )
         
-        status = 'فعال' if user.is_active else 'غیرفعال'
-        messages.success(request, f'کاربر {user.username} {status} شد.')
+        if user.is_active:
+            message = _('User %(username)s has been activated.') % {'username': user.username}
+        else:
+            message = _('User %(username)s has been deactivated.') % {'username': user.username}
+        messages.success(request, message)
         
         return JsonResponse({
             'success': True,
             'is_active': user.is_active,
-            'message': f'کاربر {status} شد.'
+            'message': message
         })
     
     return JsonResponse({'success': False, 'error': 'Invalid request'})
@@ -479,9 +483,17 @@ def delete_user_data(request, user_id):
         
         messages.success(
             request, 
-            f'تمام داده‌های کاربر {user.username} حذف شد: '
-            f'{emission_count} رکورد انتشار، {supplier_count} تامین‌کننده، '
-            f'{factor_count} فاکتور سفارشی، {request_count} درخواست'
+            _(
+                'All data for user %(username)s has been deleted: '
+                '%(emissions)d emission records, %(suppliers)d suppliers, '
+                '%(factors)d custom factors, %(requests)d requests'
+            ) % {
+                'username': user.username,
+                'emissions': emission_count,
+                'suppliers': supplier_count,
+                'factors': factor_count,
+                'requests': request_count,
+            }
         )
         
         return JsonResponse({
