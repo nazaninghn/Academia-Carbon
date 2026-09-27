@@ -134,8 +134,8 @@ def inventory_pdf(request: HttpRequest) -> HttpResponse:
     story.append(Paragraph("Executive Summary", heading_style))
     summary_data = [
         ['Metric', 'Value'],
-        ['Total Emissions (tCO₂e)', f"{summary['totals']['total_t']:.3f}"],
-        ['Total Emissions (kgCO₂e)', f"{summary['totals']['total_kg']:.0f}"],
+        ['Total Emissions (tCO2e)', f"{summary['totals']['total_t']:.3f}"],
+        ['Total Emissions (kgCO2e)', f"{summary['totals']['total_kg']:.0f}"],
         ['Total Records', str(summary['totals']['records'])],
         ['Custom Factor Records', str(summary['flags']['custom_factor_records'])],
         ['Standard', 'ISO 14064-1'],
@@ -159,7 +159,7 @@ def inventory_pdf(request: HttpRequest) -> HttpResponse:
     # Emissions by Scope
     if summary['by_scope']:
         story.append(Paragraph("Emissions by Scope", heading_style))
-        scope_data = [['Scope', 'Emissions (tCO₂e)', 'Percentage']]
+        scope_data = [['Scope', 'Emissions (tCO2e)', 'Percentage']]
         for item in summary['by_scope']:
             scope_data.append([
                 item['scope'],
@@ -186,7 +186,7 @@ def inventory_pdf(request: HttpRequest) -> HttpResponse:
     # Top Sources
     if summary['top_sources']:
         story.append(Paragraph("Top Emission Sources", heading_style))
-        sources_data = [['Scope', 'Category', 'Source', 'tCO₂e', '%']]
+        sources_data = [['Scope', 'Category', 'Source', 'tCO2e', '%']]
         for item in summary['top_sources'][:10]:  # Limit to top 10
             sources_data.append([
                 item['scope'],

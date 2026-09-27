@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views, admin_views
+from .reporting.views import inventory_pdf
 
 app_name = 'ghg'
 
@@ -39,6 +40,8 @@ urlpatterns = [
     
     # Export reports
     path('api/export-report/<str:scope>/', views.export_emission_report, name='export_report'),
+    # ISO 14064-1 inventory report (PDF); optional filters: from, to, scope, country
+    path('api/reports/inventory/pdf/', inventory_pdf, name='inventory_pdf'),
     
     # Analysis API
     path('api/analysis/scope-distribution/', views.analysis_scope_distribution, name='analysis_scope_distribution'),

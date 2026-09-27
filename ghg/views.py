@@ -1208,6 +1208,7 @@ def get_industry_types(request):
             {
                 'id': industry.id,
                 'name': industry.name,
+                'name_tr': industry.name_tr or industry.name,
                 'code': industry.code,
                 'description': industry.description,
             }
@@ -2759,6 +2760,7 @@ def api_get_sources(request):
     """Get emission sources by category - reads from emission_factors.py"""
     from .models_emission_sources import EmissionCategory
     from . import emission_factors
+    from .source_names_tr import SOURCE_NAMES_TR
     
     category_id = request.GET.get('category')
     
@@ -2797,7 +2799,7 @@ def api_get_sources(request):
         data.append({
             'id': source_key,  # Use the key as ID
             'name': source_data.get('name', source_key),
-            'name_tr': source_data.get('name', source_key),  # Can add Turkish translations later
+            'name_tr': SOURCE_NAMES_TR.get(source_data.get('name', source_key), source_data.get('name', source_key)),
             'description': source_data.get('source', ''),
             'category': category_id,
             'unit': source_data.get('unit', ''),
