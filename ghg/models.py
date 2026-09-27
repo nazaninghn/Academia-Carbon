@@ -292,6 +292,7 @@ class ReportExtraInfo(models.Model):
 class IndustryType(models.Model):
     """Industry types for better emission factor categorization"""
     name = models.CharField(max_length=200, unique=True, help_text="Industry name")
+    name_tr = models.CharField(max_length=200, blank=True, null=True, verbose_name="Name (Turkish)")
     code = models.CharField(max_length=20, blank=True, null=True, help_text="Industry code (e.g., NAICS)")
     description = models.TextField(blank=True, null=True, help_text="Industry description")
     is_active = models.BooleanField(default=True, help_text="Is this industry type active?")

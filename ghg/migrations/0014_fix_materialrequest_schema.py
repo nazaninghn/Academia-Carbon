@@ -1,14 +1,19 @@
 # Generated migration to fix MaterialRequest schema mismatch
 from django.db import migrations
 
+def _existing_columns(connection, cursor):
+    """Column names of ghg_materialrequest; works on SQLite and PostgreSQL."""
+    description = connection.introspection.get_table_description(cursor, 'ghg_materialrequest')
+    return [column.name for column in description]
+
+
 def add_columns_if_not_exist(apps, schema_editor):
-    """Add columns only if they don't exist (SQLite compatible)"""
-    from django.db import connection
+    """Add columns only if they don't exist"""
+    connection = schema_editor.connection
     
     with connection.cursor() as cursor:
         # Get existing columns
-        cursor.execute("PRAGMA table_info(ghg_materialrequest);")
-        existing_columns = [row[1] for row in cursor.fetchall()]
+        existing_columns = _existing_columns(connection, cursor)
         
         # Add request_type if not exists
         if 'request_type' not in existing_columns:
@@ -24,12 +29,11 @@ def add_columns_if_not_exist(apps, schema_editor):
 
 def copy_data(apps, schema_editor):
     """Copy data from old columns to new columns"""
-    from django.db import connection
+    connection = schema_editor.connection
     
     with connection.cursor() as cursor:
         # Get existing columns
-        cursor.execute("PRAGMA table_info(ghg_materialrequest);")
-        existing_columns = [row[1] for row in cursor.fetchall()]
+        existing_columns = _existing_columns(connection, cursor)
         
         # Copy material_name to name if material_name exists
         if 'material_name' in existing_columns and 'name' in existing_columns:
